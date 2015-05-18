@@ -10,8 +10,20 @@ select $1.col from $1 => from x in $1 select x.col;
 select count(1) from $1 => from x in $1 select count(1);
 */
 (function Linq() {
+	var sp = String.prototype;
+	var op = Object.prototype;
+	var ap = Array.prototype;
+	var np = Number.prototype;
+
+	var st = 'string';
+	var nt = 'number';
+	var ot = 'object';
+	var bt = 'boolean';
+	var ft = 'function';
+	var ut = 'undefined';
+
 	var keywords = ['select', 'where', 'in', 'on', 'key', 'join', 'order', 'group', 'by', 'length', 'max', 'min', 'count', 'sum', 'avg', 'from', 'value', 'prev', 'next', 'index'];
-	var functions = ['cast', 'select', 'forEach', 'single', 'any', 'all', 'count', 'first', 'concat', 'union', 'exists', 'empty', 'except', 'intersect', 'last', 'reverse', 'sequenceEqual', 'findFirst', 'findFirstIndex', 'findLast', 'findLastIndex', 'skip', 'skipWhile', 'take', 'takeWhile', 'where', 'zip', 'sum', 'max', 'min', 'avgrage', 'aggregate', 'orderBy', 'orderByDescending', 'groupBy', 'joinBy', 'groupJoin', 'defaultIfEmpty', 'selectMany', 'toLookup', 'thenBy', 'thenByDescending', 'query', 'range', 'repeat', 'replace'];
+	var functions = ['cast', 'select', 'forEach', 'single', 'any', 'all', 'count', 'first', 'concat', 'union', 'exists', 'empty', 'except', 'intersect', 'last', 'reverse', 'sequenceEqual', 'findFirst', 'findFirstIndex', 'findLast', 'findLastIndex', 'skip', 'skipWhile', 'take', 'takeWhile', 'where', 'zip', 'sum', 'max', 'min', 'avgrage', 'aggregate', 'orderBy', 'orderByDescending', 'groupBy', 'joinBy', 'groupJoin', 'defaultIfEmpty', 'selectMany', 'toLookup', 'thenBy', 'thenByDescending', 'query', 'range', 'repeat', 'replace', 'an'];
 
 	var aggfuns = [{
 		name: 'max',
@@ -70,7 +82,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		obj[name] = descriptor.value;
 	};
 	var define = function(obj, name, value, full) {
-		if (obj instanceof Array && !full) {
+		if (an(obj, Array) && !full) {
 			for (var i = 0; i < obj.length; i++) {
 				define(obj[i], name, value);
 			}
@@ -93,9 +105,22 @@ select count(1) from $1 => from x in $1 select count(1);
 		});
 	};
 
+	function an(element) {
+		for (var i = 1; i < arguments.length; i++) {
+			if (typeof(arguments[i]) === 'string') {
+				if (typeof(element) === arguments[i]) {
+					return true;
+				}
+			} else if (element instanceof arguments[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function toLinqFun(fun) {
 		var index = -1;
-		if (typeof fun === 'string' && (index = fun.indexOf('=>')) != -1) {
+		if (an(fun, st) && (index = fun.indexOf('=>')) != -1) {
 			var args = fun.substring(0, index).replace(/\s/g, '') || Array.range(1, fun.select(/_$(\d+)/g, 1).cast(parseInt).max() || 1).select(function(x) {
 				return '_$' + x;
 			}).join(',');
@@ -116,7 +141,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		fun = toLinqFun(fun || function(o) {
 			return o;
 		});
-		if (typeof fun === 'string') {
+		if (an(fun, st)) {
 			if (fun.indexOf(',') != -1) {
 				fun = fun.split(',').select(function(f) {
 					return f.trim()
@@ -146,7 +171,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		fun = toLinqFun(fun || function(a, b) {
 			return (a == b || (exists(a) && exists(b) && a.valueOf() == b.valueOf())) ? 0 : a > b ? 1 : -1;
 		});
-		if (typeof fun === 'string') {
+		if (an(fun, st)) {
 			if (fun == 'key') {
 				return function(a, b) {
 					if (a == b) {
@@ -165,7 +190,7 @@ select count(1) from $1 => from x in $1 select count(1);
 							if (a == b) {
 								return true;
 							}
-							if (typeof(a) === 'object' && typeof(b) === 'object') {
+							if (an(a, ot) && an(b, ot)) {
 								var keyCount = 0;
 								for (var key in a) {
 									if (key in b) {
@@ -222,29 +247,29 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 	}
 
-	var sort = Array.prototype.sort;
-	define(Array.prototype, 'sort', function() {
+	var sort = ap.sort;
+	define(ap, 'sort', function() {
 		sort.apply(this, arguments);
 		return this;
 	});
 
-	var slice = Array.prototype.slice;
-	define(Array.prototype, 'slice', function() {
+	var slice = ap.slice;
+	define(ap, 'slice', function() {
 		var result = slice.apply(this, arguments);
-		define(result, 'join', this.join || Array.prototype.join, true);
+		define(result, 'join', this.join || ap.join, true);
 		return result;
 	});
-	define(String.prototype, 'slice', String.prototype.slice || function() {
+	define(sp, 'slice', sp.slice || function() {
 		var result = slice.apply(this, arguments);
 		define(result, 'join', this.join || function(split) {
-			return Array.prototype.join.call(this, split || '');
+			return ap.join.call(this, split || '');
 		}, true);
 		return result;
 	});
 
-	var split = String.prototype.split;
-	define(String.prototype, 'split', function(s) {
-		if (s instanceof Function) {
+	var split = sp.split;
+	define(sp, 'split', function(s) {
+		if (an(s, Function)) {
 			var result = ''.empty();
 			var length = -1;
 			var index = 0;
@@ -265,42 +290,42 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 	});
 
-	define(String.prototype, 'trim', function() {
+	define(sp, 'trim', function() {
 		return this.replace(/^[\s\x00]+|[\s\x00]+$/g, '');
 	});
-	define(Array.prototype, 'trim', function() {
+	define(ap, 'trim', function() {
 		return this.skipWhile(function(e) {
 			return !exists(e);
 		}).skipRightWhile(function(e) {
 			return !exists(e);
 		});
 	});
-	define(String.prototype, 'ltrim', function() {
+	define(sp, 'ltrim', function() {
 		return this.replace(/^[\s\x00]+/g, '');
 	});
-	define(Array.prototype, 'ltrim', function() {
+	define(ap, 'ltrim', function() {
 		return this.skipWhile(function(e) {
 			return !exists(e);
 		});
 	});
-	define(String.prototype, 'rtrim', function() {
+	define(sp, 'rtrim', function() {
 		return this.replace(/[\s\x00]+$/g, '');
 	});
-	define(Array.prototype, 'rtrim', function() {
+	define(ap, 'rtrim', function() {
 		return this.skipRightWhile(function(e) {
 			return !exists(e);
 		});
 	});
-	define(String.prototype, 'leftPad', function(length, ch) {
+	define(sp, 'leftPad', function(length, ch) {
 		ch = ch || ' ';
 		return String.repeat(ch, Math.max(0, length - this.length)) + this;
 	});
-	define(Array.prototype, 'leftPad', function(length, element) {
+	define(ap, 'leftPad', function(length, element) {
 		return this.empty().concat(Array.repeat(element, Math.max(0, length - this.length))).concat(this);
 	});
-	define(Number.prototype, 'leftPad', function(fixed, length) {
+	define(np, 'leftPad', function(fixed, length) {
 		var result;
-		if (typeof(length) === 'undefined') {
+		if (an(length, ut)) {
 			length = fixed;
 			result = this.toString();
 		} else {
@@ -308,16 +333,16 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result.leftPad(length, ' ');
 	});
-	define(String.prototype, 'rightPad', function(length, ch) {
+	define(sp, 'rightPad', function(length, ch) {
 		ch = ch || ' ';
 		return this + String.repeat(ch, Math.max(0, length - this.length));
 	});
-	define(Array.prototype, 'rightPad', function(length, element) {
+	define(ap, 'rightPad', function(length, element) {
 		return this.empty().concat(this).concat(Array.repeat(element, Math.max(0, length - this.length)));
 	});
-	define(Number.prototype, 'rightPad', function(fixed, length) {
+	define(np, 'rightPad', function(fixed, length) {
 		var result;
-		if (typeof(length) === 'undefined') {
+		if (an(length, ut)) {
 			length = fixed;
 			fixed = 0;
 			result = this.toString();
@@ -335,9 +360,9 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result.rightPad(length, '0');
 		}
 	});
-	define(Number.prototype, 'format', function(fixed) {
+	define(np, 'format', function(fixed) {
 		var result;
-		if (typeof(fixed) === 'undefined') {
+		if (an(fixed, ut)) {
 			result = '' + this;
 		} else {
 			result = this.toFixed(fixed);
@@ -350,8 +375,8 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 	});
 
-	define(String.prototype, 'splice', function(index, length) {
-		return this.substring(0, index) + Array.prototype.slice.call(arguments, 2).join('') + this.substring(index + length);
+	define(sp, 'splice', function(index, length) {
+		return this.substring(0, index) + ap.slice.call(arguments, 2).join('') + this.substring(index + length);
 	});
 
 	var random = Math.random;
@@ -365,14 +390,17 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return random() * (end - start) + start;
 	};
-	Math.randomInt = function(start, end) {
+	Math.rand = Math.randomInt = function(start, end) {
+		if (arguments.length == 0) {
+			return parseInt(('' + random()).substring(2));
+		}
 		return Math.floor(Math.random.apply(this, arguments));
 	};
 
-	define(String.prototype, 'code', function(){
+	define(sp, 'code', function() {
 		return this.charCodeAt(0);
 	});
-	define(String.prototype, 'codes', function(){
+	define(sp, 'codes', function() {
 		var result = new Array(this.length);
 		for (var i = 0; i < this.length; i++) {
 			result[i] = this[i].charCodeAt(0);
@@ -380,17 +408,17 @@ select count(1) from $1 => from x in $1 select count(1);
 		return result;
 	});
 
-	define([String.prototype, Number.prototype], 'char', function(){
+	define([sp, np], 'char', function() {
 		return String.fromCharCode(this);
 	});
-	define([String.prototype, Number.prototype], 'chars', function(){
+	define([sp, np], 'chars', function() {
 		return String.fromCharCode(this);
 	});
-	define(Array.prototype, 'chars', function(){
+	define(ap, 'chars', function() {
 		return String.fromCharCode.apply(this, this);
 	});
 
-	define([String.prototype, Number.prototype], 'loop', function(start, fun){
+	define([sp, np], 'loop', function(start, fun) {
 		if (arguments.length == 1) {
 			fun = start;
 			start = 0;
@@ -398,12 +426,12 @@ select count(1) from $1 => from x in $1 select count(1);
 		start = start || 0;
 		fun = toLinqFun(fun);
 		var count = parseInt(this);
-		for (var i = 0, n = start; i < count ;i++, n++) {
+		for (var i = 0, n = start; i < count; i++, n++) {
 			fun.call(this, i, n);
 		}
 	});
 
-	define([String.prototype, Array.prototype], 'random', function(count) {
+	define([sp, ap], 'random', function(count) {
 		count = count || 1;
 		if (count == 1) {
 			return this[Math.randomInt(0, this.length)];
@@ -417,7 +445,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		cast each element with fun
 		@params fun function(element)
 	*/
-	define([String.prototype, Array.prototype], 'cast', function(fun) {
+	define([sp, ap], 'cast', function(fun) {
 		var result = this.empty(this.length);
 		for (var i = 0; i < this.length; i++) {
 			result[i] = fun.call(this, this[i]);
@@ -433,8 +461,8 @@ select count(1) from $1 => from x in $1 select count(1);
 		@params index int
 			if fun is a RegExp, get search result with index in regex groups
 	*/
-	define(String.prototype, 'select', function(fun, index) {
-		if (fun instanceof RegExp) {
+	define(sp, 'select', function(fun, index) {
+		if (an(fun, RegExp)) {
 			index = index || 0;
 			var result = [];
 			this.replace(fun, function(w) {
@@ -443,10 +471,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			});
 			return result;
 		} else {
-			return Array.prototype.select.call(this, fun);
+			return ap.select.call(this, fun);
 		}
 	});
-	define(Array.prototype, 'select', function(fun) {
+	define(ap, 'select', function(fun) {
 		var result = this.empty(this.length);
 		fun = fieldFun(fun);
 		for (var i = 0; i < this.length; i++) {
@@ -455,7 +483,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		return result;
 	});
 	/*
-	define(Array.prototype, 'replace', function(fun) {
+	define(ap, 'replace', function(fun) {
 		fun = toLinqFun(fun);
 		for (var i = 0; i < this.length; i++) {
 			this[i] = fun.call(this, this[i], i, this[i - 1], this[i + 1]);
@@ -463,7 +491,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		return this;
 	});
 */
-	define([String.prototype, Array.prototype], 'forEach', function(fun) {
+	define([sp, ap], 'forEach', function(fun) {
 		fun = toLinqFun(fun);
 		for (var i = 0; i < this.length; i++) {
 			if (fun.call(this, this[i], i, this[i - 1], this[i + 1]) === false) {
@@ -472,7 +500,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return this;
 	});
-	define([String.prototype, Array.prototype], 'single', function(fun) {
+	define([sp, ap], 'single', function(fun) {
 		if (fun) {
 			fun = toLinqFun(fun);
 			for (var i = 0; i < this.length; i++) {
@@ -485,7 +513,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return this.first();
 		}
 	});
-	define([String.prototype, Array.prototype], 'any', function(fun) {
+	define([sp, ap], 'any', function(fun) {
 		if (fun) {
 			fun = toLinqFun(fun);
 			for (var i = 0; i < this.length; i++) {
@@ -498,7 +526,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return this.length > 0;
 		}
 	});
-	define([String.prototype, Array.prototype], 'all', function(fun) {
+	define([sp, ap], 'all', function(fun) {
 		fun = toLinqFun(fun);
 		for (var i = 0; i < this.length; i++) {
 			if (!fun.call(this, this[i], i, this[i - 1], this[i + 1])) {
@@ -507,12 +535,12 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return true;
 	});
-	define([String.prototype, Array.prototype], 'count', function(fun) {
+	define([sp, ap], 'count', function(fun) {
 		fun = toLinqFun(fun);
 		var count = 0;
-		if (typeof fun === 'undefined') {
+		if (an(fun, ut)) {
 			return this.length;
-		} else if (fun instanceof Function) {
+		} else if (an(fun, Function)) {
 			for (var i = 0; i < this.length; i++) {
 				if (fun.call(this, this[i], i, this[i - 1], this[i + 1])) {
 					count++;
@@ -527,10 +555,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return count;
 	});
-	define([String.prototype, Array.prototype], 'first', function() {
+	define([sp, ap], 'first', function() {
 		return this.length > 0 ? this[0] : null;
 	});
-	define([String.prototype, Array.prototype], 'concat', function(other) {
+	define([sp, ap], 'concat', function(other) {
 		var result = this.empty(this.length + other.length);
 		var index = 0;
 		for (var i = 0; i < this.length; i++, index++) {
@@ -541,7 +569,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'union', function(other, fun) {
+	define([sp, ap], 'union', function(other, fun) {
 		var result = this.empty();
 		for (var i = 0; i < this.length; i++) {
 			if (!result.exists(this[i], fun)) {
@@ -555,9 +583,9 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'exists', function(element, fun) {
+	define([sp, ap], 'exists', function(element, fun) {
 		var result = this.findFirstIndex(element, fun) != -1;
-		if (!result && (element instanceof Array)) {
+		if (!result && (an(element, Array))) {
 			for (var i = 0; i < element.length; i++) {
 				if (this.findFirstIndex(element, fun) != -1) {
 					return true;
@@ -568,7 +596,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	define([String.prototype, Array.prototype], 'existsAll', function(other, fun) {
+	define([sp, ap], 'existsAll', function(other, fun) {
 		for (var i = 0; i < other.length; i++) {
 			if (!this.exists(other[i])) {
 				return false;
@@ -576,7 +604,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return true;
 	});
-	define([String.prototype, Array.prototype], 'distinct', function(fun) {
+	define([sp, ap], 'distinct', function(fun) {
 		var result = this.empty();
 		for (var i = 0; i < this.length; i++) {
 			if (!result.exists(this[i], fun)) {
@@ -585,19 +613,19 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define(String.prototype, 'empty', function(length) {
+	define(sp, 'empty', function(length) {
 		var a = new Array(length || 0);
 		define(a, 'join', function(split) {
-			return Array.prototype.join.call(this, split || '');
+			return ap.join.call(this, split || '');
 		}, true);
 		return a;
 	});
-	define(Array.prototype, 'empty', function(length) {
+	define(ap, 'empty', function(length) {
 		var a = new Array(length || 0);
 		define(a, 'join', this.join, true);
 		return a;
 	});
-	define([String.prototype, Array.prototype], 'except', function(other, fun) {
+	define([sp, ap], 'except', function(other, fun) {
 		var result = this.empty();
 		for (var i = 0; i < this.length; i++) {
 			if (!other.exists(this[i], fun)) {
@@ -606,7 +634,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'intersect', function(other, fun) {
+	define([sp, ap], 'intersect', function(other, fun) {
 		var result = this.empty();
 		for (var i = 0; i < this.length; i++) {
 			if (other.exists(this[i], fun)) {
@@ -615,17 +643,24 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'last', function() {
+	define([sp, ap], 'last', function() {
 		return this.length > 0 ? this[this.length - 1] : null;
 	});
-	define([String.prototype, Array.prototype], 'reverse', function() {
+	define(ap, 'reverse', function() {
 		var result = this.empty(this.length);
 		for (var i = this.length - 1, j = 0; i >= 0; i--, j++) {
 			result[j] = this[i];
 		}
 		return result;
 	});
-	define(Array.prototype, 'shuffle', function(start, len) {
+	define(sp, 'reverse', function() {
+		var result = '';
+		for (var i = this.length - 1; i >= 0; i--) {
+			result += this[i];
+		}
+		return result;
+	});
+	define(ap, 'shuffle', function(start, len) {
 		start = start || 0;
 		var end = len ? Math.min(this.length, start + len) : this.length;
 		var index, temp;
@@ -640,22 +675,23 @@ select count(1) from $1 => from x in $1 select count(1);
 		};
 		return result;
 	});
-	define(String.prototype, 'shuffle', function(start, len) {
+	define(sp, 'shuffle', function(start, len) {
 		start = start || 0;
 		var end = len ? Math.min(this.length, start + len) : this.length;
+		len = end - start;
 		var index, temp;
-		var result = this.toArray();
+		var result = this.substring(start, end).toArray();
 		for (var i = start; i < end; i++) {
-			index = Math.randomInt(start, end);
+			index = Math.randomInt(len);
 			if (index != i) {
 				temp = result[i];
 				result[i] = result[index];
 				result[index] = temp;
 			}
 		};
-		return result.join('');
+		return this.substring(0, start) + result.join('') + this.substring(end);
 	});
-	define([String.prototype, Array.prototype], 'sequenceEqual', function(other, fun, start, len) {
+	define([sp, ap], 'sequenceEqual', function(other, fun, start, len) {
 		if (this == other) {
 			return true;
 		}
@@ -679,10 +715,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return true;
 	});
-	define([String.prototype, Array.prototype], 'findFirst', function(element, index, fun) {
+	define([sp, ap], 'findFirst', function(element, index, fun) {
 		return this[this.findFirstIndex(element, index, fun)];
 	});
-	define([String.prototype, Array.prototype], 'findFirstIndex', function(element, index, fun) {
+	define([sp, ap], 'findFirstIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
 			fun = fieldComparer(fun || index);
@@ -699,7 +735,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		} else {
 			element = toLinqFun(element);
-			if (element instanceof Function) {
+			if (an(element, Function)) {
 				fun = element;
 				var result;
 				for (var i = 0; i < this.length; i++) {
@@ -726,10 +762,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return -1;
 	});
-	define([String.prototype, Array.prototype], 'findLast', function(element, index, fun) {
+	define([sp, ap], 'findLast', function(element, index, fun) {
 		return this[this.findLastIndex(element, index, fun)];
 	});
-	define([String.prototype, Array.prototype], 'findLastIndex', function(element, index, fun) {
+	define([sp, ap], 'findLastIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
 			fun = fieldComparer(fun || index);
@@ -746,7 +782,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		} else {
 			element = toLinqFun(element);
-			if (element instanceof Function) {
+			if (an(element, Function)) {
 				fun = element;
 				var result;
 				for (var i = this.length - 1; i >= 0; i--) {
@@ -773,18 +809,18 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return -1;
 	});
-	define([String.prototype, Array.prototype], 'limit', function(start, count) {
+	define([sp, ap], 'limit', function(start, count) {
 		return this.slice(start, start + count);
 	});
-	define([String.prototype, Array.prototype], 'skip', function(count) {
+	define([sp, ap], 'skip', function(count) {
 		return this.slice(count);
 	});
-	define([String.prototype, Array.prototype], 'skipRight', function(count) {
+	define([sp, ap], 'skipRight', function(count) {
 		return this.slice(0, -count);
 	});
-	define([String.prototype, Array.prototype], 'skipWhile', function(fun) {
+	define([sp, ap], 'skipWhile', function(fun) {
 		fun = toLinqFun(fun);
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var result;
 			for (var i = 0; i < this.length; i++) {
 				result = fun.call(this, this[i], i, this[i - 1], this[i + 1]);
@@ -801,9 +837,9 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		}
 	});
-	define([String.prototype, Array.prototype], 'skipRightWhile', function(fun) {
+	define([sp, ap], 'skipRightWhile', function(fun) {
 		fun = toLinqFun(fun);
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var result;
 			for (var i = this.length - 1; i >= 0; i--) {
 				result = fun.call(this, this[i], i, this[i - 1], this[i + 1]);
@@ -820,15 +856,15 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		}
 	});
-	define([String.prototype, Array.prototype], 'take', function(count) {
+	define([sp, ap], 'take', function(count) {
 		return this.slice(0, count);
 	});
-	define([String.prototype, Array.prototype], 'takeRight', function(count) {
+	define([sp, ap], 'takeRight', function(count) {
 		return this.slice(-count);
 	});
-	define([String.prototype, Array.prototype], 'takeWhile', function(fun) {
+	define([sp, ap], 'takeWhile', function(fun) {
 		fun = toLinqFun(fun);
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var result;
 			for (var i = 0; i < this.length; i++) {
 				result = fun.call(this, this[i], i, this[i - 1], this[i + 1]);
@@ -845,9 +881,9 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		}
 	});
-	define([String.prototype, Array.prototype], 'takeRightWhile', function(fun) {
+	define([sp, ap], 'takeRightWhile', function(fun) {
 		fun = toLinqFun(fun);
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var result;
 			for (var i = this.length - 1; i >= 0; i--) {
 				result = fun.call(this, this[i], i, this[i - 1], this[i + 1]);
@@ -864,18 +900,18 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		}
 	});
-	define([String.prototype, Array.prototype], 'wipe', function(fun, count) {
+	define([sp, ap], 'wipe', function(fun, count) {
 		if (arguments.length > 1) {
-			var elements = Array.prototype.slice.call(arguments, 0);
+			var elements = ap.slice.call(arguments, 0);
 			return this.except(elements);
-		} else if (fun instanceof Array && !(fun instanceof Grouping) && !(fun instanceof Joins)) {
+		} else if (an(fun, Array) && !(an(fun, Grouping, Joins))) {
 			return this.except(fun);
 		} else {
 			fun = toLinqFun(fun);
 		}
-		count = typeof(count) === 'undefined' ? -1 : count;
+		count = an(count, ut) ? -1 : count;
 		var result = this.empty();
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var compareResult;
 			for (var i = 0; i < this.length; i++) {
 				if (count == 0) {
@@ -900,18 +936,18 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'where', function(fun, count) {
+	define([sp, ap], 'where', function(fun, count) {
 		if (arguments.length > 1) {
-			var elements = Array.prototype.slice.call(arguments, 0);
+			var elements = ap.slice.call(arguments, 0);
 			return this.intersect(elements);
-		} else if (fun instanceof Array && !(fun instanceof Grouping) && !(fun instanceof Joins)) {
+		} else if (an(fun, Array) && !(an(fun, Grouping, Joins))) {
 			return this.intersect(fun);
 		} else {
 			fun = toLinqFun(fun);
 		}
-		count = typeof(count) === 'undefined' ? -1 : count;
+		count = an(count, ut) ? -1 : count;
 		var result = this.empty();
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			var compareResult;
 			for (var i = 0; i < this.length; i++) {
 				if (count == 0) {
@@ -936,7 +972,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'zip', function(other, fun) {
+	define([sp, ap], 'zip', function(other, fun) {
 		fun = toLinqFun(fun);
 		var result = this.empty(Math.min(this.length, other.length));
 		for (var i = 0; i < this.length && i < other.length; i++) {
@@ -944,7 +980,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'sum', function(fun) {
+	define([sp, ap], 'sum', function(fun) {
 		var sum = 0;
 		fun = fieldFun(fun);
 		for (var i = 0; i < this.length; i++) {
@@ -956,7 +992,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return sum;
 	});
-	define([String.prototype, Array.prototype], 'max', function(fun, comparer) {
+	define([sp, ap], 'max', function(fun, comparer) {
 		if (!this.length) {
 			return null;
 		}
@@ -973,7 +1009,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return max;
 	});
-	define([String.prototype, Array.prototype], 'min', function(fun, comparer) {
+	define([sp, ap], 'min', function(fun, comparer) {
 		if (!this.length) {
 			return null;
 		}
@@ -990,13 +1026,13 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return min;
 	});
-	define([String.prototype, Array.prototype], 'average', function(fun) {
+	define([sp, ap], 'average', function(fun) {
 		if (!this.length) {
 			return null;
 		}
 		return this.sum(fun) / this.length;
 	});
-	define([String.prototype, Array.prototype], 'aggregate', function(fun, seed, resultSelector) {
+	define([sp, ap], 'aggregate', function(fun, seed, resultSelector) {
 		if (!this.length) {
 			return seed;
 		}
@@ -1015,29 +1051,29 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	define([String.prototype, Array.prototype], 'orderBy', function(fun, comparer) {
+	define([sp, ap], 'orderBy', function(fun, comparer) {
 		return new OrderByArray(this, [fieldFun(fun)], [fieldComparer(comparer)]);
 	});
-	define([String.prototype, Array.prototype], 'orderByDescending', function(fun, comparer) {
+	define([sp, ap], 'orderByDescending', function(fun, comparer) {
 		return new OrderByArray(this, [fieldFun(fun)], [function(a, b) {
 			return -(fieldComparer(comparer))(a, b);
 		}]);
 	});
-	define([String.prototype, Array.prototype], 'broke', function(count) {
+	define([sp, ap], 'broke', function(count) {
 		var result = this.empty();
 		for (var i = 0; i < this.length; i += count) {
 			result.push(this.slice(i, Math.min(i + count, this.length)));
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'brokeRight', function(count) {
+	define([sp, ap], 'brokeRight', function(count) {
 		var result = this.empty();
 		for (var i = this.length - count; i > -count; i -= count) {
 			result.unshift(this.slice(Math.max(0, i), i + count));
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'nearBy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define([sp, ap], 'nearBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
 		comparer = fieldComparer(comparer || 'key');
@@ -1066,7 +1102,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	define([String.prototype, Array.prototype], 'groupBy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define([sp, ap], 'groupBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
 		comparer = fieldComparer(comparer || 'key');
@@ -1095,7 +1131,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	define([String.prototype, Array.prototype], 'joinBy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
+	define([sp, ap], 'joinBy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
@@ -1140,7 +1176,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'groupJoin', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
+	define([sp, ap], 'groupJoin', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
@@ -1174,7 +1210,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define(String.prototype, 'defaultIfEmpty', function(defaultValue) {
+	define(sp, 'defaultIfEmpty', function(defaultValue) {
 		var result;
 		if (!this.length) {
 			result = this.empty();
@@ -1184,7 +1220,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define(Array.prototype, 'defaultIfEmpty', function(defaultValue) {
+	define(ap, 'defaultIfEmpty', function(defaultValue) {
 		var result;
 		if (!this.length) {
 			result = this.empty();
@@ -1194,7 +1230,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'selectMany', function(collectionSelector, resultSelector) {
+	define([sp, ap], 'selectMany', function(collectionSelector, resultSelector) {
 		collectionSelector = fieldFun(collectionSelector);
 		resultSelector = toLinqFun(resultSelector || function(o, v) {
 			return v;
@@ -1209,7 +1245,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define([String.prototype, Array.prototype], 'toLookup', function(keySelector, elementSelector, comparer) {
+	define([sp, ap], 'toLookup', function(keySelector, elementSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
 		comparer = fieldComparer(comparer || 'key');
@@ -1232,10 +1268,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	});
-	define(String.prototype, 'quote', function() {
+	define(sp, 'quote', function() {
 		return '"' + this.replace(/([\'\"\\])/g, '\\$1').replace(/\r/g, '\\r').replace(/\n/g, '\\n').replace(/\t/g, '\\t') + '"';
 	});
-	define(Object.prototype, 'equals', function(other, depth) {
+	define(op, 'equals', function(other, depth) {
 		if (this == other) {
 			return true;
 		} else if (!exists(other)) {
@@ -1245,7 +1281,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			var thus = this.valueOf();
 			if (other == thus) {
 				return true;
-			} else if (typeof(other) === 'object' && typeof(thus) === 'object') {
+			} else if (an(other, ot) && an(thus, ot)) {
 				depth = depth || 0;
 				if (depth) {
 					var keyCount = 0;
@@ -1320,8 +1356,8 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return result;
 	};
-	define(Object.prototype, 'repeat', function(count) {
-		if (this instanceof String || typeof(this) === 'string') {
+	define(op, 'repeat', function(count) {
+		if (an(this, String, st)) {
 			return String.repeat(this, count);
 		} else {
 			return Array.repeat(this, count);
@@ -1370,7 +1406,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 
 			function getfun(funbody, join) {
-				var others = Array.prototype.slice.call(arguments, join === true ? 2 : 1).aggregate(function(n, s) {
+				var others = ap.slice.call(arguments, join === true ? 2 : 1).aggregate(function(n, s) {
 					return s + ',' + n;
 				}, '');
 				var full = joins.aggregate(function(n, s) {
@@ -1380,7 +1416,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 
 			function replace(str, needFirst) {
-				if (str instanceof Query) {
+				if (an(str, Query)) {
 					return '(' + str.query(null, set, joins.slice(0), needFirst, replaceParam) + ')';
 				} else {
 					return str;
@@ -1403,7 +1439,7 @@ select count(1) from $1 => from x in $1 select count(1);
 				}).last();
 				if (name == str) {
 					name = name.trim();
-					if ((typeof(i) !== 'undefined' && /[^_0-9a-zA-Z\$]/g.test(name)) || keywords.exists(name)) {
+					if ((!an(i, ut) && /[^_0-9a-zA-Z\$]/g.test(name)) || keywords.exists(name)) {
 						return '_$$$' + i;
 					} else {
 						return name;
@@ -1444,7 +1480,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 			if (from == '_$' && !thus) {
 				return this.get('select').select(function(v) {
-					return (typeof(v) === 'string') ? v.replace(/(^|\s)_\$\._\$\$(\d+)($|\s)/g, function(v, l, i, r) {
+					return (an(v, st)) ? v.replace(/(^|\s)_\$\._\$\$(\d+)($|\s)/g, function(v, l, i, r) {
 						var index = parseInt(i);
 						var command = indexes[index];
 						index = indexes.count(function(e, i) {
@@ -1478,7 +1514,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 
 			function needGroup(e, i) {
-				if (e instanceof Query) {
+				if (an(e, Query)) {
 					if ((e.get('from').join(' ') || '_$') == '_$') {
 						if (aggfuns.exists(function(c) {
 								return e.get(c.name).length > 0;
@@ -1544,7 +1580,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 
 			function selectin(e, i) {
-				if (e instanceof Query) {
+				if (an(e, Query)) {
 					if ((e.get('from').join(' ') || '_$') == '_$') {
 						aggfuns.forEach(function(c) {
 							groupfun(e, c.name, c.fun || c.name, c.params || []);
@@ -1623,12 +1659,12 @@ select count(1) from $1 => from x in $1 select count(1);
 
 	var queryCompilers = {};
 
-	define(Array.prototype, 'query', function(queryStr) {
-		var args = Array.prototype.slice.call(arguments, 1);
+	define(ap, 'query', function(queryStr) {
+		var args = ap.slice.call(arguments, 1);
 		args.unshift(this);
-		return String.prototype.query.apply(queryStr, args);
+		return sp.query.apply(queryStr, args);
 	});
-	define(String.prototype, 'query', function(array) {
+	define(sp, 'query', function(array) {
 		var replaceParam = [];
 		var index = arguments.length != 0 ? arguments.length - 1 : 0;
 		//[,\:\?\(\)]|={2,3}|!==|(?(?<{1,2}|>{1,3}|\|{1,2}|&{1,2}|[%\!\+\-\*\/\^])=?)|=
@@ -1645,7 +1681,7 @@ select count(1) from $1 => from x in $1 select count(1);
 
 		var result = queryCompilers[queryStr];
 
-		replaceParam = Array.prototype.slice.call(arguments, 0).defaultIfEmpty().concat(replaceParam);
+		replaceParam = ap.slice.call(arguments, 0).defaultIfEmpty().concat(replaceParam);
 		var replaceLength = replaceParam.length;
 
 		if (!result) {
@@ -1742,7 +1778,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 
 		result = replaceParam.aggregate(function(n, s, i) {
-			return s + 'var _$' + i + '=' + (i >= replaceLength ? n + '.toArray()' : ((typeof(n) === 'undefined' ? 'null' : typeof(n) === 'string' ? n.quote() : n instanceof Number ? n : n instanceof RegExp ? n.toString() : JSON.stringify(n)))) + ';';
+			return s + 'var _$' + i + '=' + (i >= replaceLength ? n + '.toArray()' : ((an(n, ut) ? 'null' : an(n, st) ? n.quote() : an(n, Number) ? n : an(n, RegExp) ? n.toString() : JSON.stringify(n)))) + ';';
 		}, '') + result + '.toArray()';
 		console.log(result);
 		//var noLazy = result.replace(/Lazy\(/g, '(');
@@ -1755,16 +1791,16 @@ select count(1) from $1 => from x in $1 select count(1);
 		//console.log('NoLazy:', Date.reset(), result);
 		return result;
 	});
-	define(Array.prototype, 'multiQuery', function() {
+	define(ap, 'multiQuery', function() {
 		var result = new Array(this.length);
 		for (var i = 0; i < this.length; i++) {
 			result[i] = this[i].query.apply(this[i], arguments);
 		}
 		return result;
 	});
-	define(Array.prototype, 'beginMultiQuery', function(callback, delay) {
+	define(ap, 'beginMultiQuery', function(callback, delay) {
 		var thus = this;
-		var args = isNaN(delay) ? Array.prototype.slice.call(arguments, 1) : Array.prototype.slice.call(arguments, 2);
+		var args = isNaN(delay) ? ap.slice.call(arguments, 1) : ap.slice.call(arguments, 2);
 		delay = isNaN(delay) ? 0 : delay;
 		var result = new Array(this.length);
 		var index = 0;
@@ -1796,12 +1832,12 @@ select count(1) from $1 => from x in $1 select count(1);
 		}, true);
 		return this;
 	});
-	define(Array.prototype, 'endMultiQuery', function() {
+	define(ap, 'endMultiQuery', function() {
 		return this;
 	});
-	define(String.prototype, 'beginQuery', function(callback, delay) {
+	define(sp, 'beginQuery', function(callback, delay) {
 		var thus = this;
-		var args = isNaN(delay) ? Array.prototype.slice.call(arguments, 1) : Array.prototype.slice.call(arguments, 2);
+		var args = isNaN(delay) ? ap.slice.call(arguments, 1) : ap.slice.call(arguments, 2);
 		delay = isNaN(delay) ? 0 : delay;
 		var async = setTimeout((function() {
 			return function() {
@@ -1816,16 +1852,16 @@ select count(1) from $1 => from x in $1 select count(1);
 		}, true);
 		return this;
 	});
-	define(String.prototype, 'endQuery', function() {
+	define(sp, 'endQuery', function() {
 		return this;
 	});
-	define(Object.prototype, 'toArray', function() {
-		if (this instanceof Array) {
+	define(op, 'toArray', function() {
+		if (an(this, Array)) {
 			return this;
-		} else if (this instanceof String || typeof(this) === 'string') {
+		} else if (an(this, String, st)) {
 			var result = this.split('');
 			define(result, 'join', this.join || function(split) {
-				return Array.prototype.join.call(this, split || '');
+				return ap.join.call(this, split || '');
 			}, true);
 			return result;
 		} else {
@@ -1839,7 +1875,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	_define(Object.prototype, '_keyCount', function() {
+	_define(op, '_keyCount', function() {
 		var count = 0;
 		for (var name in this) {
 			count++;
@@ -1847,7 +1883,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		return count;
 	});
 
-	define([Number.prototype, String.prototype], 'isBetween', function(min, max) {
+	define([np, sp], 'isBetween', function(min, max) {
 		return typeof(this.valueOf()) === typeof(min) && typeof(this.valueOf()) === typeof(max) && !(this > max || this < min);
 	});
 
@@ -1855,11 +1891,11 @@ select count(1) from $1 => from x in $1 select count(1);
 		return value === "" || value === 0 || value === false ? new Object(value) : new Object(value || {});
 	};
 	Object.clone = function(value) {
-		if (value instanceof Array) {
+		if (an(value, Array)) {
 			return value.slice(0);
-		} else if (typeof(value) === 'object') {
+		} else if (an(value, ot)) {
 			/*
-			if (value instanceof String || value instanceof Boolean || value instanceof Number) {
+			if (an(value,String) || an(value,Boolean) || an(value,Number)) {
 				var result = Object.valueOf(value.valueOf());
 				//result.__proto__ = value;
 				for (var name in value) {
@@ -1869,7 +1905,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			} else {
 				return Object.create(value);
 			}*/
-			var result = value instanceof String || value instanceof Boolean || value instanceof Number ? Object.valueOf(value.valueOf()) : {};
+			var result = an(value, String, Boolean, Number) ? Object.valueOf(value.valueOf()) : {};
 			for (var name in value) {
 				result[name] = value[name];
 			}
@@ -1879,7 +1915,33 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 	}
 
-	define(Object.prototype, 'log', function() {
+	Object.an = function(element) {
+		for (var i = 1; i < arguments.length; i++) {
+			if (typeof(arguments[i]) === 'string') {
+				if (typeof(element) === arguments[i]) {
+					return true;
+				}
+			} else if (element instanceof arguments[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	define(op, 'an', function() {
+		for (var i = 0; i < arguments.length; i++) {
+			if (typeof(arguments[i]) === 'string') {
+				if (typeof(this) === arguments[i]) {
+					return true;
+				}
+			} else if (this instanceof arguments[i]) {
+				return true;
+			}
+		}
+		return false;
+	});
+
+	define(op, 'log', function() {
 		window.console && console.log && console.log(this.valueOf());
 		return this;
 	});
@@ -1904,14 +1966,14 @@ select count(1) from $1 => from x in $1 select count(1);
 		define(this, 'compares', compares, true);
 		define(this, 'funs', funs, true);
 	};
-	OrderByArray.prototype = Object.create(Array.prototype);
+	OrderByap = Object.create(ap);
 
-	define(OrderByArray.prototype, 'thenBy', function(fun, comparer) {
+	define(OrderByap, 'thenBy', function(fun, comparer) {
 		this.funs.push(fieldFun(fun));
 		this.compares.push(fieldComparer(comparer));
 		return new OrderByArray(this, this.funs, this.compares);
 	}, true);
-	define(OrderByArray.prototype, 'thenByDescending', function(fun, comparer) {
+	define(OrderByap, 'thenByDescending', function(fun, comparer) {
 		this.funs.push(fieldFun(fun));
 		this.compares.push(function(a, b) {
 			return -(fieldComparer(comparer))(a, b);
@@ -1922,10 +1984,10 @@ select count(1) from $1 => from x in $1 select count(1);
 	var Grouping = function(key) {
 		this.key = key;
 	};
-	Grouping.prototype = Object.create(Array.prototype);
+	Grouping.prototype = Object.create(ap);
 
 	define(Grouping.prototype, 'push', function() {
-		Array.prototype.push.apply(this, arguments);
+		ap.push.apply(this, arguments);
 		for (var name in this[0]) {
 			if (name == 'key' || name == 'length' || !isNaN(name)) {
 				continue;
@@ -1950,7 +2012,7 @@ select count(1) from $1 => from x in $1 select count(1);
 	var Joins = function(element) {
 		this.push(element);
 	};
-	Joins.prototype = Object.create(Array.prototype);
+	Joins.prototype = Object.create(ap);
 
 	var timer = {};
 
@@ -1960,7 +2022,7 @@ select count(1) from $1 => from x in $1 select count(1);
 	};
 	Date.tick = function(tmr) {
 		tmr = tmr || 0;
-		return new Date() - timer[tmr];
+		return timer[tmr] ? new Date() - timer[tmr] : 0;
 	};
 	Date.reset = function(tmr) {
 		tmr = tmr || 0;
@@ -1970,8 +2032,8 @@ select count(1) from $1 => from x in $1 select count(1);
 	}
 
 	//Lazy
-	define(Array.prototype, '$index', 0);
-	define(Array.prototype, '$tryNext', function(pre) {
+	define(ap, '$index', 0);
+	define(ap, '$tryNext', function(pre) {
 		if (this.$index < this.length) {
 			if (pre) {
 				return this[this.$index];
@@ -1983,17 +2045,17 @@ select count(1) from $1 => from x in $1 select count(1);
 			throw null;
 		}
 	});
-	define(Array.prototype, 'hasNext', function() {
+	define(ap, 'hasNext', function() {
 		return this.$index < this.length;
 	});
-	define(Array.prototype, 'moveNext', function() {
+	define(ap, 'moveNext', function() {
 		if (this.hasNext()) {
 			return this.tryNext().current;
 		} else {
 			return null;
 		}
 	});
-	define(Array.prototype, 'tryNext', (function() {
+	define(ap, 'tryNext', (function() {
 		var element = {};
 		return function() {
 			if (this.$index < this.length) {
@@ -2008,10 +2070,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			}
 		};
 	})());
-	define(String.prototype, 'selectLazy', function(fun) {
+	define(sp, 'selectLazy', function(fun) {
 		return this.toArray().selectLazy(fun);
 	});
-	define(Array.prototype, 'selectLazy', function(fun) {
+	define(ap, 'selectLazy', function(fun) {
 		this.$index = 0;
 		var thus = this;
 		fun = fieldFun(fun);
@@ -2021,10 +2083,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return fun(element.current, element.index, element.prev, element.next);
 		});
 	});
-	define(String.prototype, 'whereLazy', function(fun) {
+	define(sp, 'whereLazy', function(fun) {
 		return this.toArray().whereLazy(fun);
 	});
-	define(Array.prototype, 'whereLazy', function(fun) {
+	define(ap, 'whereLazy', function(fun) {
 		this.$index = 0;
 		var thus = this;
 		fun = toLinqFun(fun);
@@ -2037,10 +2099,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return element.current;
 		});
 	});
-	define(String.prototype, 'orderByLazy', function(keySelector, comparer) {
+	define(sp, 'orderByLazy', function(keySelector, comparer) {
 		return this.toArray().orderByLazy(keySelector, comparer);
 	});
-	define(Array.prototype, 'orderByLazy', function(keySelector, comparer) {
+	define(ap, 'orderByLazy', function(keySelector, comparer) {
 		this.$index = 0;
 		var thus = this;
 		keySelector = fieldFun(keySelector);
@@ -2051,10 +2113,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return comparer.call(thus, keySelector.call(thus, a), keySelector.call(thus, b));
 		});
 	});
-	define(String.prototype, 'orderByDescendingLazy', function(keySelector, comparer) {
+	define(sp, 'orderByDescendingLazy', function(keySelector, comparer) {
 		return this.toArray().orderByDescendingLazy(keySelector, comparer);
 	});
-	define(Array.prototype, 'orderByDescendingLazy', function(keySelector, comparer) {
+	define(ap, 'orderByDescendingLazy', function(keySelector, comparer) {
 		this.$index = 0;
 		var thus = this;
 		keySelector = fieldFun(keySelector);
@@ -2065,10 +2127,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return -comparer.call(thus, keySelector.call(thus, a), keySelector.call(thus, b));
 		});
 	});
-	define(String.prototype, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define(sp, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		return this.toArray().groupByLazy(keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(Array.prototype, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define(ap, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		this.$index = 0;
 		var thus = this;
 		keySelector = fieldFun(keySelector);
@@ -2078,10 +2140,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return thus.tryNext();
 		}, keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(String.prototype, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define(sp, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		return this.toArray().nearByLazy(keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(Array.prototype, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define(ap, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		this.$index = 0;
 		var thus = this;
 		keySelector = fieldFun(keySelector);
@@ -2091,10 +2153,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return thus.tryNext();
 		}, keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(String.prototype, 'firstLazy', function() {
+	define(sp, 'firstLazy', function() {
 		return this.toArray().firstLazy();
 	});
-	define(Array.prototype, 'firstLazy', function() {
+	define(ap, 'firstLazy', function() {
 		this.$index = 0;
 		if (this.hasNext()) {
 			return this.moveNext();
@@ -2102,15 +2164,15 @@ select count(1) from $1 => from x in $1 select count(1);
 			return null;
 		}
 	});
-	define(String.prototype, 'countLazy', function(fun) {
+	define(sp, 'countLazy', function(fun) {
 		return this.toArray().countLazy(fun);
 	});
-	define(Array.prototype, 'countLazy', function(fun) {
+	define(ap, 'countLazy', function(fun) {
 		fun = toLinqFun(fun);
 		var count = 0;
 		var i = 0,
 			element, result;
-		if (fun instanceof Function) {
+		if (an(fun, Function)) {
 			if (this.length) {
 				for (i = 0; i < this.length; i++) {
 					if (fun.call(this, this[i], i, this[i - 1], this[i + 1])) {
@@ -2155,10 +2217,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return count;
 	});
-	define(String.prototype, 'sumLazy', function(fun) {
+	define(sp, 'sumLazy', function(fun) {
 		return this.toArray().sumLazy(fun);
 	});
-	define(Array.prototype, 'sumLazy', function(fun) {
+	define(ap, 'sumLazy', function(fun) {
 		fun = fieldFun(fun);
 		var sum = 0;
 		var i = 0,
@@ -2181,10 +2243,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return sum;
 	}, true);
-	define(String.prototype, 'maxLazy', function(fun, comparer) {
+	define(sp, 'maxLazy', function(fun, comparer) {
 		return this.toArray().maxLazy(fun, comparer);
 	});
-	define(Array.prototype, 'maxLazy', function(fun, comparer) {
+	define(ap, 'maxLazy', function(fun, comparer) {
 		fun = fieldFun(fun);
 		comparer = fieldComparer(comparer);
 		var max = null;
@@ -2221,10 +2283,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return max;
 	});
-	define(String.prototype, 'minLazy', function(fun, comparer) {
+	define(sp, 'minLazy', function(fun, comparer) {
 		return this.toArray().minLazy(fun, comparer);
 	});
-	define(Array.prototype, 'minLazy', function(fun, comparer) {
+	define(ap, 'minLazy', function(fun, comparer) {
 		fun = fieldFun(fun);
 		comparer = fieldComparer(comparer);
 		var min = null;
@@ -2261,10 +2323,10 @@ select count(1) from $1 => from x in $1 select count(1);
 		}
 		return min;
 	});
-	define(String.prototype, 'aggregateLazy', function(fun, seed, resultSelector) {
+	define(sp, 'aggregateLazy', function(fun, seed, resultSelector) {
 		return this.toArray().aggregateLazy(fun, seed, resultSelector);
 	});
-	define(Array.prototype, 'aggregateLazy', function(fun, seed, resultSelector) {
+	define(ap, 'aggregateLazy', function(fun, seed, resultSelector) {
 		if (arguments.length == 1) {
 			fun = seed;
 			seed = null;
@@ -2293,10 +2355,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			return result;
 		}
 	});
-	define(String.prototype, 'selectManyLazy', function(collectionSelector, resultSelector) {
+	define(sp, 'selectManyLazy', function(collectionSelector, resultSelector) {
 		return this.toArray().selectManyLazy(collectionSelector, resultSelector);
 	});
-	define(Array.prototype, 'selectManyLazy', function(collectionSelector, resultSelector) {
+	define(ap, 'selectManyLazy', function(collectionSelector, resultSelector) {
 		this.$index = 0;
 		var thus = this;
 		var collection;
@@ -2316,10 +2378,10 @@ select count(1) from $1 => from x in $1 select count(1);
 			} while (true);
 		});
 	});
-	define(String.prototype, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
+	define(sp, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
 		return this.toArray().joinByLazy(other, thisKeySelector, otherKeySelector, resultSelector, comparer);
 	});
-	define(Array.prototype, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
+	define(ap, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
 		this.$index = 0;
 		var thus = this;
 		var thusCurrent;
@@ -2328,11 +2390,12 @@ select count(1) from $1 => from x in $1 select count(1);
 		var otherKeyCollection = [];
 		var otherIndex = -1;
 		var first = true;
+		var right = {};
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
 		comparer = fieldComparer(comparer || 'key');
-		if (typeof(other) === 'string' || other instanceof String) {
+		if (an(other, String, st)) {
 			other = other.toArray();
 		}
 		return new Enumerator(function() {
@@ -2363,13 +2426,11 @@ select count(1) from $1 => from x in $1 select count(1);
 					} else {
 						result = false;
 						for (; otherIndex < otherCollection.length; otherIndex++) {
-							right = {
-								current: otherCollection[otherIndex],
-								index: otherIndex,
-								prev: otherCollection[otherIndex - 1],
-								next: otherCollection[otherIndex + 1]
-							};
-							result = comparer.call(thus, thusKey, otherKeyCollection[otherIndex], thusCurrent, right);
+							right.current = otherCollection[otherIndex];
+							right.index = otherIndex;
+							right.prev = otherCollection[otherIndex - 1];
+							right.next = otherCollection[otherIndex + 1];
+							result = comparer.call(thus, thusKey, right.current, thusCurrent, right);
 							if (result === true || result === 0) {
 								otherIndex++;
 								return resultSelector.call(thus, thusCurrent.current, right.current, thusCurrent, right);
@@ -2379,21 +2440,15 @@ select count(1) from $1 => from x in $1 select count(1);
 					}
 				}
 				thusCurrent = thus.tryNext();
-				thusCurrent = {
-					current: thusCurrent.current,
-					index: thusCurrent.index,
-					prev: thusCurrent.prev,
-					next: thusCurrent.next
-				}
 				thusKey = thisKeySelector.call(thus, thusCurrent.current, thusCurrent.index, thusCurrent.prev, thusCurrent.next);
 				first = false;
 			} while (true);
 		});
 	});
-	define(String.prototype, 'limitLazy', function(start, count) {
+	define(sp, 'limitLazy', function(start, count) {
 		return this.toArray().limitLazy(start, count);
 	});
-	define(Array.prototype, 'limitLazy', function(start, count) {
+	define(ap, 'limitLazy', function(start, count) {
 		this.$index = 0;
 		var thus = this;
 		var index = 0;
@@ -2436,7 +2491,7 @@ select count(1) from $1 => from x in $1 select count(1);
 		define(this, '$tryNext', tryNext, true);
 	};
 
-	Enumerator.prototype = Object.create(Array.prototype);
+	Enumerator.prototype = Object.create(ap);
 	define(Enumerator.prototype, 'hasNext', function() {
 		if (this.$next != this.$index) {
 			if (this.$next < 0) {
@@ -2797,7 +2852,7 @@ select count(1) from $1 => from x in $1 select count(1);
 	};
 	GroupingEnumerator.prototype = Object.create(Enumerator.prototype);
 	define(GroupingEnumerator.prototype, 'push', function() {
-		Array.prototype.push.apply(this, arguments);
+		ap.push.apply(this, arguments);
 		if (this.length == 1) {
 			for (var name in this[0]) {
 				if (name == 'key' || name == 'length' || !isNaN(name)) {
