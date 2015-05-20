@@ -552,21 +552,27 @@ Lambda 表达式 支持如下情况:
 #### 1. `"arguments=>return"`
 *arguments*:参数列表,逗号隔开
 *return*:返回值
-案例:`"abc".select("e=>e.toUpperCase()")`
+```javascript
+"abc".select("e=>e.toUpperCase()");
+```
 #### 2. `"arguments=>new {...}"`
 *arguments*:参数列表,逗号隔开
 返回一个*object*
-案例:`"abc".select("e,i=>new {ch:e,index:i}")`
+```javascript
+"abc".select("e,i=>new {ch:e,index:i}");
+```
 #### 3. `"arguments=>{funbody}"`
 *arguments*:参数列表,逗号隔开
 *funbody*:方法体
-案例:`"abc".forEach("e,i=>{alert(e+','+i);}")`
+```javascript
+"abc".forEach("e,i=>{alert(e+','+i);}");
+```
 
 ### JSQL
 
 JSQL 格式如下:
 
-```
+```sql
 select column1 [as name1] [, column2 [as name2], column3 [as name3], ...] from element in list [join element2 in list2 on conditions ...] [where conditions] [group by column1 [, column2, column3, ...] [having conditions]] [order by column1 [, column2, column3, ...]]
 ```
 其中:
