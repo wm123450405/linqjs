@@ -20,23 +20,23 @@ And here's some code! :+1:
 
 ## Usage 用法
 
-Coming soon...
+Usage for English is Coming soon...
 
 ### Static Functions  静态方法
 | function(方法)        | type(类型) | description(描述) |
 | -------------------   | :---------: | ----------------- |
-| Object.valueOf(value) | Object | return an Object object <br/>返回一个值的Object对象 |
-| Array.range(start,len) | Array | 生成一个长度为len的数组,数组内容为从start开始逐个加1的整数 |
-| Array.rangeBetween(start,end) | Array | 生成一个数组,数组内容为从start开始到end结束步长长度为1的整数 |
-| Array.rangeChar(startChar,endChar) | Array | 生成一个数组,数组内容为从字符start开始到字符end结束的字符 |
-| Array.rangeCharCode(startChar,endChar) | Array | 生成一个数组,数组内容为从字符start开始到字符end结束的字符的ASCII码 |
-| Array.repeat(element,count) | Array | 生成一个长度为count的数组,数组的每个元素都为element |
-| String.repeat(word,count) | String | 由count个word拼接而成的新字符串 |
-| Math.random(start,end) | Math | 返回一个从start开始end结束的浮点型随机数 |
-| Math.randomInt(start,end)	| Math | 返回一个从start开始end结束的随机整数 |
-| Date.start(id) | Date | 开始一个计时器,计时器标识id,id为空启用默认计时器 |
-| Date.tick(id) | Date | 获取标识为id的计时器从开始或重置后至当前时间的间隔 |
-| Date.reset(id) | Date | 获取标识为id的计时器从开始或重置后至当前时间的间隔,并重置该计时器 |
+| Object.valueOf(value) | Object | 返回一个值的Object对象 |
+| Array.range(start,len) | Array | 生成一个长度为*len*的数组,数组内容为从*start*开始逐个加1的整数 |
+| Array.rangeBetween(start,end) | Array | 生成一个数组,数组内容为从*start*开始到*end*结束步长长度为1的整数 |
+| Array.rangeChar(startChar,endChar) | Array | 生成一个数组,数组内容为从字符*start*开始到字符*end*结束的字符 |
+| Array.rangeCharCode(startChar,endChar) | Array | 生成一个数组,数组内容为从字符*start*开始到字符*end*结束的字符的ASCII码 |
+| Array.repeat(element,count) | Array | 生成一个长度为*count*的数组,数组的每个元素都为*element* |
+| String.repeat(word,count) | String | 由*count*个*word*拼接而成的新字符串 |
+| Math.random(start,end) | Math | 返回一个从*start*开始*end*结束的浮点型随机数 |
+| Math.randomInt(start,end)	| Math | 返回一个从*start*开始*end*结束的随机整数 |
+| Date.start(id) | Date | 开始一个计时器,计时器标识*id*,*id*为空启用默认计时器 |
+| Date.tick(id) | Date | 获取标识为*id*的计时器从开始或重置后至当前时间的间隔 |
+| Date.reset(id) | Date | 获取标识为*id*的计时器从开始或重置后至当前时间的间隔,并重置该计时器 |
 
 
 #### e.g.  案例
@@ -579,9 +579,6 @@ select column1 [as name1] [, column2 [as name2], column3 [as name3], ...] from e
 > *column*为取值表达式:`element.property`或其他复杂表达式  
 > *list*指向对象、数组或字符串:`this`(同`_$0`),`_$<index>`指向参数列表中第*index*个的参数值,如 `_$1`  
 > *conditions*为条件表达式,需要表达式最终结果为*boolean*型,或能表达其是否满足条件的其他值  
-
-...  
-更多功能请阅读api.html的内容
 
 ## Examples 代码案例
 
