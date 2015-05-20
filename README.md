@@ -288,8 +288,7 @@ String.repeat('c',3); //"ccc"
 
 #### 43. `findFirst(fun)` *String* *Array*
 > 查找指定元素,返回符合方法*fun*的第一个元素  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
