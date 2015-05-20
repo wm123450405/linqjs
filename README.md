@@ -114,12 +114,10 @@ String.repeat('c',3); //"ccc"
 
 #### 10. `random(count)` *String* *Array*
 > 返回字符串或数组中一个或多个随机的元素或字符  
-
 > * *count*为可选参数
 
 #### 11. `forEach(fun)` *String* *Array*
-> 循环每个元素,并对每个元素执行*fun*方法,*fun*返回`false`时终止遍历
-
+> 循环每个元素,并对每个元素执行*fun*方法,*fun*返回`false`时终止遍历  
 > * `fun(element,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 
 #### 12. `trim()` *String* *Array*
@@ -144,13 +142,11 @@ String.repeat('c',3); //"ccc"
 > 对数字四舍五入到小数点后*fixed*位,并在后端端补齐小数点与*0*至*length*总长度,实现左对齐
 
 #### 19. `cast(fun)` *String* *Array*
-> 返回一个数组,数组内容为对源数组对应的每个元素执行*fun*方法转换类型后的值
-
+> 返回一个数组,数组内容为对源数组对应的每个元素执行*fun*方法转换类型后的值  
 > * `fun(element):object`  如:`parseInt`,`Math.round`
 
 #### 20. `select(fun)` *Array*
 > 返回一个数组,数组内容有如下情况:  
-
 > * *fun*为方法:对源数组的每个元素执行*fun*方法返回的值
 >   * `fun(element,index,prev,next):object`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:获取源数组的每个元素的*fun*属性,同时获取多个属性使用逗号隔开
@@ -159,30 +155,25 @@ String.repeat('c',3); //"ccc"
 ```
 
 #### 21. `select(fun)` *String*
-> 返回一个数组,数组内容有如下情况
-
+> 返回一个数组,数组内容有如下情况  
 > * *funOrReg*为方法:对字符串每个字符执行*fun*方法返回的值
 >   * `fun(ch):object`
 > * *funOrReg*为正则:对字符进行正则匹配,返回所有匹配结果中的第*index*组的值,无*index*参数时返回完整匹配结果
 
 #### 22. `single(fun)` *String* *Array*
-> 通过*fun*找到匹配的第一个元素或字符,若未找到返回`null`,若*fun*为空返回第一个元素或字符
-
+> 通过*fun*找到匹配的第一个元素或字符,若未找到返回`null`,若*fun*为空返回第一个元素或字符  
 > * `fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 
 #### 23. `any(fun)` *String* *Array*
-> 通过*fun*匹配数组的元素,只要有匹配元素或字符返回`true`
-
+> 通过*fun*匹配数组的元素,只要有匹配元素或字符返回`true`  
 > * `fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 
 #### 24. `all(fun)` *String* *Array*
-> 通过*fun*匹配数组的所有元素,只有所有元素或字符都匹配才返回`true`
-
+> 通过*fun*匹配数组的所有元素,只有所有元素或字符都匹配才返回`true`  
 > * `fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 
 #### 25. `count(fun)` *String* *Array*
-> 通过*fun*匹配数组的所有元素,返回所有匹配元素或字符的数量
-
+> 通过*fun*匹配数组的所有元素,返回所有匹配元素或字符的数量  
 > * `fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 
 #### 26. `first()` *String* *Array*
@@ -193,34 +184,29 @@ String.repeat('c',3); //"ccc"
 
 #### 28. `union(other,fun)` *String* *Array*
 > 联合两个数组或字符串,并剔除其中相同的元素或字符  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
 #### 29. `exists(charOrElementOrArray,fun)` *String* *Array*
 > 1. 判断数组或字符串是否含有指定元素*element*或字符*char*
-> 2. 判断数组或字符串是否含有指定数组*array*中的某个元素
-
-> 比较相同的方法*fun*由如下情况:
-
+> 2. 判断数组或字符串是否含有指定数组*array*中的某个元素  
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
 #### 30. `existsAll(array,fun)` *String* *Array*
 > 判断数组或字符串是否含有指定数组*array*中的全部元素  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
 #### 31. `distinct(fun)` *String* *Array*
 > 剔除一个数组或字符串中相同的元素或字符  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
@@ -230,16 +216,14 @@ String.repeat('c',3); //"ccc"
 
 #### 33. `except(other,fun)` *String* *Array*
 > 获取两个数组或字符串的差集,从一个数组或字符串剔除所有存在于另一个数组或字符串中元素或字符  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
 #### 34. `intersect(other,fun)` *String* *Array*
 > 获取两个数组或字符串的交集,返回一个数组或字符串,该数组或字符串的中的所有元素或字符都存在于两个源数组或字符串中  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
@@ -257,8 +241,7 @@ String.repeat('c',3); //"ccc"
 #### 38. `sequenceEqual(other,fun,start,len)` *String* *Array*
 > 判断两个数组或字符串从*satrt*开始长度*len*内的内容是否相同且顺序一致  
 > *start*、*len*为可选参数  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
@@ -269,16 +252,14 @@ String.repeat('c',3); //"ccc"
 
 #### 40. `findFirst(element,index,fun)` *String* *Array*
 > 查找指定元素,返回通过*fun*比较与*element*相同的第*index*+1个元素,*index*从0开始  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
 #### 41. `findFirst(element,fun)` *String* *Array*
 > 查找指定元素,返回通过*fun*比较与*element*相同的第一个元素  
-> 比较相同的方法*fun*由如下情况:
-
+> 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
