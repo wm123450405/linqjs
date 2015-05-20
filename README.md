@@ -150,11 +150,11 @@ String.repeat('c',3); //"ccc"
 
 #### 20. `select(fun)` *Array*
 > 返回一个数组,数组内容有如下情况:  
-> * *fun*为方法:对源数组的每个元素执行*fun*方法返回的值
+> 1. *fun*为方法:对源数组的每个元素执行*fun*方法返回的值
 
 >   * `fun(element,index,prev,next):object`  [可为Lambda表达式](#lambda)
 
-> * *fun*为字符串:获取源数组的每个元素的*fun*属性,同时获取多个属性使用逗号隔开
+> 2. *fun*为字符串:获取源数组的每个元素的*fun*属性,同时获取多个属性使用逗号隔开
 ```javascript
 [{p1:0,p2:'a',p3:true},{p1:1,p2:'b',p3:false}].select("p1,p2");
 ```
