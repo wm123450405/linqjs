@@ -1,13 +1,16 @@
 /**
 
-author:
+author:wm
+email:491029934@qq.com
 
 deal javascript array or string as sql
+use linq and lambda in javascript
 
+http://github.com/wm123450405/linqjs
 
-select * from $1 => from x in $1 select x;
-select $1.col from $1 => from x in $1 select x.col;
-select count(1) from $1 => from x in $1 select count(1);
+select * from _$0 => from x in _$0 select x;
+select _$0.col from _$0 => from x in _$0 select x.col;
+select count(1) from _$0 => from x in _$0 select count(1);
 */
 (function Linq() {
 	var sp = String.prototype;

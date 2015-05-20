@@ -1,6 +1,6 @@
 {
   "name": "linq-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "use linq and lamdba in javascript",
   "main": "linq.js",
   "scripts": {

@@ -1,13 +1,11 @@
 /**
 
-author:
+author:wm
+email:491029934@qq.com
 
-deal javascript array or string as sql
+use linq and lambda in javascript
 
-
-select * from $1 => from x in $1 select x;
-select $1.col from $1 => from x in $1 select x.col;
-select count(1) from $1 => from x in $1 select count(1);
+http://github.com/wm123450405/linqjs
 */
 (function Linq() {
 	var sp = String.prototype;
@@ -24,59 +22,6 @@ select count(1) from $1 => from x in $1 select count(1);
 
 	var keywords = ['select', 'where', 'in', 'on', 'key', 'join', 'order', 'group', 'by', 'length', 'max', 'min', 'count', 'sum', 'avg', 'from', 'value', 'prev', 'next', 'index'];
 	var functions = ['cast', 'select', 'forEach', 'single', 'any', 'all', 'count', 'first', 'concat', 'union', 'exists', 'empty', 'except', 'intersect', 'last', 'reverse', 'sequenceEqual', 'findFirst', 'findFirstIndex', 'findLast', 'findLastIndex', 'skip', 'skipWhile', 'take', 'takeWhile', 'where', 'zip', 'sum', 'max', 'min', 'avgrage', 'aggregate', 'orderBy', 'orderByDescending', 'groupBy', 'joinBy', 'groupJoin', 'defaultIfEmpty', 'selectMany', 'toLookup', 'thenBy', 'thenByDescending', 'query', 'range', 'repeat', 'replace', 'an'];
-
-	var aggfuns = [{
-		name: 'max',
-		fun: 'maxLazy'
-	}, {
-		name: 'min',
-		fun: 'minLazy'
-	}, {
-		name: 'count',
-		fun: 'countLazy'
-	}, {
-		name: 'avg',
-		fun: 'averageLazy'
-	}, {
-		name: 'sum',
-		fun: 'sumLazy'
-	}, {
-		name: 'agg',
-		fun: 'aggregateLazy',
-		params: ['seed']
-	}];
-
-	var joinfuns = [{
-		name: 'default',
-		fun: 'joinByLazy'
-	}, {
-		name: 'inner',
-		fun: 'joinByLazy'
-	}];
-
-	var orderfuns = [{
-		name: 'order',
-		asc: 'orderByLazy',
-		desc: 'orderByDescendingLazy',
-		subasc: 'thenByLazy',
-		subdesc: 'thenByDescendingLazy'
-	}]
-
-	var groupfuns = [{
-		name: 'near',
-		fun: 'nearByLazy'
-	}, {
-		name: 'group',
-		fun: 'groupByLazy'
-	}];
-
-	var byfuns = ['group', 'near', 'order'];
-
-	var controlkeys = ['from', 'in', 'select', 'where', 'on', 'having'];
-
-	function funname(fun) {
-		return fun.name;
-	}
 
 	var __define = Object.defineProperty || function(obj, name, descriptor) {
 		obj[name] = descriptor.value;
@@ -1363,7 +1308,7 @@ select count(1) from $1 => from x in $1 select count(1);
 			return Array.repeat(this, count);
 		}
 	});
-	
+
 	define(op, 'toArray', function() {
 		if (an(this, Array)) {
 			return this;
