@@ -224,6 +224,75 @@ String.repeat('c',3); //"ccc"
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
+#### 32. `empty(length)` *String* *Array*
+> 创建一个指定长度的空数组
+
+#### 33. `except(other,fun)` *String* *Array*
+> 获取两个数组或字符串的差集,从一个数组或字符串剔除所有存在于另一个数组或字符串中元素或字符
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 34. `intersect(other,fun)` *String* *Array*
+> 获取两个数组或字符串的交集,返回一个数组或字符串,该数组或字符串的中的所有元素或字符都存在于两个源数组或字符串中
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 35. `last()` *String* *Array*
+> 返回最后一个元素或字符,不存在返回`null`
+
+#### 36. `reverse()` *String* *Array*
+> 反转一个元素或字符串
+
+#### 37. `shuffle(start,len)` *String* *Array*
+> 打乱一个数组或字符串从*start*开始长度为*len*的部分内容
+> *start*、*len*为可选参数
+
+#### 38. `sequenceEqual(other,fun,start,len)` *String* *Array*
+> 判断两个数组或字符串从*satrt*开始长度*len*内的内容是否相同且顺序一致
+> *start*、*len*为可选参数
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 39. `sequenceEqual(other,start,len)` *String* *Array*
+> 判断两个数组或字符串从*satrt*开始长度*len*内的内容是否相同且顺序一致
+> *start*、*len*为可选参数
+
+#### 40. `findFirst(element,index,fun)` *String* *Array*
+> 查找指定元素,返回通过*fun*比较与*element*相同的第*index*+1个元素,*index*从0开始
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 41. `findFirst(element,fun)` *String* *Array*
+> 查找指定元素,返回通过*fun*比较与*element*相同的第一个元素
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 42. `findFirst(element,index)` *String* *Array*
+> 查找指定元素,返回与*element*相同的第*index*+1个元素,*index*从0开始,*index*为空返回第一个匹配元素
+
+#### 43. `findFirst(fun)` *String* *Array*
+> 查找指定元素,返回符合方法*fun*的第一个元素
+> 比较相同的方法*fun*由如下情况:
+
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
 ### Lambda
 
 Lambda 表达式 支持如下情况:
