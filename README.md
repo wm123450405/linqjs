@@ -550,20 +550,20 @@ String.repeat('c',3); //"ccc"
 Lambda 表达式 支持如下情况:
 
 #### 1. `"arguments=>return"`
-*arguments*:参数列表,逗号隔开
-*return*:返回值
+> *arguments*:参数列表,逗号隔开  
+> *return*:返回值  
 ```javascript
 "abc".select("e=>e.toUpperCase()");
 ```
 #### 2. `"arguments=>new {...}"`
-*arguments*:参数列表,逗号隔开
-返回一个*object*
+> *arguments*:参数列表,逗号隔开  
+> 返回一个*object*  
 ```javascript
 "abc".select("e,i=>new {ch:e,index:i}");
 ```
 #### 3. `"arguments=>{funbody}"`
-*arguments*:参数列表,逗号隔开
-*funbody*:方法体
+> *arguments*:参数列表,逗号隔开  
+> *funbody*:方法体  
 ```javascript
 "abc".forEach("e,i=>{alert(e+','+i);}");
 ```
@@ -576,9 +576,9 @@ JSQL 格式如下:
 select column1 [as name1] [, column2 [as name2], column3 [as name3], ...] from element in list [join element2 in list2 on conditions ...] [where conditions] [group by column1 [, column2, column3, ...] [having conditions]] [order by column1 [, column2, column3, ...]]
 ```
 其中:
-*column*为取值表达式:`element.property`或其他复杂表达式
-*list*指向对象、数组或字符串:`this`(同`_$0`),`_$<index>`指向参数列表中第*index*个的参数值,如 `_$1`
-*conditions*为条件表达式,需要表达式最终结果为*boolean*型,或能表达其是否满足条件的其他值
+> *column*为取值表达式:`element.property`或其他复杂表达式  
+> *list*指向对象、数组或字符串:`this`(同`_$0`),`_$<index>`指向参数列表中第*index*个的参数值,如 `_$1`  
+> *conditions*为条件表达式,需要表达式最终结果为*boolean*型,或能表达其是否满足条件的其他值  
 
 ...  
 更多功能请阅读api.html的内容
