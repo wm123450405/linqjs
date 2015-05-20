@@ -3,7 +3,7 @@
 use linq and lambda in javascript  
 在javascript中使用linq与lambda
 
- * can use linq function with an object of Array or String
+ * can use linq function in an object of Array or String
  * 直接对Array和String进行扩展,可直接使用
  * extends some function of Number,Date,Console
  * 同时扩展了Number、Date、Console的部分方法,方便使用
@@ -55,7 +55,7 @@ Array.repeat('c',3); //["c", "c", "c"]
 String.repeat('c',3); //"ccc"
 ```
 
-### Unstatic Functions 非静态方法
+### Non-static Functions 非静态方法
 
 #### 1. `log()`  *Object*
 > 将对象输出到控制台,返回对象本身,可链式调用
