@@ -1808,7 +1808,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		var result = new Array(this.length);
 		var index = 0;
 		var error = [];
-		var async = setTimeout((function() {
+		var async = setTimeout((function(thus) {
 			return function() {
 				async = setInterval((function() {
 					return function() {
@@ -1827,8 +1827,12 @@ select count(1) from _$0 => from x in _$0 select count(1);
 						}
 					}
 				})());
+				define(thus, 'endMultiQuery', function() {
+					clearInterval(async);
+					return this;
+				}, true);
 			};
-		})(), delay);
+		})(this), delay);
 		define(this, 'endMultiQuery', function() {
 			clearTimeout(async);
 			return this;

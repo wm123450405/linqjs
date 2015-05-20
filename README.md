@@ -371,7 +371,8 @@ String.repeat('c',3); //"ccc"
 > 符合条件的判断方法*fun*由如下情况:  
 > * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为其他值:忽略结尾所有值为fun的元素或字符
-:warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
+
+> :warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
 
 #### 60. `take(count)` *String* *Array*
 > 返回指定数组或字符串捡取前count个元素或字符的子数组或子串
@@ -390,7 +391,8 @@ String.repeat('c',3); //"ccc"
 > 符合条件的判断方法*fun*由如下情况:  
 > * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为其他值:忽略结尾所有值为fun的元素或字符
-:warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
+
+> :warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
 
 #### 64. `where(fun)` *String* *Array*
 > 返回数组或字符串中所有满足*fun*条件的元素或字符组成的子数组或子串  
@@ -479,11 +481,11 @@ String.repeat('c',3); //"ccc"
 
 #### 74. `broke(count)` *String* *Array*
 > 按照一定数量*count*将数组或字符串破开成新的数组,新数组中的每个元素的长度为*count*  
-:warning:新数组最后一个元素的长度可能不足*count*
+> :warning:新数组最后一个元素的长度可能不足*count*
 
 #### 75. `brokeRight(count)` *String* *Array*
-> 按照一定数量*count*从尾部向头部将数组或字符串破开成新的数组,新数组中的每个元素的长度为*count*
-:warning:新数组的第一个元素的长度可能不足*count*
+> 按照一定数量*count*从尾部向头部将数组或字符串破开成新的数组,新数组中的每个元素的长度为*count*  
+> :warning:新数组的第一个元素的长度可能不足*count*
 
 #### 76. `groupBy(keySelector,elementSelector,resultSelector,comparer)` *String* *Array*
 > 分组,将相同的元素或字符归为同一组,返回所有组的集合  
@@ -502,7 +504,8 @@ String.repeat('c',3); //"ccc"
 > * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *comparer*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *comparer*为空:使用默认的比较方法 
-:warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
+
+> :warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
 
 #### 77. `nearBy(keySelector,elementSelector,resultSelector,comparer)` *String* *Array*
 > 分组,将相同且相邻的元素或字符归为同一组,返回所有组的集合  
@@ -521,7 +524,8 @@ String.repeat('c',3); //"ccc"
 > * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *comparer*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *comparer*为空:使用默认的比较方法 
-:warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
+
+> :warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
 
 #### 78. `defaultIfEmpty(defaultValue)` *String* *Array*
 > 如果数组或字符串为空返回一个含默认值*defaultValue*的数组或字符串,否则返回其本身
@@ -543,7 +547,33 @@ String.repeat('c',3); //"ccc"
 
 #### 82. `query(...lists)` *String*
 > 使用参数列表中参数执行指定的[JSQL语句](#jsql)  
-:warning:只支持full版本,simple版本无此功能
+> :warning:只支持full版本,simple版本无此功能
+
+#### 83. `beginQuery(callback,delay,...lists)` *String*
+> 使用参数列表中参数异步执行指定的[JSQL语句](#jsql),推迟delay毫秒开始执行,通过回调函数*callback*处理执行结果  
+> * *delay*为可选参数,为空表示立即开始异步查询  
+> * `callback(result):void`  [可为Lambda表达式](#lambda)  
+
+> :warning:只支持full版本,simple版本无此功能
+
+#### 84. `endQuery()` *String*
+> 停止正在或将要执行的异步查询  
+> :warning:只支持full版本,simple版本无此功能
+
+#### 85. `multiQuery(...lists)` *Array*
+> 对同一组数据一次性执行多条[JSQL语句](#jsql),返回包含所有结果的数组  
+> :warning:只支持full版本,simple版本无此功能
+
+#### 86. `beginMultiQuery(callback,delay,...lists)` *Array*
+> 对同一组数据异步执行多条[JSQL语句](#jsql),推迟delay毫秒开始执行,通过回调函数*callback*一次性处理所有执行结果  
+> * *delay*为可选参数,为空表示立即开始异步查询  
+> * `callback(results):void`  *results*为一个包含所有执行结果的数组  [可为Lambda表达式](#lambda)  
+
+> :warning:只支持full版本,simple版本无此功能
+
+#### 87. `endMulitQuery()` *Array*
+> 停止正在或将要执行的异步查询  
+> :warning:只支持full版本,simple版本无此功能
 
 ### Lambda
 
