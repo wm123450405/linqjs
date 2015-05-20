@@ -191,7 +191,8 @@ String.repeat('c',3); //"ccc"
 
 #### 29. `exists(charOrElementOrArray,fun)` *String* *Array*
 > 1. 判断数组或字符串是否含有指定元素*element*或字符*char*
-> 2. 判断数组或字符串是否含有指定数组*array*中的某个元素  
+> 2. 判断数组或字符串是否含有指定数组*array*中的某个元素
+
 > 比较相同的方法*fun*由如下情况:  
 > * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
