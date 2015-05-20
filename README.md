@@ -20,7 +20,7 @@ And here's some code! :+1:
 
 ### APIS
 
-Coming soon
+Coming soon...
 
 ### Static Functions  静态方法
 | function(方法)        | type（类型) | description(描述) |
@@ -72,4 +72,22 @@ String.repeat('c',3); //"ccc"
 ```javascript
 (10).loop(0,"i,c=>alert(i)"); //提示10次
 '10'.loop("i,c=>alert(i)"); //同上
+```
+
+...  
+更多更能请阅读api.html的内容
+
+### Examples 代码案例
+
+```javascript
+var words = Array.rangeChar('a','z');
+words.count(); //26;
+words = words.select("e=>new {w:e,c:e.charCodeAt(0)}"); //[{w:'a',c:97},{w:'b',c:98},...]
+words.where("e=>e.c.isBetween(100,108)").select('w'); //["d","e","f","g","h","i","j","k","l"]
+words.orderBy("e=>e.c%10").limit(0,10).select('c'); //[110,100,120,121,101,111,122,112,102,103]
+words.forEach(function(e,i){
+	e.log();
+});
+words.groupBy("e=>e.c%5").select("g=>g.count()"); //[6,5,5,5,5]
+"from word in this select word.w where word.c < 110 && word.c % 2 == 0 && !_$1.exists(word.w)".query(words, ['f','h']);// ["b","d","j","l"]
 ```

@@ -1966,14 +1966,14 @@ select count(1) from $1 => from x in $1 select count(1);
 		define(this, 'compares', compares, true);
 		define(this, 'funs', funs, true);
 	};
-	OrderByap = Object.create(ap);
+	OrderByArray.prototype = Object.create(ap);
 
-	define(OrderByap, 'thenBy', function(fun, comparer) {
+	define(OrderByArray.prototype, 'thenBy', function(fun, comparer) {
 		this.funs.push(fieldFun(fun));
 		this.compares.push(fieldComparer(comparer));
 		return new OrderByArray(this, this.funs, this.compares);
 	}, true);
-	define(OrderByap, 'thenByDescending', function(fun, comparer) {
+	define(OrderByArray.prototype, 'thenByDescending', function(fun, comparer) {
 		this.funs.push(fieldFun(fun));
 		this.compares.push(function(a, b) {
 			return -(fieldComparer(comparer))(a, b);
