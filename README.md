@@ -275,6 +275,272 @@ String.repeat('c',3); //"ccc"
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
+#### 44. `findFirstIndex(element,index,fun)` *String* *Array*
+> 查找指定元素的索引,返回通过*fun*比较与*element*相同的第*index*+1个元素的索引,*index*从0开始  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 45. `findFirstIndex(element,fun)` *String* *Array*
+> 查找指定元素的索引,返回通过*fun*比较与*element*相同的第一个元素的索引  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 46. `findFirstIndex(element,index)` *String* *Array*
+> 查找指定元素的索引,返回与*element*相同的第*index*+1个元素的索引,*index*从0开始,*index*为空返回第一个匹配元素
+
+#### 47. `findFirstIndex(fun)` *String* *Array*
+> 查找指定元素的索引,返回符合方法*fun*的第一个元素的索引  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+
+
+
+
+
+
+
+#### 48. `findLast(element,index,fun)` *String* *Array*
+> 从后向前查找指定元素,返回通过*fun*比较与*element*相同的第*index*+1个元素,*index*从0开始  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 49. `findLast(element,fun)` *String* *Array*
+> 从后向前查找指定元素,返回通过*fun*比较与*element*相同的第一个元素  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 50. `findLast(element,index)` *String* *Array*
+> 从后向前查找指定元素,返回与*element*相同的第*index*+1个元素,*index*从0开始,*index*为空返回第一个匹配元素
+
+#### 51. `findLast(fun)` *String* *Array*
+> 从后向前查找指定元素,返回符合方法*fun*的第一个元素  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 52. `findLastIndex(element,index,fun)` *String* *Array*
+> 从后向前查找指定元素的索引,返回通过*fun*比较与*element*相同的第*index*+1个元素的索引,*index*从0开始  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 53. `findLastIndex(element,fun)` *String* *Array*
+> 从后向前查找指定元素的索引,返回通过*fun*比较与*element*相同的第一个元素的索引  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 54. `findLastIndex(element,index)` *String* *Array*
+> 从后向前查找指定元素的索引,返回与*element*相同的第*index*+1个元素的索引,*index*从0开始,*index*为空返回第一个匹配元素
+
+#### 55. `findLastIndex(fun)` *String* *Array*
+> 从后向前查找指定元素的索引,返回符合方法*fun*的第一个元素的索引  
+> 比较相同的方法*fun*由如下情况:  
+> * *fun*为方法:`fun(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *fun*为空:使用默认的比较方法
+
+#### 56. `skip(count)` *String* *Array*
+> 返回指定数组或字符串忽略前count个元素或字符的子数组或子串
+
+#### 57. `skipRight(count)` *String* *Array*
+> 返回指定数组或字符串忽略后count个元素或字符的子数组或子串
+
+#### 58. `skipWhile(fun)` *String* *Array*
+> 返回指定数组或字符串忽略开头符合条件的连续的所有的元素或字符的子数组或子串  
+> 符合条件的判断方法*fun*由如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为其他值:忽略开头所有值为fun的元素或字符
+
+#### 59. `skipRightWhile(fun)` *String* *Array*
+> 返回指定数组或字符串忽略结尾符合条件的连续的所有的元素或字符的子数组或子串  
+> 符合条件的判断方法*fun*由如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为其他值:忽略结尾所有值为fun的元素或字符
+> :warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
+
+#### 60. `take(count)` *String* *Array*
+> 返回指定数组或字符串捡取前count个元素或字符的子数组或子串
+
+#### 61. `takeRight(count)` *String* *Array*
+> 返回指定数组或字符串捡取后count个元素或字符的子数组或子串
+
+#### 62. `takeWhile(fun)` *String* *Array*
+> 返回指定数组或字符串捡取开头符合条件的连续的所有的元素或字符的子数组或子串  
+> 符合条件的判断方法*fun*由如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为其他值:忽略开头所有值为fun的元素或字符
+
+#### 63. `takeRightWhile(fun)` *String* *Array*
+> 返回指定数组或字符串捡取结尾符合条件的连续的所有的元素或字符的子数组或子串  
+> 符合条件的判断方法*fun*由如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为其他值:忽略结尾所有值为fun的元素或字符
+> :warning: 其中*prev*,*next*为相对于数组中指定位置的元素或字符,并非按照比较顺序上的相对位置的元素或字符
+
+#### 64. `where(fun)` *String* *Array*
+> 返回数组或字符串中所有满足*fun*条件的元素或字符组成的子数组或子串  
+> 匹配方法*fun*有如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为数组:计算两数组的交集
+> * *fun*为其他:待保留的指定元素
+
+#### 65. `wipe(fun,count)` *String* *Array*
+> 返回数组或字符串去除*count*个满足*fun*条件的元素或字符后组成的子数组或子串,*count*为空时去除所有符合条件的元素或字符  
+> 匹配方法fun有如下情况:  
+> * *fun*为方法:`fun(current,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+> * *fun*为数组:计算两数组的差集,*count*参数无效
+> * *fun*为其他:待去除的指定元素
+
+#### 66. `zip(other,fun)` *String* *Array*
+> 合并两个长度相同的数组或字符串,使得两个相同索引的元素或字符通过*fun*转换成一个新的元素或字符,最后组合成一个数组或字符串  
+> * `fun(current,other,i):object`  [可为Lambda表达式](#lambda)
+
+#### 67. `sum(fun)` *String* *Array*
+> 返回一个数组或字符串所有元素或字符的和,可求和通过*fun*转换每个元素或字符后的值  
+> 转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):number`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的*fun*属性进行求和
+> * *fun*为空:使用每个元素或字符本身求和
+
+#### 68. `max(fun,comparer)` *String* *Array*
+> 返回一个数组或字符串中最大元素或字符,可求通过*fun*转换每个元素或字符后的最大值  
+> 转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):numberOrString`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的*fun*属性进行求值
+> * *fun*为空:使用每个元素或字符本身求值
+
+> 比较方法*comparer*有如下情况:  
+> * *comparer*为方法:`comparer(a,b):number`  返回整数表示*a*>*b*,返回负数表示*a*<*b*,返回0表示*a*与*b*相等  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性
+> * *comparer*为空:使用默认的比较方法
+
+#### 69. `min(fun,comparer)` *String* *Array*
+> 返回一个数组或字符串中最小元素或字符,可求通过*fun*转换每个元素或字符后的最小值  
+> 转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):numberOrString`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的*fun*属性进行求值
+> * *fun*为空:使用每个元素或字符本身求值
+
+> 比较方法*comparer*有如下情况:  
+> * *comparer*为方法:`comparer(a,b):number`  返回整数表示*a*>*b*,返回负数表示*a*<*b*,返回0表示*a*与*b*相等  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性
+> * *comparer*为空:使用默认的比较方法
+
+#### 70. `average(fun)` *String* *Array*
+> 返回一个数组或字符串所有元素或字符的平均值,可求通过*fun*转换每个元素或字符后的值的平均值  
+> 转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):number`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的fun属性进行求值
+> * *fun*为空:使用每个元素或字符本身求值
+
+#### 71. `aggregate(fun,seed,resultSelector)` *String* *Array*
+> 累加器,返回通过*fun*将结果累加至*seed*后再通过*resultSelector*转换的结果值  
+> * 累加方法`fun(current,seed,index,next,prev):object`  返回将当前元素*current*累加至*seed*后的结果  [可为Lambda表达式](#lambda)
+> * 转换方法*resultSelector*同[select(resultSelector)](#20-selectfun-array)
+
+#### 72. `orderBy(fun,comparer)` *String* *Array*
+> 返回通过*fun*转换每个元素或字符后再通过*comparer*比较的结果进行正向排序后的结果  
+转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):numberOrString`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的*fun*属性进行求值
+> * *fun*为空:使用每个元素或字符本身求值
+
+> 比较方法comparer有如下情况:  
+> * *comparer*为方法:`comparer(a,b):number`  返回整数表示*a*>*b*,返回负数表示*a*<*b*,返回0表示*a*与*b*相等  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性
+> * *comparer*为空:使用默认的比较方法
+
+#### 73. `orderByDescending(fun,comparer)` *String* *Array*
+> 倒序,返回通过*fun*转换每个元素或字符后再通过*comparer*比较的结果进行反向排序后的结果  
+转换方法*fun*有如下情况:  
+> * *fun*为方法:`fun(element):numberOrString`  [可为Lambda表达式](#lambda)
+> * *fun*为字符串:获取每个元素对应的*fun*属性进行求值
+> * *fun*为空:使用每个元素或字符本身求值
+
+> 比较方法comparer有如下情况:  
+> * *comparer*为方法:`comparer(a,b):number`  返回整数表示*a*>*b*,返回负数表示*a*<*b*,返回0表示*a*与*b*相等  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性
+> * *comparer*为空:使用默认的比较方法
+
+#### 74. `broke(count)` *String* *Array*
+> 按照一定数量*count*将数组或字符串破开成新的数组,新数组中的每个元素的长度为*count*  
+> :warning:新数组最后一个元素的长度可能不足*count*
+
+#### 75. `brokeRight(count)` *String* *Array*
+> 按照一定数量*count*从尾部向头部将数组或字符串破开成新的数组,新数组中的每个元素的长度为*count*
+> :warning:新数组的第一个元素的长度可能不足*count*
+
+#### 76. `groupBy(keySelector,elementSelector,resultSelector,comparer)` *String* *Array*
+> 分组,将相同的元素或字符归为同一组,返回所有组的集合  
+> 获取每个元素对应键(*key*)的方法*keySelector*由如下情况:  
+> * *keySelector*为方法:`keySelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
+> * *keySelector*为字符串:键(*key*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
+> * *keySelector*为空:键(*key*)为每个元素本身 
+> 获取每个元素对应值(*element*)的方法*elementSelector*,elementSelector的返回值将组成每个组中的元素,*elementSelector*由如下情况:  
+> * *elementSelector*为方法:`elementSelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
+> * *elementSelector*为字符串:值(*element*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
+> * *elementSelector*为空:值(*element*)为每个元素本身 
+> 将结果中的组投影至新数组中,进行最后的修正方法*resultSelector*同[select(resultSelector)](#20-selectfun-array)  
+> 比较相同的方法comparer由如下情况:  
+> * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *comparer*为空:使用默认的比较方法 
+> :warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
+
+#### 77. `nearBy(keySelector,elementSelector,resultSelector,comparer)` *String* *Array*
+> 分组,将相同且相邻的元素或字符归为同一组,返回所有组的集合  
+> 获取每个元素对应键(*key*)的方法*keySelector*由如下情况:  
+> * *keySelector*为方法:`keySelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
+> * *keySelector*为字符串:键(*key*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
+> * *keySelector*为空:键(*key*)为每个元素本身 
+> 获取每个元素对应值(*element*)的方法*elementSelector*,elementSelector的返回值将组成每个组中的元素,*elementSelector*由如下情况:  
+> * *elementSelector*为方法:`elementSelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
+> * *elementSelector*为字符串:值(*element*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
+> * *elementSelector*为空:值(*element*)为每个元素本身 
+> 将结果中的组投影至新数组中,进行最后的修正方法*resultSelector*同[select(resultSelector)](#20-selectfun-array)  
+> 比较相同的方法comparer由如下情况:  
+> * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
+> * *comparer*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
+> * *comparer*为空:使用默认的比较方法 
+> :warning:新数组中的每一个元素拥有新的属性*key*表示该组中的所有元素通过*fun*方法比较都与*key*相同
+
+#### 78. `defaultIfEmpty(defaultValue)` *String* *Array*
+> 如果数组或字符串为空返回一个含默认值*defaultValue*的数组或字符串,否则返回其本身
+
+#### 79. `quote()` *String*
+> 将*string*转化为可执行的*string*
+```javascript
+"abc'".quote()  //"abc\'"
+```
+
+#### 80. `toArray()` *Object*
+> 将一个对象转化外可遍历的数组  
+> * 如果对象为数组,返回本身
+> * 如果对象为字符串,返回一个数组,数组内容为字符串中对应位置的单个字符
+> * 其他对象,返回一个键值对的数组如:`[{key:...,value:...},{key:...,value:...},...]`
+
+#### 81. `isBetween(min,max)` *Number* *String*
+> 返回元数据是否在指定的区间之内
+
+#### 82. `query(...lists)` *String*
+> 使用参数列表中参数执行指定的[JSQL语句](#jsql)  
+> :warning:只支持full版本,simple版本无此功能
+
 ### Lambda
 
 Lambda 表达式 支持如下情况:
