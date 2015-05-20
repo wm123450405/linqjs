@@ -1,0 +1,24 @@
+{
+  "name": "linq-js",
+  "version": "1.0.0",
+  "description": "use linq and lamdba in javascript",
+  "main": "linq.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wm123450405/linqjs.git"
+  },
+  "keywords": [
+    "linqjs",
+    "linq",
+    "js"
+  ],
+  "author": "wm123450405",
+  "license": "wm",
+  "bugs": {
+    "url": "https://github.com/wm123450405/linqjs/issues"
+  },
+  "homepage": "https://github.com/wm123450405/linqjs#readme"
+}
