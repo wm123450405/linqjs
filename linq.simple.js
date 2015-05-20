@@ -1318,6 +1318,31 @@ http://github.com/wm123450405/linqjs
 				return ap.join.call(this, split || '');
 			}, true);
 			return result;
+		} else if (an(this, Function)) {
+			var result = [];
+			var isBreak = false;
+			var _yieldreturn = window.yieldreturn;
+			var _yieldbreak = window.yieldbreak;
+			define(this, 'yieldreturn', window.yieldreturn = function(value) {
+				if (!isBreak) {
+					result.push(value);
+				}
+			});
+			define(this, 'yieldbreak', window.yieldbreak = function(value) {
+				isBreak = true;
+			});
+			this.apply(this, arguments);
+			if (an(_yieldreturn, 'undefined')) {
+				delete window.yieldreturn;
+			} else {
+				window.yieldreturn = _yieldreturn;
+			}
+			if (an(_yieldbreak, 'undefined')) {
+				delete window.yieldbreak;
+			} else {
+				window.yieldbreak = _yieldbreak;
+			}
+			return result;
 		} else {
 			var result = [];
 			for (var name in this) {

@@ -299,13 +299,6 @@ String.repeat('c',3); //"ccc"
 > * *fun*为字符串:比较每个元素的指定属性,同时比较多个属性使用逗号隔开
 > * *fun*为空:使用默认的比较方法
 
-
-
-
-
-
-
-
 #### 48. `findLast(element,index,fun)` *String* *Array*
 > 从后向前查找指定元素,返回通过*fun*比较与*element*相同的第*index*+1个元素,*index*从0开始  
 > 比较相同的方法*fun*由如下情况:  
@@ -540,6 +533,7 @@ String.repeat('c',3); //"ccc"
 > 将一个对象转化外可遍历的数组  
 > * 如果对象为数组,返回本身
 > * 如果对象为字符串,返回一个数组,数组内容为字符串中对应位置的单个字符
+> * 如果对象为方法,返回一个数组,数组的内容为[迭代器](#yield)产生的值
 > * 其他对象,返回一个键值对的数组如:`[{key:...,value:...},{key:...,value:...},...]`
 
 #### 81. `isBetween(min,max)` *Number* *String*
@@ -605,10 +599,32 @@ JSQL 格式如下:
 ```sql
 select column1 [as name1] [, column2 [as name2], column3 [as name3], ...] from element in list [join element2 in list2 on conditions ...] [where conditions] [group by column1 [, column2, column3, ...] [having conditions]] [order by column1 [, column2, column3, ...]]
 ```
-其中:
+> 其中:  
 > *column*为取值表达式:`element.property`或其他复杂表达式  
 > *list*指向对象、数组或字符串:`this`(同`_$0`),`_$<index>`指向参数列表中第*index*个的参数值,如 `_$1`  
 > *conditions*为条件表达式,需要表达式最终结果为*boolean*型,或能表达其是否满足条件的其他值  
+
+### Yield
+
+迭代器:
+
+```javascript
+this.yieldreturn(value); //迭代器返回的值
+this.yieldbreak(); //结束迭代
+```
+
+> 在迭代器返回值用于向数组对象提供值或发出迭代结束信号
+
+```javascript
+function iterator() {
+	this.yieldreturn(1);
+	this.yieldreturn(2);
+	this.yieldreturn(3);
+	this.yieldbreak();
+	this.yieldreturn(4);
+}
+iterator.toArray(); //[1,2,3]
+```
 
 ## Examples 代码案例
 

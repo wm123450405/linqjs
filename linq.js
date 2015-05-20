@@ -17,6 +17,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	var op = Object.prototype;
 	var ap = Array.prototype;
 	var np = Number.prototype;
+	var fp = Function.prototype;
 
 	var st = 'string';
 	var nt = 'number';
@@ -1366,6 +1367,206 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return Array.repeat(this, count);
 		}
 	});
+	define(op, 'toArray', function() {
+		if (an(this, Array)) {
+			return this;
+		} else if (an(this, String, st)) {
+			var result = this.split('');
+			define(result, 'join', this.join || function(split) {
+				return ap.join.call(this, split || '');
+			}, true);
+			return result;
+		} else if (an(this, Function)) {
+			var result = [];
+			var isBreak = false;
+			var _yieldreturn = window.yieldreturn;
+			var _yieldbreak = window.yieldbreak;
+			define(this, 'yieldreturn', window.yieldreturn = function(value) {
+				if (!isBreak) {
+					result.push(value);
+				}
+			});
+			define(this, 'yieldbreak', window.yieldbreak = function(value) {
+				isBreak = true;
+			});
+			this.apply(this, arguments);
+			if (an(_yieldreturn, 'undefined')) {
+				delete window.yieldreturn;
+			} else {
+				window.yieldreturn = _yieldreturn;
+			}
+			if (an(_yieldbreak, 'undefined')) {
+				delete window.yieldbreak;
+			} else {
+				window.yieldbreak = _yieldbreak;
+			}
+			return result;
+		} else {
+			var result = [];
+			for (var name in this) {
+				result.push({
+					key: name,
+					value: this[name]
+				});
+			}
+			return result;
+		}
+	});
+	_define(op, '_keyCount', function() {
+		var count = 0;
+		for (var name in this) {
+			count++;
+		}
+		return count;
+	});
+
+	define([np, sp], 'isBetween', function(min, max) {
+		return typeof(this.valueOf()) === typeof(min) && typeof(this.valueOf()) === typeof(max) && !(this > max || this < min);
+	});
+
+	var timer = {};
+
+	Date.start = function(tmr) {
+		tmr = tmr || 0;
+		timer[tmr] = new Date();
+	};
+	Date.tick = function(tmr) {
+		tmr = tmr || 0;
+		return timer[tmr] ? new Date() - timer[tmr] : 0;
+	};
+	Date.reset = function(tmr) {
+		tmr = tmr || 0;
+		var tick = Date.tick(tmr);
+		timer[tmr] = new Date();
+		return tick;
+	}
+
+	Object.valueOf = function(value) {
+		return value === "" || value === 0 || value === false ? new Object(value) : new Object(value || {});
+	};
+	Object.clone = function(value) {
+		if (an(value, Array)) {
+			return value.slice(0);
+		} else if (an(value, ot)) {
+			/*
+			if (an(value,String) || an(value,Boolean) || an(value,Number)) {
+				var result = Object.valueOf(value.valueOf());
+				//result.__proto__ = value;
+				for (var name in value) {
+					result[name] = value[name];
+				}
+				return result;
+			} else {
+				return Object.create(value);
+			}*/
+			var result = an(value, String, Boolean, Number) ? Object.valueOf(value.valueOf()) : {};
+			for (var name in value) {
+				result[name] = value[name];
+			}
+			return result;
+		} else {
+			return value;
+		}
+	}
+
+	Object.an = function(element) {
+		for (var i = 1; i < arguments.length; i++) {
+			if (typeof(arguments[i]) === 'string') {
+				if (typeof(element) === arguments[i]) {
+					return true;
+				}
+			} else if (element instanceof arguments[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	define(op, 'an', function() {
+		for (var i = 0; i < arguments.length; i++) {
+			if (typeof(arguments[i]) === 'string') {
+				if (typeof(this) === arguments[i]) {
+					return true;
+				}
+			} else if (this instanceof arguments[i]) {
+				return true;
+			}
+		}
+		return false;
+	});
+
+	define(op, 'log', function() {
+		window.console && console.log && console.log(this.valueOf());
+		return this;
+	});
+
+	var OrderByArray = function(origin, funs, compares) {
+		origin = origin || this.empty();
+		for (var i = 0; i < origin.length; i++) {
+			this.push(origin[i]);
+		}
+
+		this.sort(function(a, b) {
+			var result = 0;
+			for (var i = 0; i < compares.length; i++) {
+				result = compares[i].call(this, funs[i].call(this, a), funs[i].call(this, b));
+				if (result !== 0 && result !== true) {
+					return result;
+				}
+			}
+			return 0;
+		});
+
+		define(this, 'compares', compares, true);
+		define(this, 'funs', funs, true);
+	};
+	OrderByArray.prototype = Object.create(ap);
+
+	define(OrderByArray.prototype, 'thenBy', function(fun, comparer) {
+		this.funs.push(fieldFun(fun));
+		this.compares.push(fieldComparer(comparer));
+		return new OrderByArray(this, this.funs, this.compares);
+	}, true);
+	define(OrderByArray.prototype, 'thenByDescending', function(fun, comparer) {
+		this.funs.push(fieldFun(fun));
+		this.compares.push(function(a, b) {
+			return -(fieldComparer(comparer))(a, b);
+		});
+		return new OrderByArray(this, this.funs, this.compares);
+	}, true);
+
+	var Grouping = function(key) {
+		this.key = key;
+	};
+	Grouping.prototype = Object.create(ap);
+
+	define(Grouping.prototype, 'push', function() {
+		ap.push.apply(this, arguments);
+		for (var name in this[0]) {
+			if (name == 'key' || name == 'length' || !isNaN(name)) {
+				continue;
+			}
+			this[name] = this[0][name];
+		}
+	}, true);
+	define(Grouping.prototype, 'toArray', function() {
+		var result = [];
+		for (var name in this) {
+			if (name == 'length' || !isNaN(name)) {
+				continue;
+			}
+			result.push({
+				key: name,
+				value: this[name]
+			})
+		}
+		return result;
+	}, true);
+
+	var Joins = function(element) {
+		this.push(element);
+	};
+	Joins.prototype = Object.create(ap);
 
 	function Query(out) {
 		var controls = {};
@@ -1862,181 +2063,6 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	define(sp, 'endQuery', function() {
 		return this;
 	});
-	define(op, 'toArray', function() {
-		if (an(this, Array)) {
-			return this;
-		} else if (an(this, String, st)) {
-			var result = this.split('');
-			define(result, 'join', this.join || function(split) {
-				return ap.join.call(this, split || '');
-			}, true);
-			return result;
-		} else {
-			var result = [];
-			for (var name in this) {
-				result.push({
-					key: name,
-					value: this[name]
-				});
-			}
-			return result;
-		}
-	});
-	_define(op, '_keyCount', function() {
-		var count = 0;
-		for (var name in this) {
-			count++;
-		}
-		return count;
-	});
-
-	define([np, sp], 'isBetween', function(min, max) {
-		return typeof(this.valueOf()) === typeof(min) && typeof(this.valueOf()) === typeof(max) && !(this > max || this < min);
-	});
-
-	Object.valueOf = function(value) {
-		return value === "" || value === 0 || value === false ? new Object(value) : new Object(value || {});
-	};
-	Object.clone = function(value) {
-		if (an(value, Array)) {
-			return value.slice(0);
-		} else if (an(value, ot)) {
-			/*
-			if (an(value,String) || an(value,Boolean) || an(value,Number)) {
-				var result = Object.valueOf(value.valueOf());
-				//result.__proto__ = value;
-				for (var name in value) {
-					result[name] = value[name];
-				}
-				return result;
-			} else {
-				return Object.create(value);
-			}*/
-			var result = an(value, String, Boolean, Number) ? Object.valueOf(value.valueOf()) : {};
-			for (var name in value) {
-				result[name] = value[name];
-			}
-			return result;
-		} else {
-			return value;
-		}
-	}
-
-	Object.an = function(element) {
-		for (var i = 1; i < arguments.length; i++) {
-			if (typeof(arguments[i]) === 'string') {
-				if (typeof(element) === arguments[i]) {
-					return true;
-				}
-			} else if (element instanceof arguments[i]) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	define(op, 'an', function() {
-		for (var i = 0; i < arguments.length; i++) {
-			if (typeof(arguments[i]) === 'string') {
-				if (typeof(this) === arguments[i]) {
-					return true;
-				}
-			} else if (this instanceof arguments[i]) {
-				return true;
-			}
-		}
-		return false;
-	});
-
-	define(op, 'log', function() {
-		window.console && console.log && console.log(this.valueOf());
-		return this;
-	});
-
-	var OrderByArray = function(origin, funs, compares) {
-		origin = origin || this.empty();
-		for (var i = 0; i < origin.length; i++) {
-			this.push(origin[i]);
-		}
-
-		this.sort(function(a, b) {
-			var result = 0;
-			for (var i = 0; i < compares.length; i++) {
-				result = compares[i].call(this, funs[i].call(this, a), funs[i].call(this, b));
-				if (result !== 0 && result !== true) {
-					return result;
-				}
-			}
-			return 0;
-		});
-
-		define(this, 'compares', compares, true);
-		define(this, 'funs', funs, true);
-	};
-	OrderByArray.prototype = Object.create(ap);
-
-	define(OrderByArray.prototype, 'thenBy', function(fun, comparer) {
-		this.funs.push(fieldFun(fun));
-		this.compares.push(fieldComparer(comparer));
-		return new OrderByArray(this, this.funs, this.compares);
-	}, true);
-	define(OrderByArray.prototype, 'thenByDescending', function(fun, comparer) {
-		this.funs.push(fieldFun(fun));
-		this.compares.push(function(a, b) {
-			return -(fieldComparer(comparer))(a, b);
-		});
-		return new OrderByArray(this, this.funs, this.compares);
-	}, true);
-
-	var Grouping = function(key) {
-		this.key = key;
-	};
-	Grouping.prototype = Object.create(ap);
-
-	define(Grouping.prototype, 'push', function() {
-		ap.push.apply(this, arguments);
-		for (var name in this[0]) {
-			if (name == 'key' || name == 'length' || !isNaN(name)) {
-				continue;
-			}
-			this[name] = this[0][name];
-		}
-	}, true);
-	define(Grouping.prototype, 'toArray', function() {
-		var result = [];
-		for (var name in this) {
-			if (name == 'length' || !isNaN(name)) {
-				continue;
-			}
-			result.push({
-				key: name,
-				value: this[name]
-			})
-		}
-		return result;
-	}, true);
-
-	var Joins = function(element) {
-		this.push(element);
-	};
-	Joins.prototype = Object.create(ap);
-
-	var timer = {};
-
-	Date.start = function(tmr) {
-		tmr = tmr || 0;
-		timer[tmr] = new Date();
-	};
-	Date.tick = function(tmr) {
-		tmr = tmr || 0;
-		return timer[tmr] ? new Date() - timer[tmr] : 0;
-	};
-	Date.reset = function(tmr) {
-		tmr = tmr || 0;
-		var tick = Date.tick(tmr);
-		timer[tmr] = new Date();
-		return tick;
-	}
 
 	//Lazy
 	define(ap, '$index', 0);
@@ -2077,7 +2103,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			}
 		};
 	})());
-	define(sp, 'selectLazy', function(fun) {
+	define([sp, fp], 'selectLazy', function(fun) {
 		return this.toArray().selectLazy(fun);
 	});
 	define(ap, 'selectLazy', function(fun) {
@@ -2090,7 +2116,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return fun(element.current, element.index, element.prev, element.next);
 		});
 	});
-	define(sp, 'whereLazy', function(fun) {
+	define([sp, fp], 'whereLazy', function(fun) {
 		return this.toArray().whereLazy(fun);
 	});
 	define(ap, 'whereLazy', function(fun) {
@@ -2106,7 +2132,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return element.current;
 		});
 	});
-	define(sp, 'orderByLazy', function(keySelector, comparer) {
+	define([sp, fp], 'orderByLazy', function(keySelector, comparer) {
 		return this.toArray().orderByLazy(keySelector, comparer);
 	});
 	define(ap, 'orderByLazy', function(keySelector, comparer) {
@@ -2120,7 +2146,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return comparer.call(thus, keySelector.call(thus, a), keySelector.call(thus, b));
 		});
 	});
-	define(sp, 'orderByDescendingLazy', function(keySelector, comparer) {
+	define([sp, fp], 'orderByDescendingLazy', function(keySelector, comparer) {
 		return this.toArray().orderByDescendingLazy(keySelector, comparer);
 	});
 	define(ap, 'orderByDescendingLazy', function(keySelector, comparer) {
@@ -2134,7 +2160,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return -comparer.call(thus, keySelector.call(thus, a), keySelector.call(thus, b));
 		});
 	});
-	define(sp, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define([sp, fp], 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		return this.toArray().groupByLazy(keySelector, elementSelector, resultSelector, comparer);
 	});
 	define(ap, 'groupByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
@@ -2147,7 +2173,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return thus.tryNext();
 		}, keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(sp, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
+	define([sp, fp], 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
 		return this.toArray().nearByLazy(keySelector, elementSelector, resultSelector, comparer);
 	});
 	define(ap, 'nearByLazy', function(keySelector, elementSelector, resultSelector, comparer) {
@@ -2160,7 +2186,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return thus.tryNext();
 		}, keySelector, elementSelector, resultSelector, comparer);
 	});
-	define(sp, 'firstLazy', function() {
+	define([sp, fp], 'firstLazy', function() {
 		return this.toArray().firstLazy();
 	});
 	define(ap, 'firstLazy', function() {
@@ -2171,7 +2197,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return null;
 		}
 	});
-	define(sp, 'countLazy', function(fun) {
+	define([sp, fp], 'countLazy', function(fun) {
 		return this.toArray().countLazy(fun);
 	});
 	define(ap, 'countLazy', function(fun) {
@@ -2224,7 +2250,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		}
 		return count;
 	});
-	define(sp, 'sumLazy', function(fun) {
+	define([sp, fp], 'sumLazy', function(fun) {
 		return this.toArray().sumLazy(fun);
 	});
 	define(ap, 'sumLazy', function(fun) {
@@ -2250,7 +2276,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		}
 		return sum;
 	}, true);
-	define(sp, 'maxLazy', function(fun, comparer) {
+	define([sp, fp], 'maxLazy', function(fun, comparer) {
 		return this.toArray().maxLazy(fun, comparer);
 	});
 	define(ap, 'maxLazy', function(fun, comparer) {
@@ -2290,7 +2316,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		}
 		return max;
 	});
-	define(sp, 'minLazy', function(fun, comparer) {
+	define([sp, fp], 'minLazy', function(fun, comparer) {
 		return this.toArray().minLazy(fun, comparer);
 	});
 	define(ap, 'minLazy', function(fun, comparer) {
@@ -2330,7 +2356,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		}
 		return min;
 	});
-	define(sp, 'aggregateLazy', function(fun, seed, resultSelector) {
+	define([sp, fp], 'aggregateLazy', function(fun, seed, resultSelector) {
 		return this.toArray().aggregateLazy(fun, seed, resultSelector);
 	});
 	define(ap, 'aggregateLazy', function(fun, seed, resultSelector) {
@@ -2362,7 +2388,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return result;
 		}
 	});
-	define(sp, 'selectManyLazy', function(collectionSelector, resultSelector) {
+	define([sp, fp], 'selectManyLazy', function(collectionSelector, resultSelector) {
 		return this.toArray().selectManyLazy(collectionSelector, resultSelector);
 	});
 	define(ap, 'selectManyLazy', function(collectionSelector, resultSelector) {
@@ -2385,7 +2411,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			} while (true);
 		});
 	});
-	define(sp, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
+	define([sp, fp], 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
 		return this.toArray().joinByLazy(other, thisKeySelector, otherKeySelector, resultSelector, comparer);
 	});
 	define(ap, 'joinByLazy', function(other, thisKeySelector, otherKeySelector, resultSelector, comparer) {
@@ -2452,7 +2478,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			} while (true);
 		});
 	});
-	define(sp, 'limitLazy', function(start, count) {
+	define([sp, fp], 'limitLazy', function(start, count) {
 		return this.toArray().limitLazy(start, count);
 	});
 	define(ap, 'limitLazy', function(start, count) {
