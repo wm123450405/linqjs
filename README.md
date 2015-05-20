@@ -64,18 +64,99 @@ String.repeat('c',3); //"ccc"
 ```
 
 #### 2. `format(fixed)` *Number*
-> 显示精确到fixed位数后并按照千分位分隔的字符
+> 显示精确到*fixed*位数后并按照千分位分隔的字符
 ```javascript
 (1234567.8901).format(2); //1,234,567.89
 ```
 
 #### 3. `loop(start,fun)` *Number* *String*
 > 循环执行fun相应次数
-如果start不存在start表示0
-`fun(index,current):void`  *index*表示循环的次数索引,*current*表示初始值加上当前索引的当前值  [可为Lambda表达式](#Lambda)
+
+> * 如果start不存在,start表示0  
+> * `fun(index,current):void`  *index*表示循环的次数索引,*current*表示初始值加上当前索引的当前值  [可为Lambda表达式](#lambda)
 ```javascript
 (10).loop(0,"i,c=>alert(i)"); //提示10次
 '10'.loop("i,c=>alert(i)"); //同上
+```
+
+#### 4. `code()` *String*
+> 返回指定字符的ASCII码
+```javascript
+'a'.code(); //97
+```
+
+#### 5. `codes()` *String*
+> 返回指定字符串的ASCII码数组
+```javascript
+'abc'.codes(); //[97,98,99]
+```
+
+#### 6. `char()` *Number* *String*
+> 返回ASCII码对应的字符
+```javascript
+'97'.char(); //'a';
+```
+
+#### 7. `repeat(count)` *String*
+> 由*count*个该字符串拼接而成的新字符串
+```javascript
+'abc'.repeat(3); //'abcabcabc'
+```
+
+#### 8. `repeat(count)` *Object*
+> 由*count*个该元素组成的新数组
+```javascript
+(0).repeat(3); //[0,0,0]
+```
+
+#### 9. `splice(index,length,...params)` *String*
+> 返回将字符串从*index*开始的*length*长度部分替换成*params*后的结果
+
+#### 10. `random(count)` *String* *Array*
+> 返回字符串或数组中一个或多个随机的元素或字符  
+
+> * *count*为可选参数
+
+#### 11. `forEach(fun)` *String* *Array*
+> 循环每个元素,并对每个元素执行*fun*方法,*fun*返回`false`时终止遍历
+
+> * `fun(element,index,prev,next):boolean`  [可为Lambda表达式](#lambda)
+
+#### 12. `trim()` *String* *Array*
+> 取出开头与结尾的空格或空元素
+
+#### 13. `ltrim()` *String* *Array*
+> 取出开头的空格或空元素
+
+#### 14. `rtrim()` *String* *Array*
+> 取出结尾的空格或空元素
+
+#### 15. `leftPad(length,charOrElement)` *String* *Array*
+> 在指定对象前端使用*charOrElement*补齐对象到*length*总长度,实现右对齐
+
+#### 16. `leftPad(fixed,length)` *Number*
+> 对数字四舍五入到小数点后*fixed*位,并在前端补齐空格至*length*总长度,实现右对齐
+
+#### 17. `rightPad(length,charOrElement)` *String* *Array*
+> 在指定对象后端使用*charOrElement*补齐对象到*length*总长度,实现左对齐
+
+#### 18. `rightPad(fixed,length)` *Number*
+> 对数字四舍五入到小数点后*fixed*位,并在后端端补齐小数点与*0*至*length*总长度,实现左对齐
+
+#### 19. `cast(fun)` *String* *Array*
+> 返回一个数组,数组内容为对源数组对应的每个元素执行*fun*方法转换类型后的值
+
+> * `fun(element):object`  如:`parseInt`,`Math.round`
+
+#### 20. `select(fun)` *Array*
+> 返回一个数组,数组内容有如下情况:
+> 1.*fun*为方法:对源数组的每个元素执行*fun*方法返回的值
+
+> * `fun(element,index,prev,next):object`  [可为Lambda表达式](#lambda)
+
+> 2.*fun*为字符串:获取源数组的每个元素的*fun*属性,同时获取多个属性使用逗号隔开
+```javascript
+[{p1:0,p2:'a',p3:true},{p1:1,p2:'b',p3:false}].select("p1,p2");
 ```
 
 ### Lambda
@@ -96,6 +177,16 @@ Lambda 表达式 支持如下情况:
 案例:`"abc".forEach("e,i=>{alert(e+','+i);}")`
 
 ### JSQL
+
+JSQL 格式如下:
+
+```
+select column1 [as name1] [, column2 [as name2], column3 [as name3], ...] from element in list [join element2 in list2 on conditions ...] [where conditions] [group by column1 [, column2, column3, ...] [having conditions]] [order by column1 [, column2, column3, ...]]
+```
+其中:
+*column*为取值表达式:`element.property`或其他复杂表达式
+*list*指向对象、数组或字符串:`this`(同`_$0`),`_$<index>`指向参数列表中第*index*个的参数值,如 `_$1`
+*conditions*为条件表达式,需要表达式最终结果为*boolean*型,或能表达其是否满足条件的其他值
 
 ...  
 更多功能请阅读api.html的内容
