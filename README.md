@@ -490,11 +490,13 @@ String.repeat('c',3); //"ccc"
 > 获取每个元素对应键(*key*)的方法*keySelector*由如下情况:  
 > * *keySelector*为方法:`keySelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
 > * *keySelector*为字符串:键(*key*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
-> * *keySelector*为空:键(*key*)为每个元素本身 
+> * *keySelector*为空:键(*key*)为每个元素本身  
+
 > 获取每个元素对应值(*element*)的方法*elementSelector*,elementSelector的返回值将组成每个组中的元素,*elementSelector*由如下情况:  
 > * *elementSelector*为方法:`elementSelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
 > * *elementSelector*为字符串:值(*element*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
-> * *elementSelector*为空:值(*element*)为每个元素本身 
+> * *elementSelector*为空:值(*element*)为每个元素本身  
+
 > 将结果中的组投影至新数组中,进行最后的修正方法*resultSelector*同[select(resultSelector)](#20-selectfun-array)  
 > 比较相同的方法comparer由如下情况:  
 > * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
@@ -507,11 +509,13 @@ String.repeat('c',3); //"ccc"
 > 获取每个元素对应键(*key*)的方法*keySelector*由如下情况:  
 > * *keySelector*为方法:`keySelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
 > * *keySelector*为字符串:键(*key*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
-> * *keySelector*为空:键(*key*)为每个元素本身 
+> * *keySelector*为空:键(*key*)为每个元素本身  
+
 > 获取每个元素对应值(*element*)的方法*elementSelector*,elementSelector的返回值将组成每个组中的元素,*elementSelector*由如下情况:  
 > * *elementSelector*为方法:`elementSelector(current,index,prev,next):object`  [可为Lambda表达式](#lambda)
 > * *elementSelector*为字符串:值(*element*)由每个元素的指定属性组成,同时指定多个属性使用逗号隔开
-> * *elementSelector*为空:值(*element*)为每个元素本身 
+> * *elementSelector*为空:值(*element*)为每个元素本身  
+
 > 将结果中的组投影至新数组中,进行最后的修正方法*resultSelector*同[select(resultSelector)](#20-selectfun-array)  
 > 比较相同的方法comparer由如下情况:  
 > * *comparer*为方法:`comparer(a,b):boolean`  [可为Lambda表达式](#lambda)
