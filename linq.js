@@ -29,59 +29,6 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	var keywords = ['select', 'where', 'in', 'on', 'key', 'join', 'order', 'group', 'by', 'length', 'max', 'min', 'count', 'sum', 'avg', 'from', 'value', 'prev', 'next', 'index'];
 	var functions = ['cast', 'select', 'forEach', 'single', 'any', 'all', 'count', 'first', 'concat', 'union', 'exists', 'empty', 'except', 'intersect', 'last', 'reverse', 'sequenceEqual', 'findFirst', 'findFirstIndex', 'findLast', 'findLastIndex', 'skip', 'skipWhile', 'take', 'takeWhile', 'where', 'zip', 'sum', 'max', 'min', 'avgrage', 'aggregate', 'orderBy', 'orderByDescending', 'groupBy', 'joinBy', 'groupJoin', 'defaultIfEmpty', 'selectMany', 'toLookup', 'thenBy', 'thenByDescending', 'query', 'range', 'repeat', 'replace', 'an'];
 
-	var aggfuns = [{
-		name: 'max',
-		fun: 'maxLazy'
-	}, {
-		name: 'min',
-		fun: 'minLazy'
-	}, {
-		name: 'count',
-		fun: 'countLazy'
-	}, {
-		name: 'avg',
-		fun: 'averageLazy'
-	}, {
-		name: 'sum',
-		fun: 'sumLazy'
-	}, {
-		name: 'agg',
-		fun: 'aggregateLazy',
-		params: ['seed']
-	}];
-
-	var joinfuns = [{
-		name: 'default',
-		fun: 'joinByLazy'
-	}, {
-		name: 'inner',
-		fun: 'joinByLazy'
-	}];
-
-	var orderfuns = [{
-		name: 'order',
-		asc: 'orderByLazy',
-		desc: 'orderByDescendingLazy',
-		subasc: 'thenByLazy',
-		subdesc: 'thenByDescendingLazy'
-	}]
-
-	var groupfuns = [{
-		name: 'near',
-		fun: 'nearByLazy'
-	}, {
-		name: 'group',
-		fun: 'groupByLazy'
-	}];
-
-	var byfuns = ['group', 'near', 'order'];
-
-	var controlkeys = ['from', 'in', 'select', 'where', 'on', 'having'];
-
-	function funname(fun) {
-		return fun.name;
-	}
-
 	var __define = Object.defineProperty || function(obj, name, descriptor) {
 		obj[name] = descriptor.value;
 	};
@@ -122,29 +69,33 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		return false;
 	}
 
-	function toLinqFun(fun) {
+	function toLinqFun(fun, params) {
 		var index = -1;
 		if (an(fun, st) && (index = fun.indexOf('=>')) != -1) {
+			params = params || ['current', 'index', 'prev', 'next'];
 			var args = fun.substring(0, index).replace(/\s/g, '') || Array.range(1, fun.select(/_$(\d+)/g, 1).cast(parseInt).max() || 1).select(function(x) {
 				return '_$' + x;
-			}).join(',');
+			});
+			args = args.concat(params.slice(args.length));
+			var first = args.first();
+			args = args.join(',');
 			var funBody = fun.substring(index + 2).trim();
 			if (funBody.startsWith('new')) {
-				funBody = 'return' + funBody.substring(3);
+				funBody = 'with(' + first + '){return' + funBody.substring(3) + '}';
 			} else if (funBody.startsWith('{') && funBody.endsWith('}')) {
-				funBody = funBody.substring(1, funBody.length - 1);
+				funBody = 'with(' + first + '){' + funBody.substring(1, funBody.length - 1) + '}';
 			} else {
-				funBody = 'return ' + funBody;
+				funBody = 'with(' + first + '){return ' + funBody + '}';
 			}
 			fun = new Function(args, funBody);
 		}
 		return fun;
 	}
 
-	function fieldFun(fun) {
+	function fieldFun(fun, params) {
 		fun = toLinqFun(fun || function(o) {
 			return o;
-		});
+		}, params);
 		if (an(fun, st)) {
 			if (fun.indexOf(',') != -1) {
 				fun = fun.split(',').select(function(f) {
@@ -174,7 +125,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	function fieldComparer(fun) {
 		fun = toLinqFun(fun || function(a, b) {
 			return (a == b || (exists(a) && exists(b) && a.valueOf() == b.valueOf())) ? 0 : a > b ? 1 : -1;
-		});
+		}, params || ['current', 'other', 'index']);
 		if (an(fun, st)) {
 			if (fun == 'key') {
 				return function(a, b) {
@@ -428,7 +379,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			start = 0;
 		}
 		start = start || 0;
-		fun = toLinqFun(fun);
+		fun = toLinqFun(fun, ['index', 'current']);
 		var count = parseInt(this);
 		for (var i = 0, n = start; i < count; i++, n++) {
 			fun.call(this, i, n);
@@ -709,7 +660,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		if ((this.length < end || other.length < end || !len) && this.length != other.length) {
 			return false;
 		}
-		fun = fieldComparer(fun);
+		fun = fieldComparer(fun, ['current', 'other']);
 		var result;
 		for (var i = start; i < end; i++) {
 			result = fun.call(this, this[i], other[i]);
@@ -725,7 +676,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	define([sp, ap], 'findFirstIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
-			fun = fieldComparer(fun || index);
+			fun = fieldComparer(fun || index, ['current', 'element']);
 			var result;
 			for (var i = 0; i < this.length; i++) {
 				result = fun.call(this, this[i], element);
@@ -772,7 +723,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	define([sp, ap], 'findLastIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
-			fun = fieldComparer(fun || index);
+			fun = fieldComparer(fun || index, ['current', 'element']);
 			var result;
 			for (var i = this.length - 1; i >= 0; i--) {
 				result = fun.call(this, this[i], element);
@@ -977,7 +928,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		return result;
 	});
 	define([sp, ap], 'zip', function(other, fun) {
-		fun = toLinqFun(fun);
+		fun = toLinqFun(fun, ['current', 'other', 'index']);
 		var result = this.empty(Math.min(this.length, other.length));
 		for (var i = 0; i < this.length && i < other.length; i++) {
 			result[i] = fun.call(this, this[i], other[i], i);
@@ -1001,7 +952,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 			return null;
 		}
 		fun = fieldFun(fun);
-		comparer = fieldComparer(comparer);
+		comparer = fieldComparer(comparer, ['current', 'other']);
 		var max = fun.call(this, this[0], 0, null, this[1]);
 		var result, value;
 		for (var i = 1; i < this.length; i++) {
@@ -1080,7 +1031,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	define([sp, ap], 'nearBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other']);
 		var result = this.empty();
 		var key, element, compareResult;
 		for (var i = 0; i < this.length; i++) {
@@ -1109,7 +1060,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 	define([sp, ap], 'groupBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other']);
 		var result = this.empty();
 		var key, element, index;
 		for (var i = 0; i < this.length; i++) {
@@ -1139,7 +1090,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other', 'left', 'right']);
 		var result = this.empty();
 		var key, compareResult;
 		var thisSelect = this.select(function(o, i, p, n) {
@@ -1184,7 +1135,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other', 'left', 'right']);
 		var result = this.empty();
 		var key, compareResult;
 		var thisSelect = this.select(function(o, i, p, n) {
@@ -1238,7 +1189,7 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		collectionSelector = fieldFun(collectionSelector);
 		resultSelector = toLinqFun(resultSelector || function(o, v) {
 			return v;
-		});
+		}, ['current', 'element']);
 		var result = this.empty();
 		var elements;
 		for (var i = 0; i < this.length; i++) {
@@ -1567,6 +1518,62 @@ select count(1) from _$0 => from x in _$0 select count(1);
 		this.push(element);
 	};
 	Joins.prototype = Object.create(ap);
+
+
+//full
+
+	var aggfuns = [{
+		name: 'max',
+		fun: 'maxLazy'
+	}, {
+		name: 'min',
+		fun: 'minLazy'
+	}, {
+		name: 'count',
+		fun: 'countLazy'
+	}, {
+		name: 'avg',
+		fun: 'averageLazy'
+	}, {
+		name: 'sum',
+		fun: 'sumLazy'
+	}, {
+		name: 'agg',
+		fun: 'aggregateLazy',
+		params: ['seed']
+	}];
+
+	var joinfuns = [{
+		name: 'default',
+		fun: 'joinByLazy'
+	}, {
+		name: 'inner',
+		fun: 'joinByLazy'
+	}];
+
+	var orderfuns = [{
+		name: 'order',
+		asc: 'orderByLazy',
+		desc: 'orderByDescendingLazy',
+		subasc: 'thenByLazy',
+		subdesc: 'thenByDescendingLazy'
+	}]
+
+	var groupfuns = [{
+		name: 'near',
+		fun: 'nearByLazy'
+	}, {
+		name: 'group',
+		fun: 'groupByLazy'
+	}];
+
+	var byfuns = ['group', 'near', 'order'];
+
+	var controlkeys = ['from', 'in', 'select', 'where', 'on', 'having'];
+
+	function funname(fun) {
+		return fun.name;
+	}
 
 	function Query(out) {
 		var controls = {};

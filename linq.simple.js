@@ -12,6 +12,7 @@ http://github.com/wm123450405/linqjs
 	var op = Object.prototype;
 	var ap = Array.prototype;
 	var np = Number.prototype;
+	var fp = Function.prototype;
 
 	var st = 'string';
 	var nt = 'number';
@@ -63,29 +64,33 @@ http://github.com/wm123450405/linqjs
 		return false;
 	}
 
-	function toLinqFun(fun) {
+	function toLinqFun(fun, params) {
 		var index = -1;
 		if (an(fun, st) && (index = fun.indexOf('=>')) != -1) {
+			params = params || ['current', 'index', 'prev', 'next'];
 			var args = fun.substring(0, index).replace(/\s/g, '') || Array.range(1, fun.select(/_$(\d+)/g, 1).cast(parseInt).max() || 1).select(function(x) {
 				return '_$' + x;
-			}).join(',');
+			});
+			args = args.concat(params.slice(args.length));
+			var first = args.first();
+			args = args.join(',');
 			var funBody = fun.substring(index + 2).trim();
 			if (funBody.startsWith('new')) {
-				funBody = 'return' + funBody.substring(3);
+				funBody = 'with(' + first + '){return' + funBody.substring(3) + '}';
 			} else if (funBody.startsWith('{') && funBody.endsWith('}')) {
-				funBody = funBody.substring(1, funBody.length - 1);
+				funBody = 'with(' + first + '){' + funBody.substring(1, funBody.length - 1) + '}';
 			} else {
-				funBody = 'return ' + funBody;
+				funBody = 'with(' + first + '){return ' + funBody + '}';
 			}
 			fun = new Function(args, funBody);
 		}
 		return fun;
 	}
 
-	function fieldFun(fun) {
+	function fieldFun(fun, params) {
 		fun = toLinqFun(fun || function(o) {
 			return o;
-		});
+		}, params);
 		if (an(fun, st)) {
 			if (fun.indexOf(',') != -1) {
 				fun = fun.split(',').select(function(f) {
@@ -115,7 +120,7 @@ http://github.com/wm123450405/linqjs
 	function fieldComparer(fun) {
 		fun = toLinqFun(fun || function(a, b) {
 			return (a == b || (exists(a) && exists(b) && a.valueOf() == b.valueOf())) ? 0 : a > b ? 1 : -1;
-		});
+		}, params || ['current', 'other', 'index']);
 		if (an(fun, st)) {
 			if (fun == 'key') {
 				return function(a, b) {
@@ -369,7 +374,7 @@ http://github.com/wm123450405/linqjs
 			start = 0;
 		}
 		start = start || 0;
-		fun = toLinqFun(fun);
+		fun = toLinqFun(fun, ['index', 'current']);
 		var count = parseInt(this);
 		for (var i = 0, n = start; i < count; i++, n++) {
 			fun.call(this, i, n);
@@ -650,7 +655,7 @@ http://github.com/wm123450405/linqjs
 		if ((this.length < end || other.length < end || !len) && this.length != other.length) {
 			return false;
 		}
-		fun = fieldComparer(fun);
+		fun = fieldComparer(fun, ['current', 'other']);
 		var result;
 		for (var i = start; i < end; i++) {
 			result = fun.call(this, this[i], other[i]);
@@ -666,7 +671,7 @@ http://github.com/wm123450405/linqjs
 	define([sp, ap], 'findFirstIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
-			fun = fieldComparer(fun || index);
+			fun = fieldComparer(fun || index, ['current', 'element']);
 			var result;
 			for (var i = 0; i < this.length; i++) {
 				result = fun.call(this, this[i], element);
@@ -713,7 +718,7 @@ http://github.com/wm123450405/linqjs
 	define([sp, ap], 'findLastIndex', function(element, index, fun) {
 		var count = parseInt(index) || 0;
 		if (fun || (exists(index) && isNaN(index))) {
-			fun = fieldComparer(fun || index);
+			fun = fieldComparer(fun || index, ['current', 'element']);
 			var result;
 			for (var i = this.length - 1; i >= 0; i--) {
 				result = fun.call(this, this[i], element);
@@ -918,7 +923,7 @@ http://github.com/wm123450405/linqjs
 		return result;
 	});
 	define([sp, ap], 'zip', function(other, fun) {
-		fun = toLinqFun(fun);
+		fun = toLinqFun(fun, ['current', 'other', 'index']);
 		var result = this.empty(Math.min(this.length, other.length));
 		for (var i = 0; i < this.length && i < other.length; i++) {
 			result[i] = fun.call(this, this[i], other[i], i);
@@ -942,7 +947,7 @@ http://github.com/wm123450405/linqjs
 			return null;
 		}
 		fun = fieldFun(fun);
-		comparer = fieldComparer(comparer);
+		comparer = fieldComparer(comparer, ['current', 'other']);
 		var max = fun.call(this, this[0], 0, null, this[1]);
 		var result, value;
 		for (var i = 1; i < this.length; i++) {
@@ -1021,7 +1026,7 @@ http://github.com/wm123450405/linqjs
 	define([sp, ap], 'nearBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other']);
 		var result = this.empty();
 		var key, element, compareResult;
 		for (var i = 0; i < this.length; i++) {
@@ -1050,7 +1055,7 @@ http://github.com/wm123450405/linqjs
 	define([sp, ap], 'groupBy', function(keySelector, elementSelector, resultSelector, comparer) {
 		keySelector = fieldFun(keySelector);
 		elementSelector = fieldFun(elementSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other']);
 		var result = this.empty();
 		var key, element, index;
 		for (var i = 0; i < this.length; i++) {
@@ -1080,7 +1085,7 @@ http://github.com/wm123450405/linqjs
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other', 'left', 'right']);
 		var result = this.empty();
 		var key, compareResult;
 		var thisSelect = this.select(function(o, i, p, n) {
@@ -1125,7 +1130,7 @@ http://github.com/wm123450405/linqjs
 		thisKeySelector = fieldFun(thisKeySelector);
 		otherKeySelector = fieldFun(otherKeySelector);
 		resultSelector = toLinqFun(resultSelector);
-		comparer = fieldComparer(comparer || 'key');
+		comparer = fieldComparer(comparer || 'key', ['current', 'other', 'left', 'right']);
 		var result = this.empty();
 		var key, compareResult;
 		var thisSelect = this.select(function(o, i, p, n) {
@@ -1179,7 +1184,7 @@ http://github.com/wm123450405/linqjs
 		collectionSelector = fieldFun(collectionSelector);
 		resultSelector = toLinqFun(resultSelector || function(o, v) {
 			return v;
-		});
+		}, ['current', 'element']);
 		var result = this.empty();
 		var elements;
 		for (var i = 0; i < this.length; i++) {
@@ -1308,7 +1313,6 @@ http://github.com/wm123450405/linqjs
 			return Array.repeat(this, count);
 		}
 	});
-
 	define(op, 'toArray', function() {
 		if (an(this, Array)) {
 			return this;
@@ -1366,6 +1370,23 @@ http://github.com/wm123450405/linqjs
 		return typeof(this.valueOf()) === typeof(min) && typeof(this.valueOf()) === typeof(max) && !(this > max || this < min);
 	});
 
+	var timer = {};
+
+	Date.start = function(tmr) {
+		tmr = tmr || 0;
+		timer[tmr] = new Date();
+	};
+	Date.tick = function(tmr) {
+		tmr = tmr || 0;
+		return timer[tmr] ? new Date() - timer[tmr] : 0;
+	};
+	Date.reset = function(tmr) {
+		tmr = tmr || 0;
+		var tick = Date.tick(tmr);
+		timer[tmr] = new Date();
+		return tick;
+	}
+
 	Object.valueOf = function(value) {
 		return value === "" || value === 0 || value === false ? new Object(value) : new Object(value || {});
 	};
@@ -1405,7 +1426,7 @@ http://github.com/wm123450405/linqjs
 			}
 		}
 		return false;
-	};
+	}
 
 	define(op, 'an', function() {
 		for (var i = 0; i < arguments.length; i++) {
@@ -1493,20 +1514,4 @@ http://github.com/wm123450405/linqjs
 	};
 	Joins.prototype = Object.create(ap);
 
-	var timer = {};
-
-	Date.start = function(tmr) {
-		tmr = tmr || 0;
-		timer[tmr] = new Date();
-	};
-	Date.tick = function(tmr) {
-		tmr = tmr || 0;
-		return timer[tmr] ? new Date() - timer[tmr] : 0;
-	};
-	Date.reset = function(tmr) {
-		tmr = tmr || 0;
-		var tick = Date.tick(tmr);
-		timer[tmr] = new Date();
-		return tick;
-	}
 })();
