@@ -26,8 +26,8 @@ class IOrderedEnumerable extends IEnumerable {
         core.defineProperty(this, IOrderedEnumerable.source, source);
         core.defineProperty(this, IOrderedEnumerable.orderByComparer, orderByComparer);
     };
-    static source = Symbol('source');
-    static orderByComparer = Symbol('orderByComparer');
 };
+IOrderedEnumerable.source = Symbol('source');
+IOrderedEnumerable.orderByComparer = Symbol('orderByComparer');
 
 export default IOrderedEnumerable;

@@ -1,4 +1,6 @@
 'use strict';
+import 'babel-polyfill';
+
 import core from './core/core';
 
 import Enumerable from './Enumerable';
@@ -8,6 +10,10 @@ import ArrayEnumerable from './enumerables/ArrayEnumerable';
 import StringEnumerable from './enumerables/StringEnumerable';
 import IteratorEnumerable from './enumerables/IteratorEnumerable';
 import ObjectEnumerable from './enumerables/ObjectEnumerable';
+
+import extendArray from './linq-array';
+import extendObject from './linq-object';
+import extendString from './linq-string';
 
 core.defineProperties(Map.prototype, {
     asEnumerable() {
@@ -39,5 +45,25 @@ core.defineProperties(Object.prototype, {
         }
     }
 });
+
+Enumerable.Config = {
+    extends: {
+        set array(value) {
+            if (value) {
+                extendArray();
+            }
+        },
+        set object(value) {
+            if (value) {
+                extendObject();
+            }
+        },
+        set string(value) {
+            if (value) {
+                extendString();
+            }
+        }
+    }
+}
 
 export default Enumerable;
