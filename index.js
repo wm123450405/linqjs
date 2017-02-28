@@ -1,2 +1,2 @@
-import Enumerable from './lib/linq'
+import Enumerable from './src/linq'
 export default Enumerable;

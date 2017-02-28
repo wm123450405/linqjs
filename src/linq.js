@@ -1,6 +1,4 @@
 'use strict';
-import 'babel-polyfill';
-
 import core from './core/core';
 
 import Enumerable from './Enumerable';
@@ -14,6 +12,12 @@ import ObjectEnumerable from './enumerables/ObjectEnumerable';
 import extendArray from './linq-array';
 import extendObject from './linq-object';
 import extendString from './linq-string';
+
+if (!global._babelPolyfill) {
+    require('babel-polyfill');
+} else {
+    console.warn('babel-polyfill already imported');
+}
 
 core.defineProperties(Map.prototype, {
     asEnumerable() {

@@ -1,4 +1,6 @@
-import Enumerable from './lib/linq';
+let Enumerable = require('./dist/linq').default;
+
+console.log(Proxy);
 
 console.log(Enumerable.range(1, 10).concat(Enumerable.range(1, 10)).where(v => v > 2).orderBy(v => v % 3).thenByDescending().distinct().union(Enumerable.range(5, 10)).except(Enumerable.range(1, 3)).intersect(Enumerable.range(5, 5)).reverse().toArray())
 

@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-require('babel-polyfill');
-
 var _core = require('./core/core');
 
 var _core2 = _interopRequireDefault(_core);
@@ -47,6 +45,12 @@ var _linqString = require('./linq-string');
 var _linqString2 = _interopRequireDefault(_linqString);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if (!global._babelPolyfill) {
+    require('babel-polyfill');
+} else {
+    console.warn('babel-polyfill already imported');
+}
 
 _core2.default.defineProperties(Map.prototype, {
     asEnumerable: function asEnumerable() {
