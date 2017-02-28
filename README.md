@@ -18,7 +18,7 @@ Usage for English is Coming soon...
 #### 1. 引入
 >使用nodejs
 ```
-node --save-dev linq-js
+npm install --save-dev linq-js
 ```
 ```javascript
 const Enumerable = require('linq-js').default; //ES5
