@@ -9,6 +9,13 @@ use linq and lambda in javascript
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作  
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
+## Change 更新日志
+
+### 2017-03-01
+
+	由import方法修改为require方式引用  
+	增加了对node最低版本号的限制
+
 ## Usage 用法
 
 Usage for English is Coming soon...
@@ -102,6 +109,25 @@ function all(
 > [1,2,3].asEnumerable().all(v => v == 2); //false
 > ```
 
+#### 7. `sum(selector)`
+```typescript
+function sum(
+	selector:Function = defaultSelector
+):number,
+
+	selector(element:any, index:number):number;
+```
+
+#### 8. `average(selector)`
+```typescript
+function average(
+	selector:Function = defaultSelector
+):number,
+
+	selector(element:any, index:number):number;
+```
+
+More docs, to be continue...
 更多内容的说明,未完待补充...  
 
 :*[see msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
