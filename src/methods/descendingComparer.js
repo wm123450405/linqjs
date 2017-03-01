@@ -1,1 +1,1 @@
-export default (orderBy) => (element, other) => -orderBy(element, other);
+module.exports = (orderBy) => (element, other) => -orderBy(element, other);

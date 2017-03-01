@@ -1,10 +1,10 @@
-import IteratorEnumerable from './IteratorEnumerable';
+const IteratorEnumerable = require('./IteratorEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
 class ArrayEnumerable extends IteratorEnumerable {
     constructor(array) {
@@ -35,4 +35,4 @@ class ArrayEnumerable extends IteratorEnumerable {
     };
 };
 
-export default ArrayEnumerable;
+module.exports = ArrayEnumerable;

@@ -1,1 +1,1 @@
-export default 'Keys for multi elements'
+module.exports = 'Keys for multi elements'

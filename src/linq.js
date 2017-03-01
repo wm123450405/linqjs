@@ -1,22 +1,20 @@
 'use strict';
-import core from './core/core';
+const core = require('./core/core');
 
-import Enumerable from './Enumerable';
+const Enumerable = require('./Enumerable');
 
-import MapEnumerable from './enumerables/MapEnumerable';
-import ArrayEnumerable from './enumerables/ArrayEnumerable';
-import StringEnumerable from './enumerables/StringEnumerable';
-import IteratorEnumerable from './enumerables/IteratorEnumerable';
-import ObjectEnumerable from './enumerables/ObjectEnumerable';
+const MapEnumerable = require('./enumerables/MapEnumerable');
+const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
+const StringEnumerable = require('./enumerables/StringEnumerable');
+const IteratorEnumerable = require('./enumerables/IteratorEnumerable');
+const ObjectEnumerable = require('./enumerables/ObjectEnumerable');
 
-import extendArray from './linq-array';
-import extendObject from './linq-object';
-import extendString from './linq-string';
+const extendArray = require('./linq-array');
+const extendObject = require('./linq-object');
+const extendString = require('./linq-string');
 
-if (!global._babelPolyfill) {
+if (typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
-} else {
-    console.warn('babel-polyfill already imported');
 }
 
 core.defineProperties(Map.prototype, {
@@ -70,4 +68,5 @@ Enumerable.Config = {
     }
 }
 
-export default Enumerable;
+//module.exports = Enumerable;
+module.exports = Enumerable;

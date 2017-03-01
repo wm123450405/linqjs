@@ -1,10 +1,10 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class DistinctEnumerable extends IEnumerable {
     constructor(source, comparer = defaultEqualityComparer) {
@@ -21,4 +21,4 @@ class DistinctEnumerable extends IEnumerable {
     };
 };
 
-export default DistinctEnumerable;
+module.exports = DistinctEnumerable;

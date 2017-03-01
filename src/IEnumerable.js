@@ -1,14 +1,14 @@
-import core from './core/core';
+const core = require('./core/core');
 
-import Enumerable from './Enumerable';
+const defaultPredicate = require('./methods/defaultPredicate');
+const defaultSelector = require('./methods/defaultSelector');
+const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
+const defaultComparer = require('./methods/defaultComparer');
+const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
+const defaultKeySelector = require('./methods/defaultKeySelector');
+const defaultValueSelector = require('./methods/defaultValueSelector');
 
-import defaultPredicate from './methods/defaultPredicate';
-import defaultSelector from './methods/defaultSelector';
-import defaultEqualityComparer from './methods/defaultEqualityComparer';
-import defaultComparer from './methods/defaultComparer';
-import defaultGroupResultSelector from './methods/defaultGroupResultSelector';
-import defaultKeySelector from './methods/defaultKeySelector';
-import defaultValueSelector from './methods/defaultValueSelector';
+const hasProxy = typeof Proxy !== 'undefined' && Proxy.toString().match(/native code/);
 
 class IEnumerable {
     constructor(source) {
@@ -22,25 +22,27 @@ class IEnumerable {
                 return type === 'string' ? Enumerable.join(this, '') : type === 'array' ? '[' + Enumerable.join(this, ',') + ']' : type === 'enumerable' ? source.toString.call(this) : ('[' + Enumerable.join(this, ',') + ']');
             }
         });
-        return new Proxy(this, {
-            get(target, prop) {
-                if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
-                    return target.elementAtOrDefault(prop);
-                } else {
-                    return target[prop];
+        if (hasProxy) {
+            return new Proxy(this, {
+                get(target, prop) {
+                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
+                        return target.elementAtOrDefault(prop);
+                    } else {
+                        return target[prop];
+                    }
+                },
+                getOwnPropertyDescriptor(target, prop) {
+                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
+                        return { writable: false, enumerable: true, configurable: true };
+                    } else {
+                        return Object.getOwnPropertyDescriptor(target, prop);
+                    }
+                },
+                ownKeys(target) {
+                    return Enumerable.range(0, target.count()).select(i => String(i)).concat(Reflect.ownKeys(target)).toArray();
                 }
-            },
-            getOwnPropertyDescriptor(target, prop) {
-                if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
-                    return { writable: false, enumerable: true, configurable: true };
-                } else {
-                    return Object.getOwnPropertyDescriptor(target, prop);
-                }
-            },
-            ownKeys(target) {
-                return Enumerable.range(0, target.count()).select(i => String(i)).concat(Reflect.ownKeys(target)).toArray();
-            }
-        });
+            });
+        }
     };
     get length() {
         return this.count();
@@ -199,4 +201,7 @@ class IEnumerable {
         return Enumerable.forEach(this, action);
     };
 };
-export default IEnumerable;
+
+module.exports = IEnumerable;
+
+const Enumerable = require('./Enumerable');

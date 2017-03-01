@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class RepeatEnumerable extends IEnumerable {
     constructor(element, count = 0) {
@@ -13,4 +13,4 @@ class RepeatEnumerable extends IEnumerable {
     };
 };
 
-export default RepeatEnumerable;
+module.exports = RepeatEnumerable;

@@ -1,9 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (element, index) {
+module.exports = function (element, index) {
   return true;
 };

@@ -1,106 +1,73 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+var core = require('./core/core');
 
-var _core = require('./core/core');
+var Enumerable = require('./Enumerable');
 
-var _core2 = _interopRequireDefault(_core);
+var MapEnumerable = require('./enumerables/MapEnumerable');
+var ArrayEnumerable = require('./enumerables/ArrayEnumerable');
+var StringEnumerable = require('./enumerables/StringEnumerable');
+var IteratorEnumerable = require('./enumerables/IteratorEnumerable');
+var ObjectEnumerable = require('./enumerables/ObjectEnumerable');
 
-var _Enumerable = require('./Enumerable');
+var extendArray = require('./linq-array');
+var extendObject = require('./linq-object');
+var extendString = require('./linq-string');
 
-var _Enumerable2 = _interopRequireDefault(_Enumerable);
-
-var _MapEnumerable = require('./enumerables/MapEnumerable');
-
-var _MapEnumerable2 = _interopRequireDefault(_MapEnumerable);
-
-var _ArrayEnumerable = require('./enumerables/ArrayEnumerable');
-
-var _ArrayEnumerable2 = _interopRequireDefault(_ArrayEnumerable);
-
-var _StringEnumerable = require('./enumerables/StringEnumerable');
-
-var _StringEnumerable2 = _interopRequireDefault(_StringEnumerable);
-
-var _IteratorEnumerable = require('./enumerables/IteratorEnumerable');
-
-var _IteratorEnumerable2 = _interopRequireDefault(_IteratorEnumerable);
-
-var _ObjectEnumerable = require('./enumerables/ObjectEnumerable');
-
-var _ObjectEnumerable2 = _interopRequireDefault(_ObjectEnumerable);
-
-var _linqArray = require('./linq-array');
-
-var _linqArray2 = _interopRequireDefault(_linqArray);
-
-var _linqObject = require('./linq-object');
-
-var _linqObject2 = _interopRequireDefault(_linqObject);
-
-var _linqString = require('./linq-string');
-
-var _linqString2 = _interopRequireDefault(_linqString);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-if (!global._babelPolyfill) {
+if (typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
-} else {
-    console.warn('babel-polyfill already imported');
 }
 
-_core2.default.defineProperties(Map.prototype, {
+core.defineProperties(Map.prototype, {
     asEnumerable: function asEnumerable() {
-        return new _MapEnumerable2.default(this);
+        return new MapEnumerable(this);
     }
 });
-_core2.default.defineProperties(Array.prototype, {
+core.defineProperties(Array.prototype, {
     asEnumerable: function asEnumerable() {
-        return new _ArrayEnumerable2.default(this);
+        return new ArrayEnumerable(this);
     }
 });
-_core2.default.defineProperties(Set.prototype, {
+core.defineProperties(Set.prototype, {
     asEnumerable: function asEnumerable() {
-        return new _ArrayEnumerable2.default(this);
+        return new ArrayEnumerable(this);
     }
 });
-_core2.default.defineProperties(String.prototype, {
+core.defineProperties(String.prototype, {
     asEnumerable: function asEnumerable() {
-        return new _StringEnumerable2.default(this);
+        return new StringEnumerable(this);
     }
 });
-_core2.default.defineProperties(Object.prototype, {
+core.defineProperties(Object.prototype, {
     asEnumerable: function asEnumerable() {
-        var type = _core2.default.typeName(this);
+        var type = core.typeName(this);
         if (type.endsWith(' Iterator')) {
-            return new _IteratorEnumerable2.default(this);
+            return new IteratorEnumerable(this);
         } else {
-            return new _ObjectEnumerable2.default(this);
+            return new ObjectEnumerable(this);
         }
     }
 });
 
-_Enumerable2.default.Config = {
+Enumerable.Config = {
     extends: {
         set array(value) {
             if (value) {
-                (0, _linqArray2.default)();
+                extendArray();
             }
         },
         set object(value) {
             if (value) {
-                (0, _linqObject2.default)();
+                extendObject();
             }
         },
         set string(value) {
             if (value) {
-                (0, _linqString2.default)();
+                extendString();
             }
         }
     }
 };
 
-exports.default = _Enumerable2.default;
+//module.exports = Enumerable;
+module.exports = Enumerable;

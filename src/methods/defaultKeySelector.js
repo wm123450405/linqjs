@@ -1,1 +1,1 @@
-export default (element, index) => typeof element.key === 'undefined' ? element : element.key;
+module.exports = (element, index) => typeof element.key === 'undefined' ? element : element.key;

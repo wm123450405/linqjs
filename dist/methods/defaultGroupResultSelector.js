@@ -1,9 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (key, enumerable) {
+module.exports = function (key, enumerable) {
   return enumerable;
 };

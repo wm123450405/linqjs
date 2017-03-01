@@ -1,1 +1,1 @@
-export default (element, key) => {};
+module.exports = (element, key) => {};

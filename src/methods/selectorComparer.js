@@ -1,1 +1,1 @@
-export default (selector, comparer) => (element, other) => comparer(selector(element), selector(other));
+module.exports = (selector, comparer) => (element, other) => comparer(selector(element), selector(other));

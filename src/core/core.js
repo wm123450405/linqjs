@@ -33,4 +33,4 @@ const core = {
 	"string$lastIndexOf": String.prototype.lastIndexOf
 };
 
-export default core;
+module.exports = core;

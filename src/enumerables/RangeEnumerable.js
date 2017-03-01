@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class RangeEnumerable extends IEnumerable {
     constructor(start, count) {
@@ -13,4 +13,4 @@ class RangeEnumerable extends IEnumerable {
     };
 };
 
-export default RangeEnumerable;
+module.exports = RangeEnumerable;

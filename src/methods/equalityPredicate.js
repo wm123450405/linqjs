@@ -1,1 +1,1 @@
-export default (value, comparer) => (element, index) => comparer(element, value);
+module.exports = (value, comparer) => (element, index) => comparer(element, value);

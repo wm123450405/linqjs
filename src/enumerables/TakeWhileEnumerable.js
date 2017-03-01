@@ -1,8 +1,8 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultPredicate from './../methods/defaultPredicate';
+const defaultPredicate = require('./../methods/defaultPredicate');
 
 class TakeWhileEnumerable extends IEnumerable {
     constructor(source, predicate = defaultPredicate) {
@@ -21,4 +21,4 @@ class TakeWhileEnumerable extends IEnumerable {
     };
 };
 
-export default TakeWhileEnumerable;
+module.exports = TakeWhileEnumerable;

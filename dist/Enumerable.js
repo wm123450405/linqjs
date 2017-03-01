@@ -1,182 +1,23 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _core = require('./core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _defaultPredicate = require('./methods/defaultPredicate');
-
-var _defaultPredicate2 = _interopRequireDefault(_defaultPredicate);
-
-var _defaultSelector = require('./methods/defaultSelector');
-
-var _defaultSelector2 = _interopRequireDefault(_defaultSelector);
-
-var _defaultEqualityComparer = require('./methods/defaultEqualityComparer');
-
-var _defaultEqualityComparer2 = _interopRequireDefault(_defaultEqualityComparer);
-
-var _defaultComparer = require('./methods/defaultComparer');
-
-var _defaultComparer2 = _interopRequireDefault(_defaultComparer);
-
-var _defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
-
-var _defaultGroupResultSelector2 = _interopRequireDefault(_defaultGroupResultSelector);
-
-var _defaultKeySelector = require('./methods/defaultKeySelector');
-
-var _defaultKeySelector2 = _interopRequireDefault(_defaultKeySelector);
-
-var _defaultValueSelector = require('./methods/defaultValueSelector');
-
-var _defaultValueSelector2 = _interopRequireDefault(_defaultValueSelector);
-
-var _NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
-
-var _NoSuchElementsException2 = _interopRequireDefault(_NoSuchElementsException);
-
-var _OutOfRangeException = require('./core/exceptions/OutOfRangeException');
-
-var _OutOfRangeException2 = _interopRequireDefault(_OutOfRangeException);
-
-var _TooManyElementsException = require('./core/exceptions/TooManyElementsException');
-
-var _TooManyElementsException2 = _interopRequireDefault(_TooManyElementsException);
-
-var _KeysForMultiElementsException = require('./core/exceptions/KeysForMultiElementsException');
-
-var _KeysForMultiElementsException2 = _interopRequireDefault(_KeysForMultiElementsException);
-
-var _RepeatEnumerable = require('./enumerables/RepeatEnumerable');
-
-var _RepeatEnumerable2 = _interopRequireDefault(_RepeatEnumerable);
-
-var _RangeEnumerable = require('./enumerables/RangeEnumerable');
-
-var _RangeEnumerable2 = _interopRequireDefault(_RangeEnumerable);
-
-var _EmptyEnumerable = require('./enumerables/EmptyEnumerable');
-
-var _EmptyEnumerable2 = _interopRequireDefault(_EmptyEnumerable);
-
-var _IteratorEnumerable = require('./enumerables/IteratorEnumerable');
-
-var _IteratorEnumerable2 = _interopRequireDefault(_IteratorEnumerable);
-
-var _WhereEnumerable = require('./enumerables/WhereEnumerable');
-
-var _WhereEnumerable2 = _interopRequireDefault(_WhereEnumerable);
-
-var _SelectEnumerable = require('./enumerables/SelectEnumerable');
-
-var _SelectEnumerable2 = _interopRequireDefault(_SelectEnumerable);
-
-var _ConcatEnumerable = require('./enumerables/ConcatEnumerable');
-
-var _ConcatEnumerable2 = _interopRequireDefault(_ConcatEnumerable);
-
-var _DistinctEnumerable = require('./enumerables/DistinctEnumerable');
-
-var _DistinctEnumerable2 = _interopRequireDefault(_DistinctEnumerable);
-
-var _ExceptEnumerable = require('./enumerables/ExceptEnumerable');
-
-var _ExceptEnumerable2 = _interopRequireDefault(_ExceptEnumerable);
-
-var _UnionEnumerable = require('./enumerables/UnionEnumerable');
-
-var _UnionEnumerable2 = _interopRequireDefault(_UnionEnumerable);
-
-var _IntersectEnumerable = require('./enumerables/IntersectEnumerable');
-
-var _IntersectEnumerable2 = _interopRequireDefault(_IntersectEnumerable);
-
-var _OfTypeEnumerable = require('./enumerables/OfTypeEnumerable');
-
-var _OfTypeEnumerable2 = _interopRequireDefault(_OfTypeEnumerable);
-
-var _SkipEnumerable = require('./enumerables/SkipEnumerable');
-
-var _SkipEnumerable2 = _interopRequireDefault(_SkipEnumerable);
-
-var _SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
-
-var _SkipWhileEnumerable2 = _interopRequireDefault(_SkipWhileEnumerable);
-
-var _TakeEnumerable = require('./enumerables/TakeEnumerable');
-
-var _TakeEnumerable2 = _interopRequireDefault(_TakeEnumerable);
-
-var _TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
-
-var _TakeWhileEnumerable2 = _interopRequireDefault(_TakeWhileEnumerable);
-
-var _IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
-
-var _IOrderedEnumerable2 = _interopRequireDefault(_IOrderedEnumerable);
-
-var _OrderByEnumerable = require('./enumerables/OrderByEnumerable');
-
-var _OrderByEnumerable2 = _interopRequireDefault(_OrderByEnumerable);
-
-var _OrderByDescendingEnumerable = require('./enumerables/OrderByDescendingEnumerable');
-
-var _OrderByDescendingEnumerable2 = _interopRequireDefault(_OrderByDescendingEnumerable);
-
-var _ThenByEnumerable = require('./enumerables/ThenByEnumerable');
-
-var _ThenByEnumerable2 = _interopRequireDefault(_ThenByEnumerable);
-
-var _ThenByDescendingEnumerable = require('./enumerables/ThenByDescendingEnumerable');
-
-var _ThenByDescendingEnumerable2 = _interopRequireDefault(_ThenByDescendingEnumerable);
-
-var _GroupingEnumerable = require('./enumerables/GroupingEnumerable');
-
-var _GroupingEnumerable2 = _interopRequireDefault(_GroupingEnumerable);
-
-var _SelectManyEnumerable = require('./enumerables/SelectManyEnumerable');
-
-var _SelectManyEnumerable2 = _interopRequireDefault(_SelectManyEnumerable);
-
-var _JoinEnumerable = require('./enumerables/JoinEnumerable');
-
-var _JoinEnumerable2 = _interopRequireDefault(_JoinEnumerable);
-
-var _GroupJoinEnumerable = require('./enumerables/GroupJoinEnumerable');
-
-var _GroupJoinEnumerable2 = _interopRequireDefault(_GroupJoinEnumerable);
-
-var _ReverseEnumerable = require('./enumerables/ReverseEnumerable');
-
-var _ReverseEnumerable2 = _interopRequireDefault(_ReverseEnumerable);
-
-var _ZipEnumerable = require('./enumerables/ZipEnumerable');
-
-var _ZipEnumerable2 = _interopRequireDefault(_ZipEnumerable);
-
-var _SingleEnumerable = require('./enumerables/SingleEnumerable');
-
-var _SingleEnumerable2 = _interopRequireDefault(_SingleEnumerable);
-
-var _Dictionary = require('./enumerables/Dictionary');
-
-var _Dictionary2 = _interopRequireDefault(_Dictionary);
-
-var _Lookup = require('./enumerables/Lookup');
-
-var _Lookup2 = _interopRequireDefault(_Lookup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var core = require('./core/core');
+
+var defaultPredicate = require('./methods/defaultPredicate');
+var defaultSelector = require('./methods/defaultSelector');
+var defaultEqualityComparer = require('./methods/defaultEqualityComparer');
+var defaultComparer = require('./methods/defaultComparer');
+var defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
+var defaultKeySelector = require('./methods/defaultKeySelector');
+var defaultValueSelector = require('./methods/defaultValueSelector');
+
+var NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
+var OutOfRangeException = require('./core/exceptions/OutOfRangeException');
+var TooManyElementsException = require('./core/exceptions/TooManyElementsException');
+var KeysForMultiElementsException = require('./core/exceptions/KeysForMultiElementsException');
 
 var Enumerable = function () {
     function Enumerable() {
@@ -186,14 +27,14 @@ var Enumerable = function () {
     _createClass(Enumerable, null, [{
         key: 'extends',
         value: function _extends(prototype, type) {
-            _core2.default.defineProperties(prototype, {
+            core.defineProperties(prototype, {
                 where: function where() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().where(predicate);
                 },
                 select: function select() {
-                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
+                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
 
                     return this.asEnumerable().select(selector);
                 },
@@ -201,22 +42,22 @@ var Enumerable = function () {
                     return this.asEnumerable().elementAt(index);
                 },
                 distinct: function distinct() {
-                    var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEqualityComparer;
 
                     return this.asEnumerable().distinct(comparer);
                 },
                 except: function except(other) {
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                     return this.asEnumerable().except(other, comparer);
                 },
                 union: function union(other) {
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                     return this.asEnumerable().union(other, comparer);
                 },
                 intersect: function intersect(other) {
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                     return this.asEnumerable().intersect(other, comparer);
                 },
@@ -227,7 +68,7 @@ var Enumerable = function () {
                     return this.asEnumerable().skip(count);
                 },
                 skipWhile: function skipWhile() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _defaultPredicate2.default)();
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
 
                     return this.asEnumerable().skipWhile(predicate);
                 },
@@ -235,43 +76,43 @@ var Enumerable = function () {
                     return this.asEnumerable().take(count);
                 },
                 takeWhile: function takeWhile() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _defaultPredicate2.default)();
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
 
                     return this.asEnumerable().takeWhile(predicate);
                 },
                 orderBy: function orderBy() {
-                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
                     return this.asEnumerable().orderBy(keySelector, comparer);
                 },
                 orderByDescending: function orderByDescending() {
-                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
                     return this.asEnumerable().orderByDescending(keySelector, comparer);
                 },
                 groupBy: function groupBy() {
-                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-                    var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultGroupResultSelector2.default;
-                    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultEqualityComparer2.default;
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                    var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultGroupResultSelector;
+                    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
 
                     return this.asEnumerable().groupBy(keySelector, elementSelector, resultSelector, comparer);
                 },
                 selectMany: function selectMany() {
-                    var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
+                    var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
                     return this.asEnumerable().selectMany(collectionSelector, resultSelector);
                 },
                 join: function join(inner, outerKeySelector, innerKeySelector, resultSelector) {
-                    var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
                     return this.asEnumerable().join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
                 },
                 groupJoin: function groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector) {
-                    var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
                     return this.asEnumerable().groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
                 },
@@ -279,12 +120,12 @@ var Enumerable = function () {
                     return this.asEnumerable().defaultIfEmpty();
                 },
                 all: function all() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().all(predicate);
                 },
                 any: function any() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().any(predicate);
                 },
@@ -292,80 +133,80 @@ var Enumerable = function () {
                     return this.asEnumerable().isEmpty();
                 },
                 sequenceEqual: function sequenceEqual(other) {
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                     return this.asEnumerable().sequenceEqual(other, comparer);
                 },
                 first: function first() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().first(predicate);
                 },
                 firstOrDefault: function firstOrDefault(defaultValue) {
-                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
                     return this.asEnumerable().firstOrDefault(defaultValue, predicate);
                 },
                 last: function last() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().last(predicate);
                 },
                 lastOrDefault: function lastOrDefault(defaultValue) {
-                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
                     return this.asEnumerable().lastOrDefault(defaultValue, predicate);
                 },
                 single: function single() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().single(predicate);
                 },
                 singleOrDefault: function singleOrDefault(defaultValue) {
-                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
                     return this.asEnumerable().singleOrDefault(defaultValue, predicate);
                 },
                 count: function count() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().count(predicate);
                 },
                 sum: function sum() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().sum(predicate);
                 },
                 max: function max() {
-                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
                     return this.asEnumerable().max(selector, comparer);
                 },
                 min: function min() {
-                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
                     return this.asEnumerable().min(selector, comparer);
                 },
                 average: function average() {
-                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultPredicate2.default;
+                    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
                     return this.asEnumerable().average(predicate);
                 },
                 aggregate: function aggregate(seed, func) {
-                    var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultSelector2.default;
+                    var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
 
                     return this.asEnumerable().aggregate(seed, func, selector);
                 },
                 contains: function contains(value) {
-                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                     return this.asEnumerable().contains(value, comparer);
                 },
                 indexOf: function indexOf(value) {
                     var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                     return this.asEnumerable().indexOf(value, start, comparer);
                 },
@@ -376,7 +217,7 @@ var Enumerable = function () {
                 },
                 lastIndexOf: function lastIndexOf(value) {
                     var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                     return this.asEnumerable().lastIndexOf(value, start, comparer);
                 },
@@ -395,9 +236,9 @@ var Enumerable = function () {
                     return this.asEnumerable().toArray();
                 },
                 toObject: function toObject() {
-                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultKeySelector2.default;
-                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultValueSelector2.default;
-                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                     return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer).toObject();
                 },
@@ -419,16 +260,16 @@ var Enumerable = function () {
             if (type !== 'object') {
                 defineProperties(prototype, {
                     toDictionary: function toDictionary() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                         return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
                     },
                     toLookup: function toLookup() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                         return this.asEnumerable().toLookup(keySelector, elementSelector, comparer);
                     }
@@ -436,16 +277,16 @@ var Enumerable = function () {
             } else {
                 defineProperties(prototype, {
                     toDictionary: function toDictionary() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultKeySelector2.default;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultValueSelector2.default;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                         return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
                     },
                     toLookup: function toLookup() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultKeySelector2.default;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultValueSelector2.default;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
                         return this.asEnumerable().toLookup(keySelector, elementSelector, comparer);
                     }
@@ -457,22 +298,22 @@ var Enumerable = function () {
         value: function repeat(element) {
             var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-            return new _RepeatEnumerable2.default(element, count);
+            return new RepeatEnumerable(element, count);
         }
     }, {
         key: 'range',
         value: function range(start, count) {
-            return new _RangeEnumerable2.default(start, count);
+            return new RangeEnumerable(start, count);
         }
     }, {
         key: 'empty',
         value: function empty() {
-            return new _EmptyEnumerable2.default();
+            return new EmptyEnumerable();
         }
     }, {
         key: 'asEnumerable',
         value: function asEnumerable(object) {
-            return object.asEnumerable ? object.asEnumerable() : new _IteratorEnumerable2.default(object);
+            return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
         }
     }, {
         key: 'toArray',
@@ -508,11 +349,11 @@ var Enumerable = function () {
     }, {
         key: 'toDictionary',
         value: function toDictionary(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultSelector2.default;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultEqualityComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
 
-            var dictionary = new _Dictionary2.default(),
+            var dictionary = new Dictionary(),
                 index = 0;
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
@@ -524,7 +365,7 @@ var Enumerable = function () {
 
                     var key = keySelector(element, index);
                     if (dictionary.has(key, comparer)) {
-                        throw _KeysForMultiElementsException2.default;
+                        throw KeysForMultiElementsException;
                     } else {
                         dictionary.set(key, elementSelector(element, index), comparer);
                     }
@@ -550,11 +391,11 @@ var Enumerable = function () {
     }, {
         key: 'toLookup',
         value: function toLookup(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultSelector2.default;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultEqualityComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
 
-            var lookup = new _Lookup2.default(),
+            var lookup = new Lookup(),
                 index = 0;
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
@@ -592,176 +433,176 @@ var Enumerable = function () {
     }, {
         key: 'where',
         value: function where(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            return new _WhereEnumerable2.default(source, predicate);
+            return new WhereEnumerable(source, predicate);
         }
     }, {
         key: 'select',
         value: function select(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
+            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
-            return new _SelectEnumerable2.default(source, selector);
+            return new SelectEnumerable(source, selector);
         }
     }, {
         key: 'concat',
         value: function concat(source) {
             var other = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-            return new _ConcatEnumerable2.default(source, other);
+            return new ConcatEnumerable(source, other);
         }
     }, {
         key: 'distinct',
         value: function distinct(source) {
-            var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
-            return new _DistinctEnumerable2.default(source, comparer);
+            return new DistinctEnumerable(source, comparer);
         }
     }, {
         key: 'except',
         value: function except(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
-            return new _ExceptEnumerable2.default(source, other, comparer);
+            return new ExceptEnumerable(source, other, comparer);
         }
     }, {
         key: 'union',
         value: function union(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
-            return new _UnionEnumerable2.default(source, other, comparer);
+            return new UnionEnumerable(source, other, comparer);
         }
     }, {
         key: 'intersect',
         value: function intersect(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
-            return new _IntersectEnumerable2.default(source, other, comparer);
+            return new IntersectEnumerable(source, other, comparer);
         }
     }, {
         key: 'ofType',
         value: function ofType(source, type) {
-            return new _OfTypeEnumerable2.default(source, type);
+            return new OfTypeEnumerable(source, type);
         }
     }, {
         key: 'skip',
         value: function skip(source, count) {
-            return new _SkipEnumerable2.default(source, count);
+            return new SkipEnumerable(source, count);
         }
     }, {
         key: 'skipWhile',
         value: function skipWhile(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            return new _SkipWhileEnumerable2.default(source, predicate);
+            return new SkipWhileEnumerable(source, predicate);
         }
     }, {
         key: 'take',
         value: function take(source, count) {
-            return new _TakeEnumerable2.default(source, count);
+            return new TakeEnumerable(source, count);
         }
     }, {
         key: 'takeWhile',
         value: function takeWhile(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            return new _TakeWhileEnumerable2.default(source, predicate);
+            return new TakeWhileEnumerable(source, predicate);
         }
     }, {
         key: 'orderBy',
         value: function orderBy(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            return new _OrderByEnumerable2.default(source, keySelector, comparer);
+            return new OrderByEnumerable(source, keySelector, comparer);
         }
     }, {
         key: 'orderByDescending',
         value: function orderByDescending(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            return new _OrderByDescendingEnumerable2.default(source, keySelector, comparer);
+            return new OrderByDescendingEnumerable(source, keySelector, comparer);
         }
     }, {
         key: 'thenBy',
         value: function thenBy(orderedSource) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            if (orderedSource instanceof _IOrderedEnumerable2.default) {
-                return new _ThenByEnumerable2.default(orderedSource, keySelector, comparer);
+            if (orderedSource instanceof IOrderedEnumerable) {
+                return new ThenByEnumerable(orderedSource, keySelector, comparer);
             } else {
-                return new _OrderByEnumerable2.default(orderedSource, keySelector, comparer);
+                return new OrderByEnumerable(orderedSource, keySelector, comparer);
             }
         }
     }, {
         key: 'thenByDescending',
         value: function thenByDescending(orderedSource) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            if (orderedSource instanceof _IOrderedEnumerable2.default) {
-                return new _ThenByDescendingEnumerable2.default(orderedSource, keySelector, comparer);
+            if (orderedSource instanceof IOrderedEnumerable) {
+                return new ThenByDescendingEnumerable(orderedSource, keySelector, comparer);
             } else {
-                return new _OrderByDescendingEnumerable2.default(orderedSource, keySelector, comparer);
+                return new OrderByDescendingEnumerable(orderedSource, keySelector, comparer);
             }
         }
     }, {
         key: 'groupBy',
         value: function groupBy(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultSelector2.default;
-            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultGroupResultSelector2.default;
-            var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _defaultEqualityComparer2.default;
+            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultGroupResultSelector;
+            var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-            return new _GroupingEnumerable2.default(source, keySelector, elementSelector, resultSelector, comparer);
+            return new GroupingEnumerable(source, keySelector, elementSelector, resultSelector, comparer);
         }
     }, {
         key: 'selectMany',
         value: function selectMany(source) {
-            var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultSelector2.default;
+            var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
 
-            return new _SelectManyEnumerable2.default(source, collectionSelector, resultSelector);
+            return new SelectManyEnumerable(source, collectionSelector, resultSelector);
         }
     }, {
         key: 'join',
         value: function join(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
-            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
             if (typeof resultSelector === 'undefined') {
-                return _core2.default.array$join.call(outer, inner);
+                return core.array$join.call(outer, inner);
             } else {
-                return new _JoinEnumerable2.default(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+                return new JoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
             }
         }
     }, {
         key: 'groupJoin',
         value: function groupJoin(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
-            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
-            return new _GroupJoinEnumerable2.default(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return new GroupJoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
         }
     }, {
         key: 'reverse',
         value: function reverse(source) {
-            return new _ReverseEnumerable2.default(source);
+            return new ReverseEnumerable(source);
         }
     }, {
         key: 'zip',
         value: function zip(source, other, resultSelector) {
-            return new _ZipEnumerable2.default(source, other, resultSelector);
+            return new ZipEnumerable(source, other, resultSelector);
         }
     }, {
         key: 'defaultIfEmpty',
         value: function defaultIfEmpty(source, defaultValue) {
-            return Enumerable.isEmpty(source) ? new _SingleEnumerable2.default(defaultValue) : source;
+            return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : source;
         }
     }, {
         key: 'all',
         value: function all(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var index = 0;
             var _iteratorNormalCompletion4 = true;
@@ -796,7 +637,7 @@ var Enumerable = function () {
     }, {
         key: 'any',
         value: function any(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var index = 0;
             var _iteratorNormalCompletion5 = true;
@@ -836,7 +677,7 @@ var Enumerable = function () {
     }, {
         key: 'sequenceEqual',
         value: function sequenceEqual(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
             var sourceIterator = source[Symbol.iterator]();
             var otherIterator = other[Symbol.iterator]();
@@ -856,7 +697,7 @@ var Enumerable = function () {
     }, {
         key: 'first',
         value: function first(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var index = 0;
             var _iteratorNormalCompletion6 = true;
@@ -886,12 +727,12 @@ var Enumerable = function () {
                 }
             }
 
-            throw _NoSuchElementsException2.default;
+            throw NoSuchElementsException;
         }
     }, {
         key: 'firstOrDefault',
         value: function firstOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultPredicate2.default;
+            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
 
             var index = 0;
             var _iteratorNormalCompletion7 = true;
@@ -926,7 +767,7 @@ var Enumerable = function () {
     }, {
         key: 'last',
         value: function last(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var last = void 0,
                 has = false,
@@ -962,13 +803,13 @@ var Enumerable = function () {
             if (has) {
                 return last;
             } else {
-                throw _NoSuchElementsException2.default;
+                throw NoSuchElementsException;
             }
         }
     }, {
         key: 'lastOrDefault',
         value: function lastOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultPredicate2.default;
+            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
 
             var last = void 0,
                 has = false,
@@ -1010,7 +851,7 @@ var Enumerable = function () {
     }, {
         key: 'single',
         value: function single(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var single = void 0,
                 count = 0,
@@ -1049,15 +890,15 @@ var Enumerable = function () {
             if (count == 1) {
                 return single;
             } else if (count == 0) {
-                throw _NoSuchElementsException2.default;
+                throw NoSuchElementsException;
             } else {
-                throw _TooManyElementsException2.default;
+                throw TooManyElementsException;
             }
         }
     }, {
         key: 'singleOrDefault',
         value: function singleOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultPredicate2.default;
+            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
 
             var single = void 0,
                 count = 0,
@@ -1098,13 +939,13 @@ var Enumerable = function () {
             } else if (count == 0) {
                 return defaultValue;
             } else {
-                throw _TooManyElementsException2.default;
+                throw TooManyElementsException;
             }
         }
     }, {
         key: 'count',
         value: function count(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
             var count = 0,
                 index = 0;
@@ -1140,7 +981,7 @@ var Enumerable = function () {
     }, {
         key: 'aggregate',
         value: function aggregate(source, seed, func) {
-            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultSelector2.default;
+            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
             var _iteratorNormalCompletion13 = true;
             var _didIteratorError13 = false;
             var _iteratorError13 = undefined;
@@ -1171,7 +1012,7 @@ var Enumerable = function () {
     }, {
         key: 'sum',
         value: function sum(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
+            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
             var sum = 0,
                 index = 0;
@@ -1205,8 +1046,8 @@ var Enumerable = function () {
     }, {
         key: 'max',
         value: function max(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
             var max = false,
                 first = true,
@@ -1242,7 +1083,7 @@ var Enumerable = function () {
             }
 
             if (first) {
-                throw _NoSuchElementsException2.default;
+                throw NoSuchElementsException;
             } else {
                 return max;
             }
@@ -1250,8 +1091,8 @@ var Enumerable = function () {
     }, {
         key: 'min',
         value: function min(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultComparer2.default;
+            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
             var min = false,
                 first = true,
@@ -1287,7 +1128,7 @@ var Enumerable = function () {
             }
 
             if (first) {
-                throw _NoSuchElementsException2.default;
+                throw NoSuchElementsException;
             } else {
                 return min;
             }
@@ -1295,7 +1136,7 @@ var Enumerable = function () {
     }, {
         key: 'average',
         value: function average(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultSelector2.default;
+            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
             var sum = 0,
                 count = 0,
@@ -1329,13 +1170,13 @@ var Enumerable = function () {
             if (count != 0) {
                 return sum / count;
             } else {
-                throw _NoSuchElementsException2.default;
+                throw NoSuchElementsException;
             }
         }
     }, {
         key: 'contains',
         value: function contains(source, value) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
             var _iteratorNormalCompletion18 = true;
             var _didIteratorError18 = false;
             var _iteratorError18 = undefined;
@@ -1396,7 +1237,7 @@ var Enumerable = function () {
                     }
                 }
             }
-            throw _OutOfRangeException2.default;
+            throw OutOfRangeException;
         }
     }, {
         key: 'elementAtOrDefault',
@@ -1435,7 +1276,7 @@ var Enumerable = function () {
         key: 'indexOf',
         value: function indexOf(source, value) {
             var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
 
             var index = 0;
             var _iteratorNormalCompletion21 = true;
@@ -1508,7 +1349,7 @@ var Enumerable = function () {
         key: 'lastIndexOf',
         value: function lastIndexOf(source, value) {
             var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _defaultEqualityComparer2.default;
+            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
 
             var index = 0,
                 lastIndex = -1;
@@ -1616,4 +1457,36 @@ var Enumerable = function () {
 }();
 
 ;
-exports.default = Enumerable;
+
+module.exports = Enumerable;
+
+var RepeatEnumerable = require('./enumerables/RepeatEnumerable');
+var RangeEnumerable = require('./enumerables/RangeEnumerable');
+var EmptyEnumerable = require('./enumerables/EmptyEnumerable');
+var IteratorEnumerable = require('./enumerables/IteratorEnumerable');
+var WhereEnumerable = require('./enumerables/WhereEnumerable');
+var SelectEnumerable = require('./enumerables/SelectEnumerable');
+var ConcatEnumerable = require('./enumerables/ConcatEnumerable');
+var DistinctEnumerable = require('./enumerables/DistinctEnumerable');
+var ExceptEnumerable = require('./enumerables/ExceptEnumerable');
+var UnionEnumerable = require('./enumerables/UnionEnumerable');
+var IntersectEnumerable = require('./enumerables/IntersectEnumerable');
+var OfTypeEnumerable = require('./enumerables/OfTypeEnumerable');
+var SkipEnumerable = require('./enumerables/SkipEnumerable');
+var SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
+var TakeEnumerable = require('./enumerables/TakeEnumerable');
+var TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
+var IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
+var OrderByEnumerable = require('./enumerables/OrderByEnumerable');
+var OrderByDescendingEnumerable = require('./enumerables/OrderByDescendingEnumerable');
+var ThenByEnumerable = require('./enumerables/ThenByEnumerable');
+var ThenByDescendingEnumerable = require('./enumerables/ThenByDescendingEnumerable');
+var GroupingEnumerable = require('./enumerables/GroupingEnumerable');
+var SelectManyEnumerable = require('./enumerables/SelectManyEnumerable');
+var JoinEnumerable = require('./enumerables/JoinEnumerable');
+var GroupJoinEnumerable = require('./enumerables/GroupJoinEnumerable');
+var ReverseEnumerable = require('./enumerables/ReverseEnumerable');
+var ZipEnumerable = require('./enumerables/ZipEnumerable');
+var SingleEnumerable = require('./enumerables/SingleEnumerable');
+var Dictionary = require('./enumerables/Dictionary');
+var Lookup = require('./enumerables/Lookup');

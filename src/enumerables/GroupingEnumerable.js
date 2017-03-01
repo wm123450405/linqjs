@@ -1,15 +1,15 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultSelector from './../methods/defaultSelector';
-import defaultGroupResultSelector from './../methods/defaultGroupResultSelector';
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
-import equalityPredicate from './../methods/equalityPredicate';
+const defaultSelector = require('./../methods/defaultSelector');
+const defaultGroupResultSelector = require('./../methods/defaultGroupResultSelector');
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const equalityPredicate = require('./../methods/equalityPredicate');
 
-import IGrouping from './IGrouping';
+const IGrouping = require('./IGrouping');
 
 class GroupingEnumerable extends IEnumerable {
     constructor(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
@@ -53,4 +53,4 @@ class GroupingEnumerable extends IEnumerable {
     }
 };
 
-export default GroupingEnumerable;
+module.exports = GroupingEnumerable;

@@ -1,1 +1,1 @@
-export default (element, other) => element == other;
+module.exports = (element, other) => element == other;

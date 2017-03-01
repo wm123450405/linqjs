@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class SkipEnumerable extends IEnumerable {
     constructor(source, count) {
@@ -17,4 +17,4 @@ class SkipEnumerable extends IEnumerable {
     };
 };
 
-export default SkipEnumerable;
+module.exports = SkipEnumerable;

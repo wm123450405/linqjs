@@ -1,12 +1,12 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultKeySelector from './../methods/defaultKeySelector';
-import defaultValueSelector from './../methods/defaultValueSelector';
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultKeySelector = require('./../methods/defaultKeySelector');
+const defaultValueSelector = require('./../methods/defaultValueSelector');
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class IMapEnumerable extends IEnumerable {
     constructor() {
@@ -28,4 +28,4 @@ class IMapEnumerable extends IEnumerable {
     }
 };
 
-export default IMapEnumerable;
+module.exports = IMapEnumerable;

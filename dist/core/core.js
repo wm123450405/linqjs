@@ -1,8 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
 var core = {
 	getType: function getType(value) {
 		return value.constructor.toString().replace(/^function ([^(]*)\(.+$/ig, '$1');
@@ -43,4 +40,4 @@ var core = {
 	"string$lastIndexOf": String.prototype.lastIndexOf
 };
 
-exports.default = core;
+module.exports = core;

@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 const isInstanceofString = (element) => element instanceof String || typeof element === 'string';
 const isInstanceofArray = (element) => element instanceof Array;
@@ -23,4 +23,4 @@ class OfTypeEnumerable extends IEnumerable {
     };
 };
 
-export default OfTypeEnumerable;
+module.exports = OfTypeEnumerable;

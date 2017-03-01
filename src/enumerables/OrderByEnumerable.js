@@ -1,8 +1,8 @@
-import IOrderedEnumerable from './IOrderedEnumerable';
+const IOrderedEnumerable = require('./IOrderedEnumerable');
 
-import defaultSelector from './../methods/defaultSelector';
-import defaultComparer from './../methods/defaultComparer';
-import selectorComparer from './../methods/selectorComparer';
+const defaultSelector = require('./../methods/defaultSelector');
+const defaultComparer = require('./../methods/defaultComparer');
+const selectorComparer = require('./../methods/selectorComparer');
 
 class OrderByEnumerable extends IOrderedEnumerable {
     constructor(source, keySelector = defaultSelector, comparer = defaultComparer) {
@@ -10,4 +10,4 @@ class OrderByEnumerable extends IOrderedEnumerable {
     }
 };
 
-export default OrderByEnumerable;
+module.exports = OrderByEnumerable;

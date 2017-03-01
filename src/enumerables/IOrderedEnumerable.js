@@ -1,11 +1,11 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultSelector from './../methods/defaultSelector';
-import defaultComparer from './../methods/defaultComparer';
+const defaultSelector = require('./../methods/defaultSelector');
+const defaultComparer = require('./../methods/defaultComparer');
 
 class IOrderedEnumerable extends IEnumerable {
     constructor(source, orderByComparer = defaultComparer) {
@@ -30,4 +30,4 @@ class IOrderedEnumerable extends IEnumerable {
 IOrderedEnumerable.source = Symbol('source');
 IOrderedEnumerable.orderByComparer = Symbol('orderByComparer');
 
-export default IOrderedEnumerable;
+module.exports = IOrderedEnumerable;

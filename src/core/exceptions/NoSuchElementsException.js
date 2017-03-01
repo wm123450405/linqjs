@@ -1,1 +1,1 @@
-export default 'No such elements';
+module.exports = 'No such elements';

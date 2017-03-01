@@ -1,1 +1,1 @@
-export default 'Out of range';
+module.exports = 'Out of range';

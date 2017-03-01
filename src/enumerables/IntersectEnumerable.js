@@ -1,10 +1,10 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class IntersectEnumerable extends IEnumerable {
     constructor(source, other, comparer = defaultEqualityComparer) {
@@ -23,4 +23,4 @@ class IntersectEnumerable extends IEnumerable {
     };
 };
 
-export default IntersectEnumerable;
+module.exports = IntersectEnumerable;

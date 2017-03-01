@@ -1,8 +1,8 @@
 /**
  * Created by wm123 on 2017/2/14.
  */
-import Enumerable from './linq';
+const Enumerable = require('./linq');
 
-export default function() {
+module.exports = function() {
 	Enumerable.extends(String.prototype, 'string');
 };

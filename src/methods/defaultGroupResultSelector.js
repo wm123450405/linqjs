@@ -1,1 +1,1 @@
-export default (key, enumerable) => enumerable;
+module.exports = (key, enumerable) => enumerable;

@@ -1,8 +1,8 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultSelector from './../methods/defaultSelector';
+const defaultSelector = require('./../methods/defaultSelector');
 
 class SelectEnumerable extends IEnumerable {
     constructor(source, selector = defaultSelector) {
@@ -16,4 +16,4 @@ class SelectEnumerable extends IEnumerable {
     };
 };
 
-export default SelectEnumerable;
+module.exports = SelectEnumerable;

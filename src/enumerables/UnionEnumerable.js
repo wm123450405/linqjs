@@ -1,10 +1,10 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Enumerable from './../Enumerable';
+const Enumerable = require('./../Enumerable');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class UnionEnumerable extends IEnumerable {
     constructor(source, other, comparer = defaultEqualityComparer) {
@@ -27,4 +27,4 @@ class UnionEnumerable extends IEnumerable {
     };
 };
 
-export default UnionEnumerable;
+module.exports = UnionEnumerable;

@@ -1,31 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _IEnumerable2 = require('./../IEnumerable');
-
-var _IEnumerable3 = _interopRequireDefault(_IEnumerable2);
-
-var _core = require('./../core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
-
-var _defaultEqualityComparer2 = _interopRequireDefault(_defaultEqualityComparer);
-
-var _IGrouping = require('./IGrouping');
-
-var _IGrouping2 = _interopRequireDefault(_IGrouping);
-
-var _Entry = require('./Entry');
-
-var _Entry2 = _interopRequireDefault(_Entry);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,17 +8,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+
+var IGrouping = require('./IGrouping');
+var Entry = require('./Entry');
+
 var GroupJoinEnumerable = function (_IEnumerable) {
     _inherits(GroupJoinEnumerable, _IEnumerable);
 
     function GroupJoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
-        var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _defaultEqualityComparer2.default;
+        var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
         _classCallCheck(this, GroupJoinEnumerable);
 
         var _this = _possibleConstructorReturn(this, (GroupJoinEnumerable.__proto__ || Object.getPrototypeOf(GroupJoinEnumerable)).call(this, outer));
 
-        _core2.default.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
             var _this2 = this;
 
             var innerTemp, outerIndex, innerIndex, innerIterator, innerHasNext, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step;
@@ -59,7 +42,7 @@ var GroupJoinEnumerable = function (_IEnumerable) {
                                 var next = innerIterator.next();
                                 if (!next.done) {
                                     var innerElement = next.value;
-                                    innerTemp.push(new _Entry2.default(innerKeySelector(innerElement, innerIndex++), innerElement));
+                                    innerTemp.push(new Entry(innerKeySelector(innerElement, innerIndex++), innerElement));
                                 }
                                 return !next.done;
                             };
@@ -77,7 +60,7 @@ var GroupJoinEnumerable = function (_IEnumerable) {
                                                 outerElement = _step.value;
                                                 outerKey = outerKeySelector(outerElement, outerIndex++);
                                                 _context2.next = 4;
-                                                return resultSelector(outerElement, new _IGrouping2.default(outerKey, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+                                                return resultSelector(outerElement, new IGrouping(outerKey, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
                                                     var index;
                                                     return regeneratorRuntime.wrap(function _callee$(_context) {
                                                         while (1) {
@@ -189,8 +172,8 @@ var GroupJoinEnumerable = function (_IEnumerable) {
     }
 
     return GroupJoinEnumerable;
-}(_IEnumerable3.default);
+}(IEnumerable);
 
 ;
 
-exports.default = GroupJoinEnumerable;
+module.exports = GroupJoinEnumerable;

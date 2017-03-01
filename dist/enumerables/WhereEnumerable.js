@@ -1,40 +1,28 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _IEnumerable2 = require('./../IEnumerable');
-
-var _IEnumerable3 = _interopRequireDefault(_IEnumerable2);
-
-var _core = require('./../core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _defaultPredicate = require('./../methods/defaultPredicate');
-
-var _defaultPredicate2 = _interopRequireDefault(_defaultPredicate);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var defaultPredicate = require('./../methods/defaultPredicate');
+
 var WhereEnumerable = function (_IEnumerable) {
     _inherits(WhereEnumerable, _IEnumerable);
 
     function WhereEnumerable(source) {
-        var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultPredicate2.default;
+        var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
         _classCallCheck(this, WhereEnumerable);
 
         var _this = _possibleConstructorReturn(this, (WhereEnumerable.__proto__ || Object.getPrototypeOf(WhereEnumerable)).call(this, source));
 
-        _core2.default.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
             var index, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -114,8 +102,8 @@ var WhereEnumerable = function (_IEnumerable) {
     }
 
     return WhereEnumerable;
-}(_IEnumerable3.default);
+}(IEnumerable);
 
 ;
 
-exports.default = WhereEnumerable;
+module.exports = WhereEnumerable;

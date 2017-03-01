@@ -1,1 +1,1 @@
-export default 'Too many elements';
+module.exports = 'Too many elements';

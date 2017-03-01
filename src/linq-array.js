@@ -1,11 +1,11 @@
 /**
  * Created by wm123 on 2017/2/14.
  */
-import Enumerable from './linq';
+const Enumerable = require('./linq');
 
-import core from './core/core';
+const core = require('./core/core');
 
-export default function() {
+module.exports = function() {
 	Enumerable.extends(Array.prototype, 'array');
 
 	(function(types, props) {

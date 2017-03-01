@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class ReverseEnumerable extends IEnumerable {
     constructor(source) {
@@ -14,4 +14,4 @@ class ReverseEnumerable extends IEnumerable {
     }
 };
 
-export default ReverseEnumerable;
+module.exports = ReverseEnumerable;

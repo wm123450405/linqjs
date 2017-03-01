@@ -1,11 +1,11 @@
-import IMapEnumerable from './IMapEnumerable';
+const IMapEnumerable = require('./IMapEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
-import equalityPredicate from './../methods/equalityPredicate';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const equalityPredicate = require('./../methods/equalityPredicate');
 
-import Entry from './Entry';
+const Entry = require('./Entry');
 
 class MapEnumerable extends IMapEnumerable {
     constructor(map) {
@@ -41,4 +41,4 @@ class MapEnumerable extends IMapEnumerable {
     };
 };
 
-export default MapEnumerable;
+module.exports = MapEnumerable;

@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class IteratorEnumerable extends IEnumerable {
     constructor(iterable) {
@@ -11,4 +11,4 @@ class IteratorEnumerable extends IEnumerable {
     }
 };
 
-export default IteratorEnumerable;
+module.exports = IteratorEnumerable;

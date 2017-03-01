@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class ZipEnumerable extends IEnumerable {
     constructor(source, other, resultSelector) {
@@ -20,4 +20,4 @@ class ZipEnumerable extends IEnumerable {
     }
 };
 
-export default ZipEnumerable;
+module.exports = ZipEnumerable;

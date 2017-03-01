@@ -1,8 +1,8 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultPredicate from './../methods/defaultPredicate';
+const defaultPredicate = require('./../methods/defaultPredicate');
 
 class SkipWhileEnumerable extends IEnumerable {
     constructor(source, predicate = defaultPredicate) {
@@ -19,4 +19,4 @@ class SkipWhileEnumerable extends IEnumerable {
     };
 };
 
-export default SkipWhileEnumerable;
+module.exports = SkipWhileEnumerable;

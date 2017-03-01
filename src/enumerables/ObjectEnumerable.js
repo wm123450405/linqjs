@@ -1,8 +1,8 @@
-import IMapEnumerable from './IMapEnumerable';
+const IMapEnumerable = require('./IMapEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import Entry from './Entry';
+const Entry = require('./Entry');
 
 class ObjectEnumerable extends IMapEnumerable {
     constructor(source) {
@@ -15,4 +15,4 @@ class ObjectEnumerable extends IMapEnumerable {
     };
 };
 
-export default ObjectEnumerable;
+module.exports = ObjectEnumerable;

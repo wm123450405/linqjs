@@ -1,10 +1,10 @@
-import IOrderedEnumerable from './IOrderedEnumerable';
+const IOrderedEnumerable = require('./IOrderedEnumerable');
 
-import thenByComparer from './../methods/thenByComparer';
-import selectorComparer from './../methods/selectorComparer';
-import defaultSelector from './../methods/defaultSelector';
-import defaultComparer from './../methods/defaultComparer';
-import descendingComparer from './../methods/descendingComparer';
+const thenByComparer = require('./../methods/thenByComparer');
+const selectorComparer = require('./../methods/selectorComparer');
+const defaultSelector = require('./../methods/defaultSelector');
+const defaultComparer = require('./../methods/defaultComparer');
+const descendingComparer = require('./../methods/descendingComparer');
 
 class ThenByDescendingEnumerable extends IOrderedEnumerable {
     constructor(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {
@@ -12,4 +12,4 @@ class ThenByDescendingEnumerable extends IOrderedEnumerable {
     }
 };
 
-export default ThenByDescendingEnumerable;
+module.exports = ThenByDescendingEnumerable;

@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class TakeEnumerable extends IEnumerable {
     constructor(source, count) {
@@ -19,4 +19,4 @@ class TakeEnumerable extends IEnumerable {
     };
 };
 
-export default TakeEnumerable;
+module.exports = TakeEnumerable;

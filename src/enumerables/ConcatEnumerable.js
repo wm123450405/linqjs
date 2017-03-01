@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class ConcatEnumerable extends IEnumerable {
     constructor(source, other = []) {
@@ -12,4 +12,4 @@ class ConcatEnumerable extends IEnumerable {
     };
 };
 
-export default ConcatEnumerable;
+module.exports = ConcatEnumerable;

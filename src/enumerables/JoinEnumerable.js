@@ -1,8 +1,8 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class JoinEnumerable extends IEnumerable {
     constructor(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
@@ -33,4 +33,4 @@ class JoinEnumerable extends IEnumerable {
     }
 };
 
-export default JoinEnumerable;
+module.exports = JoinEnumerable;

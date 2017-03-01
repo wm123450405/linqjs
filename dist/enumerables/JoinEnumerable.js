@@ -1,40 +1,28 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _IEnumerable2 = require('./../IEnumerable');
-
-var _IEnumerable3 = _interopRequireDefault(_IEnumerable2);
-
-var _core = require('./../core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
-
-var _defaultEqualityComparer2 = _interopRequireDefault(_defaultEqualityComparer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+
 var JoinEnumerable = function (_IEnumerable) {
     _inherits(JoinEnumerable, _IEnumerable);
 
     function JoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
-        var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _defaultEqualityComparer2.default;
+        var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
         _classCallCheck(this, JoinEnumerable);
 
         var _this = _possibleConstructorReturn(this, (JoinEnumerable.__proto__ || Object.getPrototypeOf(JoinEnumerable)).call(this, outer));
 
-        _core2.default.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
             var innerTemp, outerIndex, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, outerElement, outerKey, innerIndex, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, innerElement, innerKey, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, innerValue;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -246,8 +234,8 @@ var JoinEnumerable = function (_IEnumerable) {
     }
 
     return JoinEnumerable;
-}(_IEnumerable3.default);
+}(IEnumerable);
 
 ;
 
-exports.default = JoinEnumerable;
+module.exports = JoinEnumerable;

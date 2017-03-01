@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class SingleEnumerable extends IEnumerable {
 	constructor(value) {
@@ -11,4 +11,4 @@ class SingleEnumerable extends IEnumerable {
 	}
 }
 
-export default SingleEnumerable;
+module.exports = SingleEnumerable;

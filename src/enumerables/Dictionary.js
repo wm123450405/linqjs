@@ -1,4 +1,4 @@
-import MapEnumerable from './MapEnumerable';
+const MapEnumerable = require('./MapEnumerable');
 
 class Dictionary extends MapEnumerable {
     constructor() {
@@ -13,4 +13,4 @@ class Dictionary extends MapEnumerable {
     }
 };
 
-export default Dictionary;
+module.exports = Dictionary;

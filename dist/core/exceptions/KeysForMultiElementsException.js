@@ -1,6 +1,3 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = 'Keys for multi elements';
+module.exports = 'Keys for multi elements';

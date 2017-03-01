@@ -1,48 +1,17 @@
-import core from './core/core';
+const core = require('./core/core');
 
-import defaultPredicate from './methods/defaultPredicate';
-import defaultSelector from './methods/defaultSelector';
-import defaultEqualityComparer from './methods/defaultEqualityComparer';
-import defaultComparer from './methods/defaultComparer';
-import defaultGroupResultSelector from './methods/defaultGroupResultSelector';
-import defaultKeySelector from './methods/defaultKeySelector';
-import defaultValueSelector from './methods/defaultValueSelector';
+const defaultPredicate = require('./methods/defaultPredicate');
+const defaultSelector = require('./methods/defaultSelector');
+const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
+const defaultComparer = require('./methods/defaultComparer');
+const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
+const defaultKeySelector = require('./methods/defaultKeySelector');
+const defaultValueSelector = require('./methods/defaultValueSelector');
 
-import NoSuchElementsException from './core/exceptions/NoSuchElementsException';
-import OutOfRangeException from './core/exceptions/OutOfRangeException';
-import TooManyElementsException from './core/exceptions/TooManyElementsException';
-import KeysForMultiElementsException from './core/exceptions/KeysForMultiElementsException';
-
-import RepeatEnumerable from './enumerables/RepeatEnumerable';
-import RangeEnumerable from './enumerables/RangeEnumerable';
-import EmptyEnumerable from './enumerables/EmptyEnumerable';
-import IteratorEnumerable from './enumerables/IteratorEnumerable';
-import WhereEnumerable from './enumerables/WhereEnumerable';
-import SelectEnumerable from './enumerables/SelectEnumerable';
-import ConcatEnumerable from './enumerables/ConcatEnumerable';
-import DistinctEnumerable from './enumerables/DistinctEnumerable';
-import ExceptEnumerable from './enumerables/ExceptEnumerable';
-import UnionEnumerable from './enumerables/UnionEnumerable';
-import IntersectEnumerable from './enumerables/IntersectEnumerable';
-import OfTypeEnumerable from './enumerables/OfTypeEnumerable';
-import SkipEnumerable from './enumerables/SkipEnumerable';
-import SkipWhileEnumerable from './enumerables/SkipWhileEnumerable';
-import TakeEnumerable from './enumerables/TakeEnumerable';
-import TakeWhileEnumerable from './enumerables/TakeWhileEnumerable';
-import IOrderedEnumerable from './enumerables/IOrderedEnumerable';
-import OrderByEnumerable from './enumerables/OrderByEnumerable';
-import OrderByDescendingEnumerable from './enumerables/OrderByDescendingEnumerable';
-import ThenByEnumerable from './enumerables/ThenByEnumerable';
-import ThenByDescendingEnumerable from './enumerables/ThenByDescendingEnumerable';
-import GroupingEnumerable from './enumerables/GroupingEnumerable';
-import SelectManyEnumerable from './enumerables/SelectManyEnumerable';
-import JoinEnumerable from './enumerables/JoinEnumerable';
-import GroupJoinEnumerable from './enumerables/GroupJoinEnumerable';
-import ReverseEnumerable from './enumerables/ReverseEnumerable';
-import ZipEnumerable from './enumerables/ZipEnumerable';
-import SingleEnumerable from './enumerables/SingleEnumerable';
-import Dictionary from './enumerables/Dictionary';
-import Lookup from './enumerables/Lookup';
+const NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
+const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
+const TooManyElementsException = require('./core/exceptions/TooManyElementsException');
+const KeysForMultiElementsException = require('./core/exceptions/KeysForMultiElementsException');
 
 class Enumerable {
     static extends(prototype, type) {
@@ -597,4 +566,36 @@ class Enumerable {
         }
     }
 };
-export default Enumerable;
+
+module.exports = Enumerable;
+
+const RepeatEnumerable = require('./enumerables/RepeatEnumerable');
+const RangeEnumerable = require('./enumerables/RangeEnumerable');
+const EmptyEnumerable = require('./enumerables/EmptyEnumerable');
+const IteratorEnumerable = require('./enumerables/IteratorEnumerable');
+const WhereEnumerable = require('./enumerables/WhereEnumerable');
+const SelectEnumerable = require('./enumerables/SelectEnumerable');
+const ConcatEnumerable = require('./enumerables/ConcatEnumerable');
+const DistinctEnumerable = require('./enumerables/DistinctEnumerable');
+const ExceptEnumerable = require('./enumerables/ExceptEnumerable');
+const UnionEnumerable = require('./enumerables/UnionEnumerable');
+const IntersectEnumerable = require('./enumerables/IntersectEnumerable');
+const OfTypeEnumerable = require('./enumerables/OfTypeEnumerable');
+const SkipEnumerable = require('./enumerables/SkipEnumerable');
+const SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
+const TakeEnumerable = require('./enumerables/TakeEnumerable');
+const TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
+const IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
+const OrderByEnumerable = require('./enumerables/OrderByEnumerable');
+const OrderByDescendingEnumerable = require('./enumerables/OrderByDescendingEnumerable');
+const ThenByEnumerable = require('./enumerables/ThenByEnumerable');
+const ThenByDescendingEnumerable = require('./enumerables/ThenByDescendingEnumerable');
+const GroupingEnumerable = require('./enumerables/GroupingEnumerable');
+const SelectManyEnumerable = require('./enumerables/SelectManyEnumerable');
+const JoinEnumerable = require('./enumerables/JoinEnumerable');
+const GroupJoinEnumerable = require('./enumerables/GroupJoinEnumerable');
+const ReverseEnumerable = require('./enumerables/ReverseEnumerable');
+const ZipEnumerable = require('./enumerables/ZipEnumerable');
+const SingleEnumerable = require('./enumerables/SingleEnumerable');
+const Dictionary = require('./enumerables/Dictionary');
+const Lookup = require('./enumerables/Lookup');

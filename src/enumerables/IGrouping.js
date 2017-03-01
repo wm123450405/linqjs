@@ -1,6 +1,6 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
 class IGrouping extends IEnumerable {
     constructor(key, iterable) {
@@ -12,4 +12,4 @@ class IGrouping extends IEnumerable {
     }
 };
 
-export default IGrouping;
+module.exports = IGrouping;

@@ -1,44 +1,30 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _IEnumerable2 = require('./../IEnumerable');
-
-var _IEnumerable3 = _interopRequireDefault(_IEnumerable2);
-
-var _core = require('./../core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _Enumerable = require('./../Enumerable');
-
-var _Enumerable2 = _interopRequireDefault(_Enumerable);
-
-var _defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
-
-var _defaultEqualityComparer2 = _interopRequireDefault(_defaultEqualityComparer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var Enumerable = require('./../Enumerable');
+
+var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+
 var IntersectEnumerable = function (_IEnumerable) {
     _inherits(IntersectEnumerable, _IEnumerable);
 
     function IntersectEnumerable(source, other) {
-        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _defaultEqualityComparer2.default;
+        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
         _classCallCheck(this, IntersectEnumerable);
 
         var _this = _possibleConstructorReturn(this, (IntersectEnumerable.__proto__ || Object.getPrototypeOf(IntersectEnumerable)).call(this, source));
 
-        _core2.default.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
             var temp, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -60,12 +46,12 @@ var IntersectEnumerable = function (_IEnumerable) {
 
                             element = _step.value;
 
-                            if (!_Enumerable2.default.contains(other, element, comparer)) {
+                            if (!Enumerable.contains(other, element, comparer)) {
                                 _context.next = 13;
                                 break;
                             }
 
-                            if (_Enumerable2.default.contains(temp, element, comparer)) {
+                            if (Enumerable.contains(temp, element, comparer)) {
                                 _context.next = 13;
                                 break;
                             }
@@ -124,8 +110,8 @@ var IntersectEnumerable = function (_IEnumerable) {
     }
 
     return IntersectEnumerable;
-}(_IEnumerable3.default);
+}(IEnumerable);
 
 ;
 
-exports.default = IntersectEnumerable;
+module.exports = IntersectEnumerable;

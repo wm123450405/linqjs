@@ -1,11 +1,11 @@
-import IEnumerable from './../IEnumerable';
+const IEnumerable = require('./../IEnumerable');
 
-import core from './../core/core';
+const core = require('./../core/core');
 
-import defaultEqualityComparer from './../methods/defaultEqualityComparer';
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
-import IGrouping from './IGrouping';
-import Entry from './Entry';
+const IGrouping = require('./IGrouping');
+const Entry = require('./Entry');
 
 class GroupJoinEnumerable extends IEnumerable {
     constructor(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
@@ -41,4 +41,4 @@ class GroupJoinEnumerable extends IEnumerable {
     }
 };
 
-export default GroupJoinEnumerable;
+module.exports = GroupJoinEnumerable;

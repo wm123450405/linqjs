@@ -1,4 +1,4 @@
-import Dictionary from './Dictionary';
+const Dictionary = require('./Dictionary');
 
 class Lookup extends Dictionary {
     constructor() {
@@ -6,4 +6,4 @@ class Lookup extends Dictionary {
     };
 };
 
-export default Lookup;
+module.exports = Lookup;

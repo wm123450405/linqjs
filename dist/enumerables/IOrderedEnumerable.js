@@ -1,48 +1,31 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _IEnumerable2 = require('./../IEnumerable');
-
-var _IEnumerable3 = _interopRequireDefault(_IEnumerable2);
-
-var _core = require('./../core/core');
-
-var _core2 = _interopRequireDefault(_core);
-
-var _Enumerable = require('./../Enumerable');
-
-var _Enumerable2 = _interopRequireDefault(_Enumerable);
-
-var _defaultSelector = require('./../methods/defaultSelector');
-
-var _defaultSelector2 = _interopRequireDefault(_defaultSelector);
-
-var _defaultComparer = require('./../methods/defaultComparer');
-
-var _defaultComparer2 = _interopRequireDefault(_defaultComparer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var Enumerable = require('./../Enumerable');
+
+var defaultSelector = require('./../methods/defaultSelector');
+var defaultComparer = require('./../methods/defaultComparer');
+
 var IOrderedEnumerable = function (_IEnumerable) {
     _inherits(IOrderedEnumerable, _IEnumerable);
 
     function IOrderedEnumerable(source) {
-        var orderByComparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+        var orderByComparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
         _classCallCheck(this, IOrderedEnumerable);
 
         var _this = _possibleConstructorReturn(this, (IOrderedEnumerable.__proto__ || Object.getPrototypeOf(IOrderedEnumerable)).call(this, source));
 
-        _core2.default.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
             var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -111,30 +94,30 @@ var IOrderedEnumerable = function (_IEnumerable) {
                 }
             }, _callee, this, [[3, 14, 18, 26], [19,, 21, 25]]);
         }));
-        _core2.default.defineProperties(_this, {
+        core.defineProperties(_this, {
             thenBy: function thenBy() {
-                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
-                return _Enumerable2.default.thenBy(this, keySelector, comparer);
+                return Enumerable.thenBy(this, keySelector, comparer);
             },
             thenByDescending: function thenByDescending() {
-                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultSelector2.default;
-                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _defaultComparer2.default;
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
 
-                return _Enumerable2.default.thenByDescending(this, keySelector, comparer);
+                return Enumerable.thenByDescending(this, keySelector, comparer);
             }
         });
-        _core2.default.defineProperty(_this, IOrderedEnumerable.source, source);
-        _core2.default.defineProperty(_this, IOrderedEnumerable.orderByComparer, orderByComparer);
+        core.defineProperty(_this, IOrderedEnumerable.source, source);
+        core.defineProperty(_this, IOrderedEnumerable.orderByComparer, orderByComparer);
         return _this;
     }
 
     return IOrderedEnumerable;
-}(_IEnumerable3.default);
+}(IEnumerable);
 
 ;
 IOrderedEnumerable.source = Symbol('source');
 IOrderedEnumerable.orderByComparer = Symbol('orderByComparer');
 
-exports.default = IOrderedEnumerable;
+module.exports = IOrderedEnumerable;

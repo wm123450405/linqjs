@@ -1,6 +1,3 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = 'Too many elements';
+module.exports = 'Too many elements';
