@@ -21,12 +21,18 @@ Usage for English is Coming soon...
 npm install --save-dev linq-js
 ```
 ```javascript
-const Enumerable = require('linq-js').default; //ES5
-import Enumerable from 'linq-js'; //ES6 (建议)
+const Enumerable = require('linq-js');
 ```
 > * 说明:本module依赖于ES6,建议项目在中使用ES6,以下案例中将均使用ES6写法
 
-#### 2. 获取IEnumerable对象
+#### 2. 配置
+```javascript
+Enumerable.Config.extends.array = true; //开启针对Array的扩展
+Enumerable.Config.extends.string = true; //开启针对String的扩展
+Enumerable.Config.extends.object = true; //开启针对Object的扩展
+```
+
+#### 3. 获取IEnumerable对象
 ```javascript
 'abc'.asEnumerable();
 [1,2,3].asEnumerable();
