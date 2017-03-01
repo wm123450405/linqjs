@@ -41,30 +41,54 @@ Enumerable.Config.extends.object = true; //开启针对Object的扩展
 {a:1,b:2}.asEnumerable();
 ```
 
-#### 2. `toArray():array` *IEnumerable*
+#### 2. `toArray()`
+```typescript
+.toArray():Array
 ```
-[1,2,3].asEnumerable().toArray(); //[1, 2, 3]
-```
+> e.g. 案例
+> ```javascript
+> [1,2,3].asEnumerable().toArray(); //[1, 2, 3]
+> ```
 
-#### 3. `select(selector:Function(element:object, index:int):object = defaultSelector):IEnumerable` *IEnumerable*
-```javascript
-[1,2,3].asEnumerable().select((element, index) => `${element}|${index}`); //'1|0', '2|1', '3|2'
+#### 3. `select(selector)`
+```typescript
+.select(selector:Function(element:any, index:number):any = defaultSelector):IEnumerable
 ```
+> e.g. 案例
+> ```javascript
+> [1,2,3].asEnumerable().select((element, index) => `${element}|${index}`); //'1|0', '2|1', '3|2'
+> ```
 
-#### 4. `where(predicate:Function(element:object, index:int):boolean = defaultPredicate):IEnumerable` *IEnumerable*
-```javascript
-[1,2,3].asEnumerable().where(v => v >= 2); //2, 3
+#### 4. `where(predicate)`
+```typescript
+.where(predicate:Function(element:any, index:number):boolean = defaultPredicate):IEnumerable
 ```
+> e.g. 案例
+> ```javascript
+> [1,2,3].asEnumerable().where(v => v >= 2); //2, 3
+> ```
 
-#### 5. `any(predicate:Function(element:object, index:int):boolean = defaultPredicate):boolean` *IEnumerable*
-```javascript
-[1,2,3].asEnumerable().any(v => v == 2); //true
+#### 5. `any(predicate)`
+```typescript
+.any(predicate:Function(element:any, index:number):boolean = defaultPredicate):boolean
 ```
+> e.g. 案例
+> ```javascript
+> [1,2,3].asEnumerable().any(v => v == 2); //true
+> ```
 
-#### 6. `all(predicate:Function(element:object, index:int):boolean = defaultPredicate):boolean` *IEnumerable*
-```javascript
-[1,2,3].asEnumerable().all(v => v == 2); //false
+#### 6. `all(predicate)` :*[refer](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
+```typescript
+.all(predicate:Function(element:any, index:number):boolean = defaultPredicate):boolean
 ```
+> e.g. 案例
+> ```javascript
+> [1,2,3].asEnumerable().all(v => v == 2); //false
+> ```
 
-[查考msdn(Enumerable)](https://msdn.microsoft.com/en-us/library/system.linq.enumerable_methods(v=vs.110).aspx)  
-[查考msdn(IEnumerable)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)
+更多内容的说明,未完待补充...  
+
+:*[refer msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
+:*[参考 MSDN(IEnumerable<T>)](https://msdn.microsoft.com/zh-cn/library/ckzcawb8(v=vs.110).aspx)*  
+:*[refer msdn(Enumerable)](https://msdn.microsoft.com/en-us/library/system.linq.enumerable_methods(v=vs.110).aspx)*
+:*[参考 MSDN(Enumerable)](https://msdn.microsoft.com/zh-cn/library/system.linq.enumerable_methods(v=vs.110).aspx)*
