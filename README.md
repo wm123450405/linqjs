@@ -43,7 +43,7 @@ Enumerable.Config.extends.object = true; //开启针对Object的扩展
 
 #### 2. `toArray()`
 ```typescript
-.toArray():Array
+toArray():Array
 ```
 > e.g. 案例
 > ```javascript
@@ -52,7 +52,7 @@ Enumerable.Config.extends.object = true; //开启针对Object的扩展
 
 #### 3. `select(selector)`
 ```typescript
-.select(selector:Function(element:any, index:number):any = defaultSelector):IEnumerable
+select(selector:Function(element:any, index:number):any = defaultSelector):IEnumerable
 ```
 > e.g. 案例
 > ```javascript
