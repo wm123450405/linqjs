@@ -43,7 +43,7 @@ Enumerable.Config.extends.object = true; //开启针对Object的扩展
 
 #### 2. `toArray()`
 ```typescript
-function toArray():Array
+function toArray():Array;
 ```
 > e.g. 案例
 > ```javascript
@@ -52,8 +52,11 @@ function toArray():Array
 
 #### 3. `select(selector)`
 ```typescript
-function select(selector:Function = defaultSelector):IEnumerable
-	function selector(element:any, index:number):any
+function select(
+    selector:Function = defaultSelector
+):IEnumerable,
+
+    selector(element:any, index:number):any;
 ```
 > e.g. 案例
 > ```javascript
@@ -62,8 +65,11 @@ function select(selector:Function = defaultSelector):IEnumerable
 
 #### 4. `where(predicate)`
 ```typescript
-function where(predicate:Function = defaultPredicate):IEnumerable
-	function predicate(element:any, index:number):boolean
+function where(
+    predicate:Function = defaultPredicate
+):IEnumerable,
+
+    predicate(element:any, index:number):boolean;
 ```
 > e.g. 案例
 > ```javascript
@@ -72,18 +78,24 @@ function where(predicate:Function = defaultPredicate):IEnumerable
 
 #### 5. `any(predicate)`
 ```typescript
-function any(predicate:Function = defaultPredicate):boolean
-	function predicate(element:any, index:number):boolean
+function any(
+    predicate:Function
+):boolean,
+
+    predicate(element:any, index:number):boolean;
 ```
 > e.g. 案例
 > ```javascript
 > [1,2,3].asEnumerable().any(v => v == 2); //true
 > ```
 
-#### 6. `all(predicate)` :*[refer](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
+#### 6. `all(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
 ```typescript
-function all(predicate:Function = defaultPredicate):boolean
-	function predicate(element:any, index:number):boolean
+function all(
+    predicate:Function
+):boolean,
+
+    predicate(element:any, index:number):boolean;
 ```
 > e.g. 案例
 > ```javascript
@@ -92,7 +104,7 @@ function all(predicate:Function = defaultPredicate):boolean
 
 更多内容的说明,未完待补充...  
 
-:*[refer msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
+:*[see msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
 :*[参考 MSDN(IEnumerable<T>)](https://msdn.microsoft.com/zh-cn/library/ckzcawb8(v=vs.110).aspx)*  
-:*[refer msdn(Enumerable)](https://msdn.microsoft.com/en-us/library/system.linq.enumerable_methods(v=vs.110).aspx)*
+:*[see msdn(Enumerable)](https://msdn.microsoft.com/en-us/library/system.linq.enumerable_methods(v=vs.110).aspx)*
 :*[参考 MSDN(Enumerable)](https://msdn.microsoft.com/zh-cn/library/system.linq.enumerable_methods(v=vs.110).aspx)*
