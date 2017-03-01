@@ -52,7 +52,8 @@ toArray():Array
 
 #### 3. `select(selector)`
 ```typescript
-select(selector:Function(element:any, index:number):any = defaultSelector):IEnumerable
+select(selector:Function = defaultSelector):IEnumerable
+selector(element:any, index:number):any
 ```
 > e.g. 案例
 > ```javascript
@@ -61,7 +62,8 @@ select(selector:Function(element:any, index:number):any = defaultSelector):IEnum
 
 #### 4. `where(predicate)`
 ```typescript
-.where(predicate:Function(element:any, index:number):boolean = defaultPredicate):IEnumerable
+where(predicate:Function = defaultPredicate):IEnumerable
+predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
@@ -70,7 +72,8 @@ select(selector:Function(element:any, index:number):any = defaultSelector):IEnum
 
 #### 5. `any(predicate)`
 ```typescript
-.any(predicate:Function(element:any, index:number):boolean = defaultPredicate):boolean
+any(predicate:Function = defaultPredicate):boolean
+predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
@@ -79,7 +82,8 @@ select(selector:Function(element:any, index:number):any = defaultSelector):IEnum
 
 #### 6. `all(predicate)` :*[refer](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
 ```typescript
-.all(predicate:Function(element:any, index:number):boolean = defaultPredicate):boolean
+all(predicate:Function = defaultPredicate):boolean
+predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
