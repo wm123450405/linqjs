@@ -43,7 +43,7 @@ Enumerable.Config.extends.object = true; //开启针对Object的扩展
 
 #### 2. `toArray()`
 ```typescript
-toArray():Array
+function toArray():Array
 ```
 > e.g. 案例
 > ```javascript
@@ -52,8 +52,8 @@ toArray():Array
 
 #### 3. `select(selector)`
 ```typescript
-select(selector:Function = defaultSelector):IEnumerable
-selector(element:any, index:number):any
+function select(selector:Function = defaultSelector):IEnumerable
+	function selector(element:any, index:number):any
 ```
 > e.g. 案例
 > ```javascript
@@ -62,8 +62,8 @@ selector(element:any, index:number):any
 
 #### 4. `where(predicate)`
 ```typescript
-where(predicate:Function = defaultPredicate):IEnumerable
-predicate(element:any, index:number):boolean
+function where(predicate:Function = defaultPredicate):IEnumerable
+	function predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
@@ -72,8 +72,8 @@ predicate(element:any, index:number):boolean
 
 #### 5. `any(predicate)`
 ```typescript
-any(predicate:Function = defaultPredicate):boolean
-predicate(element:any, index:number):boolean
+function any(predicate:Function = defaultPredicate):boolean
+	function predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
@@ -82,8 +82,8 @@ predicate(element:any, index:number):boolean
 
 #### 6. `all(predicate)` :*[refer](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
 ```typescript
-all(predicate:Function = defaultPredicate):boolean
-predicate(element:any, index:number):boolean
+function all(predicate:Function = defaultPredicate):boolean
+	function predicate(element:any, index:number):boolean
 ```
 > e.g. 案例
 > ```javascript
