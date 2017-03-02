@@ -64,11 +64,11 @@ class Enumerable {
             selectMany(collectionSelector = defaultSelector, resultSelector = defaultSelector) {
                 return this.asEnumerable().selectMany(collectionSelector, resultSelector);
             },
-            join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+                return this.asEnumerable().join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             },
-            groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+                return this.asEnumerable().groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             },
             defaultIfEmpty() {
                 return this.asEnumerable().defaultIfEmpty();
@@ -286,15 +286,15 @@ class Enumerable {
     static selectMany(source, collectionSelector = defaultSelector, resultSelector = defaultSelector) {
         return new SelectManyEnumerable(source, collectionSelector, resultSelector);
     };
-    static join(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
+    static join(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (typeof resultSelector === 'undefined') {
             return core.array$join.call(outer, inner);
         } else {
-            return new JoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     };
-    static groupJoin(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
-        return new GroupJoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+    static groupJoin(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return new GroupJoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     };
     static reverse(source) {
         return new ReverseEnumerable(source);
@@ -435,8 +435,9 @@ class Enumerable {
         return count;
     };
     static aggregate(source, seed, func, resultSelector = defaultSelector) {
+        let index = 0;
         for (let element of source) {
-            seed = func(seed, element);
+            seed = func(seed, element, index++);
         }
         return resultSelector(seed);
     };

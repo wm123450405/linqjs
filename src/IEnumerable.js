@@ -107,11 +107,11 @@ class IEnumerable {
     selectMany(collectionSelector = defaultSelector, resultSelector = defaultSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     };
-    join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
-        return Enumerable.join(this, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+    join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     };
-    groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
-        return Enumerable.groupJoin(this, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+    groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     };
     defaultIfEmpty() {
         return Enumerable.defaultIfEmpty(this);

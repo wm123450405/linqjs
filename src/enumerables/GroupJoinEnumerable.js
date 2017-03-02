@@ -3,12 +3,13 @@ const IEnumerable = require('./../IEnumerable');
 const core = require('./../core/core');
 
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultSelector = require('./../methods/defaultSelector');
 
 const IGrouping = require('./IGrouping');
 const Entry = require('./Entry');
 
 class GroupJoinEnumerable extends IEnumerable {
-    constructor(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer = defaultEqualityComparer) {
+    constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         super(outer);
         core.defineProperty(this, Symbol.iterator, function*() {
             let innerTemp = [], outerIndex = 0, innerIndex = 0, innerIterator = inner[Symbol.iterator]();

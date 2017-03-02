@@ -8,8 +8,9 @@ class SelectManyEnumerable extends IEnumerable {
     constructor(source, collectionSelector = defaultSelector, resultSelector = defaultSelector) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function*() {
+            let index = 0;
             for (let element of source) {
-                for (let collectionElement of collectionSelector(element)) {
+                for (let collectionElement of collectionSelector(element, index++)) {
                     yield resultSelector(collectionElement);
                 }
             }
