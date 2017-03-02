@@ -186,17 +186,22 @@ var IEnumerable = function () {
         }
     }, {
         key: 'join',
-        value: function join(inner, outerKeySelector, innerKeySelector, resultSelector) {
+        value: function join(inner) {
+            var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+            var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
             var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-            return Enumerable.join(this, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     }, {
         key: 'groupJoin',
-        value: function groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector) {
+        value: function groupJoin(inner, resultSelector) {
+            var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
             var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-            return Enumerable.groupJoin(this, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     }, {
         key: 'defaultIfEmpty',

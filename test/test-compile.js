@@ -17,9 +17,9 @@ console.log(Enumerable.range(1, 10).zip(Enumerable.range(1, 10), (v1, v2) => v1 
 
 console.log(Enumerable.repeat(1, 10).join(','));
 
-console.log(Enumerable.range(1, 10).join(Enumerable.range(1, 10), v => v % 2, v => v % 3, (v1, v2) => v1 + ',' + v2).toArray());
+console.log(Enumerable.range(1, 10).join(Enumerable.range(1, 10), (v1, v2) => v1 + ',' + v2, v => v % 2, v => v % 3).toArray());
 
-console.log(Enumerable.range(1, 10).groupJoin(Enumerable.range(1, 10), v => v % 5, v => v % 2, (key, values) => key + '-' + values.join(',')).toArray());
+console.log(Enumerable.range(1, 10).groupJoin(Enumerable.range(1, 10), (key, values) => key + '-' + values.join(','), v => v % 5, v => v % 2).toArray());
 
 console.log(Enumerable.asEnumerable({ a: 1, b: '2'}).toObject());
 

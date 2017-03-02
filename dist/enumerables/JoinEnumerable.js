@@ -11,11 +11,14 @@ var IEnumerable = require('./../IEnumerable');
 var core = require('./../core/core');
 
 var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+var defaultSelector = require('./../methods/defaultSelector');
 
 var JoinEnumerable = function (_IEnumerable) {
     _inherits(JoinEnumerable, _IEnumerable);
 
-    function JoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
+    function JoinEnumerable(outer, inner, resultSelector) {
+        var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+        var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
         var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
         _classCallCheck(this, JoinEnumerable);

@@ -13,6 +13,7 @@ var IEnumerable = require('./../IEnumerable');
 var core = require('./../core/core');
 
 var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+var defaultSelector = require('./../methods/defaultSelector');
 
 var IGrouping = require('./IGrouping');
 var Entry = require('./Entry');
@@ -20,7 +21,9 @@ var Entry = require('./Entry');
 var GroupJoinEnumerable = function (_IEnumerable) {
     _inherits(GroupJoinEnumerable, _IEnumerable);
 
-    function GroupJoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
+    function GroupJoinEnumerable(outer, inner, resultSelector) {
+        var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+        var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
         var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
         _classCallCheck(this, GroupJoinEnumerable);

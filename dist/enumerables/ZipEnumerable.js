@@ -19,14 +19,14 @@ var ZipEnumerable = function (_IEnumerable) {
         var _this = _possibleConstructorReturn(this, (ZipEnumerable.__proto__ || Object.getPrototypeOf(ZipEnumerable)).call(this, source));
 
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
-            var sourceIterator, otherIterator, sourceElement, otherElement;
+            var sourceIterator, otherIterator, sourceElement, otherElement, index;
             return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
                             sourceIterator = source[Symbol.iterator]();
                             otherIterator = other[Symbol.iterator]();
-                            sourceElement = void 0, otherElement = void 0;
+                            sourceElement = void 0, otherElement = void 0, index = 0;
 
                         case 3:
                             sourceElement = sourceIterator.next();
@@ -38,7 +38,7 @@ var ZipEnumerable = function (_IEnumerable) {
                             }
 
                             _context.next = 8;
-                            return resultSelector(sourceElement.value, otherElement.value);
+                            return resultSelector(sourceElement.value, otherElement.value, index++);
 
                         case 8:
                             if (!(sourceElement.done && otherElement.done)) {

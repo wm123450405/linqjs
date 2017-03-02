@@ -106,15 +106,20 @@ var Enumerable = function () {
 
                     return this.asEnumerable().selectMany(collectionSelector, resultSelector);
                 },
-                join: function join(inner, outerKeySelector, innerKeySelector, resultSelector) {
+                join: function join(inner) {
+                    var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+                    var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+                    var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
                     var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-                    return this.asEnumerable().join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+                    return this.asEnumerable().join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
                 },
-                groupJoin: function groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector) {
+                groupJoin: function groupJoin(inner, resultSelector) {
+                    var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+                    var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
                     var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-                    return this.asEnumerable().groupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+                    return this.asEnumerable().groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
                 },
                 defaultIfEmpty: function defaultIfEmpty() {
                     return this.asEnumerable().defaultIfEmpty();
@@ -568,21 +573,26 @@ var Enumerable = function () {
         }
     }, {
         key: 'join',
-        value: function join(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
+        value: function join(outer, inner) {
+            var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+            var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+            var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
             var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
             if (typeof resultSelector === 'undefined') {
                 return core.array$join.call(outer, inner);
             } else {
-                return new JoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+                return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             }
         }
     }, {
         key: 'groupJoin',
-        value: function groupJoin(outer, inner, outerKeySelector, innerKeySelector, resultSelector) {
+        value: function groupJoin(outer, inner, resultSelector) {
+            var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+            var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
             var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
-            return new GroupJoinEnumerable(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return new GroupJoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     }, {
         key: 'reverse',
@@ -982,6 +992,8 @@ var Enumerable = function () {
         key: 'aggregate',
         value: function aggregate(source, seed, func) {
             var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+
+            var index = 0;
             var _iteratorNormalCompletion13 = true;
             var _didIteratorError13 = false;
             var _iteratorError13 = undefined;
@@ -990,7 +1002,7 @@ var Enumerable = function () {
                 for (var _iterator13 = source[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
                     var element = _step13.value;
 
-                    seed = func(seed, element);
+                    seed = func(seed, element, index++);
                 }
             } catch (err) {
                 _didIteratorError13 = true;
