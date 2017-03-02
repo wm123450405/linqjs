@@ -553,10 +553,19 @@ function thenByDescending(
 ```
 
 ### Dictionary对象
+```typescript
+class Dictionary extends IEnumerable { };
+```
 
 ### Lookup对象
+```typescript
+class Lookup extends IEnumerable { };
+```
 
 ### IGrouping对象
+```typescript
+class IGrouping extends IEnumerable { };
+```
 
 #### 1. `key`
 ```typescript
