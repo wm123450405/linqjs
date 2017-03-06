@@ -3,6 +3,9 @@ const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
 
+const IComparable = require('./core/IComparable');
+const IEquatable = require('./core/IEquatable');
+
 const MapEnumerable = require('./enumerables/MapEnumerable');
 const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
 const StringEnumerable = require('./enumerables/StringEnumerable');
@@ -68,5 +71,7 @@ Enumerable.Config = {
     }
 }
 
-//module.exports = Enumerable;
+Enumerable.IComparable = IComparable;
+Enumerable.IEquatable = IEquatable;
+
 module.exports = Enumerable;

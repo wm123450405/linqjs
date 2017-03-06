@@ -51,6 +51,9 @@ class IEnumerable {
     get size() {
         return this.count();
     };
+    getEnumerator() {
+        return Enumerable.getEnumerator(this);
+    };
     where(predicate = defaultPredicate) {
         return Enumerable.where(this, predicate);
     };

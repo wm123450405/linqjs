@@ -9,7 +9,12 @@ use linq and lambda in javascript
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作  
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
-## Change 更新日志
+## Change list 更新日志
+
+### v2.0.5
+
+	新增 IEnumerator 接口 与 实现
+	新增 Enumerable.IComparable 与 Enumerable.IEquatable 接口, 及调整默认的 defaultComparer 与 defaultEqualityComparer 实现
 
 ### 2017-03-06 v2.0.4
 
@@ -52,24 +57,6 @@ Enumerable.Config.extends.string = true; //开启针对String的扩展
 Enumerable.Config.extends.object = true; //开启针对Object的扩展
 ```
 
-### Enumerable类
-
-#### 1. `repeat(element, count)`
-```typescript
-function repeat(
-	element:any,
-	count:number
-):IEnumerable;
-```
-
-#### 2. `range(start, count)`
-```typescript
-function range(
-	start:number,
-	count:number
-):IEnumerable;
-```
-
 ### IEnumerable对象
 
 #### 1. 获取IEnumerable对象
@@ -86,16 +73,17 @@ function asEnumerable():IEnumerable; //任何对象都有asEnumerable方法用�
 > {a:1,b:2}.asEnumerable();
 > ```
 
-#### 2. `toArray()`
+#### 2. `toArray()` :*[see](https://msdn.microsoft.com/en-us/library/bb298736(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb298736(v=vs.110).aspx)*
 ```typescript
 function toArray():Array;
 ```
 > e.g. 案例
 > ```javascript
-> [1,2,3].asEnumerable().toArray(); //[1, 2, 3]
+> let e = [1,2,3].asEnumerable();
+> e.toArray(); //[1, 2, 3]
 > ```
 
-#### 3. `select(selector)`
+#### 3. `select(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb534869(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534869(v=vs.110).aspx)*
 ```typescript
 function select(
     selector:Function = defaultSelector
@@ -105,10 +93,11 @@ function select(
 ```
 > e.g. 案例
 > ```javascript
-> [1,2,3].asEnumerable().select((element, index) => `${element}|${index}`); //'1|0', '2|1', '3|2'
+> let e = [1,2,3].asEnumerable();
+> e.select((element, index) => `${element}|${index}`); //'1|0', '2|1', '3|2'
 > ```
 
-#### 4. `where(predicate)`
+#### 4. `where(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549418(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549418(v=vs.110).aspx)*
 ```typescript
 function where(
     predicate:Function = defaultPredicate
@@ -118,10 +107,11 @@ function where(
 ```
 > e.g. 案例
 > ```javascript
-> [1,2,3].asEnumerable().where(v => v >= 2); //2, 3
+> let e = [1,2,3].asEnumerable();
+> e.where(v => v >= 2); //2, 3
 > ```
 
-#### 5. `any(predicate)`
+#### 5. `any(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb534972(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534972(v=vs.110).aspx)*
 ```typescript
 function any(
     predicate:Function
@@ -131,10 +121,11 @@ function any(
 ```
 > e.g. 案例
 > ```javascript
-> [1,2,3].asEnumerable().any(v => v == 2); //true
+> let e = [1,2,3].asEnumerable();
+> e.any(v => v == 2); //truee
 > ```
 
-#### 6. `all(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).asp)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).asp)*
+#### 6. `all(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb548541(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548541(v=vs.110).aspx)*
 ```typescript
 function all(
     predicate:Function
@@ -144,10 +135,11 @@ function all(
 ```
 > e.g. 案例
 > ```javascript
-> [1,2,3].asEnumerable().all(v => v == 2); //false
+> let e = [1,2,3].asEnumerable();
+> e.all(v => v == 2); //false
 > ```
 
-#### 7. `sum(selector)`
+#### 7. `sum(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb549046(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549046(v=vs.110).aspx)*
 ```typescript
 function sum(
 	selector:Function = defaultSelector
@@ -155,8 +147,13 @@ function sum(
 
 	selector(element:any, index:number):number;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3].asEnumerable();
+> e.sum(); //6
+> ```
 
-#### 8. `average(selector)`
+#### 8. `average(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb549067(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549067(v=vs.110).aspx)*
 ```typescript
 function average(
 	selector:Function = defaultSelector
@@ -164,6 +161,11 @@ function average(
 
 	selector(element:any, index:number):number;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3].asEnumerable();
+> e.average(); //2
+> ```
 
 #### 9. `aggregate(seed, func, resultSelector)` :*[see](https://msdn.microsoft.com/en-us/library/bb548744(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548744(v=vs.110).aspx)*
 ```typescript
@@ -176,8 +178,13 @@ function aggregate(
 	func(seed:any, element:any, index:number):any,
 	resultSelector(seed:any):any;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.aggregate(1, (s, v) => s * v); //24
+> ```
 
-#### 10. `max(selector, comparer)`
+#### 10. `max(selector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548659(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548659(v=vs.110).aspx)*
 ```typescript
 function max(
 	selector:Function = defaultSelector,
@@ -187,8 +194,13 @@ function max(
 	selector(element:any, index:number):number,
 	comparer(element:any, other:any):number;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.max(); //4
+> ```
 
-#### 11. `min(selector, comparer)`
+#### 11. `min(selector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548779(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548779(v=vs.110).aspx)*
 ```typescript
 function min(
 	selector:Function = defaultSelector,
@@ -198,6 +210,11 @@ function min(
 	selector(element:any, index:number):number,
 	comparer(element:any, other:any):number;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.min(); //1
+> ```
 
 #### 12. `concat(other)`
 ```typescript
@@ -205,6 +222,12 @@ function concat(
 	other:IEnumerable
 ):IEnumerable
 ```
+> e.g. 案例
+> ```javascript
+> let e1 = [1,'a'].asEnumerable();
+> let e2 = [2,'b'].asEnumerable();
+> e1.concat(e2); //1, 'a', 2, 'b'
+> ```
 
 #### 13. `contains(value, comparer)`
 ```typescript
@@ -224,8 +247,13 @@ function count(
 
 	predicate(element:any, index:number):boolean;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.count(v => v >= 2); //3
+> ```
 
-#### 15. `defaultIfEmpty(defaultValue)` :*[see](https://msdn.microsoft.com/en-us/library/bb355419(v=vs.110).aspx)*
+#### 15. `defaultIfEmpty(defaultValue)` :*[see](https://msdn.microsoft.com/en-us/library/bb355419(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb355419(v=vs.110).aspx)*
 ```typescript
 function defaultIfEmpty(
 	defaultValue:any
@@ -349,6 +377,11 @@ function join(
 	split:string
 ):string;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3].asEnumerable();
+> e.join('|'); //'1|2|3'
+> ```
 
 #### 29. `ofType(type)`
 ```typescript
@@ -356,11 +389,24 @@ function ofType(
 	type:type
 ):IEnumerable;
 ```
+> e.g. 案例
+> ```javascript
+> let e = ['a',1,true,'b',3.2,()=>{}].asEnumerable();
+> e.ofType(String); //'a', 'b'
+> e.ofType(Number); //1, 3.2
+> e.ofType(Boolean); //true
+> e.ofType(Function): //()=>{}
+> ```
 
 #### 30. `reverse()`
 ```typescript
 function reverse():IEnumerable;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3].asEnumerable();
+> e.reverse(); //3, 2, 1
+> ```
 
 #### 31. `sequenceEqual(other, comparer)`
 ```typescript
@@ -378,6 +424,11 @@ function skip(
 	count:number
 ):IEnumerable;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.skip(2); //3, 4
+> ```
 
 #### 33. `skipWhile(predicate)`
 ```typescript
@@ -394,6 +445,11 @@ function take(
 	count:number
 ):IEnumerable;
 ```
+> e.g. 案例
+> ```javascript
+> let e = [1,2,3,4].asEnumerable();
+> e.take(2); //1, 2
+> ```
 
 #### 34. `takeWhile(predicate)`
 ```typescript
@@ -542,6 +598,11 @@ function forEach(
 	action(element:any, index:number):void;
 ```
 
+#### 46. ```getEnumerator()`
+```typescript
+function getEnumerator():IEnumerator;
+```
+
 ### IOrderedEnumerable对象
 
 #### 1. `thenBy(keySelector, comparer)`
@@ -567,6 +628,9 @@ function thenByDescending(
 ```
 
 ### IMapEnumerable对象
+```typescript
+interface IMapEnumerable extends IEnumerable { };
+```
 
 #### 1. `forEach(action)`
 ```typescript
@@ -596,6 +660,49 @@ class IGrouping extends IEnumerable { };
 ```typescript
 const key:any;
 ```
+
+### IEnumerator对象
+```typescript
+interface IEnumerator { };
+```
+
+#### 1. `current`
+
+#### 2. `moveNext()`
+```typescript
+function moveNext():boolean;
+```
+
+#### 3. `reset()`
+```typescript
+function reset():void;
+```
+
+### Enumerable类
+
+#### 1. `repeat(element, count)` :*[see](https://msdn.microsoft.com/en-us/library/bb348899(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb348899(v=vs.110).aspx)*
+```typescript
+function repeat(
+	element:any,
+	count:number
+):IEnumerable;
+```
+> e.g. 案例
+> ```javascript
+> Enumerable.repeat('a', 2); //'a', 'a'
+> ```
+
+#### 2. `range(start, count)` :*[see](https://msdn.microsoft.com/en-us/library/system.linq.enumerable.range(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/system.linq.enumerable.range(v=vs.110).aspx)*
+```typescript
+function range(
+	start:number,
+	count:number
+):IEnumerable;
+```
+> e.g. 案例
+> ```javascript
+> Enumerable.range(2, 3); //2, 3, 4
+> ```
 
 More docs and examples, to be continue...
 更多接口文档的案例,未完待补充...  

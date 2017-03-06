@@ -180,6 +180,9 @@ class Enumerable {
             });
         }
     };
+    static getEnumerator(enumerable) {
+        return new IEnumerator(enumerable);
+    };
     static repeat(element, count = 0) {
         return new RepeatEnumerable(element, count);
     };
@@ -570,6 +573,8 @@ class Enumerable {
 };
 
 module.exports = Enumerable;
+
+const IEnumerator = require('./IEnumerator');
 
 const RepeatEnumerable = require('./enumerables/RepeatEnumerable');
 const RangeEnumerable = require('./enumerables/RangeEnumerable');
