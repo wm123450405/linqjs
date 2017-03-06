@@ -7,6 +7,7 @@ const Enumerable = require('./../Enumerable');
 const defaultKeySelector = require('./../methods/defaultKeySelector');
 const defaultValueSelector = require('./../methods/defaultValueSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultAction = require('./../methods/defaultAction');
 
 class IMapEnumerable extends IEnumerable {
     constructor() {

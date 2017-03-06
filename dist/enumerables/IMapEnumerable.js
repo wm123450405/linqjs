@@ -17,6 +17,7 @@ var Enumerable = require('./../Enumerable');
 var defaultKeySelector = require('./../methods/defaultKeySelector');
 var defaultValueSelector = require('./../methods/defaultValueSelector');
 var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+var defaultAction = require('./../methods/defaultAction');
 
 var IMapEnumerable = function (_IEnumerable) {
     _inherits(IMapEnumerable, _IEnumerable);

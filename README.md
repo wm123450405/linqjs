@@ -11,9 +11,14 @@ use linq and lambda in javascript
 
 ## Change 更新日志
 
+### 2017-03-06 v2.0.4
+
+	修复forEach的bug
+
 ### 2017-03-02
 
 	修改了join方法参数顺序,以及参数默认值  
+	修改了groupJoin方法参数的顺序,以及参数默认值  
 	为selectMany方法的collectionSelector:Function参数方法增加了index参数  
 	为zip方法的resultSelector:Function参数方法增加了index参数  
 	为aggreagte方法的func:Function参数方法增加了index参数  
@@ -528,6 +533,15 @@ function groupJoin(
 	comparer(element:any, other:any):boolean;
 ```
 
+#### 45. `forEach(action)`
+```typescript
+function forEach(
+	action:Function = defaultAction
+),
+
+	action(element:any, index:number):void;
+```
+
 ### IOrderedEnumerable对象
 
 #### 1. `thenBy(keySelector, comparer)`
@@ -552,14 +566,25 @@ function thenByDescending(
 	comparer(element:any, other:any):number;
 ```
 
+### IMapEnumerable对象
+
+#### 1. `forEach(action)`
+```typescript
+function forEach(
+	action:Function = defaultAction
+),
+
+	action(element:any, key:any):void;
+```
+
 ### Dictionary对象
 ```typescript
-class Dictionary extends IEnumerable { };
+class Dictionary extends IMapEnumerable { };
 ```
 
 ### Lookup对象
 ```typescript
-class Lookup extends IEnumerable { };
+class Lookup extends IMapEnumerable { };
 ```
 
 ### IGrouping对象
@@ -569,7 +594,7 @@ class IGrouping extends IEnumerable { };
 
 #### 1. `key`
 ```typescript
-key:any;
+const key:any;
 ```
 
 More docs and examples, to be continue...

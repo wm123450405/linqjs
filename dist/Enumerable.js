@@ -13,6 +13,7 @@ var defaultComparer = require('./methods/defaultComparer');
 var defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
 var defaultKeySelector = require('./methods/defaultKeySelector');
 var defaultValueSelector = require('./methods/defaultValueSelector');
+var defaultAction = require('./methods/defaultAction');
 
 var NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 var OutOfRangeException = require('./core/exceptions/OutOfRangeException');

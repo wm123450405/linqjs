@@ -14,7 +14,7 @@ var extendArray = require('./linq-array');
 var extendObject = require('./linq-object');
 var extendString = require('./linq-string');
 
-if (!regeneratorRuntime) {
+if (!global.regeneratorRuntime) {
     require('babel-polyfill');
 }
 

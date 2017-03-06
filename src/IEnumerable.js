@@ -7,6 +7,7 @@ const defaultComparer = require('./methods/defaultComparer');
 const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
+const defaultAction = require('./methods/defaultAction');
 
 const hasProxy = typeof Proxy !== 'undefined' && Proxy.toString().match(/native code/);
 

@@ -13,7 +13,7 @@ const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
 
-if (!regeneratorRuntime) {
+if (!global.regeneratorRuntime) {
     require('babel-polyfill');
 }
 

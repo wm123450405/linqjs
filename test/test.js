@@ -5,12 +5,12 @@ console.log(Enumerable.range(1, 10).concat(Enumerable.range(1, 10)).where(v => v
 console.log(Enumerable.range(1, 10).select(v => v > 2).toArray());
 
 let gs = Enumerable.range(1, 10).groupBy(v => v % 3);
-for (let g of gs) {
+
+gs.forEach(g => {
 	console.log(g.key);
-	for (let v of g) {
-		console.log('->', v);
-	}
-}
+	g.forEach(console.log);
+});
+
 console.log(gs.selectMany().toArray());
 
 console.log(Enumerable.range(1, 10).zip(Enumerable.range(1, 10), (v1, v2) => v1 * v2).toArray());
