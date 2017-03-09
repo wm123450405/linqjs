@@ -9,6 +9,9 @@ const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
 
+const arrayComparer = require('./methods/arrayComparer');
+const predicateComparer = require('./methods/predicateComparer');
+
 const NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
 const TooManyElementsException = require('./core/exceptions/TooManyElementsException');
@@ -569,7 +572,13 @@ class Enumerable {
         for (let element of source) {
             action(element, index++);
         }
-    }
+    };
+    static arrayComparer(array, last = false) {
+        return arrayComparer(array, last);
+    };
+    static predicateComparer(predicateArray, last = false) {
+        return predicateComparer(predicateArray, last);
+    };
 };
 
 module.exports = Enumerable;

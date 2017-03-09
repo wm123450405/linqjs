@@ -15,6 +15,9 @@ var defaultKeySelector = require('./methods/defaultKeySelector');
 var defaultValueSelector = require('./methods/defaultValueSelector');
 var defaultAction = require('./methods/defaultAction');
 
+var _arrayComparer = require('./methods/arrayComparer');
+var _predicateComparer = require('./methods/predicateComparer');
+
 var NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 var OutOfRangeException = require('./core/exceptions/OutOfRangeException');
 var TooManyElementsException = require('./core/exceptions/TooManyElementsException');
@@ -298,6 +301,11 @@ var Enumerable = function () {
                     }
                 });
             }
+        }
+    }, {
+        key: 'getEnumerator',
+        value: function getEnumerator(enumerable) {
+            return new IEnumerator(enumerable);
         }
     }, {
         key: 'repeat',
@@ -1464,6 +1472,20 @@ var Enumerable = function () {
                 }
             }
         }
+    }, {
+        key: 'arrayComparer',
+        value: function arrayComparer(array) {
+            var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return _arrayComparer(array, last);
+        }
+    }, {
+        key: 'predicateComparer',
+        value: function predicateComparer(predicateArray) {
+            var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return _predicateComparer(predicateArray, last);
+        }
     }]);
 
     return Enumerable;
@@ -1472,6 +1494,8 @@ var Enumerable = function () {
 ;
 
 module.exports = Enumerable;
+
+var IEnumerator = require('./IEnumerator');
 
 var RepeatEnumerable = require('./enumerables/RepeatEnumerable');
 var RangeEnumerable = require('./enumerables/RangeEnumerable');

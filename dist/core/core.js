@@ -7,7 +7,7 @@ var core = {
 	typeName: function typeName(value) {
 		return value[Symbol.toStringTag] || value.toString().replace(/^\[\w+\s(.+)]$/ig, '$1');
 	},
-	defineProperty: function defineProperty(prototype, property, value) {
+	conflict: function conflict(prototype, property) {
 		if (prototype.hasOwnProperty(property)) {
 			console.warn(property + ' already in ' + getType(prototype) + ', set original function to o$' + property);
 			Object.defineProperty(prototype, "o$" + property, {
@@ -17,18 +17,39 @@ var core = {
 				value: prototype[property]
 			});
 		}
-		Object.defineProperty(prototype, property, {
-			enumerable: false,
-			writable: true,
-			configurable: false,
-			value: value
-		});
+	},
+	defineProperty: function defineProperty(prototype, property, value) {
+		var isGet = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+		this.conflict(prototype, property);
+		if (isGet && value instanceof Function) {
+			Object.defineProperty(prototype, property, {
+				enumerable: false,
+				configurable: false,
+				get: value
+			});
+		} else {
+			Object.defineProperty(prototype, property, {
+				enumerable: false,
+				writable: true,
+				configurable: false,
+				value: value
+			});
+		}
 	},
 	defineProperties: function defineProperties(prototype, properties) {
-		for (var property in properties) {
+		var _this = this;
+
+		var _loop = function _loop(property) {
 			if (properties.hasOwnProperty(property)) {
-				this.defineProperty(prototype, property, properties[property]);
+				_this.defineProperty(prototype, property, function () {
+					return properties[property];
+				}, true);
 			}
+		};
+
+		for (var property in properties) {
+			_loop(property);
 		}
 	},
 

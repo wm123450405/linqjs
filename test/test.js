@@ -31,3 +31,17 @@ console.log(Enumerable.asEnumerable({ a: 1, b: '2'}).toObject());
 console.log(Enumerable.asEnumerable([1,'a',true,2,undefined,'b']).ofType(Number).toArray());
 
 console.log(Enumerable.range(1, 10).skip(2).take(6).skipWhile(v => v <= 4).takeWhile(v => v <= 7).toArray());
+
+
+let e = [
+	{"status": "start", "value": "A"},
+	{"status": "end", "value": "B"},
+	{"status": "start", "value": "C"},
+	{"status": "progress", "value": "D"},
+	{"status": "start", "value": "E"},
+ 	{"status": "init", "value": "F"}
+];
+console.log(e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"])).select(v => v.value).toArray());
+console.log(e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"], true)).select(v => v.value).toArray());
+console.log(e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"])).select(v => v.value).toArray());
+console.log(e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"], true)).select(v => v.value).toArray());

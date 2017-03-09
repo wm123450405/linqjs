@@ -11,10 +11,11 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
-### v2.0.5
+### 2017-03-09 v2.0.5
 
 	新增 IEnumerator 接口 与 实现
 	新增 Enumerable.IComparable 与 Enumerable.IEquatable 接口, 及调整默认的 defaultComparer 与 defaultEqualityComparer 实现
+	新增 Enumerable.arrayComparer 与 Enumerable.predicateComparer
 
 ### 2017-03-06 v2.0.4
 
@@ -682,7 +683,7 @@ function reset():void;
 
 #### 1. `repeat(element, count)` :*[see](https://msdn.microsoft.com/en-us/library/bb348899(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb348899(v=vs.110).aspx)*
 ```typescript
-function repeat(
+function Enumerable.repeat(
 	element:any,
 	count:number
 ):IEnumerable;
@@ -694,7 +695,7 @@ function repeat(
 
 #### 2. `range(start, count)` :*[see](https://msdn.microsoft.com/en-us/library/system.linq.enumerable.range(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/system.linq.enumerable.range(v=vs.110).aspx)*
 ```typescript
-function range(
+function Enumerable.range(
 	start:number,
 	count:number
 ):IEnumerable;
@@ -702,6 +703,50 @@ function range(
 > e.g. 案例
 > ```javascript
 > Enumerable.range(2, 3); //2, 3, 4
+> ```
+
+#### 3. `arrayComparer(array, last)`
+```typescript
+function Enumerable.arrayComparer(
+	array:array, // 表示值的顺序的数组
+	last:boolean = false // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
+):Function; // comparer
+```
+
+> e.g. 案例
+> ```javascript
+> let e = [
+> 	{"status": "start", "value": "A"},
+> 	{"status": "end", "value": "B"},
+> 	{"status": "start", "value": "C"},
+> 	{"status": "progress", "value": "D"},
+> 	{"status": "start", "value": "E"},
+> 	{"status": "init", "value": "F"}
+> ];
+> e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"])).select(v => v.value); //'F', 'A', 'C', 'E', 'D', 'B'
+> e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
+> ```
+
+#### 4. `predicateComparer(array, last)`
+```typescript
+function Enumerable.predicateComparer(
+	array:array<Function>, // 包含一组校验方法的数组
+	last:boolean = false // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
+):Function; // comparer
+```
+
+> e.g. 案例
+> ```javascript
+> let e = [
+> 	{"status": "start", "value": "A"},
+> 	{"status": "end", "value": "B"},
+> 	{"status": "start", "value": "C"},
+> 	{"status": "progress", "value": "D"},
+> 	{"status": "start", "value": "E"},
+> 	{"status": "init", "value": "F"}
+> ];
+> e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"])).select(v => v.value); //'F', 'A', 'C', 'E', 'D', 'B'
+> e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
 More docs and examples, to be continue...

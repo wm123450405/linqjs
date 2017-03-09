@@ -59,6 +59,11 @@ var IEnumerable = function () {
     }
 
     _createClass(IEnumerable, [{
+        key: 'getEnumerator',
+        value: function getEnumerator() {
+            return Enumerable.getEnumerator(this);
+        }
+    }, {
         key: 'where',
         value: function where() {
             var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
