@@ -42,7 +42,7 @@ core.defineProperties(String.prototype, {
 });
 core.defineProperties(Object.prototype, {
     asEnumerable() {
-        let type = core.typeName(this);
+        let type = core.getType(this);
         if (type.endsWith(' Iterator')) {
             return new IteratorEnumerable(this);
         } else {

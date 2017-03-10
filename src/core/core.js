@@ -1,9 +1,19 @@
 const core = {
-	getType(value) { return value.constructor.toString().replace(/^function ([^(]*)\(.+$/ig, '$1'); },
-	typeName(value) { return value[Symbol.toStringTag] || value.toString().replace(/^\[\w+\s(.+)]$/ig, '$1'); },
+	getType(value) { 
+		if (typeof(value) === 'undefined') {
+			return 'Undefined';
+		} else {
+			let type = value[Symbol.toStringTag] || Object.prototype.toString.call(value).replace(/^\[\w+\s(.+)]$/ig, '$1');
+			if (type === 'Object') {
+				return Function.prototype.toString.call(value.constructor).replace(/^(function|class)\s+([^({\s]*)\s*[({].+$/ig, '$2');
+			} else {
+				return type;
+			}
+		}
+	},
 	conflict(prototype, property) {
 		if (prototype.hasOwnProperty(property)) {
-	        console.warn(property + ' already in ' + getType(prototype) + ', set original function to o$' + property);
+	        console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to o$' + property);
 	        Object.defineProperty(prototype, "o$" + property, {
 	            enumerable: false,
 	            writable: true,

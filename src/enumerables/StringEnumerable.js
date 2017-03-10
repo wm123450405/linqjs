@@ -11,14 +11,14 @@ class StringEnumerable extends IteratorEnumerable {
         super(array);
         core.defineProperties(this, {
             indexOf(value, start = 0, comparer = defaultEqualityComparer) {
-                if (comparer === defaultEqualityComparer) {
+                if (comparer === defaultEqualityComparer && core.string$indexOf) {
                     return core.string$indexOf.call(array, value, start);
                 } else {
                     return Enumerable.indexOf(this, value, start, comparer);
                 }
             },
             lastIndexOf(value, start = 0, comparer = defaultEqualityComparer) {
-                if (comparer === defaultEqualityComparer) {
+                if (comparer === defaultEqualityComparer && core.string$lastIndexOf) {
                     return core.string$lastIndexOf.call(array, value, start);
                 } else {
                     return Enumerable.lastIndexOf(this, value, start, comparer);

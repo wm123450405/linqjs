@@ -43,7 +43,7 @@ core.defineProperties(String.prototype, {
 });
 core.defineProperties(Object.prototype, {
     asEnumerable: function asEnumerable() {
-        var type = core.typeName(this);
+        var type = core.getType(this);
         if (type.endsWith(' Iterator')) {
             return new IteratorEnumerable(this);
         } else {

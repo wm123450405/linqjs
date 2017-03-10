@@ -1,0 +1,23 @@
+{
+  "name": "wm123450405",
+  "authors": [
+    "491029934@qq.com"
+  ],
+  "description": "linq js",
+  "main": "dist/linq.js",
+  "keywords": [
+    "linq",
+    "js",
+    "javascript",
+    "Enumerable"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

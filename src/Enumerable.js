@@ -294,7 +294,7 @@ class Enumerable {
         return new SelectManyEnumerable(source, collectionSelector, resultSelector);
     };
     static join(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-        if (typeof resultSelector === 'undefined') {
+        if (typeof resultSelector === 'undefined' && core.array$join) {
             return core.array$join.call(outer, inner);
         } else {
             return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
@@ -573,8 +573,8 @@ class Enumerable {
             action(element, index++);
         }
     };
-    static arrayComparer(array, last = false) {
-        return arrayComparer(array, last);
+    static arrayComparer(array, last = false, comparer = defaultEqualityComparer) {
+        return arrayComparer(array, last, comparer);
     };
     static predicateComparer(predicateArray, last = false) {
         return predicateComparer(predicateArray, last);

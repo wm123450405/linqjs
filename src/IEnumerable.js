@@ -13,7 +13,7 @@ const hasProxy = typeof Proxy !== 'undefined' && Proxy.toString().match(/native 
 
 class IEnumerable {
     constructor(source) {
-        let type = source instanceof String || typeof(source) === 'string' ? 'string' : source instanceof Array || core.typeName(source).endsWith(' Iterator') ? 'array' : source instanceof IEnumerable ? 'enumerable' : 'object';
+        let type = source instanceof String || typeof(source) === 'string' ? 'string' : source instanceof Array || core.getType(source).endsWith(' Iterator') ? 'array' : source instanceof IEnumerable ? 'enumerable' : 'object';
         core.defineProperty(this, Symbol.toStringTag, 'IEnumerable');
         core.defineProperties(this, {
             getProtoType() {

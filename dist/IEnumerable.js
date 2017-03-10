@@ -23,7 +23,7 @@ var IEnumerable = function () {
     function IEnumerable(source) {
         _classCallCheck(this, IEnumerable);
 
-        var type = source instanceof String || typeof source === 'string' ? 'string' : source instanceof Array || core.typeName(source).endsWith(' Iterator') ? 'array' : source instanceof IEnumerable ? 'enumerable' : 'object';
+        var type = source instanceof String || typeof source === 'string' ? 'string' : source instanceof Array || core.getType(source).endsWith(' Iterator') ? 'array' : source instanceof IEnumerable ? 'enumerable' : 'object';
         core.defineProperty(this, Symbol.toStringTag, 'IEnumerable');
         core.defineProperties(this, {
             getProtoType: function getProtoType() {

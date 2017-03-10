@@ -11,6 +11,12 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
+### v2.0.6
+
+	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
+	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
+	优化了 Enumerable.arrayComparer, 增加 comparer 参数用于查找对比
+
 ### 2017-03-09 v2.0.5
 
 	新增 IEnumerator 接口 与 实现
@@ -705,12 +711,15 @@ function Enumerable.range(
 > Enumerable.range(2, 3); //2, 3, 4
 > ```
 
-#### 3. `arrayComparer(array, last)`
+#### 3. `arrayComparer(array, comparer, last)`
 ```typescript
 function Enumerable.arrayComparer(
 	array:array, // 表示值的顺序的数组
-	last:boolean = false // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
-):Function; // comparer
+	last:boolean = false, // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
+	comparer:Function = defaultEqualityComparer // 用于查找对比
+):Function, // comparer
+
+	comparer(element:any, other:any):boolean;
 ```
 
 > e.g. 案例
