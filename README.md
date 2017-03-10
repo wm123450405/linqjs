@@ -16,6 +16,8 @@ use linq and lambda in javascript
 	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
 	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
 	优化了 Enumerable.arrayComparer, 增加 comparer 参数用于查找对比
+	添加对 bower 的支持
+	添加 gulp 打包, dist将仅包含 linq.js 与 linq.min.js
 
 ### 2017-03-09 v2.0.5
 
