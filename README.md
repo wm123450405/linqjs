@@ -11,11 +11,12 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
-### v2.0.7
+### v2.1.7
 
+	修复了一些在IE浏览器中的bug
 	进一步优化gulp打包, source map 将在后续添加
 
-### 2017-03-10 v2.0.6
+### 2017-03-10 v2.1.6
 
 	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
 	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
@@ -23,13 +24,13 @@ use linq and lambda in javascript
 	添加对 bower 的支持
 	添加 gulp 打包, dist将仅包含 linq.js 与 linq.min.js
 
-### 2017-03-09 v2.0.5
+### 2017-03-09 v2.1.5
 
 	新增 IEnumerator 接口 与 实现
 	新增 Enumerable.IComparable 与 Enumerable.IEquatable 接口, 及调整默认的 defaultComparer 与 defaultEqualityComparer 实现
 	新增 Enumerable.arrayComparer 与 Enumerable.predicateComparer
 
-### 2017-03-06 v2.0.4
+### 2017-03-06 v2.1.4
 
 	修复forEach的bug
 
