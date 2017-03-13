@@ -295,7 +295,11 @@ class Enumerable {
     };
     static join(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (typeof resultSelector === 'undefined' && core.array$join) {
-            return core.array$join.call(outer, inner);
+            if (outer instanceof IEnumerable) {
+                return core.array$join.call(outer.toArray(), inner);
+            } else {
+                return core.array$join.call(outer, inner);
+            }
         } else {
             return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
@@ -585,6 +589,7 @@ module.exports = Enumerable;
 
 const IEnumerator = require('./IEnumerator');
 
+const IEnumerable = require('./IEnumerable');
 const RepeatEnumerable = require('./enumerables/RepeatEnumerable');
 const RangeEnumerable = require('./enumerables/RangeEnumerable');
 const EmptyEnumerable = require('./enumerables/EmptyEnumerable');

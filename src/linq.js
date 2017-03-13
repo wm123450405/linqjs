@@ -1,4 +1,12 @@
 'use strict';
+var g =
+  typeof global === "object" ? global :
+  typeof window === "object" ? window :
+  typeof self === "object" ? self : this;
+if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
+    require('babel-polyfill');
+}
+
 const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
@@ -15,14 +23,6 @@ const ObjectEnumerable = require('./enumerables/ObjectEnumerable');
 const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
-
-var g =
-  typeof global === "object" ? global :
-  typeof window === "object" ? window :
-  typeof self === "object" ? self : this;
-if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
-    require('babel-polyfill');
-}
 
 core.defineProperties(Map.prototype, {
     asEnumerable() {

@@ -2,34 +2,35 @@
 <html>
 <head>
 	<title></title>
-	<script type="text/javascript" src="../dist/linq.js"></script>
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script> -->
+	<script type="text/javascript" src="../dist/linq.min.js"></script>
 	<script type="text/javascript">
-		console.log(Enumerable.range(1, 10).concat(Enumerable.range(1, 10)).where(v => v > 2).orderBy(v => v % 3).thenByDescending().distinct().union(Enumerable.range(5, 10)).except(Enumerable.range(1, 3)).intersect(Enumerable.range(5, 5)).reverse().toArray())
+		console.log(Enumerable.range(1, 10).concat(Enumerable.range(1, 10)).where(function(v){return v > 2}).orderBy(function(v){return v % 3}).thenByDescending().distinct().union(Enumerable.range(5, 10)).except(Enumerable.range(1, 3)).intersect(Enumerable.range(5, 5)).reverse().toArray())
 
-		console.log(Enumerable.range(1, 10).select(v => v > 2).toArray());
+		console.log(Enumerable.range(1, 10).select(function(v){return v > 2}).toArray());
 
-		let gs = Enumerable.range(1, 10).groupBy(v => v % 3);
-		for (let g of gs) {
+		var gs = Enumerable.range(1, 10).groupBy(function(v){return v % 3});
+		gs.forEach(function(g) {
 			console.log(g.key);
-			for (let v of g) {
+			g.forEach(function(v) {
 				console.log('->', v);
-			}
-		}
+			})
+		});
 		console.log(gs.selectMany().toArray());
 
-		console.log(Enumerable.range(1, 10).zip(Enumerable.range(1, 10), (v1, v2) => v1 * v2).toArray());
+		console.log(Enumerable.range(1, 10).zip(Enumerable.range(1, 10), function(v1, v2){return v1 * v2}).toArray());
 
 		console.log(Enumerable.repeat(1, 10).join(','));
 
-		console.log(Enumerable.range(1, 10).join(Enumerable.range(1, 10), (v1, v2) => v1 + ',' + v2, v => v % 2, v => v % 3).toArray());
+		console.log(Enumerable.range(1, 10).join(Enumerable.range(1, 10), function(v1, v2){return v1 + ',' + v2}, function(v){return v % 2}, function(v){return v % 3}).toArray());
 
-		console.log(Enumerable.range(1, 10).groupJoin(Enumerable.range(1, 10), (key, values) => key + '-' + values.join(','), v => v % 5, v => v % 2).toArray());
+		console.log(Enumerable.range(1, 10).groupJoin(Enumerable.range(1, 10), function(key, values){return key + '-' + values.join(',')}, function(v){return v % 5}, function(v){return v % 2}).toArray());
 
 		console.log(Enumerable.asEnumerable({ a: 1, b: '2'}).toObject());
 
 		console.log(Enumerable.asEnumerable([1,'a',true,2,undefined,'b']).ofType(Number).toArray());
 
-		console.log(Enumerable.range(1, 10).skip(2).take(6).skipWhile(v => v <= 4).takeWhile(v => v <= 7).toArray());
+		console.log(Enumerable.range(1, 10).skip(2).take(6).skipWhile(function(v){return v <= 4}).takeWhile(function(v){return v <= 7}).toArray());
 
 	</script>
 </head>

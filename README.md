@@ -11,7 +11,11 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
-### v2.0.6
+### v2.0.7
+
+	进一步优化gulp打包, source map 将在后续添加
+
+### 2017-03-10 v2.0.6
 
 	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
 	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
