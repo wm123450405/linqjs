@@ -11,10 +11,10 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
-### v2.1.7
+### 2017-03-14 v2.1.7
 
 	修复了一些在IE浏览器中的bug
-	进一步优化gulp打包, source map 将在后续添加
+	进一步优化gulp打包, 添加source map
 
 ### 2017-03-10 v2.1.6
 

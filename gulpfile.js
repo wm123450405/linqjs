@@ -1,38 +1,43 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
-const browserify = require('gulp-browserify');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const babelify = require('babelify');
 const exorcist = require('exorcist');
-const transform = require('vinyl-transform');
 const sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('default', function() {
-	gulp.src('./src/linq.js')
-		.pipe(browserify({
-			transform: [ babelify.configure({
-				presets: [ 'es2015', 'stage-3' ],
-				sourceMaps: false
-			}) ],
+	browserify({
+			entries: './src/linq.js',
 			standalone: 'Enumerable',
-			debug: false,
-			bundle: true,
+			debug: true,
 			insertGlobalVars: {
 				global: function() {
 					return 'typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}';
 				}
 			}
+		})
+		.transform(babelify.configure({
+			presets: ['es2015', 'stage-3'],
+			sourceMaps: true
 		}))
-		// .pipe(transform(() => exorcist('./dist/linq.js.map', '', '', './dist/')))
+		.bundle()
+		.pipe(exorcist('./dist/linq.js.map', '', '', './dist/'))
+		.pipe(source('linq.js'))
+		.pipe(buffer())
 		.pipe(gulp.dest('./dist/'))
 		.pipe(rename('linq.min.js'))
-		// .pipe(sourcemaps.init())
+		.pipe(sourcemaps.init({
+			loadMaps: true
+		}))
 		.pipe(uglify({
 			mangle: {
 				except: ['require', 'exports', 'module']
 			},
 			compress: true
 		}))
-		// .pipe(sourcemaps.write('./'))
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 });
