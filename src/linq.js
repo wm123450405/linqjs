@@ -11,9 +11,6 @@ const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
 
-const IComparable = require('./core/IComparable');
-const IEquatable = require('./core/IEquatable');
-
 const MapEnumerable = require('./enumerables/MapEnumerable');
 const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
 const StringEnumerable = require('./enumerables/StringEnumerable');
@@ -24,38 +21,52 @@ const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
 
-core.defineProperties(Map.prototype, {
-    asEnumerable() {
-        return new MapEnumerable(this);
+const defaultName = 'asEnumerable';
+let prevName = '';
+const init = (name) => {
+    if (name !== defaultName && prevName) {
+        delete String.prototype[prevName];
+        delete Array.prototype[prevName];
+        delete Map.prototype[prevName];
+        delete Set.prototype[prevName];
+        delete Object.prototype[prevName];
+        prevName = '';
     }
-});
-core.defineProperties(Array.prototype, {
-    asEnumerable() {
-        return new ArrayEnumerable(this);
-    }
-});
-core.defineProperties(Set.prototype, {
-    asEnumerable() {
-        return new ArrayEnumerable(this);
-    }
-});
-core.defineProperties(String.prototype, {
-    asEnumerable() {
-        return new StringEnumerable(this);
-    }
-});
-core.defineProperties(Object.prototype, {
-    asEnumerable() {
-        let type = core.getType(this);
-        if (type.endsWith(' Iterator')) {
-            return new IteratorEnumerable(this);
-        } else {
-            return new ObjectEnumerable(this);
+    core.defineProperties(String.prototype, {
+        [name]() {
+            return new StringEnumerable(this);
         }
-    }
-});
+    });
+    core.defineProperties(Array.prototype, {
+        [name]() {
+            return new ArrayEnumerable(this);
+        }
+    });
+    core.defineProperties(Map.prototype, {
+        [name]() {
+            return new MapEnumerable(this);
+        }
+    });
+    core.defineProperties(Set.prototype, {
+        [name]() {
+            return new ArrayEnumerable(this);
+        }
+    });
+    core.defineProperties(Object.prototype, {
+        [name]() {
+            let type = core.getType(this);
+            if (type.endsWith(' Iterator')) {
+                return new IteratorEnumerable(this);
+            } else {
+                return new ObjectEnumerable(this);
+            }
+        }
+    });
+};
 
-Enumerable.Config = {
+init(defaultName);
+
+Enumerable.config = {
     extends: {
         set array(value) {
             if (value) {
@@ -72,10 +83,10 @@ Enumerable.Config = {
                 extendString();
             }
         }
+    },
+    set as(name) {
+        init(name);
     }
 }
-
-Enumerable.IComparable = IComparable;
-Enumerable.IEquatable = IEquatable;
 
 module.exports = Enumerable;

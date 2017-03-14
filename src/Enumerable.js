@@ -578,10 +578,58 @@ class Enumerable {
         }
     };
     static arrayComparer(array, last = false, comparer = defaultEqualityComparer) {
+        console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
         return arrayComparer(array, last, comparer);
     };
     static predicateComparer(predicateArray, last = false) {
+        console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
         return predicateComparer(predicateArray, last);
+    };
+    static get comparers() {
+        return {
+            get default() {
+                return defaultComparer;
+            },
+            get equality() {
+                return defaultEqualityComparer;
+            },
+            array(array, last = false, comparer = defaultEqualityComparer) {
+                return arrayComparer(array, last, comparer);
+            },
+            predicate(predicateArray, last = false) {
+                return predicateComparer(predicateArray, last);
+            }
+        };
+    };
+    static get selectors() {
+        return {
+            get default() {
+                return defaultSelector;
+            },
+            get key() {
+                return defaultKeySelector;
+            },
+            get value() {
+                return defaultValueSelector;
+            },
+            get groupResult() {
+                return defaultGroupResultSelector;
+            }
+        };
+    };
+    static get actions() {
+        return {
+            get default() {
+                return defaultAction;
+            }
+        };
+    };
+    static get predicates() {
+        return {
+            get default() {
+                return defaultPredicate;
+            }
+        };
     };
 };
 
@@ -620,3 +668,9 @@ const ZipEnumerable = require('./enumerables/ZipEnumerable');
 const SingleEnumerable = require('./enumerables/SingleEnumerable');
 const Dictionary = require('./enumerables/Dictionary');
 const Lookup = require('./enumerables/Lookup');
+
+const IComparable = require('./core/IComparable');
+const IEquatable = require('./core/IEquatable');
+
+Enumerable.IComparable = IComparable;
+Enumerable.IEquatable = IEquatable;

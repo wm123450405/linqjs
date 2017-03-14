@@ -5,8 +5,8 @@
   "main": "dist/linq.min.js",
   "scripts": {
     "test": "node test/test.js",
-    "test-compile": "npm run compile && node test/test-compile.js",
-    "test-babel": "babel-node test/test-babel.js --presets es2015,stage-3",
+    "test:compile": "npm run compile && node test/test-compile.js",
+    "test:babel": "babel-node test/test-babel.js --presets es2015,stage-3",
     "compile": "gulp",
     "prepublish": "npm run compile"
   },

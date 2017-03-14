@@ -8479,6 +8479,7 @@ var Enumerable = function () {
             var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
+            console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
             return _arrayComparer(array, last, comparer);
         }
     }, {
@@ -8486,7 +8487,67 @@ var Enumerable = function () {
         value: function predicateComparer(predicateArray) {
             var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
+            console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
             return _predicateComparer(predicateArray, last);
+        }
+    }, {
+        key: 'comparers',
+        get: function get() {
+            return {
+                get default() {
+                    return defaultComparer;
+                },
+                get equality() {
+                    return defaultEqualityComparer;
+                },
+                array: function array(_array) {
+                    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+                    return _arrayComparer(_array, last, comparer);
+                },
+                predicate: function predicate(predicateArray) {
+                    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+                    return _predicateComparer(predicateArray, last);
+                }
+            };
+        }
+    }, {
+        key: 'selectors',
+        get: function get() {
+            return {
+                get default() {
+                    return defaultSelector;
+                },
+                get key() {
+                    return defaultKeySelector;
+                },
+                get value() {
+                    return defaultValueSelector;
+                },
+                get groupResult() {
+                    return defaultGroupResultSelector;
+                }
+            };
+        }
+    }, {
+        key: 'actions',
+        get: function get() {
+            return {
+                get default() {
+                    return defaultAction;
+                }
+            };
+        }
+    }, {
+        key: 'predicates',
+        get: function get() {
+            return {
+                get default() {
+                    return defaultPredicate;
+                }
+            };
         }
     }]);
 
@@ -8531,7 +8592,13 @@ var SingleEnumerable = require('./enumerables/SingleEnumerable');
 var Dictionary = require('./enumerables/Dictionary');
 var Lookup = require('./enumerables/Lookup');
 
-},{"./IEnumerable":299,"./IEnumerator":300,"./core/core":303,"./core/exceptions/KeysForMultiElementsException":304,"./core/exceptions/NoSuchElementsException":305,"./core/exceptions/OutOfRangeException":306,"./core/exceptions/TooManyElementsException":307,"./enumerables/ConcatEnumerable":309,"./enumerables/Dictionary":310,"./enumerables/DistinctEnumerable":311,"./enumerables/EmptyEnumerable":312,"./enumerables/ExceptEnumerable":314,"./enumerables/GroupJoinEnumerable":315,"./enumerables/GroupingEnumerable":316,"./enumerables/IOrderedEnumerable":319,"./enumerables/IntersectEnumerable":320,"./enumerables/IteratorEnumerable":321,"./enumerables/JoinEnumerable":322,"./enumerables/Lookup":323,"./enumerables/OfTypeEnumerable":326,"./enumerables/OrderByDescendingEnumerable":327,"./enumerables/OrderByEnumerable":328,"./enumerables/RangeEnumerable":329,"./enumerables/RepeatEnumerable":330,"./enumerables/ReverseEnumerable":331,"./enumerables/SelectEnumerable":332,"./enumerables/SelectManyEnumerable":333,"./enumerables/SingleEnumerable":334,"./enumerables/SkipEnumerable":335,"./enumerables/SkipWhileEnumerable":336,"./enumerables/TakeEnumerable":338,"./enumerables/TakeWhileEnumerable":339,"./enumerables/ThenByDescendingEnumerable":340,"./enumerables/ThenByEnumerable":341,"./enumerables/UnionEnumerable":342,"./enumerables/WhereEnumerable":343,"./enumerables/ZipEnumerable":344,"./methods/arrayComparer":349,"./methods/defaultAction":350,"./methods/defaultComparer":351,"./methods/defaultEqualityComparer":352,"./methods/defaultGroupResultSelector":353,"./methods/defaultKeySelector":354,"./methods/defaultPredicate":355,"./methods/defaultSelector":356,"./methods/defaultValueSelector":357,"./methods/predicateComparer":360}],299:[function(require,module,exports){
+var IComparable = require('./core/IComparable');
+var IEquatable = require('./core/IEquatable');
+
+Enumerable.IComparable = IComparable;
+Enumerable.IEquatable = IEquatable;
+
+},{"./IEnumerable":299,"./IEnumerator":300,"./core/IComparable":301,"./core/IEquatable":302,"./core/core":303,"./core/exceptions/KeysForMultiElementsException":304,"./core/exceptions/NoSuchElementsException":305,"./core/exceptions/OutOfRangeException":306,"./core/exceptions/TooManyElementsException":307,"./enumerables/ConcatEnumerable":309,"./enumerables/Dictionary":310,"./enumerables/DistinctEnumerable":311,"./enumerables/EmptyEnumerable":312,"./enumerables/ExceptEnumerable":314,"./enumerables/GroupJoinEnumerable":315,"./enumerables/GroupingEnumerable":316,"./enumerables/IOrderedEnumerable":319,"./enumerables/IntersectEnumerable":320,"./enumerables/IteratorEnumerable":321,"./enumerables/JoinEnumerable":322,"./enumerables/Lookup":323,"./enumerables/OfTypeEnumerable":326,"./enumerables/OrderByDescendingEnumerable":327,"./enumerables/OrderByEnumerable":328,"./enumerables/RangeEnumerable":329,"./enumerables/RepeatEnumerable":330,"./enumerables/ReverseEnumerable":331,"./enumerables/SelectEnumerable":332,"./enumerables/SelectManyEnumerable":333,"./enumerables/SingleEnumerable":334,"./enumerables/SkipEnumerable":335,"./enumerables/SkipWhileEnumerable":336,"./enumerables/TakeEnumerable":338,"./enumerables/TakeWhileEnumerable":339,"./enumerables/ThenByDescendingEnumerable":340,"./enumerables/ThenByEnumerable":341,"./enumerables/UnionEnumerable":342,"./enumerables/WhereEnumerable":343,"./enumerables/ZipEnumerable":344,"./methods/arrayComparer":349,"./methods/defaultAction":350,"./methods/defaultComparer":351,"./methods/defaultEqualityComparer":352,"./methods/defaultGroupResultSelector":353,"./methods/defaultKeySelector":354,"./methods/defaultPredicate":355,"./methods/defaultSelector":356,"./methods/defaultValueSelector":357,"./methods/predicateComparer":360}],299:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -12613,6 +12680,8 @@ module.exports = function () {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var g = (typeof global === "undefined" ? "undefined" : _typeof(global)) === "object" ? global : (typeof window === "undefined" ? "undefined" : _typeof(window)) === "object" ? window : (typeof self === "undefined" ? "undefined" : _typeof(self)) === "object" ? self : undefined;
 if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
@@ -12621,9 +12690,6 @@ if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
 var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
-
-var IComparable = require('./core/IComparable');
-var IEquatable = require('./core/IEquatable');
 
 var MapEnumerable = require('./enumerables/MapEnumerable');
 var ArrayEnumerable = require('./enumerables/ArrayEnumerable');
@@ -12635,38 +12701,42 @@ var extendArray = require('./linq-array');
 var extendObject = require('./linq-object');
 var extendString = require('./linq-string');
 
-core.defineProperties(Map.prototype, {
-    asEnumerable: function asEnumerable() {
-        return new MapEnumerable(this);
+var defaultName = 'asEnumerable';
+var prevName = '';
+var init = function init(name) {
+    if (name !== defaultName && prevName) {
+        delete String.prototype[prevName];
+        delete Array.prototype[prevName];
+        delete Map.prototype[prevName];
+        delete Set.prototype[prevName];
+        delete Object.prototype[prevName];
+        prevName = '';
     }
-});
-core.defineProperties(Array.prototype, {
-    asEnumerable: function asEnumerable() {
-        return new ArrayEnumerable(this);
-    }
-});
-core.defineProperties(Set.prototype, {
-    asEnumerable: function asEnumerable() {
-        return new ArrayEnumerable(this);
-    }
-});
-core.defineProperties(String.prototype, {
-    asEnumerable: function asEnumerable() {
+    core.defineProperties(String.prototype, _defineProperty({}, name, function () {
         return new StringEnumerable(this);
-    }
-});
-core.defineProperties(Object.prototype, {
-    asEnumerable: function asEnumerable() {
+    }));
+    core.defineProperties(Array.prototype, _defineProperty({}, name, function () {
+        return new ArrayEnumerable(this);
+    }));
+    core.defineProperties(Map.prototype, _defineProperty({}, name, function () {
+        return new MapEnumerable(this);
+    }));
+    core.defineProperties(Set.prototype, _defineProperty({}, name, function () {
+        return new ArrayEnumerable(this);
+    }));
+    core.defineProperties(Object.prototype, _defineProperty({}, name, function () {
         var type = core.getType(this);
         if (type.endsWith(' Iterator')) {
             return new IteratorEnumerable(this);
         } else {
             return new ObjectEnumerable(this);
         }
-    }
-});
+    }));
+};
 
-Enumerable.Config = {
+init(defaultName);
+
+Enumerable.config = {
     extends: {
         set array(value) {
             if (value) {
@@ -12683,17 +12753,17 @@ Enumerable.Config = {
                 extendString();
             }
         }
+    },
+    set as(name) {
+        init(name);
     }
 };
-
-Enumerable.IComparable = IComparable;
-Enumerable.IEquatable = IEquatable;
 
 module.exports = Enumerable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":298,"./core/IComparable":301,"./core/IEquatable":302,"./core/core":303,"./enumerables/ArrayEnumerable":308,"./enumerables/IteratorEnumerable":321,"./enumerables/MapEnumerable":324,"./enumerables/ObjectEnumerable":325,"./enumerables/StringEnumerable":337,"./linq-array":345,"./linq-object":346,"./linq-string":347,"babel-polyfill":1}],349:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303,"./enumerables/ArrayEnumerable":308,"./enumerables/IteratorEnumerable":321,"./enumerables/MapEnumerable":324,"./enumerables/ObjectEnumerable":325,"./enumerables/StringEnumerable":337,"./linq-array":345,"./linq-object":346,"./linq-string":347,"babel-polyfill":1}],349:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');

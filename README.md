@@ -11,6 +11,13 @@ use linq and lambda in javascript
 
 ## Change list 更新日志
 
+### v2.1.8
+
+	新增 Enumerable.config.as 方法 用来设置替代 asEnumerable 方法的方法名
+	将 Enumerable.Config 修改为 Enumerable.config
+	弃用 Enumerable.arrayComparer(建议:Enumerable.comparers.array) 与 Enumerable.predicateComparer(建议:Enumerable.comparers.predicate)
+	通过 Enumerable 可以获取 内置 的 actions, predicates, selectors, comparers
+
 ### 2017-03-14 v2.1.7
 
 	修复了一些在IE浏览器中的bug
@@ -66,9 +73,10 @@ const Enumerable = require('linq-js');
 
 #### 2. 配置
 ```javascript
-Enumerable.Config.extends.array = true; //开启针对Array的扩展
-Enumerable.Config.extends.string = true; //开启针对String的扩展
-Enumerable.Config.extends.object = true; //开启针对Object的扩展
+Enumerable.config.extends.array = true; //开启针对Array的扩展
+Enumerable.config.extends.string = true; //开启针对String的扩展
+Enumerable.config.extends.object = true; //开启针对Object的扩展
+Enumerable.config.as = 'em'; //设置使用[].em()来获取IEnumerable对象
 ```
 
 ### IEnumerable对象
@@ -718,9 +726,9 @@ function Enumerable.range(
 > Enumerable.range(2, 3); //2, 3, 4
 > ```
 
-#### 3. `arrayComparer(array, comparer, last)`
+#### 3. `comparers.array(array, comparer, last)` +1
 ```typescript
-function Enumerable.arrayComparer(
+function Enumerable.comparers.array(
 	array:array, // 表示值的顺序的数组
 	last:boolean = false, // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
 	comparer:Function = defaultEqualityComparer // 用于查找对比
@@ -743,9 +751,9 @@ function Enumerable.arrayComparer(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
-#### 4. `predicateComparer(array, last)`
+#### 4. `comparers.predicate(array, last)` +1
 ```typescript
-function Enumerable.predicateComparer(
+function Enumerable.comparers.predicate(
 	array:array<Function>, // 包含一组校验方法的数组
 	last:boolean = false // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
 ):Function; // comparer
@@ -764,6 +772,15 @@ function Enumerable.predicateComparer(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"])).select(v => v.value); //'F', 'A', 'C', 'E', 'D', 'B'
 > e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
+
+#### 5. `comparers.default` [defaultComparer]
+#### 6. `comparers.equality` [defaultEqualityComparer]
+#### 7. `selectors.default` [defaultSelector]
+#### 8. `selectors.key` [defaultKeySelector]
+#### 9. `selectors.value` [defaultValueSelector]
+#### 10. `selectors.groupResult` [defaultGroupResultSelector]
+#### 11. `predicates:default` [defaultPredicate]
+#### 12. `actions:default` [defaultAction]
 
 More docs and examples, to be continue...
 更多接口文档的案例,未完待补充...  
