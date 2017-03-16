@@ -290,18 +290,18 @@ function elementAtOrDefault(
 ):any;
 ```
 
-#### 22. `firstAt(predicate)`
+#### 22. `first(predicate)`
 ```typescript
-function firstAt(
+function first(
 	predicate:Function = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 23. `firstAtOrDefault(defaultValue, predicate)`
+#### 23. `firstOrDefault(defaultValue, predicate)`
 ```typescript
-function firstAtOrDefault(
+function firstOrDefault(
 	defaultValue:any,
 	predicate:Function = defaultPredicate
 ):any,
@@ -309,18 +309,18 @@ function firstAtOrDefault(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 24. `lastAt(predicate)`
+#### 24. `last(predicate)`
 ```typescript
-function lastAt(
+function last(
 	predicate:Function = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 25. `lastAtOrDefault(defaultValue, predicate)`
+#### 25. `lastOrDefault(defaultValue, predicate)`
 ```typescript
-function lastAtOrDefault(
+function lastOrDefault(
 	defaultValue:any,
 	predicate:Function = defaultPredicate
 ):any,
@@ -328,18 +328,18 @@ function lastAtOrDefault(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 26. `singleAt(predicate)`
+#### 26. `single(predicate)`
 ```typescript
-function singleAt(
+function single(
 	predicate:Function = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 27. `singleAtOrDefault(defaultValue, predicate)`
+#### 27. `singleOrDefault(defaultValue, predicate)`
 ```typescript
-function singleAtOrDefault(
+function singleOrDefault(
 	defaultValue:any,
 	predicate:Function = defaultPredicate
 ):any,
@@ -740,6 +740,15 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.9
 
+	修复了 IEnumerable 的方法 defaultIfEmpty 的bug
+	修复了 IEnumerable 的方法 sum 与 average 的bug
+	修复了 sequenceEqual 在完全匹配是依然返回 false 的bug
+	修复了 Enumerable.reverse 如果参数 source 使用原生的 Array 对象,报错的bug
+	增加了 ofType 使用 String 类型的数据 作为 type 的值,表示筛选的类型名称(此模式下为强校验,不能检查继承关系)
+	优化了 ofType 的一些问题, 对 Object 类型的判定做了修改 RegExp,Array,Function 将不会被认定为一个 Object 对象
+	修复 ofType 方法不能识别 Boolean 对象的问题
+	修复了 Enumerable.defaultIfEmpty 如果参数 source 使用原生的 Array 对象,不会返回一个 IEnumerable 对象的bug
+	修复了 min 与 max 方法报 No such elements 的 bug
 	修复 MapEnumerable 的 has 与 delete 方法参数comparer默认值错误的bug
 	修复一个不能对原生 Array,Object,String 进行有效扩展的bug
 	使用严格模式执行代码 use strict

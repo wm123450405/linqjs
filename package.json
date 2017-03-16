@@ -16,9 +16,10 @@
     "url": "git+https://github.com/wm123450405/linqjs.git"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
+    "asserture": "^1.0.2",
+    "babel-cli": "^6.22.0",
     "babel-polyfill": "^6.22.0",
-    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",

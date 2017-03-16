@@ -119,8 +119,8 @@ class IEnumerable {
     groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
-    defaultIfEmpty() {
-        return Enumerable.defaultIfEmpty(this);
+    defaultIfEmpty(defaultValue) {
+        return Enumerable.defaultIfEmpty(this, defaultValue);
     }
     all(predicate = defaultPredicate) {
         return Enumerable.all(this, predicate);
@@ -155,8 +155,8 @@ class IEnumerable {
     count(predicate = defaultPredicate) {
         return Enumerable.count(this, predicate);
     }
-    sum(predicate = defaultPredicate) {
-        return Enumerable.sum(this, predicate);
+    sum(selector = defaultSelector) {
+        return Enumerable.sum(this, selector);
     }
     max(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.max(this, selector, comparer);
@@ -164,8 +164,8 @@ class IEnumerable {
     min(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.min(this, selector, comparer);
     }
-    average(predicate = defaultPredicate) {
-        return Enumerable.average(this, predicate);
+    average(selector = defaultSelector) {
+        return Enumerable.average(this, selector);
     }
     aggregate(seed, func, selector = defaultSelector) {
         return Enumerable.aggregate(this, seed, func, selector);

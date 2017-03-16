@@ -316,7 +316,7 @@ class Enumerable {
         return new ZipEnumerable(source, other, resultSelector);
     }
     static defaultIfEmpty(source, defaultValue) {
-        return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : source;
+        return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : Enumerable.asEnumerable(source);
     }
     static all(source, predicate = defaultPredicate) {
         let index = 0;
@@ -343,15 +343,13 @@ class Enumerable {
         let sourceIterator = source[Symbol.iterator]();
         let otherIterator = other[Symbol.iterator]();
         let sourceElement, otherElement;
-        do {
-            sourceElement = sourceIterator.next();
-            otherElement = otherIterator.next();
+        while(!((sourceElement = sourceIterator.next()).done & (otherElement = otherIterator.next()).done)) {
             if (sourceElement.done != otherElement.done) {
                 return false;
             } else if (!comparer(sourceElement.value, otherElement.value)) {
                 return false;
             }
-        } while (!(sourceElement.done && otherElement.done));
+        }
         return true;
     }
     static first(source, predicate = defaultPredicate) {
@@ -458,6 +456,7 @@ class Enumerable {
         let sum = 0, index = 0;
         for (let element of source) {
             sum += parseFloat(selector(element, index++));
+            if (isNaN(sum)) return sum;
         }
         return sum;
     }
@@ -470,6 +469,7 @@ class Enumerable {
             } else {
                 max = comparer(max, element) > 0 ? max : element;
             }
+            first = false;
         }
         if (first) {
             throw NoSuchElementsException;
@@ -486,6 +486,7 @@ class Enumerable {
             } else {
                 min = comparer(min, element) < 0 ? min : element;
             }
+            first = false;
         }
         if (first) {
             throw NoSuchElementsException;
@@ -497,6 +498,7 @@ class Enumerable {
         let sum = 0, count = 0, index = 0;
         for (let element of source) {
             sum += parseFloat(selector(element, index++));
+            if (isNaN(sum)) return sum;
             count++;
         }
         if (count !== 0) {

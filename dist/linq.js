@@ -7255,7 +7255,7 @@ var Enumerable = function () {
                 }
             });
             if (type !== 'string') {
-                defineProperties(prototype, {
+                core.defineProperties(prototype, {
                     concat: function concat() {
                         var other = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
@@ -7264,7 +7264,7 @@ var Enumerable = function () {
                 });
             }
             if (type !== 'object') {
-                defineProperties(prototype, {
+                core.defineProperties(prototype, {
                     toDictionary: function toDictionary() {
                         var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
                         var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
@@ -7281,7 +7281,7 @@ var Enumerable = function () {
                     }
                 });
             } else {
-                defineProperties(prototype, {
+                core.defineProperties(prototype, {
                     toDictionary: function toDictionary() {
                         var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
                         var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
@@ -7907,9 +7907,9 @@ var Enumerable = function () {
                 }
             }
 
-            if (count == 1) {
+            if (count === 1) {
                 return single;
-            } else if (count == 0) {
+            } else if (count === 0) {
                 throw NoSuchElementsException;
             } else {
                 throw TooManyElementsException;
@@ -7954,9 +7954,9 @@ var Enumerable = function () {
                 }
             }
 
-            if (count == 1) {
+            if (count === 1) {
                 return single;
-            } else if (count == 0) {
+            } else if (count === 0) {
                 return defaultValue;
             } else {
                 throw TooManyElementsException;
@@ -8189,7 +8189,7 @@ var Enumerable = function () {
                 }
             }
 
-            if (count != 0) {
+            if (count !== 0) {
                 return sum / count;
             } else {
                 throw NoSuchElementsException;
@@ -8240,7 +8240,7 @@ var Enumerable = function () {
                     for (var _iterator19 = source[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
                         var element = _step19.value;
 
-                        if (index-- == 0) {
+                        if (index-- === 0) {
                             return element;
                         }
                     }
@@ -8273,7 +8273,7 @@ var Enumerable = function () {
                     for (var _iterator20 = source[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
                         var element = _step20.value;
 
-                        if (index-- == 0) {
+                        if (index-- === 0) {
                             return element;
                         }
                     }
@@ -8553,8 +8553,6 @@ var Enumerable = function () {
 
     return Enumerable;
 }();
-
-;
 
 module.exports = Enumerable;
 
@@ -9028,8 +9026,6 @@ var IEnumerable = function () {
     return IEnumerable;
 }();
 
-;
-
 module.exports = IEnumerable;
 
 var Enumerable = require('./Enumerable');
@@ -9067,12 +9063,10 @@ var IEnumerator = function IEnumerator(enumerable) {
 	this.reset();
 };
 
-;
-
 module.exports = IEnumerator;
 
 },{"./core/core":303}],301:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9084,7 +9078,7 @@ var IComparable = function () {
 	}
 
 	_createClass(IComparable, [{
-		key: "compare",
+		key: 'compare',
 		value: function compare(other) {
 			return 0;
 		}
@@ -9096,7 +9090,7 @@ var IComparable = function () {
 module.exports = IComparable;
 
 },{}],302:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9108,7 +9102,7 @@ var IEquatable = function () {
 	}
 
 	_createClass(IEquatable, [{
-		key: "equals",
+		key: 'equals',
 		value: function equals(other) {
 			return false;
 		}
@@ -9117,12 +9111,16 @@ var IEquatable = function () {
 	return IEquatable;
 }();
 
-;
-
 module.exports = IEquatable;
 
 },{}],303:[function(require,module,exports){
 'use strict';
+
+var getter = function getter(properties, property) {
+	return function () {
+		return properties[property];
+	};
+};
 
 var core = {
 	getType: function getType(value) {
@@ -9168,18 +9166,10 @@ var core = {
 		}
 	},
 	defineProperties: function defineProperties(prototype, properties) {
-		var _this = this;
-
-		var _loop = function _loop(property) {
-			if (properties.hasOwnProperty(property)) {
-				_this.defineProperty(prototype, property, function () {
-					return properties[property];
-				}, true);
-			}
-		};
-
 		for (var property in properties) {
-			_loop(property);
+			if (properties.hasOwnProperty(property)) {
+				this.defineProperty(prototype, property, getter(properties, property), true);
+			}
 		}
 	},
 
@@ -9275,8 +9265,6 @@ var ArrayEnumerable = function (_IteratorEnumerable) {
     return ArrayEnumerable;
 }(IteratorEnumerable);
 
-;
-
 module.exports = ArrayEnumerable;
 
 },{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultEqualityComparer":352,"./IteratorEnumerable":321}],309:[function(require,module,exports){
@@ -9324,8 +9312,6 @@ var ConcatEnumerable = function (_IEnumerable) {
 
     return ConcatEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = ConcatEnumerable;
 
@@ -9386,8 +9372,6 @@ var Dictionary = function (_MapEnumerable) {
 
     return Dictionary;
 }(MapEnumerable);
-
-;
 
 module.exports = Dictionary;
 
@@ -9501,8 +9485,6 @@ var DistinctEnumerable = function (_IEnumerable) {
     return DistinctEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = DistinctEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352}],312:[function(require,module,exports){
@@ -9531,6 +9513,9 @@ var EmptyEnumerable = function (_IEnumerable) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
+                            return _context.delegateYield([], 't0', 1);
+
+                        case 1:
                         case 'end':
                             return _context.stop();
                     }
@@ -9542,8 +9527,6 @@ var EmptyEnumerable = function (_IEnumerable) {
 
     return EmptyEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = EmptyEnumerable;
 
@@ -9571,8 +9554,6 @@ var Entry = function () {
 
     return Entry;
 }();
-
-;
 
 module.exports = Entry;
 
@@ -9691,20 +9672,18 @@ var ExceptEnumerable = function (_IEnumerable) {
     return ExceptEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = ExceptEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352}],315:[function(require,module,exports){
 'use strict';
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var IEnumerable = require('./../IEnumerable');
 
@@ -9715,6 +9694,50 @@ var defaultSelector = require('./../methods/defaultSelector');
 
 var IGrouping = require('./IGrouping');
 var Entry = require('./Entry');
+
+var createGrouping = function createGrouping(array, key, comparer, hasNext) {
+    return new IGrouping(key, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+        var index;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        index = 0;
+
+                    case 1:
+                        if (!(array.length > index || hasNext())) {
+                            _context.next = 9;
+                            break;
+                        }
+
+                        if (!(array.length > index)) {
+                            _context.next = 7;
+                            break;
+                        }
+
+                        if (!comparer(key, array[index].key)) {
+                            _context.next = 6;
+                            break;
+                        }
+
+                        _context.next = 6;
+                        return array[index].value;
+
+                    case 6:
+                        index++;
+
+                    case 7:
+                        _context.next = 1;
+                        break;
+
+                    case 9:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    })));
+};
 
 var GroupJoinEnumerable = function (_IEnumerable) {
     _inherits(GroupJoinEnumerable, _IEnumerable);
@@ -9729,13 +9752,11 @@ var GroupJoinEnumerable = function (_IEnumerable) {
         var _this = _possibleConstructorReturn(this, (GroupJoinEnumerable.__proto__ || Object.getPrototypeOf(GroupJoinEnumerable)).call(this, outer));
 
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
-            var _this2 = this;
+            var innerTemp, outerIndex, innerIndex, innerIterator, innerHasNext, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, outerElement, outerKey;
 
-            var innerTemp, outerIndex, innerIndex, innerIterator, innerHasNext, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step;
-
-            return regeneratorRuntime.wrap(function _callee2$(_context3) {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
-                    switch (_context3.prev = _context3.next) {
+                    switch (_context2.prev = _context2.next) {
                         case 0:
                             innerTemp = [], outerIndex = 0, innerIndex = 0, innerIterator = inner[Symbol.iterator]();
 
@@ -9751,131 +9772,74 @@ var GroupJoinEnumerable = function (_IEnumerable) {
                             _iteratorNormalCompletion = true;
                             _didIteratorError = false;
                             _iteratorError = undefined;
-                            _context3.prev = 5;
-                            _loop = regeneratorRuntime.mark(function _loop() {
-                                var outerElement, outerKey;
-                                return regeneratorRuntime.wrap(function _loop$(_context2) {
-                                    while (1) {
-                                        switch (_context2.prev = _context2.next) {
-                                            case 0:
-                                                outerElement = _step.value;
-                                                outerKey = outerKeySelector(outerElement, outerIndex++);
-                                                _context2.next = 4;
-                                                return resultSelector(outerElement, new IGrouping(outerKey, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
-                                                    var index;
-                                                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                                                        while (1) {
-                                                            switch (_context.prev = _context.next) {
-                                                                case 0:
-                                                                    index = 0;
-
-                                                                case 1:
-                                                                    if (!(innerTemp.length > index || innerHasNext())) {
-                                                                        _context.next = 9;
-                                                                        break;
-                                                                    }
-
-                                                                    if (!(innerTemp.length > index)) {
-                                                                        _context.next = 7;
-                                                                        break;
-                                                                    }
-
-                                                                    if (!comparer(outerKey, innerTemp[index].key)) {
-                                                                        _context.next = 6;
-                                                                        break;
-                                                                    }
-
-                                                                    _context.next = 6;
-                                                                    return innerTemp[index].value;
-
-                                                                case 6:
-                                                                    index++;
-
-                                                                case 7:
-                                                                    _context.next = 1;
-                                                                    break;
-
-                                                                case 9:
-                                                                case 'end':
-                                                                    return _context.stop();
-                                                            }
-                                                        }
-                                                    }, _callee, this);
-                                                }))));
-
-                                            case 4:
-                                                outerIndex++;
-
-                                            case 5:
-                                            case 'end':
-                                                return _context2.stop();
-                                        }
-                                    }
-                                }, _loop, _this2);
-                            });
+                            _context2.prev = 5;
                             _iterator = outer[Symbol.iterator]();
 
-                        case 8:
+                        case 7:
                             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                _context3.next = 13;
+                                _context2.next = 16;
                                 break;
                             }
 
-                            return _context3.delegateYield(_loop(), 't0', 10);
+                            outerElement = _step.value;
+                            outerKey = outerKeySelector(outerElement, outerIndex++);
+                            _context2.next = 12;
+                            return resultSelector(outerElement, createGrouping(innerTemp, outerKey, comparer, innerHasNext));
 
-                        case 10:
-                            _iteratorNormalCompletion = true;
-                            _context3.next = 8;
-                            break;
+                        case 12:
+                            outerIndex++;
 
                         case 13:
-                            _context3.next = 19;
+                            _iteratorNormalCompletion = true;
+                            _context2.next = 7;
                             break;
 
-                        case 15:
-                            _context3.prev = 15;
-                            _context3.t1 = _context3['catch'](5);
-                            _didIteratorError = true;
-                            _iteratorError = _context3.t1;
+                        case 16:
+                            _context2.next = 22;
+                            break;
 
-                        case 19:
-                            _context3.prev = 19;
-                            _context3.prev = 20;
+                        case 18:
+                            _context2.prev = 18;
+                            _context2.t0 = _context2['catch'](5);
+                            _didIteratorError = true;
+                            _iteratorError = _context2.t0;
+
+                        case 22:
+                            _context2.prev = 22;
+                            _context2.prev = 23;
 
                             if (!_iteratorNormalCompletion && _iterator.return) {
                                 _iterator.return();
                             }
 
-                        case 22:
-                            _context3.prev = 22;
+                        case 25:
+                            _context2.prev = 25;
 
                             if (!_didIteratorError) {
-                                _context3.next = 25;
+                                _context2.next = 28;
                                 break;
                             }
 
                             throw _iteratorError;
 
-                        case 25:
-                            return _context3.finish(22);
+                        case 28:
+                            return _context2.finish(25);
 
-                        case 26:
-                            return _context3.finish(19);
+                        case 29:
+                            return _context2.finish(22);
 
-                        case 27:
+                        case 30:
                         case 'end':
-                            return _context3.stop();
+                            return _context2.stop();
                     }
                 }
-            }, _callee2, this, [[5, 15, 19, 27], [20,, 22, 26]]);
+            }, _callee2, this, [[5, 18, 22, 30], [23,, 25, 29]]);
         }));
         return _this;
     }
 
     return GroupJoinEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = GroupJoinEnumerable;
 
@@ -10005,8 +9969,6 @@ var GroupingEnumerable = function (_IEnumerable) {
     return GroupingEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = GroupingEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352,"./../methods/defaultGroupResultSelector":353,"./../methods/defaultSelector":356,"./../methods/equalityPredicate":359,"./IGrouping":317}],317:[function(require,module,exports){
@@ -10050,8 +10012,6 @@ var IGrouping = function (_IEnumerable) {
 
     return IGrouping;
 }(IEnumerable);
-
-;
 
 module.exports = IGrouping;
 
@@ -10147,8 +10107,6 @@ var IMapEnumerable = function (_IEnumerable) {
     return IMapEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = IMapEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultAction":350,"./../methods/defaultEqualityComparer":352,"./../methods/defaultKeySelector":354,"./../methods/defaultValueSelector":357}],319:[function(require,module,exports){
@@ -10190,7 +10148,7 @@ var IOrderedEnumerable = function (_IEnumerable) {
                             _didIteratorError = false;
                             _iteratorError = undefined;
                             _context.prev = 3;
-                            _iterator = source.toArray().sort(orderByComparer)[Symbol.iterator]();
+                            _iterator = Enumerable.toArray(source).sort(orderByComparer)[Symbol.iterator]();
 
                         case 5:
                             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
@@ -10270,7 +10228,6 @@ var IOrderedEnumerable = function (_IEnumerable) {
     return IOrderedEnumerable;
 }(IEnumerable);
 
-;
 IOrderedEnumerable.source = Symbol('source');
 IOrderedEnumerable.orderByComparer = Symbol('orderByComparer');
 
@@ -10391,8 +10348,6 @@ var IntersectEnumerable = function (_IEnumerable) {
     return IntersectEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = IntersectEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352}],321:[function(require,module,exports){
@@ -10435,8 +10390,6 @@ var IteratorEnumerable = function (_IEnumerable) {
 
     return IteratorEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = IteratorEnumerable;
 
@@ -10491,7 +10444,7 @@ var JoinEnumerable = function (_IEnumerable) {
                             outerElement = _step.value;
                             outerKey = outerKeySelector(outerElement, outerIndex);
 
-                            if (!(outerIndex == 0)) {
+                            if (!(outerIndex === 0)) {
                                 _context.next = 42;
                                 break;
                             }
@@ -10682,8 +10635,6 @@ var JoinEnumerable = function (_IEnumerable) {
     return JoinEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = JoinEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352,"./../methods/defaultSelector":356}],323:[function(require,module,exports){
@@ -10708,8 +10659,6 @@ var Lookup = function (_Dictionary) {
 
     return Lookup;
 }(Dictionary);
-
-;
 
 module.exports = Lookup;
 
@@ -10820,12 +10769,12 @@ var MapEnumerable = function (_IMapEnumerable) {
                 return map.set(map.keys().asEnumerable().singleOrDefault(key, equalityPredicate(key, comparer)), value);
             },
             has: function has(key) {
-                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                 return map.keys().asEnumerable().contains(key, comparer);
             },
             delete: function _delete(key) {
-                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
 
                 return map.delete(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
             },
@@ -10844,8 +10793,6 @@ var MapEnumerable = function (_IMapEnumerable) {
 
     return MapEnumerable;
 }(IMapEnumerable);
-
-;
 
 module.exports = MapEnumerable;
 
@@ -10946,8 +10893,6 @@ var ObjectEnumerable = function (_IMapEnumerable) {
 
     return ObjectEnumerable;
 }(IMapEnumerable);
-
-;
 
 module.exports = ObjectEnumerable;
 
@@ -11075,8 +11020,6 @@ var OfTypeEnumerable = function (_IEnumerable) {
     return OfTypeEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = OfTypeEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303}],327:[function(require,module,exports){
@@ -11110,8 +11053,6 @@ var OrderByDescendingEnumerable = function (_IOrderedEnumerable) {
     return OrderByDescendingEnumerable;
 }(IOrderedEnumerable);
 
-;
-
 module.exports = OrderByDescendingEnumerable;
 
 },{"./../methods/defaultComparer":351,"./../methods/defaultSelector":356,"./../methods/descendingComparer":358,"./../methods/selectorComparer":361,"./IOrderedEnumerable":319}],328:[function(require,module,exports){
@@ -11143,8 +11084,6 @@ var OrderByEnumerable = function (_IOrderedEnumerable) {
 
     return OrderByEnumerable;
 }(IOrderedEnumerable);
-
-;
 
 module.exports = OrderByEnumerable;
 
@@ -11203,8 +11142,6 @@ var RangeEnumerable = function (_IEnumerable) {
 
     return RangeEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = RangeEnumerable;
 
@@ -11266,8 +11203,6 @@ var RepeatEnumerable = function (_IEnumerable) {
     return RepeatEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = RepeatEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303}],331:[function(require,module,exports){
@@ -11326,8 +11261,6 @@ var ReverseEnumerable = function (_IEnumerable) {
 
     return ReverseEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = ReverseEnumerable;
 
@@ -11431,8 +11364,6 @@ var SelectEnumerable = function (_IEnumerable) {
 
     return SelectEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = SelectEnumerable;
 
@@ -11590,8 +11521,6 @@ var SelectManyEnumerable = function (_IEnumerable) {
     return SelectManyEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = SelectManyEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultSelector":356}],334:[function(require,module,exports){
@@ -11744,8 +11673,6 @@ var SkipEnumerable = function (_IEnumerable) {
     return SkipEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = SkipEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303}],336:[function(require,module,exports){
@@ -11857,8 +11784,6 @@ var SkipWhileEnumerable = function (_IEnumerable) {
     return SkipWhileEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = SkipWhileEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":355}],337:[function(require,module,exports){
@@ -11913,8 +11838,6 @@ var StringEnumerable = function (_IteratorEnumerable) {
 
     return StringEnumerable;
 }(IteratorEnumerable);
-
-;
 
 module.exports = StringEnumerable;
 
@@ -12030,8 +11953,6 @@ var TakeEnumerable = function (_IEnumerable) {
 
     return TakeEnumerable;
 }(IEnumerable);
-
-;
 
 module.exports = TakeEnumerable;
 
@@ -12151,8 +12072,6 @@ var TakeWhileEnumerable = function (_IEnumerable) {
     return TakeWhileEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = TakeWhileEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":355}],340:[function(require,module,exports){
@@ -12187,8 +12106,6 @@ var ThenByDescendingEnumerable = function (_IOrderedEnumerable) {
     return ThenByDescendingEnumerable;
 }(IOrderedEnumerable);
 
-;
-
 module.exports = ThenByDescendingEnumerable;
 
 },{"./../methods/defaultComparer":351,"./../methods/defaultSelector":356,"./../methods/descendingComparer":358,"./../methods/selectorComparer":361,"./../methods/thenByComparer":362,"./IOrderedEnumerable":319}],341:[function(require,module,exports){
@@ -12221,8 +12138,6 @@ var ThenByEnumerable = function (_IOrderedEnumerable) {
 
     return ThenByEnumerable;
 }(IOrderedEnumerable);
-
-;
 
 module.exports = ThenByEnumerable;
 
@@ -12399,8 +12314,6 @@ var UnionEnumerable = function (_IEnumerable) {
     return UnionEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = UnionEnumerable;
 
 },{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":352}],343:[function(require,module,exports){
@@ -12510,8 +12423,6 @@ var WhereEnumerable = function (_IEnumerable) {
     return WhereEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = WhereEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":355}],344:[function(require,module,exports){
@@ -12576,8 +12487,6 @@ var ZipEnumerable = function (_IEnumerable) {
     return ZipEnumerable;
 }(IEnumerable);
 
-;
-
 module.exports = ZipEnumerable;
 
 },{"./../IEnumerable":299,"./../core/core":303}],345:[function(require,module,exports){
@@ -12586,9 +12495,16 @@ module.exports = ZipEnumerable;
 /**
  * Created by wm123 on 2017/2/14.
  */
+
 var Enumerable = require('./Enumerable');
 
 var core = require('./core/core');
+
+var getter = function getter(original) {
+	return function () {
+		return Enumerable.asEnumerable(original.apply(this, arguments));
+	};
+};
 
 module.exports = function () {
 	Enumerable.extends(Array.prototype, 'array');
@@ -12606,17 +12522,11 @@ module.exports = function () {
 				var _iteratorError2 = undefined;
 
 				try {
-					var _loop = function _loop() {
+					for (var _iterator2 = props[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 						var prop = _step2.value;
 
 						var original = type.prototype[prop];
-						core.defineProperty(type.prototype, prop, function () {
-							return Enumerable.asEnumerable(original.apply(this, arguments));
-						});
-					};
-
-					for (var _iterator2 = props[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-						_loop();
+						core.defineProperty(type.prototype, prop, getter(original));
 					}
 				} catch (err) {
 					_didIteratorError2 = true;
@@ -12656,6 +12566,7 @@ module.exports = function () {
 /**
  * Created by wm123 on 2017/2/14.
  */
+
 var Enumerable = require('./Enumerable');
 
 module.exports = function () {
@@ -12668,6 +12579,7 @@ module.exports = function () {
 /**
  * Created by wm123 on 2017/2/14.
  */
+
 var Enumerable = require('./Enumerable');
 
 module.exports = function () {
@@ -12701,16 +12613,24 @@ var extendArray = require('./linq-array');
 var extendObject = require('./linq-object');
 var extendString = require('./linq-string');
 
-var defaultName = 'asEnumerable';
-var prevName = '';
-var init = function init(name) {
-    if (name !== defaultName && prevName) {
-        delete String.prototype[prevName];
-        delete Array.prototype[prevName];
-        delete Map.prototype[prevName];
-        delete Set.prototype[prevName];
-        delete Object.prototype[prevName];
-        prevName = '';
+var defaultAs = 'asEnumerable';
+
+var config = {
+    extends: {
+        array: false,
+        object: false,
+        string: false
+    },
+    as: defaultAs
+};
+
+var initAs = function initAs(name) {
+    if (name !== defaultAs && config.as && config.as !== defaultAs) {
+        delete String.prototype[config.as];
+        delete Array.prototype[config.as];
+        delete Map.prototype[config.as];
+        delete Set.prototype[config.as];
+        delete Object.prototype[config.as];
     }
     core.defineProperties(String.prototype, _defineProperty({}, name, function () {
         return new StringEnumerable(this);
@@ -12732,30 +12652,46 @@ var init = function init(name) {
             return new ObjectEnumerable(this);
         }
     }));
+    config.as = name;
 };
 
-init(defaultName);
+initAs(defaultAs);
 
 Enumerable.config = {
     extends: {
         set array(value) {
-            if (value) {
+            if (value && config.extends.array !== value) {
                 extendArray();
             }
+            config.extends.array = value;
+        },
+        get array() {
+            return config.extends.array;
         },
         set object(value) {
-            if (value) {
+            if (value && config.extends.object !== value) {
                 extendObject();
             }
+            config.extends.object = value;
+        },
+        get object() {
+            return config.extends.object;
         },
         set string(value) {
-            if (value) {
+            if (value && config.extends.string !== value) {
                 extendString();
             }
+            config.extends.string = value;
+        },
+        get string() {
+            return config.extends.string;
         }
     },
     set as(name) {
-        init(name);
+        initAs(name);
+    },
+    get as() {
+        return config.as;
     }
 };
 
@@ -12783,7 +12719,7 @@ module.exports = function (array) {
 };
 
 },{"./defaultEqualityComparer":352}],350:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (element, key) {};
 
@@ -12791,6 +12727,7 @@ module.exports = function (element, key) {};
 'use strict';
 
 var IComparable = require('./../core/IComparable');
+
 module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
@@ -12799,12 +12736,13 @@ module.exports = function (element, other) {
 'use strict';
 
 var IEquatable = require('./../core/IEquatable');
+
 module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
 },{"./../core/IEquatable":302}],353:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (key, enumerable) {
   return enumerable;
@@ -12818,14 +12756,14 @@ module.exports = function (element, index) {
 };
 
 },{}],355:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
 },{}],356:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (element, index) {
   return element;
@@ -12839,7 +12777,7 @@ module.exports = function (element, index) {
 };
 
 },{}],358:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (orderBy) {
   return function (element, other) {
@@ -12848,7 +12786,7 @@ module.exports = function (orderBy) {
 };
 
 },{}],359:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (value, comparer) {
   return function (element, index) {
@@ -12857,7 +12795,7 @@ module.exports = function (value, comparer) {
 };
 
 },{}],360:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (array) {
 	var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -12877,7 +12815,7 @@ module.exports = function (array) {
 };
 
 },{}],361:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (selector, comparer) {
   return function (element, other) {
@@ -12886,12 +12824,12 @@ module.exports = function (selector, comparer) {
 };
 
 },{}],362:[function(require,module,exports){
-"use strict";
+'use strict';
 
 module.exports = function (orderByComparer, thenByComparer) {
     return function (element, other) {
         var compare = orderByComparer(element, other);
-        return compare == 0 ? thenByComparer(element, other) : compare;
+        return compare === 0 ? thenByComparer(element, other) : compare;
     };
 };
 
