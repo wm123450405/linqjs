@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -14,7 +16,7 @@ class SkipEnumerable extends IEnumerable {
                 index++;
             }
         });
-    };
-};
+    }
+}
 
 module.exports = SkipEnumerable;

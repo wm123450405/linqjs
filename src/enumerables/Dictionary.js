@@ -1,9 +1,11 @@
+'use strict';
+
 const MapEnumerable = require('./MapEnumerable');
 
 class Dictionary extends MapEnumerable {
     constructor() {
         super(new Map());
-    };
+    }
     toObject() {
         let object = {};
         for (let entry of this) {
@@ -11,6 +13,6 @@ class Dictionary extends MapEnumerable {
         }
         return object;
     }
-};
+}
 
 module.exports = Dictionary;

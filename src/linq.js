@@ -1,5 +1,6 @@
 'use strict';
-var g =
+
+const g =
   typeof global === "object" ? global :
   typeof window === "object" ? window :
   typeof self === "object" ? self : this;
@@ -21,16 +22,24 @@ const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
 
-const defaultName = 'asEnumerable';
-let prevName = '';
-const init = (name) => {
-    if (name !== defaultName && prevName) {
-        delete String.prototype[prevName];
-        delete Array.prototype[prevName];
-        delete Map.prototype[prevName];
-        delete Set.prototype[prevName];
-        delete Object.prototype[prevName];
-        prevName = '';
+const defaultAs = 'asEnumerable';
+
+const config = {
+    extends: {
+        array: false,
+        object: false,
+        string: false
+    },
+    as: defaultAs
+};
+
+const initAs = (name) => {
+    if (name !== defaultAs && config.as && config.as !== defaultAs) {
+        delete String.prototype[config.as];
+        delete Array.prototype[config.as];
+        delete Map.prototype[config.as];
+        delete Set.prototype[config.as];
+        delete Object.prototype[config.as];
     }
     core.defineProperties(String.prototype, {
         [name]() {
@@ -62,31 +71,47 @@ const init = (name) => {
             }
         }
     });
+    config.as = name;
 };
 
-init(defaultName);
+initAs(defaultAs);
 
 Enumerable.config = {
     extends: {
         set array(value) {
-            if (value) {
+            if (value && config.extends.array !== value) {
                 extendArray();
             }
+            config.extends.array = value;
+        },
+        get array() {
+            return config.extends.array;
         },
         set object(value) {
-            if (value) {
+            if (value && config.extends.object !== value) {
                 extendObject();
             }
+            config.extends.object = value;
+        },
+        get object() {
+            return config.extends.object;
         },
         set string(value) {
-            if (value) {
+            if (value && config.extends.string !== value) {
                 extendString();
             }
-        }
+            config.extends.string = value;
+        },
+        get string() {
+            return config.extends.string;
+        },
     },
     set as(name) {
-        init(name);
+        initAs(name);
+    },
+    get as() {
+        return config.as;
     }
-}
+};
 
 module.exports = Enumerable;

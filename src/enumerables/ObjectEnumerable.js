@@ -1,3 +1,5 @@
+'use strict';
+
 const IMapEnumerable = require('./IMapEnumerable');
 
 const core = require('./../core/core');
@@ -12,7 +14,7 @@ class ObjectEnumerable extends IMapEnumerable {
                 yield new Entry(key, source[key]);
             }
         });
-    };
-};
+    }
+}
 
 module.exports = ObjectEnumerable;

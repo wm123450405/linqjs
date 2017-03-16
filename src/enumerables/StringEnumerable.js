@@ -1,3 +1,5 @@
+'use strict';
+
 const IteratorEnumerable = require('./IteratorEnumerable');
 
 const core = require('./../core/core');
@@ -25,7 +27,7 @@ class StringEnumerable extends IteratorEnumerable {
                 }
             }
         });
-    };
-};
+    }
+}
 
 module.exports = StringEnumerable;

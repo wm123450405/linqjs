@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -20,7 +22,7 @@ class IntersectEnumerable extends IEnumerable {
                 }
             }
         });
-    };
-};
+    }
+}
 
 module.exports = IntersectEnumerable;

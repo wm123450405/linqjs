@@ -1,3 +1,5 @@
+'use strict';
+
 class IComparable {
 	compare(other) {
 		return 0;

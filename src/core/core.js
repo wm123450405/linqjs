@@ -1,3 +1,9 @@
+'use strict';
+
+const getter = (properties, property) => {
+	return () => properties[property];
+};
+
 const core = {
 	getType(value) { 
 		if (typeof(value) === 'undefined') {
@@ -42,7 +48,7 @@ const core = {
 	defineProperties(prototype, properties) {
 	    for (let property in properties) {
 	        if (properties.hasOwnProperty(property)) {
-	            this.defineProperty(prototype, property, () => properties[property], true);
+	            this.defineProperty(prototype, property, getter(properties, property), true);
 	        }
 	    }
 	},

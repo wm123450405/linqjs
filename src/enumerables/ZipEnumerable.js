@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -18,6 +20,6 @@ class ZipEnumerable extends IEnumerable {
             } while (!(sourceElement.done && otherElement.done));
         });
     }
-};
+}
 
 module.exports = ZipEnumerable;

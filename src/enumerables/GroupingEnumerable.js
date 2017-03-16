@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -51,6 +53,6 @@ class GroupingEnumerable extends IEnumerable {
             }
         });
     }
-};
+}
 
 module.exports = GroupingEnumerable;

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (array, last = false) => (element, other) => {
 	let enumerable = array.asEnumerable(), count = 0;
 	let elementIndex = enumerable.findIndex(predicate => predicate(element));

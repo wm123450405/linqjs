@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -12,7 +14,7 @@ class JoinEnumerable extends IEnumerable {
             let innerTemp = [], outerIndex = 0;
             for (let outerElement of outer) {
                 let outerKey = outerKeySelector(outerElement, outerIndex);
-                if (outerIndex == 0) {
+                if (outerIndex === 0) {
                     let innerIndex = 0;
                     for (let innerElement of inner) {
                         let innerKey = innerKeySelector(innerElement, innerIndex++);
@@ -32,6 +34,6 @@ class JoinEnumerable extends IEnumerable {
             }
         });
     }
-};
+}
 
 module.exports = JoinEnumerable;

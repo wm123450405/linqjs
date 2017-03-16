@@ -1,3 +1,5 @@
+'use strict';
+
 const IOrderedEnumerable = require('./IOrderedEnumerable');
 
 const thenByComparer = require('./../methods/thenByComparer');
@@ -10,6 +12,6 @@ class ThenByDescendingEnumerable extends IOrderedEnumerable {
     constructor(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {
         super(orderedSource[IOrderedEnumerable.source], thenByComparer(orderedSource[IOrderedEnumerable.orderByComparer], descendingComparer(selectorComparer(keySelector, comparer))));
     }
-};
+}
 
 module.exports = ThenByDescendingEnumerable;

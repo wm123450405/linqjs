@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -13,7 +15,7 @@ class SelectEnumerable extends IEnumerable {
                 yield selector(element, index++);
             }
         });
-    };
-};
+    }
+}
 
 module.exports = SelectEnumerable;

@@ -7,9 +7,29 @@ const buffer = require('vinyl-buffer');
 const babelify = require('babelify');
 const exorcist = require('exorcist');
 const sourcemaps = require('gulp-sourcemaps');
+const jshint = require('gulp-jshint');
 
-gulp.task('default', function() {
-	browserify({
+gulp.task('hint', function() {
+	return gulp.src('./src/**/*.js')
+		.pipe(jshint({
+			esversion: 6,
+			strict: true,
+			browser: true,
+			node: true,
+			validthis: true,
+			globals: {
+				self: false
+			}
+		}))
+		.pipe(jshint.reporter('default'));
+});
+
+gulp.task('unit', ['hint'], function() {
+	require('./test/test-unit');
+});
+
+gulp.task('pack', ['unit'], function() {
+	return browserify({
 			entries: './src/linq.js',
 			standalone: 'Enumerable',
 			debug: true,
@@ -27,7 +47,11 @@ gulp.task('default', function() {
 		.pipe(exorcist('./dist/linq.js.map', '', '', './dist/'))
 		.pipe(source('linq.js'))
 		.pipe(buffer())
-		.pipe(gulp.dest('./dist/'))
+		.pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('min', ['pack'], function() {
+	return gulp.src('./dist/linq.js')
 		.pipe(rename('linq.min.js'))
 		.pipe(sourcemaps.init({
 			loadMaps: true
@@ -41,3 +65,5 @@ gulp.task('default', function() {
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 });
+
+gulp.task('default', ['min']);

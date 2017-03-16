@@ -1,3 +1,5 @@
+'use strict';
+
 const core = require('./core/core');
 
 const defaultPredicate = require('./methods/defaultPredicate');
@@ -157,14 +159,14 @@ class Enumerable {
             }
         });
         if (type !== 'string') {
-            defineProperties(prototype, {
+            core.defineProperties(prototype, {
                 concat(other = []) {
                     return this.asEnumerable().concat(other);
                 }
             });
         }
         if (type !== 'object') {
-            defineProperties(prototype, {
+            core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
                     return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
                 },
@@ -173,7 +175,7 @@ class Enumerable {
                 }
             });
         } else {
-            defineProperties(prototype, {
+            core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
                     return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
                 },
@@ -182,29 +184,29 @@ class Enumerable {
                 }
             });
         }
-    };
+    }
     static getEnumerator(enumerable) {
         return new IEnumerator(enumerable);
-    };
+    }
     static repeat(element, count = 0) {
         return new RepeatEnumerable(element, count);
-    };
+    }
     static range(start, count) {
-        return new RangeEnumerable(start, count)
-    };
+        return new RangeEnumerable(start, count);
+    }
     static empty() {
         return new EmptyEnumerable();
-    };
+    }
     static asEnumerable(object) {
         return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
-    };
+    }
     static toArray(source) {
         let array = [];
         for (let element of source) {
             array.push(element);
         }
         return array;
-    };
+    }
     static toDictionary(source, keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
         let dictionary = new Dictionary(), index = 0;
         for (let element of source) {
@@ -217,7 +219,7 @@ class Enumerable {
             index++;
         }
         return dictionary;
-    };
+    }
     static toLookup(source, keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
         let lookup = new Lookup(), index = 0;
         for (let element of source) {
@@ -230,69 +232,69 @@ class Enumerable {
             index++;
         }
         return lookup;
-    };
+    }
     static where(source, predicate = defaultPredicate) {
         return new WhereEnumerable(source, predicate);
-    };
+    }
     static select(source, selector = defaultSelector) {
         return new SelectEnumerable(source, selector);
-    };
+    }
     static concat(source, other = []) {
         return new ConcatEnumerable(source, other);
-    };
+    }
     static distinct(source, comparer = defaultEqualityComparer) {
         return new DistinctEnumerable(source, comparer);
-    };
+    }
     static except(source, other, comparer = defaultEqualityComparer) {
         return new ExceptEnumerable(source, other, comparer);
-    };
+    }
     static union(source, other, comparer = defaultEqualityComparer) {
         return new UnionEnumerable(source, other, comparer);
-    };
+    }
     static intersect(source, other, comparer = defaultEqualityComparer) {
         return new IntersectEnumerable(source, other, comparer);
-    };
+    }
     static ofType(source, type) {
         return new OfTypeEnumerable(source, type);
-    };
+    }
     static skip(source, count) {
         return new SkipEnumerable(source, count);
-    };
+    }
     static skipWhile(source, predicate = defaultPredicate) {
         return new SkipWhileEnumerable(source, predicate);
-    };
+    }
     static take(source, count) {
         return new TakeEnumerable(source, count);
-    };
+    }
     static takeWhile(source, predicate = defaultPredicate) {
         return new TakeWhileEnumerable(source, predicate);
-    };
+    }
     static orderBy(source, keySelector = defaultSelector, comparer = defaultComparer) {
         return new OrderByEnumerable(source, keySelector, comparer);
-    };
+    }
     static orderByDescending(source, keySelector = defaultSelector, comparer = defaultComparer) {
         return new OrderByDescendingEnumerable(source, keySelector, comparer);
-    };
+    }
     static thenBy(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {
         if (orderedSource instanceof IOrderedEnumerable) {
             return new ThenByEnumerable(orderedSource, keySelector, comparer);
         } else {
             return new OrderByEnumerable(orderedSource, keySelector, comparer);
         }
-    };
+    }
     static thenByDescending(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {
         if (orderedSource instanceof IOrderedEnumerable) {
             return new ThenByDescendingEnumerable(orderedSource, keySelector, comparer);
         } else {
             return new OrderByDescendingEnumerable(orderedSource, keySelector, comparer);
         }
-    };
+    }
     static groupBy(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
-        return new GroupingEnumerable(source, keySelector, elementSelector, resultSelector, comparer)
-    };
+        return new GroupingEnumerable(source, keySelector, elementSelector, resultSelector, comparer);
+    }
     static selectMany(source, collectionSelector = defaultSelector, resultSelector = defaultSelector) {
         return new SelectManyEnumerable(source, collectionSelector, resultSelector);
-    };
+    }
     static join(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (typeof resultSelector === 'undefined' && core.array$join) {
             if (outer instanceof IEnumerable) {
@@ -303,19 +305,19 @@ class Enumerable {
         } else {
             return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
-    };
+    }
     static groupJoin(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return new GroupJoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-    };
+    }
     static reverse(source) {
         return new ReverseEnumerable(source);
-    };
+    }
     static zip(source, other, resultSelector) {
         return new ZipEnumerable(source, other, resultSelector);
-    };
+    }
     static defaultIfEmpty(source, defaultValue) {
         return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : source;
-    };
+    }
     static all(source, predicate = defaultPredicate) {
         let index = 0;
         for (let element of source) {
@@ -324,7 +326,7 @@ class Enumerable {
             }
         }
         return true;
-    };
+    }
     static any(source, predicate = defaultPredicate) {
         let index = 0;
         for (let element of source) {
@@ -333,10 +335,10 @@ class Enumerable {
             }
         }
         return false;
-    };
+    }
     static isEmpty(source) {
         return !Enumerable.any(source);
-    };
+    }
     static sequenceEqual(source, other, comparer = defaultEqualityComparer) {
         let sourceIterator = source[Symbol.iterator]();
         let otherIterator = other[Symbol.iterator]();
@@ -351,7 +353,7 @@ class Enumerable {
             }
         } while (!(sourceElement.done && otherElement.done));
         return true;
-    };
+    }
     static first(source, predicate = defaultPredicate) {
         let index = 0;
         for (let element of source) {
@@ -360,7 +362,7 @@ class Enumerable {
             }
         }
         throw NoSuchElementsException;
-    };
+    }
     static firstOrDefault(source, defaultValue, predicate = defaultPredicate) {
         let index = 0;
         for (let element of source) {
@@ -369,7 +371,7 @@ class Enumerable {
             }
         }
         return defaultValue;
-    };
+    }
     static last(source, predicate = defaultPredicate) {
         let last, has = false, index = 0;
         for (let element of source) {
@@ -383,7 +385,7 @@ class Enumerable {
         } else {
             throw NoSuchElementsException;
         }
-    };
+    }
     static lastOrDefault(source, defaultValue, predicate = defaultPredicate) {
         let last, has = false, index = 0;
         for (let element of source) {
@@ -397,7 +399,7 @@ class Enumerable {
         } else {
             return defaultValue;
         }
-    };
+    }
     static single(source, predicate = defaultPredicate) {
         let single, count = 0, index = 0;
         for (let element of source) {
@@ -409,14 +411,14 @@ class Enumerable {
                 }
             }
         }
-        if (count == 1) {
+        if (count === 1) {
             return single;
-        } else if (count == 0) {
+        } else if (count === 0) {
             throw NoSuchElementsException;
         } else {
             throw TooManyElementsException;
         }
-    };
+    }
     static singleOrDefault(source, defaultValue, predicate = defaultPredicate) {
         let single, count = 0, index = 0;
         for (let element of source) {
@@ -428,14 +430,14 @@ class Enumerable {
                 }
             }
         }
-        if (count == 1) {
+        if (count === 1) {
             return single;
-        } else if (count == 0) {
+        } else if (count === 0) {
             return defaultValue;
         } else {
             throw TooManyElementsException;
         }
-    };
+    }
     static count(source, predicate = defaultPredicate) {
         let count = 0, index = 0;
         for (let element of source) {
@@ -444,21 +446,21 @@ class Enumerable {
             }
         }
         return count;
-    };
+    }
     static aggregate(source, seed, func, resultSelector = defaultSelector) {
         let index = 0;
         for (let element of source) {
             seed = func(seed, element, index++);
         }
         return resultSelector(seed);
-    };
+    }
     static sum(source, selector = defaultSelector) {
         let sum = 0, index = 0;
         for (let element of source) {
             sum += parseFloat(selector(element, index++));
         }
         return sum;
-    };
+    }
     static max(source, selector = defaultSelector, comparer = defaultComparer) {
         let max = false, first = true, index = 0;
         for (let element of source) {
@@ -474,7 +476,7 @@ class Enumerable {
         } else {
             return max;
         }
-    };
+    }
     static min(source, selector = defaultSelector, comparer = defaultComparer) {
         let min = false, first = true, index = 0;
         for (let element of source) {
@@ -490,19 +492,19 @@ class Enumerable {
         } else {
             return min;
         }
-    };
+    }
     static average(source, selector = defaultSelector) {
         let sum = 0, count = 0, index = 0;
         for (let element of source) {
             sum += parseFloat(selector(element, index++));
             count++;
         }
-        if (count != 0) {
+        if (count !== 0) {
             return sum / count;
         } else {
             throw NoSuchElementsException;
         }
-    };
+    }
     static contains(source, value, comparer = defaultEqualityComparer) {
         for (let element of source) {
             if (comparer(element, value)) {
@@ -510,27 +512,27 @@ class Enumerable {
             }
         }
         return false;
-    };
+    }
     static elementAt(source, index) {
         if (index >= 0) {
             for (let element of source) {
-                if (index-- == 0) {
+                if (index-- === 0) {
                     return element;
                 }
             }
         }
         throw OutOfRangeException;
-    };
+    }
     static elementAtOrDefault(source, index, defaultValue) {
         if (index >= 0) {
             for (let element of source) {
-                if (index-- == 0) {
+                if (index-- === 0) {
                     return element;
                 }
             }
         }
         return defaultValue;
-    };
+    }
     static indexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
         let index = 0;
         for (let element of source) {
@@ -540,7 +542,7 @@ class Enumerable {
             index++;
         }
         return -1;
-    };
+    }
     static findIndex(source, predicate, start = 0) {
         let index = 0;
         for (let element of source) {
@@ -550,7 +552,7 @@ class Enumerable {
             index++;
         }
         return -1;
-    };
+    }
     static lastIndexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
         let index = 0, lastIndex = -1;
         for (let element of source) {
@@ -560,7 +562,7 @@ class Enumerable {
             index++;
         }
         return lastIndex;
-    };
+    }
     static findLastIndex(source, predicate, start = 0) {
         let index = 0, lastIndex = -1;
         for (let element of source) {
@@ -570,21 +572,21 @@ class Enumerable {
             index++;
         }
         return lastIndex;
-    };
+    }
     static forEach(source, action = defaultAction) {
         let index = 0;
         for (let element of source) {
             action(element, index++);
         }
-    };
+    }
     static arrayComparer(array, last = false, comparer = defaultEqualityComparer) {
         console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
         return arrayComparer(array, last, comparer);
-    };
+    }
     static predicateComparer(predicateArray, last = false) {
         console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
         return predicateComparer(predicateArray, last);
-    };
+    }
     static get comparers() {
         return {
             get default() {
@@ -600,7 +602,7 @@ class Enumerable {
                 return predicateComparer(predicateArray, last);
             }
         };
-    };
+    }
     static get selectors() {
         return {
             get default() {
@@ -616,22 +618,22 @@ class Enumerable {
                 return defaultGroupResultSelector;
             }
         };
-    };
+    }
     static get actions() {
         return {
             get default() {
                 return defaultAction;
             }
         };
-    };
+    }
     static get predicates() {
         return {
             get default() {
                 return defaultPredicate;
             }
         };
-    };
-};
+    }
+}
 
 module.exports = Enumerable;
 

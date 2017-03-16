@@ -1,3 +1,5 @@
+'use strict';
+
 const defaultEqualityComparer = require('./defaultEqualityComparer');
 
 module.exports = (array, last = false, comparer = defaultEqualityComparer) => (element, other) => {

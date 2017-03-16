@@ -738,6 +738,14 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
+### v2.1.9
+
+	修复 MapEnumerable 的 has 与 delete 方法参数comparer默认值错误的bug
+	修复一个不能对原生 Array,Object,String 进行有效扩展的bug
+	使用严格模式执行代码 use strict
+	修复一处 Enumerable.orderBy 的第一个参数是原生 Array 对象会报错的bug
+	增加单元测试,修改发布编译流程
+
 ### 2017-03-16 v2.1.8
 
 	修复一处 comparers.array 的 bug
@@ -782,7 +790,7 @@ function Enumerable.comparers.predicate(
 
 	由import方法修改为require方式引用  
 	增加了对node最低版本号的限制
-	
+
 More docs and examples, to be continue...
 更多接口文档的案例,未完待补充...  
 

@@ -1,3 +1,5 @@
+'use strict';
+
 const core = require('./core/core');
 
 class IEnumerator {
@@ -23,6 +25,6 @@ class IEnumerator {
 		});
 		this.reset();
 	}
-};
+}
 
 module.exports = IEnumerator;

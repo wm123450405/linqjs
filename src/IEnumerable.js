@@ -1,3 +1,5 @@
+'use strict';
+
 const core = require('./core/core');
 
 const defaultPredicate = require('./methods/defaultPredicate');
@@ -44,167 +46,167 @@ class IEnumerable {
                 }
             });
         }
-    };
+    }
     get length() {
         return this.count();
-    };
+    }
     get size() {
         return this.count();
-    };
+    }
     getEnumerator() {
         return Enumerable.getEnumerator(this);
-    };
+    }
     where(predicate = defaultPredicate) {
         return Enumerable.where(this, predicate);
-    };
+    }
     select(selector = defaultSelector) {
         return Enumerable.select(this, selector);
-    };
+    }
     elementAt(index) {
         return Enumerable.elementAt(this, index);
-    };
+    }
     elementAtOrDefault(index, defaultValue) {
         return Enumerable.elementAtOrDefault(this, index, defaultValue);
-    };
+    }
     asEnumerable() {
         return this;
-    };
+    }
     concat(other = []) {
         return Enumerable.concat(this, other);
-    };
+    }
     distinct(comparer = defaultEqualityComparer) {
         return Enumerable.distinct(this, comparer);
-    };
+    }
     except(other, comparer = defaultEqualityComparer) {
         return Enumerable.except(this, other, comparer);
-    };
+    }
     union(other, comparer = defaultEqualityComparer) {
         return Enumerable.union(this, other, comparer);
-    };
+    }
     intersect(other, comparer = defaultEqualityComparer) {
         return Enumerable.intersect(this, other, comparer);
-    };
+    }
     ofType(type) {
         return Enumerable.ofType(this, type);
-    };
+    }
     skip(count) {
         return Enumerable.skip(this, count);
-    };
+    }
     skipWhile(predicate = defaultPredicate()) {
         return Enumerable.skipWhile(this, predicate);
-    };
+    }
     take(count) {
         return Enumerable.take(this, count);
-    };
+    }
     takeWhile(predicate = defaultPredicate()) {
         return Enumerable.takeWhile(this, predicate);
-    };
+    }
     orderBy(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.orderBy(this, keySelector, comparer);
-    };
+    }
     orderByDescending(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.orderByDescending(this, keySelector, comparer);
-    };
+    }
     groupBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupBy(this, keySelector, elementSelector, resultSelector, comparer);
-    };
+    }
     selectMany(collectionSelector = defaultSelector, resultSelector = defaultSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
-    };
+    }
     join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-    };
+    }
     groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-    };
+    }
     defaultIfEmpty() {
         return Enumerable.defaultIfEmpty(this);
-    };
+    }
     all(predicate = defaultPredicate) {
         return Enumerable.all(this, predicate);
-    };
+    }
     any(predicate = defaultPredicate) {
         return Enumerable.any(this, predicate);
-    };
+    }
     isEmpty() {
         return Enumerable.isEmpty(this);
-    };
+    }
     sequenceEqual(other, comparer = defaultEqualityComparer) {
         return Enumerable.sequenceEqual(this, other, comparer);
-    };
+    }
     first(predicate = defaultPredicate) {
         return Enumerable.first(this, predicate);
-    };
+    }
     firstOrDefault(defaultValue, predicate = defaultPredicate) {
         return Enumerable.firstOrDefault(this, defaultValue, predicate);
-    };
+    }
     last(predicate = defaultPredicate) {
         return Enumerable.last(this, predicate);
-    };
+    }
     lastOrDefault(defaultValue, predicate = defaultPredicate) {
         return Enumerable.lastOrDefault(this, defaultValue, predicate);
-    };
+    }
     single(predicate = defaultPredicate) {
         return Enumerable.single(this, predicate);
-    };
+    }
     singleOrDefault(defaultValue, predicate = defaultPredicate) {
         return Enumerable.singleOrDefault(this, defaultValue, predicate);
-    };
+    }
     count(predicate = defaultPredicate) {
         return Enumerable.count(this, predicate);
-    };
+    }
     sum(predicate = defaultPredicate) {
         return Enumerable.sum(this, predicate);
-    };
+    }
     max(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.max(this, selector, comparer);
     }
     min(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.min(this, selector, comparer);
-    };
+    }
     average(predicate = defaultPredicate) {
         return Enumerable.average(this, predicate);
-    };
+    }
     aggregate(seed, func, selector = defaultSelector) {
         return Enumerable.aggregate(this, seed, func, selector);
-    };
+    }
     contains(value, comparer = defaultEqualityComparer) {
         return Enumerable.contains(this, value, comparer);
-    };
+    }
     indexOf(value, start = 0, comparer = defaultEqualityComparer) {
         return Enumerable.indexOf(this, value, start, comparer);
-    };
+    }
     findIndex(predicate, start = 0) {
         return Enumerable.findIndex(this, predicate, start);
-    };
+    }
     lastIndexOf(value, start = 0, comparer = defaultEqualityComparer) {
         return Enumerable.lastIndexOf(this, value, start, comparer);
-    };
+    }
     findLastIndex(predicate, start = 0) {
         return Enumerable.findLastIndex(this, predicate, start);
-    };
+    }
     reverse() {
         return Enumerable.reverse(this);
-    };
+    }
     zip(other, resultSelector) {
         return Enumerable.zip(this, other, resultSelector);
-    };
+    }
     toArray() {
         return Enumerable.toArray(this);
-    };
+    }
     toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
         return this.toDictionary(keySelector, elementSelector, comparer).toObject();
-    };
+    }
     toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
-        return Enumerable.toDictionary(this, keySelector, elementSelector, comparer)
-    };
+        return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
+    }
     toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
-        return Enumerable.toLookup(this, keySelector, elementSelector, comparer)
-    };
+        return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
+    }
     forEach(action = defaultAction) {
         return Enumerable.forEach(this, action);
-    };
-};
+    }
+}
 
 module.exports = IEnumerable;
 

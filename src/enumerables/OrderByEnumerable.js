@@ -1,3 +1,5 @@
+'use strict';
+
 const IOrderedEnumerable = require('./IOrderedEnumerable');
 
 const defaultSelector = require('./../methods/defaultSelector');
@@ -8,6 +10,6 @@ class OrderByEnumerable extends IOrderedEnumerable {
     constructor(source, keySelector = defaultSelector, comparer = defaultComparer) {
         super(source, selectorComparer(keySelector, comparer));
     }
-};
+}
 
 module.exports = OrderByEnumerable;

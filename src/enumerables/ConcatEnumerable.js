@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -9,7 +11,7 @@ class ConcatEnumerable extends IEnumerable {
             yield* source;
             yield* other;
         });
-    };
-};
+    }
+}
 
 module.exports = ConcatEnumerable;

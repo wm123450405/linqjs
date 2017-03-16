@@ -1,3 +1,5 @@
+'use strict';
+
 const IMapEnumerable = require('./IMapEnumerable');
 
 const core = require('./../core/core');
@@ -22,10 +24,10 @@ class MapEnumerable extends IMapEnumerable {
             set(key, value, comparer = defaultEqualityComparer) {
                 return map.set(map.keys().asEnumerable().singleOrDefault(key, equalityPredicate(key, comparer)), value);
             },
-            has(key, comparer = defaultComparer) {
+            has(key, comparer = defaultEqualityComparer) {
                 return map.keys().asEnumerable().contains(key, comparer);
             },
-            delete(key, comparer = defaultComparer) {
+            delete(key, comparer = defaultEqualityComparer) {
                 return map.delete(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
             },
             keys() {
@@ -37,8 +39,8 @@ class MapEnumerable extends IMapEnumerable {
             entries() {
                 return map.entries().asEnumerable();
             }
-        })
-    };
-};
+        });
+    }
+}
 
 module.exports = MapEnumerable;

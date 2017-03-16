@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -18,7 +20,7 @@ class DistinctEnumerable extends IEnumerable {
                 }
             }
         });
-    };
-};
+    }
+}
 
 module.exports = DistinctEnumerable;

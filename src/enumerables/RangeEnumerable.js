@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -10,7 +12,7 @@ class RangeEnumerable extends IEnumerable {
                 yield value;
             }
         });
-    };
-};
+    }
+}
 
 module.exports = RangeEnumerable;

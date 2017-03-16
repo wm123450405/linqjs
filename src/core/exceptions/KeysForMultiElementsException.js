@@ -1,1 +1,3 @@
-module.exports = 'Keys for multi elements'
+'use strict';
+
+module.exports = 'Keys for multi elements';

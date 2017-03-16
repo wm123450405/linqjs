@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -9,6 +11,6 @@ class IteratorEnumerable extends IEnumerable {
             yield* iterable;
         });
     }
-};
+}
 
 module.exports = IteratorEnumerable;

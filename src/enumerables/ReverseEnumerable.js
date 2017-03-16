@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -12,6 +14,6 @@ class ReverseEnumerable extends IEnumerable {
             }
         });
     }
-};
+}
 
 module.exports = ReverseEnumerable;

@@ -1,3 +1,5 @@
+'use strict';
+
 const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
@@ -7,6 +9,20 @@ const defaultSelector = require('./../methods/defaultSelector');
 
 const IGrouping = require('./IGrouping');
 const Entry = require('./Entry');
+
+const createGrouping = (array, key, comparer, hasNext) => new IGrouping(key, {
+    *[Symbol.iterator]() {
+        let index = 0;
+        while (array.length > index || hasNext()) {
+            if (array.length > index) {
+                if (comparer(key, array[index].key)) {
+                    yield array[index].value;
+                }
+                index++;
+            }
+        }
+    }
+});
 
 class GroupJoinEnumerable extends IEnumerable {
     constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -23,23 +39,11 @@ class GroupJoinEnumerable extends IEnumerable {
             };
             for (let outerElement of outer) {
                 let outerKey = outerKeySelector(outerElement, outerIndex++);
-                yield resultSelector(outerElement, new IGrouping(outerKey, {
-                    *[Symbol.iterator]() {
-                        let index = 0;
-                        while (innerTemp.length > index || innerHasNext()) {
-                            if (innerTemp.length > index) {
-                                if (comparer(outerKey, innerTemp[index].key)) {
-                                    yield innerTemp[index].value;
-                                }
-                                index++
-                            }
-                        }
-                    }
-                }));
+                yield resultSelector(outerElement, createGrouping(innerTemp, outerKey, comparer, innerHasNext));
                 outerIndex++;
             }
         });
     }
-};
+}
 
 module.exports = GroupJoinEnumerable;
