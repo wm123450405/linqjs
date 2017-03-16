@@ -33,9 +33,9 @@ gulp.task('default', function() {
 			loadMaps: true
 		}))
 		.pipe(uglify({
-			mangle: {
-				except: ['require', 'exports', 'module']
-			},
+			// mangle: {
+			// 	except: ['require', 'exports', 'module']
+			// },
 			compress: true
 		}))
 		.pipe(sourcemaps.write('./'))

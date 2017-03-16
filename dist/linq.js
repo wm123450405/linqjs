@@ -12774,9 +12774,9 @@ module.exports = function (array) {
 	return function (element, other) {
 		var enumerable = array.asEnumerable(),
 		    count = 0;
-		var elementIndex = enumerable.indexOf(element, comparer);
+		var elementIndex = enumerable.indexOf(element, 0, comparer);
 		elementIndex = elementIndex == -1 && last ? count = count || enumerable.count() : elementIndex;
-		var otherIndex = enumerable.indexOf(other, comparer);
+		var otherIndex = enumerable.indexOf(other, 0, comparer);
 		otherIndex = otherIndex == -1 && last ? count = count || enumerable.count() : otherIndex;
 		return elementIndex - otherIndex;
 	};

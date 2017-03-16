@@ -9,52 +9,6 @@ use linq and lambda in javascript
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作  
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
-## Change list 更新日志
-
-### v2.1.8
-
-	新增 Enumerable.config.as 方法 用来设置替代 asEnumerable 方法的方法名
-	将 Enumerable.Config 修改为 Enumerable.config
-	弃用 Enumerable.arrayComparer(建议:Enumerable.comparers.array) 与 Enumerable.predicateComparer(建议:Enumerable.comparers.predicate)
-	通过 Enumerable 可以获取 内置 的 actions, predicates, selectors, comparers
-
-### 2017-03-14 v2.1.7
-
-	修复了一些在IE浏览器中的bug
-	进一步优化gulp打包, 添加source map
-
-### 2017-03-10 v2.1.6
-
-	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
-	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
-	优化了 Enumerable.arrayComparer, 增加 comparer 参数用于查找对比
-	添加对 bower 的支持
-	添加 gulp 打包, dist将仅包含 linq.js 与 linq.min.js
-
-### 2017-03-09 v2.1.5
-
-	新增 IEnumerator 接口 与 实现
-	新增 Enumerable.IComparable 与 Enumerable.IEquatable 接口, 及调整默认的 defaultComparer 与 defaultEqualityComparer 实现
-	新增 Enumerable.arrayComparer 与 Enumerable.predicateComparer
-
-### 2017-03-06 v2.1.4
-
-	修复forEach的bug
-
-### 2017-03-02
-
-	修改了join方法参数顺序,以及参数默认值  
-	修改了groupJoin方法参数的顺序,以及参数默认值  
-	为selectMany方法的collectionSelector:Function参数方法增加了index参数  
-	为zip方法的resultSelector:Function参数方法增加了index参数  
-	为aggreagte方法的func:Function参数方法增加了index参数  
-	补充了文档
-
-### 2017-03-01
-
-	由import方法修改为require方式引用  
-	增加了对node最低版本号的限制
-
 ## Usage 用法
 
 Usage for English is Coming soon...
@@ -76,7 +30,7 @@ const Enumerable = require('linq-js');
 Enumerable.config.extends.array = true; //开启针对Array的扩展
 Enumerable.config.extends.string = true; //开启针对String的扩展
 Enumerable.config.extends.object = true; //开启针对Object的扩展
-Enumerable.config.as = 'em'; //设置使用[].em()来获取IEnumerable对象
+Enumerable.config.as = 'em'; //设置使用.em()来获取IEnumerable对象
 ```
 
 ### IEnumerable对象
@@ -782,6 +736,53 @@ function Enumerable.comparers.predicate(
 #### 11. `predicates:default` [defaultPredicate]
 #### 12. `actions:default` [defaultAction]
 
+## Change list 更新日志
+
+### 2017-03-16 v2.1.8
+
+	修复一处 comparers.array 的 bug
+	新增 Enumerable.config.as 方法 用来设置替代 asEnumerable 方法的方法名
+	将 Enumerable.Config 修改为 Enumerable.config
+	弃用 Enumerable.arrayComparer(建议:Enumerable.comparers.array) 与 Enumerable.predicateComparer(建议:Enumerable.comparers.predicate)
+	通过 Enumerable 可以获取 内置 的 actions, predicates, selectors, comparers
+
+### 2017-03-14 v2.1.7
+
+	修复了一些在IE浏览器中的bug
+	进一步优化gulp打包, 添加source map
+
+### 2017-03-10 v2.1.6
+
+	优化 core.getType 与 core.typeName 方法, 合并为方法 getType 返回实际的类型名称
+	修复某些js版本下 在使用了 Enumerable.Config.extends.array = true 时 无法使用 findIndex 方法的bug
+	优化了 Enumerable.arrayComparer, 增加 comparer 参数用于查找对比
+	添加对 bower 的支持
+	添加 gulp 打包, dist将仅包含 linq.js 与 linq.min.js
+
+### 2017-03-09 v2.1.5
+
+	新增 IEnumerator 接口 与 实现
+	新增 Enumerable.IComparable 与 Enumerable.IEquatable 接口, 及调整默认的 defaultComparer 与 defaultEqualityComparer 实现
+	新增 Enumerable.arrayComparer 与 Enumerable.predicateComparer
+
+### 2017-03-06 v2.1.4
+
+	修复forEach的bug
+
+### 2017-03-02
+
+	修改了join方法参数顺序,以及参数默认值  
+	修改了groupJoin方法参数的顺序,以及参数默认值  
+	为selectMany方法的collectionSelector:Function参数方法增加了index参数  
+	为zip方法的resultSelector:Function参数方法增加了index参数  
+	为aggreagte方法的func:Function参数方法增加了index参数  
+	补充了文档
+
+### 2017-03-01
+
+	由import方法修改为require方式引用  
+	增加了对node最低版本号的限制
+	
 More docs and examples, to be continue...
 更多接口文档的案例,未完待补充...  
 
