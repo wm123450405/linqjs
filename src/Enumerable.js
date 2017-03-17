@@ -217,7 +217,7 @@ class Enumerable {
         for (let element of source) {
             let key = keySelector(element, index);
             if (dictionary.has(key, comparer)) {
-                throw KeysForMultiElementsException;
+                throw new KeysForMultiElementsException(key);
             } else {
                 dictionary.set(key, elementSelector(element, index), comparer);
             }
@@ -362,7 +362,7 @@ class Enumerable {
             if (source.length > 0) {
                 return source[0];
             } else {
-                throw NoSuchElementsException;
+                throw new NoSuchElementsException();
             }
         } else {
             let index = 0;
@@ -371,7 +371,7 @@ class Enumerable {
                     return element;
                 }
             }
-            throw NoSuchElementsException;
+            throw new NoSuchElementsException();
         }
     }
     static firstOrDefault(source, defaultValue, predicate = defaultPredicate) {
@@ -396,7 +396,7 @@ class Enumerable {
             if (source.length > 0) {
                 return source[source.length - 1];
             } else {
-                throw NoSuchElementsException;
+                throw new NoSuchElementsException();
             }
         } else {
             let last, has = false, index = 0;
@@ -409,7 +409,7 @@ class Enumerable {
             if (has) {
                 return last;
             } else {
-                throw NoSuchElementsException;
+                throw new NoSuchElementsException();
             }
         }
     }
@@ -440,9 +440,9 @@ class Enumerable {
             if (source.length === 1) {
                 return source[0];
             } else if (source.length === 0) {
-                throw NoSuchElementsException;
+                throw new NoSuchElementsException();
             } else {
-                throw TooManyElementsException;
+                throw new TooManyElementsException();
             }
         } else {
             let single, count = 0, index = 0;
@@ -458,9 +458,9 @@ class Enumerable {
             if (count === 1) {
                 return single;
             } else if (count === 0) {
-                throw NoSuchElementsException;
+                throw new NoSuchElementsException();
             } else {
-                throw TooManyElementsException;
+                throw new TooManyElementsException();
             }
         }
     }
@@ -471,7 +471,7 @@ class Enumerable {
             } else if (source.length === 0) {
                 return defaultValue;
             } else {
-                throw TooManyElementsException;
+                throw new TooManyElementsException();
             }
         } else {
             let single, count = 0, index = 0;
@@ -489,7 +489,7 @@ class Enumerable {
             } else if (count === 0) {
                 return defaultValue;
             } else {
-                throw TooManyElementsException;
+                throw new TooManyElementsException();
             }
         }
     }
@@ -529,7 +529,7 @@ class Enumerable {
             first = false;
         }
         if (first) {
-            throw NoSuchElementsException;
+            throw new NoSuchElementsException();
         } else {
             return max;
         }
@@ -546,7 +546,7 @@ class Enumerable {
             first = false;
         }
         if (first) {
-            throw NoSuchElementsException;
+            throw new NoSuchElementsException();
         } else {
             return min;
         }
@@ -561,7 +561,7 @@ class Enumerable {
         if (count !== 0) {
             return sum / count;
         } else {
-            throw NoSuchElementsException;
+            throw new NoSuchElementsException();
         }
     }
     static contains(source, value, comparer = defaultEqualityComparer) {
@@ -577,7 +577,7 @@ class Enumerable {
             if (index >= 0 && index < source.length) {
                 return source[index];
             } else {
-                throw OutOfRangeException;
+                throw new OutOfRangeException(index);
             }
         } else {
             if (index >= 0) {
@@ -587,7 +587,7 @@ class Enumerable {
                     }
                 }
             }
-            throw OutOfRangeException;
+            throw new OutOfRangeException(index);
         }
     }
     static elementAtOrDefault(source, index, defaultValue) {

@@ -740,6 +740,7 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.10
 
+	优化异常类型, 将是不是简单的抛出一个字符串
 	优化了 IEnumerable 部分方法(elementAt, elementAtOrDefault, first, firstOrDefault, last, lastOrDefault, single, singleOrDefault, indexOf, lastIndexOf)的性能
 	优化 IEnumerable ,在 Proxy 受支持的环境下, Object.getOwnPropertyDescriptor 将得到有效的返回
 

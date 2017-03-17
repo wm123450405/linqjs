@@ -1,3 +1,9 @@
 'use strict';
 
-module.exports = 'Out of range';
+class OutOfRangeException extends Error {
+	constructor(index) {
+		super('Out of range, index:' + index);
+	}
+}
+
+module.exports = OutOfRangeException;

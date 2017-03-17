@@ -1,3 +1,9 @@
 'use strict';
 
-module.exports = 'Too many elements';
+class TooManyElementsException extends Error {
+	constructor() {
+		super('Too many elements');
+	}
+}
+
+module.exports = TooManyElementsException;

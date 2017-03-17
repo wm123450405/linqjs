@@ -1,3 +1,9 @@
 'use strict';
 
-module.exports = 'No such elements';
+class NoSuchElementsException extends Error {
+	constructor() {
+		super('No such elements');
+	}
+}
+
+module.exports = NoSuchElementsException;

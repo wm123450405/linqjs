@@ -2,6 +2,8 @@
 
 const core = require('./core/core');
 
+const NeedExecuteBeforeException = require('./core/exceptions/NeedExecuteBeforeException');
+
 class IEnumerator {
 	constructor(enumerable) {
 		let iterator;
@@ -19,7 +21,7 @@ class IEnumerator {
 				if (next) {
 					return next.value;
 				} else {
-					throw 'Should execute moveNext() before';
+					throw new NeedExecuteBeforeException('moveNext');
 				}
 			}
 		});
