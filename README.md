@@ -729,20 +729,20 @@ function Enumerable.comparers.predicate(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
-#### 5. `comparers.default` [defaultComparer]
-#### 6. `comparers.equality` [defaultEqualityComparer]
-#### 7. `selectors.default` [defaultSelector]
-#### 8. `selectors.key` [defaultKeySelector]
-#### 9. `selectors.value` [defaultValueSelector]
-#### 10. `selectors.groupResult` [defaultGroupResultSelector]
-#### 11. `predicates:default` [defaultPredicate]
-#### 12. `actions:default` [defaultAction]
+#### 5. `comparers.default` [*defaultComparer*]
+#### 6. `comparers.equality` [*defaultEqualityComparer*]
+#### 7. `selectors.default` [*defaultSelector*]
+#### 8. `selectors.key` [*defaultKeySelector*]
+#### 9. `selectors.value` [*defaultValueSelector*]
+#### 10. `selectors.groupResult` [*defaultGroupResultSelector*]
+#### 11. `predicates:default` [*defaultPredicate*]
+#### 12. `actions:default` [*defaultAction*]
 
 ## Change list 更新日志
 
 ### v2.1.10
 
-	优化异常类型, 将是不是简单的抛出一个字符串
+	优化异常类型, 将不再是简单的抛出一个字符串, 而是完整的Error对象
 	优化了 IEnumerable 部分方法(elementAt, elementAtOrDefault, first, firstOrDefault, last, lastOrDefault, single, singleOrDefault, indexOf, lastIndexOf)的性能
 	优化 IEnumerable ,在 Proxy 受支持的环境下, Object.getOwnPropertyDescriptor 将得到有效的返回
 
