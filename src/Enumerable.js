@@ -19,6 +19,11 @@ const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
 const TooManyElementsException = require('./core/exceptions/TooManyElementsException');
 const KeysForMultiElementsException = require('./core/exceptions/KeysForMultiElementsException');
 
+const isProto = source => {
+    let type = core.getType(source);
+    return type === core.types.Array || type === core.types.String;
+};
+
 class Enumerable {
     static extends(prototype, type) {
         core.defineProperties(prototype, {
@@ -353,87 +358,139 @@ class Enumerable {
         return true;
     }
     static first(source, predicate = defaultPredicate) {
-        let index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                return element;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length > 0) {
+                return source[0];
+            } else {
+                throw NoSuchElementsException;
             }
+        } else {
+            let index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    return element;
+                }
+            }
+            throw NoSuchElementsException;
         }
-        throw NoSuchElementsException;
     }
     static firstOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        let index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                return element;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length > 0) {
+                return source[0];
+            } else {
+                return defaultValue;
+            }   
+        } else {
+            let index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    return element;
+                }
             }
+            return defaultValue;
         }
-        return defaultValue;
     }
     static last(source, predicate = defaultPredicate) {
-        let last, has = false, index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                last = element;
-                has = true;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length > 0) {
+                return source[source.length - 1];
+            } else {
+                throw NoSuchElementsException;
             }
-        }
-        if (has) {
-            return last;
         } else {
-            throw NoSuchElementsException;
+            let last, has = false, index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    last = element;
+                    has = true;
+                }
+            }
+            if (has) {
+                return last;
+            } else {
+                throw NoSuchElementsException;
+            }
         }
     }
     static lastOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        let last, has = false, index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                last = element;
-                has = true;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length > 0) {
+                return source[source.length - 1];
+            } else {
+                return defaultValue;
             }
-        }
-        if (has) {
-            return last;
         } else {
-            return defaultValue;
+            let last, has = false, index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    last = element;
+                    has = true;
+                }
+            }
+            if (has) {
+                return last;
+            } else {
+                return defaultValue;
+            }
         }
     }
     static single(source, predicate = defaultPredicate) {
-        let single, count = 0, index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                single = element;
-                count++;
-                if (count >= 2) {
-                    break;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length === 1) {
+                return source[0];
+            } else if (source.length === 0) {
+                throw NoSuchElementsException;
+            } else {
+                throw TooManyElementsException;
+            }
+        } else {
+            let single, count = 0, index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    single = element;
+                    count++;
+                    if (count >= 2) {
+                        break;
+                    }
                 }
             }
-        }
-        if (count === 1) {
-            return single;
-        } else if (count === 0) {
-            throw NoSuchElementsException;
-        } else {
-            throw TooManyElementsException;
+            if (count === 1) {
+                return single;
+            } else if (count === 0) {
+                throw NoSuchElementsException;
+            } else {
+                throw TooManyElementsException;
+            }
         }
     }
     static singleOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        let single, count = 0, index = 0;
-        for (let element of source) {
-            if (predicate(element, index++)) {
-                single = element;
-                count++;
-                if (count >= 2) {
-                    break;
+        if (predicate === defaultPredicate && isProto(source)) {
+            if (source.length === 1) {
+                return source[0];
+            } else if (source.length === 0) {
+                return defaultValue;
+            } else {
+                throw TooManyElementsException;
+            }
+        } else {
+            let single, count = 0, index = 0;
+            for (let element of source) {
+                if (predicate(element, index++)) {
+                    single = element;
+                    count++;
+                    if (count >= 2) {
+                        break;
+                    }
                 }
             }
-        }
-        if (count === 1) {
-            return single;
-        } else if (count === 0) {
-            return defaultValue;
-        } else {
-            throw TooManyElementsException;
+            if (count === 1) {
+                return single;
+            } else if (count === 0) {
+                return defaultValue;
+            } else {
+                throw TooManyElementsException;
+            }
         }
     }
     static count(source, predicate = defaultPredicate) {
@@ -516,34 +573,54 @@ class Enumerable {
         return false;
     }
     static elementAt(source, index) {
-        if (index >= 0) {
-            for (let element of source) {
-                if (index-- === 0) {
-                    return element;
+        if (isProto(source)) {
+            if (index >= 0 && index < source.length) {
+                return source[index];
+            } else {
+                throw OutOfRangeException;
+            }
+        } else {
+            if (index >= 0) {
+                for (let element of source) {
+                    if (index-- === 0) {
+                        return element;
+                    }
                 }
             }
+            throw OutOfRangeException;
         }
-        throw OutOfRangeException;
     }
     static elementAtOrDefault(source, index, defaultValue) {
-        if (index >= 0) {
-            for (let element of source) {
-                if (index-- === 0) {
-                    return element;
+        if (isProto(source)) {
+            if (index >= 0 && index < source.length) {
+                return source[index];
+            } else {
+                return defaultValue;
+            }
+        } else {
+            if (index >= 0) {
+                for (let element of source) {
+                    if (index-- === 0) {
+                        return element;
+                    }
                 }
             }
+            return defaultValue;
         }
-        return defaultValue;
     }
     static indexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
-        let index = 0;
-        for (let element of source) {
-            if (index >= start && comparer(element, value)) {
-                return index;
+        if (comparer === defaultEqualityComparer && isProto(source)) {
+            return Enumerable.asEnumerable(source).indexOf(value, start);
+        } else {
+            let index = 0;
+            for (let element of source) {
+                if (index >= start && comparer(element, value)) {
+                    return index;
+                }
+                index++;
             }
-            index++;
+            return -1;
         }
-        return -1;
     }
     static findIndex(source, predicate, start = 0) {
         let index = 0;
@@ -556,14 +633,18 @@ class Enumerable {
         return -1;
     }
     static lastIndexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
-        let index = 0, lastIndex = -1;
-        for (let element of source) {
-            if (index >= start && comparer(element, value)) {
-                lastIndex = index;
+        if (comparer === defaultEqualityComparer && isProto(source)) {
+            return Enumerable.asEnumerable(source).lastIndexOf(value, start);
+        } else {
+            let index = 0, lastIndex = -1;
+            for (let element of source) {
+                if (index >= start && comparer(element, value)) {
+                    lastIndex = index;
+                }
+                index++;
             }
-            index++;
+            return lastIndex;
         }
-        return lastIndex;
     }
     static findLastIndex(source, predicate, start = 0) {
         let index = 0, lastIndex = -1;

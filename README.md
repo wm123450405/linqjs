@@ -740,6 +740,9 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.10
 
+	优化了 IEnumerable 部分方法(elementAt, elementAtOrDefault, first, firstOrDefault, last, lastOrDefault, single, singleOrDefault, indexOf, lastIndexOf)的性能
+	优化 IEnumerable ,在 Proxy 受支持的环境下, Object.getOwnPropertyDescriptor 将得到有效的返回
+
 ### v2.1.9
 
 	修复使用 groupBy 当设置了 comparer 参数时 导致不能有效分组或报错的bug

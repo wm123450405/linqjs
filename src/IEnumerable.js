@@ -42,7 +42,7 @@ class IEnumerable {
                 },
                 getOwnPropertyDescriptor(target, prop) {
                     if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
-                        return { writable: false, enumerable: true, configurable: true };
+                        return { enumerable: true, configurable: true, get: () => target.elementAtOrDefault(prop) };
                     } else {
                         return Object.getOwnPropertyDescriptor(target, prop);
                     }
