@@ -41,6 +41,8 @@ class GroupingEnumerable extends IEnumerable {
                                 }
                             }
                         }));
+                    } else {
+                        key = trueKey;
                     }
                     iterators.get(key).push(element);
                 }

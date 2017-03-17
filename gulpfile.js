@@ -25,7 +25,7 @@ gulp.task('hint', function() {
 });
 
 gulp.task('unit', ['hint'], function() {
-	require('./test/test-unit');
+	require('./test/test-unit')(require('./src/linq'));
 });
 
 gulp.task('pack', ['unit'], function() {

@@ -740,6 +740,7 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.9
 
+	修复使用 groupBy 当设置了 comparer 参数时 导致不能有效分组或报错的bug
 	修复了 IEnumerable 的方法 defaultIfEmpty 的bug
 	修复了 IEnumerable 的方法 sum 与 average 的bug
 	修复了 sequenceEqual 在完全匹配是依然返回 false 的bug

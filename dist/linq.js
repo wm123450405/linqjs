@@ -7617,7 +7617,7 @@ var Enumerable = function () {
     }, {
         key: 'defaultIfEmpty',
         value: function defaultIfEmpty(source, defaultValue) {
-            return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : source;
+            return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : Enumerable.asEnumerable(source);
         }
     }, {
         key: 'all',
@@ -7703,15 +7703,13 @@ var Enumerable = function () {
             var otherIterator = other[Symbol.iterator]();
             var sourceElement = void 0,
                 otherElement = void 0;
-            do {
-                sourceElement = sourceIterator.next();
-                otherElement = otherIterator.next();
+            while (!((sourceElement = sourceIterator.next()).done & (otherElement = otherIterator.next()).done)) {
                 if (sourceElement.done != otherElement.done) {
                     return false;
                 } else if (!comparer(sourceElement.value, otherElement.value)) {
                     return false;
                 }
-            } while (!(sourceElement.done && otherElement.done));
+            }
             return true;
         }
     }, {
@@ -8047,6 +8045,7 @@ var Enumerable = function () {
                     var element = _step14.value;
 
                     sum += parseFloat(selector(element, index++));
+                    if (isNaN(sum)) return sum;
                 }
             } catch (err) {
                 _didIteratorError14 = true;
@@ -8088,6 +8087,7 @@ var Enumerable = function () {
                     } else {
                         max = comparer(max, element) > 0 ? max : element;
                     }
+                    first = false;
                 }
             } catch (err) {
                 _didIteratorError15 = true;
@@ -8133,6 +8133,7 @@ var Enumerable = function () {
                     } else {
                         min = comparer(min, element) < 0 ? min : element;
                     }
+                    first = false;
                 }
             } catch (err) {
                 _didIteratorError16 = true;
@@ -8172,6 +8173,7 @@ var Enumerable = function () {
                     var element = _step17.value;
 
                     sum += parseFloat(selector(element, index++));
+                    if (isNaN(sum)) return sum;
                     count++;
                 }
             } catch (err) {
@@ -8810,8 +8812,8 @@ var IEnumerable = function () {
         }
     }, {
         key: 'defaultIfEmpty',
-        value: function defaultIfEmpty() {
-            return Enumerable.defaultIfEmpty(this);
+        value: function defaultIfEmpty(defaultValue) {
+            return Enumerable.defaultIfEmpty(this, defaultValue);
         }
     }, {
         key: 'all',
@@ -8891,9 +8893,9 @@ var IEnumerable = function () {
     }, {
         key: 'sum',
         value: function sum() {
-            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+            var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
 
-            return Enumerable.sum(this, predicate);
+            return Enumerable.sum(this, selector);
         }
     }, {
         key: 'max',
@@ -8914,9 +8916,9 @@ var IEnumerable = function () {
     }, {
         key: 'average',
         value: function average() {
-            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+            var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
 
-            return Enumerable.average(this, predicate);
+            return Enumerable.average(this, selector);
         }
     }, {
         key: 'aggregate',
@@ -9932,6 +9934,8 @@ var GroupingEnumerable = function (_IEnumerable) {
                                                 }
                                             }, _callee, this);
                                         }))));
+                                    } else {
+                                        key = trueKey;
                                     }
                                     iterators.get(key).push(element);
                                 }
@@ -10909,14 +10913,17 @@ var IEnumerable = require('./../IEnumerable');
 
 var core = require('./../core/core');
 
+var isInstanceofBoolean = function isInstanceofBoolean(element) {
+    return element instanceof Boolean || element === true || element === false;
+};
 var isInstanceofString = function isInstanceofString(element) {
     return element instanceof String || typeof element === 'string';
 };
 var isInstanceofArray = function isInstanceofArray(element) {
-    return element instanceof Array;
+    return element instanceof Array || Array.isArray && Array.isArray(element);
 };
 var isInstanceofObject = function isInstanceofObject(element) {
-    return element instanceof Object;
+    return element instanceof Object && !(element instanceof RegExp || isInstanceofArray(element) || isInstanceofFunction(element));
 };
 var isInstanceofNumber = function isInstanceofNumber(element) {
     return element instanceof Number || typeof element === 'number';
@@ -10929,6 +10936,11 @@ var isInstanceof = function isInstanceof(type) {
         return element instanceof type;
     };
 };
+var isInstanceofByTypeName = function isInstanceofByTypeName(type) {
+    return function (element) {
+        return core.getType(element).toUpperCase() === type.toUpperCase();
+    };
+};
 
 var OfTypeEnumerable = function (_IEnumerable) {
     _inherits(OfTypeEnumerable, _IEnumerable);
@@ -10938,7 +10950,7 @@ var OfTypeEnumerable = function (_IEnumerable) {
 
         var _this = _possibleConstructorReturn(this, (OfTypeEnumerable.__proto__ || Object.getPrototypeOf(OfTypeEnumerable)).call(this, source));
 
-        var is = type === String ? isInstanceofString : type === Array ? isInstanceofArray : type === Object ? isInstanceofObject : type === Number ? isInstanceofNumber : type === Function ? isInstanceofFunction : isInstanceof(type);
+        var is = type === Boolean ? isInstanceofBoolean : type === String ? isInstanceofString : type === Array ? isInstanceofArray : type === Number ? isInstanceofNumber : type === Function ? isInstanceofFunction : type === Object ? isInstanceofObject : typeof type === 'string' ? isInstanceofByTypeName(type) : isInstanceof(type);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
             var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
 
@@ -11232,7 +11244,7 @@ var ReverseEnumerable = function (_IEnumerable) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            temp = source.toArray(), length = temp.length;
+                            temp = source.asEnumerable().toArray(), length = temp.length;
                             i = length - 1;
 
                         case 2:
