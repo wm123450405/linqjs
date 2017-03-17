@@ -1,5 +1,8 @@
 'use strict';
 
+const getFunctionNameReg = /^(function|class)\s+([^({\s]*)\s*[({].+$/ig;
+const getObjectTypeNameReg = /^\[\w+\s(.+)]$/ig;
+
 const getter = (properties, property) => {
 	return () => properties[property];
 };
@@ -9,9 +12,9 @@ const core = {
 		if (typeof(value) === 'undefined') {
 			return this.types.Undefined;
 		} else {
-			let type = value[Symbol.toStringTag] || Object.prototype.toString.call(value).replace(/^\[\w+\s(.+)]$/ig, '$1');
+			let type = value[Symbol.toStringTag] || Object.prototype.toString.call(value).replace(getObjectTypeNameReg, '$1');
 			if (type === 'Object') {
-				return Function.prototype.toString.call(value.constructor).replace(/^(function|class)\s+([^({\s]*)\s*[({].+$/ig, '$2');
+				return Function.prototype.toString.call(value.constructor).replace(getFunctionNameReg, '$2');
 			} else {
 				let typeName = typeof value;
 				if (typeName !== 'object') {
