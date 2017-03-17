@@ -4,6 +4,7 @@
 [![Github Releases (by Release)](https://img.shields.io/github/downloads/wm123450405/linqjs/total.svg)](https://github.com/wm123450405/linqjs)
 [![npm](https://img.shields.io/npm/v/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![npm](https://img.shields.io/npm/dm/linq-js.svg)](https://www.npmjs.com/package/linq-js)
+[![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.org/wm123450405/linqjs)
 
 use linq and lambda in javascript  
 在javascript中使用linq与lambda
@@ -742,6 +743,7 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.10
 
+	增加 Travis CI 支持
 	优化异常类型, 将不再是简单的抛出一个字符串, 而是完整的Error对象
 	优化了 IEnumerable 部分方法(elementAt, elementAtOrDefault, first, firstOrDefault, last, lastOrDefault, single, singleOrDefault, indexOf, lastIndexOf)的性能
 	优化 IEnumerable ,在 Proxy 受支持的环境下, Object.getOwnPropertyDescriptor 将得到有效的返回
