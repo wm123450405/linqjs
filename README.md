@@ -192,7 +192,7 @@ function min(
 > e.min(); //1
 > ```
 
-#### 12. `concat(other)`
+#### 12. `concat(other)` :*[see](https://msdn.microsoft.com/en-us/library/bb302894(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb302894(v=vs.110).aspx)*
 ```typescript
 function concat(
 	other:IEnumerable
@@ -215,7 +215,7 @@ function contains(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 14. `count(predicate)`
+#### 14. `count(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535181(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/en-us/library/bb535181(v=vs.110).aspx)*
 ```typescript
 function count(
 	predicate:Function = defaultPredicate
@@ -236,7 +236,7 @@ function defaultIfEmpty(
 ):IEnumerable
 ```
 
-#### 16. `distinct(comparer)`
+#### 16. `distinct(comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb338049(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb338049(v=vs.110).aspx)*
 ```typescript
 function distinct(
 	comparer:Function = defaultEqualityComparer
@@ -245,7 +245,7 @@ function distinct(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 17. `except(other, comparer)`
+#### 17. `except(other, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb336390(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb336390(v=vs.110).aspx)*
 ```typescript
 function except(
 	other:IEnumerable,
@@ -255,7 +255,7 @@ function except(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 18. `union(other, comparer)`
+#### 18. `union(other, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb358407(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb358407(v=vs.110).aspx)*
 ```typescript
 function union(
 	other:IEnumerable,
@@ -265,7 +265,7 @@ function union(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 19. `intersect(other, comparer)`
+#### 19. `intersect(other, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb355408(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb355408(v=vs.110).aspx)*
 ```typescript
 function intersect(
 	other:IEnumerable,
@@ -275,14 +275,14 @@ function intersect(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 20. `elementAt(index)`
+#### 20. `elementAt(index)` :*[see](https://msdn.microsoft.com/en-us/library/bb299233(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb299233(v=vs.110).aspx)*
 ```typescript
 function elementAt(
 	index:number
 ):any;
 ```
 
-#### 21. `elementAtOrDefault(index, defaultValue)`
+#### 21. `elementAtOrDefault(index, defaultValue)` :*[see](https://msdn.microsoft.com/en-us/library/bb494386(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb494386(v=vs.110).aspx)*
 ```typescript
 function elementAtOrDefault(
 	index:number,
@@ -290,7 +290,7 @@ function elementAtOrDefault(
 ):any;
 ```
 
-#### 22. `first(predicate)`
+#### 22. `first(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535050(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535050(v=vs.110).aspx)*
 ```typescript
 function first(
 	predicate:Function = defaultPredicate
@@ -299,7 +299,7 @@ function first(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 23. `firstOrDefault(defaultValue, predicate)`
+#### 23. `firstOrDefault(defaultValue, predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549039(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549039(v=vs.110).aspx)*
 ```typescript
 function firstOrDefault(
 	defaultValue:any,
@@ -309,7 +309,7 @@ function firstOrDefault(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 24. `last(predicate)`
+#### 24. `last(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549138(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549138(v=vs.110).aspx)*
 ```typescript
 function last(
 	predicate:Function = defaultPredicate
@@ -318,7 +318,7 @@ function last(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 25. `lastOrDefault(defaultValue, predicate)`
+#### 25. `lastOrDefault(defaultValue, predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb548915(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548915(v=vs.110).aspx)*
 ```typescript
 function lastOrDefault(
 	defaultValue:any,
@@ -328,7 +328,7 @@ function lastOrDefault(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 26. `single(predicate)`
+#### 26. `single(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535118(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535118(v=vs.110).aspx)*
 ```typescript
 function single(
 	predicate:Function = defaultPredicate
@@ -337,7 +337,7 @@ function single(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 27. `singleOrDefault(defaultValue, predicate)`
+#### 27. `singleOrDefault(defaultValue, predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549274(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549274(v=vs.110).aspx)*
 ```typescript
 function singleOrDefault(
 	defaultValue:any,
@@ -359,7 +359,7 @@ function join(
 > e.join('|'); //'1|2|3'
 > ```
 
-#### 29. `ofType(type)`
+#### 29. `ofType(type)` :*[see](https://msdn.microsoft.com/en-us/library/bb360913(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb360913(v=vs.110).aspx)*
 ```typescript
 function ofType(
 	type:type
@@ -374,7 +374,7 @@ function ofType(
 > e.ofType(Function): //()=>{}
 > ```
 
-#### 30. `reverse()`
+#### 30. `reverse()` :*[see](https://msdn.microsoft.com/en-us/library/bb358497(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb358497(v=vs.110).aspx)*
 ```typescript
 function reverse():IEnumerable;
 ```
@@ -384,7 +384,7 @@ function reverse():IEnumerable;
 > e.reverse(); //3, 2, 1
 > ```
 
-#### 31. `sequenceEqual(other, comparer)`
+#### 31. `sequenceEqual(other, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb342073(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb342073(v=vs.110).aspx)*
 ```typescript
 function sequenceEqual(
 	other:IEnumerable,
@@ -394,7 +394,7 @@ function sequenceEqual(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 32. `skip(count)`
+#### 32. `skip(count)` :*[see](https://msdn.microsoft.com/en-us/library/bb358985(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb358985(v=vs.110).aspx)*
 ```typescript
 function skip(
 	count:number
@@ -406,7 +406,7 @@ function skip(
 > e.skip(2); //3, 4
 > ```
 
-#### 33. `skipWhile(predicate)`
+#### 33. `skipWhile(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549288(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549288(v=vs.110).aspx)*
 ```typescript
 function skipWhile(
 	predicate:Function = defaultPredicate
@@ -415,7 +415,7 @@ function skipWhile(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 33. `take(count)`
+#### 33. `take(count)` :*[see]()* :*[参考]()*
 ```typescript
 function take(
 	count:number
@@ -427,7 +427,7 @@ function take(
 > e.take(2); //1, 2
 > ```
 
-#### 34. `takeWhile(predicate)`
+#### 34. `takeWhile(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb503062(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb503062(v=vs.110).aspx)*
 ```typescript
 function takeWhile(
 	predicate:Function = defaultPredicate
@@ -436,7 +436,7 @@ function takeWhile(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 35. `zip(other, resultSelector)`
+#### 35. `zip(other, resultSelector)` :*[see](https://msdn.microsoft.com/en-us/library/bb548775(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548775(v=vs.110).aspx)*
 ```typescript
 function zip(
 	other:IEnumerable
@@ -485,7 +485,7 @@ function toObject(
 	comparer(element:string, other:string):boolean;
 ```
 
-#### 39. `orderBy(keySelector, comparer)`
+#### 39. `orderBy(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb549422(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549422(v=vs.110).aspx)*
 ```typescript
 function orderBy(
 	keySelector:Function = defaultSelector,
@@ -496,7 +496,7 @@ function orderBy(
 	comparer(element:any, other:any):number;
 ```
 
-#### 40. `orderByDescending(keySelector, comparer)`
+#### 40. `orderByDescending(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548916(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548916(v=vs.110).aspx)*
 ```typescript
 function orderByDescending(
 	keySelector:Function = defaultSelector,
@@ -507,7 +507,7 @@ function orderByDescending(
 	comparer(element:any, other:any):number;
 ```
 
-#### 41. `join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer)`
+#### 41. `join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb549267(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549267(v=vs.110).aspx)*
 ```typescript
 function join(
 	inner:IEnumerable,
@@ -523,7 +523,7 @@ function join(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 42. `groupBy(keySelector, elementSelector, resultSelector, comparer)`
+#### 42. `groupBy(keySelector, elementSelector, resultSelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb535049(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535049(v=vs.110).aspx)*
 ```typescript
 function groupBy(
 	keySelector:Function = defaultSelector, 
@@ -538,7 +538,7 @@ function groupBy(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 43. `selectMany(collectionSelector, resultSelector)`
+#### 43. `selectMany(collectionSelector, resultSelector)` :*[see](https://msdn.microsoft.com/en-us/library/bb534732(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534732(v=vs.110).aspx)*
 ```typescript
 function selectMany(
 	collectionSelector:Function = defaultSelector,
@@ -549,7 +549,7 @@ function selectMany(
 	resultSelector(element:any):any;
 ```
 
-#### 44. `groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer)`
+#### 44. `groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb535047(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535047(v=vs.110).aspx)*
 ```typescript
 function groupJoin(
 	inner:IEnumerable,
@@ -574,14 +574,14 @@ function forEach(
 	action(element:any, index:number):void;
 ```
 
-#### 46. ```getEnumerator()`
+#### 46. `getEnumerator()`
 ```typescript
 function getEnumerator():IEnumerator;
 ```
 
 ### IOrderedEnumerable对象
 
-#### 1. `thenBy(keySelector, comparer)`
+#### 1. `thenBy(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb534500(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534500(v=vs.110).aspx)*
 ```typescript
 function thenBy(
 	keySelector:Function = defaultSelector,
@@ -592,7 +592,7 @@ function thenBy(
 	comparer(element:any, other:any):number;
 ```
 
-#### 2. `thenByDescending(keySelector, comparer)`
+#### 2. `thenByDescending(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb534489(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534489(v=vs.110).aspx)*
 ```typescript
 function thenByDescending(
 	keySelector:Function = defaultSelector,
@@ -680,7 +680,7 @@ function Enumerable.range(
 > Enumerable.range(2, 3); //2, 3, 4
 > ```
 
-#### 3. `comparers.array(array, comparer, last)` +1
+#### 3. `comparers.array(array, comparer, last)` :+1:
 ```typescript
 function Enumerable.comparers.array(
 	array:array, // 表示值的顺序的数组
@@ -705,7 +705,7 @@ function Enumerable.comparers.array(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
-#### 4. `comparers.predicate(array, last)` +1
+#### 4. `comparers.predicate(array, last)` :+1:
 ```typescript
 function Enumerable.comparers.predicate(
 	array:array<Function>, // 包含一组校验方法的数组
@@ -737,6 +737,8 @@ function Enumerable.comparers.predicate(
 #### 12. `actions:default` [defaultAction]
 
 ## Change list 更新日志
+
+### v2.1.10
 
 ### v2.1.9
 

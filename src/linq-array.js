@@ -14,7 +14,7 @@ const getter = (original) => {
 };
 
 module.exports = function() {
-	Enumerable.extends(Array.prototype, 'array');
+	Enumerable.extends(Array.prototype, core.types.Array);
 
 	((types, props) => {
 	    for (let type of types) {

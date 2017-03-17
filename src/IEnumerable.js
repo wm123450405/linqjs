@@ -13,16 +13,22 @@ const defaultAction = require('./methods/defaultAction');
 
 const hasProxy = typeof Proxy !== 'undefined' && Proxy.toString().match(/native code/);
 
+const string = 'string';
+const array = 'array';
+const enumerable = 'enumerable';
+const object = 'object';
+
 class IEnumerable {
     constructor(source) {
-        let type = source instanceof String || typeof(source) === 'string' ? 'string' : source instanceof Array || core.getType(source).endsWith(' Iterator') ? 'array' : source instanceof IEnumerable ? 'enumerable' : 'object';
+        let typeName = core.getType(source);
+        let type = source instanceof String || typeName === core.types.String ? string : source instanceof Array || typeName === core.types.Array || typeName.endsWith(' Iterator') ? array : source instanceof IEnumerable ? enumerable : object;
         core.defineProperty(this, Symbol.toStringTag, 'IEnumerable');
         core.defineProperties(this, {
             getProtoType() {
-                return type === 'enumerable' ? source.getProtoType() : type;
+                return type === enumerable ? source.getProtoType() : type;
             },
             toString() {
-                return type === 'string' ? Enumerable.join(this, '') : type === 'array' ? '[' + Enumerable.join(this, ',') + ']' : type === 'enumerable' ? source.toString.call(this) : ('[' + Enumerable.join(this, ',') + ']');
+                return type === string ? Enumerable.join(this, '') : type === array ? '[' + Enumerable.join(this, ',') + ']' : type === enumerable ? source.toString.call(this) : ('[' + Enumerable.join(this, ',') + ']');
             }
         });
         if (hasProxy) {

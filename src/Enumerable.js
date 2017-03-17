@@ -158,14 +158,14 @@ class Enumerable {
                 return this.asEnumerable().forEach(action);
             }
         });
-        if (type !== 'string') {
+        if (type !== core.types.String) {
             core.defineProperties(prototype, {
                 concat(other = []) {
                     return this.asEnumerable().concat(other);
                 }
             });
         }
-        if (type !== 'object') {
+        if (type !== core.types.Object) {
             core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
                     return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
