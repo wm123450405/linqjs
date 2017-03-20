@@ -13333,7 +13333,6 @@ var SpliceEnumerable = function (_IEnumerable) {
 
         var _this = _possibleConstructorReturn(this, (SpliceEnumerable.__proto__ || Object.getPrototypeOf(SpliceEnumerable)).call(this, source));
 
-        count = typeof count === 'undefined' ? Infinity : count;
         if (core.isArray(source) && core.array$splice) {
             var _core$array$splice;
 
@@ -13353,6 +13352,7 @@ var SpliceEnumerable = function (_IEnumerable) {
                 }, _callee, this);
             }));
         } else {
+            count = typeof count === 'undefined' ? Infinity : count;
             var iterable = _defineProperty({}, Symbol.iterator, source[Symbol.iterator]);
             core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
                 var index, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, value;
