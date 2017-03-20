@@ -11897,7 +11897,49 @@ var IteratorEnumerable = function (_IterableEnumerable) {
 
         var _this = _possibleConstructorReturn(this, (IteratorEnumerable.__proto__ || Object.getPrototypeOf(IteratorEnumerable)).call(this, iterator));
 
-        core.defineProperty(_this, Symbol.iterator, iterator);
+        var temp = [],
+            first = true;
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+            var next;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            next = iterator.next();
+
+                            if (!next.done) {
+                                _context.next = 9;
+                                break;
+                            }
+
+                            if (!first) {
+                                _context.next = 6;
+                                break;
+                            }
+
+                            first = false;
+                            _context.next = 7;
+                            break;
+
+                        case 6:
+                            return _context.delegateYield(temp, 't0', 7);
+
+                        case 7:
+                            _context.next = 12;
+                            break;
+
+                        case 9:
+                            temp.push(next.value);
+                            _context.next = 12;
+                            return next.value;
+
+                        case 12:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, this);
+        }));
         return _this;
     }
 
