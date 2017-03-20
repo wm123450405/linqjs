@@ -24,167 +24,234 @@ const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
 
 class Enumerable {
+    static unextends(prototype, type) {
+        if (typeof prototype !== 'object') return prototype;
+        core.undefineProperties(prototype, 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup');
+    }
     static extends(prototype, type) {
+        if (typeof prototype !== 'object') return prototype;
+        let getThis = core.getType(prototype).endsWith(' Iterator') ? t => t.asEnumerable() : t => t;
         core.defineProperties(prototype, {
             where(predicate = defaultPredicate) {
-                return this.asEnumerable().where(predicate);
+                return Enumerable.where(getThis(this), predicate);
             },
             select(selector = defaultSelector) {
-                return this.asEnumerable().select(selector);
+                return Enumerable.select(getThis(this), selector);
             },
             elementAt(index) {
-                return this.asEnumerable().elementAt(index);
+                return Enumerable.elementAt(getThis(this), index);
             },
             distinct(comparer = defaultEqualityComparer) {
-                return this.asEnumerable().distinct(comparer);
+                return Enumerable.distinct(getThis(this), comparer);
             },
             except(other, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().except(other, comparer);
+                return Enumerable.except(getThis(this), other, comparer);
             },
             union(other, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().union(other, comparer);
+                return Enumerable.union(getThis(this), other, comparer);
             },
             intersect(other, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().intersect(other, comparer);
+                return Enumerable.intersect(getThis(this), other, comparer);
             },
             ofType(type) {
-                return this.asEnumerable().ofType(type);
+                return Enumerable.ofType(getThis(this), type);
             },
             skip(count) {
-                return this.asEnumerable().skip(count);
+                return Enumerable.skip(getThis(this), count);
             },
             skipWhile(predicate = defaultPredicate()) {
-                return this.asEnumerable().skipWhile(predicate);
+                return Enumerable.skipWhile(getThis(this), predicate);
             },
             take(count) {
-                return this.asEnumerable().take(count);
+                return Enumerable.take(getThis(this), count);
             },
             takeWhile(predicate = defaultPredicate()) {
-                return this.asEnumerable().takeWhile(predicate);
+                return Enumerable.takeWhile(getThis(this), predicate);
             },
             orderBy(keySelector = defaultSelector, comparer = defaultComparer) {
-                return this.asEnumerable().orderBy(keySelector, comparer);
+                return Enumerable.orderBy(getThis(this), keySelector, comparer);
             },
             orderByDescending(keySelector = defaultSelector, comparer = defaultComparer) {
-                return this.asEnumerable().orderByDescending(keySelector, comparer);
+                return Enumerable.orderByDescending(getThis(this), keySelector, comparer);
             },
             groupBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().groupBy(keySelector, elementSelector, resultSelector, comparer);
+                return Enumerable.groupBy(getThis(this), keySelector, elementSelector, resultSelector, comparer);
             },
             selectMany(collectionSelector = defaultSelector, resultSelector = defaultSelector) {
-                return this.asEnumerable().selectMany(collectionSelector, resultSelector);
+                return Enumerable.selectMany(getThis(this), collectionSelector, resultSelector);
             },
             join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+                return Enumerable.join(getThis(this), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             },
             groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+                return Enumerable.groupJoin(getThis(this), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             },
             defaultIfEmpty() {
-                return this.asEnumerable().defaultIfEmpty();
+                return Enumerable.defaultIfEmpty(getThis(this));
             },
             all(predicate = defaultPredicate) {
-                return this.asEnumerable().all(predicate);
+                return Enumerable.all(getThis(this), predicate);
             },
             any(predicate = defaultPredicate) {
-                return this.asEnumerable().any(predicate);
+                return Enumerable.any(getThis(this), predicate);
             },
             isEmpty() {
-                return this.asEnumerable().isEmpty();
+                return Enumerable.isEmpty(getThis(this));
             },
             sequenceEqual(other, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().sequenceEqual(other, comparer);
+                return Enumerable.sequenceEqual(getThis(this), other, comparer);
             },
             first(predicate = defaultPredicate) {
-                return this.asEnumerable().first(predicate);
+                return Enumerable.first(getThis(this), predicate);
             },
             firstOrDefault(defaultValue, predicate = defaultPredicate) {
-                return this.asEnumerable().firstOrDefault(defaultValue, predicate);
+                return Enumerable.firstOrDefault(getThis(this), defaultValue, predicate);
             },
             last(predicate = defaultPredicate) {
-                return this.asEnumerable().last(predicate);
+                return Enumerable.last(getThis(this), predicate);
             },
             lastOrDefault(defaultValue, predicate = defaultPredicate) {
-                return this.asEnumerable().lastOrDefault(defaultValue, predicate);
+                return Enumerable.lastOrDefault(getThis(this), defaultValue, predicate);
             },
             single(predicate = defaultPredicate) {
-                return this.asEnumerable().single(predicate);
+                return Enumerable.single(getThis(this), predicate);
             },
             singleOrDefault(defaultValue, predicate = defaultPredicate) {
-                return this.asEnumerable().singleOrDefault(defaultValue, predicate);
+                return Enumerable.singleOrDefault(getThis(this), defaultValue, predicate);
             },
             count(predicate = defaultPredicate) {
-                return this.asEnumerable().count(predicate);
+                return Enumerable.count(getThis(this), predicate);
             },
             sum(predicate = defaultPredicate) {
-                return this.asEnumerable().sum(predicate);
+                return Enumerable.sum(getThis(this), predicate);
             },
             max(selector = defaultSelector, comparer = defaultComparer) {
-                return this.asEnumerable().max(selector, comparer);
+                return Enumerable.max(getThis(this), selector, comparer);
             },
             min(selector = defaultSelector, comparer = defaultComparer) {
-                return this.asEnumerable().min(selector, comparer);
+                return Enumerable.min(getThis(this), selector, comparer);
             },
             average(predicate = defaultPredicate) {
-                return this.asEnumerable().average(predicate);
+                return Enumerable.average(getThis(this), predicate);
             },
             aggregate(seed, func, selector = defaultSelector) {
-                return this.asEnumerable().aggregate(seed, func, selector);
+                return Enumerable.aggregate(getThis(this), seed, func, selector);
             },
             contains(value, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().contains(value, comparer);
+                return Enumerable.contains(getThis(this), value, comparer);
             },
             indexOf(value, start = 0, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().indexOf(value, start, comparer);
+                return Enumerable.indexOf(getThis(this), value, start, comparer);
             },
             findIndex(predicate, thisArg) {
-                return this.asEnumerable().findIndex(predicate, thisArg);
+                return Enumerable.findIndex(getThis(this), predicate, thisArg);
             },
-            lastIndexOf(value, start = 0, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().lastIndexOf(value, start, comparer);
+            lastIndexOf(value, start = Infinity, comparer = defaultEqualityComparer) {
+                return Enumerable.lastIndexOf(getThis(this), value, start, comparer);
             },
             findLastIndex(predicate, thisArg) {
-                return this.asEnumerable().findLastIndex(predicate, thisArg);
+                return Enumerable.findLastIndex(getThis(this), predicate, thisArg);
             },
             reverse() {
-                return this.asEnumerable().reverse();
+                return Enumerable.reverse(getThis(this));
+            },
+            copyWithin(target = 0, start = 0, end = Infinity) {
+                return Enumerable.copyWithin(getThis(this), target, start, end);
+            },
+            every(callback, thisArg) {
+                return Enumerable.every(getThis(this), callback, thisArg);
+            },
+            fill(value, start = 0, end = Infinity) {
+                return Enumerable.fill(getThis(this), value, start, end);
+            },
+            filter(callback, thisArg) {
+                return Enumerable.filter(getThis(this), callback, thisArg);
+            },
+            find(callback, thisArg) {
+                return Enumerable.find(getThis(this), callback, thisArg);
+            },
+            includes(element, start = 0) {
+                return Enumerable.includes(getThis(this), element, start);
+            },
+            map(callback, thisArg) {
+                return Enumerable.map(getThis(this), callback, thisArg);
+            },
+            pop() {
+                return Enumerable.pop(getThis(this));
+            },
+            push(...values) {
+                return Enumerable.push(getThis(this), ...values);
+            },
+            shift() {
+                return Enumerable.shift(getThis(this));
+            },
+            unshift(...values) {
+                return Enumerable.unshift(getThis(this), ...values);
+            },
+            reduce(callback, initialValue) {
+                return Enumerable.reduce(getThis(this), callback, initialValue);
+            },
+            reduceRight(callback, initialValue) {
+                return Enumerable.reduceRight(getThis(this), callback, initialValue);
+            },
+            slice(start = 0, end = Infinity) {
+                return Enumerable.slice(getThis(this), start, end);
+            },
+            splice(start, count, ...values) {
+                return Enumerable.splice(getThis(this), start, count, ...values);
+            },
+            some(callback, thisArg) {
+                return Enumerable.some(getThis(this), callback, thisArg);
+            },
+            sort(comparer = defaultComparer) {
+                return Enumerable.sort(getThis(this), comparer);
             },
             zip(other, resultSelector) {
-                return this.asEnumerable().zip(other, resultSelector);
+                return Enumerable.zip(getThis(this), other, resultSelector);
             },
             toArray() {
-                return this.asEnumerable().toArray();
+                return Enumerable.toArray(getThis(this));
             },
             toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
-                return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer).toObject();
+                return Enumerable.toDictionary(getThis(this), keySelector, elementSelector, comparer).toObject();
             },
             forEach(action = defaultAction, thisArg = undefined) {
-                return this.asEnumerable().forEach(action, thisArg);
+                return Enumerable.forEach(getThis(this), action, thisArg);
             },
-        });
-        if (type !== core.types.String) {
-            core.defineProperties(prototype, {
-                concat(...others) {
-                    return this.asEnumerable().concat(...others);
+            concat(...others) {
+                //return Enumerable.concat.apply(Enumerable, this, arguments);
+                if (core.isArray(this) && core.array$concat) {
+                    return Enumerable.extends(core.array$concat.apply(this, arguments));
+                } else if (core.isString(this) && core.string$concat) {
+                    return Enumerable.extends(core.string$concat.apply(this, arguments));
+                } else {
+                    return Enumerable.concat(this, ...others);
                 }
-            });
-        }
+            }
+        });
+        // if (type !== core.types.String && type !== core.types.Array) {
+        //     core.defineProperties(prototype, {
+        //         concat(...others) {
+        //             return Enumerable.concat(this, ...others);
+        //         }
+        //     });
+        // }
         if (type !== core.types.Object) {
             core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
-                    return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
+                    return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
                 },
                 toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
-                    return this.asEnumerable().toLookup(keySelector, elementSelector, comparer);
+                    return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
             });
         } else {
             core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
-                    return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer);
+                    return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
                 },
                 toLookup(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
-                    return this.asEnumerable().toLookup(keySelector, elementSelector, comparer);
+                    return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
             });
         }
@@ -239,9 +306,6 @@ class Enumerable {
     }
     static select(source, selector = defaultSelector) {
         return new SelectEnumerable(source, selector);
-    }
-    static concat(source, ...others) {
-        return new ConcatEnumerable(source, ...others);
     }
     static distinct(source, comparer = defaultEqualityComparer) {
         return new DistinctEnumerable(source, comparer);
@@ -333,6 +397,8 @@ class Enumerable {
     static includes(source, element, start = 0) {
         if (core.isArray(source) && core.array$includes) {
             return core.array$includes.call(source, element, start);
+        } else if (core.isString(source) && core.string$includes) {
+            return core.string$includes.call(source, element, start);
         } else {
             return this.skip(source, start).contains(element);
         }
@@ -349,6 +415,15 @@ class Enumerable {
             return core.array$filter.call(source, callback, thisArg);
         } else {
             return this.where(source, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static concat(source, ...others) {
+        if (core.isArray(source) && core.array$concat) {
+            return this.extends(core.array$concat.call(source, ...others));
+        } else if (core.isString(source) && core.string$concat) {
+            return this.extends(core.string$concat.call(source, ...others));
+        } else {
+            return new ConcatEnumerable(source, ...others);
         }
     }
     static pop(source) {
@@ -428,7 +503,13 @@ class Enumerable {
         }
     }
     static slice(source, start = 0, end = Infinity) {
-        return new SliceEnumerable(source, start, end);
+        if (core.isArray(source) && core.array$slice) {
+            return this.extends(core.array$slice.call(source, start, end));
+        } else if (core.isString(source) && core.string$slice) {
+            return this.extends(core.string$slice.call(source, start, end));
+        } else {
+            return new SliceEnumerable(source, start, end);
+        }
     }
     static splice(source, start, count, ...values) {
         return new SpliceEnumerable(source, start, count, ...values);

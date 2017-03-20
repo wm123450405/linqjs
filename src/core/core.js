@@ -62,7 +62,7 @@ const core = {
 		return this.getType(value) === this.types.Array;
 	},
 	conflict(prototype, property) {
-		if (prototype.hasOwnProperty(property)) {
+		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {
 			let newProperty = 'o$' + property;
 			if (prototype.hasOwnProperty(newProperty)) return;
 			console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
@@ -78,14 +78,14 @@ const core = {
 		if (isGet && value instanceof Function) {
 			Object.defineProperty(prototype, property, {
 				enumerable: false,
-				configurable: false,
+				configurable: true,
 				get: value
 			});
 		} else {
 			Object.defineProperty(prototype, property, {
 				enumerable: false,
 				writable: true,
-				configurable: false,
+				configurable: true,
 				value: value
 			});
 		}
@@ -101,7 +101,29 @@ const core = {
 			}
 		}
 	},
+	undefineProperty(prototype, property) {
+		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {
+			let oldProperty = 'o$' + property;
+			if (prototype.hasOwnProperty(oldProperty)) {
+				Object.defineProperty(prototype, property, {
+					enumerable: false,
+					writable: true,
+					configurable: true,
+					value: prototype[oldProperty]
+				});
+				delete prototype[oldProperty];
+			} else {
+				delete prototype[property];
+			}
+		}
+	},
+	undefineProperties(prototype, ...properties) {
+		for (let property of properties) {
+			this.undefineProperty(prototype, property);
+		}
+	},
 	"array$every": Array.prototype.every,
+	"array$concat": Array.prototype.concat,
 	"array$splice": Array.prototype.splice,
 	"array$slice": Array.prototype.slice,
 	"array$fill": Array.prototype.fill,
@@ -117,10 +139,14 @@ const core = {
 	"array$reduceRight": Array.prototype.reduceRight,
 	"array$some": Array.prototype.some,
 	"array$sort": Array.prototype.sort,
+	"array$copyWithin": Array.prototype.copyWithin,
 	"array$join": Array.prototype.join,
 	"array$indexOf": Array.prototype.indexOf,
 	"array$lastIndexOf": Array.prototype.lastIndexOf,
 	"array$findIndex": Array.prototype.findIndex,
+	"string$concat": String.prototype.concat,
+	"string$slice": String.prototype.slice,
+	"string$includes": String.prototype.includes,
 	"string$indexOf": String.prototype.indexOf,
 	"string$lastIndexOf": String.prototype.lastIndexOf
 };

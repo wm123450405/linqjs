@@ -79,8 +79,12 @@ initAs(defaultAs);
 Enumerable.config = {
     extends: {
         set array(value) {
-            if (value && config.extends.array !== value) {
-                extendArray();
+            if (config.extends.array !== value) {
+                if (value) {
+                    extendArray.install();
+                } else {
+                    extendArray.uninstall();
+                }
             }
             config.extends.array = value;
         },
@@ -88,8 +92,12 @@ Enumerable.config = {
             return config.extends.array;
         },
         set object(value) {
-            if (value && config.extends.object !== value) {
-                extendObject();
+            if (config.extends.object !== value) {
+                if (value) {
+                    extendObject.install();
+                } else {
+                    extendObject.uninstall();
+                }
             }
             config.extends.object = value;
         },
@@ -97,8 +105,12 @@ Enumerable.config = {
             return config.extends.object;
         },
         set string(value) {
-            if (value && config.extends.string !== value) {
-                extendString();
+            if (config.extends.string !== value) {
+                if (value) {
+                    extendString.install();
+                } else {
+                    extendString.uninstall();
+                }
             }
             config.extends.string = value;
         },

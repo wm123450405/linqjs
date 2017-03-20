@@ -948,6 +948,12 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
+### v2.1.11
+
+	修复部分对象 keys,values,entries 方法返回值异常的问题
+	新增对 String,Array,Object 进行的扩展的卸载功能
+	修复直接对 String,Array,Object 进行扩展时遇到的一些bug
+
 ### 2017-03-20 v2.1.10
 
 	使 IEnumerable 继承 Array, 并且重写了 Array 的原生方法, 使得 IEnumerable 使用起来更接近 Array 对象, 包括(copyWithin, every, fill, filter, find, findIndex, forEach, includes, indexOf, lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, some, sort, splice, unshift)

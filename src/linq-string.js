@@ -6,6 +6,11 @@
 const Enumerable = require('./Enumerable');
 const core = require('./core/core');
 
-module.exports = () => {
-	Enumerable.extends(String.prototype, core.types.String);
+module.exports = {
+	install() {
+		Enumerable.extends(String.prototype, core.types.String);
+	},
+	uninstall() {
+		Enumerable.unextends(String.prototype, core.types.String);
+	}
 };
