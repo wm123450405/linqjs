@@ -743,6 +743,7 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.10
 
+	优化 toArray 方法, 使用es6最新的析构功能
 	增加 Travis CI 支持
 	优化异常类型, 将不再是简单的抛出一个字符串, 而是完整的Error对象
 	优化了 IEnumerable 部分方法(elementAt, elementAtOrDefault, first, firstOrDefault, last, lastOrDefault, single, singleOrDefault, indexOf, lastIndexOf)的性能

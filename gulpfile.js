@@ -41,6 +41,12 @@ gulp.task('pack', ['unit'], function() {
 		})
 		.transform(babelify.configure({
 			presets: ['es2015', 'stage-3'],
+			plugins: [
+				['babel-plugin-transform-builtin-extend', {
+					globals: ['Error', 'Array'],
+					approximate: true
+				}]
+			],
 			sourceMaps: true
 		}))
 		.bundle()

@@ -18,6 +18,10 @@ const NoSuchElementsException = require('./core/exceptions/NoSuchElementsExcepti
 const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
 const TooManyElementsException = require('./core/exceptions/TooManyElementsException');
 const KeysForMultiElementsException = require('./core/exceptions/KeysForMultiElementsException');
+const NeedExecuteBeforeException = require('./core/exceptions/NeedExecuteBeforeException');
+
+const IComparable = require('./core/IComparable');
+const IEquatable = require('./core/IEquatable');
 
 const isProto = source => {
     let type = core.getType(source);
@@ -206,11 +210,12 @@ class Enumerable {
         return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
     }
     static toArray(source) {
-        let array = [];
-        for (let element of source) {
-            array.push(element);
-        }
-        return array;
+        return [...source];
+        // let array = [];
+        // for (let element of source) {
+        //     array.push(element);
+        // }
+        // return array;
     }
     static toDictionary(source, keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
         let dictionary = new Dictionary(), index = 0;
@@ -716,6 +721,31 @@ class Enumerable {
             }
         };
     }
+    static get exceptions() {
+        return {
+            get NoSuchElementsException() {
+                return NoSuchElementsException;
+            },
+            get OutOfRangeException() {
+                return OutOfRangeException;
+            },
+            get TooManyElementsException() {
+                return TooManyElementsException;
+            },
+            get KeysForMultiElementsException() {
+                return KeysForMultiElementsException;
+            },
+            get NeedExecuteBeforeException() {
+                return NeedExecuteBeforeException;
+            }
+        };
+    }
+    static get IComparable() {
+        return IComparable;
+    }
+    static get IEquatable() {
+        return IEquatable;
+    }
 }
 
 module.exports = Enumerable;
@@ -753,9 +783,3 @@ const ZipEnumerable = require('./enumerables/ZipEnumerable');
 const SingleEnumerable = require('./enumerables/SingleEnumerable');
 const Dictionary = require('./enumerables/Dictionary');
 const Lookup = require('./enumerables/Lookup');
-
-const IComparable = require('./core/IComparable');
-const IEquatable = require('./core/IEquatable');
-
-Enumerable.IComparable = IComparable;
-Enumerable.IEquatable = IEquatable;

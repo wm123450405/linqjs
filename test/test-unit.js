@@ -1,18 +1,16 @@
 const assert = require('asserture');
 
-module.exports = function(Enumerable, exceptions) {
+module.exports = function(Enumerable) {
 	const a = 'a',
 		b = 'b',
 		c = 'c',
 		d = 'd',
 		e = 'e',
 		f = 'f';
-	const OutOfRangeException = exceptions && exceptions.outOfRange || require('./../src/core/exceptions/OutOfRangeException');
-	const NoSuchElementsException = exceptions && exceptions.noSuchElements || require('./../src/core/exceptions/NoSuchElementsException');
-	const TooManyElementsException = exceptions && exceptions.tooManyElements || require('./../src/core/exceptions/TooManyElementsException');
-	const KeysForMultiElementsException = exceptions && exceptions.keysForMultiElements || require('./../src/core/exceptions/KeysForMultiElementsException');
-
-	Enumerable = Enumerable || require('./../src/linq');
+	const OutOfRangeException = Enumerable.exceptions.OutOfRangeException;
+	const NoSuchElementsException = Enumerable.exceptions.NoSuchElementsException;
+	const TooManyElementsException = Enumerable.exceptions.TooManyElementsException;
+	const KeysForMultiElementsException = Enumerable.exceptions.KeysForMultiElementsException;
 
 	//Enumerable static methods
 	assert.deepStrictEqual(Enumerable.empty().toArray(), []);
@@ -586,6 +584,9 @@ module.exports = function(Enumerable, exceptions) {
 		code: 102,
 		lastName: c
 	}], (outerElement, innerGrouping) => outerElement.firstName + ' ' + innerGrouping.select(v => v.lastName).join(' '), outerElement => outerElement.id, innerElement => innerElement.code, (element, other) => element === other - 100).toArray(), ['d b !', 'e c', 'f ']);
+
+	//for Syntax
+	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 == 0)], [2, 4, 6]);
 
 
 	console.log('test successful!');

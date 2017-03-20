@@ -1,4 +1,10 @@
 {
 	"sourceMaps": false,
-	"presets": ["es2015", "stage-3"]
+	"presets": ["es2015", "stage-3"],
+	"plugins": [
+		["babel-plugin-transform-builtin-extend", {
+			"globals": ["Error", "Array"],
+			"approximate": true
+		}]
+	]
 }
