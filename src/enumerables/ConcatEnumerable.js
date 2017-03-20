@@ -5,11 +5,13 @@ const IEnumerable = require('./../IEnumerable');
 const core = require('./../core/core');
 
 class ConcatEnumerable extends IEnumerable {
-    constructor(source, other = []) {
+    constructor(source, ...others) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function*() {
             yield* source;
-            yield* other;
+            for (let other of others) {
+            	yield* other;
+            }
         });
     }
 }

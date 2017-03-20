@@ -743,6 +743,7 @@ function Enumerable.comparers.predicate(
 
 ### v2.1.10
 
+	使 IEnumerable 继承 Array, 并且重写了 Array 的原生方法, 使得 IEnumerable 使用起来更接近 Array 对象, 包括(copyWithin, every, fill, filter, find, findIndex, forEach, includes, indexOf, lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, some, sort, splice, unshift)
 	优化 toArray 方法, 使用es6最新的析构功能
 	增加 Travis CI 支持
 	优化异常类型, 将不再是简单的抛出一个字符串, 而是完整的Error对象

@@ -13,7 +13,7 @@ class TakeEnumerable extends IEnumerable {
                 if (index < count) {
                     yield element;
                 } else {
-                    return;
+                    break;
                 }
                 index++;
             }

@@ -18,10 +18,11 @@ const array = 'array';
 const enumerable = 'enumerable';
 const object = 'object';
 
-class IEnumerable {
+class IEnumerable extends Array {
     constructor(source) {
+        super();
         let typeName = core.getType(source);
-        let type = source instanceof String || typeName === core.types.String ? string : source instanceof Array || typeName === core.types.Array || typeName.endsWith(' Iterator') ? array : source instanceof IEnumerable ? enumerable : object;
+        let type = source instanceof IEnumerable ? enumerable : typeName === core.types.String ? string : typeName === core.types.Array || typeName.endsWith(' Iterator') ? array : object;
         core.defineProperty(this, Symbol.toStringTag, 'IEnumerable');
         core.defineProperties(this, {
             getProtoType() {
@@ -48,7 +49,7 @@ class IEnumerable {
                     }
                 },
                 ownKeys(target) {
-                    return Enumerable.range(0, target.count()).select(i => String(i)).concat(Reflect.ownKeys(target)).toArray();
+                    return Enumerable.toArray(Enumerable.range(0, target.count()).select(i => String(i)).concat(Reflect.ownKeys(target)));
                 }
             });
         }
@@ -77,8 +78,8 @@ class IEnumerable {
     asEnumerable() {
         return this;
     }
-    concat(other = []) {
-        return Enumerable.concat(this, other);
+    concat(...others) {
+        return Enumerable.concat(this, ...others);
     }
     distinct(comparer = defaultEqualityComparer) {
         return Enumerable.distinct(this, comparer);
@@ -182,20 +183,71 @@ class IEnumerable {
     indexOf(value, start = 0, comparer = defaultEqualityComparer) {
         return Enumerable.indexOf(this, value, start, comparer);
     }
-    findIndex(predicate, start = 0) {
-        return Enumerable.findIndex(this, predicate, start);
+    findIndex(predicate, thisArg) {
+        return Enumerable.findIndex(this, predicate, thisArg);
     }
-    lastIndexOf(value, start = 0, comparer = defaultEqualityComparer) {
+    lastIndexOf(value, start = Infinity, comparer = defaultEqualityComparer) {
         return Enumerable.lastIndexOf(this, value, start, comparer);
     }
-    findLastIndex(predicate, start = 0) {
-        return Enumerable.findLastIndex(this, predicate, start);
+    findLastIndex(predicate, thisArg) {
+        return Enumerable.findLastIndex(this, predicate, thisArg);
     }
     reverse() {
         return Enumerable.reverse(this);
     }
     zip(other, resultSelector) {
         return Enumerable.zip(this, other, resultSelector);
+    }
+    slice(start = 0, end = Infinity) {
+        return Enumerable.slice(this, start, end);
+    }
+    every(callback, thisArg) {
+        return Enumerable.every(this, callback, thisArg);
+    }
+    find(callback, thisArg) {
+        return Enumerable.find(this, callback, thisArg);
+    }
+    includes(element, start = 0) {
+        return Enumerable.includes(this, element, start);
+    }
+    map(callback, thisArg) {
+        return Enumerable.map(this, callback, thisArg);
+    }
+    filter(callback, thisArg) {
+        return Enumerable.filter(this, callback, thisArg);
+    }
+    pop() {
+        return Enumerable.pop(this);
+    }
+    push(...values) {
+        return Enumerable.push(this, ...values);
+    }
+    shift() {
+        return Enumerable.shift(this);
+    }
+    unshift(...values) {
+        return Enumerable.unshift(this, ...values);
+    }
+    reduce(callback, initialValue) {
+        return Enumerable.reduce(this, callback, initialValue);
+    }
+    reduceRight(callback, initialValue) {
+        return Enumerable.reduceRight(this, callback, initialValue);
+    }
+    some(callback, thisArg) {
+        return Enumerable.some(this, callback, thisArg);
+    }
+    splice(start, count, ...values) {
+        return Enumerable.splice(this, start, count, ...values);
+    }
+    fill(value, start = 0, end = Infinity) {
+        return Enumerable.fill(this, value, start, end);
+    }
+    sort(comparer = defaultComparer) {
+        return Enumerable.sort(this, comparer);
+    }
+    copyWithin(target = 0, start = 0, end = Infinity) {
+        return Enumerable.copyWithin(this, target, start, end);
     }
     toArray() {
         return Enumerable.toArray(this);
@@ -209,8 +261,8 @@ class IEnumerable {
     toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
     }
-    forEach(action = defaultAction) {
-        return Enumerable.forEach(this, action);
+    forEach(action = defaultAction, thisArg = undefined) {
+        return Enumerable.forEach(this, action, thisArg);
     }
 }
 

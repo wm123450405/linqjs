@@ -16,7 +16,7 @@ class TakeWhileEnumerable extends IEnumerable {
                 if (taking) {
                     yield element;
                 } else {
-                    return;
+                    break;
                 }
             }
         });

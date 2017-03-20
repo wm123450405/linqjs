@@ -23,11 +23,6 @@ const NeedExecuteBeforeException = require('./core/exceptions/NeedExecuteBeforeE
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
 
-const isProto = source => {
-    let type = core.getType(source);
-    return type === core.types.Array || type === core.types.String;
-};
-
 class Enumerable {
     static extends(prototype, type) {
         core.defineProperties(prototype, {
@@ -142,14 +137,14 @@ class Enumerable {
             indexOf(value, start = 0, comparer = defaultEqualityComparer) {
                 return this.asEnumerable().indexOf(value, start, comparer);
             },
-            findIndex(predicate, start = 0) {
-                return this.asEnumerable().findIndex(predicate, start);
+            findIndex(predicate, thisArg) {
+                return this.asEnumerable().findIndex(predicate, thisArg);
             },
             lastIndexOf(value, start = 0, comparer = defaultEqualityComparer) {
                 return this.asEnumerable().lastIndexOf(value, start, comparer);
             },
-            findLastIndex(predicate, start = 0) {
-                return this.asEnumerable().findLastIndex(predicate, start);
+            findLastIndex(predicate, thisArg) {
+                return this.asEnumerable().findLastIndex(predicate, thisArg);
             },
             reverse() {
                 return this.asEnumerable().reverse();
@@ -163,14 +158,14 @@ class Enumerable {
             toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
                 return this.asEnumerable().toDictionary(keySelector, elementSelector, comparer).toObject();
             },
-            forEach(action = defaultAction) {
-                return this.asEnumerable().forEach(action);
-            }
+            forEach(action = defaultAction, thisArg = undefined) {
+                return this.asEnumerable().forEach(action, thisArg);
+            },
         });
         if (type !== core.types.String) {
             core.defineProperties(prototype, {
-                concat(other = []) {
-                    return this.asEnumerable().concat(other);
+                concat(...others) {
+                    return this.asEnumerable().concat(...others);
                 }
             });
         }
@@ -193,6 +188,7 @@ class Enumerable {
                 }
             });
         }
+        return prototype;
     }
     static getEnumerator(enumerable) {
         return new IEnumerator(enumerable);
@@ -211,11 +207,6 @@ class Enumerable {
     }
     static toArray(source) {
         return [...source];
-        // let array = [];
-        // for (let element of source) {
-        //     array.push(element);
-        // }
-        // return array;
     }
     static toDictionary(source, keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
         let dictionary = new Dictionary(), index = 0;
@@ -249,8 +240,8 @@ class Enumerable {
     static select(source, selector = defaultSelector) {
         return new SelectEnumerable(source, selector);
     }
-    static concat(source, other = []) {
-        return new ConcatEnumerable(source, other);
+    static concat(source, ...others) {
+        return new ConcatEnumerable(source, ...others);
     }
     static distinct(source, comparer = defaultEqualityComparer) {
         return new DistinctEnumerable(source, comparer);
@@ -307,10 +298,10 @@ class Enumerable {
     }
     static join(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (typeof resultSelector === 'undefined' && core.array$join) {
-            if (outer instanceof IEnumerable) {
-                return core.array$join.call(outer.toArray(), inner);
-            } else {
+            if (core.isArray(outer)) {
                 return core.array$join.call(outer, inner);
+            } else {
+                return core.array$join.call(Enumerable.toArray(outer), inner);
             }
         } else {
             return new JoinEnumerable(outer, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
@@ -324,6 +315,132 @@ class Enumerable {
     }
     static zip(source, other, resultSelector) {
         return new ZipEnumerable(source, other, resultSelector);
+    }
+    static every(source, callback, thisArg) {
+        if (core.isArray(source) && core.array$every) {
+            return core.array$every.call(source, callback, thisArg);
+        } else {
+            return this.all(source, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static find(source, callback, thisArg) {
+        if (core.isArray(source) && core.array$find) {
+            return core.array$find.call(source, callback, thisArg);
+        } else {
+            return this.firstOrDefault(source, undefined, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static includes(source, element, start = 0) {
+        if (core.isArray(source) && core.array$includes) {
+            return core.array$includes.call(source, element, start);
+        } else {
+            return this.skip(source, start).contains(element);
+        }
+    }
+    static map(source, callback, thisArg) {
+        if (core.isArray(source) && core.array$map) {
+            return core.array$map.call(source, callback, thisArg);
+        } else {
+            return this.select(source, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static filter(source, callback, thisArg) {
+        if (core.isArray(source) && core.array$filter) {
+            return core.array$filter.call(source, callback, thisArg);
+        } else {
+            return this.where(source, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static pop(source) {
+        if (core.isArray(source) && core.array$pop) {
+            return core.array$pop.call(source);
+        } else {
+            let iterable = [...source];
+            core.setProperty(source, Symbol.iterator, function*() {
+                let len = iterable.length - 1;
+                for (let index = 0; index < len; index++) {
+                    yield iterable[index];
+                }
+            });
+            return iterable[iterable.length - 1];
+        }
+    }
+    static push(source, ...values) {
+        if (core.isArray(source) && core.array$push) {
+            return core.array$push.call(source, ...values);
+        } else {
+            let iterable = [...source];
+            core.setProperty(source, Symbol.iterator, function*() {
+                yield* iterable;
+                yield* values;
+            });
+            return iterable.length + values.length;
+        }
+    }
+    static shift(source) {
+        if (core.isArray(source) && core.array$shift) {
+            return core.array$shift.call(source);
+        } else {
+            let iterable = { [Symbol.iterator]:source[Symbol.iterator] };
+            core.setProperty(source, Symbol.iterator, function*() {
+                let index = 0;
+                for (let element of iterable) {
+                    if (index > 0) {
+                        yield element;
+                    }
+                    index++;
+                }
+            });
+            return this.firstOrDefault(iterable);
+        }
+    }
+    static unshift(source, ...values) {
+        if (core.isArray(source) && core.array$unshift) {
+            return core.array$unshift.call(source, ...values);
+        } else {
+            let iterable = [...source];
+            core.setProperty(source, Symbol.iterator, function*() {
+                yield* values;
+                yield* iterable;
+            });
+            return values.length + iterable.length;
+        }
+    }
+    static reduce(source, callback, initialValue) {
+        if (core.isArray(source) && core.array$reduce) {
+            return core.array$reduce.call(source, callback, initialValue);
+        } else {
+            return this.aggregate(source, initialValue, (seed, element, index) => callback(seed, element, index, source));
+        }
+    }
+    static reduceRight(source, callback, initialValue) {
+        if (core.isArray(source) && core.array$reduceRight) {
+            return core.array$reduceRight.call(source, callback, initialValue);
+        } else {
+            return this.reverse(source).aggregate(initialValue, (seed, element, index) => callback(seed, element, index, source));
+        }
+    }
+    static some(source, callback, thisArg) {
+        if (core.isArray(source) && core.array$some) {
+            return core.array$some.call(source, callback, thisArg);
+        } else {
+            return this.any(source, (element, index) => callback.call(thisArg, element, index, source));
+        }
+    }
+    static slice(source, start = 0, end = Infinity) {
+        return new SliceEnumerable(source, start, end);
+    }
+    static splice(source, start, count, ...values) {
+        return new SpliceEnumerable(source, start, count, ...values);
+    }
+    static fill(source, value, start = 0, end = Infinity) {
+        return new FillEnumerable(source, value, start, end);
+    }
+    static sort(source, comparer = defaultComparer) {
+        return new SortEnumerable(source, comparer);
+    }
+    static copyWithin(source, target = 0, start = 0, end = Infinity) {
+        return new CopyWithinEnumerable(source, target, start, end);
     }
     static defaultIfEmpty(source, defaultValue) {
         return Enumerable.isEmpty(source) ? new SingleEnumerable(defaultValue) : Enumerable.asEnumerable(source);
@@ -363,7 +480,7 @@ class Enumerable {
         return true;
     }
     static first(source, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length > 0) {
                 return source[0];
             } else {
@@ -380,7 +497,7 @@ class Enumerable {
         }
     }
     static firstOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length > 0) {
                 return source[0];
             } else {
@@ -397,7 +514,7 @@ class Enumerable {
         }
     }
     static last(source, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length > 0) {
                 return source[source.length - 1];
             } else {
@@ -419,7 +536,7 @@ class Enumerable {
         }
     }
     static lastOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length > 0) {
                 return source[source.length - 1];
             } else {
@@ -441,7 +558,7 @@ class Enumerable {
         }
     }
     static single(source, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length === 1) {
                 return source[0];
             } else if (source.length === 0) {
@@ -470,7 +587,7 @@ class Enumerable {
         }
     }
     static singleOrDefault(source, defaultValue, predicate = defaultPredicate) {
-        if (predicate === defaultPredicate && isProto(source)) {
+        if (predicate === defaultPredicate && core.isProto(source)) {
             if (source.length === 1) {
                 return source[0];
             } else if (source.length === 0) {
@@ -578,7 +695,7 @@ class Enumerable {
         return false;
     }
     static elementAt(source, index) {
-        if (isProto(source)) {
+        if (core.isProto(source)) {
             if (index >= 0 && index < source.length) {
                 return source[index];
             } else {
@@ -596,7 +713,7 @@ class Enumerable {
         }
     }
     static elementAtOrDefault(source, index, defaultValue) {
-        if (isProto(source)) {
+        if (core.isProto(source)) {
             if (index >= 0 && index < source.length) {
                 return source[index];
             } else {
@@ -614,7 +731,7 @@ class Enumerable {
         }
     }
     static indexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
-        if (comparer === defaultEqualityComparer && isProto(source)) {
+        if (comparer === defaultEqualityComparer && core.isProto(source)) {
             return Enumerable.asEnumerable(source).indexOf(value, start);
         } else {
             let index = 0;
@@ -627,44 +744,53 @@ class Enumerable {
             return -1;
         }
     }
-    static findIndex(source, predicate, start = 0) {
+    static findIndex(source, predicate, thisArg) {
         let index = 0;
+        let callback = (element, index) => predicate.call(thisArg, element, index, source);
         for (let element of source) {
-            if (index >= start && predicate(element, index)) {
+            if (callback(element, index)) {
                 return index;
             }
             index++;
         }
         return -1;
     }
-    static lastIndexOf(source, value, start = 0, comparer = defaultEqualityComparer) {
-        if (comparer === defaultEqualityComparer && isProto(source)) {
+    static lastIndexOf(source, value, start = Infinity, comparer = defaultEqualityComparer) {
+        if (comparer === defaultEqualityComparer && core.isProto(source)) {
             return Enumerable.asEnumerable(source).lastIndexOf(value, start);
         } else {
-            let index = 0, lastIndex = -1;
-            for (let element of source) {
-                if (index >= start && comparer(element, value)) {
-                    lastIndex = index;
+            source = [...source];
+            if (start < 0) {
+                start = source.length + start;
+            }
+            for (let index = Math.min(start, source.length - 1); index >= 0; index--) {
+                if (comparer(source[index], value)) {
+                    return index;
                 }
-                index++;
             }
-            return lastIndex;
+            return -1;
         }
     }
-    static findLastIndex(source, predicate, start = 0) {
-        let index = 0, lastIndex = -1;
-        for (let element of source) {
-            if (index >= start && predicate(element, index)) {
-                lastIndex = index;
+    static findLastIndex(source, predicate, thisArg) {
+        let callback = (element, index) => predicate.call(thisArg, element, index, source);
+        source = [...source];
+        for (let index = source.length - 1; index >= 0; index--) {
+            let element = source[index];
+            if (callback(element, index)) {
+                return index;
             }
-            index++;
         }
-        return lastIndex;
+        return -1;
     }
-    static forEach(source, action = defaultAction) {
-        let index = 0;
-        for (let element of source) {
-            action(element, index++);
+    static forEach(source, action = defaultAction, thisArg = undefined) {
+        if (core.isArray(source) && core.array$forEach) {
+            core.array$forEach.call(source, action, thisArg);
+        } else {
+            let index = 0;
+            let callback = (element, index) => action.call(thisArg, element, index, source);
+            for (let element of source) {
+                callback(element, index++);
+            }
         }
     }
     static arrayComparer(array, last = false, comparer = defaultEqualityComparer) {
@@ -783,3 +909,8 @@ const ZipEnumerable = require('./enumerables/ZipEnumerable');
 const SingleEnumerable = require('./enumerables/SingleEnumerable');
 const Dictionary = require('./enumerables/Dictionary');
 const Lookup = require('./enumerables/Lookup');
+const SliceEnumerable = require('./enumerables/SliceEnumerable');
+const SpliceEnumerable = require('./enumerables/SpliceEnumerable');
+const FillEnumerable = require('./enumerables/FillEnumerable');
+const SortEnumerable = require('./enumerables/SortEnumerable');
+const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');

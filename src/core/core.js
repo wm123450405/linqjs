@@ -51,10 +51,22 @@ const core = {
 			return 'Symbol';
 		}
 	},
+	isProto(value) {
+		let type = this.getType(value);
+    	return type === this.types.Array || type === this.types.String;
+	},
+	isString(value) {
+		return this.getType(value) === this.types.String;
+	},
+	isArray(value) {
+		return this.getType(value) === this.types.Array;
+	},
 	conflict(prototype, property) {
 		if (prototype.hasOwnProperty(property)) {
-			console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to o$' + property);
-			Object.defineProperty(prototype, "o$" + property, {
+			let newProperty = 'o$' + property;
+			if (prototype.hasOwnProperty(newProperty)) return;
+			console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
+			Object.defineProperty(prototype, newProperty, {
 				enumerable: false,
 				writable: true,
 				configurable: true,
@@ -62,8 +74,7 @@ const core = {
 			});
 		}
 	},
-	defineProperty(prototype, property, value, isGet = false) {
-		this.conflict(prototype, property);
+	setProperty(prototype, property, value, isGet = false) {
 		if (isGet && value instanceof Function) {
 			Object.defineProperty(prototype, property, {
 				enumerable: false,
@@ -79,6 +90,10 @@ const core = {
 			});
 		}
 	},
+	defineProperty(prototype, property, value, isGet = false) {
+		this.conflict(prototype, property);
+		this.setProperty(prototype, property, value, isGet);
+	},
 	defineProperties(prototype, properties) {
 		for (let property in properties) {
 			if (properties.hasOwnProperty(property)) {
@@ -86,6 +101,22 @@ const core = {
 			}
 		}
 	},
+	"array$every": Array.prototype.every,
+	"array$splice": Array.prototype.splice,
+	"array$slice": Array.prototype.slice,
+	"array$fill": Array.prototype.fill,
+	"array$find": Array.prototype.find,
+	"array$includes": Array.prototype.includes,
+	"array$map": Array.prototype.map,
+	"array$filter": Array.prototype.filter,
+	"array$shift": Array.prototype.shift,
+	"array$unshift": Array.prototype.unshift,
+	"array$pop": Array.prototype.pop,
+	"array$push": Array.prototype.push,
+	"array$reduce": Array.prototype.reduce,
+	"array$reduceRight": Array.prototype.reduceRight,
+	"array$some": Array.prototype.some,
+	"array$sort": Array.prototype.sort,
 	"array$join": Array.prototype.join,
 	"array$indexOf": Array.prototype.indexOf,
 	"array$lastIndexOf": Array.prototype.lastIndexOf,
