@@ -195,10 +195,10 @@ function min(
 > e.min(); //1
 > ```
 
-#### 12. `concat(other)` :*[see](https://msdn.microsoft.com/en-us/library/bb302894(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb302894(v=vs.110).aspx)*
+#### 12. `concat(...others)` :*[see](https://msdn.microsoft.com/en-us/library/bb302894(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb302894(v=vs.110).aspx)* :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)*
 ```typescript
 function concat(
-	other:IEnumerable
+	...others:IEnumerable[]
 ):IEnumerable
 ```
 > e.g. 案例
@@ -568,19 +568,226 @@ function groupJoin(
 	comparer(element:any, other:any):boolean;
 ```
 
-#### 45. `forEach(action)`
+#### 45. `forEach(action, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)*
 ```typescript
 function forEach(
-	action:Function = defaultAction
+	action:Function = defaultAction,
+	thisArg:any = undefined
 ),
 
-	action(element:any, index:number):void;
+	action(element:any, index:number, source:IEnumerable):void;
 ```
 
 #### 46. `getEnumerator()`
 ```typescript
 function getEnumerator():IEnumerator;
 ```
+
+#### 47. `copyWithin(target, start, end)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)*
+```typescript
+function copyWithin(
+	target:number = 0,
+	start:number = 0,
+	end:number = Infinity
+):IEnumerable;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 48. `every(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every)*
+```typescript
+function every(
+	callback:Function,
+	thisArg:any
+):boolean,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 49. `fill(value, start, end)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)*
+```typescript
+function fill(
+	value:any,
+	start:number = 0,
+	end:number = Infinity
+):IEnumerable;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 50. `filter(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)*
+```typescript
+function filter(
+	callback:Function,
+	thisArg:any
+):IEnumerable,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 51. `find(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/find)*
+```typescript
+function find(
+	callback:Function,
+	thisArg:any
+):any,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 52. `findIndex(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)*
+```typescript
+function findIndex(
+	callback:Function,
+	thisArg:any
+):number,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 53. `findLastIndex(callback, thisArg)`
+```typescript
+function findLastIndex(
+	callback:Function,
+	thisArg:any
+):number,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 54. `includes(element, start)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)*
+```typescript
+function includes(
+	element:any,
+	start:number = 0
+):boolean;
+```
+
+#### 55. `indexOf(element, start, comparer)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)*
+```typescript
+function indexOf(
+	element:any,
+	start:number = 0,
+	comparer:Function = defaultEqualityComparer
+):number,
+
+	comparer(element:any, other:any):boolean;
+```
+
+#### 56. `lastIndexOf(element, start, comparer)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf)*
+```typescript
+function lastIndexOf(
+	element:any,
+	start:number = 0,
+	comparer:Function = defaultEqualityComparer
+):number,
+
+	comparer(element:any, other:any):boolean;
+```
+
+#### 57. `map(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)*
+```typescript
+function map(
+	callback:Function,
+	thisArg:any
+):IEnumerable,
+
+	callback(element:any, index:number, source:IEnumerable):any
+```
+
+#### 58. `reduce(callback, initialValue)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)*
+```typescript
+function reduce(
+	callback:Function,
+	initialValue:any
+):any,
+
+	callback(seed:any, element:any, index:number, source:IEnumerable):any;
+```
+
+#### 59. `reduceRight()` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight)*
+```typescript
+function reduceRight(
+	callback:Function,
+	initialValue:any
+):any,
+
+	callback(seed:any, element:any, index:number, source:IEnumerable):any;
+```
+
+#### 60. `slice(start, end)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Slice)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Slice)*
+```typescript
+function slice(
+	start:number = 0,
+	end:number = Infinity
+):IEnumerable;
+```
+
+#### 61. `splice(start, count, ...values)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Splice)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Splice)*
+```typescript
+function splice(
+	start:number,
+	count:number = Infinity,
+	...values:any[]
+):IEnumerable;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 62. `some(callback, thisArg)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Some)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Some)*
+```typescript
+function some(
+	callback:Function,
+	thisArg:any
+):boolean,
+
+	callback(element:any, index:number, source:IEnumerable):boolean;
+```
+
+#### 63. `sort(comparer)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Sort)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Sort)*
+```typescript
+function sort(
+	comparer:Function = defaultComparer
+):IEnumerable,
+
+	comparer(element:any, other:any):number;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 64. `push(...values)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Push)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Push)*
+```typescript
+function push(
+	...values:any[]
+):number;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 65. `pop()` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Pop)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Pop)*
+```typescript
+function pop():any
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 66. `unshift(...values)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Unshift)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Unshift)*
+```typescript
+function unshift(
+	...values:any[]
+):number;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+#### 67. `shift()` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Shift)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Shift)*
+```typescript
+function shift():any;
+```
+
+> * 注意:调用此方法会修改对象本身
+
+
 
 ### IOrderedEnumerable对象
 
@@ -741,7 +948,7 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
-### v2.1.10
+### 2017-03-20 v2.1.10
 
 	使 IEnumerable 继承 Array, 并且重写了 Array 的原生方法, 使得 IEnumerable 使用起来更接近 Array 对象, 包括(copyWithin, every, fill, filter, find, findIndex, forEach, includes, indexOf, lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, some, sort, splice, unshift)
 	优化 toArray 方法, 使用es6最新的析构功能
