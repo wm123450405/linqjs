@@ -950,6 +950,11 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
+### v2.1.12
+
+	优化 MapEnumerable 相关方法的性能
+	修复 MapEnumerable.values() 方法 返回值错误的bug
+
 ### 2017-03-21 v2.1.11
 
 	修改部分方法的默认值, 使其与原生方法的返回结果一致

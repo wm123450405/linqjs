@@ -19,22 +19,38 @@ class MapEnumerable extends IMapEnumerable {
         });
         core.defineProperties(this, {
             get(key, comparer = defaultSameComparer) {
-                return map.get(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
+                if (comparer === defaultSameComparer) {
+                    return map.get(key);
+                } else {
+                    return map.get(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)));
+                }
             },
             set(key, value, comparer = defaultSameComparer) {
-                return map.set(map.keys().asEnumerable().singleOrDefault(key, equalityPredicate(key, comparer)), value);
+                if (comparer === defaultSameComparer) {
+                    return map.set(key, value);
+                } else {
+                    return map.set(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)), value);
+                }
             },
             has(key, comparer = defaultSameComparer) {
-                return map.keys().asEnumerable().contains(key, comparer);
+                if (comparer === defaultSameComparer) {
+                    return map.has(key);
+                } else {
+                    return this.keys().contains(key, comparer);
+                }
             },
             delete(key, comparer = defaultSameComparer) {
-                return map.delete(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
+                if (comparer === defaultSameComparer) {
+                    return map.delete(key);
+                } else {
+                    return map.delete(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)));
+                }
             },
             keys() {
                 return map.keys().asEnumerable();
             },
             values() {
-                return map.values.asEnumerable();
+                return map.values().asEnumerable();
             },
             entries() {
                 return map.entries().asEnumerable();
