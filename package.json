@@ -1,51 +1,20 @@
 {
-  "name": "linq-js",
-  "version": "2.1.11",
+  "name": "linq-js-docs",
+  "version": "1.0.0",
   "description": "use linq and lamdba in javascript",
-  "main": "dist/linq.js",
+  "main": "",
   "scripts": {
-    "test": "node test/test.js",
-    "test:compile": "npm run compile && node test/test-compile.js",
-    "test:babel": "babel-node test/test-babel.js",
-    "test:unit": "gulp unit",
-    "compile": "gulp",
-    "prepublish": "npm run compile"
+    "test": "webpack && webpack-dev-server --host 0.0.0.0 --port 8040"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wm123450405/linqjs.git"
   },
   "devDependencies": {
-    "asserture": "^1.0.2",
-    "babel-cli": "^6.22.0",
-    "babel-plugin-transform-builtin-extend": "^1.1.2",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-3": "^6.22.0",
-    "babelify": "^7.3.0",
-    "browserify": "^14.1.0",
-    "exorcist": "^0.4.0",
-    "gulp": "^3.9.1",
-    "gulp-jshint": "^2.0.4",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^2.1.0",
-    "jshint": "^2.9.4",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "optionalDependencies": {
-    "babel-plugin-transform-builtin-extend": "^1.1.2",
-    "babel-polyfill": "^6.22.0"
   },
   "engines": {
     "node": ">=6.0.0"
   },
-  "keywords": [
-    "linqjs",
-    "linq",
-    "js"
-  ],
   "author": "wm123450405",
   "license": "MIT",
   "bugs": {
