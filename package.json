@@ -4,13 +4,32 @@
   "description": "use linq and lamdba in javascript",
   "main": "",
   "scripts": {
-    "test": "webpack && webpack-dev-server --host 0.0.0.0 --port 8040"
+    "test": "webpack --display-error-details && webpack-dev-server --compress --host 0.0.0.0 --port 8040 --progress --colors --inline --hot"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wm123450405/linqjs.git"
   },
   "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "bootstrap": "^3.3.7",
+    "css-loader": "^0.27.3",
+    "file-loader": "^0.10.1",
+    "jquery": "^3.2.1",
+    "less": "^2.7.2",
+    "less-loader": "^3.0.0",
+    "linq-js": "^2.1.11",
+    "style-loader": "^0.15.0",
+    "url-loader": "^0.5.8",
+    "vue": "^2.2.4",
+    "vue-loader": "^11.1.4",
+    "vue-router": "^2.3.0",
+    "vue-template-compiler": "^2.2.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "engines": {
     "node": ">=6.0.0"
