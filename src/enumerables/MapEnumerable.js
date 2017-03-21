@@ -4,7 +4,7 @@ const IMapEnumerable = require('./IMapEnumerable');
 
 const core = require('./../core/core');
 
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultSameComparer = require('./../methods/defaultSameComparer');
 const equalityPredicate = require('./../methods/equalityPredicate');
 
 const Entry = require('./Entry');
@@ -12,22 +12,22 @@ const Entry = require('./Entry');
 class MapEnumerable extends IMapEnumerable {
     constructor(map) {
         super();
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* MapIterator() {
             for (let key of map.keys()) {
                 yield new Entry(key, map.get(key));
             }
         });
         core.defineProperties(this, {
-            get(key, comparer = defaultEqualityComparer) {
+            get(key, comparer = defaultSameComparer) {
                 return map.get(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
             },
-            set(key, value, comparer = defaultEqualityComparer) {
+            set(key, value, comparer = defaultSameComparer) {
                 return map.set(map.keys().asEnumerable().singleOrDefault(key, equalityPredicate(key, comparer)), value);
             },
-            has(key, comparer = defaultEqualityComparer) {
+            has(key, comparer = defaultSameComparer) {
                 return map.keys().asEnumerable().contains(key, comparer);
             },
-            delete(key, comparer = defaultEqualityComparer) {
+            delete(key, comparer = defaultSameComparer) {
                 return map.delete(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
             },
             keys() {

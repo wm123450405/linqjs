@@ -1,20 +1,35 @@
 'use strict';
 
-const getFunctionNameReg = /^(function|class)\s+([^({\s]*)\s*[({].+$/ig;
+const getFunctionNameReg = /^(function\*?|class)\s+([^({\s]*)\s*[({].*/ig;
 const getObjectTypeNameReg = /^\[\w+\s(.+)]$/ig;
 
 const getter = (properties, property) => {
 	return () => properties[property];
 };
 
+const getFunctionName = fun => fun.name || (getFunctionNameReg.exec(fun) || [])[2] || '';
+
 const core = {
+	isDev() {
+		return typeof process !== 'undefined' && process && typeof process.env !== 'undefined' &&  process.env && typeof process.env.NODE_ENV !== 'undefined' && process.env.NODE_ENV === 'development';
+	},
 	getType(value) {
-		if (typeof(value) === 'undefined') {
+		if (typeof value === 'undefined') {
 			return this.types.Undefined;
+		} else if (typeof value === 'string') {
+			return this.types.String;
+		} else if (typeof value === 'number') {
+			return this.types.Number;
+		} else if (typeof value === 'function') {
+			return this.types.Function;
 		} else {
-			let type = value[Symbol.toStringTag] || Object.prototype.toString.call(value).replace(getObjectTypeNameReg, '$1');
+			let type = value[Symbol.toStringTag];
+			if (!type) {
+				type = Object.prototype.toString.call(value);
+				type = type.substring('[object '.length, type.length - 1);
+			}
 			if (type === 'Object') {
-				return Function.prototype.toString.call(value.constructor).replace(getFunctionNameReg, '$2');
+				return getFunctionName(value.constructor);
 			} else {
 				let typeName = typeof value;
 				if (typeName !== 'object') {
@@ -49,6 +64,9 @@ const core = {
 		},
 		get Symbol() {
 			return 'Symbol';
+		},
+		get Iterator() {
+			return 'Iterator';
 		}
 	},
 	isProto(value) {
@@ -61,11 +79,14 @@ const core = {
 	isArray(value) {
 		return this.getType(value) === this.types.Array;
 	},
+	isIterator(value) {
+		return this.getType(value).endsWith(this.types.Iterator);
+	},
 	conflict(prototype, property) {
 		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {
 			let newProperty = 'o$' + property;
 			if (prototype.hasOwnProperty(newProperty)) return;
-			console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
+			if (this.isDev()) console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
 			Object.defineProperty(prototype, newProperty, {
 				enumerable: false,
 				writable: true,
@@ -92,6 +113,12 @@ const core = {
 	},
 	defineProperty(prototype, property, value, isGet = false) {
 		this.conflict(prototype, property);
+		if (property === Symbol.iterator) {
+			let name = (getFunctionName(value) || getFunctionName(prototype[Symbol.iterator])).replace(/\s*Iterator$/ig, ' Iterator');
+			if (name) {
+				this.defineProperty(value, Symbol.toStringTag, name);
+			}
+		}
 		this.setProperty(prototype, property, value, isGet);
 	},
 	defineProperties(prototype, properties) {

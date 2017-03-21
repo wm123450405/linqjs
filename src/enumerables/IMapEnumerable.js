@@ -8,20 +8,20 @@ const Enumerable = require('./../Enumerable');
 
 const defaultKeySelector = require('./../methods/defaultKeySelector');
 const defaultValueSelector = require('./../methods/defaultValueSelector');
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultSameComparer = require('./../methods/defaultSameComparer');
 const defaultAction = require('./../methods/defaultAction');
 
 class IMapEnumerable extends IEnumerable {
     constructor() {
         super({});
     }
-    toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
+    toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         return this.toDictionary(keySelector, elementSelector, comparer).toObject();
     }
-    toDictionary(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
+    toDictionary(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
     }
-    toLookup(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
+    toLookup(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
     }
     forEach(action = defaultAction) {

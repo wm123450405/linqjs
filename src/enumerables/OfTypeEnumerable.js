@@ -17,7 +17,7 @@ class OfTypeEnumerable extends IEnumerable {
     constructor(source, type) {
         super(source);
         let is = type === Boolean ? isInstanceOfBoolean : type === String ? isInstanceOfString : type === Array ? isInstanceOfArray : type === Number ? isInstanceOfNumber : type === Function ? isInstanceOfFunction : type === Object ? isInstanceOfObject : core.getType(type) === core.types.String ? isInstanceOfByTypeName(type) : isInstanceOf(type);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* OfTypeIterator() {
             for (let element of source) {
                 if (is(element)) {
                     yield element;

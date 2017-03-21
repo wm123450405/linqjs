@@ -7,7 +7,7 @@ const core = require('./../core/core');
 class IterableEnumerable extends IEnumerable {
     constructor(iterable) {
         super(iterable);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* IterableIterator() {
             yield* iterable;
         });
     }

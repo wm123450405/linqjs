@@ -7,7 +7,7 @@ const core = require('./../core/core');
 class SliceEnumerable extends IEnumerable {
 	constructor(source, start = 0, end = Infinity) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* SliceIterator() {
         	if (start < 0 || end < 0) {
         		source = [...source];
         		if (start < 0) {

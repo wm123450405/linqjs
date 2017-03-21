@@ -11,7 +11,7 @@ const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 class DistinctEnumerable extends IEnumerable {
     constructor(source, comparer = defaultEqualityComparer) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* DistinctIterator() {
             let temp = [];
             for (let element of source) {
                 if (!Enumerable.contains(temp, element, comparer)) {

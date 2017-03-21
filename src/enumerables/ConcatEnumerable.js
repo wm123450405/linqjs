@@ -4,13 +4,21 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
+let id = '';
+
 class ConcatEnumerable extends IEnumerable {
     constructor(source, ...others) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* ConcatIterator() {
             yield* source;
             for (let other of others) {
-            	yield* other;
+            	if (other[Symbol.iterator]) {
+            		yield* other;
+            	} else if (core.isIterator(other)) {
+            		yield* other.asEnumerable();
+            	} else {
+            		yield other;
+            	}
             }
         });
     }

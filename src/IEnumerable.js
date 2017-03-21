@@ -4,7 +4,9 @@ const core = require('./core/core');
 
 const defaultPredicate = require('./methods/defaultPredicate');
 const defaultSelector = require('./methods/defaultSelector');
+const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
+const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
 const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
@@ -22,7 +24,7 @@ class IEnumerable extends Array {
     constructor(source) {
         super();
         let typeName = core.getType(source);
-        let type = source instanceof IEnumerable ? enumerable : typeName === core.types.String ? string : typeName === core.types.Array || typeName.endsWith(' Iterator') ? array : object;
+        let type = source instanceof IEnumerable ? enumerable : typeName === core.types.String ? string : typeName === core.types.Array || typeName.endsWith(core.types.Iterator) ? array : object;
         core.defineProperty(this, Symbol.toStringTag, 'IEnumerable');
         core.defineProperties(this, {
             getProtoType() {
@@ -37,6 +39,8 @@ class IEnumerable extends Array {
                 get(target, prop) {
                     if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
                         return target.elementAtOrDefault(prop);
+                    } else if (prop === 'length' || prop === 'size') {
+                        return target.count();
                     } else {
                         return target[prop];
                     }
@@ -44,6 +48,10 @@ class IEnumerable extends Array {
                 getOwnPropertyDescriptor(target, prop) {
                     if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
                         return { enumerable: true, configurable: true, get: () => target.elementAtOrDefault(prop) };
+                    } else if (prop === 'length' || prop === 'size') {
+                        let desc = Object.getOwnPropertyDescriptor(target, 'length');
+                        desc.value = target.count();
+                        return desc;
                     } else {
                         return Object.getOwnPropertyDescriptor(target, prop);
                     }
@@ -180,13 +188,13 @@ class IEnumerable extends Array {
     contains(value, comparer = defaultEqualityComparer) {
         return Enumerable.contains(this, value, comparer);
     }
-    indexOf(value, start = 0, comparer = defaultEqualityComparer) {
+    indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
         return Enumerable.indexOf(this, value, start, comparer);
     }
     findIndex(predicate, thisArg) {
         return Enumerable.findIndex(this, predicate, thisArg);
     }
-    lastIndexOf(value, start = Infinity, comparer = defaultEqualityComparer) {
+    lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
         return Enumerable.lastIndexOf(this, value, start, comparer);
     }
     findLastIndex(predicate, thisArg) {
@@ -252,13 +260,13 @@ class IEnumerable extends Array {
     toArray() {
         return Enumerable.toArray(this);
     }
-    toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultEqualityComparer) {
+    toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         return this.toDictionary(keySelector, elementSelector, comparer).toObject();
     }
-    toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
+    toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultSameComparer) {
         return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
     }
-    toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultEqualityComparer) {
+    toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultSameComparer) {
         return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
     }
     forEach(action = defaultAction, thisArg = undefined) {

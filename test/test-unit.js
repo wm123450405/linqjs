@@ -688,11 +688,11 @@ module.exports = function(Enumerable) {
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
 	})();
 
-try {
 	(() => {
 		Enumerable.config.extends.array = true;
 		Enumerable.config.extends.object = true;
 		Enumerable.config.extends.string = true;
+
 		//splice
 		let array_splice = [1, 2, 4, 3, 5, 6];
 		assert.deepStrictEqual(array_splice.splice(2, 2, 3, 4).toArray(), [4, 3]);
@@ -752,20 +752,22 @@ try {
 		];
 		let array_reduce2 = [0, [1, [2, [3, [4, [5, [6]]]]]]];
 		let flatten_reduce = (arr) => {
-			return arr.reduce(
+			let re = arr.reduce(
 				(acc, val) => {
-					return acc.concat(Array.isArray(val) ? flatten_reduce(val) : val)
+					let result = acc.concat(Array.isArray(val) ? flatten_reduce(val) : val)
+					return result;
 				}, []
 			);
+			return re;
 		};
-		assert.deepStrictEqual(flatten_reduce(array_reduce1), [0, 1, 2, 3, 4, 5]);
-		assert.deepStrictEqual(flatten_reduce(array_reduce2), [0, 1, 2, 3, 4, 5, 6]);
+		assert.deepStrictEqual(flatten_reduce(array_reduce1).toArray(), [0, 1, 2, 3, 4, 5]);
+		assert.deepStrictEqual(flatten_reduce(array_reduce2).toArray(), [0, 1, 2, 3, 4, 5, 6]);
 		//reduceRight
 		assert.deepStrictEqual([
 			[0, 1],
 			[2, 3],
 			[4, 5]
-		].reduceRight((a, b) => a.concat(b), []), [4, 5, 2, 3, 0, 1]);
+		].reduceRight((a, b) => a.concat(b), []).toArray(), [4, 5, 2, 3, 0, 1]);
 		//some
 		assert.strictEqual([2, 5, 8, 1, 4].some(element => element >= 10), false);
 		assert.strictEqual([12, 5, 8, 1, 4].some(element => element >= 10), true);
@@ -793,11 +795,49 @@ try {
 		Enumerable.config.extends.object = false;
 		Enumerable.config.extends.string = false;
 	})();
-	
-}catch(e){
-	console.trace(e.stack);
-}
 
+	assert.deepStrictEqual(Enumerable.toDictionary(['a', 'b', 'c']).toObject(), {
+		a: 'a',
+		b: 'b',
+		c: 'c'
+	});
+	assert.deepStrictEqual(Enumerable.toDictionary([{
+		key: 'apple',
+		value: 'red'
+	}, {
+		key: 'orange',
+		value: 'yellow'
+	}, {
+		key: 'watermelon',
+		value: 'green'
+	}], v => v.key, v => v.value).toObject(), {
+		apple: 'red',
+		orange: 'yellow',
+		watermelon: 'green'
+	});
+
+	assert.deepStrictEqual(Enumerable.toLookup(['a', 'b', 'a', 'c']).toObject(), {
+		a: ['a', 'a'],
+		b: ['b'],
+		c: ['c']
+	});
+	assert.deepStrictEqual(Enumerable.toLookup([{
+		key: 'red',
+		value: 'apple'
+	}, {
+		key: 'yellow',
+		value: 'orange'
+	}, {
+		key: 'green',
+		value: 'watermelon'
+	}, {
+		key: 'yellow',
+		value: 'pear'
+	}], v => v.key, v => v.value).toObject(), {
+		red: ['apple'],
+		yellow: ['orange', 'pear'],
+		green: ['watermelon']
+	});
 
 	console.log('test successful!');
 };

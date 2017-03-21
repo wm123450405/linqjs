@@ -33,7 +33,7 @@ class SpliceEnumerable extends IEnumerable {
                     index++;
                 }
             });
-            core.setProperty(this, Symbol.iterator, function*() {
+            core.setProperty(this, Symbol.iterator, function* SpliceIterator() {
                 let index = 0;
                 for (let element of iterable) {
                     if (index >= start && index < start + count) {

@@ -7,7 +7,7 @@ const core = require('./../core/core');
 class ZipEnumerable extends IEnumerable {
     constructor(source, other, resultSelector) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* ZipIterator() {
             let sourceIterator = source[Symbol.iterator]();
             let otherIterator = other[Symbol.iterator]();
             let sourceElement, otherElement, index = 0;

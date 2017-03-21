@@ -27,7 +27,7 @@ const createGrouping = (array, key, comparer, hasNext) => new IGrouping(key, {
 class GroupJoinEnumerable extends IEnumerable {
     constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         super(outer);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* GroupJoinIterator() {
             let innerTemp = [], outerIndex = 0, innerIndex = 0, innerIterator = inner[Symbol.iterator]();
             let innerHasNext = () => {
                 let next = innerIterator.next();

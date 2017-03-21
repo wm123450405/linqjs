@@ -11,7 +11,7 @@ const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 class ExceptEnumerable extends IEnumerable {
     constructor(source, other, comparer = defaultEqualityComparer) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* ExceptIterator() {
             let temp = [];
             for (let element of source) {
                 if (!Enumerable.contains(other, element, comparer)) {

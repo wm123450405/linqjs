@@ -13,10 +13,10 @@ const equalityPredicate = require('./../methods/equalityPredicate');
 
 const IGrouping = require('./IGrouping');
 
-class GroupingEnumerable extends IEnumerable {
+class GroupedEnumerable extends IEnumerable {
     constructor(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* GroupedIterator() {
             let groupings = [];
             let iterators = new Map();
 
@@ -57,4 +57,4 @@ class GroupingEnumerable extends IEnumerable {
     }
 }
 
-module.exports = GroupingEnumerable;
+module.exports = GroupedEnumerable;

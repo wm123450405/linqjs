@@ -8,7 +8,7 @@ class IGrouping extends IEnumerable {
     constructor(key, iterable) {
         super([]);
         this.key = key;
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* GroupingIterator() {
             yield* iterable;
         });
     }

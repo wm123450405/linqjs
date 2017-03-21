@@ -9,7 +9,7 @@ const defaultPredicate = require('./../methods/defaultPredicate');
 class SkipWhileEnumerable extends IEnumerable {
     constructor(source, predicate = defaultPredicate) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* SkipWhileIterator() {
             let skipping = true, index = 0;
             for (let element of source) {
                 skipping = skipping && predicate(element, index++);

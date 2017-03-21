@@ -63,8 +63,7 @@ const initAs = (name) => {
     });
     core.defineProperties(Object.prototype, {
         [name]() {
-            let type = core.getType(this);
-            if (type.endsWith(' Iterator')) {
+            if (core.isIterator(this)) {
                 return new IteratorEnumerable(this);
             } else {
                 return new ObjectEnumerable(this);

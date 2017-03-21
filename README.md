@@ -454,7 +454,7 @@ function zip(
 function toDictionary(
 	keySelector:Function = defaultSelector,
 	valueSelector:Function = defaultSelector,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function = defaultSameComparer
 ):Dictionary,
 
 	keySelector(element:any, index:number):any,
@@ -467,7 +467,7 @@ function toDictionary(
 function toLookup(
 	keySelector:Function = defaultSelector,
 	valueSelector:Function = defaultSelector,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function = defaultSameComparer
 ):Lookup,
 
 	keySelector(element:any, index:number):any,
@@ -480,7 +480,7 @@ function toLookup(
 function toObject(
 	keySelector:Function = defaultKeySelector,
 	valueSelector:Function = defaultValueSelector,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function = defaultSameComparer
 ):any,
 
 	keySelector(element:any, index:number):string,
@@ -668,7 +668,7 @@ function includes(
 function indexOf(
 	element:any,
 	start:number = 0,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function = defaultStrictEqualityComparer
 ):number,
 
 	comparer(element:any, other:any):boolean;
@@ -679,7 +679,7 @@ function indexOf(
 function lastIndexOf(
 	element:any,
 	start:number = 0,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function = defaultStrictEqualityComparer
 ):number,
 
 	comparer(element:any, other:any):boolean;
@@ -938,6 +938,8 @@ function Enumerable.comparers.predicate(
 > ```
 
 #### 5. `comparers.default` [*defaultComparer*]
+#### 5. `comparers.same` [*defaultSameComparer*]
+#### 5. `comparers.strict` [*defaultStrictEqualityComparer*]
 #### 6. `comparers.equality` [*defaultEqualityComparer*]
 #### 7. `selectors.default` [*defaultSelector*]
 #### 8. `selectors.key` [*defaultKeySelector*]
@@ -948,8 +950,15 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
-### v2.1.11
+### 2017-03-21 v2.1.11
 
+	修改部分方法的默认值, 使其与原生方法的返回结果一致
+	优化 ArrayEnumerable, StringEnumerable 的性能
+	添加对 Iterator 类型的扩展支持
+	为所有的 iterator 命名
+	修复 Iterator.asEnumerable() 返回的 IEnumerable 只能返回一个元素的bug
+	修复 toLookup 不能很好的分组的bug
+	进一步优化 对 String,Array,Object 进行的扩展
 	修复部分对象 keys,values,entries 方法返回值异常的问题
 	新增对 String,Array,Object 进行的扩展的卸载功能
 	修复直接对 String,Array,Object 进行扩展时遇到的一些bug

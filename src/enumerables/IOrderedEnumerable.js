@@ -12,7 +12,7 @@ const defaultComparer = require('./../methods/defaultComparer');
 class IOrderedEnumerable extends IEnumerable {
     constructor(source, orderByComparer = defaultComparer) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* OrderedIterator() {
             for (let element of Enumerable.toArray(source).sort(orderByComparer)) {
                 yield element;
             }

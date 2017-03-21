@@ -10,7 +10,7 @@ const defaultSelector = require('./../methods/defaultSelector');
 class JoinEnumerable extends IEnumerable {
     constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         super(outer);
-        core.defineProperty(this, Symbol.iterator, function*() {
+        core.defineProperty(this, Symbol.iterator, function* JoinIterator() {
             let innerTemp = [], outerIndex = 0;
             for (let outerElement of outer) {
                 let outerKey = outerKeySelector(outerElement, outerIndex);
