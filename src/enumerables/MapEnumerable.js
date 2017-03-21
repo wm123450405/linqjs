@@ -27,10 +27,11 @@ class MapEnumerable extends IMapEnumerable {
             },
             set(key, value, comparer = defaultSameComparer) {
                 if (comparer === defaultSameComparer) {
-                    return map.set(key, value);
+                    map.set(key, value);
                 } else {
-                    return map.set(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)), value);
+                    map.set(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)), value);
                 }
+                return this;
             },
             has(key, comparer = defaultSameComparer) {
                 if (comparer === defaultSameComparer) {

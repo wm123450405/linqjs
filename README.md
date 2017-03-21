@@ -827,9 +827,76 @@ function forEach(
 	action(element:any, key:any):void;
 ```
 
+#### 2. `toDictionary(keySelector, elementSelector, comparer)`
+```typescript
+function toDictionary(
+	keySelector = defaultKeySelector, 
+	elementSelector = defaultValueSelector, 
+	comparer = defaultSameComparer
+):Dictionary,
+
+	keySelector(element:any, index:number):string,
+	elementSelector(element:any, index:number):any,
+	comparer(element:any, other:any):boolean;
+```
+
+#### 3. `toLookup(keySelector, elementSelector, comparer)`
+```typescript
+function toLookup(
+	keySelector = defaultKeySelector, 
+	elementSelector = defaultValueSelector, 
+	comparer = defaultSameComparer
+):Lookup,
+
+	keySelector(element:any, index:number):string,
+	elementSelector(element:any, index:number):any,
+	comparer(element:any, other:any):boolean;
+```
+
 ### Dictionary对象
 ```typescript
 class Dictionary extends IMapEnumerable { };
+```
+
+#### 1. `get(key, comparer)`
+```typescript
+function get(
+	key:any,
+	comparer:Function = defaultSameComparer
+):any,
+
+	comparer(element:any, other:any):boolean;
+```
+
+#### 2. `set(key, value, comparer)`
+```typescript
+function set(
+	key:any,
+	value:any
+	comparer:Function = defaultSameComparer
+):Dictionary,
+
+	comparer(element:any, other:any):boolean;
+```
+
+#### 3. `has(key, comparer)`
+```typescript
+function has(
+	key:any,
+	comparer:Function = defaultSameComparer
+):boolean,
+
+	comparer(element:any, other:any):boolean;
+```
+
+#### 4. `delete(key, comparer)`
+```typescript
+function delete(
+	key:any,
+	comparer:Function = defaultSameComparer
+):boolean,
+
+	comparer(element:any, other:any):boolean;
 ```
 
 ### Lookup对象
