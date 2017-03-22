@@ -4,42 +4,53 @@ const path = require('path');
 module.exports = {
     devtool: '#eval-source-map',
     entry: {
-        main: './src/js/main.js'
+        'main': './src/scripts/main.js',
+        'common': ['jquery', 'vue', 'vue-router', 'linq-js', 'bootstrap-loader']
     },
     output: {
-        path: path.resolve('./dist/js'),
+        path: path.resolve('./dist'),
+		publicPath: '/dist/',
         filename: '[name].js'
     },
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, './src/js') },
-            { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, './src/css') },
-            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader', include: path.join(__dirname, './src/css')},
-            { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'file-loader', include: path.join(__dirname, './src')}
+            { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, './src/scripts') },
+            { test: /\.vue$/, loader: 'vue-loader', include: [ path.join(__dirname, './src/pages'), path.join(__dirname, './src/components')] },
+			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, './src/resources') },
+            { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, './src/styles') },
+            { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, './src/styles') },
+            { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'url-loader?limit=40960', include: [ path.join(__dirname, './src'), path.join(__dirname, './node_modules') ] }
         ]
     },
     devServer: {
         hot:true,
         inline:true,
+        historyApiFallback: true,
         contentBase: path.resolve('./')
     },
     resolve: {
-        extensions: ['.js', '.json', '.less']
+        extensions: ['.js', '.json', '.less', '.vue'],
+        alias: {
+            'vue': 'vue/dist/vue.common',
+            'vue-router': 'vue-router/dist/vue-router.common'
+        }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: ["common"],
+            names: ['common'],
             minChunks: Infinity
         }),
         new webpack.ProvidePlugin({
 	        jQuery: 'jquery',
 	        $: 'jquery',
-	        Vue: 'vue'
-	    }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
+            Enumerable: 'linq-js',
+	        Vue: 'vue',
+	        VueRouter: 'vue-router'
+	    })
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // })
     ]
 };
