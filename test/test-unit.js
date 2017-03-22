@@ -1,4 +1,4 @@
-const assert = require('asserture');
+const assert = require('assertrue');
 
 module.exports = function(Enumerable) {
 	const a = 'a',
