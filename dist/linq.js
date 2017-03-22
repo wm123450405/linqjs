@@ -12497,28 +12497,45 @@ var MapEnumerable = function (_IMapEnumerable) {
             get: function get(key) {
                 var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
 
-                return map.get(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
+                if (comparer === defaultSameComparer) {
+                    return map.get(key);
+                } else {
+                    return map.get(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)));
+                }
             },
             set: function set(key, value) {
                 var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
 
-                return map.set(map.keys().asEnumerable().singleOrDefault(key, equalityPredicate(key, comparer)), value);
+                if (comparer === defaultSameComparer) {
+                    map.set(key, value);
+                } else {
+                    map.set(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)), value);
+                }
+                return this;
             },
             has: function has(key) {
                 var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
 
-                return map.keys().asEnumerable().contains(key, comparer);
+                if (comparer === defaultSameComparer) {
+                    return map.has(key);
+                } else {
+                    return this.keys().contains(key, comparer);
+                }
             },
             delete: function _delete(key) {
                 var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
 
-                return map.delete(map.keys().asEnumerable().single(equalityPredicate(key, comparer)));
+                if (comparer === defaultSameComparer) {
+                    return map.delete(key);
+                } else {
+                    return map.delete(this.keys().singleOrDefault(key, equalityPredicate(key, comparer)));
+                }
             },
             keys: function keys() {
                 return map.keys().asEnumerable();
             },
             values: function values() {
-                return map.values.asEnumerable();
+                return map.values().asEnumerable();
             },
             entries: function entries() {
                 return map.entries().asEnumerable();
