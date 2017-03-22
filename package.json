@@ -44,7 +44,11 @@
   "keywords": [
     "linqjs",
     "linq",
-    "js"
+    "js",
+    "array",
+    "lamdba",
+    "enumerable",
+    "queryable"
   ],
   "author": "wm123450405",
   "license": "MIT",

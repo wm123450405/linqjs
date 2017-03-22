@@ -1017,7 +1017,11 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
-### v2.1.12
+### v2.1.13
+
+	优化 Enumerable 的静态方法, 使得参数 source 可以为任意类型
+
+### 2017-03-22 v2.1.12
 
 	优化 MapEnumerable 相关方法的性能
 	修复 MapEnumerable.values() 方法 返回值错误的bug

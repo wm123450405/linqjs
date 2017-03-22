@@ -28,10 +28,8 @@ const IEquatable = require('./core/IEquatable');
 const asEnumerable = value => {
 	if (value[Symbol.iterator]) {
 		return value;
-	} else if (core.isIterator(value)) {
-		return value.asEnumerable();
 	} else {
-		throw new Error('Not an enumerable value');
+		return value.asEnumerable();
 	}
 };
 
