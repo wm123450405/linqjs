@@ -1040,6 +1040,10 @@ function Enumerable.comparers.predicate(
 
 ## Change list 更新日志
 
+### v2.1.14
+
+	修复一个可能导致内存泄露的bug
+
 ### 2017-03-23 v2.1.13
 
 	增加 plugin 支持, 使用 Enumerable.addPlugins 和 Enumerable.removePlugins 添加和移除 插件

@@ -27,8 +27,6 @@ const PluginRepeatException = require('./core/exceptions/PluginRepeatException')
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
 
-const IterableWeakSet = require('./IterableWeakSet');
-
 const asIterable = value => {
 	if (value[Symbol.iterator]) {
 		return value;
@@ -51,7 +49,7 @@ const addExtends = (prototype, type) => {
 		}
 	}
 	if (!_extends.has(type)) {
-    	_extends.set(type, new IterableWeakSet());
+    	_extends.set(type, new Set());
     }
     _extends.get(type).add(prototype);
     return true;
@@ -129,15 +127,15 @@ class Enumerable {
 	static get plugins() {
 		return Enumerable.select(_plugins, plugin => ({ get name() { return plugin.name; }, get value() { return plugin.value; }, get types() { return plugin.types; } })).toArray();
 	}
-    static unextends(prototype, type) {
+    static unextends(prototype, type, isPrototype = false) {
         if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
-        if (removeExtends(prototype, type)) {
+        if (!isPrototype || removeExtends(prototype, type)) {
 			core.undefineProperties(prototype, 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup');
 	    }
     }
-    static extends(prototype, type) {
+    static extends(prototype, type, isPrototype = false) {
         if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
-        if (addExtends(prototype, type)) {
+        if (!isPrototype ||addExtends(prototype, type)) {
 	        core.defineProperties(prototype, {
 	            where(predicate = defaultPredicate) {
 	                return Enumerable.where(this, predicate);

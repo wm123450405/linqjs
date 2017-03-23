@@ -8,9 +8,9 @@ const core = require('./core/core');
 
 module.exports = {
 	install() {
-		Enumerable.extends(Object.prototype, core.types.Object);
+		Enumerable.extends(Object.prototype, core.types.Object, true);
 	},
 	uninstall() {
-		Enumerable.unextends(Object.prototype, core.types.Object);
+		Enumerable.unextends(Object.prototype, core.types.Object, true);
 	}
 };

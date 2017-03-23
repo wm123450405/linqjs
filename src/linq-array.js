@@ -13,23 +13,25 @@ const getter = (original) => {
     };
 };
 
+const extendsTypes = [Array, Map, Set];
+const extendsProperties = ['keys', 'values', 'entries'];
+
 module.exports = {
 	install() {
-		Enumerable.extends(Array.prototype, core.types.Array);
+		Enumerable.extends(Array.prototype, core.types.Array, true);
 
 		((types, props) => {
 		    for (let type of types) {
 		    	if (type) {
 			        for (let prop of props) {
-			            let original = type.prototype[prop];
-			            core.defineProperty(type.prototype, prop, getter(original));
+			            core.defineProperty(type.prototype, prop, getter(type.prototype[prop]));
 			        }
 		    	}
 		    }
-		})([Array, Map, Set, WeakMap, WeakSet], ['keys', 'values', 'entries']);
+		})(extendsTypes, extendsProperties);
 	},
 	uninstall() {
-		Enumerable.unextends(Array.prototype, core.types.Array);
+		Enumerable.unextends(Array.prototype, core.types.Array, true);
 
 		((types, props) => {
 		    for (let type of types) {
@@ -37,6 +39,6 @@ module.exports = {
 		            core.undefineProperties(type.prototype, props);
 		    	}
 		    }
-		})([Array, Map, Set, WeakMap, WeakSet], ['keys', 'values', 'entries']);
+		})(extendsTypes, extendsProperties);
 	}
 };
