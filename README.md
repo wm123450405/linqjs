@@ -957,7 +957,30 @@ function Enumerable.range(
 > Enumerable.range(2, 3); //2, 3, 4
 > ```
 
-#### 3. `comparers.array(array, comparer, last)` :+1:
+#### 3. `addPlugins(...plugins)`
+```typescript
+function addPlugins(
+	...plugins:Plugin[]
+):void;
+```
+```typescript
+class Plugin {
+	name: String,
+	value: Function,
+	types: String[]
+}
+
+function value(source:IEnumerable, ...arguments:any[]):any;
+```
+
+#### 4. `removePlugins(...plugins)`
+```typescript
+function addPlugins(
+	...plugins:Plugin[] | String[]
+):void;
+```
+
+#### 5. `comparers.array(array, comparer, last)` :+1:
 ```typescript
 function Enumerable.comparers.array(
 	array:array, // 表示值的顺序的数组
@@ -982,7 +1005,7 @@ function Enumerable.comparers.array(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.arrayComparer(["start", "progress", "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
-#### 4. `comparers.predicate(array, last)` :+1:
+#### 6. `comparers.predicate(array, last)` :+1:
 ```typescript
 function Enumerable.comparers.predicate(
 	array:array<Function>, // 包含一组校验方法的数组
@@ -1004,21 +1027,22 @@ function Enumerable.comparers.predicate(
 > e.asEnumerable().orderBy(v => v.status, Enumerable.predicateComparer([s => s == "start", s => s == "progress", s => s == "end"], true)).select(v => v.value); //'A', 'C', 'E', 'D', 'B', 'F'
 > ```
 
-#### 5. `comparers.default` [*defaultComparer*]
-#### 5. `comparers.same` [*defaultSameComparer*]
-#### 5. `comparers.strict` [*defaultStrictEqualityComparer*]
-#### 6. `comparers.equality` [*defaultEqualityComparer*]
-#### 7. `selectors.default` [*defaultSelector*]
-#### 8. `selectors.key` [*defaultKeySelector*]
-#### 9. `selectors.value` [*defaultValueSelector*]
-#### 10. `selectors.groupResult` [*defaultGroupResultSelector*]
-#### 11. `predicates:default` [*defaultPredicate*]
-#### 12. `actions:default` [*defaultAction*]
+#### 7. `comparers.default` [*defaultComparer*]
+#### 8. `comparers.same` [*defaultSameComparer*]
+#### 9. `comparers.strict` [*defaultStrictEqualityComparer*]
+#### 10. `comparers.equality` [*defaultEqualityComparer*]
+#### 11. `selectors.default` [*defaultSelector*]
+#### 12. `selectors.key` [*defaultKeySelector*]
+#### 13. `selectors.value` [*defaultValueSelector*]
+#### 14. `selectors.groupResult` [*defaultGroupResultSelector*]
+#### 15. `predicates:default` [*defaultPredicate*]
+#### 16. `actions:default` [*defaultAction*]
 
 ## Change list 更新日志
 
-### v2.1.13
+### 2017-03-23 v2.1.13
 
+	增加 plugin 支持, 使用 Enumerable.addPlugins 和 Enumerable.removePlugins 添加和移除 插件
 	优化 Enumerable 的静态方法, 使得参数 source 可以为任意类型
 
 ### 2017-03-22 v2.1.12

@@ -791,6 +791,19 @@ module.exports = function(Enumerable) {
 		let array_unshift = [1, 2, 3];
 		assert.strictEqual(array_unshift.unshift(4), 4);
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
+
+
+		Enumerable.addPlugins({
+			name: 'toHtml',
+			value(source) {
+				return `<span>${ source.join('</span><span>') }</span>`;
+			}
+		});
+
+		assert([1, 2, 3].toHtml(), '<span>1</span><span>2</span><span>3</span>');
+
+		Enumerable.removePlugins('toHtml');
+
 		Enumerable.config.extends.array = false;
 		Enumerable.config.extends.object = false;
 		Enumerable.config.extends.string = false;
@@ -838,6 +851,18 @@ module.exports = function(Enumerable) {
 		yellow: ['orange', 'pear'],
 		green: ['watermelon']
 	});
+
+
+	Enumerable.addPlugins({
+		name: 'toHtml',
+		value(source) {
+			return `<span>${ source.join('</span><span>') }</span>`;
+		}
+	});
+
+	assert([1, 2, 3].asEnumerable().toHtml(), '<span>1</span><span>2</span><span>3</span>');
+
+	Enumerable.removePlugins('toHtml');
 
 	console.log('test successful!');
 };
