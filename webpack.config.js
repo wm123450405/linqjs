@@ -2,10 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    devtool: '#eval-source-map',
+    devtool: '#source-map',
     entry: {
         'main': './src/scripts/main.js',
-        'common': ['jquery', 'vue', 'vue-router', 'linq-js', 'bootstrap-loader']
+        'common': ['linq-js', 'vue', 'vue-router']
     },
     output: {
         path: path.resolve('./dist'),
@@ -41,16 +41,14 @@ module.exports = {
             minChunks: Infinity
         }),
         new webpack.ProvidePlugin({
-	        jQuery: 'jquery',
-	        $: 'jquery',
             Enumerable: 'linq-js',
 	        Vue: 'vue',
 	        VueRouter: 'vue-router'
-	    })
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
+	    }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ]
 };

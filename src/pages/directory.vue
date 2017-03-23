@@ -1,9 +1,17 @@
 <template>
 	<nav class="sidebar">
-		<ul class="list-group">
-			<li class="list-group-item"><lang-link to="introduction"><span>简介</span></lang-link></li>
-			<li class="list-group-item"><a><span>简介</span> <span class="pull-right">◀</span></a></li>
-			<li class="list-group-item"><a><span>简介</span> <span class="pull-right">◀</span></a></li>
+		<ul class="list-group row">
+			<li class="list-group-item" v-for="line in directory">
+				<div class="panel">
+					<div class="panel-heading">
+						<a v-if="line.children" data-toggle="collapse" :data-target="`#${ line.code }`" class="collapsed"><span>{{ line.title }}</span> <span class="pull-right arrow"></span></a>
+						<lang-link :to="line.code" v-else><span>{{ line.title }}</span></lang-link>
+					</div>
+					<ul class="list-group collapse" :id="line.code">
+						<li class="list-group-item" v-for="sub in line.children"><lang-link :to="`${ line.code }/${ sub.code }`" v-if="line.children"><span>{{ sub.title }}</span></lang-link></li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 	</nav>
 </template>
@@ -13,11 +21,11 @@
 	export default {
 		data() {
 			return {
-				apis: []
+				directory: []
 			};
 		},
 		mounted() {
-			this.getJson('directory').then(data => this.apis = data);
+			this.getJson('directory').then(directory => this.directory = directory);
 		},
 		methods: {
 		}

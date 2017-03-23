@@ -2,6 +2,13 @@
  * Created by wm123 on 2017/3/22.
  */
 export default {
+	updated() {
+		$('pre code').each(function(i, block) {
+			if (!$(block).hasClass('hljs')) {
+				hljs.highlightBlock(block);
+			}
+		});
+	},
 	methods: {
 		getJson(names) {
 			if (typeof names === 'string' || names instanceof String) {

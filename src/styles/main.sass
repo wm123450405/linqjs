@@ -12,3 +12,23 @@ body
 	padding-left: 30px
 	height: 100%
 	overflow: auto
+	.list-group-item
+		padding: 0
+		>a
+			padding-left: 20px
+		.panel
+			margin-bottom: 0
+	.panel-heading
+		a
+			.arrow
+				transform: rotateZ(90deg)
+				transition: transform 0.3s
+				&:before
+					content: '▶'
+			&.collapsed
+				.arrow
+					transform: rotateZ(0deg)
+
+pre
+	padding: 5px
+	background-color: #272822

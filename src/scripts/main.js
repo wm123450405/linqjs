@@ -1,15 +1,16 @@
 import '../styles/main.sass';
-import 'bootstrap'
 
 import routes from './routes';
 import mixin from './mixin';
 import link from '../components/lang-link.vue';
+import content from '../components/content-template.vue';
 
 const load = page => resolve => require([`../pages/${page}.vue`], resolve);
 
 Vue.use(VueRouter);
 Vue.mixin(mixin);
 Vue.component('lang-link', link);
+Vue.component('content-template', content);
 
 const router = new VueRouter({
 	routes: [
@@ -29,7 +30,7 @@ const router = new VueRouter({
 						content: load('content')
 					},
 					children: Enumerable.asEnumerable(routes)
-						.select(entry => ({ path: '/' + entry.key, component: load(entry.value) }))
+						.select(entry => ({ path: entry.key, component: load(entry.value) }))
 						.concat({ path: '/', component: load('introduction') }).toArray()
 				}
 			]

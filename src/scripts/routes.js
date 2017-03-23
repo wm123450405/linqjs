@@ -1,3 +1,4 @@
 export default {
-	'introduction': 'introduction'
+	'introduction': 'introduction',
+	'install': 'install'
 };

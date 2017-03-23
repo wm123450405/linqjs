@@ -1,9 +1,5 @@
 <template>
-    <div>
-        <div v-if="data.code">
-            <h1>{{ data.title }}</h1>
-        </div>
-    </div>
+    <content-template :title="data.title"></content-template>
 </template>
 <script>
     export default {
