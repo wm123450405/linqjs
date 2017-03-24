@@ -95,23 +95,23 @@ const core = {
 			});
 		}
 	},
-	setProperty(prototype, property, value, isGet = false) {
+	setProperty(prototype, property, value, isGet = false, isEnumerable = false) {
 		if (isGet && value instanceof Function) {
 			Object.defineProperty(prototype, property, {
-				enumerable: false,
+				enumerable: isEnumerable,
 				configurable: true,
 				get: value
 			});
 		} else {
 			Object.defineProperty(prototype, property, {
-				enumerable: false,
+				enumerable: isEnumerable,
 				writable: true,
 				configurable: true,
 				value: value
 			});
 		}
 	},
-	defineProperty(prototype, property, value, isGet = false) {
+	defineProperty(prototype, property, value, isGet = false, isEnumerable = false) {
 		this.conflict(prototype, property);
 		if (property === Symbol.iterator) {
 			let name = (getFunctionName(value) || getFunctionName(prototype[Symbol.iterator])).replace(/\s*Iterator$/ig, ' Iterator');
@@ -119,7 +119,7 @@ const core = {
 				this.defineProperty(value, Symbol.toStringTag, name);
 			}
 		}
-		this.setProperty(prototype, property, value, isGet);
+		this.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
 	defineProperties(prototype, properties) {
 		for (let property in properties) {

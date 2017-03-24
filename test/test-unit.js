@@ -860,9 +860,11 @@ module.exports = function(Enumerable) {
 		}
 	});
 
-	assert([1, 2, 3].asEnumerable().toHtml(), '<span>1</span><span>2</span><span>3</span>');
+	assert.strictEqual([1, 2, 3].asEnumerable().toHtml(), '<span>1</span><span>2</span><span>3</span>');
 
 	Enumerable.removePlugins('toHtml');
+
+	assert.deepStrictEqual(Enumerable([1, 2, 3]).toArray(), [1, 2, 3]);
 
 	console.log('test successful!');
 };

@@ -1,7 +1,6 @@
 # LinqJs
 
 [![GitHub release](https://img.shields.io/github/release/wm123450405/linqjs.svg)](https://github.com/wm123450405/linqjs)
-[![Github Releases (by Release)](https://img.shields.io/github/downloads/wm123450405/linqjs/total.svg)](https://github.com/wm123450405/linqjs)
 [![npm](https://img.shields.io/npm/v/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![npm](https://img.shields.io/npm/dm/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.org/wm123450405/linqjs)
@@ -1035,13 +1034,24 @@ function Enumerable.comparers.predicate(
 #### 12. `selectors.key` [*defaultKeySelector*]
 #### 13. `selectors.value` [*defaultValueSelector*]
 #### 14. `selectors.groupResult` [*defaultGroupResultSelector*]
-#### 15. `predicates:default` [*defaultPredicate*]
-#### 16. `actions:default` [*defaultAction*]
+
+#### 15. `selectors.property(property)` :+1:
+```typescript
+function Enumerable.selectors.property(
+	property:String || Symbol // 属性值
+):Function; // selector
+```
+
+#### 16. `predicates:default` [*defaultPredicate*]
+#### 17. `actions:default` [*defaultAction*]
 
 ## Change list 更新日志
 
-### v2.1.14
+### 2017-03-24 v2.1.14
 
+	新增 propertySelector
+	修复 unextends 时不能移除 已附加的 plugins 属性
+	调整 Enumerable 接口, 现在可以直接使用 Enumerable(source) 的方式获得一个 IEnumerable 对象, 等价于 Enumerable.asEnumerable(source)
 	修复一个可能导致内存泄露的bug
 
 ### 2017-03-23 v2.1.13

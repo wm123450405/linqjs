@@ -6999,13 +6999,9 @@ process.umask = function() { return 0; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var core = require('./core/core');
 
@@ -7020,8 +7016,9 @@ var defaultKeySelector = require('./methods/defaultKeySelector');
 var defaultValueSelector = require('./methods/defaultValueSelector');
 var defaultAction = require('./methods/defaultAction');
 
-var _arrayComparer = require('./methods/arrayComparer');
-var _predicateComparer = require('./methods/predicateComparer');
+var arrayComparer = require('./methods/arrayComparer');
+var predicateComparer = require('./methods/predicateComparer');
+var propertySelector = require('./methods/propertySelector');
 
 var NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 var OutOfRangeException = require('./core/exceptions/OutOfRangeException');
@@ -7033,8 +7030,6 @@ var PluginRepeatException = require('./core/exceptions/PluginRepeatException');
 
 var IComparable = require('./core/IComparable');
 var IEquatable = require('./core/IEquatable');
-
-var IterableWeakSet = require('./IterableWeakSet');
 
 var asIterable = function asIterable(value) {
     if (value[Symbol.iterator]) {
@@ -7083,7 +7078,7 @@ var addExtends = function addExtends(prototype, type) {
     }
 
     if (!_extends.has(type)) {
-        _extends.set(type, new IterableWeakSet());
+        _extends.set(type, new Set());
     }
     _extends.get(type).add(prototype);
     return true;
@@ -7112,2262 +7107,2120 @@ var memberFunction = function memberFunction(name) {
     };
 };
 
-var Enumerable = function () {
-    function Enumerable() {
-        _classCallCheck(this, Enumerable);
+var Enumerable = function Enumerable(source) {
+    return Enumerable.asEnumerable(source);
+};
+Enumerable.addPlugins = function () {
+    for (var _len = arguments.length, plugins = Array(_len), _key = 0; _key < _len; _key++) {
+        plugins[_key] = arguments[_key];
     }
 
-    _createClass(Enumerable, null, [{
-        key: 'addPlugins',
-        value: function addPlugins() {
-            for (var _len = arguments.length, plugins = Array(_len), _key = 0; _key < _len; _key++) {
-                plugins[_key] = arguments[_key];
-            }
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
 
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
+    try {
+        for (var _iterator2 = plugins[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var plugin = _step2.value;
 
-            try {
+            if (plugin.name && plugin.value) {
+                if (this.contains(_plugins, plugin, pluginComparer)) {
+                    throw new PluginRepeatException(plugin);
+                } else if (typeof Enumerable[plugin.name] !== 'undefined') {
+                    throw new PluginRepeatException(plugin, true);
+                } else {
+                    plugin.types = plugin.types || [];
+                    _plugins.push(plugin);
+                    Enumerable[plugin.name] = staticFunction(plugin.value);
+                    IEnumerable.prototype[plugin.name] = memberFunction(plugin.name);
+                    var _iteratorNormalCompletion3 = true;
+                    var _didIteratorError3 = false;
+                    var _iteratorError3 = undefined;
 
-                for (var _iterator2 = plugins[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var plugin = _step2.value;
+                    try {
+                        for (var _iterator3 = _extends[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                            var _step3$value = _slicedToArray(_step3.value, 2),
+                                type = _step3$value[0],
+                                prototypes = _step3$value[1];
 
-                    if (plugin.name && plugin.value) {
-                        if (_plugins.asEnumerable().contains(plugin, pluginComparer)) {
-                            throw new PluginRepeatException(plugin);
-                        } else if (typeof Enumerable[plugin.name] !== 'undefined') {
-                            throw new PluginRepeatException(plugin, true);
-                        } else {
-                            plugin.types = plugin.types || [];
-                            _plugins.push(plugin);
-                            Enumerable[plugin.name] = staticFunction(plugin.value);
-                            IEnumerable.prototype[plugin.name] = memberFunction(plugin.name);
-                            var _iteratorNormalCompletion3 = true;
-                            var _didIteratorError3 = false;
-                            var _iteratorError3 = undefined;
+                            var _iteratorNormalCompletion4 = true;
+                            var _didIteratorError4 = false;
+                            var _iteratorError4 = undefined;
 
                             try {
-                                for (var _iterator3 = _extends[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                                    var _step3$value = _slicedToArray(_step3.value, 2),
-                                        type = _step3$value[0],
-                                        prototypes = _step3$value[1];
+                                for (var _iterator4 = prototypes[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                                    var prototype = _step4.value;
 
-                                    var _iteratorNormalCompletion4 = true;
-                                    var _didIteratorError4 = false;
-                                    var _iteratorError4 = undefined;
-
-                                    try {
-                                        for (var _iterator4 = prototypes[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                                            var prototype = _step4.value;
-
-                                            if (Enumerable.isEmpty(plugin.types) || Enumerable.contains(plugin.types, type)) {
-                                                prototype[plugin.name] = memberFunction(plugin.name);
-                                            }
-                                        }
-                                    } catch (err) {
-                                        _didIteratorError4 = true;
-                                        _iteratorError4 = err;
-                                    } finally {
-                                        try {
-                                            if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                                                _iterator4.return();
-                                            }
-                                        } finally {
-                                            if (_didIteratorError4) {
-                                                throw _iteratorError4;
-                                            }
-                                        }
+                                    if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
+                                        prototype[plugin.name] = memberFunction(plugin.name);
                                     }
                                 }
                             } catch (err) {
-                                _didIteratorError3 = true;
-                                _iteratorError3 = err;
+                                _didIteratorError4 = true;
+                                _iteratorError4 = err;
                             } finally {
                                 try {
-                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                        _iterator3.return();
+                                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                        _iterator4.return();
                                     }
                                 } finally {
-                                    if (_didIteratorError3) {
-                                        throw _iteratorError3;
+                                    if (_didIteratorError4) {
+                                        throw _iteratorError4;
                                     }
                                 }
                             }
                         }
-                    } else {
-                        console.error('Not a plugin value');
+                    } catch (err) {
+                        _didIteratorError3 = true;
+                        _iteratorError3 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                _iterator3.return();
+                            }
+                        } finally {
+                            if (_didIteratorError3) {
+                                throw _iteratorError3;
+                            }
+                        }
                     }
                 }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
+            } else {
+                console.error('Not a plugin value');
             }
         }
-    }, {
-        key: 'removePlugins',
-        value: function removePlugins() {
-            for (var _len2 = arguments.length, plugins = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                plugins[_key2] = arguments[_key2];
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
             }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+};
+Enumerable.removePlugins = function () {
+    for (var _len2 = arguments.length, plugins = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        plugins[_key2] = arguments[_key2];
+    }
 
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
+    var _iteratorNormalCompletion5 = true;
+    var _didIteratorError5 = false;
+    var _iteratorError5 = undefined;
 
-            try {
-                for (var _iterator5 = plugins[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var plugin = _step5.value;
+    try {
+        for (var _iterator5 = plugins[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            var plugin = _step5.value;
 
-                    if (core.getType(plugin) === core.types.String) {
-                        plugin = { name: plugin };
-                    }
-                    var index = _plugins.asEnumerable().indexOf(plugin, 0, pluginComparer);
-                    if (index != -1) {
-                        plugin = _plugins[index];
-                        _plugins.splice(index, 1);
-                        delete Enumerable[plugin.name];
-                        delete IEnumerable.prototype[plugin.name];
-                        var _iteratorNormalCompletion6 = true;
-                        var _didIteratorError6 = false;
-                        var _iteratorError6 = undefined;
+            if (core.getType(plugin) === core.types.String) {
+                plugin = { name: plugin };
+            }
+            var index = this.indexOf(_plugins, plugin, 0, pluginComparer);
+            if (index != -1) {
+                plugin = _plugins[index];
+                _plugins.splice(index, 1);
+                delete Enumerable[plugin.name];
+                delete IEnumerable.prototype[plugin.name];
+                var _iteratorNormalCompletion6 = true;
+                var _didIteratorError6 = false;
+                var _iteratorError6 = undefined;
+
+                try {
+                    for (var _iterator6 = _extends[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                        var _step6$value = _slicedToArray(_step6.value, 2),
+                            type = _step6$value[0],
+                            prototypes = _step6$value[1];
+
+                        var _iteratorNormalCompletion7 = true;
+                        var _didIteratorError7 = false;
+                        var _iteratorError7 = undefined;
 
                         try {
-                            for (var _iterator6 = _extends[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                                var _step6$value = _slicedToArray(_step6.value, 2),
-                                    type = _step6$value[0],
-                                    prototypes = _step6$value[1];
+                            for (var _iterator7 = prototypes[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                                var prototype = _step7.value;
 
-                                var _iteratorNormalCompletion7 = true;
-                                var _didIteratorError7 = false;
-                                var _iteratorError7 = undefined;
-
-                                try {
-                                    for (var _iterator7 = prototypes[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                                        var prototype = _step7.value;
-
-                                        if (Enumerable.isEmpty(plugin.types) || Enumerable.contains(plugin.types, type)) {
-                                            delete prototype[plugin.name];
-                                        }
-                                    }
-                                } catch (err) {
-                                    _didIteratorError7 = true;
-                                    _iteratorError7 = err;
-                                } finally {
-                                    try {
-                                        if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                                            _iterator7.return();
-                                        }
-                                    } finally {
-                                        if (_didIteratorError7) {
-                                            throw _iteratorError7;
-                                        }
-                                    }
+                                if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
+                                    delete prototype[plugin.name];
                                 }
                             }
                         } catch (err) {
-                            _didIteratorError6 = true;
-                            _iteratorError6 = err;
+                            _didIteratorError7 = true;
+                            _iteratorError7 = err;
                         } finally {
                             try {
-                                if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                                    _iterator6.return();
+                                if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                                    _iterator7.return();
                                 }
                             } finally {
-                                if (_didIteratorError6) {
-                                    throw _iteratorError6;
+                                if (_didIteratorError7) {
+                                    throw _iteratorError7;
                                 }
                             }
                         }
-                    } else {
-                        console.error('No plugin find with name "' + plugin.name + '"');
-                    }
-                }
-            } catch (err) {
-                _didIteratorError5 = true;
-                _iteratorError5 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                        _iterator5.return();
-                    }
-                } finally {
-                    if (_didIteratorError5) {
-                        throw _iteratorError5;
-                    }
-                }
-            }
-        }
-    }, {
-        key: 'unextends',
-        value: function unextends(prototype, type) {
-            if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
-            if (removeExtends(prototype, type)) {
-                core.undefineProperties(prototype, 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup');
-            }
-        }
-    }, {
-        key: 'extends',
-        value: function _extends(prototype, type) {
-            if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
-            if (addExtends(prototype, type)) {
-                core.defineProperties(prototype, {
-                    where: function where() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.where(this, predicate);
-                    },
-                    select: function select() {
-                        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-
-                        return Enumerable.select(this, selector);
-                    },
-                    elementAt: function elementAt(index) {
-                        return Enumerable.elementAt(this, index);
-                    },
-                    distinct: function distinct() {
-                        var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEqualityComparer;
-
-                        return Enumerable.distinct(this, comparer);
-                    },
-                    except: function except(other) {
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-                        return Enumerable.except(this, other, comparer);
-                    },
-                    union: function union(other) {
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-                        return Enumerable.union(this, other, comparer);
-                    },
-                    intersect: function intersect(other) {
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-                        return Enumerable.intersect(this, other, comparer);
-                    },
-                    ofType: function ofType(type) {
-                        return Enumerable.ofType(this, type);
-                    },
-                    skip: function skip(count) {
-                        return Enumerable.skip(this, count);
-                    },
-                    skipWhile: function skipWhile() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
-
-                        return Enumerable.skipWhile(this, predicate);
-                    },
-                    take: function take(count) {
-                        return Enumerable.take(this, count);
-                    },
-                    takeWhile: function takeWhile() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
-
-                        return Enumerable.takeWhile(this, predicate);
-                    },
-                    orderBy: function orderBy() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-
-                        return Enumerable.orderBy(this, keySelector, comparer);
-                    },
-                    orderByDescending: function orderByDescending() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-
-                        return Enumerable.orderByDescending(this, keySelector, comparer);
-                    },
-                    groupBy: function groupBy() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-                        var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultGroupResultSelector;
-                        var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
-
-                        return Enumerable.groupBy(this, keySelector, elementSelector, resultSelector, comparer);
-                    },
-                    selectMany: function selectMany() {
-                        var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-
-                        return Enumerable.selectMany(this, collectionSelector, resultSelector);
-                    },
-                    join: function join(inner) {
-                        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-                        var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-                        var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
-                        var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-
-                        return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-                    },
-                    groupJoin: function groupJoin(inner, resultSelector) {
-                        var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-                        var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
-                        var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-
-                        return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-                    },
-                    defaultIfEmpty: function defaultIfEmpty() {
-                        return Enumerable.defaultIfEmpty(this);
-                    },
-                    all: function all() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.all(this, predicate);
-                    },
-                    any: function any() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.any(this, predicate);
-                    },
-                    isEmpty: function isEmpty() {
-                        return Enumerable.isEmpty(this);
-                    },
-                    sequenceEqual: function sequenceEqual(other) {
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-                        return Enumerable.sequenceEqual(this, other, comparer);
-                    },
-                    first: function first() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.first(this, predicate);
-                    },
-                    firstOrDefault: function firstOrDefault(defaultValue) {
-                        var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-                        return Enumerable.firstOrDefault(this, defaultValue, predicate);
-                    },
-                    last: function last() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.last(this, predicate);
-                    },
-                    lastOrDefault: function lastOrDefault(defaultValue) {
-                        var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-                        return Enumerable.lastOrDefault(this, defaultValue, predicate);
-                    },
-                    single: function single() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.single(this, predicate);
-                    },
-                    singleOrDefault: function singleOrDefault(defaultValue) {
-                        var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-                        return Enumerable.singleOrDefault(this, defaultValue, predicate);
-                    },
-                    count: function count() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.count(this, predicate);
-                    },
-                    sum: function sum() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.sum(this, predicate);
-                    },
-                    max: function max() {
-                        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-
-                        return Enumerable.max(this, selector, comparer);
-                    },
-                    min: function min() {
-                        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-
-                        return Enumerable.min(this, selector, comparer);
-                    },
-                    average: function average() {
-                        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
-
-                        return Enumerable.average(this, predicate);
-                    },
-                    aggregate: function aggregate(seed, func) {
-                        var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-
-                        return Enumerable.aggregate(this, seed, func, selector);
-                    },
-                    contains: function contains(value) {
-                        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-                        return Enumerable.contains(this, value, comparer);
-                    },
-                    indexOf: function indexOf(value) {
-                        var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
-
-                        return Enumerable.indexOf(this, value, start, comparer);
-                    },
-                    findIndex: function findIndex(predicate, thisArg) {
-                        return Enumerable.findIndex(this, predicate, thisArg);
-                    },
-                    lastIndexOf: function lastIndexOf(value) {
-                        var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
-
-                        return Enumerable.lastIndexOf(this, value, start, comparer);
-                    },
-                    findLastIndex: function findLastIndex(predicate, thisArg) {
-                        return Enumerable.findLastIndex(this, predicate, thisArg);
-                    },
-                    reverse: function reverse() {
-                        return Enumerable.reverse(this);
-                    },
-                    copyWithin: function copyWithin() {
-                        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-                        var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                        var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
-
-                        return Enumerable.copyWithin(this, target, start, end);
-                    },
-                    every: function every(callback, thisArg) {
-                        return Enumerable.every(this, callback, thisArg);
-                    },
-                    fill: function fill(value) {
-                        var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                        var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
-
-                        return Enumerable.fill(this, value, start, end);
-                    },
-                    filter: function filter(callback, thisArg) {
-                        return Enumerable.filter(this, callback, thisArg);
-                    },
-                    find: function find(callback, thisArg) {
-                        return Enumerable.find(this, callback, thisArg);
-                    },
-                    includes: function includes(element) {
-                        var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-                        return Enumerable.includes(this, element, start);
-                    },
-                    map: function map(callback, thisArg) {
-                        return Enumerable.map(this, callback, thisArg);
-                    },
-                    pop: function pop() {
-                        return Enumerable.pop(this);
-                    },
-                    push: function push() {
-                        for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-                            values[_key3] = arguments[_key3];
-                        }
-
-                        return Enumerable.push.apply(Enumerable, core.array$concat.call([this], values));
-                    },
-                    shift: function shift() {
-                        return Enumerable.shift(this);
-                    },
-                    unshift: function unshift() {
-                        for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-                            values[_key4] = arguments[_key4];
-                        }
-
-                        return Enumerable.unshift.apply(Enumerable, core.array$concat.call([this], values));
-                    },
-                    reduce: function reduce(callback, initialValue) {
-                        return Enumerable.reduce(this, callback, initialValue);
-                    },
-                    reduceRight: function reduceRight(callback, initialValue) {
-                        return Enumerable.reduceRight(this, callback, initialValue);
-                    },
-                    slice: function slice() {
-                        var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-                        var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
-
-                        return Enumerable.slice(this, start, end);
-                    },
-                    splice: function splice(start, count) {
-                        for (var _len5 = arguments.length, values = Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
-                            values[_key5 - 2] = arguments[_key5];
-                        }
-
-                        return Enumerable.splice.apply(Enumerable, core.array$concat.call([this, start, count], values));
-                    },
-                    some: function some(callback, thisArg) {
-                        return Enumerable.some(this, callback, thisArg);
-                    },
-                    sort: function sort() {
-                        var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultComparer;
-
-                        return Enumerable.sort(this, comparer);
-                    },
-                    zip: function zip(other, resultSelector) {
-                        return Enumerable.zip(this, other, resultSelector);
-                    },
-                    toArray: function toArray() {
-                        return Enumerable.toArray(this);
-                    },
-                    toObject: function toObject() {
-                        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
-                        var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
-                        var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
-
-                        return Enumerable.toDictionary(this, keySelector, elementSelector, comparer).toObject();
-                    },
-                    forEach: function forEach() {
-                        var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultAction;
-                        var thisArg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-
-                        return Enumerable.forEach(this, action, thisArg);
-                    },
-                    concat: function concat() {
-                        for (var _len6 = arguments.length, others = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-                            others[_key6] = arguments[_key6];
-                        }
-
-                        return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
-                    }
-                });
-                if (type !== core.types.Object) {
-                    core.defineProperties(prototype, {
-                        toDictionary: function toDictionary() {
-                            var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                            var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-                            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
-
-                            return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
-                        },
-                        toLookup: function toLookup() {
-                            var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
-                            var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-                            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
-
-                            return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
-                        }
-                    });
-                } else {
-                    core.defineProperties(prototype, {
-                        toDictionary: function toDictionary() {
-                            var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
-                            var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
-                            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
-
-                            return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
-                        },
-                        toLookup: function toLookup() {
-                            var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
-                            var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
-                            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
-
-                            return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
-                        }
-                    });
-                }
-                var _iteratorNormalCompletion8 = true;
-                var _didIteratorError8 = false;
-                var _iteratorError8 = undefined;
-
-                try {
-                    for (var _iterator8 = Enumerable.plugins[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                        var plugin = _step8.value;
-
-                        if (Enumerable.isEmpty(plugin.types) || Enumerable.contains(plugin.types, type)) {
-                            core.defineProperty(prototype, plugin.name, memberFunction(plugin.name));
-                        }
                     }
                 } catch (err) {
-                    _didIteratorError8 = true;
-                    _iteratorError8 = err;
+                    _didIteratorError6 = true;
+                    _iteratorError6 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                            _iterator8.return();
+                        if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                            _iterator6.return();
                         }
                     } finally {
-                        if (_didIteratorError8) {
-                            throw _iteratorError8;
+                        if (_didIteratorError6) {
+                            throw _iteratorError6;
                         }
                     }
                 }
-            }
-            return prototype;
-        }
-    }, {
-        key: 'getEnumerator',
-        value: function getEnumerator(enumerable) {
-            return new IEnumerator(asIterable(enumerable));
-        }
-    }, {
-        key: 'repeat',
-        value: function repeat(element) {
-            var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-            return new RepeatEnumerable(element, count);
-        }
-    }, {
-        key: 'range',
-        value: function range(start, count) {
-            return new RangeEnumerable(start, count);
-        }
-    }, {
-        key: 'empty',
-        value: function empty() {
-            return new EmptyEnumerable();
-        }
-    }, {
-        key: 'asEnumerable',
-        value: function asEnumerable(object) {
-            return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
-        }
-    }, {
-        key: 'toArray',
-        value: function toArray(source) {
-            if (core.isArray(source)) {
-                return source;
             } else {
-                source = asIterable(source);
-                return Array.from(source);
+                console.error('No plugin find with name "' + plugin.name + '"');
             }
         }
-    }, {
-        key: 'toDictionary',
-        value: function toDictionary(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
+    } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                _iterator5.return();
+            }
+        } finally {
+            if (_didIteratorError5) {
+                throw _iteratorError5;
+            }
+        }
+    }
+};
+core.defineProperty(Enumerable, 'plugins', function () {
+    return this.select(_plugins, function (plugin) {
+        return {
+            get name() {
+                return plugin.name;
+            },
+            get value() {
+                return plugin.value;
+            },
+            get types() {
+                return plugin.types;
+            }
+        };
+    }).toArray();
+}, true, true);
+Enumerable.unextends = function (prototype, type) {
+    var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-            var dictionary = new Dictionary(),
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion9 = true;
-            var _didIteratorError9 = false;
-            var _iteratorError9 = undefined;
+    if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
+    if (!isPrototype || removeExtends(prototype, type)) {
+        core.undefineProperties(prototype, 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup');
+        var _iteratorNormalCompletion8 = true;
+        var _didIteratorError8 = false;
+        var _iteratorError8 = undefined;
 
+        try {
+            for (var _iterator8 = this.plugins[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                var plugin = _step8.value;
+
+                if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
+                    core.undefineProperties(prototype, plugin.name);
+                }
+            }
+        } catch (err) {
+            _didIteratorError8 = true;
+            _iteratorError8 = err;
+        } finally {
             try {
-                for (var _iterator9 = source[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                    var element = _step9.value;
-
-                    var key = keySelector(element, index);
-                    if (dictionary.has(key, comparer)) {
-                        throw new KeysForMultiElementsException(key);
-                    } else {
-                        dictionary.set(key, elementSelector(element, index), comparer);
-                    }
-                    index++;
+                if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                    _iterator8.return();
                 }
-            } catch (err) {
-                _didIteratorError9 = true;
-                _iteratorError9 = err;
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                        _iterator9.return();
-                    }
-                } finally {
-                    if (_didIteratorError9) {
-                        throw _iteratorError9;
-                    }
+                if (_didIteratorError8) {
+                    throw _iteratorError8;
                 }
             }
-
-            return dictionary;
         }
-    }, {
-        key: 'toLookup',
-        value: function toLookup(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
+    }
+};
+Enumerable.extends = function (prototype, type) {
+    var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-            var lookup = new Lookup(),
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion10 = true;
-            var _didIteratorError10 = false;
-            var _iteratorError10 = undefined;
+    if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
+    if (!isPrototype || addExtends(prototype, type)) {
+        core.defineProperties(prototype, {
+            where: function where() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
-            try {
-                for (var _iterator10 = source[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                    var element = _step10.value;
+                return Enumerable.where(this, predicate);
+            },
+            select: function select() {
+                var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
 
-                    var key = keySelector(element, index);
-                    if (lookup.has(key, comparer)) {
-                        lookup.get(key, comparer).push(elementSelector(element, index));
-                    } else {
-                        lookup.set(key, [elementSelector(element, index)], comparer);
-                    }
-                    index++;
+                return Enumerable.select(this, selector);
+            },
+            elementAt: function elementAt(index) {
+                return Enumerable.elementAt(this, index);
+            },
+            distinct: function distinct() {
+                var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEqualityComparer;
+
+                return Enumerable.distinct(this, comparer);
+            },
+            except: function except(other) {
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+                return Enumerable.except(this, other, comparer);
+            },
+            union: function union(other) {
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+                return Enumerable.union(this, other, comparer);
+            },
+            intersect: function intersect(other) {
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+                return Enumerable.intersect(this, other, comparer);
+            },
+            ofType: function ofType(type) {
+                return Enumerable.ofType(this, type);
+            },
+            skip: function skip(count) {
+                return Enumerable.skip(this, count);
+            },
+            skipWhile: function skipWhile() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+
+                return Enumerable.skipWhile(this, predicate);
+            },
+            take: function take(count) {
+                return Enumerable.take(this, count);
+            },
+            takeWhile: function takeWhile() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+
+                return Enumerable.takeWhile(this, predicate);
+            },
+            orderBy: function orderBy() {
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+                return Enumerable.orderBy(this, keySelector, comparer);
+            },
+            orderByDescending: function orderByDescending() {
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+                return Enumerable.orderByDescending(this, keySelector, comparer);
+            },
+            groupBy: function groupBy() {
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultGroupResultSelector;
+                var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultEqualityComparer;
+
+                return Enumerable.groupBy(this, keySelector, elementSelector, resultSelector, comparer);
+            },
+            selectMany: function selectMany() {
+                var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+
+                return Enumerable.selectMany(this, collectionSelector, resultSelector);
+            },
+            join: function join(inner) {
+                var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+                var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+                var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+                var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+                return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+            },
+            groupJoin: function groupJoin(inner, resultSelector) {
+                var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+                var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+                var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+                return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+            },
+            defaultIfEmpty: function defaultIfEmpty() {
+                return Enumerable.defaultIfEmpty(this);
+            },
+            all: function all() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.all(this, predicate);
+            },
+            any: function any() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.any(this, predicate);
+            },
+            isEmpty: function isEmpty() {
+                return Enumerable.isEmpty(this);
+            },
+            sequenceEqual: function sequenceEqual(other) {
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+                return Enumerable.sequenceEqual(this, other, comparer);
+            },
+            first: function first() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.first(this, predicate);
+            },
+            firstOrDefault: function firstOrDefault(defaultValue) {
+                var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+                return Enumerable.firstOrDefault(this, defaultValue, predicate);
+            },
+            last: function last() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.last(this, predicate);
+            },
+            lastOrDefault: function lastOrDefault(defaultValue) {
+                var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+                return Enumerable.lastOrDefault(this, defaultValue, predicate);
+            },
+            single: function single() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.single(this, predicate);
+            },
+            singleOrDefault: function singleOrDefault(defaultValue) {
+                var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+                return Enumerable.singleOrDefault(this, defaultValue, predicate);
+            },
+            count: function count() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.count(this, predicate);
+            },
+            sum: function sum() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.sum(this, predicate);
+            },
+            max: function max() {
+                var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+                return Enumerable.max(this, selector, comparer);
+            },
+            min: function min() {
+                var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+                return Enumerable.min(this, selector, comparer);
+            },
+            average: function average() {
+                var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+                return Enumerable.average(this, predicate);
+            },
+            aggregate: function aggregate(seed, func) {
+                var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+
+                return Enumerable.aggregate(this, seed, func, selector);
+            },
+            contains: function contains(value) {
+                var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+                return Enumerable.contains(this, value, comparer);
+            },
+            indexOf: function indexOf(value) {
+                var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+                var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
+
+                return Enumerable.indexOf(this, value, start, comparer);
+            },
+            findIndex: function findIndex(predicate, thisArg) {
+                return Enumerable.findIndex(this, predicate, thisArg);
+            },
+            lastIndexOf: function lastIndexOf(value) {
+                var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
+                var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
+
+                return Enumerable.lastIndexOf(this, value, start, comparer);
+            },
+            findLastIndex: function findLastIndex(predicate, thisArg) {
+                return Enumerable.findLastIndex(this, predicate, thisArg);
+            },
+            reverse: function reverse() {
+                return Enumerable.reverse(this);
+            },
+            copyWithin: function copyWithin() {
+                var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+                var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+                var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
+
+                return Enumerable.copyWithin(this, target, start, end);
+            },
+            every: function every(callback, thisArg) {
+                return Enumerable.every(this, callback, thisArg);
+            },
+            fill: function fill(value) {
+                var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+                var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
+
+                return Enumerable.fill(this, value, start, end);
+            },
+            filter: function filter(callback, thisArg) {
+                return Enumerable.filter(this, callback, thisArg);
+            },
+            find: function find(callback, thisArg) {
+                return Enumerable.find(this, callback, thisArg);
+            },
+            includes: function includes(element) {
+                var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+                return Enumerable.includes(this, element, start);
+            },
+            map: function map(callback, thisArg) {
+                return Enumerable.map(this, callback, thisArg);
+            },
+            pop: function pop() {
+                return Enumerable.pop(this);
+            },
+            push: function push() {
+                for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                    values[_key3] = arguments[_key3];
                 }
-            } catch (err) {
-                _didIteratorError10 = true;
-                _iteratorError10 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                        _iterator10.return();
-                    }
-                } finally {
-                    if (_didIteratorError10) {
-                        throw _iteratorError10;
-                    }
+
+                return Enumerable.push.apply(Enumerable, core.array$concat.call([this], values));
+            },
+            shift: function shift() {
+                return Enumerable.shift(this);
+            },
+            unshift: function unshift() {
+                for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                    values[_key4] = arguments[_key4];
                 }
-            }
 
-            return lookup;
-        }
-    }, {
-        key: 'where',
-        value: function where(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+                return Enumerable.unshift.apply(Enumerable, core.array$concat.call([this], values));
+            },
+            reduce: function reduce(callback, initialValue) {
+                return Enumerable.reduce(this, callback, initialValue);
+            },
+            reduceRight: function reduceRight(callback, initialValue) {
+                return Enumerable.reduceRight(this, callback, initialValue);
+            },
+            slice: function slice() {
+                var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+                var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
 
-            return new WhereEnumerable(asIterable(source), predicate);
-        }
-    }, {
-        key: 'select',
-        value: function select(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-
-            return new SelectEnumerable(asIterable(source), selector);
-        }
-    }, {
-        key: 'distinct',
-        value: function distinct(source) {
-            var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-
-            return new DistinctEnumerable(asIterable(source), comparer);
-        }
-    }, {
-        key: 'except',
-        value: function except(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-
-            return new ExceptEnumerable(asIterable(source), other, comparer);
-        }
-    }, {
-        key: 'union',
-        value: function union(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-
-            return new UnionEnumerable(asIterable(source), other, comparer);
-        }
-    }, {
-        key: 'intersect',
-        value: function intersect(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-
-            return new IntersectEnumerable(asIterable(source), other, comparer);
-        }
-    }, {
-        key: 'ofType',
-        value: function ofType(source, type) {
-            return new OfTypeEnumerable(asIterable(source), type);
-        }
-    }, {
-        key: 'skip',
-        value: function skip(source, count) {
-            return new SkipEnumerable(asIterable(source), count);
-        }
-    }, {
-        key: 'skipWhile',
-        value: function skipWhile(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            return new SkipWhileEnumerable(asIterable(source), predicate);
-        }
-    }, {
-        key: 'take',
-        value: function take(source, count) {
-            return new TakeEnumerable(asIterable(source), count);
-        }
-    }, {
-        key: 'takeWhile',
-        value: function takeWhile(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            return new TakeWhileEnumerable(asIterable(source), predicate);
-        }
-    }, {
-        key: 'orderBy',
-        value: function orderBy(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-
-            return new OrderByEnumerable(asIterable(source), keySelector, comparer);
-        }
-    }, {
-        key: 'orderByDescending',
-        value: function orderByDescending(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-
-            return new OrderByDescendingEnumerable(asIterable(source), keySelector, comparer);
-        }
-    }, {
-        key: 'thenBy',
-        value: function thenBy(orderedSource) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-
-            if (orderedSource instanceof IOrderedEnumerable) {
-                return new ThenByEnumerable(orderedSource, keySelector, comparer);
-            } else {
-                return new OrderByEnumerable(asIterable(orderedSource), keySelector, comparer);
-            }
-        }
-    }, {
-        key: 'thenByDescending',
-        value: function thenByDescending(orderedSource) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-
-            if (orderedSource instanceof IOrderedEnumerable) {
-                return new ThenByDescendingEnumerable(orderedSource, keySelector, comparer);
-            } else {
-                return new OrderByDescendingEnumerable(asIterable(orderedSource), keySelector, comparer);
-            }
-        }
-    }, {
-        key: 'groupBy',
-        value: function groupBy(source) {
-            var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultGroupResultSelector;
-            var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-
-            return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
-        }
-    }, {
-        key: 'selectMany',
-        value: function selectMany(source) {
-            var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
-
-            return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
-        }
-    }, {
-        key: 'join',
-        value: function join(outer, inner) {
-            var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-            var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
-            var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
-            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
-
-            if (typeof resultSelector === 'undefined' && core.array$join) {
-                if (core.isArray(outer)) {
-                    return core.array$join.call(outer, inner);
-                } else {
-                    return core.array$join.call(this.toArray(asIterable(outer)), inner);
+                return Enumerable.slice(this, start, end);
+            },
+            splice: function splice(start, count) {
+                for (var _len5 = arguments.length, values = Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
+                    values[_key5 - 2] = arguments[_key5];
                 }
-            } else {
-                return new JoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-            }
-        }
-    }, {
-        key: 'groupJoin',
-        value: function groupJoin(outer, inner, resultSelector) {
-            var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
-            var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
-            var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
-            return new GroupJoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
-        }
-    }, {
-        key: 'reverse',
-        value: function reverse(source) {
-            return new ReverseEnumerable(asIterable(source));
-        }
-    }, {
-        key: 'zip',
-        value: function zip(source, other, resultSelector) {
-            return new ZipEnumerable(asIterable(source), other, resultSelector);
-        }
-    }, {
-        key: 'every',
-        value: function every(source, callback, thisArg) {
-            if (core.isArray(source) && core.array$every) {
-                return core.array$every.call(source, callback, thisArg);
-            } else {
-                return this.all(source, function (element, index) {
-                    return callback.call(thisArg, element, index, source);
-                });
-            }
-        }
-    }, {
-        key: 'find',
-        value: function find(source, callback, thisArg) {
-            if (core.isArray(source) && core.array$find) {
-                return core.array$find.call(source, callback, thisArg);
-            } else {
-                return this.firstOrDefault(source, undefined, function (element, index) {
-                    return callback.call(thisArg, element, index, source);
-                });
-            }
-        }
-    }, {
-        key: 'includes',
-        value: function includes(source, element) {
-            var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+                return Enumerable.splice.apply(Enumerable, core.array$concat.call([this, start, count], values));
+            },
+            some: function some(callback, thisArg) {
+                return Enumerable.some(this, callback, thisArg);
+            },
+            sort: function sort() {
+                var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultComparer;
 
-            if (core.isArray(source) && core.array$includes) {
-                return core.array$includes.call(source, element, start);
-            } else if (core.isString(source) && core.string$includes) {
-                return core.string$includes.call(source, element, start);
-            } else {
-                return this.skip(source, start).contains(element);
+                return Enumerable.sort(this, comparer);
+            },
+            zip: function zip(other, resultSelector) {
+                return Enumerable.zip(this, other, resultSelector);
+            },
+            toArray: function toArray() {
+                return Enumerable.toArray(this);
+            },
+            toObject: function toObject() {
+                var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
+
+                return Enumerable.toDictionary(this, keySelector, elementSelector, comparer).toObject();
+            },
+            forEach: function forEach() {
+                var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultAction;
+                var thisArg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+
+                return Enumerable.forEach(this, action, thisArg);
+            },
+            concat: function concat() {
+                for (var _len6 = arguments.length, others = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+                    others[_key6] = arguments[_key6];
+                }
+
+                return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
             }
-        }
-    }, {
-        key: 'map',
-        value: function map(source, callback, thisArg) {
-            return this.select(source, function (element, index) {
-                return callback.call(thisArg, element, index, source);
+        });
+        if (type !== core.types.Object) {
+            core.defineProperties(prototype, {
+                toDictionary: function toDictionary() {
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
+
+                    return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
+                },
+                toLookup: function toLookup() {
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
+
+                    return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
+                }
+            });
+        } else {
+            core.defineProperties(prototype, {
+                toDictionary: function toDictionary() {
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
+
+                    return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
+                },
+                toLookup: function toLookup() {
+                    var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultKeySelector;
+                    var elementSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSameComparer;
+
+                    return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
+                }
             });
         }
-    }, {
-        key: 'filter',
-        value: function filter(source, callback, thisArg) {
-            return this.where(source, function (element, index) {
-                return callback.call(thisArg, element, index, source);
-            });
-        }
-    }, {
-        key: 'concat',
-        value: function concat(source) {
-            for (var _len7 = arguments.length, others = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-                others[_key7 - 1] = arguments[_key7];
+        var _iteratorNormalCompletion9 = true;
+        var _didIteratorError9 = false;
+        var _iteratorError9 = undefined;
+
+        try {
+            for (var _iterator9 = this.plugins[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                var plugin = _step9.value;
+
+                if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
+                    core.defineProperty(prototype, plugin.name, memberFunction(plugin.name));
+                }
             }
-
-            return new (Function.prototype.bind.apply(ConcatEnumerable, core.array$concat.call([null], [asIterable(source)], others)))();
-        }
-    }, {
-        key: 'pop',
-        value: function pop(source) {
-            if (core.isArray(source) && core.array$pop) {
-                return core.array$pop.call(source);
-            } else {
-                source = asIterable(source);
-                var iterable = this.toArray(source);
-                core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
-                    var len, index;
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                        while (1) {
-                            switch (_context.prev = _context.next) {
-                                case 0:
-                                    len = iterable.length - 1;
-                                    index = 0;
-
-                                case 2:
-                                    if (!(index < len)) {
-                                        _context.next = 8;
-                                        break;
-                                    }
-
-                                    _context.next = 5;
-                                    return iterable[index];
-
-                                case 5:
-                                    index++;
-                                    _context.next = 2;
-                                    break;
-
-                                case 8:
-                                case 'end':
-                                    return _context.stop();
-                            }
-                        }
-                    }, _callee, this);
-                }));
-                return iterable[iterable.length - 1];
-            }
-        }
-    }, {
-        key: 'push',
-        value: function push(source) {
-            for (var _len8 = arguments.length, values = Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
-                values[_key8 - 1] = arguments[_key8];
-            }
-
-            if (core.isArray(source) && core.array$push) {
-                return core.array$push.apply(source, values);
-            } else {
-                source = asIterable(source);
-                var iterable = this.toArray(source);
-                core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
-                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                        while (1) {
-                            switch (_context2.prev = _context2.next) {
-                                case 0:
-                                    return _context2.delegateYield(iterable, 't0', 1);
-
-                                case 1:
-                                    return _context2.delegateYield(values, 't1', 2);
-
-                                case 2:
-                                case 'end':
-                                    return _context2.stop();
-                            }
-                        }
-                    }, _callee2, this);
-                }));
-                return iterable.length + values.length;
-            }
-        }
-    }, {
-        key: 'shift',
-        value: function shift(source) {
-            if (core.isArray(source) && core.array$shift) {
-                return core.array$shift.call(source);
-            } else {
-                source = asIterable(source);
-                var iterable = _defineProperty({}, Symbol.iterator, source[Symbol.iterator]);
-                core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee3() {
-                    var index, _iteratorNormalCompletion11, _didIteratorError11, _iteratorError11, _iterator11, _step11, element;
-
-                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                        while (1) {
-                            switch (_context3.prev = _context3.next) {
-                                case 0:
-                                    index = 0;
-                                    _iteratorNormalCompletion11 = true;
-                                    _didIteratorError11 = false;
-                                    _iteratorError11 = undefined;
-                                    _context3.prev = 4;
-                                    _iterator11 = iterable[Symbol.iterator]();
-
-                                case 6:
-                                    if (_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done) {
-                                        _context3.next = 15;
-                                        break;
-                                    }
-
-                                    element = _step11.value;
-
-                                    if (!(index > 0)) {
-                                        _context3.next = 11;
-                                        break;
-                                    }
-
-                                    _context3.next = 11;
-                                    return element;
-
-                                case 11:
-                                    index++;
-
-                                case 12:
-                                    _iteratorNormalCompletion11 = true;
-                                    _context3.next = 6;
-                                    break;
-
-                                case 15:
-                                    _context3.next = 21;
-                                    break;
-
-                                case 17:
-                                    _context3.prev = 17;
-                                    _context3.t0 = _context3['catch'](4);
-                                    _didIteratorError11 = true;
-                                    _iteratorError11 = _context3.t0;
-
-                                case 21:
-                                    _context3.prev = 21;
-                                    _context3.prev = 22;
-
-                                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                                        _iterator11.return();
-                                    }
-
-                                case 24:
-                                    _context3.prev = 24;
-
-                                    if (!_didIteratorError11) {
-                                        _context3.next = 27;
-                                        break;
-                                    }
-
-                                    throw _iteratorError11;
-
-                                case 27:
-                                    return _context3.finish(24);
-
-                                case 28:
-                                    return _context3.finish(21);
-
-                                case 29:
-                                case 'end':
-                                    return _context3.stop();
-                            }
-                        }
-                    }, _callee3, this, [[4, 17, 21, 29], [22,, 24, 28]]);
-                }));
-                return this.firstOrDefault(iterable);
-            }
-        }
-    }, {
-        key: 'unshift',
-        value: function unshift(source) {
-            for (var _len9 = arguments.length, values = Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
-                values[_key9 - 1] = arguments[_key9];
-            }
-
-            if (core.isArray(source) && core.array$unshift) {
-                return core.array$unshift.apply(source, values);
-            } else {
-                source = asIterable(source);
-                var iterable = this.toArray(source);
-                core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee4() {
-                    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                        while (1) {
-                            switch (_context4.prev = _context4.next) {
-                                case 0:
-                                    return _context4.delegateYield(values, 't0', 1);
-
-                                case 1:
-                                    return _context4.delegateYield(iterable, 't1', 2);
-
-                                case 2:
-                                case 'end':
-                                    return _context4.stop();
-                            }
-                        }
-                    }, _callee4, this);
-                }));
-                return values.length + iterable.length;
-            }
-        }
-    }, {
-        key: 'reduce',
-        value: function reduce(source, callback, initialValue) {
-            if (core.isArray(source) && core.array$reduce) {
-                return core.array$reduce.call(source, callback, initialValue);
-            } else {
-                return this.aggregate(source, initialValue, function (seed, element, index) {
-                    return callback(seed, element, index, source);
-                });
-            }
-        }
-    }, {
-        key: 'reduceRight',
-        value: function reduceRight(source, callback, initialValue) {
-            if (core.isArray(source) && core.array$reduceRight) {
-                return core.array$reduceRight.call(source, callback, initialValue);
-            } else {
-                return this.reverse(source).aggregate(initialValue, function (seed, element, index) {
-                    return callback(seed, element, index, source);
-                });
-            }
-        }
-    }, {
-        key: 'some',
-        value: function some(source, callback, thisArg) {
-            if (core.isArray(source) && core.array$some) {
-                return core.array$some.call(source, callback, thisArg);
-            } else {
-                return this.any(source, function (element, index) {
-                    return callback.call(thisArg, element, index, source);
-                });
-            }
-        }
-    }, {
-        key: 'slice',
-        value: function slice(source) {
-            var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-            var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
-
-            return new SliceEnumerable(asIterable(source), start, end);
-        }
-    }, {
-        key: 'splice',
-        value: function splice(source, start, count) {
-            for (var _len10 = arguments.length, values = Array(_len10 > 3 ? _len10 - 3 : 0), _key10 = 3; _key10 < _len10; _key10++) {
-                values[_key10 - 3] = arguments[_key10];
-            }
-
-            return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
-        }
-    }, {
-        key: 'fill',
-        value: function fill(source, value) {
-            var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
-
-            return new FillEnumerable(asIterable(source), value, start, end);
-        }
-    }, {
-        key: 'sort',
-        value: function sort(source) {
-            var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-
-            return new SortEnumerable(asIterable(source), comparer);
-        }
-    }, {
-        key: 'copyWithin',
-        value: function copyWithin(source) {
-            var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-            var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
-
-            return new CopyWithinEnumerable(asIterable(source), target, start, end);
-        }
-    }, {
-        key: 'defaultIfEmpty',
-        value: function defaultIfEmpty(source, defaultValue) {
-            return this.isEmpty(source) ? new SingleEnumerable(defaultValue) : this.asEnumerable(source);
-        }
-    }, {
-        key: 'all',
-        value: function all(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            var index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion12 = true;
-            var _didIteratorError12 = false;
-            var _iteratorError12 = undefined;
-
+        } catch (err) {
+            _didIteratorError9 = true;
+            _iteratorError9 = err;
+        } finally {
             try {
-                for (var _iterator12 = source[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-                    var element = _step12.value;
-
-                    if (!predicate(element, index++)) {
-                        return false;
-                    }
+                if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                    _iterator9.return();
                 }
-            } catch (err) {
-                _didIteratorError12 = true;
-                _iteratorError12 = err;
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
-                        _iterator12.return();
-                    }
-                } finally {
-                    if (_didIteratorError12) {
-                        throw _iteratorError12;
-                    }
+                if (_didIteratorError9) {
+                    throw _iteratorError9;
                 }
             }
-
-            return true;
         }
-    }, {
-        key: 'any',
-        value: function any(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+    }
+    return prototype;
+};
+Enumerable.getEnumerator = function (enumerable) {
+    return new IEnumerator(asIterable(enumerable));
+};
+Enumerable.repeat = function (element) {
+    var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-            var index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
+    return new RepeatEnumerable(element, count);
+};
+Enumerable.range = function (start, count) {
+    return new RangeEnumerable(start, count);
+};
+Enumerable.empty = function () {
+    return new EmptyEnumerable();
+};
+Enumerable.asEnumerable = function (object) {
+    return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
+};
+Enumerable.toArray = function (source) {
+    if (core.isArray(source)) {
+        return source;
+    } else {
+        source = asIterable(source);
+        return Array.from(source);
+    }
+};
+Enumerable.toDictionary = function (source) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
 
-            try {
-                for (var _iterator13 = source[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                    var element = _step13.value;
+    var dictionary = new Dictionary(),
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion10 = true;
+    var _didIteratorError10 = false;
+    var _iteratorError10 = undefined;
 
-                    if (predicate(element, index++)) {
-                        return true;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError13 = true;
-                _iteratorError13 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                        _iterator13.return();
-                    }
-                } finally {
-                    if (_didIteratorError13) {
-                        throw _iteratorError13;
-                    }
-                }
+    try {
+        for (var _iterator10 = source[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+            var element = _step10.value;
+
+            var key = keySelector(element, index);
+            if (dictionary.has(key, comparer)) {
+                throw new KeysForMultiElementsException(key);
+            } else {
+                dictionary.set(key, elementSelector(element, index), comparer);
             }
+            index++;
+        }
+    } catch (err) {
+        _didIteratorError10 = true;
+        _iteratorError10 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                _iterator10.return();
+            }
+        } finally {
+            if (_didIteratorError10) {
+                throw _iteratorError10;
+            }
+        }
+    }
 
+    return dictionary;
+};
+Enumerable.toLookup = function (source) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
+
+    var lookup = new Lookup(),
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion11 = true;
+    var _didIteratorError11 = false;
+    var _iteratorError11 = undefined;
+
+    try {
+        for (var _iterator11 = source[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+            var element = _step11.value;
+
+            var key = keySelector(element, index);
+            if (lookup.has(key, comparer)) {
+                lookup.get(key, comparer).push(elementSelector(element, index));
+            } else {
+                lookup.set(key, [elementSelector(element, index)], comparer);
+            }
+            index++;
+        }
+    } catch (err) {
+        _didIteratorError11 = true;
+        _iteratorError11 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                _iterator11.return();
+            }
+        } finally {
+            if (_didIteratorError11) {
+                throw _iteratorError11;
+            }
+        }
+    }
+
+    return lookup;
+};
+Enumerable.where = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    return new WhereEnumerable(asIterable(source), predicate);
+};
+Enumerable.select = function (source) {
+    var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+
+    return new SelectEnumerable(asIterable(source), selector);
+};
+Enumerable.distinct = function (source) {
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
+
+    return new DistinctEnumerable(asIterable(source), comparer);
+};
+Enumerable.except = function (source, other) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    return new ExceptEnumerable(asIterable(source), other, comparer);
+};
+Enumerable.union = function (source, other) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    return new UnionEnumerable(asIterable(source), other, comparer);
+};
+Enumerable.intersect = function (source, other) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    return new IntersectEnumerable(asIterable(source), other, comparer);
+};
+Enumerable.ofType = function (source, type) {
+    return new OfTypeEnumerable(asIterable(source), type);
+};
+Enumerable.skip = function (source, count) {
+    return new SkipEnumerable(asIterable(source), count);
+};
+Enumerable.skipWhile = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    return new SkipWhileEnumerable(asIterable(source), predicate);
+};
+Enumerable.take = function (source, count) {
+    return new TakeEnumerable(asIterable(source), count);
+};
+Enumerable.takeWhile = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    return new TakeWhileEnumerable(asIterable(source), predicate);
+};
+Enumerable.orderBy = function (source) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    return new OrderByEnumerable(asIterable(source), keySelector, comparer);
+};
+Enumerable.orderByDescending = function (source) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    return new OrderByDescendingEnumerable(asIterable(source), keySelector, comparer);
+};
+Enumerable.thenBy = function (orderedSource) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    if (orderedSource instanceof IOrderedEnumerable) {
+        return new ThenByEnumerable(orderedSource, keySelector, comparer);
+    } else {
+        return new OrderByEnumerable(asIterable(orderedSource), keySelector, comparer);
+    }
+};
+Enumerable.thenByDescending = function (orderedSource) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    if (orderedSource instanceof IOrderedEnumerable) {
+        return new ThenByDescendingEnumerable(orderedSource, keySelector, comparer);
+    } else {
+        return new OrderByDescendingEnumerable(asIterable(orderedSource), keySelector, comparer);
+    }
+};
+Enumerable.groupBy = function (source) {
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+    var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultGroupResultSelector;
+    var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+    return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
+};
+Enumerable.selectMany = function (source) {
+    var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+
+    return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
+};
+Enumerable.join = function (outer, inner) {
+    var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+    var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+    var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
+    var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
+
+    if (typeof resultSelector === 'undefined' && core.array$join) {
+        if (core.isArray(outer)) {
+            return core.array$join.call(outer, inner);
+        } else {
+            return core.array$join.call(this.toArray(asIterable(outer)), inner);
+        }
+    } else {
+        return new JoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    }
+};
+Enumerable.groupJoin = function (outer, inner, resultSelector) {
+    var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+    var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
+    var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
+
+    return new GroupJoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+};
+Enumerable.reverse = function (source) {
+    return new ReverseEnumerable(asIterable(source));
+};
+Enumerable.zip = function (source, other, resultSelector) {
+    return new ZipEnumerable(asIterable(source), other, resultSelector);
+};
+Enumerable.every = function (source, callback, thisArg) {
+    if (core.isArray(source) && core.array$every) {
+        return core.array$every.call(source, callback, thisArg);
+    } else {
+        return this.all(source, function (element, index) {
+            return callback.call(thisArg, element, index, source);
+        });
+    }
+};
+Enumerable.find = function (source, callback, thisArg) {
+    if (core.isArray(source) && core.array$find) {
+        return core.array$find.call(source, callback, thisArg);
+    } else {
+        return this.firstOrDefault(source, undefined, function (element, index) {
+            return callback.call(thisArg, element, index, source);
+        });
+    }
+};
+Enumerable.includes = function (source, element) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+    if (core.isArray(source) && core.array$includes) {
+        return core.array$includes.call(source, element, start);
+    } else if (core.isString(source) && core.string$includes) {
+        return core.string$includes.call(source, element, start);
+    } else {
+        return this.skip(source, start).contains(element);
+    }
+};
+Enumerable.map = function (source, callback, thisArg) {
+    return this.select(source, function (element, index) {
+        return callback.call(thisArg, element, index, source);
+    });
+};
+Enumerable.filter = function (source, callback, thisArg) {
+    return this.where(source, function (element, index) {
+        return callback.call(thisArg, element, index, source);
+    });
+};
+Enumerable.concat = function (source) {
+    for (var _len7 = arguments.length, others = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+        others[_key7 - 1] = arguments[_key7];
+    }
+
+    return new (Function.prototype.bind.apply(ConcatEnumerable, core.array$concat.call([null], [asIterable(source)], others)))();
+};
+Enumerable.pop = function (source) {
+    if (core.isArray(source) && core.array$pop) {
+        return core.array$pop.call(source);
+    } else {
+        source = asIterable(source);
+        var iterable = this.toArray(source);
+        core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+            var len, index;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            len = iterable.length - 1;
+                            index = 0;
+
+                        case 2:
+                            if (!(index < len)) {
+                                _context.next = 8;
+                                break;
+                            }
+
+                            _context.next = 5;
+                            return iterable[index];
+
+                        case 5:
+                            index++;
+                            _context.next = 2;
+                            break;
+
+                        case 8:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, this);
+        }));
+        return iterable[iterable.length - 1];
+    }
+};
+Enumerable.push = function (source) {
+    for (var _len8 = arguments.length, values = Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+        values[_key8 - 1] = arguments[_key8];
+    }
+
+    if (core.isArray(source) && core.array$push) {
+        return core.array$push.apply(source, values);
+    } else {
+        source = asIterable(source);
+        var iterable = this.toArray(source);
+        core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee2() {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            return _context2.delegateYield(iterable, 't0', 1);
+
+                        case 1:
+                            return _context2.delegateYield(values, 't1', 2);
+
+                        case 2:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, _callee2, this);
+        }));
+        return iterable.length + values.length;
+    }
+};
+Enumerable.shift = function (source) {
+    if (core.isArray(source) && core.array$shift) {
+        return core.array$shift.call(source);
+    } else {
+        source = asIterable(source);
+        var iterable = _defineProperty({}, Symbol.iterator, source[Symbol.iterator]);
+        core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee3() {
+            var index, _iteratorNormalCompletion12, _didIteratorError12, _iteratorError12, _iterator12, _step12, element;
+
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            index = 0;
+                            _iteratorNormalCompletion12 = true;
+                            _didIteratorError12 = false;
+                            _iteratorError12 = undefined;
+                            _context3.prev = 4;
+                            _iterator12 = iterable[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done) {
+                                _context3.next = 15;
+                                break;
+                            }
+
+                            element = _step12.value;
+
+                            if (!(index > 0)) {
+                                _context3.next = 11;
+                                break;
+                            }
+
+                            _context3.next = 11;
+                            return element;
+
+                        case 11:
+                            index++;
+
+                        case 12:
+                            _iteratorNormalCompletion12 = true;
+                            _context3.next = 6;
+                            break;
+
+                        case 15:
+                            _context3.next = 21;
+                            break;
+
+                        case 17:
+                            _context3.prev = 17;
+                            _context3.t0 = _context3['catch'](4);
+                            _didIteratorError12 = true;
+                            _iteratorError12 = _context3.t0;
+
+                        case 21:
+                            _context3.prev = 21;
+                            _context3.prev = 22;
+
+                            if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                                _iterator12.return();
+                            }
+
+                        case 24:
+                            _context3.prev = 24;
+
+                            if (!_didIteratorError12) {
+                                _context3.next = 27;
+                                break;
+                            }
+
+                            throw _iteratorError12;
+
+                        case 27:
+                            return _context3.finish(24);
+
+                        case 28:
+                            return _context3.finish(21);
+
+                        case 29:
+                        case 'end':
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, this, [[4, 17, 21, 29], [22,, 24, 28]]);
+        }));
+        return this.firstOrDefault(iterable);
+    }
+};
+Enumerable.unshift = function (source) {
+    for (var _len9 = arguments.length, values = Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+        values[_key9 - 1] = arguments[_key9];
+    }
+
+    if (core.isArray(source) && core.array$unshift) {
+        return core.array$unshift.apply(source, values);
+    } else {
+        source = asIterable(source);
+        var iterable = this.toArray(source);
+        core.setProperty(source, Symbol.iterator, regeneratorRuntime.mark(function _callee4() {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            return _context4.delegateYield(values, 't0', 1);
+
+                        case 1:
+                            return _context4.delegateYield(iterable, 't1', 2);
+
+                        case 2:
+                        case 'end':
+                            return _context4.stop();
+                    }
+                }
+            }, _callee4, this);
+        }));
+        return values.length + iterable.length;
+    }
+};
+Enumerable.reduce = function (source, callback, initialValue) {
+    if (core.isArray(source) && core.array$reduce) {
+        return core.array$reduce.call(source, callback, initialValue);
+    } else {
+        return this.aggregate(source, initialValue, function (seed, element, index) {
+            return callback(seed, element, index, source);
+        });
+    }
+};
+Enumerable.reduceRight = function (source, callback, initialValue) {
+    if (core.isArray(source) && core.array$reduceRight) {
+        return core.array$reduceRight.call(source, callback, initialValue);
+    } else {
+        return this.reverse(source).aggregate(initialValue, function (seed, element, index) {
+            return callback(seed, element, index, source);
+        });
+    }
+};
+Enumerable.some = function (source, callback, thisArg) {
+    if (core.isArray(source) && core.array$some) {
+        return core.array$some.call(source, callback, thisArg);
+    } else {
+        return this.any(source, function (element, index) {
+            return callback.call(thisArg, element, index, source);
+        });
+    }
+};
+Enumerable.slice = function (source) {
+    var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
+
+    return new SliceEnumerable(asIterable(source), start, end);
+};
+Enumerable.splice = function (source, start, count) {
+    for (var _len10 = arguments.length, values = Array(_len10 > 3 ? _len10 - 3 : 0), _key10 = 3; _key10 < _len10; _key10++) {
+        values[_key10 - 3] = arguments[_key10];
+    }
+
+    return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
+};
+Enumerable.fill = function (source, value) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
+
+    return new FillEnumerable(asIterable(source), value, start, end);
+};
+Enumerable.sort = function (source) {
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+    return new SortEnumerable(asIterable(source), comparer);
+};
+Enumerable.copyWithin = function (source) {
+    var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
+
+    return new CopyWithinEnumerable(asIterable(source), target, start, end);
+};
+Enumerable.defaultIfEmpty = function (source, defaultValue) {
+    return this.isEmpty(source) ? new SingleEnumerable(defaultValue) : this.asEnumerable(source);
+};
+Enumerable.all = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    var index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion13 = true;
+    var _didIteratorError13 = false;
+    var _iteratorError13 = undefined;
+
+    try {
+        for (var _iterator13 = source[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+            var element = _step13.value;
+
+            if (!predicate(element, index++)) {
+                return false;
+            }
+        }
+    } catch (err) {
+        _didIteratorError13 = true;
+        _iteratorError13 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                _iterator13.return();
+            }
+        } finally {
+            if (_didIteratorError13) {
+                throw _iteratorError13;
+            }
+        }
+    }
+
+    return true;
+};
+Enumerable.any = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    var index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion14 = true;
+    var _didIteratorError14 = false;
+    var _iteratorError14 = undefined;
+
+    try {
+        for (var _iterator14 = source[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+            var element = _step14.value;
+
+            if (predicate(element, index++)) {
+                return true;
+            }
+        }
+    } catch (err) {
+        _didIteratorError14 = true;
+        _iteratorError14 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                _iterator14.return();
+            }
+        } finally {
+            if (_didIteratorError14) {
+                throw _iteratorError14;
+            }
+        }
+    }
+
+    return false;
+};
+Enumerable.isEmpty = function (source) {
+    return !this.any(source);
+};
+Enumerable.sequenceEqual = function (source, other) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    source = asIterable(source);
+    other = asIterable(other);
+    var sourceIterator = source[Symbol.iterator]();
+    var otherIterator = other[Symbol.iterator]();
+    var sourceElement = void 0,
+        otherElement = void 0;
+    while (!((sourceElement = sourceIterator.next()).done & (otherElement = otherIterator.next()).done)) {
+        if (sourceElement.done != otherElement.done) {
+            return false;
+        } else if (!comparer(sourceElement.value, otherElement.value)) {
             return false;
         }
-    }, {
-        key: 'isEmpty',
-        value: function isEmpty(source) {
-            return !this.any(source);
-        }
-    }, {
-        key: 'sequenceEqual',
-        value: function sequenceEqual(source, other) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+    }
+    return true;
+};
+Enumerable.first = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            source = asIterable(source);
-            other = asIterable(other);
-            var sourceIterator = source[Symbol.iterator]();
-            var otherIterator = other[Symbol.iterator]();
-            var sourceElement = void 0,
-                otherElement = void 0;
-            while (!((sourceElement = sourceIterator.next()).done & (otherElement = otherIterator.next()).done)) {
-                if (sourceElement.done != otherElement.done) {
-                    return false;
-                } else if (!comparer(sourceElement.value, otherElement.value)) {
-                    return false;
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length > 0) {
+            return source[0];
+        } else {
+            throw new NoSuchElementsException();
+        }
+    } else {
+        var index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion15 = true;
+        var _didIteratorError15 = false;
+        var _iteratorError15 = undefined;
+
+        try {
+            for (var _iterator15 = source[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                var element = _step15.value;
+
+                if (predicate(element, index++)) {
+                    return element;
                 }
             }
-            return true;
-        }
-    }, {
-        key: 'first',
-        value: function first(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length > 0) {
-                    return source[0];
-                } else {
-                    throw new NoSuchElementsException();
-                }
-            } else {
-                var index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion14 = true;
-                var _didIteratorError14 = false;
-                var _iteratorError14 = undefined;
-
-                try {
-                    for (var _iterator14 = source[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-                        var element = _step14.value;
-
-                        if (predicate(element, index++)) {
-                            return element;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError14 = true;
-                    _iteratorError14 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion14 && _iterator14.return) {
-                            _iterator14.return();
-                        }
-                    } finally {
-                        if (_didIteratorError14) {
-                            throw _iteratorError14;
-                        }
-                    }
-                }
-
-                throw new NoSuchElementsException();
-            }
-        }
-    }, {
-        key: 'firstOrDefault',
-        value: function firstOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length > 0) {
-                    return source[0];
-                } else {
-                    return defaultValue;
-                }
-            } else {
-                var index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion15 = true;
-                var _didIteratorError15 = false;
-                var _iteratorError15 = undefined;
-
-                try {
-                    for (var _iterator15 = source[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-                        var element = _step15.value;
-
-                        if (predicate(element, index++)) {
-                            return element;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError15 = true;
-                    _iteratorError15 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                            _iterator15.return();
-                        }
-                    } finally {
-                        if (_didIteratorError15) {
-                            throw _iteratorError15;
-                        }
-                    }
-                }
-
-                return defaultValue;
-            }
-        }
-    }, {
-        key: 'last',
-        value: function last(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length > 0) {
-                    return source[source.length - 1];
-                } else {
-                    throw new NoSuchElementsException();
-                }
-            } else {
-                var last = void 0,
-                    has = false,
-                    index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion16 = true;
-                var _didIteratorError16 = false;
-                var _iteratorError16 = undefined;
-
-                try {
-                    for (var _iterator16 = source[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-                        var element = _step16.value;
-
-                        if (predicate(element, index++)) {
-                            last = element;
-                            has = true;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError16 = true;
-                    _iteratorError16 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion16 && _iterator16.return) {
-                            _iterator16.return();
-                        }
-                    } finally {
-                        if (_didIteratorError16) {
-                            throw _iteratorError16;
-                        }
-                    }
-                }
-
-                if (has) {
-                    return last;
-                } else {
-                    throw new NoSuchElementsException();
-                }
-            }
-        }
-    }, {
-        key: 'lastOrDefault',
-        value: function lastOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length > 0) {
-                    return source[source.length - 1];
-                } else {
-                    return defaultValue;
-                }
-            } else {
-                var last = void 0,
-                    has = false,
-                    index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion17 = true;
-                var _didIteratorError17 = false;
-                var _iteratorError17 = undefined;
-
-                try {
-                    for (var _iterator17 = source[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-                        var element = _step17.value;
-
-                        if (predicate(element, index++)) {
-                            last = element;
-                            has = true;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError17 = true;
-                    _iteratorError17 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion17 && _iterator17.return) {
-                            _iterator17.return();
-                        }
-                    } finally {
-                        if (_didIteratorError17) {
-                            throw _iteratorError17;
-                        }
-                    }
-                }
-
-                if (has) {
-                    return last;
-                } else {
-                    return defaultValue;
-                }
-            }
-        }
-    }, {
-        key: 'single',
-        value: function single(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length === 1) {
-                    return source[0];
-                } else if (source.length === 0) {
-                    throw new NoSuchElementsException();
-                } else {
-                    throw new TooManyElementsException();
-                }
-            } else {
-                var single = void 0,
-                    count = 0,
-                    index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion18 = true;
-                var _didIteratorError18 = false;
-                var _iteratorError18 = undefined;
-
-                try {
-                    for (var _iterator18 = source[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
-                        var element = _step18.value;
-
-                        if (predicate(element, index++)) {
-                            single = element;
-                            count++;
-                            if (count >= 2) {
-                                break;
-                            }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError18 = true;
-                    _iteratorError18 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion18 && _iterator18.return) {
-                            _iterator18.return();
-                        }
-                    } finally {
-                        if (_didIteratorError18) {
-                            throw _iteratorError18;
-                        }
-                    }
-                }
-
-                if (count === 1) {
-                    return single;
-                } else if (count === 0) {
-                    throw new NoSuchElementsException();
-                } else {
-                    throw new TooManyElementsException();
-                }
-            }
-        }
-    }, {
-        key: 'singleOrDefault',
-        value: function singleOrDefault(source, defaultValue) {
-            var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-
-            if (predicate === defaultPredicate && core.isProto(source)) {
-                if (source.length === 1) {
-                    return source[0];
-                } else if (source.length === 0) {
-                    return defaultValue;
-                } else {
-                    throw new TooManyElementsException();
-                }
-            } else {
-                var single = void 0,
-                    count = 0,
-                    index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion19 = true;
-                var _didIteratorError19 = false;
-                var _iteratorError19 = undefined;
-
-                try {
-                    for (var _iterator19 = source[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
-                        var element = _step19.value;
-
-                        if (predicate(element, index++)) {
-                            single = element;
-                            count++;
-                            if (count >= 2) {
-                                break;
-                            }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError19 = true;
-                    _iteratorError19 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion19 && _iterator19.return) {
-                            _iterator19.return();
-                        }
-                    } finally {
-                        if (_didIteratorError19) {
-                            throw _iteratorError19;
-                        }
-                    }
-                }
-
-                if (count === 1) {
-                    return single;
-                } else if (count === 0) {
-                    return defaultValue;
-                } else {
-                    throw new TooManyElementsException();
-                }
-            }
-        }
-    }, {
-        key: 'count',
-        value: function count(source) {
-            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-
-            var count = 0,
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion20 = true;
-            var _didIteratorError20 = false;
-            var _iteratorError20 = undefined;
-
+        } catch (err) {
+            _didIteratorError15 = true;
+            _iteratorError15 = err;
+        } finally {
             try {
-                for (var _iterator20 = source[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
-                    var element = _step20.value;
-
-                    if (predicate(element, index++)) {
-                        count++;
-                    }
+                if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                    _iterator15.return();
                 }
-            } catch (err) {
-                _didIteratorError20 = true;
-                _iteratorError20 = err;
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
-                        _iterator20.return();
-                    }
-                } finally {
-                    if (_didIteratorError20) {
-                        throw _iteratorError20;
-                    }
+                if (_didIteratorError15) {
+                    throw _iteratorError15;
                 }
             }
-
-            return count;
         }
-    }, {
-        key: 'aggregate',
-        value: function aggregate(source, seed, func) {
-            var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
 
-            var index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion21 = true;
-            var _didIteratorError21 = false;
-            var _iteratorError21 = undefined;
+        throw new NoSuchElementsException();
+    }
+};
+Enumerable.firstOrDefault = function (source, defaultValue) {
+    var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
 
-            try {
-                for (var _iterator21 = source[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
-                    var element = _step21.value;
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length > 0) {
+            return source[0];
+        } else {
+            return defaultValue;
+        }
+    } else {
+        var index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion16 = true;
+        var _didIteratorError16 = false;
+        var _iteratorError16 = undefined;
 
-                    seed = func(seed, element, index++);
+        try {
+            for (var _iterator16 = source[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                var element = _step16.value;
+
+                if (predicate(element, index++)) {
+                    return element;
                 }
-            } catch (err) {
-                _didIteratorError21 = true;
-                _iteratorError21 = err;
+            }
+        } catch (err) {
+            _didIteratorError16 = true;
+            _iteratorError16 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                    _iterator16.return();
+                }
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion21 && _iterator21.return) {
-                        _iterator21.return();
-                    }
-                } finally {
-                    if (_didIteratorError21) {
-                        throw _iteratorError21;
-                    }
+                if (_didIteratorError16) {
+                    throw _iteratorError16;
                 }
             }
-
-            return resultSelector(seed);
         }
-    }, {
-        key: 'sum',
-        value: function sum(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
-            var sum = 0,
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion22 = true;
-            var _didIteratorError22 = false;
-            var _iteratorError22 = undefined;
+        return defaultValue;
+    }
+};
+Enumerable.last = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            try {
-                for (var _iterator22 = source[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
-                    var element = _step22.value;
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length > 0) {
+            return source[source.length - 1];
+        } else {
+            throw new NoSuchElementsException();
+        }
+    } else {
+        var last = void 0,
+            has = false,
+            index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion17 = true;
+        var _didIteratorError17 = false;
+        var _iteratorError17 = undefined;
 
-                    sum += parseFloat(selector(element, index++));
-                    if (isNaN(sum)) return sum;
+        try {
+            for (var _iterator17 = source[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                var element = _step17.value;
+
+                if (predicate(element, index++)) {
+                    last = element;
+                    has = true;
                 }
-            } catch (err) {
-                _didIteratorError22 = true;
-                _iteratorError22 = err;
+            }
+        } catch (err) {
+            _didIteratorError17 = true;
+            _iteratorError17 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                    _iterator17.return();
+                }
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion22 && _iterator22.return) {
-                        _iterator22.return();
-                    }
-                } finally {
-                    if (_didIteratorError22) {
-                        throw _iteratorError22;
-                    }
+                if (_didIteratorError17) {
+                    throw _iteratorError17;
                 }
             }
-
-            return sum;
         }
-    }, {
-        key: 'max',
-        value: function max(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            var max = false,
-                first = true,
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion23 = true;
-            var _didIteratorError23 = false;
-            var _iteratorError23 = undefined;
+        if (has) {
+            return last;
+        } else {
+            throw new NoSuchElementsException();
+        }
+    }
+};
+Enumerable.lastOrDefault = function (source, defaultValue) {
+    var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
 
-            try {
-                for (var _iterator23 = source[Symbol.iterator](), _step23; !(_iteratorNormalCompletion23 = (_step23 = _iterator23.next()).done); _iteratorNormalCompletion23 = true) {
-                    var element = _step23.value;
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length > 0) {
+            return source[source.length - 1];
+        } else {
+            return defaultValue;
+        }
+    } else {
+        var last = void 0,
+            has = false,
+            index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion18 = true;
+        var _didIteratorError18 = false;
+        var _iteratorError18 = undefined;
 
-                    element = selector(element, index++);
-                    if (first) {
-                        max = element;
-                    } else {
-                        max = comparer(max, element) > 0 ? max : element;
-                    }
-                    first = false;
+        try {
+            for (var _iterator18 = source[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+                var element = _step18.value;
+
+                if (predicate(element, index++)) {
+                    last = element;
+                    has = true;
                 }
-            } catch (err) {
-                _didIteratorError23 = true;
-                _iteratorError23 = err;
+            }
+        } catch (err) {
+            _didIteratorError18 = true;
+            _iteratorError18 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                    _iterator18.return();
+                }
             } finally {
-                try {
-                    if (!_iteratorNormalCompletion23 && _iterator23.return) {
-                        _iterator23.return();
-                    }
-                } finally {
-                    if (_didIteratorError23) {
-                        throw _iteratorError23;
-                    }
+                if (_didIteratorError18) {
+                    throw _iteratorError18;
                 }
-            }
-
-            if (first) {
-                throw new NoSuchElementsException();
-            } else {
-                return max;
             }
         }
-    }, {
-        key: 'min',
-        value: function min(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
-            var min = false,
-                first = true,
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion24 = true;
-            var _didIteratorError24 = false;
-            var _iteratorError24 = undefined;
-
-            try {
-                for (var _iterator24 = source[Symbol.iterator](), _step24; !(_iteratorNormalCompletion24 = (_step24 = _iterator24.next()).done); _iteratorNormalCompletion24 = true) {
-                    var element = _step24.value;
-
-                    element = selector(element, index++);
-                    if (first) {
-                        min = element;
-                    } else {
-                        min = comparer(min, element) < 0 ? min : element;
-                    }
-                    first = false;
-                }
-            } catch (err) {
-                _didIteratorError24 = true;
-                _iteratorError24 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion24 && _iterator24.return) {
-                        _iterator24.return();
-                    }
-                } finally {
-                    if (_didIteratorError24) {
-                        throw _iteratorError24;
-                    }
-                }
-            }
-
-            if (first) {
-                throw new NoSuchElementsException();
-            } else {
-                return min;
-            }
+        if (has) {
+            return last;
+        } else {
+            return defaultValue;
         }
-    }, {
-        key: 'average',
-        value: function average(source) {
-            var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    }
+};
+Enumerable.single = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
-            var sum = 0,
-                count = 0,
-                index = 0;
-            source = asIterable(source);
-            var _iteratorNormalCompletion25 = true;
-            var _didIteratorError25 = false;
-            var _iteratorError25 = undefined;
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length === 1) {
+            return source[0];
+        } else if (source.length === 0) {
+            throw new NoSuchElementsException();
+        } else {
+            throw new TooManyElementsException();
+        }
+    } else {
+        var single = void 0,
+            count = 0,
+            index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion19 = true;
+        var _didIteratorError19 = false;
+        var _iteratorError19 = undefined;
 
-            try {
-                for (var _iterator25 = source[Symbol.iterator](), _step25; !(_iteratorNormalCompletion25 = (_step25 = _iterator25.next()).done); _iteratorNormalCompletion25 = true) {
-                    var element = _step25.value;
+        try {
+            for (var _iterator19 = source[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+                var element = _step19.value;
 
-                    sum += parseFloat(selector(element, index++));
-                    if (isNaN(sum)) return sum;
+                if (predicate(element, index++)) {
+                    single = element;
                     count++;
-                }
-            } catch (err) {
-                _didIteratorError25 = true;
-                _iteratorError25 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion25 && _iterator25.return) {
-                        _iterator25.return();
-                    }
-                } finally {
-                    if (_didIteratorError25) {
-                        throw _iteratorError25;
+                    if (count >= 2) {
+                        break;
                     }
                 }
             }
-
-            if (count !== 0) {
-                return sum / count;
-            } else {
-                throw new NoSuchElementsException();
+        } catch (err) {
+            _didIteratorError19 = true;
+            _iteratorError19 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion19 && _iterator19.return) {
+                    _iterator19.return();
+                }
+            } finally {
+                if (_didIteratorError19) {
+                    throw _iteratorError19;
+                }
             }
         }
-    }, {
-        key: 'contains',
-        value: function contains(source, value) {
-            var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
+        if (count === 1) {
+            return single;
+        } else if (count === 0) {
+            throw new NoSuchElementsException();
+        } else {
+            throw new TooManyElementsException();
+        }
+    }
+};
+Enumerable.singleOrDefault = function (source, defaultValue) {
+    var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+    if (predicate === defaultPredicate && core.isProto(source)) {
+        if (source.length === 1) {
+            return source[0];
+        } else if (source.length === 0) {
+            return defaultValue;
+        } else {
+            throw new TooManyElementsException();
+        }
+    } else {
+        var single = void 0,
+            count = 0,
+            index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion20 = true;
+        var _didIteratorError20 = false;
+        var _iteratorError20 = undefined;
+
+        try {
+            for (var _iterator20 = source[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+                var element = _step20.value;
+
+                if (predicate(element, index++)) {
+                    single = element;
+                    count++;
+                    if (count >= 2) {
+                        break;
+                    }
+                }
+            }
+        } catch (err) {
+            _didIteratorError20 = true;
+            _iteratorError20 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                    _iterator20.return();
+                }
+            } finally {
+                if (_didIteratorError20) {
+                    throw _iteratorError20;
+                }
+            }
+        }
+
+        if (count === 1) {
+            return single;
+        } else if (count === 0) {
+            return defaultValue;
+        } else {
+            throw new TooManyElementsException();
+        }
+    }
+};
+Enumerable.count = function (source) {
+    var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+    var count = 0,
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion21 = true;
+    var _didIteratorError21 = false;
+    var _iteratorError21 = undefined;
+
+    try {
+        for (var _iterator21 = source[Symbol.iterator](), _step21; !(_iteratorNormalCompletion21 = (_step21 = _iterator21.next()).done); _iteratorNormalCompletion21 = true) {
+            var element = _step21.value;
+
+            if (predicate(element, index++)) {
+                count++;
+            }
+        }
+    } catch (err) {
+        _didIteratorError21 = true;
+        _iteratorError21 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion21 && _iterator21.return) {
+                _iterator21.return();
+            }
+        } finally {
+            if (_didIteratorError21) {
+                throw _iteratorError21;
+            }
+        }
+    }
+
+    return count;
+};
+Enumerable.aggregate = function (source, seed, func) {
+    var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+
+    var index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion22 = true;
+    var _didIteratorError22 = false;
+    var _iteratorError22 = undefined;
+
+    try {
+        for (var _iterator22 = source[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
+            var element = _step22.value;
+
+            seed = func(seed, element, index++);
+        }
+    } catch (err) {
+        _didIteratorError22 = true;
+        _iteratorError22 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion22 && _iterator22.return) {
+                _iterator22.return();
+            }
+        } finally {
+            if (_didIteratorError22) {
+                throw _iteratorError22;
+            }
+        }
+    }
+
+    return resultSelector(seed);
+};
+Enumerable.sum = function (source) {
+    var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+
+    var sum = 0,
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion23 = true;
+    var _didIteratorError23 = false;
+    var _iteratorError23 = undefined;
+
+    try {
+        for (var _iterator23 = source[Symbol.iterator](), _step23; !(_iteratorNormalCompletion23 = (_step23 = _iterator23.next()).done); _iteratorNormalCompletion23 = true) {
+            var element = _step23.value;
+
+            sum += parseFloat(selector(element, index++));
+            if (isNaN(sum)) return sum;
+        }
+    } catch (err) {
+        _didIteratorError23 = true;
+        _iteratorError23 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion23 && _iterator23.return) {
+                _iterator23.return();
+            }
+        } finally {
+            if (_didIteratorError23) {
+                throw _iteratorError23;
+            }
+        }
+    }
+
+    return sum;
+};
+Enumerable.max = function (source) {
+    var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    var max = false,
+        first = true,
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion24 = true;
+    var _didIteratorError24 = false;
+    var _iteratorError24 = undefined;
+
+    try {
+        for (var _iterator24 = source[Symbol.iterator](), _step24; !(_iteratorNormalCompletion24 = (_step24 = _iterator24.next()).done); _iteratorNormalCompletion24 = true) {
+            var element = _step24.value;
+
+            element = selector(element, index++);
+            if (first) {
+                max = element;
+            } else {
+                max = comparer(max, element) > 0 ? max : element;
+            }
+            first = false;
+        }
+    } catch (err) {
+        _didIteratorError24 = true;
+        _iteratorError24 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion24 && _iterator24.return) {
+                _iterator24.return();
+            }
+        } finally {
+            if (_didIteratorError24) {
+                throw _iteratorError24;
+            }
+        }
+    }
+
+    if (first) {
+        throw new NoSuchElementsException();
+    } else {
+        return max;
+    }
+};
+Enumerable.min = function (source) {
+    var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
+
+    var min = false,
+        first = true,
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion25 = true;
+    var _didIteratorError25 = false;
+    var _iteratorError25 = undefined;
+
+    try {
+        for (var _iterator25 = source[Symbol.iterator](), _step25; !(_iteratorNormalCompletion25 = (_step25 = _iterator25.next()).done); _iteratorNormalCompletion25 = true) {
+            var element = _step25.value;
+
+            element = selector(element, index++);
+            if (first) {
+                min = element;
+            } else {
+                min = comparer(min, element) < 0 ? min : element;
+            }
+            first = false;
+        }
+    } catch (err) {
+        _didIteratorError25 = true;
+        _iteratorError25 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion25 && _iterator25.return) {
+                _iterator25.return();
+            }
+        } finally {
+            if (_didIteratorError25) {
+                throw _iteratorError25;
+            }
+        }
+    }
+
+    if (first) {
+        throw new NoSuchElementsException();
+    } else {
+        return min;
+    }
+};
+Enumerable.average = function (source) {
+    var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+
+    var sum = 0,
+        count = 0,
+        index = 0;
+    source = asIterable(source);
+    var _iteratorNormalCompletion26 = true;
+    var _didIteratorError26 = false;
+    var _iteratorError26 = undefined;
+
+    try {
+        for (var _iterator26 = source[Symbol.iterator](), _step26; !(_iteratorNormalCompletion26 = (_step26 = _iterator26.next()).done); _iteratorNormalCompletion26 = true) {
+            var element = _step26.value;
+
+            sum += parseFloat(selector(element, index++));
+            if (isNaN(sum)) return sum;
+            count++;
+        }
+    } catch (err) {
+        _didIteratorError26 = true;
+        _iteratorError26 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion26 && _iterator26.return) {
+                _iterator26.return();
+            }
+        } finally {
+            if (_didIteratorError26) {
+                throw _iteratorError26;
+            }
+        }
+    }
+
+    if (count !== 0) {
+        return sum / count;
+    } else {
+        throw new NoSuchElementsException();
+    }
+};
+Enumerable.contains = function (source, value) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    source = asIterable(source);
+    var _iteratorNormalCompletion27 = true;
+    var _didIteratorError27 = false;
+    var _iteratorError27 = undefined;
+
+    try {
+        for (var _iterator27 = source[Symbol.iterator](), _step27; !(_iteratorNormalCompletion27 = (_step27 = _iterator27.next()).done); _iteratorNormalCompletion27 = true) {
+            var element = _step27.value;
+
+            if (comparer(element, value)) {
+                return true;
+            }
+        }
+    } catch (err) {
+        _didIteratorError27 = true;
+        _iteratorError27 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion27 && _iterator27.return) {
+                _iterator27.return();
+            }
+        } finally {
+            if (_didIteratorError27) {
+                throw _iteratorError27;
+            }
+        }
+    }
+
+    return false;
+};
+Enumerable.elementAt = function (source, index) {
+    if (core.isProto(source)) {
+        if (index >= 0 && index < source.length) {
+            return source[index];
+        } else {
+            throw new OutOfRangeException(index);
+        }
+    } else {
+        if (index >= 0) {
             source = asIterable(source);
-            var _iteratorNormalCompletion26 = true;
-            var _didIteratorError26 = false;
-            var _iteratorError26 = undefined;
+            var _iteratorNormalCompletion28 = true;
+            var _didIteratorError28 = false;
+            var _iteratorError28 = undefined;
 
             try {
-                for (var _iterator26 = source[Symbol.iterator](), _step26; !(_iteratorNormalCompletion26 = (_step26 = _iterator26.next()).done); _iteratorNormalCompletion26 = true) {
-                    var element = _step26.value;
+                for (var _iterator28 = source[Symbol.iterator](), _step28; !(_iteratorNormalCompletion28 = (_step28 = _iterator28.next()).done); _iteratorNormalCompletion28 = true) {
+                    var element = _step28.value;
 
-                    if (comparer(element, value)) {
-                        return true;
+                    if (index-- === 0) {
+                        return element;
                     }
                 }
             } catch (err) {
-                _didIteratorError26 = true;
-                _iteratorError26 = err;
+                _didIteratorError28 = true;
+                _iteratorError28 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion26 && _iterator26.return) {
-                        _iterator26.return();
+                    if (!_iteratorNormalCompletion28 && _iterator28.return) {
+                        _iterator28.return();
                     }
                 } finally {
-                    if (_didIteratorError26) {
-                        throw _iteratorError26;
+                    if (_didIteratorError28) {
+                        throw _iteratorError28;
                     }
                 }
             }
-
-            return false;
         }
-    }, {
-        key: 'elementAt',
-        value: function elementAt(source, index) {
-            if (core.isProto(source)) {
-                if (index >= 0 && index < source.length) {
-                    return source[index];
-                } else {
-                    throw new OutOfRangeException(index);
-                }
-            } else {
-                if (index >= 0) {
-                    source = asIterable(source);
-                    var _iteratorNormalCompletion27 = true;
-                    var _didIteratorError27 = false;
-                    var _iteratorError27 = undefined;
-
-                    try {
-                        for (var _iterator27 = source[Symbol.iterator](), _step27; !(_iteratorNormalCompletion27 = (_step27 = _iterator27.next()).done); _iteratorNormalCompletion27 = true) {
-                            var element = _step27.value;
-
-                            if (index-- === 0) {
-                                return element;
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError27 = true;
-                        _iteratorError27 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion27 && _iterator27.return) {
-                                _iterator27.return();
-                            }
-                        } finally {
-                            if (_didIteratorError27) {
-                                throw _iteratorError27;
-                            }
-                        }
-                    }
-                }
-                throw new OutOfRangeException(index);
-            }
+        throw new OutOfRangeException(index);
+    }
+};
+Enumerable.elementAtOrDefault = function (source, index, defaultValue) {
+    if (core.isProto(source)) {
+        if (index >= 0 && index < source.length) {
+            return source[index];
+        } else {
+            return defaultValue;
         }
-    }, {
-        key: 'elementAtOrDefault',
-        value: function elementAtOrDefault(source, index, defaultValue) {
-            if (core.isProto(source)) {
-                if (index >= 0 && index < source.length) {
-                    return source[index];
-                } else {
-                    return defaultValue;
-                }
-            } else {
-                if (index >= 0) {
-                    source = asIterable(source);
-                    var _iteratorNormalCompletion28 = true;
-                    var _didIteratorError28 = false;
-                    var _iteratorError28 = undefined;
-
-                    try {
-                        for (var _iterator28 = source[Symbol.iterator](), _step28; !(_iteratorNormalCompletion28 = (_step28 = _iterator28.next()).done); _iteratorNormalCompletion28 = true) {
-                            var element = _step28.value;
-
-                            if (index-- === 0) {
-                                return element;
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError28 = true;
-                        _iteratorError28 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion28 && _iterator28.return) {
-                                _iterator28.return();
-                            }
-                        } finally {
-                            if (_didIteratorError28) {
-                                throw _iteratorError28;
-                            }
-                        }
-                    }
-                }
-                return defaultValue;
-            }
-        }
-    }, {
-        key: 'indexOf',
-        value: function indexOf(source, value) {
-            var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
-
-            if (comparer === defaultStrictEqualityComparer && core.isArray(source) && core.array$indexOf) {
-                return core.array$indexOf.call(source, value, start);
-            } else if (comparer === defaultStrictEqualityComparer && core.isString(source) && core.string$indexOf) {
-                return core.string$indexOf.call(source, value, start);
-            } else {
-                var index = 0;
-                source = asIterable(source);
-                var _iteratorNormalCompletion29 = true;
-                var _didIteratorError29 = false;
-                var _iteratorError29 = undefined;
-
-                try {
-                    for (var _iterator29 = source[Symbol.iterator](), _step29; !(_iteratorNormalCompletion29 = (_step29 = _iterator29.next()).done); _iteratorNormalCompletion29 = true) {
-                        var element = _step29.value;
-
-                        if (index >= start && comparer(element, value)) {
-                            return index;
-                        }
-                        index++;
-                    }
-                } catch (err) {
-                    _didIteratorError29 = true;
-                    _iteratorError29 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion29 && _iterator29.return) {
-                            _iterator29.return();
-                        }
-                    } finally {
-                        if (_didIteratorError29) {
-                            throw _iteratorError29;
-                        }
-                    }
-                }
-
-                return -1;
-            }
-        }
-    }, {
-        key: 'findIndex',
-        value: function findIndex(source, predicate, thisArg) {
-            var index = 0;
-            var callback = function callback(element, index) {
-                return predicate.call(thisArg, element, index, source);
-            };
+    } else {
+        if (index >= 0) {
             source = asIterable(source);
-            var _iteratorNormalCompletion30 = true;
-            var _didIteratorError30 = false;
-            var _iteratorError30 = undefined;
+            var _iteratorNormalCompletion29 = true;
+            var _didIteratorError29 = false;
+            var _iteratorError29 = undefined;
 
             try {
-                for (var _iterator30 = source[Symbol.iterator](), _step30; !(_iteratorNormalCompletion30 = (_step30 = _iterator30.next()).done); _iteratorNormalCompletion30 = true) {
-                    var element = _step30.value;
+                for (var _iterator29 = source[Symbol.iterator](), _step29; !(_iteratorNormalCompletion29 = (_step29 = _iterator29.next()).done); _iteratorNormalCompletion29 = true) {
+                    var element = _step29.value;
 
-                    if (callback(element, index)) {
-                        return index;
+                    if (index-- === 0) {
+                        return element;
                     }
-                    index++;
                 }
             } catch (err) {
-                _didIteratorError30 = true;
-                _iteratorError30 = err;
+                _didIteratorError29 = true;
+                _iteratorError29 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion30 && _iterator30.return) {
-                        _iterator30.return();
+                    if (!_iteratorNormalCompletion29 && _iterator29.return) {
+                        _iterator29.return();
                     }
                 } finally {
-                    if (_didIteratorError30) {
-                        throw _iteratorError30;
+                    if (_didIteratorError29) {
+                        throw _iteratorError29;
                     }
                 }
             }
-
-            return -1;
         }
-    }, {
-        key: 'lastIndexOf',
-        value: function lastIndexOf(source, value) {
-            var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
-            var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
+        return defaultValue;
+    }
+};
+Enumerable.indexOf = function (source, value) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
 
-            if (comparer === defaultStrictEqualityComparer && core.isArray(source) && core.array$lastIndexOf) {
-                return core.array$lastIndexOf.call(source, value, start);
-            } else if (comparer === defaultStrictEqualityComparer && core.isString(source) && core.string$lastIndexOf) {
-                return core.string$lastIndexOf.call(source, value, start);
-            } else {
-                source = this.toArray(asIterable(source));
-                if (start < 0) {
-                    start = source.length + start;
-                }
-                for (var index = Math.min(start, source.length - 1); index >= 0; index--) {
-                    if (comparer(source[index], value)) {
-                        return index;
-                    }
-                }
-                return -1;
-            }
-        }
-    }, {
-        key: 'findLastIndex',
-        value: function findLastIndex(source, predicate, thisArg) {
-            var callback = function callback(element, index) {
-                return predicate.call(thisArg, element, index, source);
-            };
-            source = this.toArray(asIterable(source));
-            for (var index = source.length - 1; index >= 0; index--) {
-                var element = source[index];
-                if (callback(element, index)) {
+    if (comparer === defaultStrictEqualityComparer && core.isArray(source) && core.array$indexOf) {
+        return core.array$indexOf.call(source, value, start);
+    } else if (comparer === defaultStrictEqualityComparer && core.isString(source) && core.string$indexOf) {
+        return core.string$indexOf.call(source, value, start);
+    } else {
+        var index = 0;
+        source = asIterable(source);
+        var _iteratorNormalCompletion30 = true;
+        var _didIteratorError30 = false;
+        var _iteratorError30 = undefined;
+
+        try {
+            for (var _iterator30 = source[Symbol.iterator](), _step30; !(_iteratorNormalCompletion30 = (_step30 = _iterator30.next()).done); _iteratorNormalCompletion30 = true) {
+                var element = _step30.value;
+
+                if (index >= start && comparer(element, value)) {
                     return index;
                 }
+                index++;
             }
-            return -1;
-        }
-    }, {
-        key: 'forEach',
-        value: function forEach(source) {
-            var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
-            var thisArg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-
-            if (core.isArray(source) && core.array$forEach) {
-                core.array$forEach.call(source, action, thisArg);
-            } else {
-                var index = 0;
-                var callback = function callback(element, index) {
-                    return action.call(thisArg, element, index, source);
-                };
-                source = asIterable(source);
-                var _iteratorNormalCompletion31 = true;
-                var _didIteratorError31 = false;
-                var _iteratorError31 = undefined;
-
-                try {
-                    for (var _iterator31 = source[Symbol.iterator](), _step31; !(_iteratorNormalCompletion31 = (_step31 = _iterator31.next()).done); _iteratorNormalCompletion31 = true) {
-                        var element = _step31.value;
-
-                        callback(element, index++);
-                    }
-                } catch (err) {
-                    _didIteratorError31 = true;
-                    _iteratorError31 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion31 && _iterator31.return) {
-                            _iterator31.return();
-                        }
-                    } finally {
-                        if (_didIteratorError31) {
-                            throw _iteratorError31;
-                        }
-                    }
+        } catch (err) {
+            _didIteratorError30 = true;
+            _iteratorError30 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion30 && _iterator30.return) {
+                    _iterator30.return();
+                }
+            } finally {
+                if (_didIteratorError30) {
+                    throw _iteratorError30;
                 }
             }
         }
-    }, {
-        key: 'arrayComparer',
-        value: function arrayComparer(array) {
+
+        return -1;
+    }
+};
+Enumerable.findIndex = function (source, predicate, thisArg) {
+    var index = 0;
+    var callback = function callback(element, index) {
+        return predicate.call(thisArg, element, index, source);
+    };
+    source = asIterable(source);
+    var _iteratorNormalCompletion31 = true;
+    var _didIteratorError31 = false;
+    var _iteratorError31 = undefined;
+
+    try {
+        for (var _iterator31 = source[Symbol.iterator](), _step31; !(_iteratorNormalCompletion31 = (_step31 = _iterator31.next()).done); _iteratorNormalCompletion31 = true) {
+            var element = _step31.value;
+
+            if (callback(element, index)) {
+                return index;
+            }
+            index++;
+        }
+    } catch (err) {
+        _didIteratorError31 = true;
+        _iteratorError31 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion31 && _iterator31.return) {
+                _iterator31.return();
+            }
+        } finally {
+            if (_didIteratorError31) {
+                throw _iteratorError31;
+            }
+        }
+    }
+
+    return -1;
+};
+Enumerable.lastIndexOf = function (source, value) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
+    var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
+
+    if (comparer === defaultStrictEqualityComparer && core.isArray(source) && core.array$lastIndexOf) {
+        return core.array$lastIndexOf.call(source, value, start);
+    } else if (comparer === defaultStrictEqualityComparer && core.isString(source) && core.string$lastIndexOf) {
+        return core.string$lastIndexOf.call(source, value, start);
+    } else {
+        source = this.toArray(asIterable(source));
+        if (start < 0) {
+            start = source.length + start;
+        }
+        for (var index = Math.min(start, source.length - 1); index >= 0; index--) {
+            if (comparer(source[index], value)) {
+                return index;
+            }
+        }
+        return -1;
+    }
+};
+Enumerable.findLastIndex = function (source, predicate, thisArg) {
+    var callback = function callback(element, index) {
+        return predicate.call(thisArg, element, index, source);
+    };
+    source = this.toArray(asIterable(source));
+    for (var index = source.length - 1; index >= 0; index--) {
+        var element = source[index];
+        if (callback(element, index)) {
+            return index;
+        }
+    }
+    return -1;
+};
+Enumerable.forEach = function (source) {
+    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
+    var thisArg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+    if (core.isArray(source) && core.array$forEach) {
+        core.array$forEach.call(source, action, thisArg);
+    } else {
+        var index = 0;
+        var callback = function callback(element, index) {
+            return action.call(thisArg, element, index, source);
+        };
+        source = asIterable(source);
+        var _iteratorNormalCompletion32 = true;
+        var _didIteratorError32 = false;
+        var _iteratorError32 = undefined;
+
+        try {
+            for (var _iterator32 = source[Symbol.iterator](), _step32; !(_iteratorNormalCompletion32 = (_step32 = _iterator32.next()).done); _iteratorNormalCompletion32 = true) {
+                var element = _step32.value;
+
+                callback(element, index++);
+            }
+        } catch (err) {
+            _didIteratorError32 = true;
+            _iteratorError32 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion32 && _iterator32.return) {
+                    _iterator32.return();
+                }
+            } finally {
+                if (_didIteratorError32) {
+                    throw _iteratorError32;
+                }
+            }
+        }
+    }
+};
+Enumerable.arrayComparer = function (array) {
+    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
+    return arrayComparer(array, last, comparer);
+};
+Enumerable.predicateComparer = function (predicateArray) {
+    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
+    return predicateComparer(predicateArray, last);
+};
+core.defineProperty(Enumerable, 'comparers', function () {
+    return {
+        get default() {
+            return defaultComparer;
+        },
+        get equality() {
+            return defaultEqualityComparer;
+        },
+        get same() {
+            return defaultSameComparer;
+        },
+        get strict() {
+            return defaultStrictEqualityComparer;
+        },
+        array: function array(_array) {
             var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
 
-            console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
-            return _arrayComparer(array, last, comparer);
-        }
-    }, {
-        key: 'predicateComparer',
-        value: function predicateComparer(predicateArray) {
+            return arrayComparer(_array, last, comparer);
+        },
+        predicate: function predicate(predicateArray) {
             var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-            console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
-            return _predicateComparer(predicateArray, last);
+            return predicateComparer(predicateArray, last);
         }
-    }, {
-        key: 'plugins',
-        get: function get() {
-            return Enumerable.select(_plugins, function (plugin) {
-                return { get name() {
-                        return plugin.name;
-                    }, get value() {
-                        return plugin.value;
-                    }, get types() {
-                        return plugin.types;
-                    } };
-            }).toArray();
+    };
+}, true, true);
+core.defineProperty(Enumerable, 'selectors', function () {
+    return {
+        get default() {
+            return defaultSelector;
+        },
+        get key() {
+            return defaultKeySelector;
+        },
+        get value() {
+            return defaultValueSelector;
+        },
+        get groupResult() {
+            return defaultGroupResultSelector;
+        },
+        property: function property(_property) {
+            return propertySelector(_property);
         }
-    }, {
-        key: 'comparers',
-        get: function get() {
-            return {
-                get default() {
-                    return defaultComparer;
-                },
-                get equality() {
-                    return defaultEqualityComparer;
-                },
-                get same() {
-                    return defaultSameComparer;
-                },
-                get strict() {
-                    return defaultStrictEqualityComparer;
-                },
-                array: function array(_array) {
-                    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-                    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-
-                    return _arrayComparer(_array, last, comparer);
-                },
-                predicate: function predicate(predicateArray) {
-                    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-                    return _predicateComparer(predicateArray, last);
-                }
-            };
+    };
+}, true, true);
+core.defineProperty(Enumerable, 'actions', function () {
+    return {
+        get default() {
+            return defaultAction;
         }
-    }, {
-        key: 'selectors',
-        get: function get() {
-            return {
-                get default() {
-                    return defaultSelector;
-                },
-                get key() {
-                    return defaultKeySelector;
-                },
-                get value() {
-                    return defaultValueSelector;
-                },
-                get groupResult() {
-                    return defaultGroupResultSelector;
-                }
-            };
+    };
+}, true, true);
+core.defineProperty(Enumerable, 'predicates', function () {
+    return {
+        get default() {
+            return defaultPredicate;
         }
-    }, {
-        key: 'actions',
-        get: function get() {
-            return {
-                get default() {
-                    return defaultAction;
-                }
-            };
+    };
+}, true, true);
+core.defineProperty(Enumerable, 'exceptions', function () {
+    return {
+        get NoSuchElementsException() {
+            return NoSuchElementsException;
+        },
+        get OutOfRangeException() {
+            return OutOfRangeException;
+        },
+        get TooManyElementsException() {
+            return TooManyElementsException;
+        },
+        get KeysForMultiElementsException() {
+            return KeysForMultiElementsException;
+        },
+        get NeedExecuteBeforeException() {
+            return NeedExecuteBeforeException;
         }
-    }, {
-        key: 'predicates',
-        get: function get() {
-            return {
-                get default() {
-                    return defaultPredicate;
-                }
-            };
-        }
-    }, {
-        key: 'exceptions',
-        get: function get() {
-            return {
-                get NoSuchElementsException() {
-                    return NoSuchElementsException;
-                },
-                get OutOfRangeException() {
-                    return OutOfRangeException;
-                },
-                get TooManyElementsException() {
-                    return TooManyElementsException;
-                },
-                get KeysForMultiElementsException() {
-                    return KeysForMultiElementsException;
-                },
-                get NeedExecuteBeforeException() {
-                    return NeedExecuteBeforeException;
-                }
-            };
-        }
-    }, {
-        key: 'IComparable',
-        get: function get() {
-            return IComparable;
-        }
-    }, {
-        key: 'IEquatable',
-        get: function get() {
-            return IEquatable;
-        }
-    }]);
-
-    return Enumerable;
-}();
+    };
+}, true, true);
+core.defineProperty(Enumerable, 'IComparable', function () {
+    return IComparable;
+}, true, true);
+core.defineProperty(Enumerable, 'IEquatable', function () {
+    return IEquatable;
+}, true, true);
 
 module.exports = Enumerable;
 
@@ -9410,7 +9263,7 @@ var FillEnumerable = require('./enumerables/FillEnumerable');
 var SortEnumerable = require('./enumerables/SortEnumerable');
 var CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 
-},{"./IEnumerable":299,"./IEnumerator":300,"./IterableWeakSet":301,"./core/IComparable":302,"./core/IEquatable":303,"./core/core":304,"./core/exceptions/KeysForMultiElementsException":305,"./core/exceptions/NeedExecuteBeforeException":306,"./core/exceptions/NoSuchElementsException":307,"./core/exceptions/NotEnumerableException":308,"./core/exceptions/OutOfRangeException":309,"./core/exceptions/PluginRepeatException":310,"./core/exceptions/TooManyElementsException":311,"./enumerables/ConcatEnumerable":313,"./enumerables/CopyWithinEnumerable":314,"./enumerables/Dictionary":315,"./enumerables/DistinctEnumerable":316,"./enumerables/EmptyEnumerable":317,"./enumerables/ExceptEnumerable":319,"./enumerables/FillEnumerable":320,"./enumerables/GroupJoinEnumerable":321,"./enumerables/GroupedEnumerable":322,"./enumerables/IOrderedEnumerable":325,"./enumerables/IntersectEnumerable":326,"./enumerables/IteratorEnumerable":328,"./enumerables/JoinEnumerable":329,"./enumerables/Lookup":330,"./enumerables/OfTypeEnumerable":333,"./enumerables/OrderByDescendingEnumerable":334,"./enumerables/OrderByEnumerable":335,"./enumerables/RangeEnumerable":336,"./enumerables/RepeatEnumerable":337,"./enumerables/ReverseEnumerable":338,"./enumerables/SelectEnumerable":339,"./enumerables/SelectManyEnumerable":340,"./enumerables/SingleEnumerable":341,"./enumerables/SkipEnumerable":342,"./enumerables/SkipWhileEnumerable":343,"./enumerables/SliceEnumerable":344,"./enumerables/SortEnumerable":345,"./enumerables/SpliceEnumerable":346,"./enumerables/TakeEnumerable":348,"./enumerables/TakeWhileEnumerable":349,"./enumerables/ThenByDescendingEnumerable":350,"./enumerables/ThenByEnumerable":351,"./enumerables/UnionEnumerable":352,"./enumerables/WhereEnumerable":353,"./enumerables/ZipEnumerable":354,"./methods/arrayComparer":359,"./methods/defaultAction":360,"./methods/defaultComparer":361,"./methods/defaultEqualityComparer":362,"./methods/defaultGroupResultSelector":363,"./methods/defaultKeySelector":364,"./methods/defaultPredicate":365,"./methods/defaultSameComparer":366,"./methods/defaultSelector":367,"./methods/defaultStrictEqualityComparer":368,"./methods/defaultValueSelector":369,"./methods/predicateComparer":372}],299:[function(require,module,exports){
+},{"./IEnumerable":299,"./IEnumerator":300,"./core/IComparable":301,"./core/IEquatable":302,"./core/core":303,"./core/exceptions/KeysForMultiElementsException":304,"./core/exceptions/NeedExecuteBeforeException":305,"./core/exceptions/NoSuchElementsException":306,"./core/exceptions/NotEnumerableException":307,"./core/exceptions/OutOfRangeException":308,"./core/exceptions/PluginRepeatException":309,"./core/exceptions/TooManyElementsException":310,"./enumerables/ConcatEnumerable":312,"./enumerables/CopyWithinEnumerable":313,"./enumerables/Dictionary":314,"./enumerables/DistinctEnumerable":315,"./enumerables/EmptyEnumerable":316,"./enumerables/ExceptEnumerable":318,"./enumerables/FillEnumerable":319,"./enumerables/GroupJoinEnumerable":320,"./enumerables/GroupedEnumerable":321,"./enumerables/IOrderedEnumerable":324,"./enumerables/IntersectEnumerable":325,"./enumerables/IteratorEnumerable":327,"./enumerables/JoinEnumerable":328,"./enumerables/Lookup":329,"./enumerables/OfTypeEnumerable":332,"./enumerables/OrderByDescendingEnumerable":333,"./enumerables/OrderByEnumerable":334,"./enumerables/RangeEnumerable":335,"./enumerables/RepeatEnumerable":336,"./enumerables/ReverseEnumerable":337,"./enumerables/SelectEnumerable":338,"./enumerables/SelectManyEnumerable":339,"./enumerables/SingleEnumerable":340,"./enumerables/SkipEnumerable":341,"./enumerables/SkipWhileEnumerable":342,"./enumerables/SliceEnumerable":343,"./enumerables/SortEnumerable":344,"./enumerables/SpliceEnumerable":345,"./enumerables/TakeEnumerable":347,"./enumerables/TakeWhileEnumerable":348,"./enumerables/ThenByDescendingEnumerable":349,"./enumerables/ThenByEnumerable":350,"./enumerables/UnionEnumerable":351,"./enumerables/WhereEnumerable":352,"./enumerables/ZipEnumerable":353,"./methods/arrayComparer":358,"./methods/defaultAction":359,"./methods/defaultComparer":360,"./methods/defaultEqualityComparer":361,"./methods/defaultGroupResultSelector":362,"./methods/defaultKeySelector":363,"./methods/defaultPredicate":364,"./methods/defaultSameComparer":365,"./methods/defaultSelector":366,"./methods/defaultStrictEqualityComparer":367,"./methods/defaultValueSelector":368,"./methods/predicateComparer":371,"./methods/propertySelector":372}],299:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -10004,7 +9857,7 @@ module.exports = IEnumerable;
 
 var Enumerable = require('./Enumerable');
 
-},{"./Enumerable":298,"./core/core":304,"./methods/defaultAction":360,"./methods/defaultComparer":361,"./methods/defaultEqualityComparer":362,"./methods/defaultGroupResultSelector":363,"./methods/defaultKeySelector":364,"./methods/defaultPredicate":365,"./methods/defaultSameComparer":366,"./methods/defaultSelector":367,"./methods/defaultStrictEqualityComparer":368,"./methods/defaultValueSelector":369}],300:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":359,"./methods/defaultComparer":360,"./methods/defaultEqualityComparer":361,"./methods/defaultGroupResultSelector":362,"./methods/defaultKeySelector":363,"./methods/defaultPredicate":364,"./methods/defaultSameComparer":365,"./methods/defaultSelector":366,"./methods/defaultStrictEqualityComparer":367,"./methods/defaultValueSelector":368}],300:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10041,180 +9894,7 @@ var IEnumerator = function IEnumerator(enumerable) {
 
 module.exports = IEnumerator;
 
-},{"./core/core":304,"./core/exceptions/NeedExecuteBeforeException":306}],301:[function(require,module,exports){
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var core = require('./core/core');
-
-var IterableWeakSet = function IterableWeakSet() {
-	_classCallCheck(this, IterableWeakSet);
-
-	var set = new Set();
-	core.defineProperty(this, Symbol.iterator, regeneratorRuntime.mark(function WeakSetIterator() {
-		var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, weak;
-
-		return regeneratorRuntime.wrap(function WeakSetIterator$(_context) {
-			while (1) {
-				switch (_context.prev = _context.next) {
-					case 0:
-						_iteratorNormalCompletion = true;
-						_didIteratorError = false;
-						_iteratorError = undefined;
-						_context.prev = 3;
-						_iterator = set[Symbol.iterator]();
-
-					case 5:
-						if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-							_context.next = 16;
-							break;
-						}
-
-						weak = _step.value;
-
-						if (!weak.has(this)) {
-							_context.next = 12;
-							break;
-						}
-
-						_context.next = 10;
-						return weak.get(this);
-
-					case 10:
-						_context.next = 13;
-						break;
-
-					case 12:
-						set.delete(weak);
-
-					case 13:
-						_iteratorNormalCompletion = true;
-						_context.next = 5;
-						break;
-
-					case 16:
-						_context.next = 22;
-						break;
-
-					case 18:
-						_context.prev = 18;
-						_context.t0 = _context['catch'](3);
-						_didIteratorError = true;
-						_iteratorError = _context.t0;
-
-					case 22:
-						_context.prev = 22;
-						_context.prev = 23;
-
-						if (!_iteratorNormalCompletion && _iterator.return) {
-							_iterator.return();
-						}
-
-					case 25:
-						_context.prev = 25;
-
-						if (!_didIteratorError) {
-							_context.next = 28;
-							break;
-						}
-
-						throw _iteratorError;
-
-					case 28:
-						return _context.finish(25);
-
-					case 29:
-						return _context.finish(22);
-
-					case 30:
-					case 'end':
-						return _context.stop();
-				}
-			}
-		}, WeakSetIterator, this, [[3, 18, 22, 30], [23,, 25, 29]]);
-	}));
-	core.defineProperties(this, {
-		has: function has(value) {
-			var _iteratorNormalCompletion2 = true;
-			var _didIteratorError2 = false;
-			var _iteratorError2 = undefined;
-
-			try {
-				for (var _iterator2 = this[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-					var v = _step2.value;
-
-					if (v === value) {
-						return true;
-					}
-				}
-			} catch (err) {
-				_didIteratorError2 = true;
-				_iteratorError2 = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion2 && _iterator2.return) {
-						_iterator2.return();
-					}
-				} finally {
-					if (_didIteratorError2) {
-						throw _iteratorError2;
-					}
-				}
-			}
-
-			return false;
-		},
-		add: function add(value) {
-			if (!this.has(value)) {
-				var weak = new WeakMap();
-				weak.set(this, value);
-				set.add(weak);
-			}
-			return this;
-		},
-		delete: function _delete(value) {
-			var _iteratorNormalCompletion3 = true;
-			var _didIteratorError3 = false;
-			var _iteratorError3 = undefined;
-
-			try {
-				for (var _iterator3 = set[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-					var weak = _step3.value;
-
-					if (weak.has(this)) {
-						if (weak.get(this) === value) {
-							set.delete(weak);
-							weak.delete(this);
-							return true;
-						}
-					} else {
-						set.delete(weak);
-					}
-				}
-			} catch (err) {
-				_didIteratorError3 = true;
-				_iteratorError3 = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion3 && _iterator3.return) {
-						_iterator3.return();
-					}
-				} finally {
-					if (_didIteratorError3) {
-						throw _iteratorError3;
-					}
-				}
-			}
-
-			return false;
-		}
-	});
-};
-
-module.exports = IterableWeakSet;
-
-},{"./core/core":304}],302:[function(require,module,exports){
+},{"./core/core":303,"./core/exceptions/NeedExecuteBeforeException":305}],301:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10238,7 +9918,7 @@ var IComparable = function () {
 
 module.exports = IComparable;
 
-},{}],303:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10262,7 +9942,7 @@ var IEquatable = function () {
 
 module.exports = IEquatable;
 
-},{}],304:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -10370,16 +10050,17 @@ var core = {
 	},
 	setProperty: function setProperty(prototype, property, value) {
 		var isGet = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+		var isEnumerable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
 
 		if (isGet && value instanceof Function) {
 			Object.defineProperty(prototype, property, {
-				enumerable: false,
+				enumerable: isEnumerable,
 				configurable: true,
 				get: value
 			});
 		} else {
 			Object.defineProperty(prototype, property, {
-				enumerable: false,
+				enumerable: isEnumerable,
 				writable: true,
 				configurable: true,
 				value: value
@@ -10388,6 +10069,7 @@ var core = {
 	},
 	defineProperty: function defineProperty(prototype, property, value) {
 		var isGet = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+		var isEnumerable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
 
 		this.conflict(prototype, property);
 		if (property === Symbol.iterator) {
@@ -10396,7 +10078,7 @@ var core = {
 				this.defineProperty(value, Symbol.toStringTag, name);
 			}
 		}
-		this.setProperty(prototype, property, value, isGet);
+		this.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
 	defineProperties: function defineProperties(prototype, properties) {
 		for (var property in properties) {
@@ -10485,7 +10167,7 @@ module.exports = core;
 
 }).call(this,require('_process'))
 
-},{"_process":296}],305:[function(require,module,exports){
+},{"_process":296}],304:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10540,7 +10222,7 @@ var KeysForMultiElementsException = function (_extendableBuiltin2) {
 
 module.exports = KeysForMultiElementsException;
 
-},{"./../core":304}],306:[function(require,module,exports){
+},{"./../core":303}],305:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10586,7 +10268,7 @@ var NeedExecuteBeforeException = function (_extendableBuiltin2) {
 
 module.exports = NeedExecuteBeforeException;
 
-},{}],307:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10632,7 +10314,7 @@ var NoSuchElementsException = function (_extendableBuiltin2) {
 
 module.exports = NoSuchElementsException;
 
-},{}],308:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10680,7 +10362,7 @@ var NoEnumerableException = function (_extendableBuiltin2) {
 
 module.exports = NoEnumerableException;
 
-},{"./../core":304}],309:[function(require,module,exports){
+},{"./../core":303}],308:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10726,7 +10408,7 @@ var OutOfRangeException = function (_extendableBuiltin2) {
 
 module.exports = OutOfRangeException;
 
-},{}],310:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10776,7 +10458,7 @@ var PluginRepeatException = function (_extendableBuiltin2) {
 
 module.exports = PluginRepeatException;
 
-},{"./../core":304}],311:[function(require,module,exports){
+},{"./../core":303}],310:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10822,7 +10504,7 @@ var TooManyElementsException = function (_extendableBuiltin2) {
 
 module.exports = TooManyElementsException;
 
-},{}],312:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10989,7 +10671,7 @@ var ArrayEnumerable = function (_IterableEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"./../Enumerable":298,"./../core/core":304,"./../methods/defaultAction":360,"./../methods/defaultEqualityComparer":362,"./../methods/defaultSelector":367,"./../methods/defaultStrictEqualityComparer":368,"./IterableEnumerable":327}],313:[function(require,module,exports){
+},{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultAction":359,"./../methods/defaultEqualityComparer":361,"./../methods/defaultSelector":366,"./../methods/defaultStrictEqualityComparer":367,"./IterableEnumerable":326}],312:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11121,7 +10803,7 @@ var ConcatEnumerable = function (_IEnumerable) {
 
 module.exports = ConcatEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],314:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],313:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11409,7 +11091,7 @@ module.exports = CopyWithinEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304}],315:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],314:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11469,7 +11151,7 @@ var Dictionary = function (_MapEnumerable) {
 
 module.exports = Dictionary;
 
-},{"./MapEnumerable":331}],316:[function(require,module,exports){
+},{"./MapEnumerable":330}],315:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11581,7 +11263,7 @@ var DistinctEnumerable = function (_IEnumerable) {
 
 module.exports = DistinctEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362}],317:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361}],316:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11624,7 +11306,7 @@ var EmptyEnumerable = function (_IEnumerable) {
 
 module.exports = EmptyEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],318:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],317:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11651,7 +11333,7 @@ var Entry = function () {
 
 module.exports = Entry;
 
-},{}],319:[function(require,module,exports){
+},{}],318:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11768,7 +11450,7 @@ var ExceptEnumerable = function (_IEnumerable) {
 
 module.exports = ExceptEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362}],320:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361}],319:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11912,7 +11594,7 @@ module.exports = FillEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304}],321:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],320:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12081,7 +11763,7 @@ var GroupJoinEnumerable = function (_IEnumerable) {
 
 module.exports = GroupJoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362,"./../methods/defaultSelector":367,"./Entry":318,"./IGrouping":323}],322:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361,"./../methods/defaultSelector":366,"./Entry":317,"./IGrouping":322}],321:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -12211,7 +11893,7 @@ var GroupedEnumerable = function (_IEnumerable) {
 
 module.exports = GroupedEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362,"./../methods/defaultGroupResultSelector":363,"./../methods/defaultSelector":367,"./../methods/equalityPredicate":371,"./IGrouping":323}],323:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361,"./../methods/defaultGroupResultSelector":362,"./../methods/defaultSelector":366,"./../methods/equalityPredicate":370,"./IGrouping":322}],322:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12255,7 +11937,7 @@ var IGrouping = function (_IEnumerable) {
 
 module.exports = IGrouping;
 
-},{"./../IEnumerable":299,"./../core/core":304}],324:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],323:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12349,7 +12031,7 @@ var IMapEnumerable = function (_IEnumerable) {
 
 module.exports = IMapEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultAction":360,"./../methods/defaultKeySelector":364,"./../methods/defaultSameComparer":366,"./../methods/defaultValueSelector":369}],325:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultAction":359,"./../methods/defaultKeySelector":363,"./../methods/defaultSameComparer":365,"./../methods/defaultValueSelector":368}],324:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12473,7 +12155,7 @@ IOrderedEnumerable.orderByComparer = Symbol('orderByComparer');
 
 module.exports = IOrderedEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultComparer":361,"./../methods/defaultSelector":367}],326:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultComparer":360,"./../methods/defaultSelector":366}],325:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12590,7 +12272,7 @@ var IntersectEnumerable = function (_IEnumerable) {
 
 module.exports = IntersectEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362}],327:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361}],326:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12633,7 +12315,7 @@ var IterableEnumerable = function (_IEnumerable) {
 
 module.exports = IterableEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],328:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],327:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12706,7 +12388,7 @@ var IteratorEnumerable = function (_IterableEnumerable) {
 
 module.exports = IteratorEnumerable;
 
-},{"./../core/core":304,"./IterableEnumerable":327}],329:[function(require,module,exports){
+},{"./../core/core":303,"./IterableEnumerable":326}],328:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12950,7 +12632,7 @@ var JoinEnumerable = function (_IEnumerable) {
 
 module.exports = JoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362,"./../methods/defaultSelector":367}],330:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361,"./../methods/defaultSelector":366}],329:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12975,7 +12657,7 @@ var Lookup = function (_Dictionary) {
 
 module.exports = Lookup;
 
-},{"./Dictionary":315}],331:[function(require,module,exports){
+},{"./Dictionary":314}],330:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13126,7 +12808,7 @@ var MapEnumerable = function (_IMapEnumerable) {
 
 module.exports = MapEnumerable;
 
-},{"./../core/core":304,"./../methods/defaultSameComparer":366,"./../methods/equalityPredicate":371,"./Entry":318,"./IMapEnumerable":324}],332:[function(require,module,exports){
+},{"./../core/core":303,"./../methods/defaultSameComparer":365,"./../methods/equalityPredicate":370,"./Entry":317,"./IMapEnumerable":323}],331:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13226,7 +12908,7 @@ var ObjectEnumerable = function (_IMapEnumerable) {
 
 module.exports = ObjectEnumerable;
 
-},{"./../core/core":304,"./Entry":318,"./IMapEnumerable":324}],333:[function(require,module,exports){
+},{"./../core/core":303,"./Entry":317,"./IMapEnumerable":323}],332:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13360,7 +13042,7 @@ var OfTypeEnumerable = function (_IEnumerable) {
 
 module.exports = OfTypeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],334:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],333:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13393,7 +13075,7 @@ var OrderByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":361,"./../methods/defaultSelector":367,"./../methods/descendingComparer":370,"./../methods/selectorComparer":373,"./IOrderedEnumerable":325}],335:[function(require,module,exports){
+},{"./../methods/defaultComparer":360,"./../methods/defaultSelector":366,"./../methods/descendingComparer":369,"./../methods/selectorComparer":373,"./IOrderedEnumerable":324}],334:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13425,7 +13107,7 @@ var OrderByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByEnumerable;
 
-},{"./../methods/defaultComparer":361,"./../methods/defaultSelector":367,"./../methods/selectorComparer":373,"./IOrderedEnumerable":325}],336:[function(require,module,exports){
+},{"./../methods/defaultComparer":360,"./../methods/defaultSelector":366,"./../methods/selectorComparer":373,"./IOrderedEnumerable":324}],335:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13483,7 +13165,7 @@ var RangeEnumerable = function (_IEnumerable) {
 
 module.exports = RangeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],337:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],336:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13543,7 +13225,7 @@ var RepeatEnumerable = function (_IEnumerable) {
 
 module.exports = RepeatEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],338:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],337:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13604,7 +13286,7 @@ var ReverseEnumerable = function (_IEnumerable) {
 
 module.exports = ReverseEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304}],339:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],338:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13707,7 +13389,7 @@ var SelectEnumerable = function (_IEnumerable) {
 
 module.exports = SelectEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultSelector":367}],340:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultSelector":366}],339:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13863,7 +13545,7 @@ var SelectManyEnumerable = function (_IEnumerable) {
 
 module.exports = SelectManyEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultSelector":367}],341:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultSelector":366}],340:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13907,7 +13589,7 @@ var SingleEnumerable = function (_IEnumerable) {
 
 module.exports = SingleEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],342:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],341:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14015,7 +13697,7 @@ var SkipEnumerable = function (_IEnumerable) {
 
 module.exports = SkipEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],343:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],342:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14126,7 +13808,7 @@ var SkipWhileEnumerable = function (_IEnumerable) {
 
 module.exports = SkipWhileEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultPredicate":365}],344:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":364}],343:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -14260,7 +13942,7 @@ var SliceEnumerable = function (_IEnumerable) {
 
 module.exports = SliceEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],345:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],344:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -14323,7 +14005,7 @@ module.exports = SortEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultComparer":361}],346:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultComparer":360}],345:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -14612,7 +14294,7 @@ var SpliceEnumerable = function (_IEnumerable) {
 
 module.exports = SpliceEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],347:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],346:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14676,7 +14358,7 @@ var StringEnumerable = function (_IterableEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"./../Enumerable":298,"./../core/core":304,"./../methods/defaultStrictEqualityComparer":368,"./IterableEnumerable":327}],348:[function(require,module,exports){
+},{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultStrictEqualityComparer":367,"./IterableEnumerable":326}],347:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14791,7 +14473,7 @@ var TakeEnumerable = function (_IEnumerable) {
 
 module.exports = TakeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],349:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],348:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14909,7 +14591,7 @@ var TakeWhileEnumerable = function (_IEnumerable) {
 
 module.exports = TakeWhileEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultPredicate":365}],350:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":364}],349:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14943,7 +14625,7 @@ var ThenByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":361,"./../methods/defaultSelector":367,"./../methods/descendingComparer":370,"./../methods/selectorComparer":373,"./../methods/thenByComparer":374,"./IOrderedEnumerable":325}],351:[function(require,module,exports){
+},{"./../methods/defaultComparer":360,"./../methods/defaultSelector":366,"./../methods/descendingComparer":369,"./../methods/selectorComparer":373,"./../methods/thenByComparer":374,"./IOrderedEnumerable":324}],350:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14976,7 +14658,7 @@ var ThenByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByEnumerable;
 
-},{"./../methods/defaultComparer":361,"./../methods/defaultSelector":367,"./../methods/selectorComparer":373,"./../methods/thenByComparer":374,"./IOrderedEnumerable":325}],352:[function(require,module,exports){
+},{"./../methods/defaultComparer":360,"./../methods/defaultSelector":366,"./../methods/selectorComparer":373,"./../methods/thenByComparer":374,"./IOrderedEnumerable":324}],351:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15151,7 +14833,7 @@ var UnionEnumerable = function (_IEnumerable) {
 
 module.exports = UnionEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultEqualityComparer":362}],353:[function(require,module,exports){
+},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":361}],352:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15260,7 +14942,7 @@ var WhereEnumerable = function (_IEnumerable) {
 
 module.exports = WhereEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304,"./../methods/defaultPredicate":365}],354:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":364}],353:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15324,7 +15006,7 @@ var ZipEnumerable = function (_IEnumerable) {
 
 module.exports = ZipEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":304}],355:[function(require,module,exports){
+},{"./../IEnumerable":299,"./../core/core":303}],354:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15341,9 +15023,12 @@ var getter = function getter(original) {
 	};
 };
 
+var extendsTypes = [Array, Map, Set];
+var extendsProperties = ['keys', 'values', 'entries'];
+
 module.exports = {
 	install: function install() {
-		Enumerable.extends(Array.prototype, core.types.Array);
+		Enumerable.extends(Array.prototype, core.types.Array, true);
 
 		(function (types, props) {
 			var _iteratorNormalCompletion = true;
@@ -15363,8 +15048,7 @@ module.exports = {
 							for (var _iterator2 = props[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 								var prop = _step2.value;
 
-								var original = type.prototype[prop];
-								core.defineProperty(type.prototype, prop, getter(original));
+								core.defineProperty(type.prototype, prop, getter(type.prototype[prop]));
 							}
 						} catch (err) {
 							_didIteratorError2 = true;
@@ -15396,10 +15080,10 @@ module.exports = {
 					}
 				}
 			}
-		})([Array, Map, Set, WeakMap, WeakSet], ['keys', 'values', 'entries']);
+		})(extendsTypes, extendsProperties);
 	},
 	uninstall: function uninstall() {
-		Enumerable.unextends(Array.prototype, core.types.Array);
+		Enumerable.unextends(Array.prototype, core.types.Array, true);
 
 		(function (types, props) {
 			var _iteratorNormalCompletion3 = true;
@@ -15428,11 +15112,11 @@ module.exports = {
 					}
 				}
 			}
-		})([Array, Map, Set, WeakMap, WeakSet], ['keys', 'values', 'entries']);
+		})(extendsTypes, extendsProperties);
 	}
 };
 
-},{"./Enumerable":298,"./core/core":304}],356:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303}],355:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15444,14 +15128,14 @@ var core = require('./core/core');
 
 module.exports = {
 	install: function install() {
-		Enumerable.extends(Object.prototype, core.types.Object);
+		Enumerable.extends(Object.prototype, core.types.Object, true);
 	},
 	uninstall: function uninstall() {
-		Enumerable.unextends(Object.prototype, core.types.Object);
+		Enumerable.unextends(Object.prototype, core.types.Object, true);
 	}
 };
 
-},{"./Enumerable":298,"./core/core":304}],357:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303}],356:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15463,14 +15147,14 @@ var core = require('./core/core');
 
 module.exports = {
 	install: function install() {
-		Enumerable.extends(String.prototype, core.types.String);
+		Enumerable.extends(String.prototype, core.types.String, true);
 	},
 	uninstall: function uninstall() {
-		Enumerable.unextends(String.prototype, core.types.String);
+		Enumerable.unextends(String.prototype, core.types.String, true);
 	}
 };
 
-},{"./Enumerable":298,"./core/core":304}],358:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303}],357:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -15594,7 +15278,7 @@ module.exports = Enumerable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":298,"./core/core":304,"./enumerables/ArrayEnumerable":312,"./enumerables/IteratorEnumerable":328,"./enumerables/MapEnumerable":331,"./enumerables/ObjectEnumerable":332,"./enumerables/StringEnumerable":347,"./linq-array":355,"./linq-object":356,"./linq-string":357,"babel-polyfill":1}],359:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303,"./enumerables/ArrayEnumerable":311,"./enumerables/IteratorEnumerable":327,"./enumerables/MapEnumerable":330,"./enumerables/ObjectEnumerable":331,"./enumerables/StringEnumerable":346,"./linq-array":354,"./linq-object":355,"./linq-string":356,"babel-polyfill":1}],358:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -15613,12 +15297,12 @@ module.exports = function (array) {
 	};
 };
 
-},{"./defaultEqualityComparer":362}],360:[function(require,module,exports){
+},{"./defaultEqualityComparer":361}],359:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, key) {};
 
-},{}],361:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 'use strict';
 
 var IComparable = require('./../core/IComparable');
@@ -15627,7 +15311,7 @@ module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
 
-},{"./../core/IComparable":302}],362:[function(require,module,exports){
+},{"./../core/IComparable":301}],361:[function(require,module,exports){
 'use strict';
 
 var IEquatable = require('./../core/IEquatable');
@@ -15636,56 +15320,56 @@ module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
-},{"./../core/IEquatable":303}],363:[function(require,module,exports){
+},{"./../core/IEquatable":302}],362:[function(require,module,exports){
 'use strict';
 
 module.exports = function (key, enumerable) {
   return enumerable;
 };
 
-},{}],364:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.key;
 };
 
-},{}],365:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
-},{}],366:[function(require,module,exports){
+},{}],365:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other || typeof element === 'number' && typeof other === 'number' && isNaN(element) && isNaN(other);
 };
 
-},{}],367:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element;
 };
 
-},{}],368:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other;
 };
 
-},{}],369:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.value;
 };
 
-},{}],370:[function(require,module,exports){
+},{}],369:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderBy) {
@@ -15694,7 +15378,7 @@ module.exports = function (orderBy) {
   };
 };
 
-},{}],371:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 'use strict';
 
 module.exports = function (value, comparer) {
@@ -15703,7 +15387,7 @@ module.exports = function (value, comparer) {
   };
 };
 
-},{}],372:[function(require,module,exports){
+},{}],371:[function(require,module,exports){
 'use strict';
 
 module.exports = function (array) {
@@ -15720,6 +15404,15 @@ module.exports = function (array) {
 		});
 		otherIndex = otherIndex == -1 && last ? count = count || enumerable.count() : otherIndex;
 		return elementIndex - otherIndex;
+	};
+};
+
+},{}],372:[function(require,module,exports){
+'use strict';
+
+module.exports = function (property) {
+	return function (element) {
+		return element && element[property];
 	};
 };
 
@@ -15742,6 +15435,6 @@ module.exports = function (orderByComparer, thenByComparer) {
     };
 };
 
-},{}]},{},[358])(358)
+},{}]},{},[357])(357)
 });
 //# sourceMappingURL=linq.js.map
