@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.resolve('./dist'),
-		publicPath: '/dist/',
+		publicPath: '/linqjs/dist/',
         filename: '[name].js'
     },
     module: {
