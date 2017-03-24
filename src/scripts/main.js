@@ -35,7 +35,8 @@ const router = new VueRouter({
 				}
 			]
 		}
-	]
+	],
+	base:'/linq-js'
 });
 
 const app = new Vue({
