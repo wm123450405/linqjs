@@ -1,37 +1,37 @@
 [
     {
         "code": "introduction",
-        "title": "简介"
+        "title": "Introduction"
     },
     {
         "code": "install",
-        "title": "安装"
+        "title": "Install"
     },
     {
         "code": "start",
-        "title": "开始",
+        "title": "Start",
         "children": [
             {
                 "code": "start",
-                "title": "开始"
+                "title": "Start"
             }
         ]
     },
     {
         "code": "apis",
-        "title": "API文档",
+        "title": "APIs",
         "children": [
             {
                 "code": "Enumerable",
-                "title": "Enumerable 类"
+                "title": "class Enumerable"
             },
             {
                 "code": "IEnumerable",
-                "title": "IEnumerable 类"
+                "title": "class IEnumerable"
             },
             {
                 "code": "IOrderedEnumerable",
-                "title": "IOrderedEnumerable 类"
+                "title": "class IOrderedEnumerable "
             }
         ]
     }

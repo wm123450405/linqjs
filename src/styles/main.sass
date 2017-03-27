@@ -8,26 +8,80 @@ body
 #app
 	height: 100%
 
+@media (max-width: 767px)
+	.topbar
+		position: fixed
+		z-index: 2
+		width: 100%
+	.sidebar
+		position: fixed
+		z-index: 1
+		bottom: 0
+		top: 52px
+		& + *
+			padding-left: 65px
+			padding-top: 52px
+
+.navbar
+	@media (max-width: 767px)
+		margin-bottom: 0
+
 .sidebar
-	padding-left: 30px
 	height: 100%
 	overflow: auto
-	.list-group-item
-		padding: 0
-		>a
-			padding-left: 20px
+	background: white
+	@media (max-width: 767px)
+		width: 50px
+		border-right: 1px solid rgb(231, 231, 231)
+		transition: width 0.4s
+		&.opened
+			border-right: 0
+			width: 100%
+			.panel-heading > a
+				> span
+					display: inline-block
+		&.closed
+			.list-group
+				&.collapse, &.collapsing
+					position: fixed
+					left: 50px
+					right: 0
+					top: 52px
+					bottom: 0
+					background-color: white
 		.panel
-			margin-bottom: 0
+			border: 0
+			box-shadow: 0 0
+		.panel-heading
+			background-color: transparent
+			padding: 15px 0
+			> a
+				white-space: nowrap
+				> i
+					margin-right: 10px
+				> span
+					display: none
+		.list-group
+			> .list-group-item
+				border: 0
+	@media (min-width: 768px)
+		padding-left: 30px
+	.list-group
+		.list-group-item
+			padding: 5px
+			@media (max-width: 767px)
+				padding: 5px 0
 	.panel-heading
 		a
-			.arrow
-				transform: rotateZ(90deg)
+			> i.first-word
+				border: 1px solid #337ab7
+				border-radius: 2px
+			.caret
+				transform: rotateZ(0deg)
 				transition: transform 0.3s
-				&:before
-					content: '▶'
 			&.collapsed
-				.arrow
-					transform: rotateZ(0deg)
+				.caret
+					transform: rotateZ(-90deg)
 
 pre
 	padding: 5px

@@ -1,5 +1,6 @@
 import '../styles/main.sass';
 
+import './extends';
 import routes from './routes';
 import mixin from './mixin';
 import link from '../components/lang-link.vue';
@@ -29,9 +30,8 @@ const router = new VueRouter({
 						directory: load('directory'),
 						content: load('content')
 					},
-					children: Enumerable.asEnumerable(routes)
-						.select(entry => ({ path: entry.key, component: load(entry.value) }))
-						.concat({ path: '/', component: load('introduction') }).toArray()
+					children: Enumerable.select(routes, entry => ({ path: entry.key, component: load(entry.value) }))
+						.concat({ path: '', component: load('introduction') }).toArray()
 				}
 			]
 		}

@@ -1,11 +1,11 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<router-view name="nav" class="navbar navbar-default"></router-view>
+			<router-view name="nav" class="navbar navbar-default topbar" id="topbar"></router-view>
 		</div>
 		<div class="row">
-			<router-view name="directory" class="col-xs-4 col-md-3"></router-view>
-			<router-view name="content" class="col-xs-8 col-md-9"></router-view>
+			<router-view name="directory" class="col-sm-4 col-md-3 sidebar" id="sidebar"></router-view>
+			<router-view name="content" class="col-sm-8 col-md-9"></router-view>
 		</div>
 	</div>
 </template>

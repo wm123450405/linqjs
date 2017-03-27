@@ -9,23 +9,68 @@ export default {
 			}
 		});
 	},
+	data() {
+		return {
+			promises: []
+		}
+	},
+	watch: {
+		lang() {
+			this.reload();
+		}
+	},
+	computed: {
+		lang() {
+			return this.$route.params['lang'] || 'zh-hans';
+		}
+	},
 	methods: {
+		reload() {
+			for (let promise of this.promises) {
+				let p = new Promise(promise.exec);
+				for (let callback of promise.callbacks) {
+					if (callback.success) {
+						p.then(callback.success, callback.failed);
+					} else {
+						p.catch(callback.failed);
+					}
+				}
+			}
+		},
 		getJson(names) {
 			if (typeof names === 'string' || names instanceof String) {
 				names = [names];
 			}
-			return new Promise((revolse, reject) => {
+			let load = (revolse, reject) => {
 				require.ensure([], () => {
 					try {
-						revolse && revolse(...names.map(name => require(`../resources/${ this.getLang() }/${ name }.json`)));
+						revolse && revolse(...names.map(name => require(`../resources/${ this.lang }/${ name }.json`)));
 					} catch(e) {
 						reject && reject(e);
 					}
 				})
-			});
-		},
-		getLang() {
-			return this.$route.params['lang'] || 'zh-hans';
+			};
+			let promise = new Promise(load);
+			let _then = promise.then;
+			let _catch = promise.catch;
+			promise.exec = load;
+			promise.callbacks = [];
+			promise.then = function(success, failed) {
+				this.callbacks.push({
+					success: success,
+					failed: failed
+				});
+				_then.call(this, success, failed);
+			};
+			promise.catch = function(failed) {
+				this.callbacks.push({
+					success: null,
+					failed: failed
+				});
+				_catch.call(this, failed);
+			};
+			this.promises.push(promise);
+			return promise;
 		},
 		getLanguages() {
 			return new Promise((revolse, reject) => {
