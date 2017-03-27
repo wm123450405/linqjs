@@ -1,4 +1,40 @@
 {
+    "icon": "",
     "code": "install",
-    "title": "安装"
+    "title": "安装",
+    "contents": [
+        {
+            "code": "addIn",
+            "title": "引入",
+            "details": [
+                {
+                    "type": "example",
+                    "runtime": "Node JS",
+                    "scripts": [
+                        {
+                            "type": "bash",
+                            "script": "$ npm install --save linq-js"
+                        },
+                        {
+                            "type": "javascript",
+                            "script": "const Enumerable = require('linq-js');"
+                        }
+                    ],
+                    "remarks": [
+                        "说明:本module依赖于ES6,建议项目在中使用ES6,以下案例中将均使用ES6写法"
+                    ]
+                },
+                {
+                    "type": "example",
+                    "runtime": "Bower",
+                    "scripts": [
+                        {
+                            "type": "bash",
+                            "script": "$ bower install js-linq"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }

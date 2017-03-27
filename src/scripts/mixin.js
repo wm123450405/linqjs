@@ -37,14 +37,11 @@ export default {
 				}
 			}
 		},
-		getJson(names) {
-			if (typeof names === 'string' || names instanceof String) {
-				names = [names];
-			}
+		getJson(...names) {
 			let load = (revolse, reject) => {
 				require.ensure([], () => {
 					try {
-						revolse && revolse(...names.map(name => require(`../resources/${ this.lang }/${ name }.json`)));
+						revolse && revolse(names.length === 1 ? require(`../resources/${ this.lang }/${ names[0] }.json`) : names.map(name => require(`../resources/${ this.lang }/${ name }.json`)));
 					} catch(e) {
 						reject && reject(e);
 					}

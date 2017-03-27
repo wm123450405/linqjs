@@ -11,11 +11,11 @@ body
 @media (max-width: 767px)
 	.topbar
 		position: fixed
-		z-index: 2
+		z-index: 4
 		width: 100%
 	.sidebar
 		position: fixed
-		z-index: 1
+		z-index: 3
 		bottom: 0
 		top: 52px
 		& + *
@@ -30,6 +30,39 @@ body
 	height: 100%
 	overflow: auto
 	background: white
+	.list-group
+		.list-group-item
+			padding: 5px
+			@media (max-width: 767px)
+				padding: 5px 0
+	.panel
+		border-radius: 0
+		border-bottom-width: 0
+		&:first-child
+			border-top-left-radius: 2px
+			border-top-right-radius: 2px
+		&:last-child
+			border-bottom-left-radius: 2px
+			border-bottom-right-radius: 2px
+			border-bottom-width: 1px
+		&+.panel
+			margin-top: 0
+		> .panel-heading
+			a
+				> i.first-word
+					border: 1px solid #337ab7
+					border-radius: 2px
+				.caret
+					transform: rotateZ(0deg)
+					transition: transform 0.3s
+				&.collapsed
+					.caret
+						transform: rotateZ(-90deg)
+			&+.list-group
+				> .list-group-item
+					&:first-child
+						border-top-width: 1px
+
 	@media (max-width: 767px)
 		width: 50px
 		border-right: 1px solid rgb(231, 231, 231)
@@ -37,52 +70,48 @@ body
 		&.opened
 			border-right: 0
 			width: 100%
-			.panel-heading > a
-				> span
-					display: inline-block
+			.panel
+				margin-bottom: 0
+				border-bottom-width: 1px
+				> .panel-heading > a
+					> span
+						display: inline-block
 		&.closed
-			.list-group
-				&.collapse, &.collapsing
+			.panel > .panel-heading
+				&+.list-group
 					position: fixed
 					left: 50px
 					right: 0
 					top: 52px
-					bottom: 0
+					height: auto !important
+					overflow: hidden
 					background-color: white
+					transition: bottom 0.4s
+					z-index: 1
+					&.collapse
+						bottom: 100%
+					&.collapsing
+						bottom: 100%
+						z-index: 2
+					&.collapse.in
+						bottom: 0
+					> .list-group-item:first-child
+						border-top-width: 0
 		.panel
-			border: 0
+			border-width: 0
+			margin-bottom: 1px
 			box-shadow: 0 0
-		.panel-heading
-			background-color: transparent
-			padding: 15px 0
-			> a
-				white-space: nowrap
-				> i
-					margin-right: 10px
-				> span
-					display: none
-		.list-group
-			> .list-group-item
-				border: 0
-	@media (min-width: 768px)
-		padding-left: 30px
-	.list-group
-		.list-group-item
-			padding: 5px
-			@media (max-width: 767px)
-				padding: 5px 0
-	.panel-heading
-		a
-			> i.first-word
-				border: 1px solid #337ab7
-				border-radius: 2px
-			.caret
-				transform: rotateZ(0deg)
-				transition: transform 0.3s
-			&.collapsed
-				.caret
-					transform: rotateZ(-90deg)
-
-pre
-	padding: 5px
-	background-color: #272822
+			&:last-child
+				border-bottom-width: 0
+			> .panel-heading
+				background-color: transparent
+				padding: 15px 0
+				> a
+					white-space: nowrap
+					> i
+						margin-right: 10px
+					> span
+						display: none
+				&+.list-group
+					> .list-group-item
+						padding-left: 20px

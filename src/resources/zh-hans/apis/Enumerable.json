@@ -1,0 +1,24 @@
+{
+    "title": "Enumerable类",
+    "contructors": [
+        {
+            "parameters": [ "source" ]
+        }
+    ],
+    "properties": [
+        {
+            "name": "config",
+            "static": true
+        },
+        {
+            "name": "comparers",
+            "static": true
+        }
+    ],
+    "methods": [
+        {
+            "name": "asEnumerable",
+            "parameters": []
+        }
+    ]
+}

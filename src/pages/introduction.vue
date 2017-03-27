@@ -1,5 +1,7 @@
 <template>
-    <content-template :title="data.title"></content-template>
+    <content-template :title="data.title">
+        <div v-for="content in data.contents" v-html="content"></div>
+    </content-template>
 </template>
 <script>
     export default {

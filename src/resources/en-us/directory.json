@@ -8,12 +8,12 @@
         "title": "Install"
     },
     {
-        "code": "start",
-        "title": "Start",
+        "code": "guide",
+        "title": "Guide",
         "children": [
             {
-                "code": "start",
-                "title": "Start"
+                "code": "instance",
+                "title": "Get IEnumerable instance"
             }
         ]
     },
@@ -23,15 +23,15 @@
         "children": [
             {
                 "code": "Enumerable",
-                "title": "class Enumerable"
+                "title": "Class Enumerable"
             },
             {
                 "code": "IEnumerable",
-                "title": "class IEnumerable"
+                "title": "Class IEnumerable"
             },
             {
                 "code": "IOrderedEnumerable",
-                "title": "class IOrderedEnumerable "
+                "title": "Class IOrderedEnumerable "
             }
         ]
     }

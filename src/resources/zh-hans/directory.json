@@ -8,12 +8,12 @@
         "title": "安装"
     },
     {
-        "code": "start",
-        "title": "开始",
+        "code": "guide",
+        "title": "教程",
         "children": [
             {
-                "code": "start",
-                "title": "开始"
+                "code": "instance",
+                "title": "获取IEnumerable实例"
             }
         ]
     },
