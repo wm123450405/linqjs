@@ -11,7 +11,7 @@ const getFunctionName = fun => fun.name || (getFunctionNameReg.exec(fun) || [])[
 
 const core = {
 	isDev() {
-		return typeof process !== 'undefined' && process && typeof process.env !== 'undefined' &&  process.env && typeof process.env.NODE_ENV !== 'undefined' && process.env.NODE_ENV === 'development';
+		return typeof process !== 'undefined' && process && process.env && process.env.NODE_ENV === 'development';
 	},
 	getType(value) {
 		if (typeof value === 'undefined') {
@@ -67,11 +67,13 @@ const core = {
 		},
 		get Iterator() {
 			return 'Iterator';
+		},
+		get Enumerable() {
+			return 'Enumerable';
 		}
 	},
-	isProto(value) {
-		let type = this.getType(value);
-    	return type === this.types.Array || type === this.types.String;
+	isUndefined(value) {
+		return this.getType(value) === this.types.Undefined;
 	},
 	isString(value) {
 		return this.getType(value) === this.types.String;
@@ -79,8 +81,21 @@ const core = {
 	isArray(value) {
 		return this.getType(value) === this.types.Array;
 	},
+	isSymbol(value) {
+		return this.getType(value) === this.types.Symbol;
+	},
+	isFunction(value) {
+		return this.getType(value) === this.types.Function;
+	},
 	isIterator(value) {
 		return this.getType(value).endsWith(this.types.Iterator);
+	},
+	isEnumerable(value) {
+		return this.getType(value).endsWith(this.types.Enumerable);
+	},
+	isProto(value) {
+		let type = this.getType(value);
+    	return type === this.types.Array || type === this.types.String;
 	},
 	conflict(prototype, property) {
 		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {

@@ -4,12 +4,17 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
+
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 const defaultSelector = require('./../methods/defaultSelector');
 
 class JoinEnumerable extends IEnumerable {
     constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         super(outer);
+        outerKeySelector = methods.asSelector(outerKeySelector);
+        innerKeySelector = methods.asSelector(innerKeySelector);
+        comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* JoinIterator() {
             let innerTemp = [], outerIndex = 0;
             for (let outerElement of outer) {

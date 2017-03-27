@@ -9,7 +9,7 @@ const core = require('./core/core');
 
 const getter = (original) => {
 	return function() {
-        return Enumerable.extends(original.apply(this, arguments), core.types.Array);
+        return Enumerable.extend(original.apply(this, arguments), core.types.Array);
     };
 };
 
@@ -18,7 +18,7 @@ const extendsProperties = ['keys', 'values', 'entries'];
 
 module.exports = {
 	install() {
-		Enumerable.extends(Array.prototype, core.types.Array, true);
+		Enumerable.extend(Array.prototype, core.types.Array, true);
 
 		((types, props) => {
 		    for (let type of types) {
@@ -31,7 +31,7 @@ module.exports = {
 		})(extendsTypes, extendsProperties);
 	},
 	uninstall() {
-		Enumerable.unextends(Array.prototype, core.types.Array, true);
+		Enumerable.unextend(Array.prototype, core.types.Array, true);
 
 		((types, props) => {
 		    for (let type of types) {

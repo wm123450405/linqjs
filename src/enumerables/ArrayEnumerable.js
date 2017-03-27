@@ -4,6 +4,8 @@ const IterableEnumerable = require('./IterableEnumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
+
 const defaultSelector = require('./../methods/defaultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./../methods/defaultStrictEqualityComparer');
@@ -16,6 +18,7 @@ class ArrayEnumerable extends IterableEnumerable {
         super(array);
         core.defineProperties(this, {
             indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
+                comparer = methods.asStrictEqualityComparer(comparer);
                 if (comparer === defaultStrictEqualityComparer && core.array$indexOf) {
                     return core.array$indexOf.call(array, value, start);
                 } else {
@@ -23,6 +26,7 @@ class ArrayEnumerable extends IterableEnumerable {
                 }
             },
             lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
+                comparer = methods.asStrictEqualityComparer(comparer);
                 if (comparer === defaultStrictEqualityComparer && core.array$lastIndexOf) {
                     return core.array$lastIndexOf.call(array, value, start);
                 } else {
@@ -37,6 +41,9 @@ class ArrayEnumerable extends IterableEnumerable {
                 }
             },
             join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+                outerKeySelector = methods.asSelector(outerKeySelector);
+                innerKeySelector = methods.asSelector(innerKeySelector);
+                comparer = methods.asEqualityComparer(comparer);
                 if (typeof resultSelector === 'undefined' && core.array$join) {
                     return core.array$join.call(array, inner);
                 } else {

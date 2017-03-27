@@ -8,7 +8,7 @@ class CopyWithinEnumerable extends IEnumerable {
 	constructor(source, target = 0, start = 0, end = Infinity) {
         super(source);
         if (core.isArray(source) && core.array$copyWithin) {
-            return Enumerable.extends(core.array$copyWithin.call(source, target, start, end));
+            return Enumerable.extend(core.array$copyWithin.call(source, target, start, end));
         } else {
             let iterable = { [Symbol.iterator]:source[Symbol.iterator] };
             core.setProperty(source, Symbol.iterator, function*() {

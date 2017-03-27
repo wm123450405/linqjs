@@ -1,3 +1,10 @@
 'use strict';
 
-module.exports = (value, comparer) => (element, index) => comparer(element, value);
+const defaultEqualityComparer = require('./defaultEqualityComparer');
+
+module.exports = (value, comparer = defaultEqualityComparer) => {
+	comparer = methods.asEqualityComparer(comparer);
+	return (element, index) => comparer(element, value);
+};
+
+const methods = require('./methods');

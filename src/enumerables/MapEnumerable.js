@@ -4,6 +4,8 @@ const IMapEnumerable = require('./IMapEnumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
+
 const defaultSameComparer = require('./../methods/defaultSameComparer');
 const equalityPredicate = require('./../methods/equalityPredicate');
 
@@ -19,6 +21,7 @@ class MapEnumerable extends IMapEnumerable {
         });
         core.defineProperties(this, {
             get(key, comparer = defaultSameComparer) {
+                comparer = methods.asSameComparer(comparer);
                 if (comparer === defaultSameComparer) {
                     return map.get(key);
                 } else {
@@ -26,6 +29,7 @@ class MapEnumerable extends IMapEnumerable {
                 }
             },
             set(key, value, comparer = defaultSameComparer) {
+                comparer = methods.asSameComparer(comparer);
                 if (comparer === defaultSameComparer) {
                     map.set(key, value);
                 } else {
@@ -34,6 +38,7 @@ class MapEnumerable extends IMapEnumerable {
                 return this;
             },
             has(key, comparer = defaultSameComparer) {
+                comparer = methods.asSameComparer(comparer);
                 if (comparer === defaultSameComparer) {
                     return map.has(key);
                 } else {
@@ -41,6 +46,7 @@ class MapEnumerable extends IMapEnumerable {
                 }
             },
             delete(key, comparer = defaultSameComparer) {
+                comparer = methods.asSameComparer(comparer);
                 if (comparer === defaultSameComparer) {
                     return map.delete(key);
                 } else {

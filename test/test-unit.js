@@ -6,7 +6,60 @@ module.exports = function(Enumerable) {
 		c = 'c',
 		d = 'd',
 		e = 'e',
-		f = 'f';
+		f = 'f',
+		u = undefined;
+	const oba = {
+			key: a,
+			value: a
+		},
+		obb = {
+			key: b,
+			value: b
+		},
+		obc = {
+			key: c,
+			value: c
+		},
+		obd = {
+			key: d,
+			value: d
+		},
+		obe = {
+			key: e,
+			value: e
+		},
+		obf = {
+			key: f,
+			value: f
+		},
+		obu = {
+			key: u,
+			value: u
+		};
+	const ob1 = {
+			id: 1,
+			value: 1
+		},
+		ob2 = {
+			id: 2,
+			value: 2
+		},
+		ob3 = {
+			id: 3,
+			value: 3
+		},
+		ob4 = {
+			id: 4,
+			value: 4
+		},
+		ob5 = {
+			id: 5,
+			value: 5
+		},
+		ob6 = {
+			id: 6,
+			value: 6
+		};
 	const OutOfRangeException = Enumerable.exceptions.OutOfRangeException;
 	const NoSuchElementsException = Enumerable.exceptions.NoSuchElementsException;
 	const TooManyElementsException = Enumerable.exceptions.TooManyElementsException;
@@ -21,21 +74,28 @@ module.exports = function(Enumerable) {
 	//select
 	assert.deepStrictEqual(Enumerable.select([a, b, c]).toArray(), [a, b, c]);
 	assert.deepStrictEqual(Enumerable.select([a, b, c], v => v + v).toArray(), ['aa', 'bb', 'cc']);
+	assert.deepStrictEqual(Enumerable.select([oba, obb, obc], 'key').toArray(), [a, b, c]);
 	//where
 	assert.deepStrictEqual(Enumerable.where([0, 1, 2, 3, 4, 5]).toArray(), [0, 1, 2, 3, 4, 5]);
 	assert.deepStrictEqual(Enumerable.where([0, 1, 2, 3, 4, 5], v => v % 2 === 0).toArray(), [0, 2, 4]);
+	assert.deepStrictEqual(Enumerable.where([oba, obb, obc, obu], 'key').select('value').toArray(), [a, b, c]);
+	assert.deepStrictEqual(Enumerable.where([oba, obb, obc, obu], Enumerable.predicates.not('key')).select('value').toArray(), [u]);
 	//any
 	assert.isStrictTrue(Enumerable.any([a, b, c], v => v === b));
+	assert.isStrictTrue(Enumerable.any([oba, obb, obc, obu], Enumerable.predicates.not(Enumerable.predicates.selector('key'))));
 	//all
 	assert.isStrictFalse(Enumerable.all([a, b, c], v => v === b));
+	assert.isStrictFalse(Enumerable.all([oba, obb, obc, obu], 'key'));
 	//sum
 	assert.strictEqual(Enumerable.sum([1, 2, 3]), 6);
 	assert.strictEqual(Enumerable.sum([1, 2, 3, 4], v => v * v), 30);
 	assert.isStrictNaN(Enumerable.sum([a, b, c]), NaN);
+	assert.strictEqual(Enumerable.sum([ob1, ob2, ob3, ob4], 'value'), 10);
 	//average
 	assert.strictEqual(Enumerable.average([1, 2, 3]), 2);
 	assert.strictEqual(Enumerable.average([1, 2, 3, 4], v => v * v), 7.5);
 	assert.isStrictNaN(Enumerable.average([a, b, c]), NaN);
+	assert.strictEqual(Enumerable.average([ob1, ob2, ob3, ob4], 'value'), 2.5);
 	//aggregate
 	assert.strictEqual(Enumerable.aggregate([4, 3, 2, 1], 5, (seed, v) => seed + v), 15);
 	assert.strictEqual(Enumerable.aggregate([4, 3, 2, 1], 5, (seed, v) => seed + v, r => r * 2), 30);
@@ -43,19 +103,27 @@ module.exports = function(Enumerable) {
 	assert.strictEqual(Enumerable.max([5, 7, 3, 1, 9]), 9);
 	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v), '-d');
 	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element == other ? 0 : 1), '-a');
+	assert.strictEqual(Enumerable.max([obb, obc, obd, oba], 'value'), d);
+	assert.strictEqual(Enumerable.max([obb, obc, obd, oba], '', 'key').value, d);
 	//min
 	assert.strictEqual(Enumerable.min([5, 7, 3, 1, 9]), 1);
 	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v), '-a');
 	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element == other ? 0 : 1), '-d');
+	assert.strictEqual(Enumerable.min([obb, obc, obd, oba], 'value'), a);
+	assert.strictEqual(Enumerable.min([obb, obc, obd, oba], '', 'key').value, a);
 	//concat
 	assert.deepStrictEqual(Enumerable.concat([a, b], [d, e]).toArray(), [a, b, d, e]);
 	//contains
 	assert.isStrictTrue(Enumerable.contains([a, b, c, d], c));
 	assert.isStrictFalse(Enumerable.contains([1, 2, 3, 4, 5], 6));
 	assert.isStrictTrue(Enumerable.contains([1, 2, 3, 4, 5], 6, (element, value) => element === value % 4));
+	assert.isStrictTrue(Enumerable.contains([ob1, ob2, ob3, ob4], {
+		id: 1
+	}, 'id'));
 	//count
 	assert.strictEqual(Enumerable.count([1, 2, 3, 4, 5]), 5);
 	assert.strictEqual(Enumerable.count([1, 2, 3, 4, 5], element => element % 2 == 0), 2);
+	assert.strictEqual(Enumerable.count([ob1, ob2, ob3, ob4, obu], 'value'), 4);
 	//defaultIfEmpty
 	assert.deepStrictEqual(Enumerable.defaultIfEmpty([], a).toArray(), [a]);
 	assert.deepStrictEqual(Enumerable.defaultIfEmpty([a, b], a).toArray(), [a, b]);
@@ -128,6 +196,7 @@ module.exports = function(Enumerable) {
 	assert.deepStrictEqual(Enumerable.orderBy([d, a, c, b]).toArray(), [a, b, c, d]);
 	assert.deepStrictEqual(Enumerable.orderBy([d, a, c, b], v => v + v).toArray(), [a, b, c, d]);
 	assert.deepStrictEqual(Enumerable.orderBy([d, a, c, b], v => v + v, (element, other) => element > other ? -1 : element == other ? 0 : 1).toArray(), [d, c, b, a]);
+	assert.deepStrictEqual(Enumerable.orderBy([d, a, e, c, f, b], '', [c, b, d]).toArray(), [a, e, f, c, b, d]);
 	//orderByDescending
 	assert.deepStrictEqual(Enumerable.orderByDescending([d, a, c, b]).toArray(), [d, c, b, a]);
 	assert.deepStrictEqual(Enumerable.orderByDescending([d, a, c, b], v => v + v).toArray(), [d, c, b, a]);

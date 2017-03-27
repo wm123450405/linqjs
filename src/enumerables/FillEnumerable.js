@@ -8,7 +8,7 @@ class FillEnumerable extends IEnumerable {
 	constructor(source, value, start = 0, end = Infinity) {
         super(source);
         if (core.isArray(source) && core.array$fill) {
-            return Enumerable.extends(core.array$fill.call(source, value, start, end));
+            return Enumerable.extend(core.array$fill.call(source, value, start, end));
         } else {
             let iterable = { [Symbol.iterator]:source[Symbol.iterator] };
             core.setProperty(source, Symbol.iterator, function*() {

@@ -64,7 +64,7 @@ function toArray():Array;
 #### 3. `select(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb534869(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534869(v=vs.110).aspx)*
 ```typescript
 function select(
-    selector:Function = defaultSelector
+    selector:Function || String || Symbol = defaultSelector
 ):IEnumerable,
 
     selector(element:any, index:number):any;
@@ -78,7 +78,7 @@ function select(
 #### 4. `where(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549418(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549418(v=vs.110).aspx)*
 ```typescript
 function where(
-    predicate:Function = defaultPredicate
+    predicate:Function || String || Symbol = defaultPredicate
 ):IEnumerable,
 
     predicate(element:any, index:number):boolean;
@@ -120,7 +120,7 @@ function all(
 #### 7. `sum(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb549046(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549046(v=vs.110).aspx)*
 ```typescript
 function sum(
-	selector:Function = defaultSelector
+	selector:Function || String || Symbol = defaultSelector
 ):number,
 
 	selector(element:any, index:number):number;
@@ -134,7 +134,7 @@ function sum(
 #### 8. `average(selector)` :*[see](https://msdn.microsoft.com/en-us/library/bb549067(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549067(v=vs.110).aspx)*
 ```typescript
 function average(
-	selector:Function = defaultSelector
+	selector:Function || String || Symbol = defaultSelector
 ):number,
 
 	selector(element:any, index:number):number;
@@ -150,7 +150,7 @@ function average(
 function aggregate(
 	seed:any,
 	func:Function,
-	resultSelector:Function = defaultSelector
+	resultSelector:Function || String || Symbol = defaultSelector
 ):any,
 
 	func(seed:any, element:any, index:number):any,
@@ -165,8 +165,8 @@ function aggregate(
 #### 10. `max(selector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548659(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548659(v=vs.110).aspx)*
 ```typescript
 function max(
-	selector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	selector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):any,
 	
 	selector(element:any, index:number):number,
@@ -181,8 +181,8 @@ function max(
 #### 11. `min(selector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548779(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548779(v=vs.110).aspx)*
 ```typescript
 function min(
-	selector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	selector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):any,
 	
 	selector(element:any, index:number):number,
@@ -211,7 +211,7 @@ function concat(
 ```typescript
 function contains(
 	value:any, 
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):boolean,
 
 	comparer(element:any, other:any):boolean;
@@ -220,7 +220,7 @@ function contains(
 #### 14. `count(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535181(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/en-us/library/bb535181(v=vs.110).aspx)*
 ```typescript
 function count(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):number,
 
 	predicate(element:any, index:number):boolean;
@@ -241,7 +241,7 @@ function defaultIfEmpty(
 #### 16. `distinct(comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb338049(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb338049(v=vs.110).aspx)*
 ```typescript
 function distinct(
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
 	comparer(element:any, other:any):boolean;
@@ -251,7 +251,7 @@ function distinct(
 ```typescript
 function except(
 	other:IEnumerable,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
 	comparer(element:any, other:any):boolean;
@@ -261,7 +261,7 @@ function except(
 ```typescript
 function union(
 	other:IEnumerable,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
 	comparer(element:any, other:any):boolean;
@@ -271,7 +271,7 @@ function union(
 ```typescript
 function intersect(
 	other:IEnumerable,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
 	comparer(element:any, other:any):boolean;
@@ -295,7 +295,7 @@ function elementAtOrDefault(
 #### 22. `first(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535050(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535050(v=vs.110).aspx)*
 ```typescript
 function first(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -305,7 +305,7 @@ function first(
 ```typescript
 function firstOrDefault(
 	defaultValue:any,
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -314,7 +314,7 @@ function firstOrDefault(
 #### 24. `last(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549138(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549138(v=vs.110).aspx)*
 ```typescript
 function last(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -324,7 +324,7 @@ function last(
 ```typescript
 function lastOrDefault(
 	defaultValue:any,
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -333,7 +333,7 @@ function lastOrDefault(
 #### 26. `single(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb535118(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535118(v=vs.110).aspx)*
 ```typescript
 function single(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -343,7 +343,7 @@ function single(
 ```typescript
 function singleOrDefault(
 	defaultValue:any,
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):any,
 
 	predicate(element:any, index:number):boolean;
@@ -390,7 +390,7 @@ function reverse():IEnumerable;
 ```typescript
 function sequenceEqual(
 	other:IEnumerable,
-	comparer:Function = defaultEqualityComparer
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):boolean,
 
 	comparer(element:any, other:any):boolean;
@@ -411,7 +411,7 @@ function skip(
 #### 33. `skipWhile(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb549288(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549288(v=vs.110).aspx)*
 ```typescript
 function skipWhile(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):IEnumerable,
 
 	predicate(element:any, index:number):boolean;
@@ -432,7 +432,7 @@ function take(
 #### 34. `takeWhile(predicate)` :*[see](https://msdn.microsoft.com/en-us/library/bb503062(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb503062(v=vs.110).aspx)*
 ```typescript
 function takeWhile(
-	predicate:Function = defaultPredicate
+	predicate:Function || String || Symbol = defaultPredicate
 ):IEnumerable,
 
 	predicate(element:any, index:number):boolean;
@@ -451,9 +451,9 @@ function zip(
 #### 36. `toDictionary(keySelector, elementSelector, comparer)`
 ```typescript
 function toDictionary(
-	keySelector:Function = defaultSelector,
-	valueSelector:Function = defaultSelector,
-	comparer:Function = defaultSameComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	valueSelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultSameComparer
 ):Dictionary,
 
 	keySelector(element:any, index:number):any,
@@ -464,9 +464,9 @@ function toDictionary(
 #### 37. `toLookup(keySelector, elementSelector, comparer)`
 ```typescript
 function toLookup(
-	keySelector:Function = defaultSelector,
-	valueSelector:Function = defaultSelector,
-	comparer:Function = defaultSameComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	valueSelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultSameComparer
 ):Lookup,
 
 	keySelector(element:any, index:number):any,
@@ -477,9 +477,9 @@ function toLookup(
 #### 38. `toObject(keySelector, elementSelector, comparer)`
 ```typescript
 function toObject(
-	keySelector:Function = defaultKeySelector,
-	valueSelector:Function = defaultValueSelector,
-	comparer:Function = defaultSameComparer
+	keySelector:Function || String || Symbol = defaultKeySelector,
+	valueSelector:Function || String || Symbol = defaultValueSelector,
+	comparer:Function || String || Symbol = defaultSameComparer
 ):any,
 
 	keySelector(element:any, index:number):string,
@@ -490,8 +490,8 @@ function toObject(
 #### 39. `orderBy(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb549422(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb549422(v=vs.110).aspx)*
 ```typescript
 function orderBy(
-	keySelector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):IOrderedEnumerable,
 
 	keySelector(element:any, index:number):any,
@@ -501,8 +501,8 @@ function orderBy(
 #### 40. `orderByDescending(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb548916(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb548916(v=vs.110).aspx)*
 ```typescript
 function orderByDescending(
-	keySelector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):IOrderedEnumerable,
 
 	keySelector(element:any, index:number):any,
@@ -514,9 +514,9 @@ function orderByDescending(
 function join(
 	inner:IEnumerable,
 	resultSelector:Function,
-	outerKeySelector:Function = defaultSelector,
-	innerKeySelector:Function = defaultSelector,
-	comparer:Function = defaultEqualityComparer
+	outerKeySelector:Function || String || Symbol = defaultSelector,
+	innerKeySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable
 
 	resultSelector(element:any, other:any):any,
@@ -528,10 +528,10 @@ function join(
 #### 42. `groupBy(keySelector, elementSelector, resultSelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb535049(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535049(v=vs.110).aspx)*
 ```typescript
 function groupBy(
-	keySelector:Function = defaultSelector, 
-	elementSelector:Function = defaultSelector, 
-	resultSelector:Function = defaultGroupResultSelector, 
-	comparer:Function = defaultEqualityComparer
+	keySelector:Function || String || Symbol = defaultSelector, 
+	elementSelector:Function || String || Symbol = defaultSelector, 
+	resultSelector:Function || String || Symbol = defaultGroupResultSelector, 
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
 	keySelector(element:any, index:number):any,
@@ -543,8 +543,8 @@ function groupBy(
 #### 43. `selectMany(collectionSelector, resultSelector)` :*[see](https://msdn.microsoft.com/en-us/library/bb534732(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534732(v=vs.110).aspx)*
 ```typescript
 function selectMany(
-	collectionSelector:Function = defaultSelector,
-	resultSelector:Function = defaultSelector
+	collectionSelector:Function || String || Symbol = defaultSelector,
+	resultSelector:Function || String || Symbol = defaultSelector
 ):IEnumerable,
 
 	collectionSelector(element:any, index:number):any,
@@ -556,9 +556,9 @@ function selectMany(
 function groupJoin(
 	inner:IEnumerable,
 	resultSelector:Function,
-	outerKeySelector:Function = defaultSelector,
-	innerKeySelector:Function = defaultSelector,
-	comparer:Function = defaultEqualityComparer
+	outerKeySelector:Function || String || Symbol = defaultSelector,
+	innerKeySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable
 
 	resultSelector(element:any, grouping:IGrouping):any,
@@ -667,7 +667,7 @@ function includes(
 function indexOf(
 	element:any,
 	start:number = 0,
-	comparer:Function = defaultStrictEqualityComparer
+	comparer:Function || String || Symbol = defaultStrictEqualityComparer
 ):number,
 
 	comparer(element:any, other:any):boolean;
@@ -678,7 +678,7 @@ function indexOf(
 function lastIndexOf(
 	element:any,
 	start:number = 0,
-	comparer:Function = defaultStrictEqualityComparer
+	comparer:Function || String || Symbol = defaultStrictEqualityComparer
 ):number,
 
 	comparer(element:any, other:any):boolean;
@@ -746,7 +746,7 @@ function some(
 #### 63. `sort(comparer)` :*[see](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Sort)* :*[参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Sort)*
 ```typescript
 function sort(
-	comparer:Function = defaultComparer
+	comparer:Function || String || Symbol = defaultComparer
 ):IEnumerable,
 
 	comparer(element:any, other:any):number;
@@ -793,8 +793,8 @@ function shift():any;
 #### 1. `thenBy(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb534500(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534500(v=vs.110).aspx)*
 ```typescript
 function thenBy(
-	keySelector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):IOrderedEnumerable,
 
 	keySelector(element:any, index:number):any,
@@ -804,8 +804,8 @@ function thenBy(
 #### 2. `thenByDescending(keySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb534489(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb534489(v=vs.110).aspx)*
 ```typescript
 function thenByDescending(
-	keySelector:Function = defaultSelector,
-	comparer:Function = defaultComparer
+	keySelector:Function || String || Symbol = defaultSelector,
+	comparer:Function || String || Symbol = defaultComparer
 ):IOrderedEnumerable,
 
 	keySelector(element:any, index:number):any,
@@ -861,7 +861,7 @@ class Dictionary extends IMapEnumerable { };
 ```typescript
 function get(
 	key:any,
-	comparer:Function = defaultSameComparer
+	comparer:Function || String || Symbol = defaultSameComparer
 ):any,
 
 	comparer(element:any, other:any):boolean;
@@ -872,7 +872,7 @@ function get(
 function set(
 	key:any,
 	value:any
-	comparer:Function = defaultSameComparer
+	comparer:Function || String || Symbol = defaultSameComparer
 ):Dictionary,
 
 	comparer(element:any, other:any):boolean;
@@ -882,7 +882,7 @@ function set(
 ```typescript
 function has(
 	key:any,
-	comparer:Function = defaultSameComparer
+	comparer:Function || String || Symbol = defaultSameComparer
 ):boolean,
 
 	comparer(element:any, other:any):boolean;
@@ -892,7 +892,7 @@ function has(
 ```typescript
 function delete(
 	key:any,
-	comparer:Function = defaultSameComparer
+	comparer:Function || String || Symbol = defaultSameComparer
 ):boolean,
 
 	comparer(element:any, other:any):boolean;
@@ -984,7 +984,7 @@ function addPlugins(
 function Enumerable.comparers.array(
 	array:array, // 表示值的顺序的数组
 	last:boolean = false, // 表示配备不到的元素将作为正序的最末端还是最前端,默认最前端
-	comparer:Function = defaultEqualityComparer // 用于查找对比
+	comparer:Function || String || Symbol = defaultEqualityComparer // 用于查找对比
 ):Function, // comparer
 
 	comparer(element:any, other:any):boolean;
@@ -1042,10 +1042,78 @@ function Enumerable.selectors.property(
 ):Function; // selector
 ```
 
-#### 16. `predicates:default` [*defaultPredicate*]
-#### 17. `actions:default` [*defaultAction*]
+#### 16. `predicates.default` [*defaultPredicate*]
+#### 17. `predicates.exists` [*defaultExistsPredicate*]
+
+#### 18. `predicates.regexp(regexp, keySelector)` :+1:
+```typescript
+function Enumerable.predicates.regexp(
+	regexp:RegExp, // 用于校验的正则表达式
+	keySelector:Function || String || Symbol = defaultSelector // 用于映射对象值与正则表达式进行校验的选择函数
+):Function, // predicate
+
+	keySelector(element:any, index:number):any;
+```
+
+#### 19. `predicates.not(predicate)` :+1:
+```typescript
+function Enumerable.predicates.not(
+	predicate:Function || String || Symbol = defaultExistsPredicate
+):Function, // predicate
+
+	predicate(element:any, index:number):boolean;
+```
+
+#### 19. `predicates.selector(selector, predicate)` :+1:
+```typescript
+function Enumerable.predicates.selector(
+	selector:Function || String || Symbol,
+	predicate:Function || String || Symbol = defaultExistsPredicate
+):Function, // predicate
+
+	selector(element:any, index:number):any,
+	predicate(element:any, index:number):boolean;
+```
+
+#### 20. `predicates.equality(value, comparer)` :+1:
+```typescript
+function Enumerable.predicates.equality(
+	value:any,
+	comparer:Function || String || Symbol = defaultEqualityComparer
+):Function, // predicate
+
+	comparer(element:any, index:number):boolean;
+```
+
+#### 21. `predicates.strict(value)` :+1:
+```typescript
+function Enumerable.predicates.strict(
+	value:any
+):Function; // predicate
+```
+
+#### 22. `predicates.same(value)` :+1:
+```typescript
+function Enumerable.predicates.same(
+	value:any
+):Function; // predicate
+```
+
+#### 23. `actions:default` [*defaultAction*]
 
 ## Change list 更新日志
+
+### 2017-03-27 v2.1.15
+
+	优化了部分代码结构
+	新增 对 arrayComparer 的默认支持
+	新增了 对绝大部分 selector, predicate, comparer 参数校验
+	新增 绝大部分的 selector, predicate, comparer 参数均支持 String 或 Symbol 类型数据 表示选择对象对应的字段 的功能
+	新增 Enumerable.predicates.exists 属性, 表示非空筛选器
+	新增 Enumerable.predicates.regexp 方法, 生成正则匹配的筛选器
+	新增 Enumerable.predicates.not 方法, 生成逻辑非筛选器
+	新增 Enumerable.predicates.selector 方法, 生成选择筛选器
+	新增 Enumerable.predicates.equality, Enumerable.predicates.strict, Enumerable.predicates.same 方法, 生成比较筛选器
 
 ### 2017-03-24 v2.1.14
 

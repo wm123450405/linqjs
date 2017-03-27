@@ -4,6 +4,8 @@ const IterableEnumerable = require('./IterableEnumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
+
 const defaultStrictEqualityComparer = require('./../methods/defaultStrictEqualityComparer');
 
 const Enumerable = require('./../Enumerable');
@@ -13,6 +15,7 @@ class StringEnumerable extends IterableEnumerable {
         super(string);
         core.defineProperties(this, {
             indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
+                comparer = methods.asStrictEqualityComparer(comparer);
                 if (comparer === defaultStrictEqualityComparer && core.string$indexOf) {
                     return core.string$indexOf.call(string, value, start);
                 } else {
@@ -20,6 +23,7 @@ class StringEnumerable extends IterableEnumerable {
                 }
             },
             lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
+                comparer = methods.asStrictEqualityComparer(comparer);
                 if (comparer === defaultStrictEqualityComparer && core.string$lastIndexOf) {
                     return core.string$lastIndexOf.call(string, value, start);
                 } else {

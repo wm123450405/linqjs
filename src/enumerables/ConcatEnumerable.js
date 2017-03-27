@@ -4,8 +4,6 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
-let id = '';
-
 class ConcatEnumerable extends IEnumerable {
     constructor(source, ...others) {
         super(source);

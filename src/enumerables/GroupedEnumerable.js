@@ -4,6 +4,8 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
+
 const Enumerable = require('./../Enumerable');
 
 const defaultSelector = require('./../methods/defaultSelector');
@@ -16,6 +18,10 @@ const IGrouping = require('./IGrouping');
 class GroupedEnumerable extends IEnumerable {
     constructor(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
         super(source);
+        keySelector = methods.asSelector(keySelector);
+        elementSelector = methods.asSelector(elementSelector);
+        resultSelector = methods.asSelector(resultSelector);
+        comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* GroupedIterator() {
             let groupings = [];
             let iterators = new Map();
