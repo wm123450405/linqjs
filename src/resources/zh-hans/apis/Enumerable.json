@@ -1,24 +1,53 @@
 {
     "title": "Enumerable类",
-    "contructors": [
+    "name": "Enumerable",
+    "type": "class",
+    "extends": [],
+    "implements": [],
+    "constructors": [
         {
-            "parameters": [ "source" ]
+            "parameters": [
+                {
+                    "name": "source",
+                    "types": [ "any" ]
+                }
+            ],
+            "since": "2.1.15",
+            "returns": "IEnumerable",
+            "newInstance": "cannot",
+            "description": "创建一个 IEnumerable 对象"
         }
     ],
     "properties": [
         {
             "name": "config",
-            "static": true
+            "type": "object",
+            "static": true,
+            "since": "2.1.15"
         },
         {
             "name": "comparers",
-            "static": true
+            "type": "object",
+            "static": true,
+            "since": "2.1.15"
         }
     ],
     "methods": [
         {
             "name": "asEnumerable",
-            "parameters": []
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "source",
+                            "types": [ "any" ]
+                        }
+                    ],
+                    "returns": "IEnumerable",
+                    "since": "2.1.15",
+                    "static": true
+                }
+            ]
         }
     ]
 }

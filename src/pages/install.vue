@@ -1,10 +1,10 @@
 <template>
 	<content-template :title="data.title">
 		<div v-for="(content,index) in data.contents">
-			<h3>{{ index + 1 }}. {{ content.title }}</h3>
+			<h3>{{ index + 1 }}. {{ content.title }}<mark-link v-if="content.code" :id="content.code"></mark-link></h3>
 			<div v-for="detail in content.details" style="padding-left: 20px">
 				<div v-if="detail.type === 'example'">
-					<h4>{{ detail.runtime }}:</h4>
+					<h4 v-if="detail.runtime">{{ detail.runtime }}:</h4>
 					<div v-for="description in detail.descriptions" v-html="description" class="text-success"></div>
 					<div v-for="script in detail.scripts">
 						<div v-for="description in script.descriptions" v-html="description" class="text-success"></div>

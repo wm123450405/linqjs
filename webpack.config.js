@@ -15,7 +15,17 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, './src/scripts') },
-            { test: /\.vue$/, loader: 'vue-loader', include: [ path.join(__dirname, './src/pages'), path.join(__dirname, './src/components')] },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                include: [ path.join(__dirname, './src/pages'), path.join(__dirname, './src/components')],
+				options: {
+					loaders: {
+						scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
+						sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
+					}
+				}
+            },
 			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, './src/resources') },
             { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, './src/styles') },
             { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, './src/styles') },

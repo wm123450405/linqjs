@@ -3,15 +3,16 @@ import '../styles/main.sass';
 import './extends';
 import routes from './routes';
 import mixin from './mixin';
-import link from '../components/lang-link.vue';
-import content from '../components/content-template.vue';
+import components from './components';
 
 const load = page => resolve => require([`../pages/${page}.vue`], resolve);
 
 Vue.use(VueRouter);
 Vue.mixin(mixin);
-Vue.component('lang-link', link);
-Vue.component('content-template', content);
+
+for (let component of components) {
+	Vue.component(component, require(`../components/${ component }.vue`));
+}
 
 const router = new VueRouter({
 	routes: [

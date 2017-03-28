@@ -16,7 +16,7 @@
 						{{ language.name }} <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li v-for="language in languages" v-if="lang !== language.code"><router-link :to="`/${ language.code }/${ path }`">{{ language.name }}</router-link></li>
+						<li v-for="language in languages" v-if="lang !== language.code"><router-link :to="`/${ language.code }/${ path }${ $route.hash }`">{{ language.name }}</router-link></li>
 					</ul>
 				</li>
 			</ul>

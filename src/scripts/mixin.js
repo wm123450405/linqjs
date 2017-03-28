@@ -24,7 +24,20 @@ export default {
 			return this.$route.params['lang'] || 'zh-hans';
 		}
 	},
+	mounted() {
+		if (this.$route && this.$route.hash) {
+			this.$nextTick(() => {
+				let scrollTo = $(this.$el);
+				if (scrollTo.is(this.$route.hash)) {
+					setTimeout(() => $(document).scrollTop(scrollTo.offset().top));
+				}
+			});
+		}
+	},
 	methods: {
+		isKeyword(type) {
+			return /^[a-z]/.test(type);
+		},
 		reload() {
 			for (let promise of this.promises) {
 				let p = new Promise(promise.exec);

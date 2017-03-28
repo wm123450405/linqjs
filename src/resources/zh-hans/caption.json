@@ -1,0 +1,21 @@
+{
+    "class": "类",
+    "constructor": "构造方法",
+    "constructors": "构造方法",
+    "property": "属性",
+    "properties": "属性",
+    "method": "方法",
+    "methods": "方法",
+    "since": "最低版本",
+    "details": "详情",
+    "description": "描述",
+    "summary": "摘要",
+    "warning": "注意",
+    "remark": "备注",
+    "static": "静态的",
+    "newInstance": {
+        "only": "只能使用new运算符",
+        "both": "可以使用new运算符,也可以直接调用",
+        "cannot": "不能使用new运算符"
+    }
+}
