@@ -1,5 +1,5 @@
 <template>
-    <a :href="`#${ $route.path }#${ to }`" @click="scrollTo"><slot></slot></a>
+    <a :href="`#${ $route.path }#${ to }`" @click="scrollById"><slot></slot></a>
 </template>
 <script>
     export default {
@@ -7,8 +7,8 @@
     		to: String
         },
         methods: {
-    		scrollTo() {
-				setTimeout(() => $(document).scrollTop($('#' + this.to).offset().top));
+    		scrollById() {
+    			this.scrollTo($('#' + this.to));
             }
         }
     }

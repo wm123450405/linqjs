@@ -1,6 +1,6 @@
 <template>
     <content-template :title="data.title">
-        <div v-for="content in data.contents" v-html="content"></div>
+        <p v-for="content in data.contents" v-html="content" class="captialize"></p>
     </content-template>
 </template>
 <script>

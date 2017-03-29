@@ -11,6 +11,7 @@ export default {
 	},
 	data() {
 		return {
+			defaultLang: 'zh-hans',
 			promises: []
 		}
 	},
@@ -21,7 +22,7 @@ export default {
 	},
 	computed: {
 		lang() {
-			return this.$route.params['lang'] || 'zh-hans';
+			return this.$route.params['lang'] || this.defaultLang;
 		}
 	},
 	mounted() {
@@ -29,12 +30,19 @@ export default {
 			this.$nextTick(() => {
 				let scrollTo = $(this.$el);
 				if (scrollTo.is(this.$route.hash)) {
-					setTimeout(() => $(document).scrollTop(scrollTo.offset().top));
+					this.scrollTo(scrollTo);
 				}
 			});
 		}
 	},
 	methods: {
+		scrollTo(scrollTo) {
+			setTimeout(() => {
+				$('.activatable').removeClass('active');
+				let fixed = $('#topbar').css('position') === 'fixed' ? 50 : 0;
+				$(document).scrollTop(scrollTo.closest('.activatable').addClass('active').offset().top - fixed - 10);
+			});
+		},
 		isKeyword(type) {
 			return /^[a-z]/.test(type);
 		},
@@ -54,11 +62,25 @@ export default {
 			let load = (revolse, reject) => {
 				require.ensure([], () => {
 					try {
-						revolse && revolse(names.length === 1 ? require(`../resources/${ this.lang }/${ names[0] }.json`) : names.map(name => require(`../resources/${ this.lang }/${ name }.json`)));
+						let results = names.map(name => {
+							let defaultLang = { }, lang = { };
+							try {
+								defaultLang = require(`../resources/${ this.defaultLang }/${ name }.json`);
+							} catch (e) { }
+							try {
+								lang = require(`../resources/${ this.lang }/${ name }.json`);
+							} catch (e) { }
+							return $.extend(true, {}, defaultLang, lang);
+						});
+						if (results.length === 1) {
+							revolse && revolse(results[0]);
+						} else {
+							revolse && revolse(results);
+						}
 					} catch(e) {
 						reject && reject(e);
 					}
-				})
+				});
 			};
 			let promise = new Promise(load);
 			let _then = promise.then;
@@ -84,13 +106,11 @@ export default {
 		},
 		getLanguages() {
 			return new Promise((revolse, reject) => {
-				require.ensure([], () => {
-					try {
-						revolse && revolse(require(`../resources/lang.json`));
-					} catch(e) {
-						reject && reject(e);
-					}
-				})
+				try {
+					revolse && revolse(require(`../resources/lang.json`));
+				} catch(e) {
+					reject && reject(e);
+				}
 			});
 		}
 	}

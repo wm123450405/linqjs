@@ -10,15 +10,16 @@ module.exports = {
     output: {
         path: path.resolve('./dist'),
 		publicPath: '/linqjs/dist/',
-        filename: '[name].js'
-    },
+        filename: '[name].js',
+		chunkFilename: '[name].js'
+	},
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, './src/scripts') },
+            { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, 'src', 'scripts') },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                include: [ path.join(__dirname, './src/pages'), path.join(__dirname, './src/components')],
+                include: [ path.join(__dirname, './src/pages'), path.join(__dirname, 'src', 'components')],
 				options: {
 					loaders: {
 						scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
@@ -26,10 +27,10 @@ module.exports = {
 					}
 				}
             },
-			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, './src/resources') },
-            { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, './src/styles') },
-            { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, './src/styles') },
-            { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'url-loader?limit=40960', include: [ path.join(__dirname, './src'), path.join(__dirname, './node_modules') ] }
+			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, 'src', 'resources') },
+            { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, 'src', 'styles') },
+            { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, 'src', 'styles') },
+            { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'url-loader?limit=40960', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'node_modules') ] }
         ]
     },
     devServer: {
@@ -39,7 +40,7 @@ module.exports = {
         contentBase: path.resolve('./')
     },
     resolve: {
-        extensions: ['.js', '.json', '.less', '.vue'],
+        extensions: ['.js', '.json', '.sass', '.vue'],
         alias: {
             'vue': 'vue/dist/vue.common',
             'vue-router': 'vue-router/dist/vue-router.common'

@@ -1,0 +1,107 @@
+{
+    "title": "IEnumerable接口",
+    "name": "IEnumerable",
+    "type": "interface",
+    "extends": [ "Array" ],
+    "implements": [],
+    "properties": [
+        {
+            "name": "length",
+            "type": "number",
+            "since": "2.1.15",
+            "description": "所包含的元素个数",
+            "sees": [
+                {
+                    "title": "IEnumerable.prototype.size",
+                    "href": "size",
+                    "mark": true
+                }
+            ]
+        },
+        {
+            "name": "size",
+            "type": "number",
+            "since": "2.1.15",
+            "description": "所包含的元素个数",
+            "sees": [
+                {
+                    "title": "IEnumerable.prototype.length",
+                    "href": "length",
+                    "mark": true
+                }
+            ]
+        }
+    ],
+    "methods": [
+        {
+            "name": "aggregate",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "seed",
+                            "types": [ "any" ],
+                            "descriptions": []
+                        },
+                        {
+                            "name": "func",
+                            "types": [ "function" ],
+                            "descriptions": [],
+                            "declare": {
+                                "returns": "any",
+                                "parameters": [
+                                    {
+                                        "name": "seed",
+                                        "types": [ "any" ]
+                                    },
+                                    {
+                                        "name": "element",
+                                        "types": [ "any" ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [ "number" ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "resultSelector",
+                            "types": [ "function", "string", "symbol", "number" ],
+                            "defaultValue": "defaultSelector",
+                            "descriptions": [],
+                            "declare": {
+                                "returns": "any",
+                                "parameters": [
+                                    {
+                                        "name": "result",
+                                        "types": [ "any" ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": "any",
+                    "description": "对一个序列应用累加器函数。 将指定的种子值用作累加器的初始值，并使用指定的函数选择结果值。"
+                }
+            ]
+        },
+        {
+            "name": "any",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [ "function", "string", "symbol", "number" ],
+                            "defaultValue": "defaultPredicate"
+                        }
+                    ],
+                    "returns": "boolean",
+                    "since": "2.1.15",
+                    "description": ""
+                }
+            ]
+        }
+    ]
+}

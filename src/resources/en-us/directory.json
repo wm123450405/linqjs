@@ -27,11 +27,11 @@
             },
             {
                 "code": "IEnumerable",
-                "title": "Class IEnumerable"
+                "title": "Interface IEnumerable"
             },
             {
                 "code": "IOrderedEnumerable",
-                "title": "Class IOrderedEnumerable "
+                "title": "Interface IOrderedEnumerable "
             }
         ]
     }

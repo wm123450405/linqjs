@@ -1,0 +1,36 @@
+{
+    "title": "Class Enumerable",
+    "constructors": [
+        {
+            "description": "Create an object of type IEnumerable from source"
+        }
+    ],
+    "properties": [
+        {
+            "name": "config",
+            "description": "Global config"
+        },
+        {
+            "name": "selectors",
+            "description": "An object contains same useful selectors"
+        },
+        {
+            "name": "predicates",
+            "description": "An object contains same useful predicates"
+        },
+        {
+            "name": "comparers",
+            "description": "An object contains same useful comparers"
+        }
+    ],
+    "methods": [
+        {
+            "name": "asEnumerable",
+            "overloads": [
+                {
+                    "description": "Create an object of type IEnumerable from source"
+                }
+            ]
+        }
+    ]
+}

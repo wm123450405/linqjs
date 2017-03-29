@@ -1,6 +1,5 @@
 {
-    "code": "introduction",
-    "title": "简介",
+    "title": "Introduction",
     "contents": [
         "use linq and lambda in javascript for es6"
     ]

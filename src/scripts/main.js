@@ -1,6 +1,7 @@
 import '../styles/main.sass';
 
 import './extends';
+import './filters';
 import routes from './routes';
 import mixin from './mixin';
 import components from './components';

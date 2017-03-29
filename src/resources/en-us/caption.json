@@ -1,0 +1,21 @@
+{
+    "class": "class",
+    "constructor": "constructor",
+    "constructors": "constructors",
+    "property": "property",
+    "properties": "properties",
+    "method": "method",
+    "methods": "methods",
+    "since": "since",
+    "details": "details",
+    "description": "description",
+    "summary": "summary",
+    "warning": "warning",
+    "remark": "remark",
+    "static": "static",
+    "newInstance": {
+        "only": "can only use new operator",
+        "both": "can use new operator or not",
+        "cannot": "can not use new operator"
+    }
+}

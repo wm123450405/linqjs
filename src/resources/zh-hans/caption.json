@@ -13,6 +13,7 @@
     "warning": "注意",
     "remark": "备注",
     "static": "静态的",
+    "see": "参考",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

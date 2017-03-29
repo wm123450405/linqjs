@@ -14,6 +14,18 @@
             {
                 "code": "instance",
                 "title": "获取IEnumerable实例"
+            },
+            {
+                "code": "selectors",
+                "title": "选择器"
+            },
+            {
+                "code": "comparers",
+                "title": "比较器"
+            },
+            {
+                "code": "predicates",
+                "title": "筛选器"
             }
         ]
     },
@@ -27,11 +39,11 @@
             },
             {
                 "code": "IEnumerable",
-                "title": "IEnumerable 类"
+                "title": "IEnumerable 接口"
             },
             {
                 "code": "IOrderedEnumerable",
-                "title": "IOrderedEnumerable 类"
+                "title": "IOrderedEnumerable 接口"
             }
         ]
     }

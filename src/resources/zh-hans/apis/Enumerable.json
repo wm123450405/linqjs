@@ -15,7 +15,14 @@
             "since": "2.1.15",
             "returns": "IEnumerable",
             "newInstance": "cannot",
-            "description": "创建一个 IEnumerable 对象"
+            "description": "通过指定的 source 创建一个 IEnumerable 对象",
+            "sees": [
+                {
+                    "title": "Enumerable.asEnumerable",
+                    "href": "asEnumerable",
+                    "mark": true
+                }
+            ]
         }
     ],
     "properties": [
@@ -23,13 +30,29 @@
             "name": "config",
             "type": "object",
             "static": true,
-            "since": "2.1.15"
+            "since": "2.1.15",
+            "description": "全局配置"
+        },
+        {
+            "name": "selectors",
+            "type": "object",
+            "static": true,
+            "since": "2.1.15",
+            "description": "一个包含了一些常用选择器的对象"
+        },
+        {
+            "name": "predicates",
+            "type": "object",
+            "static": true,
+            "since": "2.1.15",
+            "description": "一个包含了一些常用筛选器的对象"
         },
         {
             "name": "comparers",
             "type": "object",
             "static": true,
-            "since": "2.1.15"
+            "since": "2.1.15",
+            "description": "一个包含了一些常用比较器的对象"
         }
     ],
     "methods": [
@@ -45,7 +68,11 @@
                     ],
                     "returns": "IEnumerable",
                     "since": "2.1.15",
-                    "static": true
+                    "static": true,
+                    "description": "通过指定的 source 创建一个 IEnumerable 对象",
+                    "descriptions": [
+                        "其中 source 可以是 Array, String, IEnumerable, Iterator 甚至 Object 对象, 不建议使用 Boolean, Number 对象"
+                    ]
                 }
             ]
         }
