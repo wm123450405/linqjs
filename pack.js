@@ -5,8 +5,11 @@ const resources = path.join(__dirname, 'src', 'resources');
 const metaFile = 'meta.json';
 const jsonExt = '.json';
 
+const pack = path.basename(process.argv[1], '.js') === 'webpack';
+
 const watchs = [];
 const watch = (path, listener) => {
+	if (pack) return;
 	if (watchs.indexOf(path) === -1) {
 		fs.watch(path, listener);
 		watchs.push(path);
@@ -228,7 +231,7 @@ const createScripts = () => {
 createLang();
 createApis();
 createScripts();
-fs.watch(resources, (eventType, filename) => {
+watch(resources, (eventType, filename) => {
 	if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
 		createLang();
 		createApis();
