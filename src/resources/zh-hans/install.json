@@ -46,22 +46,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "code": "extend",
-            "title": "添加扩展",
-            "details": [
-                {
-                    "type": "example",
-                    "runtime": "jQuery",
-                    "scripts": [
-                        {
-                            "type": "javascript",
-                            "script": "Enumerable.extend(jQuery.fn, 'Array');"
-                        }
-                    ]
-                }
-            ]
         }
     ]
 }

@@ -1,0 +1,6 @@
+{
+    "type": "object",
+    "static": true,
+    "since": "2.1.15",
+    "description": "全局配置"
+}

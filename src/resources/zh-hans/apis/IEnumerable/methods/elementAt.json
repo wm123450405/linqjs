@@ -1,0 +1,28 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "index",
+                    "types": [ "number" ],
+                    "descriptions": [ "要检索的从零开始的元素索引" ]
+                }
+            ],
+            "returns": {
+                "type": "any",
+                "descriptions": [ "源序列中指定位置处的元素" ]
+            },
+            "description": "返回序列中的指定索引处的元素",
+            "remarks": [
+                "如果 index 超出范围, 此方法将引发异常. 如果希望 index 超出范围时返回默认值, 请使用 elementAtOrDefault 方法"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "elementAtOrDefault"
+                }
+            ]
+        }
+    ]
+}

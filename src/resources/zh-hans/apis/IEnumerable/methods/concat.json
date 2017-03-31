@@ -1,0 +1,29 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "other",
+                    "types": [ "IEnumerable", "Iterator", "array", "object", "string" ],
+                    "descriptions": [ "要与源序列连接的另一个序列" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "一个将两个序列所有元素的串联产生的新序列" ]
+            },
+            "description": "连接两个序列",
+            "remarks": [
+                "此方法通过延迟执行的方式实现",
+                "此方法不用 union 方法因为此方法返回输入序列中的所有原始元素, 而 union 方法只返回唯一元素"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "union"
+                }
+            ]
+        }
+    ]
+}

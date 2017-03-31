@@ -4,7 +4,7 @@
   "description": "use linq and lamdba in javascript",
   "main": "",
   "scripts": {
-    "test": "webpack --display-error-details && webpack-dev-server --compress --host 0.0.0.0 --port 8040 --progress --colors --inline --hot"
+    "test": "webpack-dev-server --compress --host 0.0.0.0 --port 8040 --progress --colors --inline --hot"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,6 @@
+{
+    "type": "object",
+    "static": true,
+    "since": "2.1.15",
+    "description": "一个包含了一些常用比较器的对象"
+}

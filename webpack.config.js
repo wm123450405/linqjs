@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+require('./pack');
+
 
 module.exports = {
     devtool: '#source-map',
@@ -27,7 +29,7 @@ module.exports = {
 					}
 				}
             },
-			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, 'src', 'resources') },
+			{ test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, 'src', 'resources'), exclude: path.join(__dirname, 'src', 'resources', '*', 'apis', '*') },
             { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, 'src', 'styles') },
             { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, 'src', 'styles') },
             { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'url-loader?limit=40960', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'node_modules') ] }

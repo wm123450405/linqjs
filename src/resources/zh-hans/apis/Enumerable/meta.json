@@ -1,0 +1,25 @@
+{
+    "type": "class",
+    "extends": [],
+    "implements": [],
+    "constructors": [
+        {
+            "parameters": [
+                {
+                    "name": "source",
+                    "types": [ "any" ]
+                }
+            ],
+            "since": "2.1.15",
+            "returns": "IEnumerable",
+            "newInstance": "cannot",
+            "description": "通过指定的 source 创建一个 IEnumerable 对象",
+            "sees": [
+                {
+                    "apis": "Enumerable",
+                    "method": "asEnumerable"
+                }
+            ]
+        }
+    ]
+}

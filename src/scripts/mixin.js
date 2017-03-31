@@ -12,17 +12,21 @@ export default {
 	data() {
 		return {
 			defaultLang: 'zh-hans',
+			lastest: '2.1.15',
 			promises: []
 		}
 	},
 	watch: {
-		lang() {
+		'$route.params'() {
 			this.reload();
 		}
 	},
 	computed: {
 		lang() {
 			return this.$route.params['lang'] || this.defaultLang;
+		},
+		version() {
+			return this.$route.params['version'] || this.lastest;
 		}
 	},
 	mounted() {
@@ -36,6 +40,11 @@ export default {
 		}
 	},
 	methods: {
+		capitalize(value) {
+			if (!value) return ''
+			value = value.toString()
+			return value.charAt(0).toUpperCase() + value.slice(1)
+		},
 		scrollTo(scrollTo) {
 			setTimeout(() => {
 				$('.activatable').removeClass('active');
@@ -63,14 +72,25 @@ export default {
 				require.ensure([], () => {
 					try {
 						let results = names.map(name => {
-							let defaultLang = { }, lang = { };
-							try {
-								defaultLang = require(`../resources/${ this.defaultLang }/${ name }.json`);
-							} catch (e) { }
-							try {
-								lang = require(`../resources/${ this.lang }/${ name }.json`);
-							} catch (e) { }
-							return $.extend(true, {}, defaultLang, lang);
+							if (typeof name === 'function') {
+								name = name.call(this);
+							}
+							if (name.startsWith('/')) {
+								try {
+									return require(`../resources${ name }.json`);
+								} catch (e) {
+									return { };
+								}
+							} else {
+								let defaultLang = { }, lang = { };
+								try {
+									defaultLang = require(`../resources/${ this.defaultLang }/${ name }.json`);
+								} catch (e) { }
+								try {
+									lang = require(`../resources/${ this.lang }/${ name }.json`);
+								} catch (e) { }
+								return $.extend(true, { }, defaultLang, lang);
+							}
 						});
 						if (results.length === 1) {
 							revolse && revolse(results[0]);

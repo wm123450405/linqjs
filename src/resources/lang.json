@@ -1,10 +1,10 @@
 [
-    {
-        "code": "zh-hans",
-        "name": "中文版"
-    },
-    {
-        "code": "en-us",
-        "name": "English"
-    }
+	{
+		"name": "English",
+		"code": "en-us"
+	},
+	{
+		"name": "中文版",
+		"code": "zh-hans"
+	}
 ]

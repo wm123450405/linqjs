@@ -1,0 +1,29 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "defaultValue",
+                    "types": [ "any" ],
+                    "descriptions": [ "序列为空时要返回的序列所包含的值" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "如果源序列为空, 返回包含单一 defaultValue 元素的新序列, 否则返回源序列" ]
+            },
+            "description": "如果源序列为空, 返回包含单一元素的新序列, 否则返回源序列",
+            "remarks": [
+                "此方法通过延迟执行的方式实现",
+                "此方法可以用于与 groupJoin 方法结合使用, 生成一个左外部联接"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "groupJoin"
+                }
+            ]
+        }
+    ]
+}

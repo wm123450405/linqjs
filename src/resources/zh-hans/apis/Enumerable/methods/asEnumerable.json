@@ -1,0 +1,21 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "static": true,
+            "parameters": [
+                {
+                    "name": "source",
+                    "types": [ "any" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable"
+            },
+            "description": "通过指定的 source 创建一个 IEnumerable 对象",
+            "remarks": [
+                "其中 source 可以是 IEnumerable, Iterator, array, string 甚至 object 对象, 不建议使用 boolean, number 对象"
+            ]
+        }
+    ]
+}

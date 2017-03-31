@@ -1,0 +1,16 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "一个 IEnumerable 对象" ]
+            },
+            "description": "获取一个 IEnumerable 对象",
+            "remarks": [
+                "因为本身已经是 IEnumerable 对象, 所以此方法将返回对象本身"
+            ]
+        }
+    ]
+}

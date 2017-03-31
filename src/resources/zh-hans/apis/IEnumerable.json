@@ -1,107 +1,229 @@
 {
-    "title": "IEnumerable接口",
-    "name": "IEnumerable",
-    "type": "interface",
-    "extends": [ "Array" ],
-    "implements": [],
-    "properties": [
-        {
-            "name": "length",
-            "type": "number",
-            "since": "2.1.15",
-            "description": "所包含的元素个数",
-            "sees": [
-                {
-                    "title": "IEnumerable.prototype.size",
-                    "href": "size",
-                    "mark": true
-                }
-            ]
-        },
-        {
-            "name": "size",
-            "type": "number",
-            "since": "2.1.15",
-            "description": "所包含的元素个数",
-            "sees": [
-                {
-                    "title": "IEnumerable.prototype.length",
-                    "href": "length",
-                    "mark": true
-                }
-            ]
-        }
-    ],
-    "methods": [
-        {
-            "name": "aggregate",
-            "overloads": [
-                {
-                    "parameters": [
-                        {
-                            "name": "seed",
-                            "types": [ "any" ],
-                            "descriptions": []
-                        },
-                        {
-                            "name": "func",
-                            "types": [ "function" ],
-                            "descriptions": [],
-                            "declare": {
-                                "returns": "any",
-                                "parameters": [
-                                    {
-                                        "name": "seed",
-                                        "types": [ "any" ]
-                                    },
-                                    {
-                                        "name": "element",
-                                        "types": [ "any" ]
-                                    },
-                                    {
-                                        "name": "index",
-                                        "types": [ "number" ]
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "name": "resultSelector",
-                            "types": [ "function", "string", "symbol", "number" ],
-                            "defaultValue": "defaultSelector",
-                            "descriptions": [],
-                            "declare": {
-                                "returns": "any",
-                                "parameters": [
-                                    {
-                                        "name": "result",
-                                        "types": [ "any" ]
-                                    }
-                                ]
-                            }
-                        }
-                    ],
-                    "returns": "any",
-                    "description": "对一个序列应用累加器函数。 将指定的种子值用作累加器的初始值，并使用指定的函数选择结果值。"
-                }
-            ]
-        },
-        {
-            "name": "any",
-            "overloads": [
-                {
-                    "parameters": [
-                        {
-                            "name": "predicate",
-                            "types": [ "function", "string", "symbol", "number" ],
-                            "defaultValue": "defaultPredicate"
-                        }
-                    ],
-                    "returns": "boolean",
-                    "since": "2.1.15",
-                    "description": ""
-                }
-            ]
-        }
-    ]
+	"type": "interface",
+	"extends": [
+		"Array"
+	],
+	"implements": [],
+	"name": "IEnumerable",
+	"properties": [
+		{
+			"name": "length",
+			"description": "所包含的元素个数"
+		},
+		{
+			"name": "size",
+			"description": "所包含的元素个数"
+		}
+	],
+	"methods": [
+		{
+			"name": "aggregate",
+			"overloads": [
+				{
+					"description": "对一个序列应用累加器函数. 将指定的种子值用作累加器的初始值, 并使用指定的函数选择结果值.",
+					"parameters": [
+						{
+							"name": "seed"
+						},
+						{
+							"name": "func"
+						},
+						{
+							"name": "resultSelector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "all",
+			"overloads": [
+				{
+					"description": "确定是否对序列中的所有元素都满足条件",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "any",
+			"overloads": [
+				{
+					"description": "确定序列中是否存在满足条件的元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "asEnumerable",
+			"overloads": [
+				{
+					"description": "获取一个 IEnumerable 对象",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "average",
+			"overloads": [
+				{
+					"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的平均值",
+					"parameters": [
+						{
+							"name": "selector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "concat",
+			"overloads": [
+				{
+					"description": "连接两个序列",
+					"parameters": [
+						{
+							"name": "other"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "contains",
+			"overloads": [
+				{
+					"description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "count",
+			"overloads": [
+				{
+					"description": "返回一个数字来表示多少个元素指定序列中的满足条件",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "defaultIfEmpty",
+			"overloads": [
+				{
+					"description": "如果源序列为空, 返回包含单一元素的新序列, 否则返回源序列",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "distinct",
+			"overloads": [
+				{
+					"description": "获取包含源序列中所有非重复元素的新序列",
+					"parameters": [
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "elementAt",
+			"overloads": [
+				{
+					"description": "返回序列中的指定索引处的元素",
+					"parameters": [
+						{
+							"name": "index"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "elementAtOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中的指定索引处的元素, 如果索引超出范围, 则返回默认值",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "index"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "except",
+			"overloads": [
+				{
+					"description": "生成两个序列的差集",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "first",
+			"overloads": [
+				{
+					"description": "返回序列中满足指定条件的第一个元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "firstOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中满足条件的第一个元素；如果未找到这样的元素，则返回默认值",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		}
+	]
 }
