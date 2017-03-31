@@ -1,0 +1,3 @@
+{
+	"1.js": "let fruits = [ \"apple\", \"mango\", \"orange\", \"passionfruit\", \"grape\" ];\r\n\r\n// Determine whether any string in the array is longer than \"banana\".\r\nlet longestName =\r\n\tfruits.asEnumerable().aggregate(\"banana\",\r\n\t\t(longest, next) =>\r\n\t\t\tnext.length > longest.length ? next : longest,\r\n\t\t// Return the final result as an upper case string.\r\n\t\tfruit => fruit.toUpperCase());\r\n\r\nconsole.log(`The fruit with the longest name is ${ longestName }`);\r\n\r\n// This code produces the following output:\r\n//\r\n// The fruit with the longest name is PASSIONFRUIT."
+}
