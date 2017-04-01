@@ -2,8 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 require('./pack');
 
+const pack = path.basename(process.argv[1], '.js') === 'webpack';
 
-module.exports = {
+const config = module.exports = {
     devtool: '#source-map',
     entry: {
         'main': './src/scripts/main.js',
@@ -57,11 +58,13 @@ module.exports = {
             Enumerable: 'linq-js',
 	        Vue: 'vue',
 	        VueRouter: 'vue-router'
-	    }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ]
+	    })
+    ].concat(
+		pack ?
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}) : []
+	)
 };
