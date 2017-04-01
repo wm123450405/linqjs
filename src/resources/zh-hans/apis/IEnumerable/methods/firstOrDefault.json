@@ -32,9 +32,9 @@
             ],
             "returns": {
                 "type": "any",
-                "descriptions": [ "序列中通过指定函数检测的第一个元素, 如果未找到匹配元素, 则返回 defaultValue" ]
+                "descriptions": [ "序列中通过指定函数检测的第一个元素. 如果未找到匹配元素, 则返回 defaultValue" ]
             },
-            "description": "返回序列中满足条件的第一个元素；如果未找到这样的元素，则返回默认值",
+            "description": "返回序列中满足条件的第一个元素. 如果未找到这样的元素, 则返回默认值",
             "sees": [
                 {
                     "apis": "IEnumerable",

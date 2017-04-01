@@ -1,6 +1,8 @@
 /**
  * Created by wm123 on 2017/3/22.
  */
+import common from './common';
+
 export default {
 	updated() {
 		$('pre code').each(function(i, block) {
@@ -11,8 +13,8 @@ export default {
 	},
 	data() {
 		return {
-			defaultLang: 'zh-hans',
-			lastest: '2.1.15',
+			defaultLang: common.defaultLang,
+			lastest: common.lastest,
 			promises: []
 		}
 	},
@@ -41,9 +43,7 @@ export default {
 	},
 	methods: {
 		capitalize(value) {
-			if (!value) return ''
-			value = value.toString()
-			return value.charAt(0).toUpperCase() + value.slice(1)
+			return common.capitalize(value);
 		},
 		scrollTo(scrollTo) {
 			setTimeout(() => {
@@ -79,16 +79,17 @@ export default {
 								try {
 									return require(`../resources${ name }.json`);
 								} catch (e) {
+									console.warn(e);
 									return { };
 								}
 							} else {
 								let defaultLang = { }, lang = { };
 								try {
 									defaultLang = require(`../resources/${ this.defaultLang }/${ name }.json`);
-								} catch (e) { }
+								} catch (e) { console.warn(e); }
 								try {
 									lang = require(`../resources/${ this.lang }/${ name }.json`);
-								} catch (e) { }
+								} catch (e) { console.warn(e); }
 								return $.extend(true, { }, defaultLang, lang);
 							}
 						});

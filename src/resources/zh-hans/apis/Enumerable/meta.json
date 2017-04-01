@@ -11,7 +11,9 @@
                 }
             ],
             "since": "2.1.15",
-            "returns": "IEnumerable",
+            "returns": {
+                "type": "IEnumerable"
+            },
             "newInstance": "cannot",
             "description": "通过指定的 source 创建一个 IEnumerable 对象",
             "sees": [

@@ -1,0 +1,37 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "predicate",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "包含输入序列中所有满足条件的元素组成的新序列" ]
+            },
+            "description": "通过筛选器筛选值序列",
+            "remarks": [
+                "此方法通过延迟执行的方式实现"
+            ]
+        }
+    ]
+}

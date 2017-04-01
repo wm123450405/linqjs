@@ -1,4 +1,1 @@
-/**
- * Created by wm123 on 2017/3/28.
- */
-export default ['lang-link', 'content-template', 'mark-link', 'mark-to', 'shields', 'see-link', 'declare-type'];
+export default ["code-class","code-declare","content-template","lang-link","mark-link","mark-to","see-link","shields"]

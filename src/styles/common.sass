@@ -4,20 +4,20 @@ img
 	border: 0
 pre
 	padding: 0
+	word-break: normal
+	word-wrap: normal
 	> code
+		white-space: pre
 		padding: 13.5px
 		&.hljs
 			padding: 13.5px
 code
+	white-space: nowrap
+	overflow: auto
 	padding: 5px
 	background-color: #272822
-h1:first-letter, h2:first-letter, h3:first-letter, h4:first-letter, h5:first-letter, h6:first-letter
-	text-transform: capitalize
-p.captialize:first-letter
-	text-transform: capitalize
-//.activatable
-//	padding: 5px
-//	&.active
-//		background-color: lightgray
-//		border-radius: 5px
-//		box-shadow: 0 0 10px 2px gray
+.hljs.inline
+	white-space: normal
+	vertical-align: middle
+	display: inline-block
+	margin-left: 5px

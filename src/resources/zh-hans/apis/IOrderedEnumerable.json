@@ -1,0 +1,43 @@
+{
+	"type": "interface",
+	"extends": [
+		"IEnumerable"
+	],
+	"implements": [],
+	"name": "IOrderedEnumerable",
+	"properties": [],
+	"methods": [
+		{
+			"name": "thenBy",
+			"overloads": [
+				{
+					"description": "执行后续排序中使用指定的比较器按升序对序列的元素",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "thenByDescending",
+			"overloads": [
+				{
+					"description": "执行后续排序中使用指定的比较器按降序对序列的元素",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		}
+	]
+}

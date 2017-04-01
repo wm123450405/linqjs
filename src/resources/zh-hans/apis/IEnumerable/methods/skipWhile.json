@@ -1,0 +1,48 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "predicate",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "跳过从源序列第一个元素开始, 连续的所有执行 predicate 检测返回 true 的元素, 后剩余的元素组成的序列" ]
+            },
+            "description": "跳过序列中指定条件为 true 的元素，然后返回剩余元素",
+            "remarks": [
+                "此方法通过延迟执行的方式实现",
+                "如果源序列中所有元素执行 predicate 检测时都返回 true, 则返回空序列"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "skip"
+                },
+                {
+                    "apis": "IEnumerable",
+                    "method": "takeWhile"
+                }
+            ]
+        }
+    ]
+}

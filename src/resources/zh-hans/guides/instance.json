@@ -1,0 +1,63 @@
+{
+    "title": "获取 IEnumerable 实例",
+    "contents": [
+        {
+            "title": "通过 Enumerable 构造方法获取",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "可以通过 Enumerable 类的构造方法获取一个 IEnumerable 对象"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "Enumerable.js"
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable",
+                        "constructor": true
+                    }
+                }
+            ]
+        },
+        {
+            "title": "通过 Enumerable.asEnumerable 方法获取",
+            "descriptions": [
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "Enumerable.asEnumerable.js"
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable",
+                        "method": "asEnumerable"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "通过 asEnumerable 方法获取",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "引入linq-js后, 任何对象都包含一个 asEnumerable 方法, 可以直接获取一个 IEnumerable 对象"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "asEnumerable.js"
+                    }
+                }
+            ]
+        }
+    ]
+}

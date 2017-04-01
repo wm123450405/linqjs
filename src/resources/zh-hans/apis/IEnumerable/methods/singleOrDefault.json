@@ -1,0 +1,46 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "defaultValue",
+                    "types": [ "any" ],
+                    "descriptions": [ "找不到匹配元素时返回的默认值" ]
+                },
+                {
+                    "name": "predicate",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
+                    "defaultValue": "defaultPredicate",
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "any",
+                "descriptions": [ "序列中通过指定函数检测的唯一元素. 如果未找到匹配元素, 则返回 defaultValue" ]
+            },
+            "description": "返回序列中满足条件的唯一元素. 如果未找到这样的元素, 则返回默认值. 如果有多个元素满足该条件, 此方法将引发异常",
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "single"
+                }
+            ]
+        }
+    ]
+}

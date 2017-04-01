@@ -1,0 +1,7 @@
+{
+    "constructors": [
+        {
+            "description": "Create an object of type IEnumerable from source"
+        }
+    ]
+}

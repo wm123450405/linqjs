@@ -1,9 +1,16 @@
 const path = require('path');
 const fs = require('fs');
+const extend = require('extend');
+const Enumerable = require('linq-js');
+const common = require('./src/scripts/common');
 
 const resources = path.join(__dirname, 'src', 'resources');
 const metaFile = 'meta.json';
+const directoryMetaFile = 'directory.meta.json';
+const directoryFile = 'directory.json';
+const captionFile = 'caption.json';
 const jsonExt = '.json';
+const vueExt = '.vue';
 
 const pack = path.basename(process.argv[1], '.js') === 'webpack';
 
@@ -64,14 +71,14 @@ const createApis = () => {
 				let classNames = fs.readdirSync(apisPath);
 				for (let className of classNames) {
 					let classPath = path.join(apisPath, className);
-					watch(classPath, (eventType, filename) => {
-						if (filename === metaFile) {
-							createApis();
-						} else if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
-							createApis();
-						}
-					});
 					if (fs.statSync(classPath).isDirectory()) {
+						watch(classPath, (eventType, filename) => {
+							if (filename === metaFile) {
+								createApis();
+							} else if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+								createApis();
+							}
+						});
 						try {
 							let classMeta = JSON.parse(fs.readFileSync(path.join(classPath, metaFile)));
 							classMeta.name = className;
@@ -79,10 +86,10 @@ const createApis = () => {
 							classMeta.methods = [];
 
 							let propertiesPath = path.join(classPath, 'properties');
-							watch(propertiesPath, (eventType, filename) => {
-								createApis();
-							});
 							if (fs.existsSync(propertiesPath)) {
+								watch(propertiesPath, (eventType, filename) => {
+									createApis();
+								});
 								let propertyFiles = fs.readdirSync(propertiesPath);
 								for (let propertyFile of propertyFiles) {
 									if (path.extname(propertyFile) === jsonExt) {
@@ -102,10 +109,10 @@ const createApis = () => {
 							}
 
 							let methodsPath = path.join(classPath, 'methods');
-							watch(methodsPath, (eventType, filename) => {
-								createApis();
-							});
 							if (fs.existsSync(methodsPath)) {
+								watch(methodsPath, (eventType, filename) => {
+									createApis();
+								});
 								let methodFiles = fs.readdirSync(methodsPath);
 								for (let methodFile of methodFiles) {
 									if (path.extname(methodFile) === jsonExt) {
@@ -117,7 +124,7 @@ const createApis = () => {
 												overloads: methodMeta.overloads.map(overload => ({
 													static: overload.static,
 													description: overload.description,
-													parameters: overload.parameters.map(parameter => ({
+													parameters: overload.parameters && overload.parameters.map(parameter => ({
 														name: parameter.name
 													}))
 												}))
@@ -137,6 +144,118 @@ const createApis = () => {
 						}
 					}
 				}
+			}
+		}
+	}
+};
+
+const createDirectory = () => {
+	let defaultDirectoryMeta = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, directoryMetaFile)));
+	let defaultCaption = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, captionFile)));
+	let defaultGuides = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
+		"instance", "selector", "predicate", "comparer", "equalityComparer", "action"
+	], false)).toArray();
+	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
+		if (element.startsWith(other + '.')) {
+			return 1;
+		} else if (other.startsWith(element + '.')) {
+			return -1;
+		} else {
+			return element > other ? 1 : element === other ? 0 : -1;
+		}
+	}).toArray();
+
+	let langNames = fs.readdirSync(resources);
+	for (let langName of langNames) {
+		let langPath = path.join(resources, langName);
+		if (fs.statSync(langPath).isDirectory()) {
+			let caption = defaultCaption;
+			let captionPath = path.join(langPath, captionFile);
+			if (fs.existsSync(captionPath)) {
+				watch(captionPath, () => {
+					createDirectory();
+				});
+				try {
+					caption = extend(true, {}, defaultCaption, JSON.parse(fs.readFileSync(captionPath)));
+				} catch(e) {
+					console.error(e);
+				}
+			}
+
+			let directorys = defaultDirectoryMeta;
+			let directoryMetaPath = path.join(langPath, directoryMetaFile);
+			if (fs.existsSync(directoryMetaPath)) {
+				watch(directoryMetaPath, () => {
+					createDirectory();
+				});
+				try {
+					directorys = extend(true, [], defaultDirectoryMeta, JSON.parse(fs.readFileSync(directoryMetaPath)));
+				} catch(e) {
+					console.error(e);
+				}
+
+				let guides = {
+					code: "guides",
+					title: caption.guide,
+					children: []
+				};
+				let guidesPath = path.join(langPath, 'guides');
+				if (fs.existsSync(guidesPath)) {
+					watch(guidesPath, (eventType, filename) => {
+						if (path.extname(filename) === jsonExt) {
+							createDirectory();
+						}
+					});
+				}
+				for (let guide of defaultGuides) {
+					let guidePath = path.join(guidesPath, guide);
+					try {
+						let guideContent = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, 'guides', guide)));
+						if (fs.existsSync(guidePath)) {
+							guideContent = extend(true, [], guideContent, JSON.parse(fs.readFileSync(guidePath)));
+						}
+						guides.children.push({
+							code: path.basename(guide, jsonExt),
+							title: guideContent.title
+						});
+					} catch(e) {
+						console.error(e);
+					}
+				}
+				directorys.push(guides);
+
+				let apis = {
+					code: "apis",
+					title: caption.apis,
+					children: []
+				};
+				let apisPath = path.join(langPath, 'apis');
+				if (fs.existsSync(apisPath)) {
+					watch(apisPath, (eventType, filename) => {
+						if (path.extname(filename) === jsonExt) {
+							createDirectory();
+						}
+					});
+				}
+				for (let api of defaultApis) {
+					let apiPath = path.join(apisPath, api);
+					try {
+						let apiContent = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, 'apis', api)));
+						if (fs.existsSync(apiPath)) {
+							apiContent = extend(true, [], apiContent, JSON.parse(fs.readFileSync(apiPath)));
+						}
+						apis.children.push({
+							code: path.basename(api, jsonExt),
+							title: `${ apiContent.name || path.basename(api, jsonExt) } ${ common.capitalize(caption[apiContent.type]) }`
+						});
+					} catch(e) {
+						console.error(e);
+					}
+				}
+				directorys.push(apis);
+
+				fs.writeFileSync(path.join(langPath, directoryFile), JSON.stringify(directorys, null, '\t'));
+				console.log(`Directory file for language ${ langName } is created`);
 			}
 		}
 	}
@@ -228,13 +347,35 @@ const createScripts = () => {
 	}
 };
 
+const createComponents = () => {
+	let componentsPath = path.join(__dirname, 'src', 'components');
+	if (fs.existsSync(componentsPath)) {
+		watch(componentsPath, (eventType, filename) => {
+			if (path.extname(filename) === vueExt) {
+				createComponents();
+			}
+		});
+		let componentNames = fs.readdirSync(componentsPath);
+		let components = [];
+		for (let componentName of componentNames) {
+			if (path.extname(componentName) === vueExt) {
+				components.push(path.basename(componentName, vueExt));
+			}
+		}
+		fs.writeFileSync(path.join(__dirname, 'src', 'scripts', 'components.js'), 'export default ' + JSON.stringify(components));
+	}
+};
+
+createComponents();
 createLang();
 createApis();
 createScripts();
+createDirectory();
 watch(resources, (eventType, filename) => {
 	if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
 		createLang();
 		createApis();
+		createDirectory();
 		if (filename === 'examples') {
 			createScripts();
 		}

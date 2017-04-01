@@ -1,5 +1,7 @@
 {
     "class": "class",
+    "interface": "interface",
+    "object": "object",
     "constructor": "constructor",
     "constructors": "constructors",
     "property": "property",
@@ -22,7 +24,10 @@
     "declare": "declare",
     "parameters": "parameters",
     "parameter": "parameter",
-    "returns": "returns",
+    "returns": "return value",
+    "generics": "type parameters",
+    "apis": "APIs",
+    "guide": "Guide",
     "newInstance": {
         "only": "can only use new operator",
         "both": "can use new operator or not",

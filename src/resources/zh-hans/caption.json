@@ -1,5 +1,7 @@
 {
     "class": "类",
+    "interface": "接口",
+    "object": "对象",
     "constructor": "构造方法",
     "constructors": "构造方法",
     "property": "属性",
@@ -23,6 +25,9 @@
     "parameters": "参数",
     "parameter": "参数",
     "returns": "返回值",
+    "generics": "类型参数",
+    "apis": "API文档",
+    "guide": "教程",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

@@ -1,0 +1,44 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "predicate",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
+                    "defaultValue": "defaultPredicate",
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "any",
+                "descriptions": [ "序列中通过指定函数检测的最后一个元素" ]
+            },
+            "description": "返回序列中满足指定条件的最后一个元素",
+            "remarks": [
+                "如果在源序列中找不到任何匹配的元素, 则会引发异常. 如果希望在找不到任何元素时返回默认值, 请使用 lastOrDefault 方法"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "lastOrDefault"
+                }
+            ]
+        }
+    ]
+}

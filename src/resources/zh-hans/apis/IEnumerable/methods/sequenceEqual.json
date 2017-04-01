@@ -1,0 +1,40 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "other",
+                    "types": [ "IEnumerable", "Iterator", "array", "object", "string" ],
+                    "descriptions": [ "应用于每个元素的转换函数" ]
+                },
+                {
+                    "name": "comparer",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于对值进行比较的相等比较器" ],
+                    "defaultValue": "defaultEqualityComparer",
+                    "declare": {
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "any" ]
+                            }
+                        ],
+                        "returns": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ],
+            "returns": {
+                "type": "boolean",
+                "descriptions": [ "如果两个源序列的长度相等, 并且其相应元素根据 comparer 比较器比较的结果都为相等, 则返回true, 否则返回 false" ]
+            },
+            "description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等"
+        }
+    ]
+}

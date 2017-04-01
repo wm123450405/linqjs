@@ -1,6 +1,6 @@
 <template>
-    <content-template :title="`${ meta.name || name } ${ capitalize(caption.class) }`">
-        <p v-for="description in meta.descriptions" v-html="description" class="text-success captialize"></p>
+    <content-template :title="`${ meta.name || name } ${ capitalize(caption[meta.type]) }`">
+        <p v-for="description in meta.descriptions" v-html="capitalize(description)" class="text-success"></p>
         <div v-if="meta.constructors && meta.constructors.length">
             <h3>{{ caption.constructors }}</h3>
             <div v-if="meta.constructors">
@@ -84,8 +84,8 @@
                 </table>
             </div>
         </div>
-        <p v-for="remark in meta.remarks" v-html="remark" class="text-info captialize"></p>
-        <p v-for="warning in meta.warnings" v-html="warning" class="text-warning captialize"></p>
+        <p v-for="remark in meta.remarks" v-html="capitalize(remark)" class="text-info"></p>
+        <p v-for="warning in meta.warnings" v-html="capitalize(warning)" class="text-warning"></p>
         <div v-if="meta.constructors && meta.constructors.length" class="activatable">
             <h3>{{ caption.constructors }}</h3>
             <div class="activatable" v-for="(method, methodIndex) in meta.constructors">
@@ -95,8 +95,8 @@
                         <shields v-if="method.since" subject="since" :status="method.since" color="yellow" :title="`${ caption.since }: ${ method.since }`"></shields>
                         <shields v-if="method.newInstance" subject="new" :status="method.newInstance" color="yellow" :title="caption.newInstance[method.newInstance]"></shields>
                     </p>
-                    <p v-if="method.description" class="text-success captialize">{{ method.description }}</p>
-                    <p v-for="description in method.descriptions" v-html="description" class="text-success captialize"></p>
+                    <p v-if="method.description" class="text-success">{{ capitalize(method.description) }}</p>
+                    <p v-for="description in method.descriptions" v-html="capitalize(description)" class="text-success"></p>
                     <p>
                         <code class="hljs">
                             <span class="hljs-class"><span class="hljs-title">{{ meta.name }}</span></span>
@@ -108,14 +108,14 @@
                                 <span class="hljs-symbol">:</span>
                                 <template v-for="(type, typeIndex) in parameter.types">
                                     <template v-if="typeIndex !== 0"><span class="hljs-symbol"> || </span></template>
-                                    <span class="hljs-class"><span :class="[isKeyword(type) ? 'hljs-keyword' : 'hljs-title']">{{ type }}</span></span>
+                                    <code-class :type="type"></code-class>
                                 </template>
                                 <template v-if="parameter.defaultValue"> = <span class="hljs-variable">{{ parameter.defaultValue }}</span></template>
                             </template>
                             <br/>
                             )
                             <span class="hljs-symbol">:</span>
-                            <span class="hljs-class"><span :class="[isKeyword(method.returns) ? 'hljs-keyword' : 'hljs-title']">{{ method.returns }}</span></span>
+                            <code-class :type="method.returns.type" :generics="method.returns.generics"></code-class>
                         </code>
                     </p>
                     <div v-for="(example, exampleIndex) in method.examples" class="indent">
@@ -151,7 +151,7 @@
             }
         },
         mounted() {
-			this.getJson(`caption`, `apis/${ this.name }`, `/examples/${ this.name }`).then(([caption, meta, examples]) => {
+			this.getJson(`caption`, () => `apis/${ this.name }`, () => `/examples/${ this.name }`).then(([caption, meta, examples]) => {
 				this.caption = caption;
 				this.meta = meta;
 				this.examples = examples;

@@ -1,0 +1,34 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "count",
+                    "types": [ "number" ],
+                    "descriptions": [ "要返回的元素数量" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "包含从输入序列的起始位置开始, 指定的数量的连续元素组成的新序列" ]
+            },
+            "description": "从序列的开头返回指定的数量的连续元素",
+            "remarks": [
+                "此方法通过延迟执行的方式实现",
+                "如果源序列中元素的个数少于count个, 则返回包含全部源序列元素的新序列",
+                "如果count小于或等于0, 则返回空序列"
+            ],
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "skip"
+                },
+                {
+                    "apis": "IEnumerable",
+                    "method": "takeWhile"
+                }
+            ]
+        }
+    ]
+}

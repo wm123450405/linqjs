@@ -1,38 +1,50 @@
 [
-    {
-        "code": "introduction",
-        "title": "Introduction"
-    },
-    {
-        "code": "install",
-        "title": "Install"
-    },
-    {
-        "code": "guide",
-        "title": "Guide",
-        "children": [
-            {
-                "code": "instance",
-                "title": "Get IEnumerable instance"
-            }
-        ]
-    },
-    {
-        "code": "apis",
-        "title": "APIs",
-        "children": [
-            {
-                "code": "Enumerable",
-                "title": "Class Enumerable"
-            },
-            {
-                "code": "IEnumerable",
-                "title": "Interface IEnumerable"
-            },
-            {
-                "code": "IOrderedEnumerable",
-                "title": "Interface IOrderedEnumerable "
-            }
-        ]
-    }
+	{
+		"code": "introduction",
+		"title": "Introduction"
+	},
+	{
+		"code": "install",
+		"title": "Install"
+	},
+	{
+		"code": "guides",
+		"title": "Guide",
+		"children": [
+			{
+				"code": "instance",
+				"title": "获取 IEnumerable 实例"
+			},
+			{
+				"code": "selector",
+				"title": "选择器"
+			},
+			{
+				"code": "comparer",
+				"title": "大小比较器"
+			}
+		]
+	},
+	{
+		"code": "apis",
+		"title": "APIs",
+		"children": [
+			{
+				"code": "Enumerable",
+				"title": "Enumerable Class"
+			},
+			{
+				"code": "Enumerable.comparers",
+				"title": "Enumerable.comparers Object"
+			},
+			{
+				"code": "IEnumerable",
+				"title": "IEnumerable Interface"
+			},
+			{
+				"code": "IOrderedEnumerable",
+				"title": "IOrderedEnumerable Interface"
+			}
+		]
+	}
 ]

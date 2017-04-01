@@ -1,0 +1,14 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "一个序列，其元素以相反顺序对应于输入序列的元素" ]
+            },
+            "description": "反转序列中元素的顺序",
+            "warnings": [ "如果开启对 Array 的扩展, 则 Array 对象原生的 reverse 方法也将返回 IEnumerable 对象, 而不只是 Array 对象" ]
+        }
+    ]
+}

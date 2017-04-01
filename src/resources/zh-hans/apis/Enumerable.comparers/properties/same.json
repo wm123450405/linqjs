@@ -1,0 +1,6 @@
+{
+    "type": "function",
+    "since": "2.1.15",
+    "description": "默认的相同比较器",
+    "remarks": [ "defaultSameComparer" ]
+}
