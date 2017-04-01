@@ -11,6 +11,7 @@ const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
 const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
+const defaultCollectionSelector = require('./methods/defaultCollectionSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -163,7 +164,7 @@ Enumerable.thenByDescending = function(orderedSource, keySelector = defaultSelec
 Enumerable.groupBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
     return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
-Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultSelector) {
+Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultCollectionSelector) {
     return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
 };
 Enumerable.join = function(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -752,6 +753,9 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     },
     get groupResult() {
         return defaultGroupResultSelector;
+    },
+    get collection() {
+        return defaultCollectionSelector;
     },
     property(property) {
     	return propertySelector(property);

@@ -9,6 +9,7 @@ const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
 const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
+const defaultCollectionSelector = require('./methods/defaultCollectionSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -125,7 +126,7 @@ class IEnumerable extends Array {
     groupBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupBy(this, keySelector, elementSelector, resultSelector, comparer);
     }
-    selectMany(collectionSelector = defaultSelector, resultSelector = defaultSelector) {
+    selectMany(collectionSelector = defaultSelector, resultSelector = defaultCollectionSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     }
     join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {

@@ -11,6 +11,9 @@ use linq and lambda in javascript
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作  
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
+[尚未完成的帮助文档](http://wm123450405.github.io/linqjs/#/zh-hans)
+[Documention(not completed)](http://wm123450405.github.io/linqjs/#/en-us)
+
 ## Usage 用法
 
 Usage for English is Coming soon...
@@ -544,11 +547,11 @@ function groupBy(
 ```typescript
 function selectMany(
 	collectionSelector:Function || String || Symbol = defaultSelector,
-	resultSelector:Function || String || Symbol = defaultSelector
+	resultSelector:Function || String || Symbol = defaultCollectionSelector
 ):IEnumerable,
 
 	collectionSelector(element:any, index:number):any,
-	resultSelector(element:any):any;
+	resultSelector(sourceElement:any, collectionElement:any):any;
 ```
 
 #### 44. `groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer)` :*[see](https://msdn.microsoft.com/en-us/library/bb535047(v=vs.110).aspx)* :*[参考](https://msdn.microsoft.com/zh-cn/library/bb535047(v=vs.110).aspx)*
@@ -1064,7 +1067,7 @@ function Enumerable.predicates.not(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 19. `predicates.selector(selector, predicate)` :+1:
+#### 20. `predicates.selector(selector, predicate)` :+1:
 ```typescript
 function Enumerable.predicates.selector(
 	selector:Function || String || Symbol,
@@ -1075,7 +1078,7 @@ function Enumerable.predicates.selector(
 	predicate(element:any, index:number):boolean;
 ```
 
-#### 20. `predicates.equality(value, comparer)` :+1:
+#### 21. `predicates.equality(value, comparer)` :+1:
 ```typescript
 function Enumerable.predicates.equality(
 	value:any,
@@ -1085,23 +1088,27 @@ function Enumerable.predicates.equality(
 	comparer(element:any, index:number):boolean;
 ```
 
-#### 21. `predicates.strict(value)` :+1:
+#### 22. `predicates.strict(value)` :+1:
 ```typescript
 function Enumerable.predicates.strict(
 	value:any
 ):Function; // predicate
 ```
 
-#### 22. `predicates.same(value)` :+1:
+#### 23. `predicates.same(value)` :+1:
 ```typescript
 function Enumerable.predicates.same(
 	value:any
 ):Function; // predicate
 ```
 
-#### 23. `actions:default` [*defaultAction*]
+#### 24. `actions:default` [*defaultAction*]
 
 ## Change list 更新日志
+
+### v2.1.16
+
+	优化 selectMany 方法, 使的使用上更接近linq原生的方法. 修复 selectMany 方法 collectionSelector 返回 Iterator,string,object 对象是出现异常的bug
 
 ### 2017-03-27 v2.1.15
 
