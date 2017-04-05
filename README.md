@@ -533,7 +533,7 @@ function join(
 function groupBy(
 	keySelector:Function || String || Symbol = defaultSelector, 
 	elementSelector:Function || String || Symbol = defaultSelector, 
-	resultSelector:Function || String || Symbol = defaultGroupResultSelector, 
+	resultSelector:Function || String || Symbol = defaultResultSelector, 
 	comparer:Function || String || Symbol = defaultEqualityComparer
 ):IEnumerable,
 
@@ -1036,7 +1036,7 @@ function Enumerable.comparers.predicate(
 #### 11. `selectors.default` [*defaultSelector*]
 #### 12. `selectors.key` [*defaultKeySelector*]
 #### 13. `selectors.value` [*defaultValueSelector*]
-#### 14. `selectors.groupResult` [*defaultGroupResultSelector*]
+#### 14. `selectors.result` [*defaultResultSelector*]
 
 #### 15. `selectors.property(property)` :+1:
 ```typescript
@@ -1106,9 +1106,12 @@ function Enumerable.predicates.same(
 
 ## Change list 更新日志
 
-### v2.1.16
+### 2017-04-05 v2.1.16
 
 	优化 selectMany 方法, 使的使用上更接近linq原生的方法. 修复 selectMany 方法 collectionSelector 返回 Iterator,string,object 对象是出现异常的bug
+	修改 defaultGroupResultSelector 为 defaultResultSelector, 修改 Enumerable.selectors.groupResult 为 Enumerable.selectors.result
+	修改 selectMany 方法的 resultSelector 参数的结构和默认值, 与 defaultResultSelector 一致
+	增加 zip 方法的 resultSelector 的默认值为 defaultResultSelector
 
 ### 2017-03-27 v2.1.15
 
