@@ -1,7 +1,7 @@
 {
     "overloads": [
         {
-            "since": "2.1.15",
+            "since": "2.1.16",
             "parameters": [
                 {
                     "name": "collectionSelector",

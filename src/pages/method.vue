@@ -12,7 +12,7 @@
                 <p v-for="description in overload.descriptions" v-html="capitalize(description)" class="text-success"></p>
                 <p>
                     <code class="hljs">
-                        <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!overload.static">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ methodName }}</span>
+                        <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!overload.static && classMeta.type !== 'object'">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ methodName }}</span>
                         (
                         <template v-for="(parameter, parameterIndex) in overload.parameters">
                             <template v-if="parameterIndex !== 0">,</template>
@@ -77,6 +77,7 @@
 		data() {
 			return {
 				caption: { },
+				classMeta: { },
 				methodMeta: { },
 				examples: { }
 			};
@@ -93,8 +94,9 @@
             }
         },
         mounted() {
-			this.getJson(`caption`, () => `apis/${ this.className }/methods/${ this.methodName }`, () => `/examples/${ this.className }/methods/${ this.methodName }`).then(([caption, methodMeta, examples]) => {
+			this.getJson(`caption`, () => `apis/${ this.className }`, () => `apis/${ this.className }/methods/${ this.methodName }`, () => `/examples/${ this.className }/methods/${ this.methodName }`).then(([caption, classMeta, methodMeta, examples]) => {
 				this.caption = caption;
+				this.classMeta = classMeta;
 				this.methodMeta = methodMeta;
 				this.examples = examples;
 			});

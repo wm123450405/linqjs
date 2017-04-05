@@ -4,6 +4,7 @@
             <span class="hljs-function">{{ name }}</span>
             (
             <template v-for="(declareParameter, declareParameterIndex) in declare.parameters">
+                <template v-if="declareParameter.optional">[</template>
                 <template v-if="declareParameterIndex !== 0">,</template>
                 <span class="hljs-params">{{ declareParameter.name }}</span>
                 <span class="hljs-symbol">:</span>
@@ -12,6 +13,7 @@
                     <code-class :type="parameterType"></code-class>
                 </template>
                 <template v-if="declareParameter.defaultValue"> = <span class="hljs-variable">{{ declareParameter.defaultValue }}</span></template>
+                <template v-if="declareParameter.optional">]</template>
             </template>
             )
             <span class="hljs-symbol">:</span>

@@ -1,0 +1,17 @@
+{
+    "title": "Action",
+    "contents": [
+        {
+            "title": "What's the Action",
+            "descriptions": [
+                {
+                    "content": "Action is a function which is only execute some calculation for the parameters"
+                },
+                {
+                    "content": "The Action function accept one parameter, or accept another parameter which is the index of the first parameter in the enumerable as the second parameter, then execute some calculation but return nothing"
+                },
+                { }
+            ]
+        }
+    ]
+}

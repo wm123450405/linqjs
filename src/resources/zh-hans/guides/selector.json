@@ -1,3 +1,77 @@
 {
-    "title": "选择器"
+    "title": "选择器",
+    "contents": [
+        {
+            "title": "什么是选择器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "选择器是一个将输入值映射到一个输出值的函数"
+                },
+                {
+                    "type": "description",
+                    "content": "该函数接受一个或多个输入值, 有些情况下还接受输入值所在序列中的索引作为参数, 经过一系列自定义的运算, 最终返回一个对应的值, 返回值通常用来组成新的序列或进行其他运算"
+                }
+            ]
+        },
+        {
+            "title": "一元选择器",
+            "descriptions": [
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "types": [ "any" ],
+                                "name": "element"
+                            },
+                            {
+                                "types": [ "number" ],
+                                "name": "index",
+                                "optional": true
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable.selectors",
+                        "property": "default"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "二元选择器",
+            "descriptions": [
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "types": [ "any" ],
+                                "name": "first"
+                            },
+                            {
+                                "types": [ "any" ],
+                                "name": "second"
+                            },
+                            {
+                                "types": [ "number" ],
+                                "name": "index",
+                                "optional": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
 }

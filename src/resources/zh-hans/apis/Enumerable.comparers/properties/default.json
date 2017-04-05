@@ -2,5 +2,8 @@
     "type": "function",
     "since": "2.1.15",
     "description": "默认的大小比较器",
-    "remarks": [ "defaultComparer" ]
+    "remarks": [
+        "该比较器是一个大小比较器, 它接受两个用于比较的元素作为参数, 返回一个number表示大小, 通常表示为 defaultComparer",
+        "如果返回值大于0, 则表示第一个参数大于第二个参数. 如果返回值小于0, 则表示第一个参数小于第二个参数. 如果返回值等于0, 则表示两个参数相等"
+    ]
 }

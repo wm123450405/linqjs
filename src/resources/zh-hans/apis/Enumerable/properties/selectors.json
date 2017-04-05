@@ -2,5 +2,10 @@
     "type": "object",
     "static": true,
     "since": "2.1.15",
-    "description": "一个包含了一些常用选择器的对象"
+    "description": "一个包含了一些常用选择器的对象",
+    "sees": [
+        {
+            "apis": "Enumerable.selectors"
+        }
+    ]
 }

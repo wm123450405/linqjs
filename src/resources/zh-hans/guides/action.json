@@ -1,0 +1,37 @@
+{
+    "title": "执行器",
+    "contents": [
+        {
+            "title": "什么是执行器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "执行器是一个仅对输入值执行一系列计算的函数"
+                },
+                {
+                    "type": "description",
+                    "content": "通常一个执行器接受一个参数值, 或者额外接受输入值所在的序列中的索引作为第二个参数, 执行一系列计算, 但无需返回任何数值"
+                },
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "void"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ],
+                                "optional": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

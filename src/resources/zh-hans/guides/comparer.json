@@ -1,3 +1,82 @@
 {
-    "title": "大小比较器"
+    "title": "比较器",
+    "contents": [
+        {
+            "title": "什么是比较器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "比较器是一个反映两个输入值之间关系的函数"
+                }
+            ]
+        },
+        {
+            "title": "大小比较器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "大小比较器是一个反映两个输入值之间大小关系的比较器"
+                },
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "number"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "any" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable.comparers",
+                        "property": "default"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "相等比较器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "相等比较器是一个反映两个输入值是否相等的比较器"
+                },
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "any" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable.comparers",
+                        "property": "equality"
+                    }
+                }
+            ]
+        }
+    ]
 }

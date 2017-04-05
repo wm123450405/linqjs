@@ -6,6 +6,7 @@
                 <p v-if="description.type === 'description'" v-html="capitalize(description.content)" class="text-success"></p>
                 <p v-if="description.type === 'remark'" v-html="capitalize(description.content)" class="text-info"></p>
                 <p v-if="description.type === 'warning'" v-html="capitalize(description.content)" class="text-warning"></p>
+                <p v-if="description.type === 'function'"><code-declare :type="description.type" :declare="description.content"></code-declare></p>
                 <pre v-if="description.type === 'example'"><code :class="description.content.type" v-html="examples[description.content.href] || description.content.script"></code></pre>
                 <div v-if="description.type === 'see'">{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="description.content"></see-link></div>
             </div>

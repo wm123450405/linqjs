@@ -20,8 +20,16 @@
 				"title": "选择器"
 			},
 			{
+				"code": "predicate",
+				"title": "筛选器"
+			},
+			{
 				"code": "comparer",
-				"title": "大小比较器"
+				"title": "比较器"
+			},
+			{
+				"code": "action",
+				"title": "Action"
 			}
 		]
 	},
@@ -34,8 +42,20 @@
 				"title": "Enumerable Class"
 			},
 			{
+				"code": "Enumerable.actions",
+				"title": "Enumerable.actions Object"
+			},
+			{
 				"code": "Enumerable.comparers",
 				"title": "Enumerable.comparers Object"
+			},
+			{
+				"code": "Enumerable.predicates",
+				"title": "Enumerable.predicates Object"
+			},
+			{
+				"code": "Enumerable.selectors",
+				"title": "Enumerable.selectors Object"
 			},
 			{
 				"code": "IEnumerable",

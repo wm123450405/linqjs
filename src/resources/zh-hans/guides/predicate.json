@@ -1,0 +1,37 @@
+{
+    "title": "筛选器",
+    "contents": [
+        {
+            "title": "什么是筛选器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "筛选器是一个判断输入参数是否满足条件的函数"
+                },
+                {
+                    "type": "description",
+                    "content": "通常一个筛选器接受一个参数值, 或者额外接受输入值所在的序列中的索引作为第二个参数, 返回一个 boolean 值表示该参数或与其索引是否满足指定的条件"
+                },
+                {
+                    "type": "function",
+                    "content": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ],
+                                "optional": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

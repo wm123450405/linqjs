@@ -11,7 +11,7 @@
             <p v-for="description in propertyMeta.descriptions" v-html="capitalize(description)" class="text-success"></p>
             <p>
                 <code class="hljs">
-                    <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!propertyMeta.static">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ propertyName }}</span>
+                    <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!propertyMeta.static && classMeta.type !== 'object'">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ propertyName }}</span>
                     <span class="hljs-symbol">:</span>
                     <code-class :type="propertyMeta.type"></code-class>
                 </code>
@@ -35,6 +35,7 @@
 		data() {
 			return {
 				caption: { },
+				classMeta: { },
 				propertyMeta: { }
 			};
         },
@@ -47,8 +48,9 @@
 			}
         },
         mounted() {
-			this.getJson(`caption`, () => `apis/${ this.className }/properties/${ this.propertyName }`).then(([caption, propertyMeta]) => {
+			this.getJson(`caption`, () => `apis/${ this.className }`, () => `apis/${ this.className }/properties/${ this.propertyName }`).then(([caption, classMeta, propertyMeta]) => {
 				this.caption = caption;
+				this.classMeta = classMeta;
 				this.propertyMeta = propertyMeta;
 			});
         }
