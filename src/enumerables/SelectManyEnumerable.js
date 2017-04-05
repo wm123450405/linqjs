@@ -7,10 +7,10 @@ const core = require('./../core/core');
 const methods = require('./../methods/methods');
 
 const defaultSelector = require('./../methods/defaultSelector');
-const defaultCollectionElement = require('./../methods/defaultCollectionElement');
+const defaultResultSelector = require('./../methods/defaultResultSelector');
 
 class SelectManyEnumerable extends IEnumerable {
-    constructor(source, collectionSelector = defaultSelector, resultSelector = defaultCollectionElement) {
+    constructor(source, collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
         super(source);
         collectionSelector = methods.asSelector(collectionSelector);
         //resultSelector = methods.asSelector(resultSelector);

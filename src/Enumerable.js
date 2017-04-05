@@ -10,8 +10,7 @@ const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
-const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
-const defaultCollectionSelector = require('./methods/defaultCollectionSelector');
+const defaultResultSelector = require('./methods/defaultResultSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -161,10 +160,10 @@ Enumerable.thenByDescending = function(orderedSource, keySelector = defaultSelec
         return new OrderByDescendingEnumerable(asIterable(orderedSource), keySelector, comparer);
     }
 };
-Enumerable.groupBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
+Enumerable.groupBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
     return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
-Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultCollectionSelector) {
+Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
     return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
 };
 Enumerable.join = function(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -184,7 +183,7 @@ Enumerable.groupJoin = function(outer, inner, resultSelector, outerKeySelector =
 Enumerable.reverse = function(source) {
     return new ReverseEnumerable(asIterable(source));
 };
-Enumerable.zip = function(source, other, resultSelector) {
+Enumerable.zip = function(source, other, resultSelector = defaultResultSelector) {
     return new ZipEnumerable(asIterable(source), other, resultSelector);
 };
 Enumerable.every = function(source, callback, thisArg) {
@@ -751,11 +750,8 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     get value() {
         return defaultValueSelector;
     },
-    get groupResult() {
-        return defaultGroupResultSelector;
-    },
-    get collection() {
-        return defaultCollectionSelector;
+    get result() {
+        return defaultResultSelector;
     },
     property(property) {
     	return propertySelector(property);

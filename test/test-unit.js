@@ -299,7 +299,7 @@ module.exports = function(Enumerable) {
 	}, {
 		key: 'other',
 		values: [b, c, d, f]
-	}], v => v.values, v => v + a).toArray(), [a + a, e + a, b + a, c + a, d + a, f + a]);
+	}], v => v.values, (v, value) => value + a).toArray(), [a + a, e + a, b + a, c + a, d + a, f + a]);
 	//groupJoin
 	assert.deepStrictEqual(Enumerable.groupJoin([1, 2, 3, 4], [2, 4, 3, 4, 5], (outerElement, innerGrouping) => innerGrouping.toArray()).toArray(), [
 		[],
@@ -583,7 +583,7 @@ module.exports = function(Enumerable) {
 	}, {
 		key: 'other',
 		values: [b, c, d, f]
-	}].asEnumerable().selectMany(v => v.values, v => v + a).toArray(), [a + a, e + a, b + a, c + a, d + a, f + a]);
+	}].asEnumerable().selectMany(v => v.values, (v, value) => value + a).toArray(), [a + a, e + a, b + a, c + a, d + a, f + a]);
 	//groupJoin
 	assert.deepStrictEqual([1, 2, 3, 4].asEnumerable().groupJoin([2, 4, 3, 4, 5], (outerElement, innerGrouping) => innerGrouping.toArray()).toArray(), [
 		[],

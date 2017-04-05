@@ -10,8 +10,7 @@ const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
-const defaultGroupResultSelector = require('./methods/defaultGroupResultSelector');
-const defaultCollectionSelector = require('./methods/defaultCollectionSelector');
+const defaultResultSelector = require('./methods/defaultResultSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -106,10 +105,10 @@ Enumerable.extend = function(prototype, type, isPrototype = false) {
             orderByDescending(keySelector = defaultSelector, comparer = defaultComparer) {
                 return Enumerable.orderByDescending(this, keySelector, comparer);
             },
-            groupBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
+            groupBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
                 return Enumerable.groupBy(this, keySelector, elementSelector, resultSelector, comparer);
             },
-            selectMany(collectionSelector = defaultSelector, resultSelector = defaultCollectionSelector) {
+            selectMany(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
                 return Enumerable.selectMany(this, collectionSelector, resultSelector);
             },
             join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -238,7 +237,7 @@ Enumerable.extend = function(prototype, type, isPrototype = false) {
             sort(comparer = defaultComparer) {
                 return Enumerable.sort(this, comparer);
             },
-            zip(other, resultSelector) {
+            zip(other, resultSelector = defaultResultSelector) {
                 return Enumerable.zip(this, other, resultSelector);
             },
             toArray() {

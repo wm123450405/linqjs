@@ -9,14 +9,14 @@ const methods = require('./../methods/methods');
 const Enumerable = require('./../Enumerable');
 
 const defaultSelector = require('./../methods/defaultSelector');
-const defaultGroupResultSelector = require('./../methods/defaultGroupResultSelector');
+const defaultResultSelector = require('./../methods/defaultResultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 const equalityPredicate = require('./../methods/equalityPredicate');
 
 const IGrouping = require('./IGrouping');
 
 class GroupedEnumerable extends IEnumerable {
-    constructor(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultGroupResultSelector, comparer = defaultEqualityComparer) {
+    constructor(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
         super(source);
         keySelector = methods.asSelector(keySelector);
         elementSelector = methods.asSelector(elementSelector);

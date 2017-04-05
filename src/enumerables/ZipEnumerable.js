@@ -4,8 +4,10 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
+const defaultResultSelector = require('./../methods/defaultResultSelector');
+
 class ZipEnumerable extends IEnumerable {
-    constructor(source, other, resultSelector) {
+    constructor(source, other, resultSelector = defaultResultSelector) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* ZipIterator() {
             let sourceIterator = source[Symbol.iterator]();
