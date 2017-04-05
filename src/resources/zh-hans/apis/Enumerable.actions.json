@@ -1,0 +1,11 @@
+{
+	"type": "object",
+	"name": "Enumerable.actions",
+	"properties": [
+		{
+			"name": "default",
+			"description": "默认的执行器"
+		}
+	],
+	"methods": []
+}

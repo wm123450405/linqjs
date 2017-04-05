@@ -1,0 +1,37 @@
+{
+	"type": "object",
+	"name": "Enumerable.selectors",
+	"properties": [
+		{
+			"name": "default",
+			"description": "默认的选择器"
+		},
+		{
+			"name": "key",
+			"description": "默认的键选择器"
+		},
+		{
+			"name": "result",
+			"description": "默认的结果选择器"
+		},
+		{
+			"name": "value",
+			"description": "默认的值选择器"
+		}
+	],
+	"methods": [
+		{
+			"name": "property",
+			"overloads": [
+				{
+					"description": "获取一个属性选择器",
+					"parameters": [
+						{
+							"name": "property"
+						}
+					]
+				}
+			]
+		}
+	]
+}

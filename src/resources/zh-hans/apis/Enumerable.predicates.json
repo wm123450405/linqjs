@@ -1,0 +1,11 @@
+{
+	"type": "object",
+	"name": "Enumerable.predicates",
+	"properties": [
+		{
+			"name": "default",
+			"description": "默认的筛选器"
+		}
+	],
+	"methods": []
+}
