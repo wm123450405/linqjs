@@ -16,6 +16,10 @@
 				"title": "获取 IEnumerable 实例"
 			},
 			{
+				"code": "config",
+				"title": "配置"
+			},
+			{
 				"code": "selector",
 				"title": "选择器"
 			},
@@ -30,6 +34,18 @@
 			{
 				"code": "action",
 				"title": "Action"
+			},
+			{
+				"code": "extend",
+				"title": "扩展"
+			},
+			{
+				"code": "iterator",
+				"title": "遍历器"
+			},
+			{
+				"code": "plugin",
+				"title": "插件"
 			}
 		]
 	},
@@ -48,6 +64,10 @@
 			{
 				"code": "Enumerable.comparers",
 				"title": "Enumerable.comparers Object"
+			},
+			{
+				"code": "Enumerable.config",
+				"title": "Enumerable.config Object"
 			},
 			{
 				"code": "Enumerable.predicates",

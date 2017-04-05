@@ -64,7 +64,8 @@ const createApis = () => {
 			let apisPath = path.join(langPath, 'apis');
 			if (fs.existsSync(apisPath)) {
 				watch(apisPath, (eventType, filename) => {
-					if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+					let apiPath = path.join(apisPath, filename);
+					if (fs.existsSync(apiPath) && fs.statSync(apiPath).isDirectory()) {
 						createApis();
 					}
 				});
@@ -73,9 +74,10 @@ const createApis = () => {
 					let classPath = path.join(apisPath, className);
 					if (fs.statSync(classPath).isDirectory()) {
 						watch(classPath, (eventType, filename) => {
+							let dirPath = path.join(classPath, filename);
 							if (filename === metaFile) {
 								createApis();
-							} else if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+							} else if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 								createApis();
 							}
 						});
@@ -153,8 +155,8 @@ const createDirectory = () => {
 	let defaultDirectoryMeta = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, directoryMetaFile)));
 	let defaultCaption = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, captionFile)));
 	let defaultGuides = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
-		"instance", "selector", "predicate", "comparer", "equalityComparer", "action"
-	], false)).toArray();
+		"instance", "config", "selector", "predicate", "comparer", "action"
+	], true)).toArray();
 	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
 		if (element.startsWith(other + '.')) {
 			return 1;
@@ -264,7 +266,8 @@ const createDirectory = () => {
 const createScripts = () => {
 	let examplesPath = path.join(resources, 'examples');
 	watch(examplesPath, (eventType, filename) => {
-		if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+		let examplePath = path.join(examplesPath, filename);
+		if (fs.existsSync(examplePath) && fs.statSync(examplePath).isDirectory()) {
 			createScripts();
 		}
 	});
@@ -273,7 +276,8 @@ const createScripts = () => {
 		let classPath = path.join(examplesPath, className);
 		if (fs.statSync(classPath).isDirectory()) {
 			watch(classPath, (eventType, filename) => {
-				if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+				let dirPath = path.join(classPath, filename);
+				if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 					createScripts();
 				} else if (path.extname(filename) !== jsonExt) {
 					 createScripts();
@@ -291,7 +295,8 @@ const createScripts = () => {
 			let propertiesPath = path.join(classPath, 'properties');
 			if (fs.existsSync(propertiesPath)) {
 				watch(propertiesPath, (eventType, filename) => {
-					if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+					let propertyPath = path.join(propertiesPath, filename);
+					if (fs.existsSync(propertyPath) && fs.statSync(propertyPath).isDirectory()) {
 						createScripts();
 					}
 				});
@@ -318,7 +323,8 @@ const createScripts = () => {
 			let methodsPath = path.join(classPath, 'methods');
 			if (fs.existsSync(methodsPath)) {
 				watch(methodsPath, (eventType, filename) => {
-					if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+					let methodPath = path.join(methodsPath, filename);
+					if (fs.existsSync(methodPath) && fs.statSync(methodPath).isDirectory()) {
 						createScripts();
 					}
 				});
@@ -372,7 +378,8 @@ createApis();
 createScripts();
 createDirectory();
 watch(resources, (eventType, filename) => {
-	if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) {
+	let dirPath = path.join(resources, filename);
+	if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 		createLang();
 		createApis();
 		createDirectory();

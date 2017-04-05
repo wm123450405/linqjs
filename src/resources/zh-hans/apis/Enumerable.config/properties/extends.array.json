@@ -1,0 +1,5 @@
+{
+    "type": "function",
+    "since": "2.1.15",
+    "description": "开启对原生 Array 对象的扩展"
+}

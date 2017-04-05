@@ -1,0 +1,41 @@
+{
+    "title": "配置",
+    "contents": [
+        {
+            "title": "配置获取 IEnumerable 对象的方法",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "默认的获取 IEnumerable 对象的方法名为 asEnumerable, 通过 config.as 属性可以修改此方法名"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "config.as.js"
+                    }
+                },
+                {
+                    "type": "warning",
+                    "content": "修改后 asEnumerable 方法依然有效"
+                }
+            ]
+        },
+        {
+            "title": "配置内置对象的扩展",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "使用如下方式可以对javascript中原生的对象进行扩展"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "config.extends.js"
+                    }
+                }
+            ]
+        }
+    ]
+}

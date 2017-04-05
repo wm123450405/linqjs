@@ -1,0 +1,11 @@
+{
+    "type": "function",
+    "since": "2.1.15",
+    "description": "设置 asEnumerable 方法的别名",
+    "remarks": [
+        "为任何对象的 asEnumerable 方法设置一个别名"
+    ],
+    "warnings": [
+        "设置此别名后 asEnumerable 方法依然有效"
+    ]
+}
