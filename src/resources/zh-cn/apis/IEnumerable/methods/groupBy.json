@@ -1,0 +1,101 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "keySelector",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于提取每个元素的键的函数" ],
+                    "defaultValue": "defaultKeySelector",
+                    "declare": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "elementSelector",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于将每个源元素映射到组中的元素的函数" ],
+                    "defaultValue": "defaultValueSelector",
+                    "declare": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "resultSelector",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于从每个组中创建结果值的函数" ],
+                    "defaultValue": "defaultResultSelector",
+                    "declare": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "name": "key",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "grouping",
+                                "types": [ "IGrouping" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "comparer",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于对键进行比较相等比较器" ],
+                    "defaultValue": "defaultEqualityComparer",
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "any" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [ "对一组及其键的投影的结果的集合" ]
+            },
+            "description": "根据指定的键选择器函数对序列中的元素进行分组, 并且从每个组及其键中创建结果值. 通过使用指定的比较器对键值进行比较, 并且通过使用指定的函数对每个组的元素进行投影",
+            "remarks": [
+                "此方法通过延迟执行的方式实现"
+            ]
+        }
+    ]
+}

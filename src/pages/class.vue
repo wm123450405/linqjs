@@ -1,5 +1,25 @@
 <template>
     <content-template :title="`${ meta.name || name } ${ capitalize(caption[meta.type]) }`">
+        <p v-if="meta.type !== 'object'">
+            <code class="hljs">
+                <span class="hljs-keyword">{{ meta.type }}</span>
+                <span class="hljs-class">
+                    <span class="hljs-title">{{ meta.name }}</span>
+                </span>
+                <template v-if="meta.extends && meta.extends.length">
+                    <span class="hljs-keyword">extends</span>
+                </template>
+                <template v-for="extend in meta.extends">
+                    <code-class :type="extend"></code-class>
+                </template>
+                <template v-if="meta.implements && meta.implements.length">
+                    <span class="hljs-keyword">implements</span>
+                </template>
+                <template v-for="implement in meta.implements">
+                    <code-class :type="implement"></code-class>
+                </template>
+            </code>
+        </p>
         <p v-for="description in meta.descriptions" v-html="capitalize(description)" class="text-success"></p>
         <div v-if="meta.constructors && meta.constructors.length">
             <h3>{{ caption.constructors }}</h3>
@@ -98,25 +118,7 @@
                     <p v-if="method.description" class="text-success">{{ capitalize(method.description) }}</p>
                     <p v-for="description in method.descriptions" v-html="capitalize(description)" class="text-success"></p>
                     <p>
-                        <code class="hljs">
-                            <span class="hljs-class"><span class="hljs-title">{{ meta.name }}</span></span>
-                            (
-                            <template v-for="(parameter, parameterIndex) in method.parameters">
-                            <template v-if="parameterIndex !== 0">,</template>
-                                <br/>
-                                <span class="hljs-params" style="padding-left:4em">{{ parameter.name }}</span>
-                                <span class="hljs-symbol">:</span>
-                                <template v-for="(type, typeIndex) in parameter.types">
-                                    <template v-if="typeIndex !== 0"><span class="hljs-symbol"> || </span></template>
-                                    <code-class :type="type"></code-class>
-                                </template>
-                                <template v-if="parameter.defaultValue"> = <span class="hljs-variable">{{ parameter.defaultValue }}</span></template>
-                            </template>
-                            <br/>
-                            )
-                            <span class="hljs-symbol">:</span>
-                            <code-class :type="method.returns.type" :generics="method.returns.generics"></code-class>
-                        </code>
+                        <code-method-declare :overload="method" :className="meta.name"></code-method-declare>
                     </p>
                     <div v-for="(example, exampleIndex) in method.examples" class="indent">
                         <p>{{ exampleIndex + 1 }}. {{ example.description }}</p>
@@ -127,6 +129,9 @@
                 </div>
             </div>
         </div>
+        <div v-for="implement in meta.implements" v-if="!isKeyword(implement)">{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="{ apis: implement }"></see-link></div>
+        <div v-for="extend in meta.extends" v-if="!isKeyword(extend)">{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="{ apis: extend }"></see-link></div>
+        <div v-for="see in meta.sees">{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="see"></see-link></div>
     </content-template>
 </template>
 <script>

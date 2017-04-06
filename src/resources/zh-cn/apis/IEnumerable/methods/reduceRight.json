@@ -1,0 +1,44 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "callback",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "declare": {
+                        "returns": {
+                            "type": "void"
+                        },
+                        "parameters": [
+                            {
+                                "name": "seed",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            },
+                            {
+                                "name": "source",
+                                "types": [ "IEnumerable" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "initialValue",
+                    "types": [ "any" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable"
+            },
+            "description": "对累加器和数组的每个值(从右到左)应用一个函数, 以将其聚合为单个值"
+        }
+    ]
+}

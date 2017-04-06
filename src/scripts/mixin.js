@@ -45,6 +45,9 @@ export default {
 		capitalize(value) {
 			return common.capitalize(value);
 		},
+		upper(value) {
+			return common.upper(value);
+		},
 		scrollTo(scrollTo) {
 			setTimeout(() => {
 				$('.activatable').removeClass('active');

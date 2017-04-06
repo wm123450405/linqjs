@@ -1,6 +1,6 @@
 <template>
     <span class="shields">
-        <span class="shields-subject">{{ subject }}</span><span class="shields-status" :class="color">{{ status }}</span>
+        <span v-if="subject" class="shields-subject">{{ subject }}</span><span v-if="status" class="shields-status" :class="color">{{ status }}</span>
     </span>
 </template>
 <style lang="sass">
@@ -10,15 +10,17 @@
     line-height: 16px
     color: white
     font-size: 12px
-    > .shields-subject
+    &:first-child
         border-top-left-radius: 3px
         border-bottom-left-radius: 3px
+    &:last-child
+        border-top-right-radius: 3px
+        border-bottom-right-radius: 3px
+    > .shields-subject
         padding: 3px
         text-shadow: 0 1px 1px black
         background: linear-gradient(#5f5f5f, #4d4d4d)
     > .shields-status
-        border-top-right-radius: 3px
-        border-bottom-right-radius: 3px
         padding: 3px
         text-shadow: 0 1px 1px gray
         &.yellow

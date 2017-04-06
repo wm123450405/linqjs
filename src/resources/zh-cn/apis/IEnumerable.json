@@ -1,0 +1,1042 @@
+{
+	"type": "interface",
+	"extends": [
+		"array"
+	],
+	"implements": [],
+	"name": "IEnumerable",
+	"properties": [
+		{
+			"name": "length",
+			"description": "所包含的元素个数"
+		},
+		{
+			"name": "size",
+			"description": "所包含的元素个数"
+		}
+	],
+	"methods": [
+		{
+			"name": "aggregate",
+			"overloads": [
+				{
+					"description": "对一个序列应用累加器函数. 将指定的种子值用作累加器的初始值, 并使用指定的函数选择结果值.",
+					"parameters": [
+						{
+							"name": "seed"
+						},
+						{
+							"name": "func"
+						},
+						{
+							"name": "resultSelector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "all",
+			"overloads": [
+				{
+					"description": "确定是否对序列中的所有元素都满足条件",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "any",
+			"overloads": [
+				{
+					"description": "确定序列中是否存在满足条件的元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "asEnumerable",
+			"overloads": [
+				{
+					"description": "获取一个 IEnumerable 对象",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "average",
+			"overloads": [
+				{
+					"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的平均值",
+					"parameters": [
+						{
+							"name": "selector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "concat",
+			"overloads": [
+				{
+					"description": "连接两个序列",
+					"parameters": [
+						{
+							"name": "other"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "contains",
+			"overloads": [
+				{
+					"description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "copyWithin",
+			"overloads": [
+				{
+					"description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小",
+					"parameters": [
+						{
+							"name": "target"
+						},
+						{
+							"name": "start"
+						},
+						{
+							"name": "end"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "count",
+			"overloads": [
+				{
+					"description": "返回一个数字来表示多少个元素指定序列中的满足条件",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "defaultIfEmpty",
+			"overloads": [
+				{
+					"description": "如果源序列为空, 返回包含单一元素的新序列, 否则返回源序列",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "distinct",
+			"overloads": [
+				{
+					"description": "获取包含源序列中所有非重复元素的新序列",
+					"parameters": [
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "elementAt",
+			"overloads": [
+				{
+					"description": "返回序列中的指定索引处的元素",
+					"parameters": [
+						{
+							"name": "index"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "elementAtOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中的指定索引处的元素, 如果索引超出范围, 则返回默认值",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "index"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "every",
+			"overloads": [
+				{
+					"description": "测试数组的所有元素是否都通过了指定函数的测试",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "except",
+			"overloads": [
+				{
+					"description": "生成两个序列的差集",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "fill",
+			"overloads": [
+				{
+					"description": "将一个数组的所有元素从开始索引填充到具有静态值的结束索引",
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "start"
+						},
+						{
+							"name": "end"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "filter",
+			"overloads": [
+				{
+					"description": "使用指定的函数测试所有元素, 并创建一个包含所有通过测试的元素的新数组",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "find",
+			"overloads": [
+				{
+					"description": "返回数组中满足提供的测试函数的第一个元素的值",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "findIndex",
+			"overloads": [
+				{
+					"description": "返回数组中满足提供的测试函数的第一个元素的索引",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "findLastIndex",
+			"overloads": [
+				{
+					"description": "返回数组中满足提供的测试函数的最后一个元素的索引",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "first",
+			"overloads": [
+				{
+					"description": "返回序列中满足指定条件的第一个元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "firstOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中满足条件的第一个元素. 如果未找到这样的元素, 则返回默认值",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "forEach",
+			"overloads": [
+				{
+					"description": "遍历序列中的每个元素, 使用元素执行指定的操作",
+					"parameters": [
+						{
+							"name": "action"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "getEnumerator",
+			"overloads": [
+				{
+					"description": "获取序列的枚举器",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "groupBy",
+			"overloads": [
+				{
+					"description": "根据指定的键选择器函数对序列中的元素进行分组, 并且从每个组及其键中创建结果值. 通过使用指定的比较器对键值进行比较, 并且通过使用指定的函数对每个组的元素进行投影",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "elementSelector"
+						},
+						{
+							"name": "resultSelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "groupJoin",
+			"overloads": [
+				{
+					"description": "基于匹配键对两个序列的元素关联, 并对结果进行分组, 使用指定的相等比较器对键进行比较",
+					"parameters": [
+						{
+							"name": "inner"
+						},
+						{
+							"name": "resultSelector"
+						},
+						{
+							"name": "outerKeySelector"
+						},
+						{
+							"name": "innerKeySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "includes",
+			"overloads": [
+				{
+					"description": "用来判断当前数组是否包含某指定的值",
+					"parameters": [
+						{
+							"name": "element"
+						},
+						{
+							"name": "start"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "indexOf",
+			"overloads": [
+				{
+					"description": "返回在数组中可以找到给定元素的第一个索引",
+					"parameters": [
+						{
+							"name": "element"
+						},
+						{
+							"name": "start"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "intersect",
+			"overloads": [
+				{
+					"description": "生成两个序列的交集",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "join",
+			"overloads": [
+				{
+					"parameters": [
+						{
+							"name": "split"
+						}
+					]
+				},
+				{
+					"description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+					"parameters": [
+						{
+							"name": "inner"
+						},
+						{
+							"name": "resultSelector"
+						},
+						{
+							"name": "outerKeySelector"
+						},
+						{
+							"name": "innerKeySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "last",
+			"overloads": [
+				{
+					"description": "返回序列中满足指定条件的最后一个元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "lastIndexOf",
+			"overloads": [
+				{
+					"description": "法返回指定元素在数组中的最后一个的索引",
+					"parameters": [
+						{
+							"name": "element"
+						},
+						{
+							"name": "start"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "lastOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中满足条件的最后一个元素. 如果未找到这样的元素, 则返回默认值",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "map",
+			"overloads": [
+				{
+					"description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "max",
+			"overloads": [
+				{
+					"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值",
+					"parameters": [
+						{
+							"name": "selector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "min",
+			"overloads": [
+				{
+					"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值",
+					"parameters": [
+						{
+							"name": "selector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ofType",
+			"overloads": [
+				{
+					"description": "根据指定的类型筛选出的新序列",
+					"parameters": [
+						{
+							"name": "type"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "orderBy",
+			"overloads": [
+				{
+					"description": "按使用指定的比较器按升序对序列的元素进行排序",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "orderByDescending",
+			"overloads": [
+				{
+					"description": "按使用指定的比较器按降序对序列的元素进行排序",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pop",
+			"overloads": [
+				{
+					"description": "从数组中删除最后一个元素, 并返回该元素的值",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "push",
+			"overloads": [
+				{
+					"description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度",
+					"parameters": [
+						{
+							"name": "values"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reduce",
+			"overloads": [
+				{
+					"description": "对累加器和数组的每个值(从左到右)应用一个函数, 以将其聚合为单个值",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "initialValue"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reduceRight",
+			"overloads": [
+				{
+					"description": "对累加器和数组的每个值(从右到左)应用一个函数, 以将其聚合为单个值",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "initialValue"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reverse",
+			"overloads": [
+				{
+					"description": "反转序列中元素的顺序",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "select",
+			"overloads": [
+				{
+					"description": "将序列中的每个元素投影到新序列",
+					"parameters": [
+						{
+							"name": "selector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "selectMany",
+			"overloads": [
+				{
+					"description": "一个序列的每个元素投影为一个序列, 并将结果展开合并为一个结果序列",
+					"parameters": [
+						{
+							"name": "collectionSelector"
+						},
+						{
+							"name": "resultSelector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "sequenceEqual",
+			"overloads": [
+				{
+					"description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "shift",
+			"overloads": [
+				{
+					"description": "从数组中删除第一个元素, 并返回该元素的值",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "single",
+			"overloads": [
+				{
+					"description": "返回序列中满足指定条件的唯一元素. 如果有多个这样的元素存在, 则会引发异常",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "singleOrDefault",
+			"overloads": [
+				{
+					"description": "返回序列中满足条件的唯一元素. 如果未找到这样的元素, 则返回默认值. 如果有多个元素满足该条件, 此方法将引发异常",
+					"parameters": [
+						{
+							"name": "defaultValue"
+						},
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "skip",
+			"overloads": [
+				{
+					"description": "跳过指定的数量的序列中的元素，然后返回剩余元素",
+					"parameters": [
+						{
+							"name": "count"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "skipWhile",
+			"overloads": [
+				{
+					"description": "跳过序列中指定条件为 true 的元素，然后返回剩余元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "slice",
+			"overloads": [
+				{
+					"description": "将数组的一部分浅拷贝, 返回到从开始到结束(不包括结束)选择的新数组对象",
+					"parameters": [
+						{
+							"name": "start"
+						},
+						{
+							"name": "end"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "some",
+			"overloads": [
+				{
+					"description": "测试数组中的某些元素是否通过了指定函数的测试",
+					"parameters": [
+						{
+							"name": "callback"
+						},
+						{
+							"name": "thisArg"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "sort",
+			"overloads": [
+				{
+					"description": "在适当的位置对数组的元素进行排序, 并返回数组",
+					"parameters": [
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "splice",
+			"overloads": [
+				{
+					"description": "通过删除现有元素和/或添加新元素来更改数组的内容",
+					"parameters": [
+						{
+							"name": "start"
+						},
+						{
+							"name": "count"
+						},
+						{
+							"name": "values"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "sum",
+			"overloads": [
+				{
+					"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的和值",
+					"parameters": [
+						{
+							"name": "selector"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "take",
+			"overloads": [
+				{
+					"description": "从序列的开头返回指定的数量的连续元素",
+					"parameters": [
+						{
+							"name": "count"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "takeWhile",
+			"overloads": [
+				{
+					"description": "返回序列中从起始位置开始指定的条件为 true 的连续元素",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toArray",
+			"overloads": [
+				{
+					"description": "使用源序列创建一个数组",
+					"parameters": []
+				}
+			]
+		},
+		{
+			"name": "toDirectory",
+			"overloads": [
+				{
+					"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Directory 对象",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "valueSelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toLookup",
+			"overloads": [
+				{
+					"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Lookup 对象",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "valueSelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toObject",
+			"overloads": [
+				{
+					"description": "从 IEnumerable 中获取一个对象",
+					"parameters": [
+						{
+							"name": "keySelector"
+						},
+						{
+							"name": "valueSelector"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "union",
+			"overloads": [
+				{
+					"description": "生成两个序列的并集",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "comparer"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "unshift",
+			"overloads": [
+				{
+					"description": "将一个或多个元素添加到数组的开头, 并返回新数组的长度",
+					"parameters": [
+						{
+							"name": "values"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "where",
+			"overloads": [
+				{
+					"description": "通过筛选器筛选值序列",
+					"parameters": [
+						{
+							"name": "predicate"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "zip",
+			"overloads": [
+				{
+					"description": "通过依次合并元素的方式合并两个序列",
+					"parameters": [
+						{
+							"name": "other"
+						},
+						{
+							"name": "resultSelector"
+						}
+					]
+				}
+			]
+		}
+	]
+}

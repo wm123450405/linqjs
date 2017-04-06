@@ -1,0 +1,12 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [],
+            "returns": {
+                "type": "IEnumerator"
+            },
+            "description": "获取序列的枚举器"
+        }
+    ]
+}

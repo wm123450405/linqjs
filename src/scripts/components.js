@@ -1,1 +1,1 @@
-export default ["code-class","code-declare","content-template","lang-link","mark-link","mark-to","see-link","shields"]
+export default ["code-class","code-method-declare","code-type-declare","content-template","lang-link","mark-link","mark-to","see-link","shields"]

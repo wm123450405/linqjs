@@ -1,0 +1,12 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [],
+            "returns": {
+                "type": "void"
+            },
+            "description": "重置 IEnumerator 对象, 将游标只想第一个元素"
+        }
+    ]
+}

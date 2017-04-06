@@ -1,0 +1,33 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "comparer",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "defaultValue": "defaultComparer",
+                    "declare": {
+                        "returns": {
+                            "type": "number"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "any" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "number"
+            },
+            "description": "在适当的位置对数组的元素进行排序, 并返回数组"
+        }
+    ]
+}

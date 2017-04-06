@@ -1,0 +1,83 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "keySelector",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于提取每个元素的键的函数" ],
+                    "defaultValue": "defaultKeySelector",
+                    "declare": {
+                        "returns": {
+                            "type": "string"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "valueSelector",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "descriptions": [ "用于从每个元素产生结果元素值的转换函数" ],
+                    "defaultValue": "defaultValueSelector",
+                    "declare": {
+                        "returns": {
+                            "type": "any"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "comparer",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "defaultValue": "defaultSameComparer",
+                    "descriptions": [ "用于对键进行比较相等比较器" ],
+                    "declare": {
+                        "returns": {
+                            "type": "boolean"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "string" ]
+                            },
+                            {
+                                "name": "other",
+                                "types": [ "string" ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "returns": {
+                "type": "any",
+                "descriptions": [ "提取出的 Object 对象" ]
+            },
+            "description": "从 IEnumerable 中获取一个对象",
+            "sees": [
+                {
+                    "apis": "IEnumerable",
+                    "method": "toDirectory"
+                }
+            ]
+        }
+    ]
+}

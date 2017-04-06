@@ -51,14 +51,17 @@ const createLang = () => {
 	console.log('File lang.json is created');
 };
 //create apis
-const createApis = () => {
+const createApis = (refreshLangName, refreshClassName) => {
 	let langNames = fs.readdirSync(resources);
 	for (let langName of langNames) {
+		if (typeof refreshLangName !== 'undefined' && common.defaultLang !== refreshLangName && langName !== refreshLangName) {
+			continue;
+		}
 		let langPath = path.join(resources, langName);
 		if (fs.statSync(langPath).isDirectory()) {
 			watch(langPath, (eventType, filename) => {
 				if (filename === 'apis') {
-					createApis();
+					createApis(langName);
 				}
 			});
 			let apisPath = path.join(langPath, 'apis');
@@ -66,19 +69,22 @@ const createApis = () => {
 				watch(apisPath, (eventType, filename) => {
 					let apiPath = path.join(apisPath, filename);
 					if (fs.existsSync(apiPath) && fs.statSync(apiPath).isDirectory()) {
-						createApis();
+						createApis(langName);
 					}
 				});
 				let classNames = fs.readdirSync(apisPath);
 				for (let className of classNames) {
+					if (typeof refreshClassName !== 'undefined' && className !== refreshClassName) {
+						continue;
+					}
 					let classPath = path.join(apisPath, className);
 					if (fs.statSync(classPath).isDirectory()) {
 						watch(classPath, (eventType, filename) => {
 							let dirPath = path.join(classPath, filename);
 							if (filename === metaFile) {
-								createApis();
+								createApis(langName, className);
 							} else if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-								createApis();
+								createApis(langName, className);
 							}
 						});
 						try {
@@ -90,7 +96,7 @@ const createApis = () => {
 							let propertiesPath = path.join(classPath, 'properties');
 							if (fs.existsSync(propertiesPath)) {
 								watch(propertiesPath, (eventType, filename) => {
-									createApis();
+									createApis(langName, className);
 								});
 								let propertyFiles = fs.readdirSync(propertiesPath);
 								for (let propertyFile of propertyFiles) {
@@ -113,7 +119,7 @@ const createApis = () => {
 							let methodsPath = path.join(classPath, 'methods');
 							if (fs.existsSync(methodsPath)) {
 								watch(methodsPath, (eventType, filename) => {
-									createApis();
+									createApis(langName, className);
 								});
 								let methodFiles = fs.readdirSync(methodsPath);
 								for (let methodFile of methodFiles) {
@@ -151,11 +157,11 @@ const createApis = () => {
 	}
 };
 
-const createDirectory = () => {
+const createDirectory = refreshLangName => {
 	let defaultDirectoryMeta = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, directoryMetaFile)));
 	let defaultCaption = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, captionFile)));
 	let defaultGuides = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
-		"instance", "config", "selector", "predicate", "comparer", "action"
+		"instance", "config", "selector", "predicate", "comparer", "action", "iterator"
 	], true)).toArray();
 	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
 		if (element.startsWith(other + '.')) {
@@ -166,16 +172,20 @@ const createDirectory = () => {
 			return element > other ? 1 : element === other ? 0 : -1;
 		}
 	}).toArray();
+	console.log('apis:' + defaultApis);
 
 	let langNames = fs.readdirSync(resources);
 	for (let langName of langNames) {
+		if (typeof refreshLangName !== 'undefined' && common.defaultLang !== refreshLangName && langName !== refreshLangName) {
+			continue;
+		}
 		let langPath = path.join(resources, langName);
 		if (fs.statSync(langPath).isDirectory()) {
 			let caption = defaultCaption;
 			let captionPath = path.join(langPath, captionFile);
 			if (fs.existsSync(captionPath)) {
 				watch(captionPath, () => {
-					createDirectory();
+					createDirectory(langName);
 				});
 				try {
 					caption = extend(true, {}, defaultCaption, JSON.parse(fs.readFileSync(captionPath)));
@@ -188,7 +198,7 @@ const createDirectory = () => {
 			let directoryMetaPath = path.join(langPath, directoryMetaFile);
 			if (fs.existsSync(directoryMetaPath)) {
 				watch(directoryMetaPath, () => {
-					createDirectory();
+					createDirectory(langName);
 				});
 				try {
 					directorys = extend(true, [], defaultDirectoryMeta, JSON.parse(fs.readFileSync(directoryMetaPath)));
@@ -205,7 +215,7 @@ const createDirectory = () => {
 				if (fs.existsSync(guidesPath)) {
 					watch(guidesPath, (eventType, filename) => {
 						if (path.extname(filename) === jsonExt) {
-							createDirectory();
+							createDirectory(langName);
 						}
 					});
 				}
@@ -224,7 +234,7 @@ const createDirectory = () => {
 						console.error(e);
 					}
 				}
-				directorys.push(guides);
+				directorys.splice(directorys.indexOf("guides"), 1, guides);
 
 				let apis = {
 					code: "apis",
@@ -235,7 +245,7 @@ const createDirectory = () => {
 				if (fs.existsSync(apisPath)) {
 					watch(apisPath, (eventType, filename) => {
 						if (path.extname(filename) === jsonExt) {
-							createDirectory();
+							createDirectory(langName);
 						}
 					});
 				}
@@ -254,7 +264,7 @@ const createDirectory = () => {
 						console.error(e);
 					}
 				}
-				directorys.push(apis);
+				directorys.splice(directorys.indexOf("apis"), 1, apis);
 
 				fs.writeFileSync(path.join(langPath, directoryFile), JSON.stringify(directorys, null, '\t'));
 				console.log(`Directory file for language ${ langName } is created`);

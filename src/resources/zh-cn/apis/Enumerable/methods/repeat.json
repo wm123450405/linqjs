@@ -1,0 +1,30 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "static": true,
+            "parameters": [
+                {
+                    "name": "element",
+                    "types": [ "any" ],
+                    "descriptions": [ "要重复的值" ]
+                },
+                {
+                    "name": "count",
+                    "types": [ "number" ],
+                    "descriptions": [ "在生成序列中重复该值的次数" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [
+                    "一个包含指定数量重复值的序列"
+                ]
+            },
+            "description": "将生成一个序列, 其中包含指定数量个重复的值",
+            "remarks": [
+                "此方法通过延迟执行的方式实现"
+            ]
+        }
+    ]
+}

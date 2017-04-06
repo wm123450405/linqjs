@@ -1,0 +1,23 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "start",
+                    "types": [ "number" ],
+                    "defaultValue": "0"
+                },
+                {
+                    "name": "end",
+                    "types": [ "number" ],
+                    "defaultValue": "infinity"
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable"
+            },
+            "description": "将数组的一部分浅拷贝, 返回到从开始到结束(不包括结束)选择的新数组对象"
+        }
+    ]
+}

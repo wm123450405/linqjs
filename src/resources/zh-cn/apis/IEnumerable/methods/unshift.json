@@ -1,0 +1,19 @@
+
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "values",
+                    "types": [ "any" ],
+                    "params": true
+                }
+            ],
+            "returns": {
+                "type": "number"
+            },
+            "description": "将一个或多个元素添加到数组的开头, 并返回新数组的长度"
+        }
+    ]
+}

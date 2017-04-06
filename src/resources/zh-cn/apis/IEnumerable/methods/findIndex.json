@@ -1,0 +1,40 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "callback",
+                    "types": [ "function", "string", "symbol", "number" ],
+                    "declare": {
+                        "returns": {
+                            "type": "void"
+                        },
+                        "parameters": [
+                            {
+                                "name": "element",
+                                "types": [ "any" ]
+                            },
+                            {
+                                "name": "index",
+                                "types": [ "number" ]
+                            },
+                            {
+                                "name": "source",
+                                "types": [ "IEnumerable" ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "thisArg",
+                    "types": [ "any" ]
+                }
+            ],
+            "returns": {
+                "type": "number"
+            },
+            "description": "返回数组中满足提供的测试函数的第一个元素的索引"
+        }
+    ]
+}

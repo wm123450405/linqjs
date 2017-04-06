@@ -1,0 +1,5 @@
+{
+    "type": "interface",
+    "extends": [ "array" ],
+    "implements": []
+}

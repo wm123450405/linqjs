@@ -1,0 +1,30 @@
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "static": true,
+            "parameters": [
+                {
+                    "name": "start",
+                    "types": [ "number" ],
+                    "descriptions": [ "序列中第一个整数的值" ]
+                },
+                {
+                    "name": "count",
+                    "types": [ "number" ],
+                    "descriptions": [ "要生成的连续整数的数目" ]
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable",
+                "descriptions": [
+                    "一个包含范围内连续的整数序列"
+                ]
+            },
+            "description": "生成指定范围内的整数序列",
+            "remarks": [
+                "此方法通过延迟执行的方式实现"
+            ]
+        }
+    ]
+}

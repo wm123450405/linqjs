@@ -7,51 +7,33 @@
                     <span class="icon-mark bg-primary" v-if="overload.static" :title="caption.static">S</span>
                     <shields v-if="overload.since" subject="since" :status="overload.since" color="yellow" :title="`${ caption.since }: ${ overload.since }`"></shields>
                     <shields v-if="overload.deprecated" subject="deprecated" :status="overload.deprecated" color="yellow" :title="`${ caption.deprecated }: ${ overload.deprecated }`"></shields>
+                    <shields v-if="overload.override" subject="override" :title="`${ caption.override }`"></shields>
                 </p>
                 <p v-if="overload.description" class="text-success">{{ capitalize(overload.description) }}</p>
                 <p v-for="description in overload.descriptions" v-html="capitalize(description)" class="text-success"></p>
                 <p>
-                    <code class="hljs">
-                        <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!overload.static && classMeta.type !== 'object'">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ methodName }}</span>
-                        (
-                        <template v-for="(parameter, parameterIndex) in overload.parameters">
-                            <template v-if="parameterIndex !== 0">,</template>
-                            <br/>
-                            <span class="hljs-params" style="padding-left:4em">{{ parameter.name }}</span>
-                            <span class="hljs-symbol">:</span>
-                            <template v-for="(type, typeIndex) in parameter.types">
-                                <template v-if="typeIndex !== 0"><span class="hljs-symbol"> || </span></template>
-                                <code-class :type="type"></code-class>
-                            </template>
-                            <template v-if="parameter.defaultValue"> = <span class="hljs-variable">{{ parameter.defaultValue }}</span></template>
-                        </template>
-                        <template v-if="overload.parameters && overload.parameters.length"><br/></template>
-                        )
-                        <span class="hljs-symbol">:</span>
-                        <code-class :type="overload.returns.type" :generics="overload.returns.generics"></code-class>
-                    </code>
+                    <code-method-declare :overload="overload" :className="className" :methodName="methodName" :isObject="classMeta.type !== 'object'"></code-method-declare>
                 </p>
                 <h4 v-if="overload.parameters && overload.parameters.length">{{ caption.parameters }}:</h4>
                 <p v-for="parameter in overload.parameters">
-                    <i style="vertical-align: middle"><b>{{ parameter.name }}:</b></i>
+                    <i><b style="vertical-align: middle">{{ parameter.name }}:</b></i>
                     <template v-for="type in parameter.types">
-                        <code-declare :type="type" :name="parameter.name" :declare="parameter.declare"></code-declare>
+                        <code-type-declare :type="type" :name="parameter.name" :declare="parameter.declare"></code-type-declare>
                     </template>
                     <br/>
                     <span v-for="description in parameter.descriptions" class="indent"><span v-html="description"></span><br/></span>
                 </p>
-                <h4>
-                    {{ caption.returns }}:
-                    <code-declare :type="overload.returns.type" :declare="overload.returns.declare"></code-declare>
-                </h4>
-                <p>
+                <p v-if="overload.returns.type !== 'void' || overload.returns.descriptions && overload.returns.descriptions.length">
+                    <b style="vertical-align: middle">{{ upper(caption.returns) }}:</b>
+                    <code-type-declare :type="overload.returns.type" :declare="overload.returns.declare"></code-type-declare>
+                    <br/>
                     <span v-for="description in overload.returns.descriptions" class="indent"><span v-html="description"></span><br/></span>
                 </p>
                 <h4 v-if="overload.generics && overload.generics.length">{{ caption.generics }}:</h4>
                 <p v-for="generic in overload.generics">
                     <i style="vertical-align: middle"><b>{{ generic.name }}:</b></i>
                     <template v-for="where in generic.wheres">
-                        <code-declare :type="where.type" :declare="where.declare"></code-declare>
+                        <code-type-declare :type="where.type" :declare="where.declare"></code-type-declare>
                     </template>
                     <br/>
                     <span v-for="description in generic.descriptions" class="indent"><span v-html="description"></span><br/></span>

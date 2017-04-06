@@ -1,0 +1,28 @@
+
+{
+    "overloads": [
+        {
+            "since": "2.1.15",
+            "parameters": [
+                {
+                    "name": "start",
+                    "types": [ "number" ]
+                },
+                {
+                    "name": "count",
+                    "types": [ "number" ],
+                    "defaultValue": "infinity"
+                },
+                {
+                    "name": "values",
+                    "types": [ "any" ],
+                    "params": true
+                }
+            ],
+            "returns": {
+                "type": "IEnumerable"
+            },
+            "description": "通过删除现有元素和/或添加新元素来更改数组的内容"
+        }
+    ]
+}

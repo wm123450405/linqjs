@@ -1,0 +1,107 @@
+{
+	"type": "class",
+	"extends": [],
+	"implements": [],
+	"constructors": [
+		{
+			"parameters": [
+				{
+					"name": "source",
+					"types": [
+						"any"
+					]
+				}
+			],
+			"since": "2.1.15",
+			"returns": {
+				"type": "IEnumerable"
+			},
+			"newInstance": "cannot",
+			"description": "通过指定的 source 创建一个 IEnumerable 对象",
+			"sees": [
+				{
+					"apis": "Enumerable",
+					"method": "asEnumerable"
+				}
+			]
+		}
+	],
+	"name": "Enumerable",
+	"properties": [
+		{
+			"name": "actions",
+			"static": true,
+			"description": "一个包含了一些常用执行器的对象"
+		},
+		{
+			"name": "comparers",
+			"static": true,
+			"description": "一个包含了一些常用比较器的对象"
+		},
+		{
+			"name": "config",
+			"static": true,
+			"description": "全局配置"
+		},
+		{
+			"name": "predicates",
+			"static": true,
+			"description": "一个包含了一些常用筛选器的对象"
+		},
+		{
+			"name": "selectors",
+			"static": true,
+			"description": "一个包含了一些常用选择器的对象"
+		}
+	],
+	"methods": [
+		{
+			"name": "asEnumerable",
+			"overloads": [
+				{
+					"static": true,
+					"description": "通过指定的 source 创建一个 IEnumerable 对象",
+					"parameters": [
+						{
+							"name": "source"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "range",
+			"overloads": [
+				{
+					"static": true,
+					"description": "生成指定范围内的整数序列",
+					"parameters": [
+						{
+							"name": "start"
+						},
+						{
+							"name": "count"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "repeat",
+			"overloads": [
+				{
+					"static": true,
+					"description": "将生成一个序列, 其中包含指定数量个重复的值",
+					"parameters": [
+						{
+							"name": "element"
+						},
+						{
+							"name": "count"
+						}
+					]
+				}
+			]
+		}
+	]
+}

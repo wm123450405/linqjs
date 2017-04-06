@@ -36,12 +36,16 @@
 				"title": "Action"
 			},
 			{
-				"code": "extend",
-				"title": "扩展"
+				"code": "iterator",
+				"title": "迭代器"
 			},
 			{
-				"code": "iterator",
-				"title": "遍历器"
+				"code": "enumerator",
+				"title": "枚举器"
+			},
+			{
+				"code": "extend",
+				"title": "扩展"
 			},
 			{
 				"code": "plugin",
@@ -53,6 +57,14 @@
 		"code": "apis",
 		"title": "APIs",
 		"children": [
+			{
+				"code": "Directory",
+				"title": "Directory Class"
+			},
+			{
+				"code": "Entry",
+				"title": "Entry Class"
+			},
 			{
 				"code": "Enumerable",
 				"title": "Enumerable Class"
@@ -82,9 +94,33 @@
 				"title": "IEnumerable Interface"
 			},
 			{
+				"code": "IEnumerator",
+				"title": "IEnumerator Interface"
+			},
+			{
+				"code": "IGrouping",
+				"title": "IGrouping Interface"
+			},
+			{
+				"code": "IMapEnumerable",
+				"title": "IMapEnumerable Interface"
+			},
+			{
 				"code": "IOrderedEnumerable",
 				"title": "IOrderedEnumerable Interface"
+			},
+			{
+				"code": "Lookup",
+				"title": "Lookup Class"
+			},
+			{
+				"code": "Plugin",
+				"title": "Plugin Class"
 			}
 		]
+	},
+	{
+		"code": "about",
+		"title": "关于"
 	}
 ]
