@@ -1,0 +1,10 @@
+{
+	"type": "class",
+	"extends": [],
+	"implements": [
+		"IMapEnumerable"
+	],
+	"name": "Lookup",
+	"properties": [],
+	"methods": []
+}

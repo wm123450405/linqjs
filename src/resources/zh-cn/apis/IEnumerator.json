@@ -1,0 +1,47 @@
+{
+	"type": "interface",
+	"extends": [],
+	"implements": [],
+	"name": "IEnumerator",
+	"properties": [
+		{
+			"name": "current",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "当前游标所指向的元素"
+				}
+			]
+		}
+	],
+	"methods": [
+		{
+			"name": "moveNext",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "将游标移动到下一个元素, 并返回状态",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reset",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "重置 IEnumerator 对象, 将游标只想第一个元素",
+							"parameters": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

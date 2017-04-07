@@ -1,0 +1,10 @@
+{
+	"type": "interface",
+	"extends": [
+		"IEnumerable"
+	],
+	"implements": [],
+	"name": "IMapEnumerable",
+	"properties": [],
+	"methods": []
+}

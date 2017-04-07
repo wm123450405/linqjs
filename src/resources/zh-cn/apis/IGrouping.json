@@ -1,0 +1,20 @@
+{
+	"type": "interface",
+	"extends": [
+		"IEnumerable"
+	],
+	"implements": [],
+	"name": "IGrouping",
+	"properties": [
+		{
+			"name": "key",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "此分组的key"
+				}
+			]
+		}
+	],
+	"methods": []
+}
