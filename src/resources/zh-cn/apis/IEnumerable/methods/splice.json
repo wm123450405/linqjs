@@ -30,7 +30,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "通过删除现有元素和/或添加新元素来更改数组的内容"
+                    "description": "通过删除现有元素和/或添加新元素来更改数组的内容",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/splice",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

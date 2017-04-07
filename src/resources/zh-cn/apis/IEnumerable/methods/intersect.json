@@ -69,6 +69,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "except"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb355408(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

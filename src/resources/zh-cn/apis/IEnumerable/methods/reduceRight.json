@@ -56,7 +56,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "对累加器和数组的每个值(从右到左)应用一个函数, 以将其聚合为单个值"
+                    "description": "对累加器和数组的每个值(从右到左)应用一个函数, 以将其聚合为单个值",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

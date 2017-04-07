@@ -1,10 +1,58 @@
 {
 	"type": "class",
+	"since": "2.1.15",
 	"extends": [],
 	"implements": [
-		"IMapEnumerable"
+		"Directory"
 	],
 	"name": "Lookup",
 	"properties": [],
-	"methods": []
+	"methods": [
+		{
+			"name": "get",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"override": true,
+							"description": "通过指定的相等比较器查找指定键对应的序列",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "set",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "通过指定的相等比较器为指定键设置对应的序列",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "value"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
 }

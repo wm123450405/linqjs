@@ -152,6 +152,20 @@
                     "description": "基于匹配键对两个序列的元素关联, 并对结果进行分组, 使用指定的相等比较器对键进行比较",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "join"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "groupBy"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb535047(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

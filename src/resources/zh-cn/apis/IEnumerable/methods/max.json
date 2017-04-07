@@ -95,7 +95,17 @@
                             "值序列的最大值"
                         ]
                     },
-                    "description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值"
+                    "description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值",
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "min"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb548659(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
+                    ]
                 }
             ]
         }

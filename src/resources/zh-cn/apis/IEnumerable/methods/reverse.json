@@ -15,6 +15,16 @@
                     "description": "反转序列中元素的顺序",
                     "warnings": [
                         "如果开启对 Array 的扩展, 则 Array 对象原生的 reverse 方法也将返回 IEnumerable 对象, 而不只是 Array 对象"
+                    ],
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb358497(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        },
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse",
+                            "title": "Mozilla MDN"
+                        }
                     ]
                 }
             ]

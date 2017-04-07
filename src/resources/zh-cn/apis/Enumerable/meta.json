@@ -1,5 +1,6 @@
 {
     "type": "class",
+    "since": "2.1.15",
     "extends": [],
     "implements": [],
     "constructors": {

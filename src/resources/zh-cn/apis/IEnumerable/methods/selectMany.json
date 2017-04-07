@@ -81,6 +81,14 @@
                         {
                             "apis": "IEnumerable",
                             "method": "select"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "groupBy"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb534732(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

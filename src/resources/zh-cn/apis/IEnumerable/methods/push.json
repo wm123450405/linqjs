@@ -17,7 +17,13 @@
                     "returns": {
                         "type": "number"
                     },
-                    "description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度"
+                    "description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/push",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

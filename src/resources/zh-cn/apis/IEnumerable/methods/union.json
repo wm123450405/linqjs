@@ -36,8 +36,7 @@
                                         "name": "element",
                                         "types": [
                                             "any"
-                                        ]
-                                    },
+                                        ]},
                                     {
                                         "name": "other",
                                         "types": [
@@ -69,6 +68,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "intersect"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb358407(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

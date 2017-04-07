@@ -1,10 +1,84 @@
 {
 	"type": "interface",
+	"since": "2.1.15",
 	"extends": [
 		"IEnumerable"
 	],
 	"implements": [],
 	"name": "IMapEnumerable",
 	"properties": [],
-	"methods": []
+	"methods": [
+		{
+			"name": "forEach",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"override": true,
+							"description": "遍历序列中的每个元素, 使用元素执行指定的操作",
+							"parameters": [
+								{
+									"name": "action"
+								},
+								{
+									"name": "thisArg"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toDirectory",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"override": true,
+							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Directory 对象",
+							"parameters": [
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toLookup",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"override": true,
+							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Lookup 对象",
+							"parameters": [
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
 }

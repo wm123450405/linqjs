@@ -30,7 +30,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "将一个数组的所有元素从开始索引填充到具有静态值的结束索引"
+                    "description": "将一个数组的所有元素从开始索引填充到具有静态值的结束索引",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/fill",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

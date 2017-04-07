@@ -1,5 +1,6 @@
 {
     "type": "interface",
+    "since": "2.1.15",
     "extends": [ "array" ],
     "implements": []
 }

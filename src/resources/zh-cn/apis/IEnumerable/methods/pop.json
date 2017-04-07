@@ -9,7 +9,13 @@
                     "returns": {
                         "type": "any"
                     },
-                    "description": "从数组中删除最后一个元素, 并返回该元素的值"
+                    "description": "从数组中删除最后一个元素, 并返回该元素的值",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/pop",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

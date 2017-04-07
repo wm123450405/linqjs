@@ -24,7 +24,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "将数组的一部分浅拷贝, 返回到从开始到结束(不包括结束)选择的新数组对象"
+                    "description": "将数组的一部分浅拷贝, 返回到从开始到结束(不包括结束)选择的新数组对象",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/slice",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

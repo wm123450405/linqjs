@@ -107,7 +107,9 @@ const createApis = (refreshLangName, refreshClassName) => {
 												name: path.basename(propertyFile, jsonExt),
 												histroys: propertyMeta.histroys.map(histroy => ({
 													since: histroy.since,
+													deprecated: histroy.deprecated,
 													static: histroy.static,
+													override: histroy.override,
 													description: histroy.description
 												}))
 											};
@@ -137,6 +139,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 													deprecated: histroy.deprecated,
 													overloads: histroy.overloads.map(overload => ({
 														static: overload.static,
+														override: overload.override,
 														description: overload.description,
 														parameters: overload.parameters && overload.parameters.map(parameter => ({
 															name: parameter.name
@@ -235,7 +238,9 @@ const createDirectory = refreshLangName => {
 						}
 						guides.children.push({
 							code: path.basename(guide, jsonExt),
-							title: guideContent.title
+							title: guideContent.title,
+							since: guideContent.since || common.earliest,
+							deprecated: guideContent.deprecated || common.lastest
 						});
 					} catch(e) {
 						console.error(e);
@@ -263,9 +268,20 @@ const createDirectory = refreshLangName => {
 						if (fs.existsSync(apiPath)) {
 							apiContent = extend(true, [], apiContent, JSON.parse(fs.readFileSync(apiPath)));
 						}
+						let since = apiContent.since || common.lastest, deprecated = apiContent.deprecated || common.lastest;
+						for (let method of (apiContent.methods || [])) {
+							since = common.minVersion(Enumerable.min(common.histroys(method.histroys), histroy => histroy.since, common.versionComparer), since);
+							deprecated = common.maxVersion(Enumerable.max(common.histroys(method.histroys), histroy => histroy.deprecated || common.lastest, common.versionComparer), deprecated);
+						}
+						for (let property of (apiContent.properties || [])) {
+							since = common.minVersion(Enumerable.min(common.histroys(property.histroys), histroy => histroy.since, common.versionComparer), since);
+							deprecated = common.maxVersion(Enumerable.max(common.histroys(property.histroys), histroy => histroy.deprecated || common.lastest, common.versionComparer), deprecated);
+						}
 						apis.children.push({
 							code: path.basename(api, jsonExt),
-							title: `${ apiContent.name || path.basename(api, jsonExt) } ${ common.capitalize(caption[apiContent.type]) }`
+							title: `${ apiContent.name || path.basename(api, jsonExt) } ${ common.capitalize(caption[apiContent.type]) }`,
+							since: since,
+							deprecated: deprecated
 						});
 					} catch(e) {
 						console.error(e);

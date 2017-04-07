@@ -50,7 +50,13 @@
                     "returns": {
                         "type": "any"
                     },
-                    "description": "返回数组中满足提供的测试函数的第一个元素的值"
+                    "description": "返回数组中满足提供的测试函数的第一个元素的值",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/find",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

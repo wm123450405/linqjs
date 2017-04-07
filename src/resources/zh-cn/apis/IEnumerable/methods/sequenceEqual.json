@@ -57,7 +57,13 @@
                             "如果两个源序列的长度相等, 并且其相应元素根据 comparer 比较器比较的结果都为相等, 则返回true, 否则返回 false"
                         ]
                     },
-                    "description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等"
+                    "description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等",
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb342073(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
+                    ]
                 }
             ]
         }

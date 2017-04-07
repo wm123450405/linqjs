@@ -8,7 +8,12 @@
                     "returns": {
                         "type": "IEnumerator"
                     },
-                    "description": "获取序列的枚举器"
+                    "description": "获取序列的枚举器",
+                    "sees": [
+                        {
+                            "apis": "IEnumerator"
+                        }
+                    ]
                 }
             ]
         }

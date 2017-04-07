@@ -143,6 +143,20 @@
                     "description": "根据指定的键选择器函数对序列中的元素进行分组, 并且从每个组及其键中创建结果值. 通过使用指定的比较器对键值进行比较, 并且通过使用指定的函数对每个组的元素进行投影",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "selectMany"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "groupJoin"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb535049(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

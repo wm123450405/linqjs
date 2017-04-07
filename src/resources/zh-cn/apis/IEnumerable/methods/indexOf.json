@@ -52,7 +52,13 @@
                     "returns": {
                         "type": "number"
                     },
-                    "description": "返回在数组中可以找到给定元素的第一个索引"
+                    "description": "返回在数组中可以找到给定元素的第一个索引",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

@@ -29,6 +29,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "elementAtOrDefault"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb299233(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

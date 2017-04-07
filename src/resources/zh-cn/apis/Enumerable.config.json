@@ -1,5 +1,6 @@
 {
 	"type": "object",
+	"since": "2.1.15",
 	"name": "Enumerable.config",
 	"properties": [
 		{
@@ -16,7 +17,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
-					"description": "开启对原生 Array 对象的扩展"
+					"description": "开启或关闭对原生 Array 对象的扩展"
 				}
 			]
 		},
@@ -25,7 +26,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
-					"description": "开启对原生 Object 对象的扩展"
+					"description": "开启或关闭对原生 Object 对象的扩展"
 				}
 			]
 		},
@@ -34,7 +35,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
-					"description": "开启对原生 String 对象的扩展"
+					"description": "开启或关闭对原生 String 对象的扩展"
 				}
 			]
 		}

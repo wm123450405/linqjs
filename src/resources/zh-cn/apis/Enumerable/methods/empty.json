@@ -1,0 +1,23 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.15",
+            "overloads": [
+                {
+                    "static": true,
+                    "parameters": [],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "一个不包含任何元素的序列"
+                        ]
+                    },
+                    "description": "生成一个空序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ]
+                }
+            ]
+        }
+    ]
+}

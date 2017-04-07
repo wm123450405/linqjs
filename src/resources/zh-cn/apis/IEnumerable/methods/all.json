@@ -50,6 +50,16 @@
                     ],
                     "warnings": [
                         "此方法不会返回序列中任何元素, 它只会确认集合中的所有元素是否满足条件"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "any"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb548541(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

@@ -105,6 +105,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "average"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb548744(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ],
                     "examples": [

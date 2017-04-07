@@ -1,10 +1,99 @@
 {
 	"type": "class",
+	"since": "2.1.15",
 	"extends": [],
 	"implements": [
 		"IMapEnumerable"
 	],
 	"name": "Directory",
 	"properties": [],
-	"methods": []
+	"methods": [
+		{
+			"name": "delete",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "通过指定的相等比较器从 Directory 中移除指定的键",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "get",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "通过指定的相等比较器查找指定键对应的值",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "has",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "通过指定的相等比较器判断 Directory 中是否包含指定的键",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "set",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "通过指定的相等比较器为指定键设置对应的值",
+							"parameters": [
+								{
+									"name": "key"
+								},
+								{
+									"name": "value"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
 }

@@ -1,0 +1,70 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.15",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用于查找的键"
+                            ]
+                        },
+                        {
+                            "name": "value",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "要设置的值"
+                            ]
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "defaultValue": "defaultSameComparer",
+                            "descriptions": [
+                                "用于对键进行比较相等比较器"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "返回 Directory 对象本身"
+                        ]
+                    },
+                    "description": "通过指定的相等比较器为指定键设置对应的值"
+                }
+            ]
+        }
+    ]
+}

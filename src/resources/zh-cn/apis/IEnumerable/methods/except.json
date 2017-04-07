@@ -69,6 +69,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "intersect"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb336390(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

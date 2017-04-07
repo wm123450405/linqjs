@@ -26,6 +26,12 @@
                     "description": "根据指定的类型筛选出的新序列",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb360913(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

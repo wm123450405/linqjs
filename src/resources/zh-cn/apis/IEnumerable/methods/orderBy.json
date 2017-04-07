@@ -87,6 +87,10 @@
                         },
                         {
                             "apis": "IOrderedEnumerable"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb549422(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

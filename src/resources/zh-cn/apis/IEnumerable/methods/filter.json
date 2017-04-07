@@ -50,7 +50,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "使用指定的函数测试所有元素, 并创建一个包含所有通过测试的元素的新数组"
+                    "description": "使用指定的函数测试所有元素, 并创建一个包含所有通过测试的元素的新数组",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/filter",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

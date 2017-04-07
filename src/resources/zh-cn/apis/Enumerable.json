@@ -1,5 +1,6 @@
 {
 	"type": "class",
+	"since": "2.1.15",
 	"extends": [],
 	"implements": [],
 	"constructors": {
@@ -100,6 +101,21 @@
 									"name": "source"
 								}
 							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "empty",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"static": true,
+							"description": "生成一个空序列",
+							"parameters": []
 						}
 					]
 				}

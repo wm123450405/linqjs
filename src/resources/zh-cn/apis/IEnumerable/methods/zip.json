@@ -62,6 +62,12 @@
                     "description": "通过依次合并元素的方式合并两个序列",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb548775(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

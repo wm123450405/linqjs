@@ -61,6 +61,7 @@
                             <td>
                                 <span class="icon-mark bg-success" :title="caption.property">P</span>
                                 <span class="icon-mark bg-primary" v-if="histroy.static" :title="caption.static">S</span>
+                                <i class="fa fa-fw fa-chevron-circle-up text-danger" v-if="histroy.override" :title="caption.override"></i>
                             </td>
                             <td>
                                 <lang-link :to="`apis/${ name }/property/${ property.name }`">{{ property.name }}</lang-link>
@@ -92,6 +93,7 @@
                                 <td>
                                     <span class="icon-mark bg-success" :title="caption.method">M</span>
                                     <span class="icon-mark bg-primary" v-if="overload.static" :title="caption.static">S</span>
+                                    <i class="fa fa-fw fa-chevron-circle-up text-danger" v-if="overload.override" :title="caption.override"></i>
                                 </td>
                                 <td>
                                     <lang-link :to="`apis/${ name }/method/${ method.name }${ histroy.overloads.length > 1 ? '/' + overloadIndex : '' }`">{{ method.name }}(<span v-for="(parameter, parameterIndex) in overload.parameters"><span v-if="parameterIndex !== 0">, </span>{{ parameter.name }}</span>)</lang-link>

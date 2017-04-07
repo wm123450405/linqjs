@@ -1,8 +1,28 @@
 {
 	"type": "class",
+	"since": "2.1.15",
 	"extends": [],
 	"implements": [],
 	"name": "Entry",
-	"properties": [],
+	"properties": [
+		{
+			"name": "key",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "此entry的key"
+				}
+			]
+		},
+		{
+			"name": "value",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "此entry的value"
+				}
+			]
+		}
+	],
 	"methods": []
 }

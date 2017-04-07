@@ -35,6 +35,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "take"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb358985(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

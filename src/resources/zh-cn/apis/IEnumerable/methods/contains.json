@@ -56,6 +56,12 @@
                     "description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
                     "remarks": [
                         "只要找到匹配的元素, 将停止循环比较的过程"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "any"
+                        }
                     ]
                 }
             ]

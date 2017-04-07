@@ -23,7 +23,13 @@
                     "returns": {
                         "type": "boolean"
                     },
-                    "description": "用来判断当前数组是否包含某指定的值"
+                    "description": "用来判断当前数组是否包含某指定的值",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/includes",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

@@ -50,22 +50,13 @@ export default {
 			return Enumerable.any(this.histroys(histroys), histroy => this.isNewer(histroy.since) && this.isOlder(histroy.deprecated));
 		},
 		histroys(histroys) {
-			if (histroys) {
-				return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]), (v, next) => {
-					v.deprecated = v.deprecated || next && next.since;
-					return v;
-				}).toArray();
-			} else {
-				return [];
-			}
+			return common.histroys(histroys).toArray();
 		},
 		isNewer(version) {
-			let v = Enumerable.zip((version || '0.0.0').split('.'), this.version.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
-			return parseInt(v.ver) <= parseInt(v.baseVer);
+			return common.isNewer(version, this.version);
 		},
 		isOlder(version) {
-			let v = Enumerable.zip((version || this.lastest).split('.'), this.version.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
-			return parseInt(v.ver) >= parseInt(v.baseVer);
+			return common.isOlder(version, this.version);
 		},
 		capitalize(value) {
 			return common.capitalize(value);

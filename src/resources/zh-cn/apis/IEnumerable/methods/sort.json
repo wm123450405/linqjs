@@ -39,7 +39,13 @@
                     "returns": {
                         "type": "number"
                     },
-                    "description": "在适当的位置对数组的元素进行排序, 并返回数组"
+                    "description": "在适当的位置对数组的元素进行排序, 并返回数组",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

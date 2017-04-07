@@ -84,6 +84,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "orderByDescending"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb534489(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

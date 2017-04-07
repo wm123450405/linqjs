@@ -8,6 +8,10 @@
                 {
                     "apis": "IEnumerable",
                     "property": "length"
+                },
+                {
+                    "apis": "IEnumerable",
+                    "method": "count"
                 }
             ]
         }

@@ -31,7 +31,13 @@
                     "returns": {
                         "type": "IEnumerable"
                     },
-                    "description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小"
+                    "description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

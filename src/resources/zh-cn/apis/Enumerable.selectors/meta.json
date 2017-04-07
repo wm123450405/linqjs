@@ -1,3 +1,4 @@
 {
-    "type": "object"
+    "type": "object",
+    "since": "2.1.15"
 }

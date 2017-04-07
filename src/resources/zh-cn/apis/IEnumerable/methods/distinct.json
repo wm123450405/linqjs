@@ -50,6 +50,12 @@
                     ],
                     "warnings": [
                         "此方法的结果可能是无序的"
+                    ],
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb338049(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

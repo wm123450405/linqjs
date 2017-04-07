@@ -46,6 +46,12 @@
                     "description": "通过筛选器筛选值序列",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb549418(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
                     ]
                 }
             ]

@@ -113,6 +113,9 @@
                         {
                             "apis": "IEnumerable",
                             "method": "toObject"
+                        },
+                        {
+                            "apis": "Directory"
                         }
                     ]
                 }

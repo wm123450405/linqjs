@@ -44,7 +44,21 @@
                             "一个数字，表示序列中满足函数条件的元素数量"
                         ]
                     },
-                    "description": "返回一个数字来表示多少个元素指定序列中的满足条件"
+                    "description": "返回一个数字来表示多少个元素指定序列中的满足条件",
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "property": "length"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "property": "size"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb535181(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
+                    ]
                 }
             ]
         }

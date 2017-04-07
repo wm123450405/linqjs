@@ -1,5 +1,6 @@
 {
 	"type": "interface",
+	"since": "2.1.15",
 	"extends": [
 		"array"
 	],
@@ -11,6 +12,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"override": true,
 					"description": "所包含的元素个数"
 				}
 			]
@@ -125,6 +127,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "连接两个序列",
 							"parameters": [
 								{
@@ -164,6 +167,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小",
 							"parameters": [
 								{
@@ -281,6 +285,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "测试数组的所有元素是否都通过了指定函数的测试",
 							"parameters": [
 								{
@@ -323,6 +328,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "将一个数组的所有元素从开始索引填充到具有静态值的结束索引",
 							"parameters": [
 								{
@@ -347,6 +353,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "使用指定的函数测试所有元素, 并创建一个包含所有通过测试的元素的新数组",
 							"parameters": [
 								{
@@ -368,6 +375,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "返回数组中满足提供的测试函数的第一个元素的值",
 							"parameters": [
 								{
@@ -389,6 +397,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "返回数组中满足提供的测试函数的第一个元素的索引",
 							"parameters": [
 								{
@@ -410,6 +419,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "返回数组中满足提供的测试函数的最后一个元素的索引",
 							"parameters": [
 								{
@@ -470,6 +480,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "遍历序列中的每个元素, 使用元素执行指定的操作",
 							"parameters": [
 								{
@@ -562,6 +573,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "用来判断当前数组是否包含某指定的值",
 							"parameters": [
 								{
@@ -583,6 +595,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "返回在数组中可以找到给定元素的第一个索引",
 							"parameters": [
 								{
@@ -683,6 +696,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "法返回指定元素在数组中的最后一个的索引",
 							"parameters": [
 								{
@@ -728,6 +742,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数",
 							"parameters": [
 								{
@@ -851,6 +866,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "从数组中删除最后一个元素, 并返回该元素的值",
 							"parameters": []
 						}
@@ -865,6 +881,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度",
 							"parameters": [
 								{
@@ -883,6 +900,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "对累加器和数组的每个值(从左到右)应用一个函数, 以将其聚合为单个值",
 							"parameters": [
 								{
@@ -904,6 +922,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "对累加器和数组的每个值(从右到左)应用一个函数, 以将其聚合为单个值",
 							"parameters": [
 								{
@@ -925,6 +944,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "反转序列中元素的顺序",
 							"parameters": []
 						}
@@ -999,6 +1019,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "从数组中删除第一个元素, 并返回该元素的值",
 							"parameters": []
 						}
@@ -1088,6 +1109,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "将数组的一部分浅拷贝, 返回到从开始到结束(不包括结束)选择的新数组对象",
 							"parameters": [
 								{
@@ -1109,6 +1131,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "测试数组中的某些元素是否通过了指定函数的测试",
 							"parameters": [
 								{
@@ -1130,6 +1153,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "在适当的位置对数组的元素进行排序, 并返回数组",
 							"parameters": [
 								{
@@ -1148,6 +1172,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "通过删除现有元素和/或添加新元素来更改数组的内容",
 							"parameters": [
 								{
@@ -1333,6 +1358,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "将一个或多个元素添加到数组的开头, 并返回新数组的长度",
 							"parameters": [
 								{

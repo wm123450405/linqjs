@@ -52,7 +52,13 @@
                     "returns": {
                         "type": "number"
                     },
-                    "description": "法返回指定元素在数组中的最后一个的索引"
+                    "description": "法返回指定元素在数组中的最后一个的索引",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }

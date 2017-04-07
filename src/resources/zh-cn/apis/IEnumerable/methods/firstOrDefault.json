@@ -58,6 +58,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "first"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb549039(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

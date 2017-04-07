@@ -13,43 +13,63 @@
 		"children": [
 			{
 				"code": "instance",
-				"title": "获取 IEnumerable 实例"
+				"title": "获取 IEnumerable 实例",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "config",
-				"title": "配置"
+				"title": "配置",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "selector",
-				"title": "选择器"
+				"title": "选择器",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "predicate",
-				"title": "筛选器"
+				"title": "筛选器",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "comparer",
-				"title": "比较器"
+				"title": "比较器",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "action",
-				"title": "Action"
+				"title": "Action",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "iterator",
-				"title": "迭代器"
+				"title": "迭代器",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "enumerator",
-				"title": "枚举器"
+				"title": "枚举器",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "extend",
-				"title": "扩展"
+				"title": "扩展",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "plugin",
-				"title": "插件"
+				"title": "插件",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			}
 		]
 	},
@@ -59,63 +79,93 @@
 		"children": [
 			{
 				"code": "Directory",
-				"title": "Directory Class"
+				"title": "Directory Class",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Entry",
-				"title": "Entry Class"
+				"title": "Entry Class",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable",
-				"title": "Enumerable Class"
+				"title": "Enumerable Class",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable.actions",
-				"title": "Enumerable.actions Object"
+				"title": "Enumerable.actions Object",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable.comparers",
-				"title": "Enumerable.comparers Object"
+				"title": "Enumerable.comparers Object",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable.config",
-				"title": "Enumerable.config Object"
+				"title": "Enumerable.config Object",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable.predicates",
-				"title": "Enumerable.predicates Object"
+				"title": "Enumerable.predicates Object",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Enumerable.selectors",
-				"title": "Enumerable.selectors Object"
+				"title": "Enumerable.selectors Object",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "IEnumerable",
-				"title": "IEnumerable Interface"
+				"title": "IEnumerable Interface",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "IEnumerator",
-				"title": "IEnumerator Interface"
+				"title": "IEnumerator Interface",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "IGrouping",
-				"title": "IGrouping Interface"
+				"title": "IGrouping Interface",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "IMapEnumerable",
-				"title": "IMapEnumerable Interface"
+				"title": "IMapEnumerable Interface",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "IOrderedEnumerable",
-				"title": "IOrderedEnumerable Interface"
+				"title": "IOrderedEnumerable Interface",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Lookup",
-				"title": "Lookup Class"
+				"title": "Lookup Class",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			},
 			{
 				"code": "Plugin",
-				"title": "Plugin Class"
+				"title": "Plugin Class",
+				"since": "2.1.15",
+				"deprecated": "2.1.16"
 			}
 		]
 	},

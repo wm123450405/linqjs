@@ -35,6 +35,14 @@
                         {
                             "apis": "IEnumerable",
                             "method": "union"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb302894(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        },
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/concat",
+                            "title": "Mozilla MDN"
                         }
                     ]
                 }

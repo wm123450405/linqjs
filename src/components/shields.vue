@@ -10,10 +10,10 @@
     line-height: 16px
     color: white
     font-size: 12px
-    &:first-child
+    > span:first-child
         border-top-left-radius: 3px
         border-bottom-left-radius: 3px
-    &:last-child
+    > span:last-child
         border-top-right-radius: 3px
         border-bottom-right-radius: 3px
     > .shields-subject

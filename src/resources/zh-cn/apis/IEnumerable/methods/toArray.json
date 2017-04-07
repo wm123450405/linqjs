@@ -11,7 +11,13 @@
                             "一个包含输入序列中的所有元素的数组"
                         ]
                     },
-                    "description": "使用源序列创建一个数组"
+                    "description": "使用源序列创建一个数组",
+                    "sees": [
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb298736(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
+                        }
+                    ]
                 }
             ]
         }

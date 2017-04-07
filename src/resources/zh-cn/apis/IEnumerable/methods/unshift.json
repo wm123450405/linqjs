@@ -17,7 +17,13 @@
                     "returns": {
                         "type": "number"
                     },
-                    "description": "将一个或多个元素添加到数组的开头, 并返回新数组的长度"
+                    "description": "将一个或多个元素添加到数组的开头, 并返回新数组的长度",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
                 }
             ]
         }
