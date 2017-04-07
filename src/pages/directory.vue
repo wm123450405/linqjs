@@ -11,7 +11,7 @@
 				<lang-link :to="line.code" v-else><i v-if="line.icon" class="fa fa-fw" :style="`fa-${ line.icon }`"></i><i class="fa fa-fw first-word" v-else>{{ line.title && line.title.substring(0, 1) }}</i> <span>{{ line.title }}</span></lang-link>
 			</div>
 			<ul class="list-group collapse" :id="line.code">
-				<li class="list-group-item" v-for="sub in line.children"><lang-link :to="`${ line.code }/${ sub.code }`" v-if="line.children"><span>{{ sub.title }}</span></lang-link></li>
+				<li class="list-group-item" v-for="sub in line.children" v-if="isNewer(sub.since) && isOlder(sub.deprecated)"><lang-link :to="`${ line.code }/${ sub.code }`" v-if="line.children"><span>{{ sub.title }}</span></lang-link></li>
 			</ul>
 		</div>
 	</nav>
@@ -26,7 +26,7 @@
 			};
 		},
 		mounted() {
-			this.getJson('directory').then(directory => this.directory = directory);
+			this.getJson(true, 'directory').then(directory => this.directory = directory);
 		},
 		methods: {
 

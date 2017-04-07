@@ -1,28 +1,39 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "target",
-                    "types": [ "number" ],
-                    "defaultValue": "0"
-                },
-                {
-                    "name": "start",
-                    "types": [ "number" ],
-                    "defaultValue": "0"
-                },
-                {
-                    "name": "end",
-                    "types": [ "number" ],
-                    "defaultValue": "infinity"
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "target",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": "0"
+                        },
+                        {
+                            "name": "start",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": "0"
+                        },
+                        {
+                            "name": "end",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": "infinity"
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable"
+                    },
+                    "description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小"
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable"
-            },
-            "description": "浅复制数组的一部分到同一数组中的另一个位置, 并返回它, 而不修改其大小"
+            ]
         }
     ]
 }

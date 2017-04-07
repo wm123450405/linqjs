@@ -1,63 +1,88 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.16",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "collectionSelector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "要应用于输入序列中的每个元素转换函数" ],
-                    "defaultValue": "defaultSelector",
-                    "declare": {
-                        "returns": {
-                            "type": "IEnumerable"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                    "parameters": [
+                        {
+                            "name": "collectionSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "要应用于输入序列中的每个元素转换函数"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "IEnumerable"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "resultSelector",
-                    "types": [ "function" ],
-                    "descriptions": [ "要应用于中间序列的每个元素的转换函数" ],
-                    "defaultValue": "defaultCollectionSelector",
-                    "declare": {
-                        "returns": {
-                            "type": "any"
                         },
-                        "parameters": [
-                            {
-                                "name": "sourceElement",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "collectionElement",
-                                "types": [ "any" ]
+                        {
+                            "name": "resultSelector",
+                            "types": [
+                                "function"
+                            ],
+                            "descriptions": [
+                                "要应用于中间序列的每个元素的转换函数"
+                            ],
+                            "defaultValue": "defaultCollectionSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "sourceElement",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "collectionElement",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "一对多转换函数对输入序列中的每个元素调用的结果序列"
                         ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "一对多转换函数对输入序列中的每个元素调用的结果序列" ]
-            },
-            "description": "一个序列的每个元素投影为一个序列, 并将结果展开合并为一个结果序列",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
-            ],
-            "sees": [
-                {
-                    "apis": "IEnumerable",
-                    "method": "select"
+                    },
+                    "description": "一个序列的每个元素投影为一个序列, 并将结果展开合并为一个结果序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "select"
+                        }
+                    ]
                 }
             ]
         }

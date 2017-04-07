@@ -6,5 +6,15 @@
     {
         "code": "install",
         "title": "Install"
+    },
+    "guides",
+    "apis",
+    {
+        "code": "change",
+        "title": "Change List"
+    },
+    {
+        "code": "about",
+        "title": "About"
     }
 ]

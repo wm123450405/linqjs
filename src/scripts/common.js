@@ -1,6 +1,9 @@
 module.exports = {
 	defaultLang: 'zh-cn',
-	lastest: '2.1.16',
+	versions: ['2.1.15', '2.1.16'],
+	get lastest() {
+		return this.versions[this.versions.length - 1];
+	},
 	capitalize(value) {
 		if (!value) return '';
 		value = value.toString();

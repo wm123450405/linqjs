@@ -1,13 +1,17 @@
-
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [],
-            "returns": {
-                "type": "any"
-            },
-            "description": "从数组中删除最后一个元素, 并返回该元素的值"
+            "overloads": [
+                {
+                    "override": true,
+                    "parameters": [],
+                    "returns": {
+                        "type": "any"
+                    },
+                    "description": "从数组中删除最后一个元素, 并返回该元素的值"
+                }
+            ]
         }
     ]
 }

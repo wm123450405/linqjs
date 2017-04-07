@@ -1,8 +1,17 @@
 {
-    "type": "function",
-    "since": "2.1.15",
-    "description": "默认的执行器",
-    "remarks": [
-        "该执行器接受一个元素和该元素所在序列的索引作为参数, 但是不做任何处理, 通常表示为 defaultAction"
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.15",
+            "description": "默认的执行器",
+            "remarks": [
+                "该执行器接受一个元素和该元素所在序列的索引作为参数, 但是不做任何处理, 通常表示为 defaultAction"
+            ],
+            "sees": [
+                {
+                    "guide": "action"
+                }
+            ]
+        }
     ]
 }

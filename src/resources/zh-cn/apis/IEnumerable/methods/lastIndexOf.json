@@ -1,42 +1,60 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "element",
-                    "types": [ "any" ]
-                },
-                {
-                    "name": "start",
-                    "types": [ "number" ],
-                    "defaultValue": "0"
-                },
-                {
-                    "name": "comparer",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "defaultValue": "defaultStrictEqualityComparer",
-                    "declare": {
-                        "returns": {
-                            "type": "boolean"
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "element",
+                            "types": [
+                                "any"
+                            ]
                         },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
+                        {
+                            "name": "start",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": "0"
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "defaultValue": "defaultStrictEqualityComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
+                        }
+                    ],
+                    "returns": {
+                        "type": "number"
+                    },
+                    "description": "法返回指定元素在数组中的最后一个的索引"
                 }
-            ],
-            "returns": {
-                "type": "number"
-            },
-            "description": "法返回指定元素在数组中的最后一个的索引"
+            ]
         }
     ]
 }

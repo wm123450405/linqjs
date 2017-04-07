@@ -1,38 +1,68 @@
 {
-	"constructors": [
-		{
-			"description": "Create an object of type IEnumerable from source"
-		}
-	],
+	"constructors": {
+		"histroys": [
+			{
+				"overloads": [
+					{
+						"description": "Create an object of type IEnumerable from source"
+					}
+				]
+			}
+		]
+	},
 	"name": "Enumerable",
 	"properties": [
 		{
 			"name": "actions",
-			"description": "An object contains same useful actions"
+			"histroys": [
+				{
+					"description": "An object contains same useful actions"
+				}
+			]
 		},
 		{
 			"name": "comparers",
-			"description": "An object contains same useful comparers"
+			"histroys": [
+				{
+					"description": "An object contains same useful comparers"
+				}
+			]
 		},
 		{
 			"name": "config",
-			"description": "Global config"
+			"histroys": [
+				{
+					"description": "Global config"
+				}
+			]
 		},
 		{
 			"name": "predicates",
-			"description": "An object contains same useful predicates"
+			"histroys": [
+				{
+					"description": "An object contains same useful predicates"
+				}
+			]
 		},
 		{
 			"name": "selectors",
-			"description": "An object contains same useful selectors"
+			"histroys": [
+				{
+					"description": "An object contains same useful selectors"
+				}
+			]
 		}
 	],
 	"methods": [
 		{
 			"name": "asEnumerable",
-			"overloads": [
+			"histroys": [
 				{
-					"description": "Create an object of type IEnumerable from source"
+					"overloads": [
+						{
+							"description": "Create an object of type IEnumerable from source"
+						}
+					]
 				}
 			]
 		}

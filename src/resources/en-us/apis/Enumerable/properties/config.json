@@ -1,3 +1,7 @@
 {
-    "description": "Global config"
+    "histroys": [
+        {
+            "description": "Global config"
+        }
+    ]
 }

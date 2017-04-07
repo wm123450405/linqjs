@@ -1,15 +1,19 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [],
-            "returns": {
-                "type": "boolean",
-                "descriptions": [
-                    "如果游标成功移动至下一个元素, 则返回true, 否则返回false"
-                ]
-            },
-            "description": "将游标移动到下一个元素, 并返回状态"
+            "overloads": [
+                {
+                    "parameters": [],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "如果游标成功移动至下一个元素, 则返回true, 否则返回false"
+                        ]
+                    },
+                    "description": "将游标移动到下一个元素, 并返回状态"
+                }
+            ]
         }
     ]
 }

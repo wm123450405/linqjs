@@ -1,92 +1,121 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "seed",
-                    "types": [ "any" ],
-                    "descriptions": [ "累加器的初始值" ]
-                },
-                {
-                    "name": "func",
-                    "types": [ "function" ],
-                    "descriptions": [ "要对每个元素调用的累加器函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "any"
+                    "parameters": [
+                        {
+                            "name": "seed",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "累加器的初始值"
+                            ]
                         },
-                        "parameters": [
-                            {
-                                "name": "seed",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                        {
+                            "name": "func",
+                            "types": [
+                                "function"
+                            ],
+                            "descriptions": [
+                                "要对每个元素调用的累加器函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "seed",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "resultSelector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "defaultValue": "defaultSelector",
-                    "descriptions": [ "将累加器的最终值转换为结果值的函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "any"
                         },
-                        "parameters": [
-                            {
-                                "name": "result",
-                                "types": [ "any" ]
+                        {
+                            "name": "resultSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "descriptions": [
+                                "将累加器的最终值转换为结果值的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "result",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "已转换的累加器最终值"
                         ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "any",
-                "descriptions": [ "已转换的累加器最终值" ]
-            },
-            "description": "对一个序列应用累加器函数. 将指定的种子值用作累加器的初始值, 并使用指定的函数选择结果值.",
-            "remarks": [
-                "此方法可以很容易地通过一系列值执行计算. 此方法的原理是使用 source 中的每一个元素依次调用一次 func, 每次 func 调用时此方法将传递聚合的值(作为第一个参数传递给 func)与该序列中的元素. 参数 seed 的值作为聚合的初始值来使用. func 执行的结果替换之前的聚合的值. 最后一次 func 执行的结果传递给 resultSelector 得到此方法要获取的最终结果。"
-            ],
-            "sees": [
-                {
-                    "apis": "IEnumerable",
-                    "method": "count"
-                },
-                {
-                    "apis": "IEnumerable",
-                    "method": "min"
-                },
-                {
-                    "apis": "IEnumerable",
-                    "method": "max"
-                },
-                {
-                    "apis": "IEnumerable",
-                    "method": "sum"
-                },
-                {
-                    "apis": "IEnumerable",
-                    "method": "average"
-                }
-            ],
-            "examples": [
-                {
-                    "description": "下面的代码示例演示如何使用 aggregate 应用累加器函数和结果选择器",
-                    "script": {
-                        "type": "javascript",
-                        "href": "1.js"
-                    }
+                    },
+                    "description": "对一个序列应用累加器函数. 将指定的种子值用作累加器的初始值, 并使用指定的函数选择结果值.",
+                    "remarks": [
+                        "此方法可以很容易地通过一系列值执行计算. 此方法的原理是使用 source 中的每一个元素依次调用一次 func, 每次 func 调用时此方法将传递聚合的值(作为第一个参数传递给 func)与该序列中的元素. 参数 seed 的值作为聚合的初始值来使用. func 执行的结果替换之前的聚合的值. 最后一次 func 执行的结果传递给 resultSelector 得到此方法要获取的最终结果。"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "count"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "min"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "max"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "sum"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "average"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 aggregate 应用累加器函数和结果选择器",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
                 }
             ]
         }

@@ -1,6 +1,17 @@
 {
-    "type": "function",
-    "since": "2.1.15",
-    "description": "默认的选择器",
-    "remarks": [ "该选择器是一个一元选择器, 它接受一个输入值, 并返回输入的值本身. 通常表示为 defaultSelector" ]
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.15",
+            "description": "默认的选择器",
+            "remarks": [
+                "该选择器是一个一元选择器, 它接受一个输入值, 并返回输入的值本身. 通常表示为 defaultSelector"
+            ],
+            "sees": [
+                {
+                    "guide": "selector"
+                }
+            ]
+        }
+    ]
 }

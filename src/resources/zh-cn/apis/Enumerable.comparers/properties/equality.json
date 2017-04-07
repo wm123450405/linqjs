@@ -1,6 +1,17 @@
 {
-    "type": "function",
-    "since": "2.1.15",
-    "description": "默认的相等比较器",
-    "remarks": [ "defaultEqualityComparer" ]
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.15",
+            "description": "默认的相等比较器",
+            "remarks": [
+                "defaultEqualityComparer"
+            ],
+            "sees": [
+                {
+                    "guide": "comparer"
+                }
+            ]
+        }
+    ]
 }

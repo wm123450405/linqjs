@@ -1,19 +1,25 @@
-
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "values",
-                    "types": [ "any" ],
-                    "params": true
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "values",
+                            "types": [
+                                "any"
+                            ],
+                            "params": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "number"
+                    },
+                    "description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度"
                 }
-            ],
-            "returns": {
-                "type": "number"
-            },
-            "description": "将一个或多个元素添加到数组的末尾, 并返回数组的新长度"
+            ]
         }
     ]
 }

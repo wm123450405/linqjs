@@ -1,40 +1,57 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "predicate",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
-                    "defaultValue": "defaultPredicate",
-                    "declare": {
-                        "returns": {
-                            "type": "boolean"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "defaultValue": "defaultPredicate",
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "如果源序列中的每一个元素都在指定筛选器的检测中返回true或者序列为空,则返回true,否则返回false"
                         ]
-                    }
+                    },
+                    "description": "确定是否对序列中的所有元素都满足条件",
+                    "remarks": [
+                        "在循环过程中, 当可以确定的结果时, 循环就会立即停止。"
+                    ],
+                    "warnings": [
+                        "此方法不会返回序列中任何元素, 它只会确认集合中的所有元素是否满足条件"
+                    ]
                 }
-            ],
-            "returns": {
-                "type": "boolean",
-                "descriptions": [ "如果源序列中的每一个元素都在指定筛选器的检测中返回true或者序列为空,则返回true,否则返回false" ]
-            },
-            "description": "确定是否对序列中的所有元素都满足条件",
-            "remarks": [
-                "在循环过程中, 当可以确定的结果时, 循环就会立即停止。"
-            ],
-            "warnings": [
-                "此方法不会返回序列中任何元素, 它只会确认集合中的所有元素是否满足条件"
             ]
         }
     ]

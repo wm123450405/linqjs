@@ -1,41 +1,58 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "selector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "应用于每个元素的转换函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "any"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                    "parameters": [
+                        {
+                            "name": "selector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "应用于每个元素的转换函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "一个序列，其元素以相反顺序对应于输入序列的元素"
                         ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "一个序列，其元素以相反顺序对应于输入序列的元素" ]
-            },
-            "description": "将序列中的每个元素投影到新序列",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
-            ],
-            "sees": [
-                {
-                    "apis": "IEnumerable",
-                    "method": "selectMany"
+                    },
+                    "description": "将序列中的每个元素投影到新序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "selectMany"
+                        }
+                    ]
                 }
             ]
         }

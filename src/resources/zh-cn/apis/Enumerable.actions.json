@@ -4,7 +4,12 @@
 	"properties": [
 		{
 			"name": "default",
-			"description": "默认的执行器"
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "默认的执行器"
+				}
+			]
 		}
 	],
 	"methods": []

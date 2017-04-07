@@ -1,113 +1,169 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "split",
-                    "types": [ "string" ]
+                    "parameters": [
+                        {
+                            "name": "split",
+                            "types": [
+                                "string"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            "name": "inner",
+                            "types": [
+                                "IEnumerable",
+                                "Iterator",
+                                "array",
+                                "object",
+                                "string"
+                            ],
+                            "descriptions": [
+                                "要与源序列联接的序列"
+                            ]
+                        },
+                        {
+                            "name": "resultSelector",
+                            "types": [
+                                "function"
+                            ],
+                            "descriptions": [
+                                "用于从两个匹配元素创建结果元素的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "outerKeySelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于从源序列的每个元素提取联接键的函数"
+                            ],
+                            "defaultValue": "defaultKeySelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "innerKeySelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于从联接序列的每个元素提取联接键的函数"
+                            ],
+                            "defaultValue": "defaultKeySelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于对键进行比较相等比较器"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "通过对两个序列执行内部联接获得的结果集合"
+                        ]
+                    },
+                    "description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ]
                 }
-            ]
-        },
-        {
-            "since": "2.1.15",
-            "parameters": [
-                {
-                    "name": "inner",
-                    "types": [ "IEnumerable", "Iterator", "array", "object", "string" ],
-                    "descriptions": [ "要与源序列联接的序列" ]
-                },
-                {
-                    "name": "resultSelector",
-                    "types": [ "function" ],
-                    "descriptions": [ "用于从两个匹配元素创建结果元素的函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "any"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
-                            }
-                        ]
-                    }
-                },
-                {
-                    "name": "outerKeySelector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于从源序列的每个元素提取联接键的函数" ],
-                    "defaultValue": "defaultKeySelector",
-                    "declare": {
-                        "returns": {
-                            "type": "any"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            }
-                        ]
-                    }
-                },
-                {
-                    "name": "innerKeySelector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于从联接序列的每个元素提取联接键的函数" ],
-                    "defaultValue": "defaultKeySelector",
-                    "declare": {
-                        "returns": {
-                            "type": "any"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            }
-                        ]
-                    }
-                },
-                {
-                    "name": "comparer",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于对键进行比较相等比较器" ],
-                    "defaultValue": "defaultEqualityComparer",
-                    "declare": {
-                        "returns": {
-                            "type": "boolean"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
-                            }
-                        ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "通过对两个序列执行内部联接获得的结果集合" ]
-            },
-            "description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
             ]
         }
     ]

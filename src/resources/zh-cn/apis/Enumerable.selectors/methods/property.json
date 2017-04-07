@@ -1,33 +1,52 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "property",
-                    "types": [ "string", "symbol", "number" ]
-                }
-            ],
-            "returns": {
-                "type": "function",
-                "declare": {
-                    "returns": {
-                        "type": "any"
-                    },
                     "parameters": [
                         {
-                            "name": "element",
-                            "types": [ "any" ]
-                        },
+                            "name": "property",
+                            "types": [
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "any"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "index",
+                                    "types": [
+                                        "number"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "description": "获取一个属性选择器",
+                    "remarks": [
+                        "返回一个一元选择器函数, 该选择器返回输入对象的指定属性值"
+                    ],
+                    "sees": [
                         {
-                            "name": "index",
-                            "types": [ "number" ]
+                            "guide": "selector"
                         }
                     ]
                 }
-            },
-            "description": "获取一个属性选择器",
-            "remarks": [ "返回一个一元选择器函数, 该选择器返回输入对象的指定属性值" ]
+            ]
         }
     ]
 }

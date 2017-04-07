@@ -105,8 +105,11 @@ const createApis = (refreshLangName, refreshClassName) => {
 											let propertyMeta = JSON.parse(fs.readFileSync(path.join(propertiesPath, propertyFile)));
 											let property = {
 												name: path.basename(propertyFile, jsonExt),
-												static: propertyMeta.static,
-												description: propertyMeta.description
+												histroys: propertyMeta.histroys.map(histroy => ({
+													since: histroy.since,
+													static: histroy.static,
+													description: histroy.description
+												}))
 											};
 											classMeta.properties.push(property);
 										} catch(e) {
@@ -129,11 +132,15 @@ const createApis = (refreshLangName, refreshClassName) => {
 
 											let method = {
 												name: path.basename(methodFile, jsonExt),
-												overloads: methodMeta.overloads.map(overload => ({
-													static: overload.static,
-													description: overload.description,
-													parameters: overload.parameters && overload.parameters.map(parameter => ({
-														name: parameter.name
+												histroys: methodMeta.histroys.map(histroy => ({
+													since: histroy.since,
+													deprecated: histroy.deprecated,
+													overloads: histroy.overloads.map(overload => ({
+														static: overload.static,
+														description: overload.description,
+														parameters: overload.parameters && overload.parameters.map(parameter => ({
+															name: parameter.name
+														}))
 													}))
 												}))
 											};

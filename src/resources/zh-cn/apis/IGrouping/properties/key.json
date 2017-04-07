@@ -1,5 +1,9 @@
 {
-    "type": "any",
-    "since": "2.1.15",
-    "description": "此分组的key"
+    "histroys": [
+        {
+            "type": "any",
+            "since": "2.1.15",
+            "description": "此分组的key"
+        }
+    ]
 }

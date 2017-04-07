@@ -1,46 +1,63 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "predicate",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于检测每个元素是否满足条件的函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "boolean"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "包含输入序列中出现检测不能够通过在元素之前的所有元素组成的新序列"
                         ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "包含输入序列中出现检测不能够通过在元素之前的所有元素组成的新序列" ]
-            },
-            "description": "返回序列中从起始位置开始指定的条件为 true 的连续元素",
-            "remarks": [
-                "此方法通过延迟执行的方式实现",
-                "如果源序列中第一个元素执行 predicate 检测时返回 false, 则返回空序列"
-            ],
-            "sees": [
-                {
-                    "apis": "IEnumerable",
-                    "method": "skipWhile"
-                },
-                {
-                    "apis": "IEnumerable",
-                    "method": "take"
+                    },
+                    "description": "返回序列中从起始位置开始指定的条件为 true 的连续元素",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "如果源序列中第一个元素执行 predicate 检测时返回 false, 则返回空序列"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "skipWhile"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "take"
+                        }
+                    ]
                 }
             ]
         }

@@ -1,63 +1,91 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "keySelector",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于从元素中提取键的函数" ],
-                    "defaultValue": "defaultSelector",
-                    "declare": {
-                        "returns": {
-                            "type": "any"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                    "parameters": [
+                        {
+                            "name": "keySelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于从元素中提取键的函数"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "comparer",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "键进行大小比较的大小比较器" ],
-                    "defaultValue": "defaultComparer",
-                    "declare": {
-                        "returns": {
-                            "type": "number"
                         },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "键进行大小比较的大小比较器"
+                            ],
+                            "defaultValue": "defaultComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "number"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IOrderedEnumerable",
+                        "descriptions": [
+                            "元素根据某个键进行升序排序后的结果序列"
                         ]
-                    }
-                }
-            ],
-            "returns": {
-                "type": "IOrderedEnumerable",
-                "descriptions": [ "元素根据某个键进行升序排序后的结果序列" ]
-            },
-            "description": "执行后续排序中使用指定的比较器按升序对序列的元素",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
-            ],
-            "sees": [
-                {
-                    "apis": "IEnumerable",
-                    "method": "orderBy"
+                    },
+                    "description": "执行后续排序中使用指定的比较器按升序对序列的元素",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "orderBy"
+                        }
+                    ]
                 }
             ]
         }

@@ -1,7 +1,13 @@
 {
-    "constructors": [
-        {
-            "description": "Create an object of type IEnumerable from source"
-        }
-    ]
+    "constructors": {
+        "histroys": [
+            {
+                "overloads": [
+                    {
+                        "description": "Create an object of type IEnumerable from source"
+                    }
+                ]
+            }
+        ]
+    }
 }

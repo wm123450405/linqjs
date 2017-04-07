@@ -1,10 +1,11 @@
 <template>
-    <router-link :to="`/${ $route.params.lang || 'zh-hans' }/${ to }`"><slot></slot></router-link>
+    <router-link :to="`/${ $route.params.lang || 'zh-hans' }/${ toVersion ? toVersion + '/' : version !== lastest ? version + '/' : '' }${ to }`"><slot></slot></router-link>
 </template>
 <script>
     export default {
     	props: {
-    		to: String
+    		to: String,
+            toVersion: String
         }
     }
 </script>

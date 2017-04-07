@@ -1,21 +1,33 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "type",
-                    "types": [ "class", "function", "string" ],
-                    "descriptions": [ "筛选序列元素所根据的类型" ]
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "types": [
+                                "class",
+                                "function",
+                                "string"
+                            ],
+                            "descriptions": [
+                                "筛选序列元素所根据的类型"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "包含输入序列中的元素类型为指定类型的所有元素组成的新序列"
+                        ]
+                    },
+                    "description": "根据指定的类型筛选出的新序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ]
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "包含输入序列中的元素类型为指定类型的所有元素组成的新序列" ]
-            },
-            "description": "根据指定的类型筛选出的新序列",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
             ]
         }
     ]

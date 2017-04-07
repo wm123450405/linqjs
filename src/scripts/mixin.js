@@ -15,6 +15,7 @@ export default {
 		return {
 			defaultLang: common.defaultLang,
 			lastest: common.lastest,
+			versions: common.versions,
 			promises: []
 		}
 	},
@@ -42,6 +43,30 @@ export default {
 		}
 	},
 	methods: {
+		hasHistroys(metas) {
+			return Enumerable.any(metas, meta => meta && this.hasHistroy(meta.histroys));
+		},
+		hasHistroy(histroys) {
+			return Enumerable.any(this.histroys(histroys), histroy => this.isNewer(histroy.since) && this.isOlder(histroy.deprecated));
+		},
+		histroys(histroys) {
+			if (histroys) {
+				return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]), (v, next) => {
+					v.deprecated = v.deprecated || next && next.since;
+					return v;
+				}).toArray();
+			} else {
+				return [];
+			}
+		},
+		isNewer(version) {
+			let v = Enumerable.zip((version || '0.0.0').split('.'), this.version.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+			return parseInt(v.ver) <= parseInt(v.baseVer);
+		},
+		isOlder(version) {
+			let v = Enumerable.zip((version || this.lastest).split('.'), this.version.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+			return parseInt(v.ver) >= parseInt(v.baseVer);
+		},
 		capitalize(value) {
 			return common.capitalize(value);
 		},
@@ -71,6 +96,11 @@ export default {
 			}
 		},
 		getJson(...names) {
+			let isArray = false;
+			if (names[0] === true) {
+				names = names.slice(1);
+				isArray = [];
+			}
 			let load = (revolse, reject) => {
 				require.ensure([], () => {
 					try {
@@ -86,14 +116,14 @@ export default {
 									return { };
 								}
 							} else {
-								let defaultLang = { }, lang = { };
+								let defaultLang = isArray ? [] : { }, lang = isArray ? [] : { };
 								try {
 									defaultLang = require(`../resources/${ this.defaultLang }/${ name }.json`);
 								} catch (e) { console.warn(e); }
 								try {
 									lang = require(`../resources/${ this.lang }/${ name }.json`);
 								} catch (e) { console.warn(e); }
-								return $.extend(true, { }, defaultLang, lang);
+								return $.extend(true, isArray ? [] : { }, defaultLang, lang);
 							}
 						});
 						if (results.length === 1) {

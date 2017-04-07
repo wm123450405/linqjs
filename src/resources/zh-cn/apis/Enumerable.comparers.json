@@ -4,19 +4,39 @@
 	"properties": [
 		{
 			"name": "default",
-			"description": "默认的大小比较器"
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "默认的大小比较器"
+				}
+			]
 		},
 		{
 			"name": "equality",
-			"description": "默认的相等比较器"
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "默认的相等比较器"
+				}
+			]
 		},
 		{
 			"name": "same",
-			"description": "默认的相同比较器"
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "默认的相同比较器"
+				}
+			]
 		},
 		{
 			"name": "strict",
-			"description": "默认的全等比较器"
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "默认的全等比较器"
+				}
+			]
 		}
 	],
 	"methods": []

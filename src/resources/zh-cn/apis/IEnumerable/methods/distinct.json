@@ -1,40 +1,57 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "comparer",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "用于对值进行比较的相等比较器" ],
-                    "defaultValue": "defaultEqualityComparer",
-                    "declare": {
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
+                    "parameters": [
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于对值进行比较的相等比较器"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ],
+                                "returns": {
+                                    "type": "boolean"
+                                }
                             }
-                        ],
-                        "returns": {
-                            "type": "boolean"
                         }
-                    }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "包含源序列中所有非重复元素的结果序列"
+                        ]
+                    },
+                    "description": "获取包含源序列中所有非重复元素的新序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "warnings": [
+                        "此方法的结果可能是无序的"
+                    ]
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "包含源序列中所有非重复元素的结果序列" ]
-            },
-            "description": "获取包含源序列中所有非重复元素的新序列",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
-            ],
-            "warnings": [
-                "此方法的结果可能是无序的"
             ]
         }
     ]

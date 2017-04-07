@@ -1,40 +1,58 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "callback",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "declare": {
-                        "returns": {
-                            "type": "void"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            },
-                            {
-                                "name": "source",
-                                "types": [ "IEnumerable" ]
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "callback",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    },
+                                    {
+                                        "name": "source",
+                                        "types": [
+                                            "IEnumerable"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "thisArg",
-                    "types": [ "any" ]
+                        },
+                        {
+                            "name": "thisArg",
+                            "types": [
+                                "any"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable"
+                    },
+                    "description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数"
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable"
-            },
-            "description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数"
+            ]
         }
     ]
 }

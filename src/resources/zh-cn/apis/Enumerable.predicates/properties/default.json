@@ -1,8 +1,17 @@
 {
-    "type": "function",
-    "since": "2.1.15",
-    "description": "默认的筛选器",
-    "remarks": [
-        "该筛选器接受一个元素和该元素所在序列的索引作为参数, 在任何时候都返回 true, 表示满足条件, 通常表示为 defaultAction"
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.15",
+            "description": "默认的筛选器",
+            "remarks": [
+                "该筛选器接受一个元素和该元素所在序列的索引作为参数, 在任何时候都返回 true, 表示满足条件, 通常表示为 defaultAction"
+            ],
+            "sees": [
+                {
+                    "guide": "predicate"
+                }
+            ]
+        }
     ]
 }

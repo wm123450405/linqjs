@@ -1,40 +1,58 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "callback",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "declare": {
-                        "returns": {
-                            "type": "void"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            },
-                            {
-                                "name": "source",
-                                "types": [ "IEnumerable" ]
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "callback",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    },
+                                    {
+                                        "name": "source",
+                                        "types": [
+                                            "IEnumerable"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "thisArg",
-                    "types": [ "any" ]
+                        },
+                        {
+                            "name": "thisArg",
+                            "types": [
+                                "any"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "boolean"
+                    },
+                    "description": "测试数组中的某些元素是否通过了指定函数的测试"
                 }
-            ],
-            "returns": {
-                "type": "boolean"
-            },
-            "description": "测试数组中的某些元素是否通过了指定函数的测试"
+            ]
         }
     ]
 }

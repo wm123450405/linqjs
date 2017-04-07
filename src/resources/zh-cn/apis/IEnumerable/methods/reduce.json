@@ -1,44 +1,64 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "callback",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "declare": {
-                        "returns": {
-                            "type": "void"
-                        },
-                        "parameters": [
-                            {
-                                "name": "seed",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            },
-                            {
-                                "name": "source",
-                                "types": [ "IEnumerable" ]
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "callback",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "seed",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    },
+                                    {
+                                        "name": "source",
+                                        "types": [
+                                            "IEnumerable"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "initialValue",
-                    "types": [ "any" ]
+                        },
+                        {
+                            "name": "initialValue",
+                            "types": [
+                                "any"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable"
+                    },
+                    "description": "对累加器和数组的每个值(从左到右)应用一个函数, 以将其聚合为单个值"
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable"
-            },
-            "description": "对累加器和数组的每个值(从左到右)应用一个函数, 以将其聚合为单个值"
+            ]
         }
     ]
 }

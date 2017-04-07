@@ -1,42 +1,63 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "value",
-                    "types": [ "any" ],
-                    "descriptions": [ "要在序列中定位的值" ]
-                },
-                {
-                    "name": "comparer",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "一个对值进行比较的相等比较器" ],
-                    "defaultValue": "defaultEqualityComparer",
-                    "declare": {
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
+                    "parameters": [
+                        {
+                            "name": "value",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "要在序列中定位的值"
+                            ]
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "一个对值进行比较的相等比较器"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ],
+                                "returns": {
+                                    "type": "boolean"
+                                }
                             }
-                        ],
-                        "returns": {
-                            "type": "boolean"
                         }
-                    }
+                    ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "如果源序列包含具有指定的值的元素, 则返回true, 否则返回false"
+                        ]
+                    },
+                    "description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
+                    "remarks": [
+                        "只要找到匹配的元素, 将停止循环比较的过程"
+                    ]
                 }
-            ],
-            "returns": {
-                "type": "boolean",
-                "descriptions": [ "如果源序列包含具有指定的值的元素, 则返回true, 否则返回false" ]
-            },
-            "description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
-            "remarks": [
-                "只要找到匹配的元素, 将停止循环比较的过程"
             ]
         }
     ]

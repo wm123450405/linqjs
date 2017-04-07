@@ -1,53 +1,69 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "other",
-                    "types": [
-                        "IEnumerable",
-                        "Iterator",
-                        "array",
-                        "object",
-                        "string"
-                    ],
-                    "descriptions": [
-                        "要合并的第二个序列"
-                    ]
-                },
-                {
-                    "name": "resultSelector",
-                    "types": [ "function" ],
-                    "descriptions": [ "一个指定如何合并来自两个序列的元素的函数" ],
-                    "declare": {
-                        "returns": {
-                            "type": "any"
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "types": [
+                                "IEnumerable",
+                                "Iterator",
+                                "array",
+                                "object",
+                                "string"
+                            ],
+                            "descriptions": [
+                                "要合并的第二个序列"
+                            ]
                         },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "other",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
+                        {
+                            "name": "resultSelector",
+                            "types": [
+                                "function"
+                            ],
+                            "descriptions": [
+                                "一个指定如何合并来自两个序列的元素的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
                             }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "包含合并的两个输入序列的元素组成的新序列"
                         ]
-                    }
+                    },
+                    "description": "通过依次合并元素的方式合并两个序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ]
                 }
-            ],
-            "returns": {
-                "type": "IEnumerable",
-                "descriptions": [ "包含合并的两个输入序列的元素组成的新序列" ]
-            },
-            "description": "通过依次合并元素的方式合并两个序列",
-            "remarks": [
-                "此方法通过延迟执行的方式实现"
             ]
         }
     ]

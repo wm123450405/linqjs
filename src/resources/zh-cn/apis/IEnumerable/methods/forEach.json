@@ -1,42 +1,62 @@
 {
-    "overloads": [
+    "histroys": [
         {
             "since": "2.1.15",
-            "parameters": [
+            "overloads": [
                 {
-                    "name": "action",
-                    "types": [ "function", "string", "symbol", "number" ],
-                    "descriptions": [ "循环的执行体" ],
-                    "defaultValue": "defaultAction",
-                    "declare": {
-                        "returns": {
-                            "type": "void"
-                        },
-                        "parameters": [
-                            {
-                                "name": "element",
-                                "types": [ "any" ]
-                            },
-                            {
-                                "name": "index",
-                                "types": [ "number" ]
-                            },
-                            {
-                                "name": "source",
-                                "types": [ "IEnumerable" ]
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "循环的执行体"
+                            ],
+                            "defaultValue": "defaultAction",
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    },
+                                    {
+                                        "name": "source",
+                                        "types": [
+                                            "IEnumerable"
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                {
-                    "name": "thisArg",
-                    "types": [ "any" ]
+                        },
+                        {
+                            "name": "thisArg",
+                            "types": [
+                                "any"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "void"
+                    },
+                    "description": "遍历序列中的每个元素, 使用元素执行指定的操作"
                 }
-            ],
-            "returns": {
-                "type": "void"
-            },
-            "description": "遍历序列中的每个元素, 使用元素执行指定的操作"
+            ]
         }
     ]
 }
