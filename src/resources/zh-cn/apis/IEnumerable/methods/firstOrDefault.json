@@ -60,6 +60,10 @@
                             "method": "first"
                         },
                         {
+                            "apis": "Enumerable.predicates",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549039(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

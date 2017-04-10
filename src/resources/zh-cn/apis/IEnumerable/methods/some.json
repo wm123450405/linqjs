@@ -53,6 +53,9 @@
                     "description": "测试数组中的某些元素是否通过了指定函数的测试",
                     "sees": [
                         {
+                            "guides": "predicate"
+                        },
+                        {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/some",
                             "title": "Mozilla MDN"
                         }

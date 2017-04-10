@@ -6,11 +6,9 @@
                 {
                     "parameters": [
                         {
-                            "name": "property",
+                            "name": "value",
                             "types": [
-                                "string",
-                                "symbol",
-                                "number"
+                                "any"
                             ]
                         }
                     ],
@@ -18,7 +16,7 @@
                         "type": "function",
                         "declare": {
                             "returns": {
-                                "type": "any"
+                                "type": "boolean"
                             },
                             "parameters": [
                                 {
@@ -30,13 +28,17 @@
                             ]
                         }
                     },
-                    "description": "获取一个属性选择器",
+                    "description": "获取一个全等筛选器",
                     "remarks": [
-                        "返回一个一元选择器函数, 该选择器返回输入对象的指定属性值"
+                        "返回一个筛选器函数, 比较参数是否与指定的值全等"
                     ],
                     "sees": [
                         {
-                            "guide": "selector"
+                            "guide": "comparer"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "strict"
                         }
                     ]
                 }

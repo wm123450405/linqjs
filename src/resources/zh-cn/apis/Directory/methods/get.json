@@ -53,7 +53,13 @@
                             "键所对应的值"
                         ]
                     },
-                    "description": "通过指定的相等比较器查找指定键对应的值"
+                    "description": "通过指定的相等比较器查找指定键对应的值",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        }
+                    ]
                 }
             ]
         }

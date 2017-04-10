@@ -163,6 +163,14 @@
                             "method": "groupBy"
                         },
                         {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb535047(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

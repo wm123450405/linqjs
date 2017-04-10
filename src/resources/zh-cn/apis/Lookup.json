@@ -37,6 +37,7 @@
 					"since": "2.1.15",
 					"overloads": [
 						{
+							"override": true,
 							"description": "通过指定的相等比较器为指定键设置对应的序列",
 							"parameters": [
 								{

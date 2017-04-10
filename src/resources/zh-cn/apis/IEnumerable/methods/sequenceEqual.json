@@ -60,6 +60,10 @@
                     "description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等",
                     "sees": [
                         {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb342073(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

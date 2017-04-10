@@ -59,6 +59,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "forEach"
+                        },
+                        {
+                            "apis": "Enumerable.actions",
+                            "property": "default"
                         }
                     ]
                 }

@@ -3,9 +3,9 @@
         {
             "type": "function",
             "since": "2.1.15",
-            "description": "默认的筛选器",
+            "description": "非空筛选器",
             "remarks": [
-                "该筛选器接受一个元素和该元素所在序列的索引作为参数, 在任何时候都返回 true, 表示满足条件, 通常表示为 defaultPredicate"
+                "该筛选器接受一个元素和该元素所在序列的索引作为参数, 在参数值不为空( undefined, null )的时候返回 true, 表示满足条件, 通常表示为 defaultExistsPredicate"
             ],
             "sees": [
                 {

@@ -154,6 +154,22 @@
                             "method": "groupJoin"
                         },
                         {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "value"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "method": "result"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb535049(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

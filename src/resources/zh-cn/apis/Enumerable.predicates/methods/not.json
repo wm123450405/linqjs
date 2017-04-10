@@ -6,20 +6,17 @@
                 {
                     "parameters": [
                         {
-                            "name": "selector",
+                            "name": "predicate",
                             "types": [
                                 "function",
                                 "string",
                                 "symbol",
                                 "number"
                             ],
-                            "descriptions": [
-                                "应用于每个元素的转换函数"
-                            ],
-                            "defaultValue": "defaultSelector",
+                            "defaultValue": "defaultExistsPredicate",
                             "declare": {
                                 "returns": {
-                                    "type": "number"
+                                    "type": "boolean"
                                 },
                                 "parameters": [
                                     {
@@ -39,24 +36,38 @@
                         }
                     ],
                     "returns": {
-                        "type": "number",
-                        "descriptions": [
-                            "值序列的和值"
-                        ]
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "boolean"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "index",
+                                    "types": [
+                                        "number"
+                                    ]
+                                }
+                            ]
+                        }
                     },
-                    "description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的和值",
+                    "description": "获取一个否定筛选器",
+                    "remarks": [
+                        "返回一个筛选器函数, 如果 predicate 返回 true, 这该函数返回 false, 反之亦然"
+                    ],
                     "sees": [
                         {
-                            "apis": "IEnumerable",
-                            "method": "average"
+                            "guide": "comparer"
                         },
                         {
-                            "apis": "Enumerable.selectors",
-                            "property": "default"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb549046(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
+                            "apis": "Enumerable.predicates",
+                            "property": "exists"
                         }
                     ]
                 }

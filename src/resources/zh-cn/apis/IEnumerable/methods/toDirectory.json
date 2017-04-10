@@ -115,6 +115,14 @@
                             "method": "toObject"
                         },
                         {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        },
+                        {
                             "apis": "Directory"
                         }
                     ]

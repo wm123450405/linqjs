@@ -45,7 +45,7 @@
                             "descriptions": [
                                 "要应用于中间序列的每个元素的转换函数"
                             ],
-                            "defaultValue": "defaultCollectionSelector",
+                            "defaultValue": "defaultResultSelector",
                             "declare": {
                                 "returns": {
                                     "type": "any"
@@ -85,6 +85,14 @@
                         {
                             "apis": "IEnumerable",
                             "method": "groupBy"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "method": "result"
                         },
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534732(v=vs.110).aspx",

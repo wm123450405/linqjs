@@ -53,6 +53,10 @@
                     ],
                     "sees": [
                         {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb338049(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

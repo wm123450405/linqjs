@@ -6,19 +6,24 @@
                 {
                     "parameters": [
                         {
-                            "name": "property",
+                            "name": "predicateArray",
                             "types": [
-                                "string",
-                                "symbol",
-                                "number"
+                                "array"
                             ]
+                        },
+                        {
+                            "name": "last",
+                            "types": [
+                                "boolean"
+                            ],
+                            "defaultValue": "false"
                         }
                     ],
                     "returns": {
                         "type": "function",
                         "declare": {
                             "returns": {
-                                "type": "any"
+                                "type": "number"
                             },
                             "parameters": [
                                 {
@@ -26,17 +31,23 @@
                                     "types": [
                                         "any"
                                     ]
+                                },
+                                {
+                                    "name": "other",
+                                    "types": [
+                                        "any"
+                                    ]
                                 }
                             ]
                         }
                     },
-                    "description": "获取一个属性选择器",
+                    "description": "获取一个大小比较器",
                     "remarks": [
-                        "返回一个一元选择器函数, 该选择器返回输入对象的指定属性值"
+                        "返回一个大小比较器函数, 该比较器按照指定的 predicateArray 中的函数的匹配循序(作为从小到大的方式)判别待比较的元素"
                     ],
                     "sees": [
                         {
-                            "guide": "selector"
+                            "guide": "comparer"
                         }
                     ]
                 }

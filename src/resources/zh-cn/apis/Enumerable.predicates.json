@@ -11,7 +11,134 @@
 					"description": "默认的筛选器"
 				}
 			]
+		},
+		{
+			"name": "exists",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"description": "非空筛选器"
+				}
+			]
 		}
 	],
-	"methods": []
+	"methods": [
+		{
+			"name": "equality",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个相等筛选器",
+							"parameters": [
+								{
+									"name": "value"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "not",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个否定筛选器",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "regexp",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个正则筛选器",
+							"parameters": [
+								{
+									"name": "regexp"
+								},
+								{
+									"name": "keySelector"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "same",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个相同筛选器",
+							"parameters": [
+								{
+									"name": "value"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "selector",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个映射筛选器",
+							"parameters": [
+								{
+									"name": "selector"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "strict",
+			"histroys": [
+				{
+					"since": "2.1.15",
+					"overloads": [
+						{
+							"description": "获取一个全等筛选器",
+							"parameters": [
+								{
+									"name": "value"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
 }

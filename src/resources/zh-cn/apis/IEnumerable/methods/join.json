@@ -12,6 +12,9 @@
                             ]
                         }
                     ],
+                    "returns": {
+                        "type": "string"
+                    },
                     "sees": [
                         {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/join",
@@ -173,6 +176,14 @@
                         {
                             "apis": "IEnumerable",
                             "method": "groupJoin"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
                         },
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",

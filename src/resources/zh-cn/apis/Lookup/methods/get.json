@@ -54,7 +54,13 @@
                             "键所对应的序列"
                         ]
                     },
-                    "description": "通过指定的相等比较器查找指定键对应的序列"
+                    "description": "通过指定的相等比较器查找指定键对应的序列",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        }
+                    ]
                 }
             ]
         }

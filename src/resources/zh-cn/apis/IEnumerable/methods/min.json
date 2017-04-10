@@ -102,6 +102,14 @@
                             "method": "max"
                         },
                         {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb548779(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

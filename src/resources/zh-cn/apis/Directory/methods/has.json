@@ -53,7 +53,13 @@
                             "返回是否包含指定的键"
                         ]
                     },
-                    "description": "通过指定的相等比较器判断 Directory 中是否包含指定的键"
+                    "description": "通过指定的相等比较器判断 Directory 中是否包含指定的键",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        }
+                    ]
                 }
             ]
         }

@@ -74,7 +74,7 @@
 				return this.$route.params.method;
 			},
             index() {
-				return this.$route.params.index || 0;
+				return parseInt(this.$route.params.index || 0);
             }
         },
         mounted() {

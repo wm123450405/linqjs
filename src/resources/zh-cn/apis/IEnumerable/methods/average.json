@@ -55,6 +55,10 @@
                             "method": "sum"
                         },
                         {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549067(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

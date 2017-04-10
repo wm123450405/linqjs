@@ -61,6 +61,10 @@
                             "method": "contains"
                         },
                         {
+                            "apis": "Enumerable.predicates",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534972(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

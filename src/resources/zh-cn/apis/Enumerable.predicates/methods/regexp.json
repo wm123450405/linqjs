@@ -6,20 +6,23 @@
                 {
                     "parameters": [
                         {
-                            "name": "selector",
+                            "name": "regexp",
+                            "types": [
+                                "RegExp"
+                            ]
+                        },
+                        {
+                            "name": "keySelector",
                             "types": [
                                 "function",
                                 "string",
                                 "symbol",
                                 "number"
                             ],
-                            "descriptions": [
-                                "应用于每个元素的转换函数"
-                            ],
                             "defaultValue": "defaultSelector",
                             "declare": {
                                 "returns": {
-                                    "type": "number"
+                                    "type": "string"
                                 },
                                 "parameters": [
                                     {
@@ -39,24 +42,38 @@
                         }
                     ],
                     "returns": {
-                        "type": "number",
-                        "descriptions": [
-                            "值序列的和值"
-                        ]
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "boolean"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "index",
+                                    "types": [
+                                        "number"
+                                    ]
+                                }
+                            ]
+                        }
                     },
-                    "description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的和值",
+                    "description": "获取一个正则筛选器",
+                    "remarks": [
+                        "返回一个筛选器函数, 比较通过指定的 selector 映射传入的参数值后的值是否与匹配指定的正则表达式"
+                    ],
                     "sees": [
                         {
-                            "apis": "IEnumerable",
-                            "method": "average"
+                            "guide": "comparer"
                         },
                         {
                             "apis": "Enumerable.selectors",
                             "property": "default"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb549046(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

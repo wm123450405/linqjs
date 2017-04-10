@@ -58,6 +58,9 @@
                             "method": "takeWhile"
                         },
                         {
+                            "guides": "predicate"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549288(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

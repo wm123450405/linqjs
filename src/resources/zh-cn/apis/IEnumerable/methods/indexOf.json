@@ -55,6 +55,10 @@
                     "description": "返回在数组中可以找到给定元素的第一个索引",
                     "sees": [
                         {
+                            "apis": "Enumerable.comparers",
+                            "property": "strict"
+                        },
+                        {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf",
                             "title": "Mozilla MDN"
                         }

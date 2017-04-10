@@ -113,6 +113,18 @@
                         {
                             "apis": "IEnumerable",
                             "method": "toDirectory"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "value"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
                         }
                     ]
                 }

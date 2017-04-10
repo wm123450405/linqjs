@@ -32,8 +32,8 @@ const router = new VueRouter({
 						directory: load('directory'),
 						content: load('content')
 					},
-					children: Enumerable.selectMany(routes, entry => [ '', ':version/' ], (entry, prefix) => ({ path: prefix + entry.key, component: load(entry.value) }))
-						.concat([{ path: '', component: load('introduction') }, { path: ':version', component: load('introduction') }]).toArray()
+					children: Enumerable.selectMany(routes, entry => [ '', ':version(\\d+\\.\\d+\\.\\d+)/' ], (entry, prefix) => ({ path: prefix + entry.key, component: load(entry.value) }))
+						.concat([{ path: '', component: load('introduction') }, { path: ':version(\\d+\\.\\d+\\.\\d+)', component: load('introduction') }]).toArray()
 				}
 			]
 		}

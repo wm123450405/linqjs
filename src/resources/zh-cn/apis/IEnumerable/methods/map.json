@@ -53,6 +53,9 @@
                     "description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数",
                     "sees": [
                         {
+                            "guides": "selector"
+                        },
+                        {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/map",
                             "title": "Mozilla MDN"
                         }

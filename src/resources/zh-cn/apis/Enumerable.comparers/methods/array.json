@@ -6,17 +6,17 @@
                 {
                     "parameters": [
                         {
-                            "name": "other",
+                            "name": "array",
                             "types": [
-                                "IEnumerable",
-                                "Iterator",
-                                "array",
-                                "object",
-                                "string"
-                            ],
-                            "descriptions": [
-                                "需要在返回序列中返回存在于源序列中的元素序列"
+                                "array"
                             ]
+                        },
+                        {
+                            "name": "last",
+                            "types": [
+                                "boolean"
+                            ],
+                            "defaultValue": "false"
                         },
                         {
                             "name": "comparer",
@@ -26,11 +26,11 @@
                                 "symbol",
                                 "number"
                             ],
-                            "descriptions": [
-                                "用于判定两个序列元素的值是否相等的相等比较器"
-                            ],
                             "defaultValue": "defaultEqualityComparer",
                             "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
                                 "parameters": [
                                     {
                                         "name": "element",
@@ -44,39 +44,43 @@
                                             "any"
                                         ]
                                     }
-                                ],
-                                "returns": {
-                                    "type": "boolean"
-                                }
+                                ]
                             }
                         }
                     ],
                     "returns": {
-                        "type": "IEnumerable",
-                        "descriptions": [
-                            "包含这两个序列的元素的交集的序列"
-                        ]
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "number"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "other",
+                                    "types": [
+                                        "any"
+                                    ]
+                                }
+                            ]
+                        }
                     },
-                    "description": "生成两个序列的交集",
+                    "description": "获取一个大小比较器",
                     "remarks": [
-                        "此方法通过延迟执行的方式实现"
+                        "返回一个大小比较器函数, 该比较器按照指定的 array 值的循序(作为从小到大的方式)判别待比较的元素"
                     ],
                     "sees": [
                         {
-                            "apis": "IEnumerable",
-                            "method": "union"
-                        },
-                        {
-                            "apis": "IEnumerable",
-                            "method": "except"
+                            "guide": "comparer"
                         },
                         {
                             "apis": "Enumerable.comparers",
                             "property": "equality"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb355408(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

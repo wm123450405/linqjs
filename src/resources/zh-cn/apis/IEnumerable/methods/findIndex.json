@@ -53,6 +53,9 @@
                     "description": "返回数组中满足提供的测试函数的第一个元素的索引",
                     "sees": [
                         {
+                            "guides": "predicate"
+                        },
+                        {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex",
                             "title": "Mozilla MDN"
                         }

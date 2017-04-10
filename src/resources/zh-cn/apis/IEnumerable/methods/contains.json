@@ -61,6 +61,10 @@
                         {
                             "apis": "IEnumerable",
                             "method": "any"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
                         }
                     ]
                 }

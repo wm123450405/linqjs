@@ -4,6 +4,7 @@
             "since": "2.1.15",
             "overloads": [
                 {
+                    "override": true,
                     "parameters": [
                         {
                             "name": "key",
@@ -66,7 +67,13 @@
                             "返回 Directory 对象本身"
                         ]
                     },
-                    "description": "通过指定的相等比较器为指定键设置对应的序列"
+                    "description": "通过指定的相等比较器为指定键设置对应的序列",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        }
+                    ]
                 }
             ]
         }

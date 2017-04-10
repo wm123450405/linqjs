@@ -112,6 +112,14 @@
                     "sees": [
                         {
                             "apis": "Lookup"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
                         }
                     ]
                 }

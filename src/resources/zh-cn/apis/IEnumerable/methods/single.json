@@ -54,6 +54,10 @@
                             "method": "singleOrDefault"
                         },
                         {
+                            "apis": "Enumerable.predicates",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://msdn.microsoft.com/{language}/library/bb535118(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }

@@ -53,7 +53,13 @@
                             "返回是否包含指定的键"
                         ]
                     },
-                    "description": "通过指定的相等比较器从 Directory 中移除指定的键"
+                    "description": "通过指定的相等比较器从 Directory 中移除指定的键",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
+                        }
+                    ]
                 }
             ]
         }

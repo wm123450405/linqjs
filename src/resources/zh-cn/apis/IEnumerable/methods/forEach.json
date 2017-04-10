@@ -57,6 +57,10 @@
                     "description": "遍历序列中的每个元素, 使用元素执行指定的操作",
                     "sees": [
                         {
+                            "apis": "Enumerable.actions",
+                            "property": "default"
+                        },
+                        {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach",
                             "title": "Mozilla MDN"
                         }

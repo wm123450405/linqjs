@@ -114,6 +114,18 @@
                         {
                             "apis": "IEnumerable",
                             "method": "toLookup"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "value"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "same"
                         }
                     ]
                 }

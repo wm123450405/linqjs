@@ -6,17 +6,20 @@
                 {
                     "parameters": [
                         {
-                            "name": "predicate",
+                            "name": "value",
+                            "types": [
+                                "any"
+                            ]
+                        },
+                        {
+                            "name": "comparer",
                             "types": [
                                 "function",
                                 "string",
                                 "symbol",
                                 "number"
                             ],
-                            "descriptions": [
-                                "用于检测每个元素是否满足条件的函数"
-                            ],
-                            "defaultValue": "defaultPredicate",
+                            "defaultValue": "defaultEqualityComparer",
                             "declare": {
                                 "returns": {
                                     "type": "boolean"
@@ -29,9 +32,9 @@
                                         ]
                                     },
                                     {
-                                        "name": "index",
+                                        "name": "other",
                                         "types": [
-                                            "number"
+                                            "any"
                                         ]
                                     }
                                 ]
@@ -39,27 +42,32 @@
                         }
                     ],
                     "returns": {
-                        "type": "any",
-                        "descriptions": [
-                            "序列中通过指定函数检测的最后一个元素"
-                        ]
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "boolean"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                }
+                            ]
+                        }
                     },
-                    "description": "返回序列中满足指定条件的最后一个元素",
+                    "description": "获取一个相等筛选器",
                     "remarks": [
-                        "如果在源序列中找不到任何匹配的元素, 则会引发异常. 如果希望在找不到任何元素时返回默认值, 请使用 lastOrDefault 方法"
+                        "返回一个筛选器函数, 通过指定的相等比较器比较参数是否与指定的值相等"
                     ],
                     "sees": [
                         {
-                            "apis": "IEnumerable",
-                            "method": "lastOrDefault"
+                            "guide": "comparer"
                         },
                         {
-                            "apis": "Enumerable.predicates",
-                            "property": "default"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb549138(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
                         }
                     ]
                 }
