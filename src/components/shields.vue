@@ -1,5 +1,5 @@
 <template>
-    <span class="shields">
+    <span class="shields" :title="title || ((subject && status) ? subject + ': ' + status : (subject || status))">
         <span v-if="subject" class="shields-subject">{{ subject }}</span><span v-if="status" class="shields-status" :class="color">{{ status }}</span>
     </span>
 </template>
@@ -31,7 +31,8 @@
     	props: {
     		subject: String,
             status: String,
-            color: String
+            color: String,
+            title: String
         }
     }
 </script>

@@ -182,6 +182,19 @@ const createDirectory = refreshLangName => {
 			return element > other ? 1 : element === other ? 0 : -1;
 		}
 	}).toArray();
+	let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
+		if (element === other) {
+			return 0;
+		} else if (common.isNewer(element, other)) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}).toArray();
+
+	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
+	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));
+
 	console.log('apis:' + defaultApis);
 
 	let langNames = fs.readdirSync(resources);
@@ -207,6 +220,30 @@ const createDirectory = refreshLangName => {
 			let directorys = defaultDirectoryMeta;
 			let directoryMetaPath = path.join(langPath, directoryMetaFile);
 			if (fs.existsSync(directoryMetaPath)) {
+				let changes = [];
+				let changesPath = path.join(langPath, 'change');
+				if (fs.existsSync(changesPath)) {
+					watch(changesPath, () => {
+						createDirectory(langName);
+					});
+					for (let change of defaultChanges) {
+						let version = path.basename(change, jsonExt);
+						let changePath = path.join(changesPath, change);
+						try {
+							let content = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, 'change', change)));
+							if (fs.existsSync(changePath)) {
+								content = extend(true, {}, content, JSON.parse(fs.readFileSync(changePath)));
+							}
+							content.version = version;
+							changes.push(content);
+						} catch(e) {
+							console.error(e);
+						}
+					}
+				}
+				fs.writeFileSync(path.join(langPath, 'change.json'), JSON.stringify(changes, null, '\t'));
+				console.log(`change file for language ${ langName } is created`);
+
 				watch(directoryMetaPath, () => {
 					createDirectory(langName);
 				});

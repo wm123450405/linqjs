@@ -1,0 +1,9 @@
+{
+    "publish": "2017-04-05",
+    "contents": [
+        "优化 selectMany 方法, 使的使用上更接近linq原生的方法. 修复 selectMany 方法 collectionSelector 返回 Iterator,string,object 对象是出现异常的bug",
+        "修改 defaultGroupResultSelector 为 defaultResultSelector, 修改 Enumerable.selectors.groupResult 为 Enumerable.selectors.result",
+        "修改 selectMany 方法的 resultSelector 参数的结构和默认值, 与 defaultResultSelector 一致",
+        "增加 zip 方法的 resultSelector 的默认值为 defaultResultSelector"
+    ]
+}

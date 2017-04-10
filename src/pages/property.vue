@@ -7,6 +7,7 @@
                     <span class="icon-mark bg-primary" v-if="histroy.static" :title="caption.static">S</span>
                     <shields v-if="histroy.since" subject="since" :status="histroy.since" color="yellow" :title="`${ caption.since }: ${ histroy.since }`"></shields>
                     <shields v-if="histroy.deprecated" subject="deprecated" :status="histroy.deprecated" color="yellow" :title="`${ caption.deprecated }: ${ histroy.deprecated }`"></shields>
+                    <shields v-if="histroy.override" subject="override" :title="caption.override"></shields>
                 </p>
                 <p v-if="histroy.description" class="text-success">{{ capitalize(histroy.description) }}</p>
                 <p v-for="description in histroy.descriptions" v-html="capitalize(description)" class="text-success"></p>

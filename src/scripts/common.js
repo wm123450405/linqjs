@@ -2,7 +2,7 @@ const Enumerable = require('linq-js');
 
 module.exports = {
 	defaultLang: 'zh-cn',
-	versions: ['2.1.15', '2.1.16'],
+	versions: require('./../resources/versions.json'),
 	get earliest() {
 		return this.versions[0];
 	},

@@ -1,0 +1,14 @@
+{
+    "publish": "2017-03-27",
+    "contents": [
+        "优化了部分代码结构",
+        "新增 对 arrayComparer 的默认支持",
+        "新增了 对绝大部分 selector, predicate, comparer 参数校验",
+        "新增 绝大部分的 selector, predicate, comparer 参数均支持 String 或 Symbol 类型数据 表示选择对象对应的字段 的功能",
+        "新增 Enumerable.predicates.exists 属性, 表示非空筛选器",
+        "新增 Enumerable.predicates.regexp 方法, 生成正则匹配的筛选器",
+        "新增 Enumerable.predicates.not 方法, 生成逻辑非筛选器",
+        "新增 Enumerable.predicates.selector 方法, 生成选择筛选器",
+        "新增 Enumerable.predicates.equality, Enumerable.predicates.strict, Enumerable.predicates.same 方法, 生成比较筛选器"
+    ]
+}
