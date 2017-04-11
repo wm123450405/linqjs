@@ -34,7 +34,7 @@
                     ],
                     "sees": [
                         {
-                            "guide": "comparer"
+                            "guide": "predicate"
                         },
                         {
                             "apis": "Enumerable.comparers",

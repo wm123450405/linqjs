@@ -1,47 +1,26 @@
 {
     "histroys": [
         {
-            "since": "2.1.15",
+            "since": "2.1.17",
             "overloads": [
                 {
                     "parameters": [
                         {
-                            "name": "selector",
+                            "name": "properties",
                             "types": [
-                                "function",
-                                "string",
-                                "symbol",
-                                "number"
-                            ],
-                            "declare": {
-                                "returns": {
-                                    "type": "any"
-                                },
-                                "parameters": [
-                                    {
-                                        "name": "element",
-                                        "types": [
-                                            "any"
-                                        ]
-                                    },
-                                    {
-                                        "name": "index",
-                                        "types": [
-                                            "number"
-                                        ]
-                                    }
-                                ]
-                            }
+                                "object",
+                                "array"
+                            ]
                         },
                         {
-                            "name": "predicate",
+                            "name": "comparer",
                             "types": [
                                 "function",
                                 "string",
                                 "symbol",
                                 "number"
                             ],
-                            "defaultValue": "defaultExistsPredicate",
+                            "defaultValue": "defaultSameComparer",
                             "declare": {
                                 "returns": {
                                     "type": "boolean"
@@ -54,9 +33,9 @@
                                         ]
                                     },
                                     {
-                                        "name": "index",
+                                        "name": "other",
                                         "types": [
-                                            "number"
+                                            "any"
                                         ]
                                     }
                                 ]
@@ -85,17 +64,13 @@
                             ]
                         }
                     },
-                    "description": "获取一个映射筛选器",
+                    "description": "获取一个属性筛选器",
                     "remarks": [
-                        "返回一个筛选器函数, 该筛选器通过判断由 selector 映射传入的参数值后的值是否符合指定的 predicate 条件"
+                        "返回一个筛选器函数, 该筛选器通过深度对比 properties 所描述的键值对关系来判断传入参数是否符合条件"
                     ],
                     "sees": [
                         {
                             "guide": "predicate"
-                        },
-                        {
-                            "apis": "Enumerable.predicates",
-                            "property": "exists"
                         }
                     ]
                 }

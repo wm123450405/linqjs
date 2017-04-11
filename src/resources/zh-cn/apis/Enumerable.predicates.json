@@ -63,6 +63,27 @@
 			]
 		},
 		{
+			"name": "properties",
+			"histroys": [
+				{
+					"since": "2.1.17",
+					"overloads": [
+						{
+							"description": "获取一个属性筛选器",
+							"parameters": [
+								{
+									"name": "properties"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "regexp",
 			"histroys": [
 				{
