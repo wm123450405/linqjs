@@ -26,7 +26,7 @@
 			};
 		},
 		mounted() {
-			this.getJson(true, 'directory').then(directory => this.directory = directory);
+			this.getJson(['directory']).then(directory => this.directory = directory);
 		},
 		methods: {
 

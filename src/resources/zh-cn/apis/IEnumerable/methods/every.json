@@ -53,7 +53,7 @@
                     "description": "测试数组的所有元素是否都通过了指定函数的测试",
                     "sees": [
                         {
-                            "guides": "predicate"
+                            "guide": "predicate"
                         },
                         {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/every",

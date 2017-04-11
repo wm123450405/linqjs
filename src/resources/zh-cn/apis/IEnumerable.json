@@ -413,6 +413,28 @@
 			]
 		},
 		{
+			"name": "findLast",
+			"histroys": [
+				{
+					"since": "2.1.17",
+					"overloads": [
+						{
+							"override": true,
+							"description": "返回数组中满足提供的测试函数的最后一个元素的值",
+							"parameters": [
+								{
+									"name": "callback"
+								},
+								{
+									"name": "thisArg"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "findLastIndex",
 			"histroys": [
 				{

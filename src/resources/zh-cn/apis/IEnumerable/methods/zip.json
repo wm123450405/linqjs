@@ -65,7 +65,7 @@
                     ],
                     "sees": [
                         {
-                            "guides": "selector"
+                            "guide": "selector"
                         },
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb548775(v=vs.110).aspx",

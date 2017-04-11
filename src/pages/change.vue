@@ -20,12 +20,10 @@
             };
         },
         mounted() {
-			this.getJson('caption').then(caption => {
+			this.getJson('caption', ['change']).then(([caption, changes]) => {
 				this.caption = caption;
+				this.changes = changes.reverse();
 			});
-    		this.getJson(true, 'change').then(changes => {
-    			this.changes = changes.reverse();
-            });
         }
     }
 </script>

@@ -58,7 +58,7 @@
                             "method": "takeWhile"
                         },
                         {
-                            "guides": "predicate"
+                            "guide": "predicate"
                         },
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549288(v=vs.110).aspx",

@@ -1,5 +1,8 @@
 const Enumerable = require('linq-js');
 
+const isPre = /\.pre$/ig;
+const asVersion = version => version.replace(isPre, '');
+
 module.exports = {
 	defaultLang: 'zh-cn',
 	versions: require('./../resources/versions.json'),
@@ -7,6 +10,9 @@ module.exports = {
 		return this.versions[0];
 	},
 	get lastest() {
+		return Enumerable.last(this.versions, version => !isPre.test(version));
+	},
+	get newest() {
 		return this.versions[this.versions.length - 1];
 	},
 	histroys(histroys) {
@@ -20,8 +26,11 @@ module.exports = {
 		}
 	},
 	versionComparer(version, other) {
-		let v = Enumerable.zip(version.split('.'), other.split('.'), (ver, otherVer) => ({ ver, otherVer })).firstOrDefault({ ver: 0, otherVer: 0 }, v => v.ver !== v.otherVer);
+		let v = Enumerable.zip(asVersion(version).split('.'), asVersion(other).split('.'), (ver, otherVer) => ({ ver, otherVer })).firstOrDefault({ ver: 0, otherVer: 0 }, v => v.ver !== v.otherVer);
 		return v.ver === v.otherVer ? 0 : parseInt(v.ver) > parseInt(v.otherVer) ? 1 : -1;
+	},
+	asVersion(version) {
+		return asVersion(version);
 	},
 	maxVersion(...versions) {
 		return Enumerable.max(versions, '', this.versionComparer);
@@ -30,11 +39,13 @@ module.exports = {
 		return Enumerable.min(versions, '', this.versionComparer);
 	},
 	isNewer(version, basaVersion) {
-		let v = Enumerable.zip((version || this.earliest).split('.'), basaVersion.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+		console.log('isNewer', asVersion(version || this.earliest), asVersion(basaVersion));
+		let v = Enumerable.zip(asVersion(version || this.earliest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) <= parseInt(v.baseVer);
 	},
 	isOlder(version, basaVersion) {
-		let v = Enumerable.zip((version || this.lastest).split('.'), basaVersion.split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+		console.log('isOlder', asVersion(version || this.newest), asVersion(basaVersion));
+		let v = Enumerable.zip(asVersion(version || this.newest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) >= parseInt(v.baseVer);
 	},
 	capitalize(value) {

@@ -29,7 +29,7 @@ export default {
 			return this.$route.params['lang'] || this.defaultLang;
 		},
 		version() {
-			return this.$route.params['version'] || this.lastest;
+			return (this.$route.params['version'] || this.lastest) + (this.$route.params['pre'] || '');
 		}
 	},
 	mounted() {
@@ -51,6 +51,9 @@ export default {
 		},
 		histroys(histroys) {
 			return common.histroys(histroys).toArray();
+		},
+		asVersion(version) {
+			return common.asVersion(version);
 		},
 		isNewer(version) {
 			return common.isNewer(version, this.version);
@@ -87,15 +90,15 @@ export default {
 			}
 		},
 		getJson(...names) {
-			let isArray = false;
-			if (names[0] === true) {
-				names = names.slice(1);
-				isArray = [];
-			}
 			let load = (revolse, reject) => {
 				require.ensure([], () => {
 					try {
 						let results = names.map(name => {
+							let isArray = false;
+							if (name instanceof Array || Array.isArray(name)) {
+								name = name[0];
+								isArray = true;
+							}
 							if (typeof name === 'function') {
 								name = name.call(this);
 							}

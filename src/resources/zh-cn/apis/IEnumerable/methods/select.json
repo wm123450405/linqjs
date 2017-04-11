@@ -53,7 +53,7 @@
                             "method": "selectMany"
                         },
                         {
-                            "guides": "selector"
+                            "guide": "selector"
                         },
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534869(v=vs.110).aspx",

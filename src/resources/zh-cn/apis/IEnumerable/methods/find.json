@@ -53,7 +53,7 @@
                     "description": "返回数组中满足提供的测试函数的第一个元素的值",
                     "sees": [
                         {
-                            "guides": "predicate"
+                            "guide": "predicate"
                         },
                         {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/find",

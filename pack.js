@@ -277,7 +277,7 @@ const createDirectory = refreshLangName => {
 							code: path.basename(guide, jsonExt),
 							title: guideContent.title,
 							since: guideContent.since || common.earliest,
-							deprecated: guideContent.deprecated || common.lastest
+							deprecated: guideContent.deprecated || common.newest
 						});
 					} catch(e) {
 						console.error(e);
@@ -305,7 +305,7 @@ const createDirectory = refreshLangName => {
 						if (fs.existsSync(apiPath)) {
 							apiContent = extend(true, [], apiContent, JSON.parse(fs.readFileSync(apiPath)));
 						}
-						let since = apiContent.since || common.lastest, deprecated = apiContent.deprecated || common.lastest;
+						let since = apiContent.since || common.lastest, deprecated = apiContent.deprecated || common.newest;
 						for (let method of (apiContent.methods || [])) {
 							since = common.minVersion(Enumerable.min(common.histroys(method.histroys), histroy => histroy.since, common.versionComparer), since);
 							deprecated = common.maxVersion(Enumerable.max(common.histroys(method.histroys), histroy => histroy.deprecated || common.lastest, common.versionComparer), deprecated);

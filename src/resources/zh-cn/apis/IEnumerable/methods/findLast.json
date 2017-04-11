@@ -1,7 +1,7 @@
 {
     "histroys": [
         {
-            "since": "2.1.15",
+            "since": "2.1.17",
             "overloads": [
                 {
                     "override": true,
@@ -48,16 +48,12 @@
                         }
                     ],
                     "returns": {
-                        "type": "IEnumerable"
+                        "type": "any"
                     },
-                    "description": "创建一个新序列, 其结果是该数组中的每个元素调用一个提供的函数",
+                    "description": "返回数组中满足提供的测试函数的最后一个元素的值",
                     "sees": [
                         {
-                            "guide": "selector"
-                        },
-                        {
-                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/map",
-                            "title": "Mozilla MDN"
+                            "guide": "predicate"
                         }
                     ]
                 }
