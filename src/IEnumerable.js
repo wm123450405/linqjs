@@ -197,6 +197,9 @@ class IEnumerable extends Array {
     lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
         return Enumerable.lastIndexOf(this, value, start, comparer);
     }
+    findLast(predicate, thisArg) {
+        return Enumerable.findLast(this, predicate, thisArg);
+    }
     findLastIndex(predicate, thisArg) {
         return Enumerable.findLastIndex(this, predicate, thisArg);
     }

@@ -669,6 +669,9 @@ Enumerable.findIndex = function(source, predicate, thisArg) {
     }
     return -1;
 };
+Enumerable.findLast = function(source, callback, thisArg) {
+    return this.lastOrDefault(source, undefined, (element, index) => callback.call(thisArg, element, index, source));
+};
 Enumerable.lastIndexOf = function(source, value, start = Infinity, comparer = defaultStrictEqualityComparer) {
     if (comparer === defaultStrictEqualityComparer && core.isArray(source) && core.array$lastIndexOf) {
         return core.array$lastIndexOf.call(source, value, start);
