@@ -23,6 +23,8 @@ const defaultExistsPredicate = require('./methods/defaultExistsPredicate');
 const notPredicate = require('./methods/notPredicate');
 const equalityPredicate = require('./methods/equalityPredicate');
 const selectorPredicate = require('./methods/selectorPredicate');
+const greaterComparer = require('./methods/greaterComparer');
+const lessComparer = require('./methods/lessComparer');
 
 const NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
@@ -741,6 +743,12 @@ core.defineProperty(Enumerable, 'comparers', () => ({
     },
     predicate(predicateArray, last = false) {
         return predicateComparer(predicateArray, last);
+    },
+    greater(greaterThen, comparer = defaultEqualityComparer) {
+        return greaterComparer(greaterThen, comparer);
+    },
+    less(lessThen, comparer = defaultEqualityComparer) {
+        return lessComparer(lessThen, comparer);
     }
 }), true, true);
 core.defineProperty(Enumerable, 'selectors', () => ({

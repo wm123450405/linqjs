@@ -706,6 +706,8 @@ module.exports = function(Enumerable) {
 		assert.strictEqual([2, 5, 9, 2].asEnumerable().lastIndexOf(2, 2), 0);
 		assert.strictEqual([2, 5, 9, 2].asEnumerable().lastIndexOf(2, -2), 0);
 		assert.strictEqual([2, 5, 9, 2].asEnumerable().lastIndexOf(2, -1), 3);
+		//findLast
+		assert.strictEqual([2, 5, 9, 2].asEnumerable().findLast(element => element % 2 === 1), 9);
 		//map
 		assert.deepStrictEqual([1, 5, 10, 15].asEnumerable().map(x => x * 2).toArray(), [2, 10, 20, 30]);
 		assert.deepStrictEqual([1, 4, 9].asEnumerable().map(x => Math.sqrt(x)).toArray(), [1, 2, 3]);
@@ -809,6 +811,8 @@ module.exports = function(Enumerable) {
 		assert.strictEqual([2, 5, 9, 2].lastIndexOf(2, 2), 0);
 		assert.strictEqual([2, 5, 9, 2].lastIndexOf(2, -2), 0);
 		assert.strictEqual([2, 5, 9, 2].lastIndexOf(2, -1), 3);
+		//findLast
+		assert.strictEqual([2, 5, 9, 2].findLast(element => element % 2 === 1), 9);
 		//map
 		assert.deepStrictEqual([1, 5, 10, 15].map(x => x * 2).toArray(), [2, 10, 20, 30]);
 		assert.deepStrictEqual([1, 4, 9].map(x => Math.sqrt(x)).toArray(), [1, 2, 3]);
