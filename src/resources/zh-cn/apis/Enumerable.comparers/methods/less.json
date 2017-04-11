@@ -1,0 +1,102 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.17",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "lessThen",
+                            "types": [
+                                "function"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "number"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "other",
+                                    "types": [
+                                        "any"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "description": "通过一个小于判断函数与一个相等比较器生成一个大小比较器",
+                    "remarks": [
+                        "返回一个大小比较器函数, 该函数两个参数在调用 comparer 后返回 true 时该函数返回 0 表示两个参数值相等, 否则在调用 lessThen 函数后返回 true 时该函数返回 -1 表示传入的第一个参数值小于第二个参数值, 否则返回 1 表示传入的第一个参数值大于第二个参数值"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "Enumerable.comparers",
+                            "method": "greater"
+                        },
+                        {
+                            "guide": "comparer"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

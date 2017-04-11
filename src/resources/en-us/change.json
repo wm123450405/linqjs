@@ -27,7 +27,9 @@
 	{
 		"prepublish": true,
 		"contents": [
-			"新增 findLast 方法"
+			"新增 findLast 方法",
+			"新增 Enumerable.comparers.greater 方法",
+			"新增 Enumerable.comparers.less 方法"
 		],
 		"version": "2.1.17.pre"
 	}
