@@ -939,5 +939,7 @@ module.exports = function(Enumerable) {
 
 	assert.deepStrictEqual(Enumerable([1, 2, 3]).toArray(), [1, 2, 3]);
 
+	assert.deepStrictEqual(Enumerable.where([{a:1, b:2, c:3}, {a:3, b:2, c:3}, {a:1, b:5, c:3}], {b:5, c:3}).toArray(), [{a:1, b:5, c:3}]);
+
 	console.log('test successful!');
 };

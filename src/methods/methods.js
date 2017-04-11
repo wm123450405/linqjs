@@ -6,56 +6,64 @@ const InvalidFunctionException = require('./../core/exceptions/InvalidFunctionEx
 
 const methods = {
 	asSelector(selector) {
-		if (core.isString(selector)) {
+		let type = core.getType(selector);
+		if (type === core.types.String) {
 			return propertySelector(selector);
-		} else if (core.isFunction(selector)) {
+		} else if (type === core.types.Function) {
 			return selector;
 		} else {
 			throw new InvalidFunctionException(selector);
 		}
 	},
 	asPredicate(predicate) {
-		if (core.isString(predicate)) {
+		let type = core.getType(predicate);
+		if (type === core.types.String) {
 			return selectorPredicate(predicate);
-		} else if (core.isFunction(predicate)) {
+		} else if (type === core.types.Function) {
 			return predicate;
+		} else if (type === core.types.Array || type === core.types.Object) {
+			return propertiesPredicate(predicate);
 		} else {
 			throw new InvalidFunctionException(predicate);
 		}
 	},
 	asEqualityComparer(comparer) {
-		if (core.isString(comparer)) {
+		let type = core.getType(comparer);
+		if (type === core.types.String) {
 			return selectorComparer(comparer, defaultEqualityComparer);
-		} else if (core.isFunction(comparer)) {
+		} else if (type === core.types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asStrictEqualityComparer(comparer) {
-		if (core.isString(comparer)) {
+		let type = core.getType(comparer);
+		if (type === core.types.String) {
 			return selectorComparer(comparer, defaultStrictEqualityComparer);
-		} else if (core.isFunction(comparer)) {
+		} else if (type === core.types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asSameComparer(comparer) {
-		if (core.isString(comparer)) {
+		let type = core.getType(comparer);
+		if (type === core.types.String) {
 			return selectorComparer(comparer, defaultSameComparer);
-		} else if (core.isFunction(comparer)) {
+		} else if (type === core.types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asComparer(comparer) {
-		if (core.isString(comparer)) {
+		let type = core.getType(comparer);
+		if (type === core.types.String) {
 			return selectorComparer(comparer, defaultComparer);
-		} else if (core.isArray(comparer) || core.isEnumerable(comparer)) {
+		} else if (type === core.types.Array || type === core.types.Enumerable) {
 			return arrayComparer(comparer);
-		} else if (core.isFunction(comparer)) {
+		} else if (type === core.types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
@@ -73,3 +81,4 @@ const defaultStrictEqualityComparer = require('./defaultStrictEqualityComparer')
 const defaultSameComparer = require('./defaultSameComparer');
 const defaultComparer = require('./defaultComparer');
 const arrayComparer = require('./arrayComparer');
+const propertiesPredicate = require('./propertiesPredicate');

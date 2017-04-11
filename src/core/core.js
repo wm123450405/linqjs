@@ -50,6 +50,9 @@ const core = {
 		get Array() {
 			return 'Array';
 		},
+		get Object() {
+			return 'Object';
+		},
 		get Function() {
 			return 'Function';
 		},
@@ -80,6 +83,9 @@ const core = {
 	},
 	isArray(value) {
 		return this.getType(value) === this.types.Array;
+	},
+	isObject(value) {
+		return this.getType(value) === this.types.Object;
 	},
 	isSymbol(value) {
 		return this.getType(value) === this.types.Symbol;
