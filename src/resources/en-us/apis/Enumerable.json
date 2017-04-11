@@ -65,6 +65,18 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "empty",
+			"histroys": [
+				{
+					"overloads": [
+						{
+							"description": "Create an empty IEnumerable object"
+						}
+					]
+				}
+			]
 		}
 	]
 }

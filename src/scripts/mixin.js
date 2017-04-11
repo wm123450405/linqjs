@@ -1,6 +1,3 @@
-/**
- * Created by wm123 on 2017/3/22.
- */
 import common from './common';
 
 export default {

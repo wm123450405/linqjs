@@ -39,12 +39,10 @@ module.exports = {
 		return Enumerable.min(versions, '', this.versionComparer);
 	},
 	isNewer(version, basaVersion) {
-		console.log('isNewer', asVersion(version || this.earliest), asVersion(basaVersion));
 		let v = Enumerable.zip(asVersion(version || this.earliest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) <= parseInt(v.baseVer);
 	},
 	isOlder(version, basaVersion) {
-		console.log('isOlder', asVersion(version || this.newest), asVersion(basaVersion));
 		let v = Enumerable.zip(asVersion(version || this.newest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) >= parseInt(v.baseVer);
 	},

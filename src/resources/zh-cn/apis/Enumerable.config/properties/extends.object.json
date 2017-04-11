@@ -3,7 +3,12 @@
         {
             "type": "boolean",
             "since": "2.1.15",
-            "description": "开启或关闭对原生 Object 对象的扩展"
+            "description": "开启或关闭对原生 Object 对象的扩展",
+            "sees": [
+                {
+                    "guide": "extend"
+                }
+            ]
         }
     ]
 }

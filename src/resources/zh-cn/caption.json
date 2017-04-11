@@ -34,6 +34,9 @@
     "date": "日期",
     "prepublish": "预发布",
     "version": "版本",
+    "author": "作者",
+    "email": "邮箱",
+    "project": "项目",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

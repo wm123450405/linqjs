@@ -1,0 +1,19 @@
+{
+    "author": "散漫的水元素",
+    "emails": [
+        "491029934@qq.com",
+        "wm123450405@hotmail.com"
+    ],
+    "projects": [
+        {
+            "name": "github",
+            "href": "https://github.com/wm123450405/linqjs"
+        }
+    ],
+    "publishs": [
+        {
+            "name": "node",
+            "href": "https://www.npmjs.com/package/linq-js"
+        }
+    ]
+}
