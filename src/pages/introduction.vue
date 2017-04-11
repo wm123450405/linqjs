@@ -1,6 +1,8 @@
 <template>
     <content-template :title="data.title">
-        <a v-for="shield in data.shields" :href="shield.href"><img :src="shield.image" /></a>
+        <p>
+            <span v-for="shield in data.shields"><a target="_blank" :href="shield.href"><img :src="shield.image" /></a>&nbsp;&nbsp;</span>
+        </p>
         <p v-for="content in data.contents" v-html="capitalize(content)"></p>
     </content-template>
 </template>
