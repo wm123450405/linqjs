@@ -13,6 +13,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过指定的相等比较器从 Directory 中移除指定的键",
@@ -34,6 +35,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过指定的相等比较器查找指定键对应的值",
@@ -55,6 +57,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过指定的相等比较器判断 Directory 中是否包含指定的键",
@@ -76,6 +79,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过指定的相等比较器为指定键设置对应的值",

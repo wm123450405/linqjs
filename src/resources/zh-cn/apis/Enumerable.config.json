@@ -8,6 +8,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "设置 asEnumerable 方法的别名"
 				}
 			]
@@ -17,6 +18,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "开启或关闭对原生 Array 对象的扩展"
 				}
 			]
@@ -26,6 +28,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "开启或关闭对原生 Object 对象的扩展"
 				}
 			]
@@ -35,6 +38,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "开启或关闭对原生 String 对象的扩展"
 				}
 			]

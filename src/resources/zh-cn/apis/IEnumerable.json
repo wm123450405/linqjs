@@ -12,6 +12,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"override": true,
 					"description": "所包含的元素个数"
 				}
@@ -22,6 +23,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "所包含的元素个数"
 				}
 			]
@@ -33,6 +35,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "对一个序列应用累加器函数. 将指定的种子值用作累加器的初始值, 并使用指定的函数选择结果值.",
@@ -57,6 +60,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "确定是否对序列中的所有元素都满足条件",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "确定是否对序列中的所有元素都满足条件",
@@ -75,6 +93,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "确定序列中是否存在满足条件的元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "确定序列中是否存在满足条件的元素",
@@ -93,6 +126,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "获取一个 IEnumerable 对象",
@@ -107,6 +141,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的平均值",
@@ -125,6 +160,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -144,6 +180,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "确定使用指定的相等比较器时, 序列是否包含指定的元素",
@@ -165,6 +202,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -190,6 +228,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回一个数字来表示多少个元素指定序列中的满足条件",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回一个数字来表示多少个元素指定序列中的满足条件",
@@ -208,6 +261,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "如果源序列为空, 返回包含单一元素的新序列, 否则返回源序列",
@@ -226,6 +280,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "获取包含源序列中所有非重复元素的新序列",
@@ -244,6 +299,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中的指定索引处的元素",
@@ -262,6 +318,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中的指定索引处的元素, 如果索引超出范围, 则返回默认值",
@@ -283,6 +340,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -305,6 +363,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "生成两个序列的差集",
@@ -326,6 +385,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -351,6 +411,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -373,6 +434,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -395,6 +457,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -417,6 +480,7 @@
 			"histroys": [
 				{
 					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -439,6 +503,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -461,6 +526,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足指定条件的第一个元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足指定条件的第一个元素",
@@ -479,6 +559,24 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足条件的第一个元素. 如果未找到这样的元素, 则返回默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足条件的第一个元素. 如果未找到这样的元素, 则返回默认值",
@@ -500,6 +598,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -522,6 +621,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "获取序列的枚举器",
@@ -536,6 +636,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "根据指定的键选择器函数对序列中的元素进行分组, 并且从每个组及其键中创建结果值. 通过使用指定的比较器对键值进行比较, 并且通过使用指定的函数对每个组的元素进行投影",
@@ -563,6 +664,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "基于匹配键对两个序列的元素关联, 并对结果进行分组, 使用指定的相等比较器对键进行比较",
@@ -593,6 +695,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -615,6 +718,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -640,6 +744,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "生成两个序列的交集",
@@ -661,6 +766,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"parameters": [
@@ -698,6 +804,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足指定条件的最后一个元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足指定条件的最后一个元素",
@@ -716,6 +837,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -741,6 +863,24 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足条件的最后一个元素. 如果未找到这样的元素, 则返回默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足条件的最后一个元素. 如果未找到这样的元素, 则返回默认值",
@@ -762,6 +902,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -784,6 +925,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值",
@@ -805,6 +947,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值",
@@ -826,6 +969,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "根据指定的类型筛选出的新序列",
@@ -844,6 +988,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "按使用指定的比较器按升序对序列的元素进行排序",
@@ -865,6 +1010,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "按使用指定的比较器按降序对序列的元素进行排序",
@@ -886,6 +1032,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -901,6 +1048,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -920,6 +1068,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -942,6 +1091,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -964,6 +1114,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -979,6 +1130,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "将序列中的每个元素投影到新序列",
@@ -997,6 +1149,7 @@
 			"histroys": [
 				{
 					"since": "2.1.16",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "一个序列的每个元素投影为一个序列, 并将结果展开合并为一个结果序列",
@@ -1018,6 +1171,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等",
@@ -1039,6 +1193,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1054,6 +1209,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足指定条件的唯一元素. 如果有多个这样的元素存在, 则会引发异常",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足指定条件的唯一元素. 如果有多个这样的元素存在, 则会引发异常",
@@ -1072,6 +1242,24 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中满足条件的唯一元素. 如果未找到这样的元素, 则返回默认值. 如果有多个元素满足该条件, 此方法将引发异常",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中满足条件的唯一元素. 如果未找到这样的元素, 则返回默认值. 如果有多个元素满足该条件, 此方法将引发异常",
@@ -1093,6 +1281,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "跳过指定的数量的序列中的元素，然后返回剩余元素",
@@ -1111,6 +1300,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "跳过序列中指定条件为 true 的元素，然后返回剩余元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "跳过序列中指定条件为 true 的元素，然后返回剩余元素",
@@ -1129,6 +1333,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1151,6 +1356,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1173,6 +1379,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1192,6 +1399,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1217,6 +1425,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的和值",
@@ -1235,6 +1444,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "从序列的开头返回指定的数量的连续元素",
@@ -1253,6 +1463,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "返回序列中从起始位置开始指定的条件为 true 的连续元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "返回序列中从起始位置开始指定的条件为 true 的连续元素",
@@ -1271,6 +1496,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "使用源序列创建一个数组",
@@ -1285,6 +1511,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Directory 对象",
@@ -1309,6 +1536,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Lookup 对象",
@@ -1333,6 +1561,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "从 IEnumerable 中获取一个对象",
@@ -1357,6 +1586,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "生成两个序列的并集",
@@ -1378,6 +1608,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"override": true,
@@ -1397,6 +1628,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.16",
+					"overloads": [
+						{
+							"description": "通过筛选器筛选值序列",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.17",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过筛选器筛选值序列",
@@ -1415,6 +1661,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "通过依次合并元素的方式合并两个序列",

@@ -8,6 +8,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "默认的选择器"
 				}
 			]
@@ -17,6 +18,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "默认的键选择器"
 				}
 			]
@@ -26,6 +28,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "默认的结果选择器"
 				}
 			]
@@ -35,6 +38,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "默认的值选择器"
 				}
 			]
@@ -46,6 +50,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "获取一个属性选择器",

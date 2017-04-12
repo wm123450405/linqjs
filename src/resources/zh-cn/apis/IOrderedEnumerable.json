@@ -13,6 +13,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "执行后续排序中使用指定的比较器按升序对序列的元素",
@@ -34,6 +35,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "执行后续排序中使用指定的比较器按降序对序列的元素",

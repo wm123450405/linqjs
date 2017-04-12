@@ -1,4 +1,5 @@
 const Enumerable = require('linq-js');
+const extend = require('extend');
 
 const isPre = /\.pre$/ig;
 const asVersion = version => version.replace(isPre, '');
@@ -17,8 +18,12 @@ module.exports = {
 	},
 	histroys(histroys) {
 		if (histroys) {
-			return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]), (v, next) => {
-				v.deprecated = v.deprecated || next && next.since;
+			return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]).zip(Enumerable.concat([0], histroys), (next, prev) => ({ next, prev })), (v, content) => {
+				let deprecated = v.deprecated || content.next && content.next.since && this.preVersion(content.next.since);
+				if (v.ref && content.prev) {
+					v = extend(true, { }, content.prev, v);
+				}
+				v.deprecated = deprecated;
 				return v;
 			});
 		} else {
@@ -28,6 +33,12 @@ module.exports = {
 	versionComparer(version, other) {
 		let v = Enumerable.zip(asVersion(version).split('.'), asVersion(other).split('.'), (ver, otherVer) => ({ ver, otherVer })).firstOrDefault({ ver: 0, otherVer: 0 }, v => v.ver !== v.otherVer);
 		return v.ver === v.otherVer ? 0 : parseInt(v.ver) > parseInt(v.otherVer) ? 1 : -1;
+	},
+	preVersion(version) {
+		return Enumerable.where(this.versions, ver => this.versionComparer(ver, version) < 0).max('', this.versionComparer);
+	},
+	nextVersion(version) {
+		return Enumerable.where(this.versions, ver => this.versionComparer(ver, version) > 0).min('', this.versionComparer);
 	},
 	asVersion(version) {
 		return asVersion(version);

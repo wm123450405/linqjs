@@ -105,13 +105,13 @@ const createApis = (refreshLangName, refreshClassName) => {
 											let propertyMeta = JSON.parse(fs.readFileSync(path.join(propertiesPath, propertyFile)));
 											let property = {
 												name: path.basename(propertyFile, jsonExt),
-												histroys: propertyMeta.histroys.map(histroy => ({
+												histroys: common.histroys(propertyMeta.histroys).select(histroy => ({
 													since: histroy.since,
 													deprecated: histroy.deprecated,
 													static: histroy.static,
 													override: histroy.override,
 													description: histroy.description
-												}))
+												})).toArray()
 											};
 											classMeta.properties.push(property);
 										} catch(e) {
@@ -134,7 +134,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 
 											let method = {
 												name: path.basename(methodFile, jsonExt),
-												histroys: methodMeta.histroys.map(histroy => ({
+												histroys: common.histroys(methodMeta.histroys).select(histroy => ({
 													since: histroy.since,
 													deprecated: histroy.deprecated,
 													overloads: histroy.overloads.map(overload => ({
@@ -145,7 +145,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 															name: parameter.name
 														}))
 													}))
-												}))
+												})).toArray()
 											};
 											classMeta.methods.push(method);
 										} catch(e) {
@@ -174,15 +174,16 @@ const createDirectory = refreshLangName => {
 		"instance", "config", "selector", "predicate", "comparer", "action", "iterator"
 	], true)).toArray();
 	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt)).toArray();
-	let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
-		if (element === other) {
-			return 0;
-		} else if (common.isNewer(element, other)) {
-			return -1;
-		} else {
-			return 1;
-		}
-	}).toArray();
+	// let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
+	// 	if (element === other) {
+	// 		return 0;
+	// 	} else if (common.isNewer(element, other)) {
+	// 		return -1;
+	// 	} else {
+	// 		return 1;
+	// 	}
+	// }).toArray();
+	let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.less(common.isNewer)).toArray();
 
 	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
 	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));

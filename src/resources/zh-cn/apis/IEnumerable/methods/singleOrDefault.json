@@ -70,6 +70,27 @@
                     ]
                 }
             ]
+        },
+        {
+            "since": "2.1.17",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        { },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

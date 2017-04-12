@@ -10,6 +10,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"description": "当前游标所指向的元素"
 				}
 			]
@@ -21,6 +22,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "将游标移动到下一个元素, 并返回状态",
@@ -35,6 +37,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "重置 IEnumerator 对象, 将游标只想第一个元素",

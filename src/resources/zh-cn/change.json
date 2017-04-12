@@ -34,6 +34,6 @@
 			"新增所有的 predicate 参数, 如果使用 Array 或者 Object 类型作为参数时, 自动经过 Enumerable.predicates.properties 方法转译成一个筛选器",
 			"优化 comparer / predicate / selector 类型的参数 转化过程的效率"
 		],
-		"version": "2.1.17.pre"
+		"version": "2.1.17"
 	}
 ]

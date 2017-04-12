@@ -16,6 +16,7 @@
 			"name": "actions",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"description": "An object contains same useful actions"
 				}
 			]
@@ -24,6 +25,7 @@
 			"name": "comparers",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"description": "An object contains same useful comparers"
 				}
 			]
@@ -32,6 +34,7 @@
 			"name": "config",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"description": "Global config"
 				}
 			]
@@ -40,6 +43,7 @@
 			"name": "predicates",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"description": "An object contains same useful predicates"
 				}
 			]
@@ -48,6 +52,7 @@
 			"name": "selectors",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"description": "An object contains same useful selectors"
 				}
 			]
@@ -58,6 +63,7 @@
 			"name": "asEnumerable",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "Create an object of type IEnumerable from source"
@@ -70,6 +76,7 @@
 			"name": "empty",
 			"histroys": [
 				{
+					"deprecated": 0,
 					"overloads": [
 						{
 							"description": "Create an empty IEnumerable object"
