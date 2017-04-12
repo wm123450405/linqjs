@@ -50,7 +50,7 @@ function asEnumerable():IEnumerable; //任何对象都有asEnumerable方法用�
 > ```javascript
 > 'abc'.asEnumerable();
 > [1,2,3].asEnumerable();
-> {a:1,b:2}.asEnumerable();
+> ({a:1,b:2}).asEnumerable();
 > ```
 
 :*[see msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
