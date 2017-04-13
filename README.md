@@ -12,7 +12,7 @@ use linq and lambda in javascript
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
 [尚未完成的帮助文档](http://wm123450405.github.io/linqjs/#/zh-hans) :+1:  
-[Documention(not completed)](http://wm123450405.github.io/linqjs/#/en-us) :+1:
+[Documentation(not completed)](http://wm123450405.github.io/linqjs/#/en-us) :+1:
 
 ## Usage 用法
 
