@@ -1,0 +1,24 @@
+{
+    "title": "Get IEnumerable instance",
+    "contents": [
+        {
+            "title": "Use constructor of Enumerable class",
+            "descriptions": [
+                {
+                    "content": "You can use constructor of Enumerable class for get an IEnumerable object"
+                }
+            ]
+        },
+        {
+            "title": "Use Enumerable.asEnumerable method"
+        },
+        {
+            "title": "Use asEnumerable method",
+            "descriptions": [
+                {
+                    "content": "After require linq-js, asEnumerable method war included by any object, you can use asEnumerable of any object for get an IEnumerable object"
+                }
+            ]
+        }
+    ]
+}
