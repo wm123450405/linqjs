@@ -24,5 +24,7 @@
         "&nbsp;",
         "在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作",
         "从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少"
+        "&nbsp;",
+        "穷人,求捐赠: <a href=\"http://git.oschina.net/wm123450405/linqjs\">http://git.oschina.net/wm123450405/linqjs</a>"
     ]
 }
