@@ -23,6 +23,7 @@ const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
 
 const defaultAs = 'asEnumerable';
+const typeAs = Symbol('typeAs');
 
 const config = {
     extends: {
@@ -66,7 +67,17 @@ const initAs = (name) => {
             if (core.isIterator(this)) {
                 return new IteratorEnumerable(this);
             } else {
-                return new ObjectEnumerable(this);
+                if (this[typeAs] === core.types.String) {
+                    return new StringEnumerable(this);
+                } else if (this[typeAs] === core.types.Array || this[typeAs] === core.types.Set) {
+                    return new ArrayEnumerable(this);
+                } else if (this[typeAs] === core.types.Map) {
+                    return new MapEnumerable(this);
+                } else if (this[typeAs] === core.types.Iterator) {
+                    return new IteratorEnumerable(this);
+                } else {
+                    return new ObjectEnumerable(this);
+                }
             }
         }
     });
@@ -74,6 +85,13 @@ const initAs = (name) => {
 };
 
 initAs(defaultAs);
+
+Enumerable.typeAs = (type, as) => {
+    if (type.constructor.prototype !== type) type = type.prototype;
+    type[typeAs] = as;
+};
+
+Enumerable.types = core.types;
 
 Enumerable.config = {
     extends: {

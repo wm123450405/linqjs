@@ -14758,6 +14758,7 @@ Enumerable.unextend = function (prototype, type) {
             }
         }
     }
+    return prototype;
 };
 Enumerable.extend = function (prototype, type) {
     var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
@@ -15317,6 +15318,7 @@ var extendObject = require('./linq-object');
 var extendString = require('./linq-string');
 
 var defaultAs = 'asEnumerable';
+var typeAs = Symbol('typeAs');
 
 var config = {
     extends: {
@@ -15351,13 +15353,30 @@ var initAs = function initAs(name) {
         if (core.isIterator(this)) {
             return new IteratorEnumerable(this);
         } else {
-            return new ObjectEnumerable(this);
+            if (this[typeAs] === core.types.String) {
+                return new StringEnumerable(this);
+            } else if (this[typeAs] === core.types.Array || this[typeAs] === core.types.Set) {
+                return new ArrayEnumerable(this);
+            } else if (this[typeAs] === core.types.Map) {
+                return new MapEnumerable(this);
+            } else if (this[typeAs] === core.types.Iterator) {
+                return new IteratorEnumerable(this);
+            } else {
+                return new ObjectEnumerable(this);
+            }
         }
     }));
     config.as = name;
 };
 
 initAs(defaultAs);
+
+Enumerable.typeAs = function (type, as) {
+    if (type.constructor.prototype !== type) type = type.prototype;
+    type[typeAs] = as;
+};
+
+Enumerable.types = core.types;
 
 Enumerable.config = {
     extends: {
@@ -15977,6 +15996,8 @@ Enumerable.addPlugins = function () {
 			}
 		}
 	}
+
+	return this;
 };
 Enumerable.removePlugins = function () {
 	for (var _len2 = arguments.length, plugins = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -16069,6 +16090,8 @@ Enumerable.removePlugins = function () {
 			}
 		}
 	}
+
+	return this;
 };
 
 },{"./Enumerable":298,"./IEnumerable":299,"./core/core":303,"./core/exceptions/PluginRepeatException":310}]},{},[360])(360)

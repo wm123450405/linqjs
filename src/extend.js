@@ -58,10 +58,11 @@ Enumerable.unextend = function(prototype, type, isPrototype = false) {
         	}
         }
     }
+    return prototype;
 };
 Enumerable.extend = function(prototype, type, isPrototype = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
-    if (!isPrototype ||addExtends(prototype, type)) {
+    if (!isPrototype || addExtends(prototype, type)) {
         core.defineProperties(prototype, {
             where(predicate = defaultPredicate) {
                 return Enumerable.where(this, predicate);

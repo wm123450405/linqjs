@@ -49,6 +49,7 @@ Enumerable.addPlugins = function(...plugins) {
 			console.error(`Not a plugin value`);
 		}
 	}
+	return this;
 };
 Enumerable.removePlugins = function(...plugins) {
 	for (let plugin of plugins) {
@@ -72,4 +73,5 @@ Enumerable.removePlugins = function(...plugins) {
 			console.error(`No plugin find with name "${ plugin.name }"`);
 		}
 	}
+	return this;
 };

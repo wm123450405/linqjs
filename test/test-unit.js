@@ -941,5 +941,11 @@ module.exports = function(Enumerable) {
 
 	assert.deepStrictEqual(Enumerable.where([{a:1, b:2, c:3}, {a:3, b:2, c:3}, {a:1, b:5, c:3}], {b:5, c:3}).toArray(), [{a:1, b:5, c:3}]);
 
+	class TestArray { *[Symbol.iterator]() { yield 0; } }
+
+	Enumerable.typeAs(TestArray, Enumerable.types.Array);
+
+	assert.strictEqual(new TestArray().asEnumerable().elementAt(0), 0);
+
 	console.log('test successful!');
 };

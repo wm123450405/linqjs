@@ -4,7 +4,7 @@
     "491029934@qq.com"
   ],
   "description": "linq js",
-  "main": "dist/linq.js",
+  "main": "dist/linq.min.js",
   "keywords": [
     "linq",
     "js",

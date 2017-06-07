@@ -1,8 +1,8 @@
 {
   "name": "linq-js",
-  "version": "2.1.17",
+  "version": "2.1.18",
   "description": "use linq and lamdba in javascript",
-  "main": "dist/linq.js",
+  "main": "dist/linq.min.js",
   "scripts": {
     "test": "node test/test.js",
     "test:compile": "npm run compile && node test/test-compile.js",
