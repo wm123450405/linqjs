@@ -1,5 +1,5 @@
 {
-    "prepublish": true,
+    "publish": "2017-04-12",
     "contents": [
         "新增 findLast 方法",
         "新增 Enumerable.comparers.greater 方法",

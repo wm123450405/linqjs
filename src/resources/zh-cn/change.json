@@ -25,7 +25,7 @@
 		"version": "2.1.16"
 	},
 	{
-		"prepublish": true,
+		"publish": "2017-04-12",
 		"contents": [
 			"新增 findLast 方法",
 			"新增 Enumerable.comparers.greater 方法",
@@ -35,5 +35,14 @@
 			"优化 comparer / predicate / selector 类型的参数 转化过程的效率"
 		],
 		"version": "2.1.17"
+	},
+	{
+		"prepublish": true,
+		"contents": [
+			"新增 Enumerable.typeAs 方法用来对指定类型设置 asEnumerable 转换时的参考类型",
+			"新增 Enumerable.types 对象,包含各参考类型的常量值",
+			"Enumerable.addPlugins、Enumerable.removePlugins 方法增加返回值,方便链式调用"
+		],
+		"version": "2.1.18"
 	}
 ]

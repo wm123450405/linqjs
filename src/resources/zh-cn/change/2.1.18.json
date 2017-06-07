@@ -1,0 +1,8 @@
+{
+    "prepublish": true,
+    "contents": [
+        "新增 Enumerable.typeAs 方法用来对指定类型设置 asEnumerable 转换时的参考类型",
+        "新增 Enumerable.types 对象,包含各参考类型的常量值",
+        "Enumerable.addPlugins、Enumerable.removePlugins 方法增加返回值,方便链式调用"
+    ]
+}
