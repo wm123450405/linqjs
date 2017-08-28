@@ -37,7 +37,7 @@ class IEnumerable extends Array {
         if (hasProxy) {
             return new Proxy(this, {
                 get(target, prop) {
-                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
+                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && core.isInteger(prop) && prop >= 0 && !(prop in target)) {
                         return target.elementAtOrDefault(prop);
                     } else if (prop === 'length' || prop === 'size') {
                         return target.count();
@@ -46,7 +46,7 @@ class IEnumerable extends Array {
                     }
                 },
                 getOwnPropertyDescriptor(target, prop) {
-                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && parseInt(prop) == prop && !(prop in target)) {
+                    if (typeof(prop) !== 'symbol' && !isNaN(prop) && core.isInteger(prop) && prop >= 0 && !(prop in target)) {
                         return { enumerable: true, configurable: true, get: () => target.elementAtOrDefault(prop) };
                     } else if (prop === 'length' || prop === 'size') {
                         let desc = Object.getOwnPropertyDescriptor(target, 'length');

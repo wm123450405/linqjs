@@ -103,8 +103,14 @@ const core = {
 		let type = this.getType(value);
     	return type === this.types.Array || type === this.types.String;
 	},
+	isInteger(value) {
+		return (/^[-+]?\d+$/.test(value) || Number.isInteger(value));
+	},
+	asPascal(name) {
+		return typeof name === 'string' ? name.substring(0, 1).toUpperCase() + name.substring(1) : name;
+	},
 	conflict(prototype, property) {
-		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {
+		if (typeof property !== 'symbol' && prototype.hasOwnProperty(property)) {
 			let newProperty = 'o$' + property;
 			if (prototype.hasOwnProperty(newProperty)) return;
 			if (this.isDev()) console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
@@ -142,15 +148,15 @@ const core = {
 		}
 		this.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
-	defineProperties(prototype, properties) {
+	defineProperties(prototype, properties, pascal = false) {
 		for (let property in properties) {
 			if (properties.hasOwnProperty(property)) {
-				this.defineProperty(prototype, property, getter(properties, property), true);
+				this.defineProperty(prototype, pascal ? this.asPascal(property) : property, getter(properties, property), true, false);
 			}
 		}
 	},
 	undefineProperty(prototype, property) {
-		if (typeof property != 'symbol' && prototype.hasOwnProperty(property)) {
+		if (typeof property !== 'symbol' && prototype.hasOwnProperty(property)) {
 			let oldProperty = 'o$' + property;
 			if (prototype.hasOwnProperty(oldProperty)) {
 				Object.defineProperty(prototype, property, {
@@ -165,9 +171,9 @@ const core = {
 			}
 		}
 	},
-	undefineProperties(prototype, ...properties) {
+	undefineProperties(prototype, properties, pascal = false) {
 		for (let property of properties) {
-			this.undefineProperty(prototype, property);
+			this.undefineProperty(prototype, pascal ? core.asPascal(property) : property);
 		}
 	},
 	"array$every": Array.prototype.every,

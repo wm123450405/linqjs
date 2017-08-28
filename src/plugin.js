@@ -57,7 +57,7 @@ Enumerable.removePlugins = function(...plugins) {
 			plugin = { name: plugin };
 		}
 		let index = this.indexOf(_plugins, plugin, 0, pluginComparer);
-		if (index != -1) {
+		if (index !== -1) {
 			plugin = _plugins[index];
 			_plugins.splice(index, 1);
 			delete Enumerable[plugin.name];
