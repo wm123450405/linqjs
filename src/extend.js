@@ -48,19 +48,20 @@ const memberFunction = name => function() {
 core.defineProperty(Enumerable, 'extends', function() {
     return this.select(_extends).toArray();
 }, true, true);
-Enumerable.unextend = function(prototype, type, isPrototype = false, pascal = false) {
+
+Enumerable.unextend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || removeExtends(prototype, type)) {
-		core.undefineProperties(prototype, [ 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup' ], pascal);
+		core.undefineProperties(prototype, [ 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup' ], pascalOrPrefix);
         for (let plugin of this.plugins) {
         	if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-        		core.undefineProperties(prototype, [ plugin.name ], pascal);
+        		core.undefineProperties(prototype, [ plugin.name ], pascalOrPrefix);
         	}
         }
     }
     return prototype;
 };
-Enumerable.extend = function(prototype, type, isPrototype = false, pascal = false) {
+Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || addExtends(prototype, type)) {
         core.defineProperties(prototype, {
@@ -256,7 +257,7 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascal = fals
             concat(...others) {
                 return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
             }
-        }, pascal);
+        }, pascalOrPrefix);
         if (type !== core.types.Object) {
             core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultSameComparer) {
@@ -265,7 +266,7 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascal = fals
                 toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultSameComparer) {
                     return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
-            }, pascal);
+            }, pascalOrPrefix);
         } else {
             core.defineProperties(prototype, {
                 toDictionary(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
@@ -274,11 +275,13 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascal = fals
                 toLookup(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
                     return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
-            }, pascal);
+            }, pascalOrPrefix);
         }
         for (let plugin of this.plugins) {
         	if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-        		core.defineProperty(prototype, plugin.name, memberFunction(plugin.name), false, false, pascal);
+        		core.defineProperties(prototype, {
+        		    [plugin.name] : memberFunction(plugin.name)
+                }, pascalOrPrefix);
         	}
         }
     }

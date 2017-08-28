@@ -148,10 +148,10 @@ const core = {
 		}
 		this.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
-	defineProperties(prototype, properties, pascal = false) {
+	defineProperties(prototype, properties, pascalOrPrefix = false) {
 		for (let property in properties) {
 			if (properties.hasOwnProperty(property)) {
-				this.defineProperty(prototype, pascal ? this.asPascal(property) : property, getter(properties, property), true, false);
+				this.defineProperty(prototype, pascalOrPrefix === true ? this.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
 			}
 		}
 	},
@@ -171,9 +171,9 @@ const core = {
 			}
 		}
 	},
-	undefineProperties(prototype, properties, pascal = false) {
+	undefineProperties(prototype, properties, pascalOrPrefix = false) {
 		for (let property of properties) {
-			this.undefineProperty(prototype, pascal ? core.asPascal(property) : property);
+			this.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
 		}
 	},
 	"array$every": Array.prototype.every,
