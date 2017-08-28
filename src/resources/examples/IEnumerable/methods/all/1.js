@@ -7,7 +7,7 @@ let pets = [
 
 // Determine whether all pet names
 // in the array start with 'B'.
-let allStartWithB = pets.all(pet => pet.name.startsWith("B"));
+let allStartWithB = pets.asEnumerable().all(pet => pet.name.startsWith("B"));
 
 console.log(`${ allStartWithB ? "All" : "Not all" } pet names start with 'B'.`);
 

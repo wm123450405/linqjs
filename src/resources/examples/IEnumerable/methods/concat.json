@@ -1,0 +1,3 @@
+{
+	"1.js": "let cats = [\r\n    { name: \"Barley\", age: 8 },\r\n    { name: \"Boots\", age: 4 },\r\n    { name: \"Whiskers\", age: 1 }\r\n];\r\n\r\nlet dogs = [\r\n    { name: \"Bounder\", age: 3 },\r\n    { name: \"Snoopy\", age: 14 },\r\n    { name: \"Fido\", age: 9 }\r\n];\r\n\r\nlet query = cats.asEnumerable().select(cat => cat.name)\r\n        .concat(dogs.asEnumerable().select(dog => dog.name));\r\n\r\nfor (let name of query) {\r\n    console.log(name);\r\n}\r\n\r\n// This code produces the following output:\r\n//\r\n// Barley\r\n// Boots\r\n// Whiskers\r\n// Bounder\r\n// Snoopy\r\n// Fido"
+}

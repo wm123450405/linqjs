@@ -8,6 +8,10 @@
         {
             "name": "github",
             "href": "https://github.com/wm123450405/linqjs"
+        },
+        {
+            "name": "oschina",
+            "href": "http://git.oschina.net/wm123450405/linqjs"
         }
     ],
     "publishs": [

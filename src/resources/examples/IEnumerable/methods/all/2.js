@@ -31,7 +31,7 @@ let people = [
 // Determine which people have pets that are all older than 5.
 let names = people.asEnumerable().where(person => person.pets.all(pet => pet.age > 5)).select(person => person.lastName);
 
-for (let name in names) {
+for (let name of names) {
     console.log(name);
 }
 

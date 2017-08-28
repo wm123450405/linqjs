@@ -67,9 +67,11 @@ const createApis = (refreshLangName, refreshClassName) => {
 			let apisPath = path.join(langPath, 'apis');
 			if (fs.existsSync(apisPath)) {
 				watch(apisPath, (eventType, filename) => {
-					let apiPath = path.join(apisPath, filename);
-					if (fs.existsSync(apiPath) && fs.statSync(apiPath).isDirectory()) {
-						createApis(langName);
+					if (filename) {
+                        let apiPath = path.join(apisPath, filename);
+                        if (fs.existsSync(apiPath) && fs.statSync(apiPath).isDirectory()) {
+                            createApis(langName);
+                        }
 					}
 				});
 				let classNames = fs.readdirSync(apisPath);

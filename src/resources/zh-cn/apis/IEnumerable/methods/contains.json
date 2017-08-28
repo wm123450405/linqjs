@@ -66,6 +66,22 @@
                             "apis": "Enumerable.comparers",
                             "property": "equality"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 contains 确定数组是否包含特定元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的示例演示如何实现可在 contains 方法中使用的相等比较器，与使用此比较器确定数组是否包含特定元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]
