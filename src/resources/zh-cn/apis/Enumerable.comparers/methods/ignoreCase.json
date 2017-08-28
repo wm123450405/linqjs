@@ -1,0 +1,60 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.18",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "selector",
+                            "types": [
+                                "function"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "boolean"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "other",
+                                    "types": [
+                                        "any"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "description": "通过一个键选择器生成一个忽略大小写的相等比较器",
+                    "sees": [
+                        {
+                            "guide": "comparer"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
