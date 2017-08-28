@@ -1,0 +1,4 @@
+{
+	"1.js": "// Create an array of Pets.\r\nlet pets = [\r\n    { name: \"Barley\", age: 8, vaccinated: true },\r\n    { name: \"Boots\", age: 4, vaccinated: false },\r\n    { name: \"Whiskers\", age: 1, vaccinated: false }\r\n];\r\n\r\n// Determine whether any pets over age 1 are also unvaccinated.\r\nlet unvaccinated = pets.asEnumerable().any(p => p.age > 1 && p.vaccinated === false);\r\n\r\nconsole.log(`There ${ unvaccinated ? \"are\" : \"are not any\" } unvaccinated animals over age one.`);\r\n\r\n// This code produces the following output:\r\n//\r\n//  There are unvaccinated animals over age one.",
+	"2.js": "let fruits = [ \"apple\", \"banana\", \"mango\", \"orange\", \"passionfruit\", \"grape\" ];\r\n\r\nlet numberOfFruits = fruits.asEnumerable().count();\r\n\r\nconsole.log(`There are ${ numberOfFruits } fruits in the collection.`);\r\n\r\n// This code produces the following output:\r\n//\r\n// There are 6 fruits in the collection."
+}

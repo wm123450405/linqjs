@@ -173,7 +173,7 @@ const createDirectory = refreshLangName => {
 	let defaultDirectoryMeta = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, directoryMetaFile)));
 	let defaultCaption = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, captionFile)));
 	let defaultGuides = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
-		"instance", "config", "selector", "predicate", "comparer", "action", "iterator"
+		"instance", "use", "config", "selector", "predicate", "comparer", "action", "iterator"
 	], true)).toArray();
 	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt)).toArray();
 	// let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
