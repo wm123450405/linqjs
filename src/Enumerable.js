@@ -25,6 +25,7 @@ const equalityPredicate = require('./methods/equalityPredicate');
 const selectorPredicate = require('./methods/selectorPredicate');
 const greaterComparer = require('./methods/greaterComparer');
 const lessComparer = require('./methods/lessComparer');
+const ignoreCaseComparer = require('./methods/ignoreCaseComparer');
 
 const NoSuchElementsException = require('./core/exceptions/NoSuchElementsException');
 const OutOfRangeException = require('./core/exceptions/OutOfRangeException');
@@ -351,7 +352,7 @@ Enumerable.sequenceEqual = function(source, other, comparer = defaultEqualityCom
     let otherIterator = other[Symbol.iterator]();
     let sourceElement, otherElement;
     while(!((sourceElement = sourceIterator.next()).done & (otherElement = otherIterator.next()).done)) {
-        if (sourceElement.done != otherElement.done) {
+        if (sourceElement.done !== otherElement.done) {
             return false;
         } else if (!comparer(sourceElement.value, otherElement.value)) {
             return false;
@@ -749,6 +750,9 @@ core.defineProperty(Enumerable, 'comparers', () => ({
     },
     less(lessThen, comparer = defaultEqualityComparer) {
         return lessComparer(lessThen, comparer);
+    },
+    ignoreCase(selector = defaultSelector) {
+        return ignoreCaseComparer(selector);
     }
 }), true, true);
 core.defineProperty(Enumerable, 'selectors', () => ({
