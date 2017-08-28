@@ -9538,11 +9538,11 @@ var core = {
 		this.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
 	defineProperties: function defineProperties(prototype, properties) {
-		var pascal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+		var pascalOrPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
 		for (var property in properties) {
 			if (properties.hasOwnProperty(property)) {
-				this.defineProperty(prototype, pascal ? this.asPascal(property) : property, getter(properties, property), true, false);
+				this.defineProperty(prototype, pascalOrPrefix === true ? this.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
 			}
 		}
 	},
@@ -9563,7 +9563,7 @@ var core = {
 		}
 	},
 	undefineProperties: function undefineProperties(prototype, properties) {
-		var pascal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+		var pascalOrPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 		var _iteratorNormalCompletion = true;
 		var _didIteratorError = false;
 		var _iteratorError = undefined;
@@ -9572,7 +9572,7 @@ var core = {
 			for (var _iterator = properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 				var property = _step.value;
 
-				this.undefineProperty(prototype, pascal ? core.asPascal(property) : property);
+				this.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
 			}
 		} catch (err) {
 			_didIteratorError = true;
@@ -14664,6 +14664,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
@@ -14737,13 +14739,14 @@ var memberFunction = function memberFunction(name) {
 core.defineProperty(Enumerable, 'extends', function () {
     return this.select(_extends).toArray();
 }, true, true);
+
 Enumerable.unextend = function (prototype, type) {
     var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var pascal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var pascalOrPrefix = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
     if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || removeExtends(prototype, type)) {
-        core.undefineProperties(prototype, ['where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup'], pascal);
+        core.undefineProperties(prototype, ['where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup'], pascalOrPrefix);
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
         var _iteratorError2 = undefined;
@@ -14753,7 +14756,7 @@ Enumerable.unextend = function (prototype, type) {
                 var plugin = _step2.value;
 
                 if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-                    core.undefineProperties(prototype, [plugin.name], pascal);
+                    core.undefineProperties(prototype, [plugin.name], pascalOrPrefix);
                 }
             }
         } catch (err) {
@@ -14775,7 +14778,7 @@ Enumerable.unextend = function (prototype, type) {
 };
 Enumerable.extend = function (prototype, type) {
     var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var pascal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var pascalOrPrefix = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
     if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || addExtends(prototype, type)) {
@@ -15090,7 +15093,7 @@ Enumerable.extend = function (prototype, type) {
 
                 return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
             }
-        }, pascal);
+        }, pascalOrPrefix);
         if (type !== core.types.Object) {
             core.defineProperties(prototype, {
                 toDictionary: function toDictionary() {
@@ -15107,7 +15110,7 @@ Enumerable.extend = function (prototype, type) {
 
                     return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
-            }, pascal);
+            }, pascalOrPrefix);
         } else {
             core.defineProperties(prototype, {
                 toDictionary: function toDictionary() {
@@ -15124,7 +15127,7 @@ Enumerable.extend = function (prototype, type) {
 
                     return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
                 }
-            }, pascal);
+            }, pascalOrPrefix);
         }
         var _iteratorNormalCompletion3 = true;
         var _didIteratorError3 = false;
@@ -15135,7 +15138,7 @@ Enumerable.extend = function (prototype, type) {
                 var plugin = _step3.value;
 
                 if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-                    core.defineProperty(prototype, plugin.name, memberFunction(plugin.name), false, false, pascal);
+                    core.defineProperties(prototype, _defineProperty({}, plugin.name, memberFunction(plugin.name)), pascalOrPrefix);
                 }
             }
         } catch (err) {
