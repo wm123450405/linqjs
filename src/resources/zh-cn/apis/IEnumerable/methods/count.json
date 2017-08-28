@@ -62,6 +62,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb535181(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 count 对数组中的元素进行计数。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 count 对数组中满足条件的元素进行计数。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]
@@ -81,6 +97,17 @@
                                 "array",
                                 "object"
                             ]
+                        }
+                    ],
+                    "examples": [
+                        { },
+                        { },
+                        {
+                            "description": "下面的代码示例演示如何使用 count 对数组与指定值相符的元素进行计数。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "3.js"
+                            }
                         }
                     ]
                 }
