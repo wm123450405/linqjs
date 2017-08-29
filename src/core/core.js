@@ -68,6 +68,9 @@ const core = {
 		get Symbol() {
 			return 'Symbol';
 		},
+		get Arguments() {
+			return 'Arguments';
+		},
 		get Iterator() {
 			return 'Iterator';
 		},
@@ -92,6 +95,9 @@ const core = {
 	},
 	isFunction(value) {
 		return this.getType(value) === this.types.Function;
+	},
+    isArguments(value) {
+        return this.getType(value) === this.types.Arguments;
 	},
 	isIterator(value) {
 		return this.getType(value).endsWith(this.types.Iterator);
