@@ -5,6 +5,9 @@
         "新增 Enumerable.types 对象,包含各参考类型的常量值",
         "Enumerable.addPlugins、Enumerable.removePlugins 方法增加返回值,方便链式调用",
         "新增 Enumerable.comparers.ignoreCase 忽略大小写的相等比较器",
-        "新增 IEnumerable.leftJoin、IEnumerable.rightJoin 方法用来对两个序列分别进行内部左联接与内部右联接"
+        "新增 IEnumerable.leftJoin、IEnumerable.rightJoin 方法用来对两个序列分别进行内部左联接与内部右联接",
+        "修复 concat 方法在参数值为 String 或 Arguments 类型是结果超出预期的bug",
+        "移除过时的功能 arrayComparer、predicateComparer",
+        "新增 Enumerable.extends.lazy 配置选项"
     ]
 }

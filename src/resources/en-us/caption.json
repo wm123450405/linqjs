@@ -36,6 +36,9 @@
     "author": "author",
     "email": "email",
     "project": "project",
+    "default": "default",
+    "value": "value",
+    "defaultValue": "default value",
     "newInstance": {
         "only": "can only use new operator",
         "both": "can use new operator or not",

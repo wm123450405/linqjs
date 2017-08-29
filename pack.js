@@ -112,7 +112,8 @@ const createApis = (refreshLangName, refreshClassName) => {
 													deprecated: histroy.deprecated,
 													static: histroy.static,
 													override: histroy.override,
-													description: histroy.description
+													description: histroy.description,
+                                                    default: histroy.default
 												})).toArray()
 											};
 											classMeta.properties.push(property);

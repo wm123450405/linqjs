@@ -37,6 +37,9 @@
     "author": "作者",
     "email": "邮箱",
     "project": "项目",
+    "default": "默认",
+    "value": "值",
+    "defaultValue": "默认值",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

@@ -16,6 +16,10 @@
                         <span class="hljs-class"><span class="hljs-title">{{ className }}</span></span><template v-if="!histroy.static && classMeta.type !== 'object'">.<span class="hljs-built_in">prototype</span></template>.<span class="hljs-attribute">{{ propertyName }}</span>
                         <span class="hljs-symbol">:</span>
                         <code-class :type="histroy.type"></code-class>
+                        <template v-if="typeof histroy.default !== 'undefined'">
+                            <span class="hljs-symbol">=</span>
+                            <span class="hljs-variable">{{ histroy.default | json }}</span>
+                        </template>
                     </code>
                 </p>
                 <h3 v-if="histroy.remarks && histroy.remarks.length">{{ caption.remarks }}:</h3>

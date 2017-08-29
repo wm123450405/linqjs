@@ -52,6 +52,7 @@
                     <tr>
                         <th width="95"></th>
                         <th>{{ caption.property }}</th>
+                        <th>{{ caption.defaultValue }}</th>
                         <th>{{ caption.description }}</th>
                     </tr>
                     </thead>
@@ -66,6 +67,7 @@
                             <td>
                                 <lang-link :to="`apis/${ name }/property/${ property.name }`">{{ property.name }}</lang-link>
                             </td>
+                            <td>{{ histroy.default | json }}</td>
                             <td>
                                 {{ histroy.description }}
                             </td>

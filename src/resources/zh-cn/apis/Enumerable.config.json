@@ -9,7 +9,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "设置 asEnumerable 方法的别名"
+					"description": "设置 asEnumerable 方法的别名",
+					"default": "asEnumerable"
 				}
 			]
 		},
@@ -19,7 +20,19 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "开启或关闭对原生 Array 对象的扩展"
+					"description": "开启或关闭对原生 Array 对象的扩展",
+					"default": false
+				}
+			]
+		},
+		{
+			"name": "extends.lazy",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"description": "开启或关闭调用原生对象的原生方法时使用延迟执行功能",
+					"default": false
 				}
 			]
 		},
@@ -29,7 +42,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "开启或关闭对原生 Object 对象的扩展"
+					"description": "开启或关闭对原生 Object 对象的扩展",
+					"default": false
 				}
 			]
 		},
@@ -39,7 +53,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "开启或关闭对原生 String 对象的扩展"
+					"description": "开启或关闭对原生 String 对象的扩展",
+					"default": false
 				}
 			]
 		}
