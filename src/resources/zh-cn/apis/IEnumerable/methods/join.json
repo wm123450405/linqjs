@@ -189,6 +189,15 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 join 来执行基于对一个公共键的两个序列的内部联接。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]
@@ -389,6 +398,15 @@
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 join 来执行基于对一个公共键的两个序列的内部联接。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
                         }
                     ]
                 }
