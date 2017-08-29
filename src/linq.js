@@ -29,7 +29,8 @@ const config = {
     extends: {
         array: false,
         object: false,
-        string: false
+        string: false,
+        lazy: false
     },
     as: defaultAs
 };
@@ -134,6 +135,15 @@ Enumerable.config = {
         get string() {
             return config.extends.string;
         },
+        set lazy(value) {
+            if (config.extends.lazy !== value) {
+                core.lazy = value;
+            }
+            config.extends.lazy = value;
+        },
+        get lazy() {
+            return config.extends.lazy;
+        }
     },
     set as(name) {
         initAs(name);

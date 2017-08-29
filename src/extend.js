@@ -3,6 +3,7 @@
 const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
+const methods = require('./methods/methods');
 
 const defaultPredicate = require('./methods/defaultPredicate');
 const defaultSelector = require('./methods/defaultSelector');
@@ -198,16 +199,28 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
                 return Enumerable.reverse(this);
             },
             copyWithin(target = 0, start = 0, end = Infinity) {
-                return Enumerable.copyWithin(this, target, start, end);
+                if (core.isArray(this) && core.array$copyWithin && !core.lazy) {
+                    return core.array$copyWithin.call(this, target, start, end);
+                } else {
+                    return Enumerable.copyWithin(this, target, start, end);
+                }
             },
             every(callback, thisArg) {
                 return Enumerable.every(this, callback, thisArg);
             },
             fill(value, start = 0, end = Infinity) {
-                return Enumerable.fill(this, value, start, end);
+                if (core.isArray(this) && core.array$fill && !core.lazy) {
+                    return core.array$fill.call(this, value, start, end);
+                } else {
+                    return Enumerable.fill(this, value, start, end);
+                }
             },
             filter(callback, thisArg) {
-                return Enumerable.filter(this, callback, thisArg);
+                if ((core.isArray(this) || core.isArguments(this)) && core.array$filter && !core.lazy) {
+                    return core.array$filter.call(this, callback, thisArg);
+                } else {
+                    return Enumerable.filter(this, callback, thisArg);
+                }
             },
             find(callback, thisArg) {
                 return Enumerable.find(this, callback, thisArg);
@@ -216,7 +229,11 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
                 return Enumerable.includes(this, element, start);
             },
             map(callback, thisArg) {
-                return Enumerable.map(this, callback, thisArg);
+                if ((core.isArray(this) || core.isArguments(this)) && core.array$map && !core.lazy) {
+                    return core.array$map.call(this, callback, thisArg);
+                } else {
+                    return Enumerable.map(this, callback, thisArg);
+                }
             },
             pop() {
                 return Enumerable.pop(this);
@@ -237,7 +254,13 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
                 return Enumerable.reduceRight(this, callback, initialValue);
             },
             slice(start = 0, end = Infinity) {
-                return Enumerable.slice(this, start, end);
+                if (core.isString(this) && core.string$slice && !core.lazy) {
+                    return core.string$slice.call(this, start, end);
+                } else if ((core.isArray(this) || core.isArguments(this)) && core.array$slice && !core.lazy) {
+                    return core.array$slice.call(this, start, end);
+                } else {
+                    return Enumerable.slice(this, start, end);
+                }
             },
             splice(start, count, ...values) {
                 return Enumerable.splice.apply(Enumerable, core.array$concat.call([this, start, count], values));
@@ -246,7 +269,11 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
                 return Enumerable.some(this, callback, thisArg);
             },
             sort(comparer = defaultComparer) {
-                return Enumerable.sort(this, comparer);
+                if (core.isArray(this) && core.array$sort && !core.lazy) {
+                    return core.array$sort.call(this, methods.asComparer(comparer));
+                } else {
+                    return Enumerable.sort(this, comparer);
+                }
             },
             zip(other, resultSelector = defaultResultSelector) {
                 return Enumerable.zip(this, other, resultSelector);
@@ -261,7 +288,13 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
                 return Enumerable.forEach(this, action, thisArg);
             },
             concat(...others) {
-                return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+                if (core.isString(this) && core.string$concat && !core.lazy) {
+                    return core.string$concat.apply(this, others);
+                } else if ((core.isArray(this) || core.isArguments(this))&& core.array$concat && !core.lazy) {
+                    return core.array$concat.apply(this, others);
+                } else {
+                    return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+                }
             }
         }, pascalOrPrefix);
         if (type !== core.types.Object) {

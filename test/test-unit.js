@@ -763,10 +763,11 @@ module.exports = function(Enumerable) {
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
 	})();
 
-	(() => {
+	let testExtends = lazy => {
 		Enumerable.config.extends.array = true;
 		Enumerable.config.extends.object = true;
-		Enumerable.config.extends.string = true;
+        Enumerable.config.extends.string = true;
+        Enumerable.config.extends.lazy = lazy;
 
 		//splice
 		let array_splice = [1, 2, 4, 3, 5, 6];
@@ -875,7 +876,11 @@ module.exports = function(Enumerable) {
 		Enumerable.config.extends.array = false;
 		Enumerable.config.extends.object = false;
 		Enumerable.config.extends.string = false;
-	})();
+        Enumerable.config.extends.lazy = false;
+	};
+
+    testExtends(true);
+    testExtends(false);
 
 	assert.deepStrictEqual(Enumerable.toDictionary(['a', 'b', 'c']).toObject(), {
 		a: 'a',
@@ -943,4 +948,6 @@ module.exports = function(Enumerable) {
 	assert.strictEqual(new TestArray().asEnumerable().elementAt(0), 0);
 
 	console.log('test successful!');
+
+    Enumerable.config.extends.array = true;
 };

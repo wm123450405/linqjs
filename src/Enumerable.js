@@ -311,7 +311,11 @@ Enumerable.slice = function(source, start = 0, end = Infinity) {
     return new SliceEnumerable(asIterable(source), start, end);
 };
 Enumerable.splice = function(source, start, count, ...values) {
-    return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
+    if (core.isArray(source) && core.array$splice) {
+        return core.array$splice.call(source, start, count, ...values);
+    } else {
+        return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
+    }
 };
 Enumerable.fill = function(source, value, start = 0, end = Infinity) {
     return new FillEnumerable(asIterable(source), value, start, end);
@@ -666,17 +670,21 @@ Enumerable.indexOf = function(source, value, start = 0, comparer = defaultStrict
     }
 };
 Enumerable.findIndex = function(source, predicate, thisArg) {
-    let index = 0;
-    source = asIterable(source);
-    predicate = methods.asPredicate(predicate);
-    let callback = (element, index) => predicate.call(thisArg, element, index, source);
-    for (let element of source) {
-        if (callback(element, index)) {
-            return index;
+    if (core.isArray(source) && core.array$findIndex) {
+        return core.array$findIndex.call(source, predicate, thisArg);
+    } else {
+        let index = 0;
+        source = asIterable(source);
+        predicate = methods.asPredicate(predicate);
+        let callback = (element, index) => predicate.call(thisArg, element, index, source);
+        for (let element of source) {
+            if (callback(element, index)) {
+                return index;
+            }
+            index++;
         }
-        index++;
+        return -1;
     }
-    return -1;
 };
 Enumerable.findLast = function(source, callback, thisArg) {
     return this.lastOrDefault(source, undefined, (element, index) => callback.call(thisArg, element, index, source));
@@ -723,14 +731,6 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
             callback(element, index++);
         }
     }
-};
-Enumerable.arrayComparer = function(array, last = false, comparer = defaultEqualityComparer) {
-    console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
-    return arrayComparer(array, last, comparer);
-};
-Enumerable.predicateComparer = function(predicateArray, last = false) {
-    console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
-    return predicateComparer(predicateArray, last);
 };
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {

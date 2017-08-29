@@ -31,7 +31,10 @@ class IEnumerable extends Array {
                 return type === enumerable ? source.getProtoType() : type;
             },
             toString() {
-                return type === string ? Enumerable.join(this, '') : type === array ? '[' + Enumerable.join(this, ',') + ']' : type === enumerable ? source.toString.call(this) : ('[' + Enumerable.join(this, ',') + ']');
+                return type === string ? this.join('') : type === array ? '[' + this.join(',') + ']' : type === enumerable ? source.toString.call(this) : ('[' + this.join(',') + ']');
+            },
+            toProto() {
+                return this.getProtoType() === string ? this.join('') : this.getProtoType() === array ? this.toArray() : this.toObject();
             }
         });
         if (hasProxy) {

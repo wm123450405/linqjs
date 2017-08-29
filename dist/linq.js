@@ -7576,7 +7576,13 @@ Enumerable.splice = function (source, start, count) {
         values[_key4 - 3] = arguments[_key4];
     }
 
-    return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
+    if (core.isArray(source) && core.array$splice) {
+        var _core$array$splice;
+
+        return (_core$array$splice = core.array$splice).call.apply(_core$array$splice, [source, start, count].concat(values));
+    } else {
+        return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [asIterable(source), start, count], values)))();
+    }
 };
 Enumerable.fill = function (source, value) {
     var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -8388,41 +8394,45 @@ Enumerable.indexOf = function (source, value) {
     }
 };
 Enumerable.findIndex = function (source, predicate, thisArg) {
-    var index = 0;
-    source = asIterable(source);
-    predicate = methods.asPredicate(predicate);
-    var callback = function callback(element, index) {
-        return predicate.call(thisArg, element, index, source);
-    };
-    var _iteratorNormalCompletion22 = true;
-    var _didIteratorError22 = false;
-    var _iteratorError22 = undefined;
+    if (core.isArray(source) && core.array$findIndex) {
+        return core.array$findIndex.call(source, predicate, thisArg);
+    } else {
+        var index = 0;
+        source = asIterable(source);
+        predicate = methods.asPredicate(predicate);
+        var callback = function callback(element, index) {
+            return predicate.call(thisArg, element, index, source);
+        };
+        var _iteratorNormalCompletion22 = true;
+        var _didIteratorError22 = false;
+        var _iteratorError22 = undefined;
 
-    try {
-        for (var _iterator22 = source[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
-            var element = _step22.value;
-
-            if (callback(element, index)) {
-                return index;
-            }
-            index++;
-        }
-    } catch (err) {
-        _didIteratorError22 = true;
-        _iteratorError22 = err;
-    } finally {
         try {
-            if (!_iteratorNormalCompletion22 && _iterator22.return) {
-                _iterator22.return();
+            for (var _iterator22 = source[Symbol.iterator](), _step22; !(_iteratorNormalCompletion22 = (_step22 = _iterator22.next()).done); _iteratorNormalCompletion22 = true) {
+                var element = _step22.value;
+
+                if (callback(element, index)) {
+                    return index;
+                }
+                index++;
             }
+        } catch (err) {
+            _didIteratorError22 = true;
+            _iteratorError22 = err;
         } finally {
-            if (_didIteratorError22) {
-                throw _iteratorError22;
+            try {
+                if (!_iteratorNormalCompletion22 && _iterator22.return) {
+                    _iterator22.return();
+                }
+            } finally {
+                if (_didIteratorError22) {
+                    throw _iteratorError22;
+                }
             }
         }
-    }
 
-    return -1;
+        return -1;
+    }
 };
 Enumerable.findLast = function (source, callback, thisArg) {
     return this.lastOrDefault(source, undefined, function (element, index) {
@@ -8502,19 +8512,6 @@ Enumerable.forEach = function (source) {
             }
         }
     }
-};
-Enumerable.arrayComparer = function (array) {
-    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-
-    console.warn('This method was deprecated, please use Enumerable.comparers.array(array, last, comparer)');
-    return arrayComparer(array, last, comparer);
-};
-Enumerable.predicateComparer = function (predicateArray) {
-    var last = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-    console.warn('This method was deprecated, please use Enumerable.comparers.predicate(predicateArray, last)');
-    return predicateComparer(predicateArray, last);
 };
 core.defineProperty(Enumerable, 'comparers', function () {
     return {
@@ -8773,7 +8770,10 @@ var IEnumerable = function (_extendableBuiltin2) {
                 return type === enumerable ? source.getProtoType() : type;
             },
             toString: function toString() {
-                return type === string ? Enumerable.join(this, '') : type === array ? '[' + Enumerable.join(this, ',') + ']' : type === enumerable ? source.toString.call(this) : '[' + Enumerable.join(this, ',') + ']';
+                return type === string ? this.join('') : type === array ? '[' + this.join(',') + ']' : type === enumerable ? source.toString.call(this) : '[' + this.join(',') + ']';
+            },
+            toProto: function toProto() {
+                return this.getProtoType() === string ? this.join('') : this.getProtoType() === array ? this.toArray() : this.toObject();
             }
         });
         if (hasProxy) {
@@ -9630,33 +9630,35 @@ var core = {
 		}
 	},
 
-	"array$every": Array.prototype.every,
-	"array$concat": Array.prototype.concat,
-	"array$splice": Array.prototype.splice,
-	"array$slice": Array.prototype.slice,
-	"array$fill": Array.prototype.fill,
-	"array$find": Array.prototype.find,
-	"array$includes": Array.prototype.includes,
-	"array$map": Array.prototype.map,
-	"array$filter": Array.prototype.filter,
-	"array$shift": Array.prototype.shift,
-	"array$unshift": Array.prototype.unshift,
-	"array$pop": Array.prototype.pop,
-	"array$push": Array.prototype.push,
-	"array$reduce": Array.prototype.reduce,
-	"array$reduceRight": Array.prototype.reduceRight,
-	"array$some": Array.prototype.some,
-	"array$sort": Array.prototype.sort,
-	"array$copyWithin": Array.prototype.copyWithin,
-	"array$join": Array.prototype.join,
-	"array$indexOf": Array.prototype.indexOf,
-	"array$lastIndexOf": Array.prototype.lastIndexOf,
-	"array$findIndex": Array.prototype.findIndex,
-	"string$concat": String.prototype.concat,
-	"string$slice": String.prototype.slice,
-	"string$includes": String.prototype.includes,
-	"string$indexOf": String.prototype.indexOf,
-	"string$lastIndexOf": String.prototype.lastIndexOf
+	lazy: false,
+	array$every: Array.prototype.every,
+	array$concat: Array.prototype.concat,
+	array$splice: Array.prototype.splice,
+	array$slice: Array.prototype.slice,
+	array$fill: Array.prototype.fill,
+	array$find: Array.prototype.find,
+	array$includes: Array.prototype.includes,
+	array$map: Array.prototype.map,
+	array$filter: Array.prototype.filter,
+	array$shift: Array.prototype.shift,
+	array$unshift: Array.prototype.unshift,
+	array$pop: Array.prototype.pop,
+	array$push: Array.prototype.push,
+	array$reduce: Array.prototype.reduce,
+	array$reduceRight: Array.prototype.reduceRight,
+	array$some: Array.prototype.some,
+	array$sort: Array.prototype.sort,
+	array$copyWithin: Array.prototype.copyWithin,
+	array$join: Array.prototype.join,
+	array$indexOf: Array.prototype.indexOf,
+	array$lastIndexOf: Array.prototype.lastIndexOf,
+	array$findIndex: Array.prototype.findIndex,
+	array$forEach: Array.prototype.forEach,
+	string$concat: String.prototype.concat,
+	string$slice: String.prototype.slice,
+	string$includes: String.prototype.includes,
+	string$indexOf: String.prototype.indexOf,
+	string$lastIndexOf: String.prototype.lastIndexOf
 };
 
 module.exports = core;
@@ -15265,6 +15267,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
+var methods = require('./methods/methods');
 
 var defaultPredicate = require('./methods/defaultPredicate');
 var defaultSelector = require('./methods/defaultSelector');
@@ -15603,7 +15606,11 @@ Enumerable.extend = function (prototype, type) {
                 var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
                 var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-                return Enumerable.copyWithin(this, target, start, end);
+                if (core.isArray(this) && core.array$copyWithin && !core.lazy) {
+                    return core.array$copyWithin.call(this, target, start, end);
+                } else {
+                    return Enumerable.copyWithin(this, target, start, end);
+                }
             },
             every: function every(callback, thisArg) {
                 return Enumerable.every(this, callback, thisArg);
@@ -15612,10 +15619,18 @@ Enumerable.extend = function (prototype, type) {
                 var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
                 var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-                return Enumerable.fill(this, value, start, end);
+                if (core.isArray(this) && core.array$fill && !core.lazy) {
+                    return core.array$fill.call(this, value, start, end);
+                } else {
+                    return Enumerable.fill(this, value, start, end);
+                }
             },
             filter: function filter(callback, thisArg) {
-                return Enumerable.filter(this, callback, thisArg);
+                if ((core.isArray(this) || core.isArguments(this)) && core.array$filter && !core.lazy) {
+                    return core.array$filter.call(this, callback, thisArg);
+                } else {
+                    return Enumerable.filter(this, callback, thisArg);
+                }
             },
             find: function find(callback, thisArg) {
                 return Enumerable.find(this, callback, thisArg);
@@ -15626,7 +15641,11 @@ Enumerable.extend = function (prototype, type) {
                 return Enumerable.includes(this, element, start);
             },
             map: function map(callback, thisArg) {
-                return Enumerable.map(this, callback, thisArg);
+                if ((core.isArray(this) || core.isArguments(this)) && core.array$map && !core.lazy) {
+                    return core.array$map.call(this, callback, thisArg);
+                } else {
+                    return Enumerable.map(this, callback, thisArg);
+                }
             },
             pop: function pop() {
                 return Enumerable.pop(this);
@@ -15658,7 +15677,13 @@ Enumerable.extend = function (prototype, type) {
                 var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
                 var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
 
-                return Enumerable.slice(this, start, end);
+                if (core.isString(this) && core.string$slice && !core.lazy) {
+                    return core.string$slice.call(this, start, end);
+                } else if ((core.isArray(this) || core.isArguments(this)) && core.array$slice && !core.lazy) {
+                    return core.array$slice.call(this, start, end);
+                } else {
+                    return Enumerable.slice(this, start, end);
+                }
             },
             splice: function splice(start, count) {
                 for (var _len3 = arguments.length, values = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
@@ -15673,7 +15698,11 @@ Enumerable.extend = function (prototype, type) {
             sort: function sort() {
                 var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultComparer;
 
-                return Enumerable.sort(this, comparer);
+                if (core.isArray(this) && core.array$sort && !core.lazy) {
+                    return core.array$sort.call(this, methods.asComparer(comparer));
+                } else {
+                    return Enumerable.sort(this, comparer);
+                }
             },
             zip: function zip(other) {
                 var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultResultSelector;
@@ -15701,7 +15730,13 @@ Enumerable.extend = function (prototype, type) {
                     others[_key4] = arguments[_key4];
                 }
 
-                return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+                if (core.isString(this) && core.string$concat && !core.lazy) {
+                    return core.string$concat.apply(this, others);
+                } else if ((core.isArray(this) || core.isArguments(this)) && core.array$concat && !core.lazy) {
+                    return core.array$concat.apply(this, others);
+                } else {
+                    return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+                }
             }
         }, pascalOrPrefix);
         if (type !== core.types.Object) {
@@ -15769,7 +15804,7 @@ Enumerable.extend = function (prototype, type) {
     return prototype;
 };
 
-},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":364,"./methods/defaultComparer":365,"./methods/defaultEqualityComparer":366,"./methods/defaultKeySelector":368,"./methods/defaultPredicate":369,"./methods/defaultResultSelector":370,"./methods/defaultSameComparer":371,"./methods/defaultSelector":372,"./methods/defaultStrictEqualityComparer":373,"./methods/defaultValueSelector":374}],359:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":364,"./methods/defaultComparer":365,"./methods/defaultEqualityComparer":366,"./methods/defaultKeySelector":368,"./methods/defaultPredicate":369,"./methods/defaultResultSelector":370,"./methods/defaultSameComparer":371,"./methods/defaultSelector":372,"./methods/defaultStrictEqualityComparer":373,"./methods/defaultValueSelector":374,"./methods/methods":380}],359:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15951,7 +15986,8 @@ var config = {
     extends: {
         array: false,
         object: false,
-        string: false
+        string: false,
+        lazy: false
     },
     as: defaultAs
 };
@@ -16045,6 +16081,15 @@ Enumerable.config = {
         },
         get string() {
             return config.extends.string;
+        },
+        set lazy(value) {
+            if (config.extends.lazy !== value) {
+                core.lazy = value;
+            }
+            config.extends.lazy = value;
+        },
+        get lazy() {
+            return config.extends.lazy;
         }
     },
     set as(name) {
