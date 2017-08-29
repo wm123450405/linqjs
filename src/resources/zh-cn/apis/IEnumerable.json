@@ -664,6 +664,32 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.17",
+					"overloads": [
+						{
+							"description": "基于匹配键对两个序列的元素关联, 并对结果进行分组, 使用指定的相等比较器对键进行比较",
+							"parameters": [
+								{
+									"name": "inner"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "outerKeySelector"
+								},
+								{
+									"name": "innerKeySelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.18",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -766,6 +792,39 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.17",
+					"overloads": [
+						{
+							"parameters": [
+								{
+									"name": "split"
+								}
+							]
+						},
+						{
+							"description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+							"parameters": [
+								{
+									"name": "inner"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "outerKeySelector"
+								},
+								{
+									"name": "innerKeySelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.18",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -890,6 +949,37 @@
 								},
 								{
 									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "leftJoin",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+							"parameters": [
+								{
+									"name": "inner"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "outerKeySelector"
+								},
+								{
+									"name": "innerKeySelector"
+								},
+								{
+									"name": "comparer"
 								}
 							]
 						}
@@ -1120,6 +1210,37 @@
 							"override": true,
 							"description": "反转序列中元素的顺序",
 							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "rightJoin",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+							"parameters": [
+								{
+									"name": "inner"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "outerKeySelector"
+								},
+								{
+									"name": "innerKeySelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
 						}
 					]
 				}

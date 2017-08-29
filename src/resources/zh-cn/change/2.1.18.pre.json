@@ -4,6 +4,7 @@
         "新增 Enumerable.typeAs 方法用来对指定类型设置 asEnumerable 转换时的参考类型",
         "新增 Enumerable.types 对象,包含各参考类型的常量值",
         "Enumerable.addPlugins、Enumerable.removePlugins 方法增加返回值,方便链式调用",
-        "新增 Enumerable.comparers.ignoreCase 忽略大小写的相等比较器"
+        "新增 Enumerable.comparers.ignoreCase 忽略大小写的相等比较器",
+        "新增 IEnumerable.leftJoin、IEnumerable.rightJoin 方法用来对两个序列分别进行内部左联接与内部右联接"
     ]
 }
