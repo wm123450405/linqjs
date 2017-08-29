@@ -170,18 +170,24 @@ Enumerable.selectMany = function(source, collectionSelector = defaultSelector, r
     return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
 };
 Enumerable.join = function(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-    if (typeof resultSelector === 'undefined' && core.array$join) {
+    if (core.isUndefined(resultSelector) && core.array$join) {
         if (core.isArray(outer)) {
             return core.array$join.call(outer, inner);
         } else {
             return core.array$join.call(this.toArray(asIterable(outer)), inner);
         }
     } else {
-        return new JoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+        return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
 };
+Enumerable.leftJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    return new LeftJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
+};
+Enumerable.rightJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    return new RightJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
+};
 Enumerable.groupJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-    return new GroupJoinEnumerable(asIterable(outer), inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    return new GroupJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 Enumerable.reverse = function(source) {
     return new ReverseEnumerable(asIterable(source));
@@ -864,6 +870,8 @@ const ThenByDescendingEnumerable = require('./enumerables/ThenByDescendingEnumer
 const GroupedEnumerable = require('./enumerables/GroupedEnumerable');
 const SelectManyEnumerable = require('./enumerables/SelectManyEnumerable');
 const JoinEnumerable = require('./enumerables/JoinEnumerable');
+const LeftJoinEnumerable = require('./enumerables/LeftJoinEnumerable');
+const RightJoinEnumerable = require('./enumerables/RightJoinEnumerable');
 const GroupJoinEnumerable = require('./enumerables/GroupJoinEnumerable');
 const ReverseEnumerable = require('./enumerables/ReverseEnumerable');
 const ZipEnumerable = require('./enumerables/ZipEnumerable');
