@@ -201,6 +201,10 @@ module.exports = function(Enumerable) {
 	assert.deepStrictEqual(Enumerable.orderByDescending([d, a, c, b]).toArray(), [d, c, b, a]);
 	assert.deepStrictEqual(Enumerable.orderByDescending([d, a, c, b], v => v + v).toArray(), [d, c, b, a]);
 	assert.deepStrictEqual(Enumerable.orderByDescending([d, a, c, b], v => v + v, (element, other) => element > other ? -1 : element == other ? 0 : 1).toArray(), [a, b, c, d]);
+	//leftJoin
+    assert.deepStrictEqual(Enumerable.leftJoin([1, 2, 3, 4], [2, 3, 4, 5], (outerElement, innerElement) => outerElement * (innerElement || 0)).toArray(), [0, 4, 9, 16]);
+    //rightJoin
+    assert.deepStrictEqual(Enumerable.rightJoin([1, 2, 3, 4], [2, 3, 4, 5], (outerElement, innerElement) => (outerElement || 0) * innerElement).toArray(), [4, 9, 16, 0]);
 	//join
 	assert.deepStrictEqual(Enumerable.join([1, 2, 3, 4], [2, 3, 4, 5], (outerElement, innerElement) => outerElement * innerElement).toArray(), [4, 9, 16]);
 	assert.deepStrictEqual(Enumerable.join([{
