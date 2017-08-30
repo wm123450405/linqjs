@@ -1,0 +1,4 @@
+{
+	"config.as.js": "Enumerable.config.as = 'em';\r\nlet enumerable = [1, 2, 3].em();",
+	"config.extends.js": "Enumerable.config.extends.array = true; //开启针对Array的扩展\r\nEnumerable.config.extends.string = true; //开启针对String的扩展\r\nEnumerable.config.extends.object = true; //开启针对Object的扩展"
+}

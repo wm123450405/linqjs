@@ -1,0 +1,5 @@
+{
+	"asEnumerable.js": "let a = [1, 2, 3].asEnumerable();\r\nlet o = ({ key: 1, value: 'a' }).asEnumerable();\r\nlet s = 'abc'.asEnumerable();",
+	"Enumerable.asEnumerable.js": "let enumerable = Enumerable.asEnumerable([1, 2, 3]);",
+	"Enumerable.js": "let enumerable = Enumerable([1, 2, 3]);"
+}
