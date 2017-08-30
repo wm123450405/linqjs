@@ -18,9 +18,8 @@ use linq and lambda in javascript
 
 Usage for English is Coming soon...
 
-### Start 开始使用
+### 1. Import 引入
 
-#### 1. 引入
 >使用nodejs
 ```
 $ npm install --save linq-js
@@ -30,15 +29,7 @@ const Enumerable = require('linq-js');
 ```
 > * 说明:本module依赖于ES6,建议项目在中使用ES6,以下案例中将均使用ES6写法
 
-#### 2. 配置
-```javascript
-Enumerable.config.extends.array = true; //开启针对Array的扩展
-Enumerable.config.extends.string = true; //开启针对String的扩展
-Enumerable.config.extends.object = true; //开启针对Object的扩展
-Enumerable.config.as = 'em'; //设置使用.em()来获取IEnumerable对象
-```
-
-### 获取IEnumerable对象
+### 2. Get IEnumerable instance 获取IEnumerable对象
 
 ```typescript
 interface IEnumerable { };
@@ -51,6 +42,39 @@ function asEnumerable():IEnumerable; //任何对象都有asEnumerable方法用�
 > 'abc'.asEnumerable();
 > [1,2,3].asEnumerable();
 > ({a:1,b:2}).asEnumerable();
+> ```
+
+### 3. Use IEnumerable instance 使用IEnumerable对象
+
+> e.g. 案例
+> ```javascript
+> let pets = [ { name: "Barley", age: 8, vaccinated: true }, { name: "Boots", age: 4, vaccinated: false }, { name: "Whiskers", age: 1, vaccinated: false } ];
+> let unvaccinated = pets.asEnumerable().any(p => p.age > 1 && p.vaccinated === false);
+> console.log(`There ${ unvaccinated ? "are" : "are not any" } unvaccinated animals over age one.`);
+> // This code produces the following output:
+> //  There are unvaccinated animals over age one.
+> ```
+
+> e.g. 案例
+> ```javascript
+> let magnus = { name: "Hedlund, Magnus" }, terry = { name: "Adams, Terry" }, charlotte = { name: "Weiss, Charlotte" };
+> let barley = { name: "Barley", owner: terry }, boots = { name: "Boots", owner: terry }, whiskers = { name: "Whiskers", owner: charlotte }, daisy = { name: "Daisy", owner: magnus };
+> let people = [ magnus, terry, charlotte ];
+> let pets = [ barley, boots, whiskers, daisy ];
+> let query = people.asEnumerable().join(pets,
+>     (person, pet) => ({ ownerName: person.name, pet: pet.name }),
+>     person => person,
+>     pet => pet.owner);
+> for (let obj of query) {
+>     console.log(`${ obj.ownerName } - ${ obj.pet }`);
+> }
+> /*
+>  This code produces the following output:
+>  Hedlund, Magnus - Daisy
+>  Adams, Terry - Barley
+>  Adams, Terry - Boots
+>  Weiss, Charlotte - Whiskers
+>  */
 > ```
 
 :*[see msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
