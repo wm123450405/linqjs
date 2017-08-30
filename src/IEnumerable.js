@@ -74,6 +74,9 @@ class IEnumerable extends Array {
     getEnumerator() {
         return Enumerable.getEnumerator(this);
     }
+    getIterator() {
+        return Enumerable.getIterator(this);
+    }
     where(predicate = defaultPredicate) {
         return Enumerable.where(this, predicate);
     }

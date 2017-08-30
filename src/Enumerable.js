@@ -56,6 +56,9 @@ const Enumerable = function(source) {
 Enumerable.getEnumerator = function(enumerable) {
     return new IEnumerator(asIterable(enumerable));
 };
+Enumerable.getIterator = function(enumerable) {
+    return asIterable(enumerable)[Symbol.iterator]();
+};
 Enumerable.repeat = function(element, count = 0) {
     return new RepeatEnumerable(element, count);
 };
