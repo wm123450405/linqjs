@@ -35,6 +35,15 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb355419(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 defaultIfEmpty 方法并指定默认值。 第一个序列不为空，且第二个序列为空。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]

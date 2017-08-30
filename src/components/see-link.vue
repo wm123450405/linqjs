@@ -1,7 +1,7 @@
 <template>
     <span>
         <lang-link v-if="see.guide" :to="`guides/${ see.guide }`">{{ subject }}</lang-link>
-        <lang-link v-if="!see.guide && see.apis" :to="`apis/${ see.apis }` + (see.property ? `/property/${ see.property }` : see.method ? `/method/${ see.method }` + (typeof see.index !== 'undefined' ? `/${ see.index }` : '') : '')">{{ subject || (see.apis + (see.property ? '.' + see.property : see.method ? '.' + see.method : '')) }}</lang-link>
+        <lang-link v-if="!see.guide && see.apis" :to="`apis/${ see.apis }` + (see.property ? `/property/${ see.property }` : see.method ? `/method/${ see.method }` + (typeof see.index !== 'undefined' ? `/${ see.index }` : '') : '')">{{ see.apis ? (see.apis + (see.property ? '.' + see.property : see.method ? '.' + see.method : '')) : subject }}</lang-link>
         <mark-to v-if="!see.guide && !see.apis && see.mark" :to="see.href">{{ subject }}</mark-to>
         <lang-link v-if="!see.guide && !see.apis && !see.mark && see.inner" :to="see.href">{{ subject }}</lang-link>
         <a v-if="!see.guide && !see.mark && !see.inner && !see.apis && see.href" target="_blank" :href="outerLink(see.href)">{{ subject }}</a>
