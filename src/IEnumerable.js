@@ -299,6 +299,9 @@ class IEnumerable extends Array {
     rightPad(length, value) {
         return Enumerable.rightPad(this, length, value);
     }
+    rand(count = 0) {
+        return Enumerable.rand(this, count);
+    }
 }
 
 module.exports = IEnumerable;

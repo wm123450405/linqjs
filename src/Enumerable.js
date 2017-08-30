@@ -754,6 +754,9 @@ Enumerable.leftPad = function(source, length, value) {
 Enumerable.rightPad = function(source, length, value) {
     return new RightPadEnumerable(source, length, value);
 };
+Enumerable.rand = function(source, count = 0) {
+    return new RandEnumerable(source, count);
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
@@ -908,3 +911,4 @@ const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 const ChunkEnumerable = require('./enumerables/ChunkEnumerable');
 const LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
 const RightPadEnumerable = require('./enumerables/RightPadEnumerable');
+const RandEnumerable = require('./enumerables/RandEnumerable');

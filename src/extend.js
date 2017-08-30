@@ -305,6 +305,9 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
             rightPad(length, value) {
                 return Enumerable.rightPad(this, length, value);
             },
+            rand(count = 0) {
+                return Enumerable.rand(this, count);
+            },
             concat(...others) {
                 if (core.isString(this) && core.string$concat && !core.lazy) {
                     return core.string$concat.apply(this, others);
