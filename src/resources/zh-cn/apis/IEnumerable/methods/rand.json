@@ -1,0 +1,35 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.18",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "count",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "新序列的长度",
+                                "必须是正整数",
+                                "为 0 时新序列包含原序列的全部元素"
+                            ],
+                            "defaultValue": 0
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "随机排序后的序列"
+                        ]
+                    },
+                    "description": "随机获取序列中的指定数量的元素,组成新的序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1198,6 +1198,25 @@
 			]
 		},
 		{
+			"name": "rand",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "随机获取序列中的指定数量的元素,组成新的序列",
+							"parameters": [
+								{
+									"name": "count"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "reduce",
 			"histroys": [
 				{
