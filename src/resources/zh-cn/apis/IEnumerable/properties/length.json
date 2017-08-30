@@ -4,6 +4,7 @@
             "type": "number",
             "since": "2.1.15",
             "override": true,
+            "readonly": true,
             "description": "所包含的元素个数",
             "sees": [
                 {

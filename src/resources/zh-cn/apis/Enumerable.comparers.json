@@ -9,7 +9,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "默认的大小比较器"
+					"description": "默认的大小比较器",
+					"readonly": true
 				}
 			]
 		},
@@ -19,7 +20,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "默认的相等比较器"
+					"description": "默认的相等比较器",
+					"readonly": true
 				}
 			]
 		},
@@ -29,7 +31,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "默认的相同比较器"
+					"description": "默认的相同比较器",
+					"readonly": true
 				}
 			]
 		},
@@ -39,7 +42,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "默认的全等比较器"
+					"description": "默认的全等比较器",
+					"readonly": true
 				}
 			]
 		}

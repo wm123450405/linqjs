@@ -4,6 +4,7 @@
             "since": "2.1.18",
             "overloads": [
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "chunk",
@@ -42,6 +43,9 @@
                         {
                             "apis": "IEnumerable",
                             "method": "groupBy"
+                        },
+                        {
+                            "apis": "IChunk"
                         }
                     ]
                 }

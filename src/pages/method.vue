@@ -4,11 +4,12 @@
             <div class="activatable" v-for="(overload, overloadIndex) in histroy.overloads" v-if="overloadIndex === index">
                 <div class="indent">
                     <p>
-                        <span class="icon-mark bg-success" :title="caption.method">M</span>
-                        <span class="icon-mark bg-primary" v-if="overload.static" :title="caption.static">S</span>
+                        <i class="fa fa-fw fa-rocket text-success" :title="caption.method"></i>
+                        <i class="fa fa-fw fa-strikethrough text-danger" v-if="overload.static" :title="caption.static"></i>
                         <shields v-if="histroy.since" subject="since" :status="histroy.since" color="yellow" :title="`${ caption.since }: ${ histroy.since }`"></shields>
                         <shields v-if="histroy.deprecated" subject="deprecated" :status="histroy.deprecated" color="yellow" :title="`${ caption.deprecated }: ${ histroy.deprecated }`"></shields>
                         <shields v-if="overload.override" subject="override" :title="caption.override"></shields>
+                        <shields v-if="overload.lazy" subject="lazy" :title="caption.lazy"></shields>
                     </p>
                     <p v-if="overload.description" class="text-success">{{ capitalize(overload.description) }}</p>
                     <p v-for="description in overload.descriptions" v-html="capitalize(description)" class="text-success"></p>

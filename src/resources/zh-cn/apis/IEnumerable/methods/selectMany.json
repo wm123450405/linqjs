@@ -4,6 +4,7 @@
             "since": "2.1.16",
             "overloads": [
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "collectionSelector",

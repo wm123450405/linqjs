@@ -132,6 +132,12 @@
 				"deprecated": "2.1.18"
 			},
 			{
+				"code": "IChunk",
+				"title": "IChunk 接口",
+				"since": "2.1.18",
+				"deprecated": "2.1.18"
+			},
+			{
 				"code": "IEnumerable",
 				"title": "IEnumerable 接口",
 				"since": "2.1.15",

@@ -121,6 +121,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 													static: histroy.static,
 													override: histroy.override,
 													description: histroy.description,
+													readonly: histroy.readonly,
                                                     default: histroy.default
 												})).toArray()
 											};

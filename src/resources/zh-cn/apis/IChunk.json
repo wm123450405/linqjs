@@ -1,0 +1,22 @@
+{
+	"type": "interface",
+	"since": "2.1.18",
+	"extends": [
+		"IEnumerable"
+	],
+	"implements": [],
+	"name": "IChunk",
+	"properties": [
+		{
+			"name": "index",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"description": "此分块的索引"
+				}
+			]
+		}
+	],
+	"methods": []
+}

@@ -10,6 +10,7 @@
     line-height: 16px
     color: white
     font-size: 12px
+    cursor: default
     > span:first-child
         border-top-left-radius: 3px
         border-bottom-left-radius: 3px

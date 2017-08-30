@@ -60,9 +60,10 @@
                     <template v-for="property in meta.properties">
                         <tr v-for="histroy in histroys(property.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)">
                             <td>
-                                <span class="icon-mark bg-success" :title="caption.property">P</span>
-                                <span class="icon-mark bg-primary" v-if="histroy.static" :title="caption.static">S</span>
-                                <i class="fa fa-fw fa-chevron-circle-up text-danger" v-if="histroy.override" :title="caption.override"></i>
+                                <i class="fa fa-fw fa-align-left fa-flip-vertical text-success" :title="caption.property"></i>
+                                <i class="fa fa-fw fa-strikethrough text-danger" v-if="histroy.static" :title="caption.static"></i>
+                                <i class="fa fa-fw fa-chevron-circle-up text-primary" v-if="histroy.override" :title="caption.override"></i>
+                                <i class="fa fa-fw fa-eye text-warning" v-if="histroy.readonly" :title="caption.readonly"></i>
                             </td>
                             <td>
                                 <lang-link :to="`apis/${ name }/property/${ property.name }`">{{ property.name }}</lang-link>
@@ -93,9 +94,9 @@
                         <template v-for="histroy in histroys(method.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)">
                             <tr v-for="(overload, overloadIndex) in histroy.overloads">
                                 <td>
-                                    <span class="icon-mark bg-success" :title="caption.method">M</span>
-                                    <span class="icon-mark bg-primary" v-if="overload.static" :title="caption.static">S</span>
-                                    <i class="fa fa-fw fa-chevron-circle-up text-danger" v-if="overload.override" :title="caption.override"></i>
+                                    <i class="fa fa-fw fa-rocket text-success" :title="caption.method"></i>
+                                    <i class="fa fa-fw fa-strikethrough text-danger" v-if="overload.static" :title="caption.static"></i>
+                                    <i class="fa fa-fw fa-chevron-circle-up text-primary" v-if="overload.override" :title="caption.override"></i>
                                 </td>
                                 <td>
                                     <lang-link :to="`apis/${ name }/method/${ method.name }${ histroy.overloads.length > 1 ? '/' + overloadIndex : '' }`">{{ method.name }}(<span v-for="(parameter, parameterIndex) in overload.parameters"><span v-if="parameterIndex !== 0">, </span>{{ parameter.name }}</span>)</lang-link>

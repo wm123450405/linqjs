@@ -23,6 +23,7 @@
                     ]
                 },
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "inner",
@@ -225,6 +226,7 @@
                     ]
                 },
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "inner",

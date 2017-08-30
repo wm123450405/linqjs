@@ -4,6 +4,7 @@
             "since": "2.1.18",
             "overloads": [
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "count",

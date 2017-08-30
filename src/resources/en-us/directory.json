@@ -132,6 +132,12 @@
 				"deprecated": "2.1.18"
 			},
 			{
+				"code": "IChunk",
+				"title": "IChunk Interface",
+				"since": "2.1.18",
+				"deprecated": "2.1.18"
+			},
+			{
 				"code": "IEnumerable",
 				"title": "IEnumerable Interface",
 				"since": "2.1.15",

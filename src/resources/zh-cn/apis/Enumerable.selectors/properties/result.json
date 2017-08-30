@@ -3,6 +3,7 @@
         {
             "type": "function",
             "since": "2.1.15",
+            "readonly": true,
             "description": "默认的结果选择器",
             "remarks": [
                 "该选择器是一个二元选择器, 它接受两个输入值, 并返回第二个参数值. 通常表示为 defaultResultSelector",

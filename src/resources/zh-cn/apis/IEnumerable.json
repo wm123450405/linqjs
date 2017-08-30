@@ -14,7 +14,8 @@
 					"since": "2.1.15",
 					"deprecated": 0,
 					"override": true,
-					"description": "所包含的元素个数"
+					"description": "所包含的元素个数",
+					"readonly": true
 				}
 			]
 		},
@@ -24,7 +25,8 @@
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
-					"description": "所包含的元素个数"
+					"description": "所包含的元素个数",
+					"readonly": true
 				}
 			]
 		}
