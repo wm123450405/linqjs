@@ -661,6 +661,11 @@ module.exports = function(Enumerable) {
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
 
+	//chunk
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e], 3, 1).count(), 3);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.toArray()).toArray(), [ [a, b], [c, d] ]);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
+
 	//builtins array function
 	(() => {
 		//splice

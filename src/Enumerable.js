@@ -735,6 +735,9 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
         }
     }
 };
+Enumerable.chunk = function(source, chunk, offset = 0) {
+    return new ChunkEnumerable(source, chunk, offset);
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
@@ -886,3 +889,4 @@ const SpliceEnumerable = require('./enumerables/SpliceEnumerable');
 const FillEnumerable = require('./enumerables/FillEnumerable');
 const SortEnumerable = require('./enumerables/SortEnumerable');
 const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
+const ChunkEnumerable = require('./enumerables/ChunkEnumerable');

@@ -287,6 +287,9 @@ class IEnumerable extends Array {
     forEach(action = defaultAction, thisArg = undefined) {
         return Enumerable.forEach(this, action, thisArg);
     }
+    chunk(chunk, offset = 0) {
+        return Enumerable.chunk(this, chunk, offset);
+    }
 }
 
 module.exports = IEnumerable;
