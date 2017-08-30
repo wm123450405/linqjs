@@ -373,6 +373,19 @@ module.exports = function(Enumerable) {
 		code: 102,
 		lastName: c
 	}], (outerElement, innerGrouping) => outerElement.firstName + ' ' + innerGrouping.select(v => v.lastName).join(' '), outerElement => outerElement.id, innerElement => innerElement.code, (element, other) => element === other - 100).toArray(), ['d b !', 'e c', 'f ']);
+    //chunk
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e], 3, 1).count(), 3);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.toArray()).toArray(), [ [a, b], [c, d] ]);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.index).toArray(), [ 0, 1 ]);
+    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+    //product
+    assert.strictEqual(Enumerable.product([1, 2, 3, 4, 5]), 120);
+    assert.strictEqual(Enumerable.range(1, 5).product(), 120);
+    //rightPad
+    assert.deepStrictEqual(Enumerable.rightPad([a, b, c], 5, d).toArray(), [a, b, c, d, d]);
+    //leftPad
+    assert.deepStrictEqual(Enumerable.leftPad([a, b, c], 5, d).toArray(), [d, d, a, b, c]);
 
 	//IEnumerable methods
 	//select
@@ -657,26 +670,21 @@ module.exports = function(Enumerable) {
 		code: 102,
 		lastName: c
 	}], (outerElement, innerGrouping) => outerElement.firstName + ' ' + innerGrouping.select(v => v.lastName).join(' '), outerElement => outerElement.id, innerElement => innerElement.code, (element, other) => element === other - 100).toArray(), ['d b !', 'e c', 'f ']);
+    //chunk
+    assert.deepStrictEqual([a, b, c, d, e].asEnumerable().chunk(3, 1).count(), 3);
+    assert.deepStrictEqual([a, b, c, d].asEnumerable().chunk(2).select(c => c.toArray()).toArray(), [ [a, b], [c, d] ]);
+    assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().chunk(3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
+    assert.deepStrictEqual([a, b, c, d].asEnumerable().chunk(2).select(c => c.index).toArray(), [ 0, 1 ]);
+    assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().chunk(3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+    //product
+    assert.strictEqual([1, 2, 3, 4, 5].asEnumerable().product(), 120);
+    //rightPad
+    assert.deepStrictEqual([a, b, c].asEnumerable().rightPad(5, d).toArray(), [a, b, c, d, d]);
+    //leftPad
+    assert.deepStrictEqual([a, b, c].asEnumerable().leftPad(5, d).toArray(), [d, d, a, b, c]);
 
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
-
-	//chunk
-    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e], 3, 1).count(), 3);
-    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.toArray()).toArray(), [ [a, b], [c, d] ]);
-    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
-    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.index).toArray(), [ 0, 1 ]);
-    assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
-
-    //product
-    assert.strictEqual(Enumerable.product([1, 2, 3, 4, 5]), 120);
-    assert.strictEqual(Enumerable.range(1, 5).product(), 120);
-
-    //rightPad
-    assert.deepStrictEqual(Enumerable.rightPad([a, b, c], 5, d).toArray(), [a, b, c, d, d]);
-
-    //leftPad
-    assert.deepStrictEqual(Enumerable.leftPad([a, b, c], 5, d).toArray(), [d, d, a, b, c]);
 
     //builtins array function
 	(() => {
