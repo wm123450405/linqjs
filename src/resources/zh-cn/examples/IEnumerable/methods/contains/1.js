@@ -1,11 +1,11 @@
-let fruits = [ "apple", "banana", "mango", "orange", "passionfruit", "grape" ];
+let fruits = [ "苹果", "香蕉", "芒果", "橘子", "百香果", "葡萄" ];
 
-let fruit = "mango";
+let fruit = "芒果";
 
 let hasMango = fruits.asEnumerable().contains(fruit);
 
-console.log(`The array ${ hasMango ? "does" : "does not" } contain '${ fruit }'.`);
+console.log(`数组中${ hasMango ? "含" : "不含" }有“${ fruit }”。`);
 
-// This code produces the following output:
+// 这段代码的输出结果如下：
 //
-// The array does contain 'mango'.
+// 数组中含有“芒果”。

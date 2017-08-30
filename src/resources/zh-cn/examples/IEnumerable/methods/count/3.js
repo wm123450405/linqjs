@@ -1,13 +1,13 @@
 let pets = [
-    { name: "Barley", vaccinated: true },
-    { name: "Boots", vaccinated: false },
-    { name: "Whiskers", vaccinated: false }
+    { name: "小白", vaccinated: true },
+    { name: "机器人", vaccinated: false },
+    { name: "旺财", vaccinated: false }
 ];
 
 let numberUnvaccinated = pets.asEnumerable().count({ vaccinated: false });
 
-console.log(`There are ${ numberUnvaccinated } unvaccinated animals.`);
+console.log(`有${ numberUnvaccinated }个动物没有接种疫苗。`);
 
-// This code produces the following output:
+// 这段代码的输出结果如下：
 //
-// There are 2 unvaccinated animals.
+// 有2个动物没有接种疫苗。

@@ -1,15 +1,13 @@
-let fruits = [ "apple", "mango", "orange", "passionfruit", "grape" ];
+let fruits = [ "苹果", "芒果", "橘子", "百香果", "葡萄" ];
 
-// Determine whether any string in the array is longer than "banana".
-let longestName =
-	fruits.asEnumerable().aggregate("banana",
-		(longest, next) =>
-			next.length > longest.length ? next : longest,
-		// Return the final result as an upper case string.
-		fruit => fruit.toUpperCase());
+// 确定数组中比 “香蕉” 更长的字符串
+let longestName = fruits.asEnumerable().aggregate("香蕉",
+		(longest, next) => next.length > longest.length ? next : longest,
+		// 返回最终结果
+		fruit => `水果 “${ fruit }”`);
 
-console.log(`The fruit with the longest name is ${ longestName }`);
+console.log(`最长的字符串是${ longestName }`);
 
-// This code produces the following output:
+// 这段代码的输出结果如下：
 //
-// The fruit with the longest name is PASSIONFRUIT.
+// 最长的字符串是水果 “百香果”

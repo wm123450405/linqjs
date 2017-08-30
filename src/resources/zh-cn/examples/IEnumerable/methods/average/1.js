@@ -2,8 +2,8 @@ let numbers = [ "10007", "37", 299846234235 ];
 
 let average = numbers.asEnumerable().average();
 
-console.log(`The average is ${ average }.`);
+console.log(`平均数是${ average }。`);
 
-// This code produces the following output:
+// 这段代码的输出结果如下：
 //
-// The average is 99948748093.
+// 平均数是99948748093。

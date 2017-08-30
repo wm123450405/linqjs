@@ -1,29 +1,29 @@
-// Custom comparer for contains
+// 一个自定义的比较器。
 let productComparer = (x, y) => {
     if (x === y) return true;
     if (!x || !y) return false;
-    // Fruits are equal if their names and product numbers are equal.
+    // 如果水果的名称和数目相等，则表示是相同的产品。
     return x.code === y.code && x.name === y.name;
 };
 
 let fruits = [
-    { name: "apple", code: 9 },
-    { name: "orange", code: 4 },
-    { name: "lemon", code: 12 }
+    { name: "苹果", code: 9 },
+    { name: "橘子", code: 4 },
+    { name: "柠檬", code: 12 }
 ];
 
-let apple = { name: "apple", code: 9 };
-let kiwi = { name: "kiwi", code: 8 };
+let apple = { name: "苹果", code: 9 };
+let kiwi = { name: "奇异果", code: 8 };
 
 let hasApple = fruits.asEnumerable().contains(apple, productComparer);
 let hasKiwi = fruits.asEnumerable().contains(kiwi, productComparer);
 
-console.log("Apple? " + hasApple);
-console.log("Kiwi? " + hasKiwi);
+console.log("苹果? " + hasApple);
+console.log("奇异果? " + hasKiwi);
 
 /*
- This code produces the following output:
+ 这段代码的输出结果如下：
 
- Apple? true
- Kiwi? false
+ 苹果? true
+ 奇异果? false
  */

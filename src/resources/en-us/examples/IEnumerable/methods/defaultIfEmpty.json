@@ -1,0 +1,3 @@
+{
+	"1.js": "let defaultPet = { name: \"Default Pet Name\", age: 0 };\r\n\r\nlet pets1 = [\r\n    { name: \"Barley\", age: 8 },\r\n    { name: \"Boots\", age: 4 },\r\n    { name: \"Whiskers\", age: 1 }\r\n];\r\n\r\nfor (let pet of pets1.asEnumerable().defaultIfEmpty(defaultPet)) {\r\n    console.log(`Name: ${ pet.name }`);\r\n}\r\n\r\nconsole.log();\r\n\r\nlet pets2 = [];\r\n\r\nfor (let pet of pets2.asEnumerable().defaultIfEmpty(defaultPet)) {\r\n    console.log(`Name: ${ pet.name }`);\r\n}\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n Name: Barley\r\n Name: Boots\r\n Name: Whiskers\r\n\r\n Name: Default Pet Name\r\n */"
+}

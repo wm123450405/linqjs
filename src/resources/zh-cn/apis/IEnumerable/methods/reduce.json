@@ -9,10 +9,7 @@
                         {
                             "name": "callback",
                             "types": [
-                                "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "function"
                             ],
                             "declare": {
                                 "returns": {

@@ -341,9 +341,11 @@ const createDirectory = refreshLangName => {
 const createScripts = lang => {
 	let examplesPath = path.join(resources, lang, examplesFile);
 	watch(examplesPath, (eventType, filename) => {
-		let examplePath = path.join(examplesPath, filename);
-		if (fs.existsSync(examplePath) && fs.statSync(examplePath).isDirectory()) {
-			createScripts(lang);
+		if (filename) {
+            let examplePath = path.join(examplesPath, filename);
+            if (fs.existsSync(examplePath) && fs.statSync(examplePath).isDirectory()) {
+                createScripts(lang);
+            }
 		}
 	});
 	let classNames = fs.readdirSync(examplesPath);
@@ -400,9 +402,11 @@ const createScripts = lang => {
 			let methodsPath = path.join(classPath, 'methods');
 			if (fs.existsSync(methodsPath)) {
 				watch(methodsPath, (eventType, filename) => {
-					let methodPath = path.join(methodsPath, filename);
-					if (fs.existsSync(methodPath) && fs.statSync(methodPath).isDirectory()) {
-						createScripts(lang);
+					if (filename) {
+                        let methodPath = path.join(methodsPath, filename);
+                        if (fs.existsSync(methodPath) && fs.statSync(methodPath).isDirectory()) {
+                            createScripts(lang);
+                        }
 					}
 				});
 				let methodNames = fs.readdirSync(methodsPath);

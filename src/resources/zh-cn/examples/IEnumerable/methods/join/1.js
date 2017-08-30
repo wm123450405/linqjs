@@ -1,32 +1,32 @@
-let magnus = { name: "Hedlund, Magnus" };
-let terry = { name: "Adams, Terry" };
-let charlotte = { name: "Weiss, Charlotte" };
+let xi = { name: "习大大" };
+let wang = { name: "王思聪" };
+let li = { name: "李小龙" };
 
-let barley = { name: "Barley", owner: terry };
-let boots = { name: "Boots", owner: terry };
-let whiskers = { name: "Whiskers", owner: charlotte };
-let daisy = { name: "Daisy", owner: magnus };
+let white = { name: "小白", owner: wang };
+let boots = { name: "机器人", owner: wang };
+let black = { name: "黑蛋", owner: li };
+let cai = { name: "旺财", owner: xi };
 
-let people = [ magnus, terry, charlotte ];
-let pets = [ barley, boots, whiskers, daisy ];
+let people = [ xi, wang, li ];
+let pets = [ white, boots, black, cai ];
 
-// Create a list of Person-Pet pairs where
-// each element is an anonymous type that contains a
-// Pet's name and the name of the Person that owns the Pet.
+// 从主人序列与宠物序列及其关系中
+// 构建一个 主人-宠物 键值对的新序列
+// 新序列的每个元素包含宠物名称和宠物主人的姓名
 let query = people.asEnumerable().join(pets,
-        (person, pet) => ({ ownerName: person.name, pet: pet.name }),
-        person => person,
-        pet => pet.owner);
+    (person, pet) => ({ ownerName: person.name, pet: pet.name }),
+    person => person,
+    pet => pet.owner);
 
 for (let obj of query) {
     console.log(`${ obj.ownerName } - ${ obj.pet }`);
 }
 
 /*
- This code produces the following output:
+ 这段代码的输出结果如下：
 
- Hedlund, Magnus - Daisy
- Adams, Terry - Barley
- Adams, Terry - Boots
- Weiss, Charlotte - Whiskers
+ 习大大 - 旺财
+ 王思聪 - 小白
+ 王思聪 - 机器人
+ 李小龙 - 黑蛋
  */

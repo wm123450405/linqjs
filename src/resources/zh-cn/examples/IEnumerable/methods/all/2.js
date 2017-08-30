@@ -1,42 +1,44 @@
 let people = [
     {
-        lastName: "Haas",
+        lastName: "老王",
         pets: [
-            { name: "Barley", age: 10 },
-            { name: "Boots", age: 14 },
-            { name: "Whiskers", age: 6 }
+            { name: "小白", age: 10 },
+            { name: "机器人", age: 14 },
+            { name: "旺财", age: 6 }
         ]
     },
     {
-        lastName: "Fakhouri",
+        lastName: "老郑",
         pets: [
-            { name: "Snowball", age: 1 }
+            { name: "雪诺", age: 1 }
         ]
     },
     {
-        lastName: "Antebi",
+        lastName: "老吴",
         pets: [
-            { name: "Belle", age: 8 }
+            { name: "贝贝", age: 8 }
         ]
     },
     {
-        lastName: "Philips",
+        lastName: "老周",
         pets: [
-            { name: "Sweetie", age: 2 },
-            { name: "Rover", age: 13 }
+            { name: "甜心", age: 2 },
+            { name: "大河", age: 13 }
         ]
     }
 ];
 
-// Determine which people have pets that are all older than 5.
-let names = people.asEnumerable().where(person => person.pets.all(pet => pet.age > 5)).select(person => person.lastName);
+// 确定谁的宠物都是大于5岁的。
+let names = people.asEnumerable()
+        .where(person => person.pets.all(pet => pet.age > 5))
+        .select(person => person.lastName);
 
 for (let name of names) {
     console.log(name);
 }
 
-/* This code produces the following output:
+/* 这段代码的输出结果如下：
  *
- * Haas
- * Antebi
+ * 老王
+ * 老吴
  */
