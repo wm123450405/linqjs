@@ -185,6 +185,9 @@ class IEnumerable extends Array {
     sum(selector = defaultSelector) {
         return Enumerable.sum(this, selector);
     }
+    product(selector = defaultSelector) {
+        return Enumerable.product(this, selector);
+    }
     max(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.max(this, selector, comparer);
     }
@@ -289,6 +292,12 @@ class IEnumerable extends Array {
     }
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
+    }
+    leftPad(length, value) {
+        return Enumerable.leftPad(this, length, value);
+    }
+    rightPad(length, value) {
+        return Enumerable.rightPad(this, length, value);
     }
 }
 

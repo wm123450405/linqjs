@@ -53,7 +53,7 @@ core.defineProperty(Enumerable, 'extends', function() {
 Enumerable.unextend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || removeExtends(prototype, type)) {
-		core.undefineProperties(prototype, [ 'getEnumerator', 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'leftJoin', 'rightJoin', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup' ], pascalOrPrefix);
+		core.undefineProperties(prototype, [ 'getEnumerator', 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'leftJoin', 'rightJoin', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'product', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup', 'chunk' ], pascalOrPrefix);
         for (let plugin of this.plugins) {
         	if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
         		core.undefineProperties(prototype, [ plugin.name ], pascalOrPrefix);
@@ -168,8 +168,11 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
             count(predicate = defaultPredicate) {
                 return Enumerable.count(this, predicate);
             },
-            sum(predicate = defaultPredicate) {
-                return Enumerable.sum(this, predicate);
+            sum(selector = defaultSelector) {
+                return Enumerable.sum(this, selector);
+            },
+            product(selector = defaultSelector) {
+                return Enumerable.product(this, selector);
             },
             max(selector = defaultSelector, comparer = defaultComparer) {
                 return Enumerable.max(this, selector, comparer);
@@ -292,6 +295,15 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
             },
             forEach(action = defaultAction, thisArg = undefined) {
                 return Enumerable.forEach(this, action, thisArg);
+            },
+            chunk(chunk, offset = 0) {
+                return Enumerable.chunk(this, chunk, offset);
+            },
+            leftPad(length, value) {
+                return Enumerable.leftPad(this, length, value);
+            },
+            rightPad(length, value) {
+                return Enumerable.rightPad(this, length, value);
             },
             concat(...others) {
                 if (core.isString(this) && core.string$concat && !core.lazy) {

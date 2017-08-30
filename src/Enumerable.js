@@ -551,6 +551,16 @@ Enumerable.sum = function(source, selector = defaultSelector) {
     }
     return sum;
 };
+Enumerable.product = function(source, selector = defaultSelector) {
+    let product = 1, index = 0;
+    source = asIterable(source);
+    selector = methods.asSelector(selector);
+    for (let element of source) {
+        product *= parseFloat(selector(element, index++));
+        if (isNaN(product)) return product;
+    }
+    return index === 0 ? NaN : product;
+};
 Enumerable.max = function(source, selector = defaultSelector, comparer = defaultComparer) {
     let max = false, first = true, index = 0;
     source = asIterable(source);
@@ -738,6 +748,12 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
 Enumerable.chunk = function(source, chunk, offset = 0) {
     return new ChunkEnumerable(source, chunk, offset);
 };
+Enumerable.leftPad = function(source, length, value) {
+    return new LeftPadEnumerable(source, length, value);
+};
+Enumerable.rightPad = function(source, length, value) {
+    return new RightPadEnumerable(source, length, value);
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
@@ -890,3 +906,5 @@ const FillEnumerable = require('./enumerables/FillEnumerable');
 const SortEnumerable = require('./enumerables/SortEnumerable');
 const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 const ChunkEnumerable = require('./enumerables/ChunkEnumerable');
+const LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
+const RightPadEnumerable = require('./enumerables/RightPadEnumerable');

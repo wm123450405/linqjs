@@ -668,6 +668,16 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.index).toArray(), [ 0, 1 ]);
     assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
 
+    //product
+    assert.strictEqual(Enumerable.product([1, 2, 3, 4, 5]), 120);
+    assert.strictEqual(Enumerable.range(1, 5).product(), 120);
+
+    //rightPad
+    assert.deepStrictEqual(Enumerable.rightPad([a, b, c], 5, d).toArray(), [a, b, c, d, d]);
+
+    //leftPad
+    assert.deepStrictEqual(Enumerable.leftPad([a, b, c], 5, d).toArray(), [d, d, a, b, c]);
+
     //builtins array function
 	(() => {
 		//splice
