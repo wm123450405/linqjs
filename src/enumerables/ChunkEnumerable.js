@@ -11,7 +11,7 @@ const IChunk = require('./IChunk');
 class ChunkEnumerable extends IEnumerable {
     constructor(source, chunk, offset = 0) {
         super(source);
-        offset = offset % chunk;
+        offset = offset < 0 ? (offset % chunk + chunk) % chunk : offset;
         core.defineProperty(this, Symbol.iterator, function* ChunkIterator() {
             let index = 0;
             let chunks = [], last;
