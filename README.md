@@ -8,7 +8,8 @@
 use linq and lambda in javascript  
 在javascript中使用linq与lambda
 
-在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作  
+在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作
+Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory is used less and using deferred execution.
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
 [尚未完成的帮助文档](http://wm123450405.github.io/linqjs/#/zh-cn) :+1:
@@ -16,25 +17,26 @@ use linq and lambda in javascript
 
 ## Usage 用法
 
-Usage for English is Coming soon...
-
 ### 1. Import 引入
 
->使用nodejs
+> Use NodeJs 使用NodeJs
 ```
 $ npm install --save linq-js
 ```
 ```javascript
 const Enumerable = require('linq-js');
 ```
-> * 说明:本module依赖于ES6,建议项目在中使用ES6,以下案例中将均使用ES6写法
+> * description:This module require ES6. I suggest you to use this with ES6. The following examples is already use ES6.
+> * 说明：本module依赖于ES6。建议项目在中使用ES6。以下案例中将均使用ES6写法。
 
 ### 2. Get IEnumerable instance 获取IEnumerable对象
 
 ```typescript
 interface IEnumerable { };
 
-function asEnumerable():IEnumerable; //任何对象都有asEnumerable方法用来获取IEnumerable对象
+function asEnumerable():IEnumerable;
+//You can use the asEnumerable methods of every object's to get an IEnumerable object;
+//任何对象都有asEnumerable方法用来获取IEnumerable对象
 ```
 
 > e.g. 案例
