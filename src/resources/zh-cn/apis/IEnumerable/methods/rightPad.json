@@ -1,0 +1,49 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.18",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "length",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "补充后的总长度",
+                                "必须为正整数"
+                            ]
+                        },
+                        {
+                            "name": "value",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "补充的元素"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "补充了指定内容后的新序列"
+                        ]
+                    },
+                    "description": "在一个序列的结束部分补充一定数量的指定的元素以生成新的序列,使得新生成的序列元素数量达到指定的数量",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "如果原序列的元素数量已经达到或超过指定的数量,则新序列不会在原序列的基础上补充元素"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "leftPad"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -17,7 +17,7 @@
             </template>
             <code-class v-else :type="type"></code-class>
         </template>
-        <template v-if="parameter.defaultValue"> = <span class="hljs-variable">{{ parameter.defaultValue }}</span></template>
+        <template v-if="typeof parameter.defaultValue !== 'undefined'"> = <span class="hljs-variable">{{ parameter.defaultValue }}</span></template>
     </template>
         <template v-if="overload.parameters && overload.parameters.length"><br/></template>
         )

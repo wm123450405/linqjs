@@ -1,0 +1,51 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.18",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "chunk",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于表示分块后每块的数量"
+                            ]
+                        },
+                        {
+                            "name": "offset",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于表示起始分块的位移"
+                            ],
+                            "defaultValue": 0
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "分块后的序列"
+                        ]
+                    },
+                    "description": "对序列按指定数量进行分块, 分块后的序列是一个包含一组数量相同的序列的集合",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "warnings": [
+                        "由于受参数 offset 与原序列总长度的影响, 分块后的首个序列与末尾序列的长度可能不等于参数 chunk 的值"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "groupBy"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

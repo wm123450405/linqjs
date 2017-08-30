@@ -40,7 +40,7 @@
 					"deprecated": 0,
 					"overloads": [
 						{
-							"description": "重置 IEnumerator 对象, 将游标只想第一个元素",
+							"description": "重置 IEnumerator 对象, 将游标重置为指向第一个元素",
 							"parameters": []
 						}
 					]

@@ -156,6 +156,28 @@
 			]
 		},
 		{
+			"name": "chunk",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "对序列按指定数量进行分块, 分块后的序列是一个包含一组数量相同的序列的集合",
+							"parameters": [
+								{
+									"name": "chunk"
+								},
+								{
+									"name": "offset"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "concat",
 			"histroys": [
 				{
@@ -988,6 +1010,28 @@
 			]
 		},
 		{
+			"name": "leftPad",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在一个序列的开始部分补充一定数量的指定的元素以生成新的序列,使得新生成的序列元素数量达到指定的数量",
+							"parameters": [
+								{
+									"name": "length"
+								},
+								{
+									"name": "value"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "map",
 			"histroys": [
 				{
@@ -1239,6 +1283,28 @@
 								},
 								{
 									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "rightPad",
+			"histroys": [
+				{
+					"since": "2.1.18",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在一个序列的结束部分补充一定数量的指定的元素以生成新的序列,使得新生成的序列元素数量达到指定的数量",
+							"parameters": [
+								{
+									"name": "length"
+								},
+								{
+									"name": "value"
 								}
 							]
 						}
