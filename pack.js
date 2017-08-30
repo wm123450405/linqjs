@@ -9,7 +9,9 @@ const metaFile = 'meta.json';
 const directoryMetaFile = 'directory.meta.json';
 const directoryFile = 'directory.json';
 const captionFile = 'caption.json';
+const examplesFile = 'examples';
 const jsonExt = '.json';
+const jsExt = '.js';
 const vueExt = '.vue';
 
 const pack = path.basename(process.argv[1], '.js') === 'webpack';
@@ -33,6 +35,8 @@ const createLang = () => {
 			watch(langPath, (eventType, filename) => {
 				if (filename === metaFile) {
 					createLang();
+				} else if (filename === examplesFile) {
+                    createScripts(langName);
 				}
 			});
 			let metaPath = path.join(langPath, metaFile);
@@ -44,6 +48,10 @@ const createLang = () => {
 				} catch(e) {
 					console.error(e);
 				}
+			}
+			let examplesPath = path.join(langPath, examplesFile);
+			if (fs.existsSync(examplesPath) && fs.statSync(examplesPath).isDirectory()) {
+                createScripts(langName);
 			}
 		}
 	}
@@ -97,7 +105,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 
 							let propertiesPath = path.join(classPath, 'properties');
 							if (fs.existsSync(propertiesPath)) {
-								watch(propertiesPath, (eventType, filename) => {
+								watch(propertiesPath, () => {
 									createApis(langName, className);
 								});
 								let propertyFiles = fs.readdirSync(propertiesPath);
@@ -126,7 +134,7 @@ const createApis = (refreshLangName, refreshClassName) => {
 
 							let methodsPath = path.join(classPath, 'methods');
 							if (fs.existsSync(methodsPath)) {
-								watch(methodsPath, (eventType, filename) => {
+								watch(methodsPath, () => {
 									createApis(langName, className);
 								});
 								let methodFiles = fs.readdirSync(methodsPath);
@@ -329,12 +337,12 @@ const createDirectory = refreshLangName => {
 	}
 };
 
-const createScripts = () => {
-	let examplesPath = path.join(resources, 'examples');
+const createScripts = lang => {
+	let examplesPath = path.join(resources, lang, examplesFile);
 	watch(examplesPath, (eventType, filename) => {
 		let examplePath = path.join(examplesPath, filename);
 		if (fs.existsSync(examplePath) && fs.statSync(examplePath).isDirectory()) {
-			createScripts();
+			createScripts(lang);
 		}
 	});
 	let classNames = fs.readdirSync(examplesPath);
@@ -344,9 +352,9 @@ const createScripts = () => {
 			watch(classPath, (eventType, filename) => {
 				let dirPath = path.join(classPath, filename);
 				if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-					createScripts();
+					createScripts(lang);
 				} else if (path.extname(filename) !== jsonExt) {
-					 createScripts();
+					 createScripts(lang);
 				 }
 			});
 			let classExamples = { };
@@ -363,22 +371,24 @@ const createScripts = () => {
 				watch(propertiesPath, (eventType, filename) => {
 					let propertyPath = path.join(propertiesPath, filename);
 					if (fs.existsSync(propertyPath) && fs.statSync(propertyPath).isDirectory()) {
-						createScripts();
+						createScripts(lang);
 					}
 				});
 				let propertyNames = fs.readdirSync(propertiesPath);
 				for (let propertyName of propertyNames) {
 					let propertyPath = path.join(propertiesPath, propertyName);
 					if (fs.statSync(propertyPath).isDirectory()) {
-						watch(propertyPath, (eventType, filename) => {
-							createScripts();
+						watch(propertyPath, () => {
+							createScripts(lang);
 						});
 						let propertyExamples = { };
 						let exampleFiles =  fs.readdirSync(propertyPath);
 						for (let exampleFile of exampleFiles) {
-							let examplePath = path.join(propertyPath, exampleFile);
-							if (path.extname(exampleFile) !== jsonExt && fs.statSync(examplePath).isFile()) {
-								propertyExamples[exampleFile] = fs.readFileSync(examplePath, { encoding: 'UTF-8' });
+							if (path.extname(exampleFile) === jsExt) {
+                                let examplePath = path.join(propertyPath, exampleFile);
+                                if (path.extname(exampleFile) !== jsonExt && fs.statSync(examplePath).isFile()) {
+                                    propertyExamples[exampleFile] = fs.readFileSync(examplePath, { encoding: 'UTF-8' });
+                                }
 							}
 						}
 						fs.writeFileSync(path.join(propertiesPath, propertyName + jsonExt), JSON.stringify(propertyExamples, null, '\t'));
@@ -391,23 +401,25 @@ const createScripts = () => {
 				watch(methodsPath, (eventType, filename) => {
 					let methodPath = path.join(methodsPath, filename);
 					if (fs.existsSync(methodPath) && fs.statSync(methodPath).isDirectory()) {
-						createScripts();
+						createScripts(lang);
 					}
 				});
 				let methodNames = fs.readdirSync(methodsPath);
 				for (let methodName of methodNames) {
 					let methodPath = path.join(methodsPath, methodName);
 					if (fs.statSync(methodPath).isDirectory()) {
-						watch(methodPath, (eventType, filename) => {
-							createScripts();
+						watch(methodPath, () => {
+							createScripts(lang);
 						});
 						let methodExamples = { };
 						let exampleFiles =  fs.readdirSync(methodPath);
 						for (let exampleFile of exampleFiles) {
-							let examplePath = path.join(methodPath, exampleFile);
-							if (path.extname(exampleFile) !== jsonExt && fs.statSync(examplePath).isFile()) {
-								methodExamples[exampleFile] = fs.readFileSync(examplePath, { encoding: 'UTF-8' });
-							}
+                            if (path.extname(exampleFile) === jsExt) {
+                                let examplePath = path.join(methodPath, exampleFile);
+                                if (path.extname(exampleFile) !== jsonExt && fs.statSync(examplePath).isFile()) {
+                                    methodExamples[exampleFile] = fs.readFileSync(examplePath, {encoding: 'UTF-8'});
+                                }
+                            }
 						}
 						fs.writeFileSync(path.join(methodsPath, methodName + jsonExt), JSON.stringify(methodExamples, null, '\t'));
 					}
@@ -441,7 +453,6 @@ const createComponents = () => {
 createComponents();
 createLang();
 createApis();
-createScripts();
 createDirectory();
 watch(resources, (eventType, filename) => {
 	let dirPath = path.join(resources, filename);
@@ -449,8 +460,5 @@ watch(resources, (eventType, filename) => {
 		createLang();
 		createApis();
 		createDirectory();
-		if (filename === 'examples') {
-			createScripts();
-		}
 	}
 });

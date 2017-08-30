@@ -49,7 +49,7 @@
 		},
 		computed: {
 			language() {
-				return Enumerable.singleOrDefault(this.languages, { code: 'zh-hans' }, language => language.code === this.lang);
+				return Enumerable.singleOrDefault(this.languages, { code: 'zh-cn' }, language => language.code === this.lang);
 			},
 			path() {
 				return this.$route.path.replace(new RegExp(`^/${ this.lang }(/${ this.version })?/?`, 'ig'), '');

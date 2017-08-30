@@ -78,11 +78,12 @@
             }
         },
         mounted() {
-			this.getJson(`caption`, () => `apis/${ this.className }`, () => `apis/${ this.className }/methods/${ this.methodName }`, () => `/examples/${ this.className }/methods/${ this.methodName }`).then(([caption, classMeta, methodMeta, examples]) => {
+			this.getJson(`caption`, () => `apis/${ this.className }`, () => `apis/${ this.className }/methods/${ this.methodName }`, () => `examples/${ this.className }/methods/${ this.methodName }`).then(([caption, classMeta, methodMeta, examples]) => {
 				this.caption = caption;
 				this.classMeta = classMeta;
 				this.methodMeta = methodMeta;
 				this.examples = examples;
+                this.highlight();
 			});
         }
     };

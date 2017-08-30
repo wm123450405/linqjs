@@ -165,10 +165,11 @@
             }
         },
         mounted() {
-			this.getJson(`caption`, () => `apis/${ this.name }`, () => `/examples/${ this.name }`).then(([caption, meta, examples]) => {
+			this.getJson(`caption`, () => `apis/${ this.name }`, () => `examples/${ this.name }`).then(([caption, meta, examples]) => {
 				this.caption = caption;
 				this.meta = meta;
 				this.examples = examples;
+                this.highlight();
 			});
         }
     };

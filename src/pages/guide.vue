@@ -28,10 +28,11 @@
             }
         },
         mounted() {
-    		this.getJson('caption', () => `guides/${ this.code }`, () => `/examples/${ this.code }`).then(([caption, data, examples]) => {
+    		this.getJson('caption', () => `guides/${ this.code }`, () => `examples/${ this.code }`).then(([caption, data, examples]) => {
                 this.caption = caption;
                 this.data = data;
                 this.examples = examples;
+                this.highlight();
             });
         }
     }

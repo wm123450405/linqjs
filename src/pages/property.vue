@@ -59,6 +59,7 @@
 				this.caption = caption;
 				this.classMeta = classMeta;
 				this.propertyMeta = propertyMeta;
+                this.highlight();
 			});
         }
     };

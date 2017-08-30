@@ -2,7 +2,7 @@ import common from './common';
 
 export default {
 	updated() {
-		$('pre code').each(function(i, block) {
+		$('pre code').each((i, block) => {
 			if (!$(block).hasClass('hljs')) {
 				hljs.highlightBlock(block);
 			}
@@ -73,6 +73,14 @@ export default {
 		},
 		isKeyword(type) {
 			return /^[a-z]/.test(type);
+		},
+		highlight() {
+			this.$nextTick(() => {
+                $('pre code').each((i, block) => {
+                    $(block).removeClass('hljs');
+                    hljs.highlightBlock(block);
+                });
+			});
 		},
 		reload() {
 			for (let promise of this.promises) {

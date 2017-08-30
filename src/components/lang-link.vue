@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="`/${ $route.params.lang || 'zh-hans' }/${ toVersion ? toVersion + '/' : version !== lastest ? version + '/' : '' }${ to }`"><slot></slot></router-link>
+    <router-link :to="`/${ $route.params.lang || 'zh-cn' }/${ toVersion ? toVersion + '/' : version !== lastest ? version + '/' : '' }${ to }`"><slot></slot></router-link>
 </template>
 <script>
     export default {

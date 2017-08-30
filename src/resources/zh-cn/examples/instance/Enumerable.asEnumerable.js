@@ -1,0 +1,1 @@
+let enumerable = Enumerable.asEnumerable([1, 2, 3]);
