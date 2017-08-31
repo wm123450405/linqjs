@@ -1,0 +1,4 @@
+{
+	"1.js": "let numbers = [ 9, 34, 65, 92, 87, 435, 3, 54, 83, 23, 87, 435, 67, 12, 19 ];\r\n\r\nlet first = numbers.asEnumerable().first();\r\n\r\nconsole.log(first);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 9\r\n */",
+	"2.js": "let numbers = [ 9, 34, 65, 92, 87, 435, 3, 54, 83, 23, 87, 435, 67, 12, 19 ];\r\n\r\nlet first = numbers.asEnumerable().first(number => number > 80);\r\n\r\nconsole.log(first);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 92\r\n */"
+}
