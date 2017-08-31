@@ -1,4 +1,5 @@
 @import "common.sass"
+@import "~codemirror/lib/codemirror.css"
 
 body
 	position: absolute
@@ -7,6 +8,49 @@ body
 
 #app
 	height: 100%
+
+.try
+	position: fixed
+	bottom: 0.2em
+	right: 0.2em
+	width: 5em
+	height: 2em
+	//border: 1px solid gray
+	&.active
+		left: 0.2em
+		width: auto
+		height: 50%
+		.code, .CodeMirror
+			display: block
+		.result
+			width: 50%
+			.btns
+				> *
+					display: inline-block
+				> .expand
+					display: none
+			.list
+				display: block
+	.code, .CodeMirror
+		float: left
+		width: 50%
+		display: none
+	.result
+		float: right
+		width: 100%
+		.btns
+			> *
+				word-break: keep-all
+				white-space: nowrap
+				display: none
+				border: 1px solid gray
+				border-radius: 2px
+				padding: 0.2em 0.5em
+				cursor: pointer
+			> .expand
+				display: inline-block
+		.list
+			display: none
 
 @media (max-width: 767px)
 	.topbar

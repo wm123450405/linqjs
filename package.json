@@ -19,6 +19,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-loader": "^2.0.0",
     "bootstrap-sass": "^3.3.7",
+    "codemirror": "^5.29.0",
     "cross-env": "^5.0.0",
     "css-loader": "^0.27.3",
     "extend": "^3.0.0",
