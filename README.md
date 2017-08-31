@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dm/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.org/wm123450405/linqjs)
 
-use linq and lambda in javascript  
+use linq and lambda in javascript
 在javascript中使用linq与lambda
 
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作

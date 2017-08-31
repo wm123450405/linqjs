@@ -973,6 +973,4 @@ module.exports = function(Enumerable) {
 	assert.strictEqual(new TestArray().asEnumerable().elementAt(0), 0);
 
 	console.log('test successful!');
-
-    Enumerable.config.extends.array = true;
 };
