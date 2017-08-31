@@ -1,0 +1,3 @@
+{
+	"1.js": "let names = [ \"李小龙\", \"李连杰\", \"甄子丹\", \"成龙\", \"洪金宝\" ];\r\n\r\nlet name = names.asEnumerable().elementAt(4);\r\n\r\nconsole.log(`名字是“${ name }”。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 名字是“洪金宝”。\r\n */"
+}

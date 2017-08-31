@@ -61,6 +61,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb338049(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 distinct 要返回的整数序列中非重复元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何实现在 distinct 中可用的相等比较器，并在实现此比较器后对一系列数据使用 distinct 方法返回去除重复数据后的新序列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]
