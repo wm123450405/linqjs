@@ -19,31 +19,31 @@
 			},
 			{
 				"code": "use",
-				"title": "开始使用",
+				"title": "Start use",
 				"since": "2.1.15",
 				"deprecated": "2.1.18"
 			},
 			{
 				"code": "config",
-				"title": "配置",
+				"title": "Configuration",
 				"since": "2.1.15",
 				"deprecated": "2.1.18"
 			},
 			{
 				"code": "selector",
-				"title": "选择器",
+				"title": "Selector",
 				"since": "2.1.15",
 				"deprecated": "2.1.18"
 			},
 			{
 				"code": "predicate",
-				"title": "筛选器",
+				"title": "Predicate",
 				"since": "2.1.15",
 				"deprecated": "2.1.18"
 			},
 			{
 				"code": "comparer",
-				"title": "比较器",
+				"title": "Comparer",
 				"since": "2.1.15",
 				"deprecated": "2.1.18"
 			},

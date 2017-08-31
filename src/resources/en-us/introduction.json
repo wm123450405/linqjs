@@ -1,6 +1,11 @@
 {
     "title": "Introduction",
     "contents": [
-        "use linq and lambda in javascript for es6"
+        "use linq and lambda in javascript for es6",
+        "&nbsp;",
+        "",
+        "Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory is used less and using deferred execution.",
+        "&nbsp;",
+        "My English is poor!"
     ]
 }

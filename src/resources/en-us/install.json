@@ -1,3 +1,18 @@
 {
-    "title": "Install"
+    "title": "Install",
+    "contents": [
+        {
+            "title": "Add to project"
+        },
+        {
+            "title": "Require",
+            "details": [
+                {
+                    "remarks": [
+                        "description:This module require ES6. I suggest you to use this with ES6. The following examples is already use ES6."
+                    ]
+                }
+            ]
+        }
+    ]
 }

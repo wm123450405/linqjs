@@ -79,6 +79,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb336390(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 except 方法来比较两个数字序列并将其返回仅在第一个序列中出现的元素组成的新序列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何实现在 except 中可用的相等比较器，并在实现此比较器后对连个序列中的元素使用此比较器比较后返回仅在第一个序列中出现的元素组成的新序列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

@@ -72,6 +72,29 @@
                     }
                 }
             ]
+        },
+        {
+            "title": "使用字符串/数字/符号代替一元选择器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "可以使用字符串、数字或符号代替一元选择器，以下实例展示字符串或数字代替的一元选择器与一元选择器的等级关系"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "1.js"
+                    }
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "2.js"
+                    }
+                }
+            ]
         }
     ]
 }

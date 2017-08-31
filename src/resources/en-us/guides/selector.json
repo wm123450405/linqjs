@@ -1,0 +1,30 @@
+{
+    "title": "Selector",
+    "contents": [
+        {
+            "title": "What's the Selector",
+            "descriptions": [
+                {
+                    "content": "The Selector is a function which mapping an input value to an output value."
+                },
+                {
+                    "content": "The function accept one or more arguments, sometimes, it also accept index of the collection as argument."
+                }
+            ]
+        },
+        {
+            "title": "Unary Selector"
+        },
+        {
+            "title": "Binary Selector"
+        },
+        {
+            "title": "Use string/number/symbol value to replace the Selector",
+            "descriptions": [
+                {
+                    "content": "You can use a string or a number or a symbol value to replace an Unary Selector, the examples following will show you how to use string or number value to replace the Selector"
+                }
+            ]
+        }
+    ]
+}

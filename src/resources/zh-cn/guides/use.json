@@ -1,41 +1,53 @@
 {
-  "title": "开始使用",
-  "contents": [
-    {
-      "title": "可以使用 LINQ 中的一些方法",
-      "descriptions": [
+    "title": "开始使用",
+    "contents": [
         {
-          "type": "description",
-          "content": "获取到 IEnumerable 对象后既可以使用 LINQ 中提供的一些方法"
+            "title": "可以使用 LINQ 中的一些方法",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "获取到 IEnumerable 对象后既可以使用 LINQ 中提供的一些方法"
+                },
+                {
+                    "type": "remark",
+                    "content": "以下例子中展示了一些常用的 LINQ 功能"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "1.js"
+                    }
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "2.js"
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "IEnumerable"
+                    }
+                }
+            ]
         },
         {
-          "type": "remark",
-          "content": "以下例子中展示了一些常用的 LINQ 功能"
-        },
-        {
-          "type": "example",
-          "content": {
-            "type": "javascript",
-            "href": "1.js"
-          }
-        },
-        {
-          "type": "example",
-          "content": {
-            "type": "javascript",
-            "href": "2.js"
-          }
+            "title": "可以使用原生 Array 的一些方法",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "获取到 IEnumerable 对象后除了可以使用 LINQ 提供的一些方法的同时还可以使用原生 Array 提供的一些方法"
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "IEnumerable"
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "title": "可以使用原生 Array 的一些方法",
-      "descriptions": [
-        {
-          "type": "description",
-          "content": "获取到 IEnumerable 对象后除了可以使用 LINQ 提供的一些方法的同时还可以使用原生 Array 提供的一些方法"
-        }
-      ]
-    }
-  ]
+    ]
 }

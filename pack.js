@@ -357,8 +357,8 @@ const createScripts = lang => {
 				if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 					createScripts(lang);
 				} else if (path.extname(filename) !== jsonExt) {
-					 createScripts(lang);
-				 }
+                    createScripts(lang);
+                }
 			});
 			let classExamples = { };
 			let classExampleFiles = fs.readdirSync(classPath);
