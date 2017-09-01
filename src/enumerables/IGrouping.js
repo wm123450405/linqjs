@@ -7,7 +7,9 @@ const core = require('./../core/core');
 class IGrouping extends IEnumerable {
     constructor(key, iterable) {
         super([]);
-        this.key = key;
+        core.defineProperty(this, 'key', () => {
+            return key;
+        }, true, true);
         core.defineProperty(this, Symbol.iterator, function* GroupingIterator() {
             yield* iterable;
         });
