@@ -10,12 +10,12 @@
 .cm-s-hybird .CodeMirror-cursor { border-left: 1px solid #6A6A6A; }
 
 .cm-s-hybird span.cm-comment { color: #707880; }
-.cm-s-hybird span.cm-atom { color: #a16a94; }
+.cm-s-hybird span.cm-atom { color: #c66; }
 .cm-s-hybird span.cm-number { color: #c66; }
 
-.cm-s-hybird span.cm-property, .cm-s-hybird span.cm-attribute { color: #b5bd68; }
-.cm-s-hybird span.cm-keyword { color: #707880; }
-.cm-s-hybird span.cm-string { color: #b5bd68; }
+.cm-s-hybird span.cm-property, .cm-s-hybird span.cm-attribute { color: #6868bd; }
+.cm-s-hybird span.cm-keyword { color: #81a2be; }
+.cm-s-hybird span.cm-string, .cm-s-hybird span.cm-string-2 { color: #b5bd68; }
 
 .cm-s-hybird span.cm-variable { color: #8abeb7; }
 .cm-s-hybird span.cm-variable-2 { color: #8abeb7; }
