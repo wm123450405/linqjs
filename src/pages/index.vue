@@ -11,10 +11,10 @@
 			<textarea title="javascript code" id="code" class="code"></textarea>
 			<div class="result">
 				<div class="btns">
-					<div class="btn btn-default" @click="tryIt"><i class="fa fa-fw fa-play"></i>运行</div>
-					<div class="btn btn-default" @click="clear"><i class="fa fa-fw fa-ban"></i>清空</div>
-					<div class="btn btn-default" @click="close"><i class="fa fa-fw fa-compress"></i>收起</div>
-					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand"></i>试一试</div>
+					<div class="btn btn-default" @click="tryIt"><i class="fa fa-fw fa-play"></i>{{ caption.run }}</div>
+					<div class="btn btn-default" @click="clear"><i class="fa fa-fw fa-ban"></i>{{ caption.clear }}</div>
+					<div class="btn btn-default" @click="close"><i class="fa fa-fw fa-compress fa-flip-vertical"></i>{{ caption.close }}</div>
+					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand fa-flip-vertical"></i>{{ caption.try }}</div>
 				</div>
 				<ul class="list">
 					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : ''"></i> <span v-for="log in logs.contents"> {{ log | json }} </span></li>
@@ -30,10 +30,18 @@
 	let codeMirror;
 
 	export default {
+        beforeRouteUpdate(to, from, next) {
+            codeMirror && codeMirror.setValue('');
+	        this.clear();
+	        this.close();
+	        next();
+		},
 	    data() {
 	        return {
 	            active: false,
-                logList: []
+                logList: [],
+
+                caption: { }
 			}
 		},
 		mounted() {
@@ -42,10 +50,26 @@
                 indentUnit: 4,
                 theme: 'hybird'
 			});
+            this.getJson(`caption`).then(caption => {
+                console.log(caption);
+                this.caption = caption;
+            });
 		},
 		methods: {
-	        open() {
+	        open(code, run) {
 				this.active = true;
+				setTimeout(() => {
+                    if (codeMirror) {
+                        if (typeof code === 'string') {
+                            codeMirror.setValue(code);
+						} else if (!codeMirror.getValue()) {
+                            codeMirror.setValue("console.log(1);");
+						}
+						if (run) {
+                            this.tryIt();
+						}
+                    }
+				});
 			},
 			close() {
 	            this.active = false;
@@ -56,17 +80,12 @@
 			tryCode(code) {
 	            if (code && codeMirror) {
 	                this.clear();
-                    this.open();
-                    setTimeout(() => {
-                        codeMirror.setValue(code);
-                        this.tryIt();
-					});
+                    this.open(code, true);
 				}
 			},
 		    tryIt() {
 	            if (codeMirror) {
                     let code = codeMirror.getValue();
-                    //alert(code);
                     if (code) {
                         const Enumerable = require('linq-js');
                         let log = console.log;

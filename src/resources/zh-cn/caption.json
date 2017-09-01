@@ -43,6 +43,9 @@
     "readonly": "只读",
     "lazy": "延迟执行",
     "try": "试一试",
+    "run": "运行",
+    "clear": "清空",
+    "close": "收起",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

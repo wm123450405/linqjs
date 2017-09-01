@@ -41,6 +41,10 @@
     "defaultValue": "default value",
     "readonly": "readonly",
     "lazy": "deferred execution",
+    "try": "try it",
+    "run": "run",
+    "clear": "clear",
+    "close": "close",
     "newInstance": {
         "only": "can only use new operator",
         "both": "can use new operator or not",
