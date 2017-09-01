@@ -87,6 +87,9 @@ const core = {
 	isArray(value) {
 		return this.getType(value) === this.types.Array;
 	},
+	isNumber(value) {
+		return this.getType(value) === this.types.Number;
+	},
 	isObject(value) {
 		return this.getType(value) === this.types.Object;
 	},

@@ -8,7 +8,7 @@ const regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")\]))(\.\2|\3
 const regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")\]/ig;
 
 module.exports = property => {
-	if (core.isSymbol(property)) {
+	if (core.isSymbol(property) || core.isNumber(property)) {
 		return (element, index) => element && element[property];
 	} else if (property === '') {
 		return (element, index) => element;
