@@ -46,7 +46,7 @@
                     <p v-for="warning in overload.warnings" v-html="capitalize(warning)" class="text-warning indent"></p>
                     <h3 v-if="overload.examples && overload.examples.length">{{ caption.examples }}:</h3>
                     <div v-for="(example, exampleIndex) in overload.examples" class="indent">
-                        <p>{{ exampleIndex + 1 }}. {{ example.description }}</p>
+                        <p>{{ exampleIndex + 1 }}. {{ example.description }} <span v-if="example.script.type === 'javascript'" class="btn btn-success btn-sm" @click="tryCode(example.script.script || examples[example.script.href])"><i class="fa fa-fw fa-play"></i> {{ caption.try }}</span></p>
                         <pre><code :class="example.script.type" v-html="example.script.script || examples[example.script.href]"></code></pre>
                         <p v-for="description in example.descriptions" v-html="capitalize(description)"></p>
                     </div>
@@ -86,6 +86,11 @@
 				this.examples = examples;
                 this.highlight();
 			});
+        },
+        methods: {
+            tryCode(code) {
+                this.$parent.$parent.tryCode(code);
+            }
         }
     };
 </script>

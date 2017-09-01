@@ -4,6 +4,10 @@
             "type": "number",
             "since": "2.1.18",
             "description": "此分块的索引"
+        },
+        {
+            "since": "2.1.19",
+            "readonly": true
         }
     ]
 }

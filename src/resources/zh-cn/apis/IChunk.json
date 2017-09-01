@@ -12,8 +12,13 @@
 			"histroys": [
 				{
 					"since": "2.1.18",
-					"deprecated": 0,
+					"deprecated": "2.1.18",
 					"description": "此分块的索引"
+				},
+				{
+					"since": "2.1.19",
+					"deprecated": 0,
+					"readonly": true
 				}
 			]
 		}

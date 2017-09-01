@@ -54,5 +54,12 @@
 			"新增 IEnumerable.prototype.rand 方法"
 		],
 		"version": "2.1.18"
+	},
+	{
+		"prepublish": true,
+		"contents": [
+			"将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读"
+		],
+		"version": "2.1.19.pre"
 	}
 ]

@@ -1,0 +1,6 @@
+{
+    "prepublish": true,
+    "contents": [
+        "将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读"
+    ]
+}

@@ -28,8 +28,8 @@
                 <h3 v-if="histroy.warnings && histroy.warnings.length">{{ caption.warnings }}:</h3>
                 <p v-for="warning in histroy.warnings" v-html="capitalize(warning)" class="text-warning indent"></p>
                 <div v-for="(example, exampleIndex) in histroy.examples" class="indent">
-                    <p>{{ exampleIndex + 1 }}. {{ example.description }}</p>
-                    <pre><code :class="example.script.type" v-html="example.script.script"></code></pre>
+                    <p>{{ exampleIndex + 1 }}. {{ example.description }} <span v-if="example.script.type === 'javascript'" class="btn btn-success btn-sm" @click="tryCode(example.script.script || examples[example.script.href])"><i class="fa fa-fw fa-play"></i> {{ caption.try }}</span></p>
+                    <pre><code :class="example.script.type" v-html="example.script.script || examples[example.script.href]"></code></pre>
                     <p v-for="description in example.descriptions" v-html="description"></p>
                 </div>
                 <div>{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="{ apis: className }"></see-link></div>
