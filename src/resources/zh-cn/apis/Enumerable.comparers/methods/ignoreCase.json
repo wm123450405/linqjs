@@ -8,8 +8,10 @@
                         {
                             "name": "selector",
                             "types": [
-                                "function"
+                                "function",
+                                "string"
                             ],
+                            "defaultValue": "defaultSelector",
                             "declare": {
                                 "returns": {
                                     "type": "string"
@@ -51,6 +53,28 @@
                     "sees": [
                         {
                             "guide": "comparer"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

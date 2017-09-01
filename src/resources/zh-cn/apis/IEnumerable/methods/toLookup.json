@@ -9,9 +9,7 @@
                             "name": "keySelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于提取每个元素的键的函数"
@@ -41,9 +39,7 @@
                             "name": "valueSelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于从每个元素产生结果元素值的转换函数"
@@ -73,9 +69,7 @@
                             "name": "comparer",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "defaultValue": "defaultSameComparer",
                             "descriptions": [
@@ -120,6 +114,40 @@
                         {
                             "apis": "Enumerable.comparers",
                             "property": "same"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

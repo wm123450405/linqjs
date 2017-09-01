@@ -10,9 +10,7 @@
                             "name": "callback",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "declare": {
                                 "returns": {
@@ -58,6 +56,24 @@
                         {
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/find",
                             "title": "Mozilla MDN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

@@ -68,7 +68,7 @@
                             <td>
                                 <lang-link :to="`apis/${ name }/property/${ property.name }`">{{ property.name }}</lang-link>
                             </td>
-                            <td>{{ histroy.default | json }}</td>
+                            <td>{{ histroy.default | json(true) }}</td>
                             <td>
                                 {{ histroy.description }}
                             </td>

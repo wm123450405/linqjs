@@ -10,9 +10,7 @@
                             "name": "keySelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于提取每个元素的键的函数"
@@ -42,9 +40,7 @@
                             "name": "elementSelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于将每个源元素映射到组中的元素的函数"
@@ -74,9 +70,7 @@
                             "name": "resultSelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于从每个组中创建结果值的函数"
@@ -106,9 +100,7 @@
                             "name": "comparer",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于对键进行比较相等比较器"
@@ -173,6 +165,48 @@
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb535049(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

@@ -93,6 +93,10 @@
                         "type": "javascript",
                         "href": "2.js"
                     }
+                },
+                {
+                    "type": "warning",
+                    "content": "自 2.1.19 版本后才开始接受数字/符号参数"
                 }
             ]
         }

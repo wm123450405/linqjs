@@ -9,9 +9,7 @@
                             "name": "selector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "应用于每个元素的转换函数"
@@ -54,6 +52,24 @@
                         {
                             "apis": "Enumerable.selectors",
                             "property": "default"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

@@ -15,12 +15,14 @@ body
 	position: fixed
 	bottom: 0.2em
 	right: 0.2em
+	height: 2em
 	background-color: white
 	&.active
 		left: 0.2em
 		width: auto
 		height: 30em
 		padding: 0.5em
+		transition: height .4s
 		box-shadow: 0 -2px 5px -2px black
 		> .code, > .CodeMirror
 			display: block
@@ -54,6 +56,8 @@ body
 			> .expand
 				display: inline-block
 		> .list
+			height: 27em
+			overflow: auto
 			list-style: none
 			display: none
 			padding: 0.5em 0

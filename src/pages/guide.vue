@@ -7,6 +7,7 @@
                 <p v-if="description.type === 'remark'" v-html="capitalize(description.content)" class="text-info"></p>
                 <p v-if="description.type === 'warning'" v-html="capitalize(description.content)" class="text-warning"></p>
                 <p v-if="description.type === 'function'"><code-type-declare :type="description.type" :declare="description.content"></code-type-declare></p>
+                <p v-if="description.type === 'example' && description.content.type === 'javascript' && !description.content.notTry" class="btn btn-success btn-sm" @click="tryCode(description.content.tryHref && examples[description.content.tryHref] || description.content.tryScript || description.content.href && examples[description.content.href] || description.content.script)"><i class="fa fa-fw fa-play"></i> {{ caption.try }}</p>
                 <pre v-if="description.type === 'example'"><code :class="description.content.type" v-html="examples[description.content.href] || description.content.script"></code></pre>
                 <div v-if="description.type === 'see'">{{ caption.see }} <i class="fa fa-fw fa-at"></i> <see-link :see="description.content"></see-link></div>
             </div>
@@ -34,6 +35,11 @@
                 this.examples = examples;
                 this.highlight();
             });
+        },
+        methods: {
+    	    tryCode(code) {
+    	        this.$parent.$parent.tryCode(code);
+            }
         }
     }
 </script>

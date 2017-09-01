@@ -12,7 +12,8 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "Enumerable.js"
+                        "href": "Enumerable.js",
+                        "tryHref": "Enumerable.try.js"
                     }
                 },
                 {
@@ -31,7 +32,8 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "Enumerable.asEnumerable.js"
+                        "href": "Enumerable.asEnumerable.js",
+                        "tryHref": "Enumerable.asEnumerable.try.js"
                     }
                 },
                 {
@@ -54,7 +56,8 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "asEnumerable.js"
+                        "href": "asEnumerable.js",
+                        "tryHref": "asEnumerable.try.js"
                     }
                 }
             ]

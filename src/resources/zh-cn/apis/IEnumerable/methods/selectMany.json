@@ -10,9 +10,7 @@
                             "name": "collectionSelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "要应用于输入序列中的每个元素转换函数"
@@ -98,6 +96,24 @@
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534732(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

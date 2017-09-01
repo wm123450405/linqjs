@@ -10,9 +10,7 @@
                             "name": "keySelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于从元素中提取键的函数"
@@ -42,9 +40,7 @@
                             "name": "comparer",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "键进行大小比较的大小比较器"
@@ -89,6 +85,32 @@
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534500(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

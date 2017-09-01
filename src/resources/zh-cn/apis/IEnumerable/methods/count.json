@@ -9,9 +9,7 @@
                             "name": "predicate",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于检测每个元素是否满足条件的函数"
@@ -92,8 +90,6 @@
                             "types": [
                                 "function",
                                 "string",
-                                "symbol",
-                                "number",
                                 "array",
                                 "object"
                             ]
@@ -108,6 +104,26 @@
                                 "type": "javascript",
                                 "href": "3.js"
                             }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ]
                         }
                     ]
                 }

@@ -12,7 +12,8 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "config.as.js"
+                        "href": "config.as.js",
+                        "tryHref": "config.as.try.js"
                     }
                 },
                 {
@@ -32,7 +33,8 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "config.extends.js"
+                        "href": "config.extends.js",
+                        "notTry": true
                     }
                 }
             ]

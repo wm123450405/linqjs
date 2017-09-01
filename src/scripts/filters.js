@@ -1,7 +1,7 @@
-Vue.filter('json', function (value) {
+Vue.filter('json', function (value, ignore = false) {
     let type = typeof value;
     if (type === 'undefined') {
-        return 'undefined';
+        return ignore ? '' : 'undefined';
     } else {
         if (type === 'string' || type === 'number' || type === 'boolean') {
             return value;

@@ -36,6 +36,27 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.18",
+					"overloads": [
+						{
+							"override": true,
+							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Directory 对象",
+							"parameters": [
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.19",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -62,6 +83,27 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.18",
+					"overloads": [
+						{
+							"override": true,
+							"description": "根据指定的键选择器函数、 比较器和元素选择器函数创建一个 Lookup 对象",
+							"parameters": [
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.19",
 					"deprecated": 0,
 					"overloads": [
 						{

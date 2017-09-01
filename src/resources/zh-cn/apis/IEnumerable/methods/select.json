@@ -10,9 +10,7 @@
                             "name": "selector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "应用于每个元素的转换函数"
@@ -59,6 +57,24 @@
                         {
                             "href": "https://msdn.microsoft.com/{language}/library/bb534869(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

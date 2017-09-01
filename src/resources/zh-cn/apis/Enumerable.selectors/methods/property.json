@@ -8,9 +8,7 @@
                         {
                             "name": "property",
                             "types": [
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ]
                         }
                     ],
@@ -37,6 +35,23 @@
                     "sees": [
                         {
                             "guide": "selector"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

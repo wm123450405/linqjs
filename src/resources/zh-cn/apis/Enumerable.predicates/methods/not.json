@@ -9,9 +9,7 @@
                             "name": "predicate",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "defaultValue": "defaultExistsPredicate",
                             "declare": {
@@ -75,6 +73,24 @@
         },
         {
             "since": "2.1.17",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "array",
+                                "object"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
             "ref": true,
             "overloads": [
                 {

@@ -1,5 +1,8 @@
 {
 	"asEnumerable.js": "let a = [1, 2, 3].asEnumerable();\r\nlet o = ({ key: 1, value: 'a' }).asEnumerable();\r\nlet s = 'abc'.asEnumerable();",
+	"asEnumerable.try.js": "let a = [1, 2, 3].asEnumerable();\r\nconsole.log(a);\r\nlet o = ({ key: 1, value: 'a' }).asEnumerable();\r\nconsole.log(o);\r\nlet s = 'abc'.asEnumerable();\r\nconsole.log(s);",
 	"Enumerable.asEnumerable.js": "let enumerable = Enumerable.asEnumerable([1, 2, 3]);",
-	"Enumerable.js": "let enumerable = Enumerable([1, 2, 3]);"
+	"Enumerable.asEnumerable.try.js": "let enumerable = Enumerable.asEnumerable([1, 2, 3]);\r\nconsole.log(enumerable);",
+	"Enumerable.js": "let enumerable = Enumerable([1, 2, 3]);",
+	"Enumerable.try.js": "let enumerable = Enumerable([1, 2, 3]);\r\nconsole.log(enumerable);"
 }

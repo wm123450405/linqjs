@@ -10,9 +10,7 @@
                             "name": "predicate",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "descriptions": [
                                 "用于检测每个元素是否满足条件的函数"
@@ -62,6 +60,24 @@
         },
         {
             "since": "2.1.17",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "array",
+                                "object"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
             "ref": true,
             "overloads": [
                 {

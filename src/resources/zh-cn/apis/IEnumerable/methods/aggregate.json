@@ -52,9 +52,7 @@
                             "name": "resultSelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "defaultValue": "defaultSelector",
                             "descriptions": [
@@ -122,6 +120,26 @@
                                 "type": "javascript",
                                 "href": "1.js"
                             }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        { },
+                        { },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

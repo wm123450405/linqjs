@@ -15,9 +15,7 @@
                             "name": "keySelector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "defaultValue": "defaultSelector",
                             "declare": {
@@ -74,6 +72,25 @@
                         {
                             "apis": "Enumerable.selectors",
                             "property": "default"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        { },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
                         }
                     ]
                 }

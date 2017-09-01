@@ -11,10 +11,10 @@
 			<textarea title="javascript code" id="code" class="code"></textarea>
 			<div class="result">
 				<div class="btns">
-					<div @click="tryIt"><i class="fa fa-fw fa-play"></i>运行</div>
-					<div @click="clear"><i class="fa fa-fw fa-ban"></i>清空</div>
-					<div @click="close"><i class="fa fa-fw fa-compress"></i>收起</div>
-					<div class="expand" @click="open"><i class="fa fa-fw fa-expand"></i>试一试</div>
+					<div class="btn btn-default" @click="tryIt"><i class="fa fa-fw fa-play"></i>运行</div>
+					<div class="btn btn-default" @click="clear"><i class="fa fa-fw fa-ban"></i>清空</div>
+					<div class="btn btn-default" @click="close"><i class="fa fa-fw fa-compress"></i>收起</div>
+					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand"></i>试一试</div>
 				</div>
 				<ul class="list">
 					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : ''"></i> <span v-for="log in logs.contents"> {{ log | json }} </span></li>
@@ -84,6 +84,10 @@
                         });
                         log(result);
                         console.log = log;
+						this.$nextTick(() => {
+                            let list = $('.result .list');
+                            list.scrollTop(list.get(0).scrollHeight);
+						});
                     }
 				}
 			}

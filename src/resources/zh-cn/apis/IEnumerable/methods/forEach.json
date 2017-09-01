@@ -9,10 +9,7 @@
                         {
                             "name": "action",
                             "types": [
-                                "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "function"
                             ],
                             "descriptions": [
                                 "循环的执行体"

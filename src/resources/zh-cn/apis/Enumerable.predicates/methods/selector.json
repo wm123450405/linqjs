@@ -9,9 +9,7 @@
                             "name": "selector",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "declare": {
                                 "returns": {
@@ -37,9 +35,7 @@
                             "name": "predicate",
                             "types": [
                                 "function",
-                                "string",
-                                "symbol",
-                                "number"
+                                "string"
                             ],
                             "defaultValue": "defaultExistsPredicate",
                             "declare": {
@@ -108,6 +104,32 @@
                 {
                     "parameters": [
                         { },
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "array",
+                                "object"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
                         {
                             "types": [
                                 "function",

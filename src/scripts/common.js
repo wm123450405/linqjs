@@ -18,13 +18,14 @@ module.exports = {
 	},
 	histroys(histroys) {
 		if (histroys) {
-			return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]).zip(Enumerable.concat([0], histroys), (next, prev) => ({ next, prev })), (v, content) => {
-				let deprecated = v.deprecated || content.next && content.next.since && this.preVersion(content.next.since);
-				if (v.ref && content.prev) {
-					v = extend(true, { }, content.prev, v);
+			let prev = 0;
+			return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]), (v, next) => {
+				let deprecated = v.deprecated || next && next.since && this.preVersion(next.since);
+				if (v.ref && prev) {
+					v = extend(true, { }, prev, v);
 				}
 				v.deprecated = deprecated;
-				return v;
+				return prev = v;
 			});
 		} else {
 			return Enumerable.empty();
