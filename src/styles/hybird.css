@@ -13,13 +13,13 @@
 .cm-s-hybird span.cm-atom { color: #c66; }
 .cm-s-hybird span.cm-number { color: #c66; }
 
-.cm-s-hybird span.cm-property, .cm-s-hybird span.cm-attribute { color: #6868bd; }
+.cm-s-hybird span.cm-property, .cm-s-hybird span.cm-attribute { color: #c5c8c6; }
 .cm-s-hybird span.cm-keyword { color: #81a2be; }
 .cm-s-hybird span.cm-string, .cm-s-hybird span.cm-string-2 { color: #b5bd68; }
 
 .cm-s-hybird span.cm-variable { color: #8abeb7; }
 .cm-s-hybird span.cm-variable-2 { color: #8abeb7; }
-.cm-s-hybird span.cm-def { color: #f99157; }
+.cm-s-hybird span.cm-def { color: #c5c8c6; }
 .cm-s-hybird span.cm-bracket { color: #CCCCCC; }
 .cm-s-hybird span.cm-tag { color: #81a2be; }
 .cm-s-hybird span.cm-link { color: #c66; }
