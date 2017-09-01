@@ -14,13 +14,14 @@ const core = {
 		return typeof process !== 'undefined' && process && process.env && process.env.NODE_ENV === 'development';
 	},
 	getType(value) {
-		if (typeof value === 'undefined') {
+		let typeName = typeof value;
+		if (typeName === 'undefined') {
 			return this.types.Undefined;
-		} else if (typeof value === 'string') {
+		} else if (typeName === 'string' || value instanceof String) {
 			return this.types.String;
-		} else if (typeof value === 'number') {
+		} else if (typeName === 'number' || value instanceof Number) {
 			return this.types.Number;
-		} else if (typeof value === 'function') {
+		} else if (typeName === 'function' || value instanceof Function) {
 			return this.types.Function;
 		} else {
 			let type = value[Symbol.toStringTag];
@@ -31,7 +32,6 @@ const core = {
 			if (type === 'Object') {
 				return getFunctionName(value.constructor);
 			} else {
-				let typeName = typeof value;
 				if (typeName !== 'object') {
 					return typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
 				} else {
