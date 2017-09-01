@@ -84,14 +84,16 @@
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "1.js"
+                        "href": "1.js",
+                        "tryHref": "1.try.js"
                     }
                 },
                 {
                     "type": "example",
                     "content": {
                         "type": "javascript",
-                        "href": "2.js"
+                        "href": "2.js",
+                        "notTry": true
                     }
                 },
                 {

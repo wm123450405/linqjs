@@ -1,1 +1,4 @@
-{}
+{
+	"1.js": "let numbers = [];\r\nlet first = numbers.asEnumerable().firstOrDefault(0);\r\nconsole.log(first);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 0\r\n */",
+	"2.js": "let names = [ \"李小龙\", \"李连杰\", \"六小龄童\", \"甄子丹\", \"成龙\", \"洪金宝\" ];\r\n\r\nlet firstLongName = names.asEnumerable().firstOrDefault(\"\", name => name.length > 3);\r\n\r\nconsole.log(`第一个最长的名字是：“${ firstLongName }”。`);\r\n\r\nlet firstVeryLongName = names.asEnumerable().firstOrDefault(\"\", name => name.length > 4);\r\n\r\nconsole.log(`${ firstVeryLongName === \"\" ? \"没有\" : \"有\" }名字的长度多于4个字.`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 第一个最长的名字是：“六小龄童”。\r\n 没有名字的长度多于4个字。\r\n */"
+}

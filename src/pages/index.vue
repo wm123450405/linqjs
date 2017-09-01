@@ -17,13 +17,15 @@
 					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand fa-flip-vertical"></i>{{ caption.try }}</div>
 				</div>
 				<ul class="list">
-					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : ''"></i> <span v-for="log in logs.contents"> {{ log | json }} </span></li>
+					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <span v-for="log in logs.contents"> {{ log | json }} </span></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+    import common from './../scripts/common';
+
 	const CodeMirror = require('codemirror');
 	require('codemirror/mode/javascript/javascript');
 
@@ -34,7 +36,28 @@
             codeMirror && codeMirror.setValue('');
 	        this.clear();
 	        this.close();
-	        next();
+            let reg = /^\/(\w+-\w+)(\/\d+\.\d+\.\d+(\.pre)?)?(.+)?$/i;
+            to = reg.exec(to.path);
+            to = {
+                lang: to && to[1] || common.defaultLang,
+				version: to && to[2] && to[2].substring(1) || common.lastest,
+                url: to && to[4] || ''
+			};
+            from = reg.exec(from.path);
+            from = {
+                lang: from && from[1] || common.defaultLang,
+                version: from && from[2] && from[2].substring(1) || common.lastest,
+                url: from && from[4] || ''
+            };
+			if (to.url !== from.url) {
+			    if (to.lang === from.lang && to.version === from.version) {
+			        next();
+				} else {
+                    next({ path: `/${ from.lang }${ from.version !== common.lastest ? '/' + from.version : '' }${ to.url }`, replace: true });
+				}
+			} else {
+				next();
+			}
 		},
 	    data() {
 	        return {
@@ -51,7 +74,6 @@
                 theme: 'hybird'
 			});
             this.getJson(`caption`).then(caption => {
-                console.log(caption);
                 this.caption = caption;
             });
 		},
@@ -87,7 +109,6 @@
 	            if (codeMirror) {
                     let code = codeMirror.getValue();
                     if (code) {
-                        const Enumerable = require('linq-js');
                         let log = console.log;
                         console.log = (...contents) => {
                             this.logList.push({
@@ -96,12 +117,20 @@
                             });
                             log(...contents);
                         };
-                        let result = eval(code);
-                        this.logList.push({
-							type: "result",
-							contents: [ result ]
-                        });
-                        log(result);
+                        try {
+                            const Enumerable = require('linq-js');
+                            let result = eval(code);
+                            this.logList.push({
+                                type: "result",
+                                contents: [ result ]
+                            });
+                            log(result);
+						} catch(e) {
+                            this.logList.push({
+                                type: "error",
+                                contents: [ e.toString() ]
+							});
+						}
                         console.log = log;
 						this.$nextTick(() => {
                             let list = $('.result .list');

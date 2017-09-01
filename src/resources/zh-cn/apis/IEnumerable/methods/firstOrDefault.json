@@ -65,6 +65,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb549039(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何对空数组使用 firstOrDefault 。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何通过传入一个筛选器使用 firstOrDefault 。 在第二个调用到方法中，在满足条件的数组中没有任何元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

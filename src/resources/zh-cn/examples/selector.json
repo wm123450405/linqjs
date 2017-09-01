@@ -1,4 +1,5 @@
 {
 	"1.js": "let pets = [\r\n    { name: \"小白\", props: { age: 10, weight: 59 } },\r\n    { name: \"小黑\", props: { age: 14, weight: 50 } },\r\n    { name: \"旺财\", props: { age: 6, weight: 36 } }\r\n];\r\n\r\npets.asEnumerable().select(\"name\");\r\n//上述代码等价于以下代码\r\npets.asEnumerable().select(pet => pet.name);",
+	"1.try.js": "let pets = [\r\n    { name: \"小白\", props: { age: 10, weight: 59 } },\r\n    { name: \"小黑\", props: { age: 14, weight: 50 } },\r\n    { name: \"旺财\", props: { age: 6, weight: 36 } }\r\n];\r\n\r\nconsole.log(pets.asEnumerable().select(\"name\"));\r\n//上述代码等价于以下代码\r\nconsole.log(pets.asEnumerable().select(pet => pet.name));\r\n",
 	"2.js": "let arrays = [\r\n    [ 1, 2, 4, 8 ],\r\n    [ 1, 3, 9 ],\r\n    [ 1, 5 ]\r\n];\r\n\r\narrays.asEnumerable().select(1);\r\n//上述代码等价于以下代码\r\narrays.asEnumerable().select(array => array[1]);"
 }

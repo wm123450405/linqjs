@@ -1,4 +1,5 @@
 {
 	"1.js": "let pets = [\r\n    { name: \"Barley\", props: { age: 10, weight: 59 } },\r\n    { name: \"Boots\", props: { age: 14, weight: 50 } },\r\n    { name: \"Whiskers\", props: { age: 6, weight: 36 } }\r\n];\r\n\r\npets.asEnumerable().select(\"name\");\r\n//the above code and the following code are same feature.\r\npets.asEnumerable().select(pet => pet.name);",
+	"1.try.js": "let pets = [\r\n    { name: \"Barley\", props: { age: 10, weight: 59 } },\r\n    { name: \"Boots\", props: { age: 14, weight: 50 } },\r\n    { name: \"Whiskers\", props: { age: 6, weight: 36 } }\r\n];\r\n\r\nconsole.log(pets.asEnumerable().select(\"name\"));\r\n//the above code and the following code are same feature.\r\nconsole.log(pets.asEnumerable().select(pet => pet.name));",
 	"2.js": "let arrays = [\r\n    [ 1, 2, 4, 8 ],\r\n    [ 1, 3, 9 ],\r\n    [ 1, 5 ]\r\n];\r\n\r\narrays.asEnumerable().select(1);\r\n//the above code and the following code are same feature.\r\narrays.asEnumerable().select(array => array[1]);"
 }

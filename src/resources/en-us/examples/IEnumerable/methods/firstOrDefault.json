@@ -1,0 +1,4 @@
+{
+	"1.js": "let numbers = [];\r\nlet first = numbers.asEnumerable().firstOrDefault(0);\r\nconsole.log(first);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n 0\r\n */",
+	"2.js": "let names = [ \"Hartono, Tommy\", \"Adams, Terry\",\r\n    \"Andersen, Henriette Thaulow\",\r\n    \"Hedlund, Magnus\", \"Ito, Shu\" ];\r\n\r\nlet firstLongName = names.asEnumerable().firstOrDefault(\"\", name => name.length > 20);\r\n\r\nconsole.log(`The first long name is ${ firstLongName }.`);\r\n\r\nlet firstVeryLongName = names.asEnumerable().firstOrDefault(\"\", name => name.length > 30);\r\n\r\nconsole.log(`There is ${ firstVeryLongName === \"\" ? \"not a\" : \"a\" } name longer than 30 characters.`);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The first long name is 'Andersen, Henriette Thaulow'.\r\n There is not a name longer than 30 characters.\r\n */"
+}

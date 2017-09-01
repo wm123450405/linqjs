@@ -16,7 +16,7 @@
 						{{ language.name }} <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li v-for="language in languages" v-if="lang !== language.code"><router-link :to="`/${ language.code }/${ version !== lastest ? version + '/' : '' }${ path }${ $route.hash }`">{{ language.name }}</router-link></li>
+						<li v-for="language in languages" v-if="lang !== language.code"><router-link :replace="true" :to="`/${ language.code }/${ version !== lastest ? version + '/' : '' }${ path }${ $route.hash }`">{{ language.name }}</router-link></li>
 					</ul>
 				</li>
 			</ul>
@@ -26,7 +26,7 @@
 						{{ version }} <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li v-for="ver in versions" v-if="ver !== version"><router-link :to="`/${ lang }/${ ver !== lastest ? ver + '/' : '' }${ path }${ $route.hash }`">{{ ver }}</router-link></li>
+						<li v-for="ver in versions" v-if="ver !== version"><router-link :replace="true" :to="`/${ lang }/${ ver !== lastest ? ver + '/' : '' }${ path }${ $route.hash }`">{{ ver }}</router-link></li>
 					</ul>
 				</li>
 			</ul>
