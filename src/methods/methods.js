@@ -7,7 +7,7 @@ const InvalidFunctionException = require('./../core/exceptions/InvalidFunctionEx
 const methods = {
 	asSelector(selector) {
 		let type = core.getType(selector);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return propertySelector(selector);
 		} else if (type === core.types.Function) {
 			return selector;
@@ -17,7 +17,7 @@ const methods = {
 	},
 	asPredicate(predicate) {
 		let type = core.getType(predicate);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorPredicate(predicate);
 		} else if (type === core.types.Function) {
 			return predicate;
@@ -29,7 +29,7 @@ const methods = {
 	},
 	asEqualityComparer(comparer) {
 		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultEqualityComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -39,7 +39,7 @@ const methods = {
 	},
 	asStrictEqualityComparer(comparer) {
 		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultStrictEqualityComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -49,7 +49,7 @@ const methods = {
 	},
 	asSameComparer(comparer) {
 		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultSameComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -59,7 +59,7 @@ const methods = {
 	},
 	asComparer(comparer) {
 		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultComparer);
 		} else if (type === core.types.Array || type === core.types.Enumerable) {
 			return arrayComparer(comparer);
