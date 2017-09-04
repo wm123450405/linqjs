@@ -166,6 +166,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb535049(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 groupBy 对序列的元素进行分组。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 groupBy 分组一系列元素并对结果进行映射。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]
@@ -207,6 +223,14 @@
                                 "symbol",
                                 "number"
                             ]
+                        }
+                    ],
+                    "examples": [
+                        { },
+                        {
+                            "script": {
+                                "href": "2.2.1.19.js"
+                            }
                         }
                     ]
                 }

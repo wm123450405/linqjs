@@ -3,6 +3,7 @@
     "contents": [
         "将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读",
         "修复一处针对 String 扩展后 String.prototype.slice 返回超出预期的问题",
-        "增加各 选择器(Selector)/比较器(Comparer)/筛选器(Predicate) 对 Number/Symbol 类型参数的支持"
+        "增加各 选择器(Selector)/比较器(Comparer)/筛选器(Predicate) 对 Number/Symbol 类型参数的支持",
+        "修复由 groupBy/groupJoin/chunk 等方法获取到的 IGrouping/IChunk 对象不能被重复遍历的问题"
     ]
 }

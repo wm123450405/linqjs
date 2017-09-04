@@ -17,7 +17,7 @@
 					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand fa-flip-vertical"></i>{{ caption.try }}</div>
 				</div>
 				<ul class="list">
-					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <span v-for="log in logs.contents"> {{ log | json }} </span></li>
+					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <pre v-for="log in logs.contents">{{ log | json }}</pre></li>
 				</ul>
 			</div>
 		</div>
@@ -130,6 +130,7 @@
                                 type: "error",
                                 contents: [ e.toString() ]
 							});
+                            console.error(e);
 						}
                         console.log = log;
 						this.$nextTick(() => {
