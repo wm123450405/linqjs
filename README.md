@@ -53,7 +53,7 @@ function asEnumerable():IEnumerable;
 > let pets = [ { name: "Barley", age: 8, vaccinated: true }, { name: "Boots", age: 4, vaccinated: false }, { name: "Whiskers", age: 1, vaccinated: false } ];
 > let unvaccinated = pets.asEnumerable().any(p => p.age > 1 && p.vaccinated === false);
 > console.log(`There ${ unvaccinated ? "are" : "are not any" } unvaccinated animals over age one.`);
-> // This code produces the following output: 这段代码输出一下内容：
+> // This code produces the following output: 这段代码输出以下内容：
 > //  There are unvaccinated animals over age one.
 > ```
 
@@ -71,7 +71,7 @@ function asEnumerable():IEnumerable;
 >     console.log(`${ obj.ownerName } - ${ obj.pet }`);
 > }
 > /*
->  This code produces the following output: 这段代码输出一下内容：
+>  This code produces the following output: 这段代码输出以下内容：
 >  Hedlund, Magnus - Daisy
 >  Adams, Terry - Barley
 >  Adams, Terry - Boots
