@@ -1,17 +1,18 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IteratorEnumerable = require('./IteratorEnumerable');
 
 const core = require('./../core/core');
 
-class IGrouping extends IEnumerable {
-    constructor(key, iterable) {
-        super([]);
+class IGrouping extends IteratorEnumerable {
+    constructor(key, iterator) {
+        super(iterator);
         core.defineProperty(this, 'key', () => {
             return key;
         }, true, true);
-        core.defineProperty(this, Symbol.iterator, function* GroupingIterator() {
-            yield* iterable;
+        iterator = this[Symbol.iterator];
+        core.defineProperty(this, Symbol.iterator, function GroupingIterator() {
+            return iterator();
         });
     }
 }

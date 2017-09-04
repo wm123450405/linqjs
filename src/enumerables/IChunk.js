@@ -1,17 +1,18 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IteratorEnumerable = require('./IteratorEnumerable');
 
 const core = require('./../core/core');
 
-class IChunk extends IEnumerable {
-    constructor(index, iterable) {
-        super([]);
+class IChunk extends IteratorEnumerable {
+    constructor(index, iterator) {
+        super(iterator);
         core.defineProperty(this, 'index', () => {
             return index;
         }, true, true);
-        core.defineProperty(this, Symbol.iterator, function* IChunkIterator() {
-            yield* iterable;
+        iterator = this[Symbol.iterator];
+        core.defineProperty(this, Symbol.iterator, function IChunkIterator() {
+            return iterator();
         });
     }
 }

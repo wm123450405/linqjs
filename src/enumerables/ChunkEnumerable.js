@@ -26,13 +26,11 @@ class ChunkEnumerable extends IEnumerable {
                             array: [],
                         });
                         last.chunk = (last => {
-                            return new IChunk(index, {
-                                *[Symbol.iterator]() {
-                                    while (last.array.length || hasNext() && last.array.length) {
-                                        yield last.array.shift();
-                                    }
+                            return new IChunk(index, (function* () {
+                                while (last.array.length || hasNext() && last.array.length) {
+                                    yield last.array.shift();
                                 }
-                            });
+                            })());
                         })(last);
                     }
                     last.array.push(next.value);

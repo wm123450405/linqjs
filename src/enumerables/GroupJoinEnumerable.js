@@ -12,19 +12,17 @@ const defaultSelector = require('./../methods/defaultSelector');
 const IGrouping = require('./IGrouping');
 const Entry = require('./Entry');
 
-const createGrouping = (array, key, comparer, hasNext) => new IGrouping(key, {
-    *[Symbol.iterator]() {
-        let index = 0;
-        while (array.length > index || hasNext()) {
-            if (array.length > index) {
-                if (comparer(key, array[index].key)) {
-                    yield array[index].value;
-                }
-                index++;
+const createGrouping = (array, key, comparer, hasNext) => new IGrouping(key, (function* () {
+    let index = 0;
+    while (array.length > index || hasNext()) {
+        if (array.length > index) {
+            if (comparer(key, array[index].key)) {
+                yield array[index].value;
             }
+            index++;
         }
     }
-});
+})());
 
 class GroupJoinEnumerable extends IEnumerable {
     constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {

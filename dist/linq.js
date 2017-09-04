@@ -9523,13 +9523,14 @@ var core = {
 		return typeof process !== 'undefined' && process && process.env && process.env.NODE_ENV === 'development';
 	},
 	getType: function getType(value) {
-		if (typeof value === 'undefined') {
+		var typeName = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+		if (typeName === 'undefined') {
 			return this.types.Undefined;
-		} else if (typeof value === 'string') {
+		} else if (typeName === 'string' || value instanceof String) {
 			return this.types.String;
-		} else if (typeof value === 'number') {
+		} else if (typeName === 'number' || value instanceof Number) {
 			return this.types.Number;
-		} else if (typeof value === 'function') {
+		} else if (typeName === 'function' || value instanceof Function) {
 			return this.types.Function;
 		} else {
 			var type = value[Symbol.toStringTag];
@@ -9540,7 +9541,6 @@ var core = {
 			if (type === 'Object') {
 				return getFunctionName(value.constructor);
 			} else {
-				var typeName = typeof value === 'undefined' ? 'undefined' : _typeof(value);
 				if (typeName !== 'object') {
 					return typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
 				} else {
@@ -9596,6 +9596,9 @@ var core = {
 	},
 	isArray: function isArray(value) {
 		return this.getType(value) === this.types.Array;
+	},
+	isNumber: function isNumber(value) {
+		return this.getType(value) === this.types.Number;
 	},
 	isObject: function isObject(value) {
 		return this.getType(value) === this.types.Object;
@@ -10365,8 +10368,6 @@ module.exports = ArrayEnumerable;
 },{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultAction":369,"./../methods/defaultEqualityComparer":371,"./../methods/defaultSelector":377,"./../methods/defaultStrictEqualityComparer":378,"./../methods/methods":385,"./IterableEnumerable":330}],314:[function(require,module,exports){
 'use strict';
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -10412,7 +10413,7 @@ var ChunkEnumerable = function (_IEnumerable) {
                                             array: []
                                         });
                                         last.chunk = function (last) {
-                                            return new IChunk(index, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+                                            return new IChunk(index, regeneratorRuntime.mark(function _callee() {
                                                 return regeneratorRuntime.wrap(function _callee$(_context) {
                                                     while (1) {
                                                         switch (_context.prev = _context.next) {
@@ -10435,7 +10436,7 @@ var ChunkEnumerable = function (_IEnumerable) {
                                                         }
                                                     }
                                                 }, _callee, this);
-                                            })));
+                                            })());
                                         }(last);
                                     }
                                     last.array.push(next.value);
@@ -11427,8 +11428,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var IEnumerable = require('./../IEnumerable');
 
 var core = require('./../core/core');
@@ -11442,7 +11441,7 @@ var IGrouping = require('./IGrouping');
 var Entry = require('./Entry');
 
 var createGrouping = function createGrouping(array, key, comparer, hasNext) {
-    return new IGrouping(key, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+    return new IGrouping(key, regeneratorRuntime.mark(function _callee() {
         var index;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
@@ -11482,7 +11481,7 @@ var createGrouping = function createGrouping(array, key, comparer, hasNext) {
                 }
             }
         }, _callee, this);
-    })));
+    })());
 };
 
 var GroupJoinEnumerable = function (_IEnumerable) {
@@ -11595,8 +11594,6 @@ module.exports = GroupJoinEnumerable;
 },{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":371,"./../methods/defaultSelector":377,"./../methods/methods":385,"./Entry":320,"./IGrouping":326}],324:[function(require,module,exports){
 'use strict';
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -11654,7 +11651,7 @@ var GroupedEnumerable = function (_IEnumerable) {
                                     var trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
                                     if (trueKey === noneKey) {
                                         iterators.set(key, []);
-                                        groupings.push(new IGrouping(key, _defineProperty({}, Symbol.iterator, regeneratorRuntime.mark(function _callee() {
+                                        groupings.push(new IGrouping(key, regeneratorRuntime.mark(function _callee() {
                                             var array;
                                             return regeneratorRuntime.wrap(function _callee$(_context) {
                                                 while (1) {
@@ -11686,7 +11683,7 @@ var GroupedEnumerable = function (_IEnumerable) {
                                                     }
                                                 }
                                             }, _callee, this);
-                                        }))));
+                                        })()));
                                     } else {
                                         key = trueKey;
                                     }
@@ -11737,42 +11734,34 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IEnumerable = require('./../IEnumerable');
+var IteratorEnumerable = require('./IteratorEnumerable');
 
 var core = require('./../core/core');
 
-var IChunk = function (_IEnumerable) {
-    _inherits(IChunk, _IEnumerable);
+var IChunk = function (_IteratorEnumerable) {
+    _inherits(IChunk, _IteratorEnumerable);
 
-    function IChunk(index, iterable) {
+    function IChunk(index, iterator) {
         _classCallCheck(this, IChunk);
 
-        var _this = _possibleConstructorReturn(this, (IChunk.__proto__ || Object.getPrototypeOf(IChunk)).call(this, []));
+        var _this = _possibleConstructorReturn(this, (IChunk.__proto__ || Object.getPrototypeOf(IChunk)).call(this, iterator));
 
-        _this.index = index;
-        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function IChunkIterator() {
-            return regeneratorRuntime.wrap(function IChunkIterator$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            return _context.delegateYield(iterable, 't0', 1);
-
-                        case 1:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, IChunkIterator, this);
-        }));
+        core.defineProperty(_this, 'index', function () {
+            return index;
+        }, true, true);
+        iterator = _this[Symbol.iterator];
+        core.defineProperty(_this, Symbol.iterator, function IChunkIterator() {
+            return iterator();
+        });
         return _this;
     }
 
     return IChunk;
-}(IEnumerable);
+}(IteratorEnumerable);
 
 module.exports = IChunk;
 
-},{"./../IEnumerable":299,"./../core/core":303}],326:[function(require,module,exports){
+},{"./../core/core":303,"./IteratorEnumerable":331}],326:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11781,42 +11770,34 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IEnumerable = require('./../IEnumerable');
+var IteratorEnumerable = require('./IteratorEnumerable');
 
 var core = require('./../core/core');
 
-var IGrouping = function (_IEnumerable) {
-    _inherits(IGrouping, _IEnumerable);
+var IGrouping = function (_IteratorEnumerable) {
+    _inherits(IGrouping, _IteratorEnumerable);
 
-    function IGrouping(key, iterable) {
+    function IGrouping(key, iterator) {
         _classCallCheck(this, IGrouping);
 
-        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, []));
+        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, iterator));
 
-        _this.key = key;
-        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function GroupingIterator() {
-            return regeneratorRuntime.wrap(function GroupingIterator$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            return _context.delegateYield(iterable, 't0', 1);
-
-                        case 1:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, GroupingIterator, this);
-        }));
+        core.defineProperty(_this, 'key', function () {
+            return key;
+        }, true, true);
+        iterator = _this[Symbol.iterator];
+        core.defineProperty(_this, Symbol.iterator, function GroupingIterator() {
+            return iterator();
+        });
         return _this;
     }
 
     return IGrouping;
-}(IEnumerable);
+}(IteratorEnumerable);
 
 module.exports = IGrouping;
 
-},{"./../IEnumerable":299,"./../core/core":303}],327:[function(require,module,exports){
+},{"./../core/core":303,"./IteratorEnumerable":331}],327:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -16825,7 +16806,7 @@ var InvalidFunctionException = require('./../core/exceptions/InvalidFunctionExce
 var methods = {
 	asSelector: function asSelector(selector) {
 		var type = core.getType(selector);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return propertySelector(selector);
 		} else if (type === core.types.Function) {
 			return selector;
@@ -16835,7 +16816,7 @@ var methods = {
 	},
 	asPredicate: function asPredicate(predicate) {
 		var type = core.getType(predicate);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorPredicate(predicate);
 		} else if (type === core.types.Function) {
 			return predicate;
@@ -16847,7 +16828,7 @@ var methods = {
 	},
 	asEqualityComparer: function asEqualityComparer(comparer) {
 		var type = core.getType(comparer);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultEqualityComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -16857,7 +16838,7 @@ var methods = {
 	},
 	asStrictEqualityComparer: function asStrictEqualityComparer(comparer) {
 		var type = core.getType(comparer);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultStrictEqualityComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -16867,7 +16848,7 @@ var methods = {
 	},
 	asSameComparer: function asSameComparer(comparer) {
 		var type = core.getType(comparer);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultSameComparer);
 		} else if (type === core.types.Function) {
 			return comparer;
@@ -16877,7 +16858,7 @@ var methods = {
 	},
 	asComparer: function asComparer(comparer) {
 		var type = core.getType(comparer);
-		if (type === core.types.String) {
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorComparer(comparer, defaultComparer);
 		} else if (type === core.types.Array || type === core.types.Enumerable) {
 			return arrayComparer(comparer);
@@ -16992,7 +16973,7 @@ var regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")\]))(\.\2|\3)*
 var regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")\]/ig;
 
 module.exports = function (property) {
-	if (core.isSymbol(property)) {
+	if (core.isSymbol(property) || core.isNumber(property)) {
 		return function (element, index) {
 			return element && element[property];
 		};
