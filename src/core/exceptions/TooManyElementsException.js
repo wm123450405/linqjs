@@ -1,6 +1,8 @@
 'use strict';
 
-class TooManyElementsException extends Error {
+const Exception = require('./Exception');
+
+class TooManyElementsException extends Exception {
 	constructor() {
 		super('Too many elements');
 	}

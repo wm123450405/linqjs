@@ -29,7 +29,7 @@ const core = {
 				type = Object.prototype.toString.call(value);
 				type = type.substring('[object '.length, type.length - 1);
 			}
-			if (type === 'Object') {
+			if (type === 'Object' || type === 'Error') {
 				return getFunctionName(value.constructor);
 			} else {
 				if (typeName !== 'object') {

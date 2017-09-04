@@ -66,6 +66,9 @@ gulp.task('min', ['pack'], function() {
 			// mangle: {
 			// 	except: ['require', 'exports', 'module']
 			// },
+			mangle: {
+                keep_fnames: true
+            },
 			compress: true
 		}))
 		.pipe(sourcemaps.write('./'))

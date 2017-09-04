@@ -1,6 +1,8 @@
 'use strict';
 
-class NoSuchElementsException extends Error {
+const Exception = require('./Exception');
+
+class NoSuchElementsException extends Exception {
 	constructor() {
 		super('No such elements');
 	}

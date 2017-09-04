@@ -1,6 +1,8 @@
 'use strict';
 
-class OutOfRangeException extends Error {
+const Exception = require('./Exception');
+
+class OutOfRangeException extends Exception {
 	constructor(index) {
 		super('Out of range, index:' + index);
 	}

@@ -2,6 +2,8 @@
 
 const core = require('./../core');
 
+const Exception = require('./Exception');
+
 const objectStr = Object.prototype.toString.call({});
 
 const toString = key => {
@@ -9,7 +11,7 @@ const toString = key => {
 	return str === objectStr ? '[object ' + core.getType(key) + ']' : str;
 };
 
-class KeysForMultiElementsException extends Error {
+class KeysForMultiElementsException extends Exception {
 	constructor(key) {
 		super('Keys for multi elements, key:' + toString(key));
 	}
