@@ -1,3 +1,3 @@
-Enumerable.config.extends.array = true; //开启针对Array的扩展
-Enumerable.config.extends.string = true; //开启针对String的扩展
-Enumerable.config.extends.object = true; //开启针对Object的扩展
+Enumerable.config.extends.array = true; //Open extends for Array. After open this, Array will have all the features of LINQ and you can use methods of LINQ for Array. (Suggest)
+Enumerable.config.extends.string = true; //Open extends for String. After open this, String will have all the features of LINQ and you can use methods of LINQ for String.(Not suggest)
+Enumerable.config.extends.object = true; //Open extends for Object. After open this, each object will have all the features of LINQ and you can use methods of LINQ for every object.(Not suggest)
