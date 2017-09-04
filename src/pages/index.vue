@@ -119,28 +119,29 @@
                             });
                             log(...contents);
                         };
-                        try {
+						delete Object.prototype.asEnumerable;
+						histroy(this.version, Enumerable => {
+							try {
+								let result = eval(code);
+								this.logList.push({
+									type: "result",
+									contents: [ result ]
+								});
+								log(result);
+							} catch(e) {
+								this.logList.push({
+									type: "error",
+									contents: [ e.toString() ]
+								});
+								console.error(e);
+							}
+							console.log = log;
 							delete Object.prototype.asEnumerable;
-							const Enumerable = histroy(this.version);
-                            let result = eval(code);
-                            this.logList.push({
-                                type: "result",
-                                contents: [ result ]
-                            });
-                            log(result);
-						} catch(e) {
-                            this.logList.push({
-                                type: "error",
-                                contents: [ e.toString() ]
+							require('linq-js');
+							this.$nextTick(() => {
+								let list = $('.result .list');
+								list.scrollTop(list.get(0).scrollHeight);
 							});
-                            console.error(e);
-						}
-                        console.log = log;
-                        delete Object.prototype.asEnumerable;
-                        require('linq-js');
-						this.$nextTick(() => {
-                            let list = $('.result .list');
-                            list.scrollTop(list.get(0).scrollHeight);
 						});
                     }
 				}

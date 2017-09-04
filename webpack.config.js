@@ -17,10 +17,10 @@ for (let version of common.versions) {
 
 const config = module.exports = {
     devtool: '#source-map',
-    entry: extend({
+    entry: {
         'main': './src/scripts/main.js',
         'common': ['linq-js', 'vue', 'vue-router'],
-    }, ...common.versions.map(version => ({ [common.module(version)] : common.module(version) }))),
+    },
     output: {
         path: path.resolve('./dist'),
 		publicPath: '/linqjs/dist/',
@@ -62,7 +62,7 @@ const config = module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['common', ...common.versions.map(version => common.module(version))],
+            names: ['common'],
             minChunks: Infinity
         }),
         new webpack.ProvidePlugin({
