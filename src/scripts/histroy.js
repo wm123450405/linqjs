@@ -1,0 +1,1 @@
+module.exports = (version) => { if (version === '2.1.15') return require('linq-js-2.1.15'); else if (version === '2.1.16') return require('linq-js-2.1.16'); else if (version === '2.1.17') return require('linq-js-2.1.17'); else if (version === '2.1.18') return require('linq-js-2.1.18'); else if (version === '2.1.19.pre') return require('linq-js-pre'); };

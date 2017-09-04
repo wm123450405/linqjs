@@ -16,6 +16,9 @@ module.exports = {
 	get newest() {
 		return this.versions[this.versions.length - 1];
 	},
+	module(version) {
+		return 'linq-js-' + (version.endsWith('.pre') ? 'pre' : version);
+	},
 	histroys(histroys) {
 		if (histroys) {
 			let prev = 0;

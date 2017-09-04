@@ -13,8 +13,7 @@ let petsList = [
 let query = petsList.asEnumerable().groupBy(
     pet => Math.floor(pet.age),
     pet => pet,
-    (age, pets) => (
-    {
+    (age, pets) => ({
         key: age,
         count: pets.count(),
         min: pets.min(pet => pet.age),
@@ -22,8 +21,7 @@ let query = petsList.asEnumerable().groupBy(
     }));
 
 // Iterate over each anonymous type.
-for (let result of query)
-{
+for (let result of query) {
     console.log("\nAge group: " + result.key);
     console.log("Number of pets in this age group: " + result.count);
     console.log("Minimum age: " + result.min);

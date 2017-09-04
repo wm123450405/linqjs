@@ -5,6 +5,7 @@ const Enumerable = require('linq-js');
 const common = require('./src/scripts/common');
 
 const resources = path.join(__dirname, 'src', 'resources');
+const scripts = path.join(__dirname, 'src', 'scripts');
 const metaFile = 'meta.json';
 const directoryMetaFile = 'directory.meta.json';
 const directoryFile = 'directory.json';
@@ -199,6 +200,8 @@ const createDirectory = refreshLangName => {
 
 	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
 	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));
+    fs.writeFileSync(path.join(scripts, 'histroy.js'), 'module.exports = (version) => { ' + common.versions.map(version => `if (version === '${ version }') return require('${ common.module(version) }');`).join(' else ') + ' };');
+    //fs.writeFileSync(path.join(scripts, 'histroy.js'), 'if(Boolean(0)) { ' + common.versions.map(version => `require('linq-js-${ version }');`).join('') + '}');
 
 	console.log('apis:' + defaultApis);
 

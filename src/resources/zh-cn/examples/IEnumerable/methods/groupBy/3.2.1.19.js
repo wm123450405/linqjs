@@ -11,12 +11,12 @@ let petsList = [
 // 包含分组的键、数量、最小年龄与最大年龄的新对象。
 let query = petsList.asEnumerable().groupBy(
     pet => Math.floor(pet.age),
-    pet => pet,
-    (age, pets) => ({
+    pet => pet.age,
+    (age, ages) => ({
         key: age,
-        count: pets.count(),
-        min: pets.min(pet => pet.age),
-        max: pets.max(pet => pet.age)
+        count: ages.count(),
+        min: ages.min(),
+        max: ages.max()
     }));
 
 // 循环每个组的结果。

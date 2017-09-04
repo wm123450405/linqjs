@@ -31,6 +31,8 @@
 
 	let codeMirror;
 
+	const histroy = require('./../scripts/histroy');
+
 	export default {
         beforeRouteUpdate(to, from, next) {
             codeMirror && codeMirror.setValue('');
@@ -118,7 +120,8 @@
                             log(...contents);
                         };
                         try {
-                            const Enumerable = require('linq-js');
+							delete Object.prototype.asEnumerable;
+							const Enumerable = histroy(this.version);
                             let result = eval(code);
                             this.logList.push({
                                 type: "result",
@@ -133,6 +136,8 @@
                             console.error(e);
 						}
                         console.log = log;
+                        delete Object.prototype.asEnumerable;
+                        require('linq-js');
 						this.$nextTick(() => {
                             let list = $('.result .list');
                             list.scrollTop(list.get(0).scrollHeight);

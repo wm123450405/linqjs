@@ -1,15 +1,26 @@
 const webpack = require('webpack');
 const path = require('path');
 require('./pack');
+const common = require('./src/scripts/common');
+const extend = require('extend');
+const niv = require('npm-install-version');
 
 const pack = path.basename(process.argv[1], '.js') === 'webpack';
 
+for (let version of common.versions) {
+    if (version.endsWith('.pre')) {
+        niv.install('wm123450405/linqjs', { overwrite: pack, destination: common.module(version) });
+    } else {
+        niv.install('linq-js@' + version, { destination: common.module(version) });
+    }
+}
+
 const config = module.exports = {
     devtool: '#source-map',
-    entry: {
+    entry: extend({
         'main': './src/scripts/main.js',
-        'common': ['linq-js', 'vue', 'vue-router']
-    },
+        'common': ['linq-js', 'vue', 'vue-router'],
+    }, ...common.versions.map(version => ({ [common.module(version)] : common.module(version) }))),
     output: {
         path: path.resolve('./dist'),
 		publicPath: '/linqjs/dist/',
@@ -22,7 +33,7 @@ const config = module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                include: [ path.join(__dirname, './src/pages'), path.join(__dirname, 'src', 'components')],
+                include: [ path.join(__dirname, './src/pages'), path.join(__dirname, 'src', 'components') ],
 				options: {
 					loaders: {
 						scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
@@ -51,7 +62,7 @@ const config = module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['common'],
+            names: ['common', ...common.versions.map(version => common.module(version))],
             minChunks: Infinity
         }),
         new webpack.ProvidePlugin({

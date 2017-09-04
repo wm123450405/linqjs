@@ -12,15 +12,13 @@ let petsList = [
 let query = petsList.asEnumerable().groupBy(
     pet => Math.floor(pet.age),
     pet => pet,
-    (age, pets) => (
-    {
+    (age, pets) => ({
         key: age,
         count: pets.count()
     }));
 
 // 循环每个组的结果。
-for (let result of query)
-{
+for (let result of query) {
     console.log("\n年龄组：" + result.key);
     console.log("该组包含的宠物数量：" + result.count);
 }
