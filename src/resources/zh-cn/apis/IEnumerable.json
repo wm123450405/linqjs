@@ -1123,6 +1123,37 @@
 			]
 		},
 		{
+			"name": "innerJoin",
+			"histroys": [
+				{
+					"since": "2.1.19",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "基于匹配键对两个序列的元素关联, 使用指定的相等比较器对键进行比较",
+							"parameters": [
+								{
+									"name": "inner"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "outerKeySelector"
+								},
+								{
+									"name": "innerKeySelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "intersect",
 			"histroys": [
 				{

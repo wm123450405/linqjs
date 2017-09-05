@@ -1,0 +1,18 @@
+{
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.19",
+            "readonly": true,
+            "description": "默认的联接选择器",
+            "remarks": [
+                "该选择器是一个二元选择器, 它接受两个输入值, 返回一个对象, 该对象的 outer 属性对应第一个参数值, inner 属性对应第二个参数值"
+            ],
+            "sees": [
+                {
+                    "guide": "selector"
+                }
+            ]
+        }
+    ]
+}

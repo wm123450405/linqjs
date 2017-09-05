@@ -11,10 +11,11 @@
 			<textarea title="javascript code" id="code" class="code"></textarea>
 			<div class="result">
 				<div class="btns">
-					<div class="btn btn-default" @click="tryIt"><i class="fa fa-fw fa-play"></i>{{ caption.run }}</div>
+					<div class="btn btn-default" @click="tryIt" :class="{ disabled: executing }"><i class="fa fa-fw fa-play"></i>{{ caption.run }}</div>
 					<div class="btn btn-default" @click="clear"><i class="fa fa-fw fa-ban"></i>{{ caption.clear }}</div>
 					<div class="btn btn-default" @click="close"><i class="fa fa-fw fa-compress fa-flip-vertical"></i>{{ caption.close }}</div>
 					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand fa-flip-vertical"></i>{{ caption.try }}</div>
+					<div v-if="executing">{{ runtime ? caption.loadRuntime : caption.executing }}</div>
 				</div>
 				<ul class="list">
 					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <pre v-for="log in logs.contents">{{ log | json }}</pre></li>
@@ -65,6 +66,9 @@
 	        return {
 	            active: false,
                 logList: [],
+				runtime: false,
+				executing: false,
+				identity: 0,
 
                 caption: { }
 			}
@@ -111,37 +115,56 @@
 	            if (codeMirror) {
                     let code = codeMirror.getValue();
                     if (code) {
-                        let log = console.log;
-                        console.log = (...contents) => {
-                            this.logList.push({
-								type: "log",
-								contents
-                            });
-                            log(...contents);
-                        };
-						delete Object.prototype.asEnumerable;
+                        this.executing = true;
+                        this.identity++;
+                        let identity = this.identity;
+                        this.runtime = true;
 						histroy(this.version, Enumerable => {
-							try {
-								let result = eval(code);
-								this.logList.push({
-									type: "result",
-									contents: [ result ]
-								});
-								log(result);
-							} catch(e) {
-								this.logList.push({
-									type: "error",
-									contents: [ e.toString() ]
-								});
-								console.error(e);
-							}
-							console.log = log;
-							delete Object.prototype.asEnumerable;
-							require('linq-js');
+                            this.runtime = false;
+						    if (identity === this.identity) {
+                                let log = console.log;
+                                console.log = (...contents) => {
+                                    this.logList.push({
+                                        type: "log",
+                                        contents
+                                    });
+                                    log(...contents);
+                                };
+								try {
+                                    Enumerable.config.as = 'asEnumerable';
+									let result = eval(code);
+									this.logList.push({
+										type: "result",
+										contents: [ result ]
+									});
+									log(result);
+								} catch(e) {
+									this.logList.push({
+										type: "error",
+										contents: [ e.toString() ]
+									});
+									console.error(e);
+								}
+                                console.log = log;
+                            }
 							this.$nextTick(() => {
 								let list = $('.result .list');
 								list.scrollTop(list.get(0).scrollHeight);
+                                this.executing = false;
 							});
+						}, () => {
+                            delete Object.prototype.asEnumerable;
+                            delete Array.prototype.asEnumerable;
+                            delete String.prototype.asEnumerable;
+                            delete Map.prototype.asEnumerable;
+                            delete Set.prototype.asEnumerable;
+                        }, () => {
+                            delete Object.prototype.asEnumerable;
+                            delete Array.prototype.asEnumerable;
+                            delete String.prototype.asEnumerable;
+                            delete Map.prototype.asEnumerable;
+                            delete Set.prototype.asEnumerable;
+                            require('linq-js');
 						});
                     }
 				}

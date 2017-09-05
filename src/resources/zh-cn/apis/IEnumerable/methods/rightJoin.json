@@ -182,7 +182,9 @@
                 {
                     "parameters": [
                         { },
-                        { },
+                        {
+                            "defaultValue": "defaultJoinSelector"
+                        },
                         {
                             "types": [
                                 "function",

@@ -15,6 +15,17 @@
 			]
 		},
 		{
+			"name": "join",
+			"histroys": [
+				{
+					"since": "2.1.19",
+					"deprecated": 0,
+					"description": "默认的联接选择器",
+					"readonly": true
+				}
+			]
+		},
+		{
 			"name": "key",
 			"histroys": [
 				{

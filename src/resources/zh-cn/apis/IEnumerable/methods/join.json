@@ -204,10 +204,10 @@
                 { },
                 {
                     "sees": [
-                        {
-                            "apis": "IEnumerable",
-                            "method": "groupJoin"
-                        },
+                        { },
+                        { },
+                        { },
+                        { },
                         {
                             "apis": "IEnumerable",
                             "method": "leftJoin"
@@ -215,18 +215,6 @@
                         {
                             "apis": "IEnumerable",
                             "method": "rightJoin"
-                        },
-                        {
-                            "apis": "Enumerable.selectors",
-                            "property": "key"
-                        },
-                        {
-                            "apis": "Enumerable.comparers",
-                            "property": "equality"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
                         }
                     ]
                 }
@@ -264,6 +252,22 @@
                                 "symbol",
                                 "number"
                             ]
+                        }
+                    ],
+                    "sees": [
+                        { },
+                        { },
+                        { },
+                        { },
+                        { },
+                        { },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "join"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "innerJoin"
                         }
                     ]
                 }
