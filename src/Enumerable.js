@@ -11,6 +11,7 @@ const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
 const defaultResultSelector = require('./methods/defaultResultSelector');
+const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -39,6 +40,8 @@ const InvalidFunctionException = require('./core/exceptions/InvalidFunctionExcep
 
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
+
+const defaultArgument = Symbol.for(undefined);
 
 const asIterable = value => {
 	if (value[Symbol.iterator]) {
@@ -172,8 +175,8 @@ Enumerable.groupBy = function(source, keySelector = defaultSelector, elementSele
 Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
     return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
 };
-Enumerable.join = function(outer, inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-    if (core.isUndefined(resultSelector) && core.array$join) {
+Enumerable.join = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    if (arguments.length === 2 && core.array$join) {
         if (core.isArray(outer)) {
             return core.array$join.call(outer, inner);
         } else {
@@ -183,13 +186,16 @@ Enumerable.join = function(outer, inner, resultSelector = undefined, outerKeySel
         return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
 };
-Enumerable.leftJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+Enumerable.innerJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
+};
+Enumerable.leftJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
     return new LeftJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
-Enumerable.rightJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+Enumerable.rightJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
     return new RightJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
-Enumerable.groupJoin = function(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+Enumerable.groupJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
     return new GroupJoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 Enumerable.reverse = function(source) {
@@ -798,6 +804,9 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     },
     get result() {
         return defaultResultSelector;
+    },
+    get join() {
+        return defaultJoinSelector;
     },
     property(property) {
     	return propertySelector(property);

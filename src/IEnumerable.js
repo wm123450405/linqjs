@@ -9,6 +9,7 @@ const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
 const defaultComparer = require('./methods/defaultComparer');
 const defaultResultSelector = require('./methods/defaultResultSelector');
+const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultAction = require('./methods/defaultAction');
@@ -134,16 +135,23 @@ class IEnumerable extends Array {
     selectMany(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     }
-    join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        if (arguments.length === 1) {
+            return Enumerable.join(this, inner);
+        } else {
+            return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+        }
+    }
+    innerJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
-    leftJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    leftJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.leftJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
-    rightJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    rightJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.rightJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
-    groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    groupJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
     defaultIfEmpty(defaultValue) {

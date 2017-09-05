@@ -7,6 +7,7 @@ const core = require('./../core/core');
 const methods = require('./../methods/methods');
 
 const defaultSelector = require('./../methods/defaultSelector');
+const defaultJoinSelector = require('./../methods/defaultJoinSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./../methods/defaultStrictEqualityComparer');
 const defaultAction = require('./../methods/defaultAction');
@@ -40,11 +41,11 @@ class ArrayEnumerable extends IterableEnumerable {
                     return Enumerable.findIndex(this, predicate, thisArg);
                 }
             },
-            join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+            join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
                 outerKeySelector = methods.asSelector(outerKeySelector);
                 innerKeySelector = methods.asSelector(innerKeySelector);
                 comparer = methods.asEqualityComparer(comparer);
-                if (typeof resultSelector === 'undefined' && core.array$join) {
+                if (arguments.length === 1 && core.array$join) {
                     return core.array$join.call(array, inner);
                 } else {
                     return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);

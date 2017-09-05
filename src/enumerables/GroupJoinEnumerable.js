@@ -6,6 +6,7 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
+const defaultJoinSelector = require('./../methods/defaultJoinSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 const defaultSelector = require('./../methods/defaultSelector');
 
@@ -25,7 +26,7 @@ const createGrouping = (array, key, comparer, hasNext) => new IGrouping(key, (fu
 })());
 
 class GroupJoinEnumerable extends IEnumerable {
-    constructor(outer, inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    constructor(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         super(outer);
         outerKeySelector = methods.asSelector(outerKeySelector);
         innerKeySelector = methods.asSelector(innerKeySelector);
