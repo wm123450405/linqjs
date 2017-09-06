@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const fs = require('fs');
 require('./pack');
 const common = require('./src/scripts/common');
 const extend = require('extend');
@@ -7,12 +8,23 @@ const niv = require('npm-install-version');
 
 const pack = process.env.NODE_ENV === 'production';
 const reload = process.env.RUNTIME_RELOAD === 'reload';
+const ignoreSkip = process.env.IGNORE_SKIP;
+
+let skipList = [];
+const install = (packageName, options) => {
+    if (options.overwrite !== true && fs.existsSync(path.join(__dirname, 'node_modules', options.destination || packageName)) && fs.existsSync(path.join(__dirname, 'dist', (options.destination || packageName) + '.js'))) {
+        skipList.push(options.destination || packageName);
+        console.log(`Package ${ options.destination || packageName } already exists, skipping`);
+    } else {
+        niv.install(packageName, options);
+    }
+};
 
 for (let version of common.versions) {
     if (version.endsWith('.pre')) {
-        niv.install('wm123450405/linqjs', { overwrite: pack || reload, destination: common.module(version) });
+        install('wm123450405/linqjs', { overwrite: pack || reload, destination: common.module(version) });
     } else {
-        niv.install('linq-js@' + version, { destination: common.module(version) });
+        install('linq-js@' + version, { destination: common.module(version) });
     }
 }
 
@@ -73,10 +85,14 @@ const config = module.exports = {
 	    })
     ].concat(
 		pack ?
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}) : []
+		[
+            ...(ignoreSkip ? [] : skipList.map(skip => new webpack.IgnorePlugin(new RegExp(skip.replace(/\./g, '\\.'))))),
+		    new webpack.optimize.UglifyJsPlugin({
+                sourceMap: true,
+                compress: {
+                    warnings: false
+                }
+            })
+        ] : []
 	)
 };

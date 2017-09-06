@@ -9,8 +9,10 @@
                         {
                             "name": "callback",
                             "types": [
-                                "function"
+                                "function",
+                                "boolean"
                             ],
+                            "defaultValue": false,
                             "declare": {
                                 "parameters": [
                                     {

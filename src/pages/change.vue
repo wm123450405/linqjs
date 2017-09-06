@@ -6,7 +6,7 @@
                 <shields v-if="change.prepublish" :subject="caption.prepublish_version || (caption.prepublish + caption.version)"></shields>
                 <shields v-if="change.publish" :subject="caption.publish_date || (caption.publish + caption.date)" :status="change.publish" color="yellow"></shields>
             </p>
-            <p v-for="content in change.contents" v-html="content"></p>
+            <p v-for="content in change.contents" v-html="content || '&nbsp;'"></p>
             <a v-if="!change.prepublish" target="_blank" :href="`https://github.com/wm123450405/linqjs/tree/${ change.version }`">release</a>
         </div>
     </div>

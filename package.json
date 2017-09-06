@@ -6,7 +6,8 @@
   "scripts": {
     "test:reload": "cross-env NODE_ENV=development RUNTIME_RELOAD=reload webpack-dev-server --compress --host 0.0.0.0 --port 8040 --progress --colors --inline --hot",
     "test": "cross-env NODE_ENV=development webpack-dev-server --compress --host 0.0.0.0 --port 8040 --progress --colors --inline --hot",
-    "pack": "cross-env NODE_ENV=production webpack --display-error-details"
+    "pack": "cross-env NODE_ENV=production webpack --display-error-details",
+    "pack:all": "cross-env NODE_ENV=production IGNORE_SKIP=false webpack --display-error-details"
   },
   "repository": {
     "type": "git",
