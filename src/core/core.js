@@ -53,6 +53,12 @@ const core = {
 		get Object() {
 			return 'Object';
 		},
+		get Map() {
+			return 'Map';
+		},
+		get Set() {
+			return 'Set';
+		},
 		get Function() {
 			return 'Function';
 		},

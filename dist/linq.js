@@ -9598,6 +9598,12 @@ var core = {
 		get Object() {
 			return 'Object';
 		},
+		get Map() {
+			return 'Map';
+		},
+		get Set() {
+			return 'Set';
+		},
 		get Function() {
 			return 'Function';
 		},
@@ -11048,6 +11054,14 @@ var Entry = function () {
         key: 'toString',
         value: function toString() {
             return '{' + this.key + ':' + this.value + '}';
+        }
+    }, {
+        key: 'toObject',
+        value: function toObject() {
+            return {
+                key: this.key,
+                value: this.value
+            };
         }
     }]);
 

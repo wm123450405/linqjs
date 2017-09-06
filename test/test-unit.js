@@ -972,5 +972,7 @@ module.exports = function(Enumerable) {
 
 	assert.strictEqual(new TestArray().asEnumerable().elementAt(0), 0);
 
+    assert.deepStrictEqual(({ key: 1, value: 'a' }).asEnumerable().select(v => v.toObject()).toArray(), [ { key: 'key', value: 1 }, { key: 'value', value: 'a' }]);
+
 	console.log('test successful!');
 };
