@@ -18,21 +18,27 @@ const defaultAction = require('./methods/defaultAction');
 
 let _extends = new Map();
 
-const addExtends = (prototype, type) => {
+const addExtends = (prototype, type, pascalOrPrefix, callback) => {
     for (let [, prototypes] of _extends) {
         if (prototypes.has(prototype)) {
             return false;
         }
     }
     if (!_extends.has(type)) {
-        _extends.set(type, new Set());
+        _extends.set(type, new Map());
     }
-    _extends.get(type).add(prototype);
+    let prototypes = _extends.get(type);
+    if (prototypes.has(prototype) && prototypes.get(prototype) !== pascalOrPrefix) {
+        if (callback && core.isFunction(callback)) {
+            callback(prototypes.get(prototype));
+        }
+    }
+    prototypes.set(prototype, pascalOrPrefix);
     return true;
 };
-const removeExtends = (prototype, type) => {
+const removeExtends = (prototype, type, pascalOrPrefix) => {
     if (_extends.has(type)) {
-        if (_extends.get(type).has(prototype)) {
+        if (_extends.get(type).has(prototype) && _extends.get(type).get(prototype) === pascalOrPrefix) {
             _extends.get(type).delete(prototype);
             if (Enumerable.isEmpty(_extends.get(type))) {
                 _extends.delete(type);
@@ -52,14 +58,15 @@ core.defineProperty(Enumerable, 'extends', function() {
 
 Enumerable.unextendAll = function() {
     for (let type of _extends.keys()) {
-        for (let prototype of _extends.get(type)) {
-            Enumerable.unextend(prototype, type, true);
+        let prototypes = _extends.get(type);
+        for (let prototype of prototypes) {
+            Enumerable.unextend(prototype, type, true, prototypes.get(prototype));
         }
     }
 };
 Enumerable.unextend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
-    if (!isPrototype || removeExtends(prototype, type)) {
+    if (!isPrototype || removeExtends(prototype, type, pascalOrPrefix)) {
 		core.undefineProperties(prototype, [ 'getEnumerator', 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'leftJoin', 'rightJoin', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'product', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup', 'chunk' ], pascalOrPrefix);
         for (let plugin of this.plugins) {
         	if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
@@ -71,7 +78,7 @@ Enumerable.unextend = function(prototype, type, isPrototype = false, pascalOrPre
 };
 Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
-    if (!isPrototype || addExtends(prototype, type)) {
+    if (!isPrototype || addExtends(prototype, type, pascalOrPrefix, pascalOrPrefix => this.unextend(prototype, type, isPrototype, pascalOrPrefix))) {
         core.defineProperties(prototype, {
             getEnumerator() {
                 return Enumerable.getEnumerator(this);
@@ -347,7 +354,7 @@ Enumerable.extend = function(prototype, type, isPrototype = false, pascalOrPrefi
         for (let plugin of this.plugins) {
         	if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
         		core.defineProperties(prototype, {
-        		    [plugin.name] : memberFunction(plugin.name)
+        		    [ plugin.name ] : memberFunction(plugin.name)
                 }, pascalOrPrefix);
         	}
         }

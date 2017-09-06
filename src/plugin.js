@@ -38,9 +38,11 @@ Enumerable.addPlugins = function(...plugins) {
 				Enumerable[plugin.name] = staticFunction(plugin.value);
 				IEnumerable.prototype[plugin.name] = memberFunction(plugin.name);
 				for (let [type, prototypes] of this.extends) {
-					for (let prototype of prototypes) {
+					for (let prototype of prototypes.keys()) {
 						if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-							prototype[plugin.name] = memberFunction(plugin.name);
+							core.defineProperties(prototype, {
+                                [ plugin.name ] : memberFunction(plugin.name)
+                            }, prototypes.get(prototype));
 						}
 					}
 				}
@@ -63,9 +65,9 @@ Enumerable.removePlugins = function(...plugins) {
 			delete Enumerable[plugin.name];
 			delete IEnumerable.prototype[plugin.name];
 			for (let [type, prototypes] of this.extends) {
-				for (let prototype of prototypes) {
+				for (let prototype of prototypes.keys()) {
 					if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
-						delete prototype[plugin.name];
+                        core.undefineProperties(prototype, [ plugin.name ], prototypes.get(prototype));
 					}
 				}
 			}
