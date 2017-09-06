@@ -8,6 +8,9 @@ if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
 }
 
+const CONFLICT_SET_CONFIG = 'Can not set this config after call the noConflict method. If you want, you can use Enumerable.noConflict method with one parameter which value is "true" to set Enumerable of global back to this module';
+const CONFLICT_SUGGEST = 'You may require this module twice or more. I suggest you to only require once. If you must to, you can also use Enumerable.noConflict method to solve the conflict';
+
 const defaultAs = 'asEnumerable';
 const typeAs = Symbol('typeAs');
 
@@ -19,25 +22,44 @@ const clear = name => {
     delete Object.prototype[name];
 };
 
+const save = (saved, enumerable) => {
+    if (enumerable.config.as !== defaultAs) clear(enumerable.config.as);
+    clear(defaultAs);
+    saved.config.extends.array = enumerable.config.extends.array;
+    enumerable.config.extends.array = false;
+    saved.config.extends.string = enumerable.config.extends.string;
+    enumerable.config.extends.string = false;
+    saved.config.extends.object = enumerable.config.extends.object;
+    enumerable.config.extends.object = false;
+    saved.extends = enumerable.extends;
+    if (enumerable.unextendAll) enumerable.unextendAll();
+};
+
+const restore = (saved, enumerable) => {
+    let as = enumerable.config.as;
+    enumerable.config.as = defaultAs;
+    if (as !== defaultAs) enumerable.config.as = as;
+    enumerable.config.extends.array = saved.config.extends.array;
+    enumerable.config.extends.string = saved.config.extends.string;
+    enumerable.config.extends.object = saved.config.extends.object;
+    enumerable.extendAll(saved.extends);
+};
+
 let _Enumerable;
-let _extends = {
-    array: false,
-    string: false,
-    object: false
+let _saved = {
+    config: {
+        extends: {
+            array: false,
+            string: false,
+            object: false
+        }
+    },
+    extends: new Map()
 };
 if (g.Enumerable) {
-    _Enumerable = g.Enumerable;
-    if (_Enumerable.config.as !== defaultAs) {
-        clear(_Enumerable.config.as);
-    }
-    clear(defaultAs);
-    _extends.array = _Enumerable.config.extends.array;
-    _Enumerable.config.extends.array = false;
-    _extends.string = _Enumerable.config.extends.string;
-    _Enumerable.config.extends.string = false;
-    _extends.object = _Enumerable.config.extends.object;
-    _Enumerable.config.extends.object = false;
-    if (_Enumerable.unextendAll) _Enumerable.unextendAll();
+    save(_saved, _Enumerable = g.Enumerable);
+    delete g.Enumerable;
+    console.warn(CONFLICT_SUGGEST);
 }
 
 const core = require('./core/core');
@@ -63,6 +85,16 @@ const config = {
     },
     as: defaultAs,
     noConflict: false
+};
+const saved = {
+    config: {
+        extends: {
+            array: false,
+            object: false,
+            string: false
+        }
+    },
+    extends: []
 };
 
 const initAs = (name) => {
@@ -124,7 +156,7 @@ Enumerable.config = {
     extends: {
         set array(value) {
             if (config.noConflict) {
-                console.warn('Can not set this config after call the noConflict method');
+                console.warn(CONFLICT_SET_CONFIG);
                 return;
             }
             if (config.extends.array !== value) {
@@ -141,7 +173,7 @@ Enumerable.config = {
         },
         set object(value) {
             if (config.noConflict) {
-                console.warn('Can not set this config after call the noConflict method');
+                console.warn(CONFLICT_SET_CONFIG);
                 return;
             }
             if (config.extends.object !== value) {
@@ -158,7 +190,7 @@ Enumerable.config = {
         },
         set string(value) {
             if (config.noConflict) {
-                console.warn('Can not set this config after call the noConflict method');
+                console.warn(CONFLICT_SET_CONFIG);
                 return;
             }
             if (config.extends.string !== value) {
@@ -190,26 +222,27 @@ Enumerable.config = {
         return config.as;
     }
 };
-Enumerable.noConflict = function(callback) {
-    if (this.isConflict) {
-        if (config.as !== defaultAs) {
-            clear(config.as);
+
+Enumerable.noConflict = function(callback = false) {
+    if (callback !== true) {
+        if (this.isConflict) {
+            save(saved, this);
+            config.noConflict = true;
+            restore(_saved, g.Enumerable = _Enumerable);
+
+            let noConflict = g.Enumerable.noConflict;
+            g.Enumerable.noConflict = function(callback = false) {
+                if (callback === true) {
+                    save(_saved, g.Enumerable);
+                    config.noConflict = false;
+                    restore(saved, Enumerable);
+                    g.Enumerable.noConflict = noConflict;
+                    return Enumerable;
+                } else {
+                    return noConflict();
+                }
+            };
         }
-        clear(defaultAs);
-        this.config.extends.array = false;
-        this.config.extends.string = false;
-        this.config.extends.object = false;
-        this.unextendAll();
-        config.noConflict = true;
-        g.Enumerable = _Enumerable;
-        let as = g.Enumerable.config.as;
-        g.Enumerable.config.as = defaultAs;
-        if (as !== defaultAs) {
-            g.Enumerable.config.as = as;
-        }
-        g.Enumerable.config.extends.array = _extends.array;
-        g.Enumerable.config.extends.string = _extends.string;
-        g.Enumerable.config.extends.object = _extends.object;
     }
     if (callback && core.isFunction(callback)) callback(Enumerable);
     return Enumerable;
@@ -218,4 +251,4 @@ core.defineProperty(Enumerable, 'isConflict', () => {
     return _Enumerable && !config.noConflict;
 }, true, true);
 
-module.exports = Enumerable;
+module.exports = g.Enumerable = Enumerable;

@@ -41,8 +41,6 @@ const InvalidFunctionException = require('./core/exceptions/InvalidFunctionExcep
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
 
-const defaultArgument = Symbol.for(undefined);
-
 const asIterable = value => {
 	if (value[Symbol.iterator]) {
 		return value;
@@ -404,7 +402,7 @@ Enumerable.firstOrDefault = function(source, defaultValue, predicate = defaultPr
             return source[0];
         } else {
             return defaultValue;
-        }   
+        }
     } else {
         let index = 0;
         source = asIterable(source);
