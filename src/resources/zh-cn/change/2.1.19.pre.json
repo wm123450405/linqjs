@@ -1,13 +1,21 @@
 {
     "prepublish": true,
     "contents": [
-        "将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读",
-        "修复一处针对 String 扩展后 String.prototype.slice 返回超出预期的问题",
-        "增加各 选择器(Selector)/比较器(Comparer)/筛选器(Predicate) 对 Number/Symbol 类型参数的支持",
-        "修复由 groupBy/groupJoin/chunk 等方法获取到的 IGrouping/IChunk 对象不能被重复遍历的问题",
-        "新增 Enumerable.selectors.join 作为 defaultJoinSelector",
-        "新增 IEnumerable.prototype.innerJoin 方法与原先的 join 方法功能一致, 主要为了区别仅有一个参数的情况下的逻辑",
-        "为 groupJoin, leftJoin, rightJoin 等方法的 resultSelector 参数设置了 defaultJoinSelector 默认值",
-        "优化了 join 方法的处理逻辑"
+        "新增(New):",
+        "1. 增加各 选择器(Selector)/比较器(Comparer)/筛选器(Predicate) 对 Number/Symbol 类型参数的支持",
+        "2. 新增 Enumerable.selectors.join 作为 defaultJoinSelector",
+        "3. 新增 IEnumerable.prototype.innerJoin 方法与原先的 join 方法功能一致, 主要为了区别仅有一个参数的情况下的逻辑",
+        "4. 新增 Enumerable.noConflict 方法 用于解决重复引用的问题",
+        "&nbsp",
+        "优化(Optimization):",
+        "1. 优化了 join 方法的处理逻辑",
+        "2. 将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读",
+        "3. 为 groupJoin, leftJoin, rightJoin 等方法的 resultSelector 参数设置了 defaultJoinSelector 默认值",
+        "4. 优化了 Enumerable.extend/Enumerable.unextend/Enumerable.addPlugins/Enumerble.removePlugins 等方法, 并新增了 Enumerable.unextendAll 方法",
+        "&nbsp",
+        "修复(Fixed):",
+        "1. 修复一处针对 String 扩展后 String.prototype.slice 返回超出预期的问题",
+        "2. 修复由 groupBy/groupJoin/chunk 等方法获取到的 IGrouping/IChunk 对象不能被重复遍历的问题",
+        "3. 修复对 Object 对象使用 asEnumerable 方法时不能返回此对象键值对序列或出现错误的bug"
     ]
 }

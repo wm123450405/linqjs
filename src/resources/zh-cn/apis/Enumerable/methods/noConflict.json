@@ -1,0 +1,37 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.19",
+            "overloads": [
+                {
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "callback",
+                            "types": [
+                                "function"
+                            ],
+                            "declare": {
+                                "parameters": [
+                                    {
+                                        "name": "Enumerable",
+                                        "types": [
+                                            "class"
+                                        ]
+                                    }
+                                ],
+                                "returns": {
+                                    "type": "void"
+                                }
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "class"
+                    },
+                    "description": "释放当前的全局 Enumerable 对象, 解决冲突"
+                }
+            ]
+        }
+    ]
+}

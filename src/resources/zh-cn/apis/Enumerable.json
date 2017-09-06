@@ -134,6 +134,26 @@
 			]
 		},
 		{
+			"name": "noConflict",
+			"histroys": [
+				{
+					"since": "2.1.19",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"static": true,
+							"description": "释放当前的全局 Enumerable 对象, 解决冲突",
+							"parameters": [
+								{
+									"name": "callback"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "range",
 			"histroys": [
 				{

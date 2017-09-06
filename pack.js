@@ -15,7 +15,7 @@ const jsonExt = '.json';
 const jsExt = '.js';
 const vueExt = '.vue';
 
-const pack = path.basename(process.argv[1], '.js') === 'webpack';
+const pack = process.env.NODE_ENV === 'production';
 
 const watchs = [];
 const watch = (path, listener) => {

@@ -5,11 +5,12 @@ const common = require('./src/scripts/common');
 const extend = require('extend');
 const niv = require('npm-install-version');
 
-const pack = path.basename(process.argv[1], '.js') === 'webpack';
+const pack = process.env.NODE_ENV === 'production';
+const reload = process.env.RUNTIME_RELOAD === 'reload';
 
 for (let version of common.versions) {
     if (version.endsWith('.pre')) {
-        niv.install('wm123450405/linqjs', { overwrite: pack, destination: common.module(version) });
+        niv.install('wm123450405/linqjs', { overwrite: pack || reload, destination: common.module(version) });
     } else {
         niv.install('linq-js@' + version, { destination: common.module(version) });
     }
