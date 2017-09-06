@@ -1,19 +1,18 @@
+let xi = { name: "习大大" };
+let wang = { name: "王思聪" };
+let li = { name: "李小龙" };
 
-let magnus = { name: "Hedlund, Magnus" };
-let terry = { name: "Adams, Terry" };
-let charlotte = { name: "Weiss, Charlotte" };
+let white = { name: "小白", owner: wang };
+let boots = { name: "机器人", owner: wang };
+let black = { name: "黑蛋", owner: li };
+let cai = { name: "旺财", owner: xi };
 
-let barley = { name: "Barley", owner: terry };
-let boots = { name: "Boots", owner: terry };
-let whiskers = { name: "Whiskers", owner: charlotte };
-let daisy = { name: "Daisy", owner: magnus };
+let people = [ xi, wang, li ];
+let pets = [ white, boots, black, cai ];
 
-let people = [ magnus, terry, charlotte ];
-let pets = [ barley, boots, whiskers, daisy ];
-
-// Create a list where each element is an anonymous
-// type that contains a person's name and
-// a collection of names of the pets they own.
+// 生成一个每个元素都包含
+// 主人名字和其所有宠物名字列表
+// 的新序列
 let query = people.asEnumerable().groupJoin(pets,
     (person, petCollection) => ({
         ownerName: person.name,
@@ -23,22 +22,22 @@ let query = people.asEnumerable().groupJoin(pets,
     pet => pet.owner);
 
 for (let obj of query) {
-    // Output the owner's name.
-    console.log(`${ obj.ownerName }:`);
-    // Output each of the owner's pet's names.
+    // 输入该主人姓名。
+    console.log(`${ obj.ownerName }：`);
+    // 输入该主人所有宠物的名字。
     for (let pet of obj.pets) {
         console.log(`  ${ pet }`);
     }
 }
 
 /*
- This code produces the following output:
+ 这段代码的输出结果如下：
 
- Hedlund, Magnus:
-   Daisy
- Adams, Terry:
-   Barley
-   Boots
- Weiss, Charlotte:
-   Whiskers
+ 习大大：
+   旺财
+ 王思聪：
+   小白
+   机器人
+ 李小龙：
+   黑蛋
  */

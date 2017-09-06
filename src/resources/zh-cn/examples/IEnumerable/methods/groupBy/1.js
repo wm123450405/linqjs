@@ -12,7 +12,7 @@ let query = pets.asEnumerable().groupBy(pet => pet.age, pet => pet.name);
 
 // 循环每个组的结果。
 for (let petGroup of query) {
-    // 输入该组的键。
+    // 输出该组的键。
     console.log(petGroup.key);
     // 循环每个结果的内容。
     for (let name of petGroup)

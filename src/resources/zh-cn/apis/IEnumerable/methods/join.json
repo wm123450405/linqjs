@@ -20,6 +20,14 @@
                             "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/join",
                             "title": "Mozilla MDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "script": {
+                                "type": "javascript",
+                                "href": "0.1.js"
+                            }
+                        }
                     ]
                 },
                 {
@@ -190,7 +198,7 @@
                             "description": "下面的代码示例演示如何使用 join 来执行基于对一个公共键的两个序列的内部联接。",
                             "script": {
                                 "type": "javascript",
-                                "href": "1.js"
+                                "href": "1.1.js"
                             }
                         }
                     ]
@@ -205,16 +213,27 @@
                 {
                     "sees": [
                         { },
-                        { },
-                        { },
-                        { },
                         {
                             "apis": "IEnumerable",
-                            "method": "leftJoin"
+                            "method": "leftJoin",
+                            "property": ""
                         },
                         {
                             "apis": "IEnumerable",
-                            "method": "rightJoin"
+                            "method": "rightJoin",
+                            "property": ""
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }
@@ -258,16 +277,26 @@
                         { },
                         { },
                         { },
-                        { },
-                        { },
-                        { },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "innerJoin",
+                            "property": ""
+                        },
                         {
                             "apis": "Enumerable.selectors",
                             "property": "join"
                         },
                         {
-                            "apis": "IEnumerable",
-                            "method": "innerJoin"
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        },
+                        {
+                            "href": "https://msdn.microsoft.com/{language}/library/bb549267(v=vs.110).aspx",
+                            "title": "Microsoft MSDN"
                         }
                     ]
                 }

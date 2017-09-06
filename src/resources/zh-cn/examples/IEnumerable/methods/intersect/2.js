@@ -6,17 +6,20 @@ let productComparer = (x, y) => {
     return x.code === y.code && x.name === y.name;
 };
 
-let products = [
+let store1 = [
     { name: "苹果", code: 9 },
-    { name: "橘子", code: 4 },
+    { name: "橘子", code: 4 }
+];
+let store2 = [
     { name: "苹果", code: 9 },
     { name: "柠檬", code: 12 }
 ];
 
-// 去除重复
-let noduplicates = products.asEnumerable().distinct(productComparer);
+// 获取所有的在第一个数组从出现
+// 又在第二个数组中出现了的产品
+let duplicates = store1.asEnumerable().intersect(store2, productComparer);
 
-for (let product of noduplicates) {
+for (let product of duplicates) {
     console.log(product.name + " " + product.code);
 }
 
@@ -24,6 +27,4 @@ for (let product of noduplicates) {
  这段代码的输出结果如下：
 
  苹果 9
- 橘子 4
- 柠檬 12
  */

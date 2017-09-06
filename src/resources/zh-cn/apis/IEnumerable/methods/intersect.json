@@ -77,6 +77,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb355408(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 intersect 获取在两个整数的序列中都存在的元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何实现在 intersect 中可用的相等比较器，并在实现此比较器后对两个序列使用 intersect 方法返回由每个原序列中都存在的元素组成新序列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

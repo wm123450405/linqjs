@@ -1,0 +1,4 @@
+{
+	"1.js": "let id1 = [ 44, 26, 92, 30, 71, 38 ];\r\nlet id2 = [ 39, 59, 83, 47, 26, 4, 30 ];\r\n\r\nlet both = id1.asEnumerable().intersect(id2);\r\n\r\nfor (let id of both) {\r\n    console.log(id);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 26\r\n 30\r\n */",
+	"2.js": "// 一个自定义的比较器。\r\nlet productComparer = (x, y) => {\r\n    if (x === y) return true;\r\n    if (!x || !y) return false;\r\n    // 如果产品的名称和编号相等，则表示是相同的产品。\r\n    return x.code === y.code && x.name === y.name;\r\n};\r\n\r\nlet store1 = [\r\n    { name: \"苹果\", code: 9 },\r\n    { name: \"橘子\", code: 4 }\r\n];\r\nlet store2 = [\r\n    { name: \"苹果\", code: 9 },\r\n    { name: \"柠檬\", code: 12 }\r\n];\r\n\r\n// 获取所有的在第一个数组从出现\r\n// 又在第二个数组中出现了的产品\r\nlet duplicates = store1.asEnumerable().intersect(store2, productComparer);\r\n\r\nfor (let product of duplicates) {\r\n    console.log(product.name + \" \" + product.code);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 苹果 9\r\n */"
+}
