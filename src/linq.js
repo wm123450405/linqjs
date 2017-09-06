@@ -8,6 +8,26 @@ if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
 }
 
+const defaultAs = 'asEnumerable';
+const typeAs = Symbol('typeAs');
+
+const clear = name => {
+    delete String.prototype[name];
+    delete Array.prototype[name];
+    delete Map.prototype[name];
+    delete Set.prototype[name];
+    delete Object.prototype[name];
+};
+
+let _Enumerable;
+if (g.Enumerable) {
+    _Enumerable = g.Enumerable;
+    if (_Enumerable.config.as !== defaultAs) {
+        clear(_Enumerable.config.as);
+    }
+    clear(defaultAs);
+}
+
 const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
@@ -22,9 +42,6 @@ const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
 const extendString = require('./linq-string');
 
-const defaultAs = 'asEnumerable';
-const typeAs = Symbol('typeAs');
-
 const config = {
     extends: {
         array: false,
@@ -37,11 +54,7 @@ const config = {
 
 const initAs = (name) => {
     if (name !== defaultAs && config.as && config.as !== defaultAs) {
-        delete String.prototype[config.as];
-        delete Array.prototype[config.as];
-        delete Map.prototype[config.as];
-        delete Set.prototype[config.as];
-        delete Object.prototype[config.as];
+        clear(config.as);
     }
     core.defineProperties(String.prototype, {
         [name]() {
@@ -150,6 +163,22 @@ Enumerable.config = {
     },
     get as() {
         return config.as;
+    },
+    noConflict(callback) {
+        if (_Enumerable) {
+            if (config.as !== defaultAs) {
+                clear(config.as);
+            }
+            clear(defaultAs);
+            g.Enumerable = _Enumerable;
+            let as = g.Enumerable.config.as;
+            g.Enumerable.config.as = defaultAs;
+            if (as !== defaultAs) {
+                g.Enumerable.config.as = as;
+            }
+        }
+        callback && core.isFunction(callback) && callback(Enumerable);
+        return Enumerable;
     }
 };
 
