@@ -86,7 +86,7 @@ const config = module.exports = {
     ].concat(
 		pack ?
 		[
-            ...(ignoreSkip ? [] : skipList.map(skip => new webpack.IgnorePlugin(new RegExp(skip.replace(/\./g, '\\.'))))),
+            //...(ignoreSkip ? [] : skipList.map(skip => new webpack.IgnorePlugin(new RegExp(skip.replace(/\./g, '\\.'))))),
 		    new webpack.optimize.UglifyJsPlugin({
                 sourceMap: true,
                 compress: {
