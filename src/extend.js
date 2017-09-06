@@ -50,6 +50,13 @@ core.defineProperty(Enumerable, 'extends', function() {
     return this.select(_extends).toArray();
 }, true, true);
 
+Enumerable.unextendAll = function() {
+    for (let type of _extends.keys()) {
+        for (let prototype of _extends.get(type)) {
+            Enumerable.unextend(prototype, type, true);
+        }
+    }
+};
 Enumerable.unextend = function(prototype, type, isPrototype = false, pascalOrPrefix = false) {
     if (typeof prototype !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || removeExtends(prototype, type)) {

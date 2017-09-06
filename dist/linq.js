@@ -15739,6 +15739,54 @@ core.defineProperty(Enumerable, 'extends', function () {
     return this.select(_extends).toArray();
 }, true, true);
 
+Enumerable.unextendAll = function () {
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = _extends.keys()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var type = _step2.value;
+            var _iteratorNormalCompletion3 = true;
+            var _didIteratorError3 = false;
+            var _iteratorError3 = undefined;
+
+            try {
+                for (var _iterator3 = _extends.get(type)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    var prototype = _step3.value;
+
+                    Enumerable.unextend(prototype, type, true);
+                }
+            } catch (err) {
+                _didIteratorError3 = true;
+                _iteratorError3 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                        _iterator3.return();
+                    }
+                } finally {
+                    if (_didIteratorError3) {
+                        throw _iteratorError3;
+                    }
+                }
+            }
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+};
 Enumerable.unextend = function (prototype, type) {
     var isPrototype = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
     var pascalOrPrefix = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
@@ -15746,29 +15794,29 @@ Enumerable.unextend = function (prototype, type) {
     if ((typeof prototype === 'undefined' ? 'undefined' : _typeof(prototype)) !== 'object' || core.getType(type) !== core.types.String) return prototype;
     if (!isPrototype || removeExtends(prototype, type)) {
         core.undefineProperties(prototype, ['getEnumerator', 'where', 'select', 'elementAt', 'distinct', 'except', 'union', 'intersect', 'ofType', 'skip', 'skipWhile', 'take', 'takeWhile', 'orderBy', 'orderByDescending', 'groupBy', 'selectMany', 'join', 'leftJoin', 'rightJoin', 'groupJoin', 'defaultIfEmpty', 'all', 'any', 'isEmpty', 'sequenceEqual', 'first', 'firstOrDefault', 'last', 'lastOrDefault', 'single', 'singleOrDefault', 'count', 'sum', 'product', 'max', 'min', 'average', 'aggregate', 'contains', 'indexOf', 'findIndex', 'lastIndexOf', 'findLast', 'findLastIndex', 'reverse', 'copyWithin', 'every', 'fill', 'filter', 'find', 'includes', 'map', 'pop', 'push', 'shift', 'unshift', 'reduce', 'reduceRight', 'slice', 'splice', 'some', 'sort', 'zip', 'toArray', 'toObject', 'forEach', 'concat', 'toDictionary', 'toLookup', 'chunk'], pascalOrPrefix);
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
         try {
-            for (var _iterator2 = this.plugins[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var plugin = _step2.value;
+            for (var _iterator4 = this.plugins[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                var plugin = _step4.value;
 
                 if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
                     core.undefineProperties(prototype, [plugin.name], pascalOrPrefix);
                 }
             }
         } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
         } finally {
             try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
+                if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                    _iterator4.return();
                 }
             } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
+                if (_didIteratorError4) {
+                    throw _iteratorError4;
                 }
             }
         }
@@ -16201,29 +16249,29 @@ Enumerable.extend = function (prototype, type) {
                 }
             }, pascalOrPrefix);
         }
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        var _iteratorNormalCompletion5 = true;
+        var _didIteratorError5 = false;
+        var _iteratorError5 = undefined;
 
         try {
-            for (var _iterator3 = this.plugins[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                var plugin = _step3.value;
+            for (var _iterator5 = this.plugins[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                var plugin = _step5.value;
 
                 if (this.isEmpty(plugin.types) || this.contains(plugin.types, type)) {
                     core.defineProperties(prototype, _defineProperty({}, plugin.name, memberFunction(plugin.name)), pascalOrPrefix);
                 }
             }
         } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
+            _didIteratorError5 = true;
+            _iteratorError5 = err;
         } finally {
             try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                    _iterator3.return();
+                if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                    _iterator5.return();
                 }
             } finally {
-                if (_didIteratorError3) {
-                    throw _iteratorError3;
+                if (_didIteratorError5) {
+                    throw _iteratorError5;
                 }
             }
         }
@@ -16392,6 +16440,38 @@ if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
     require('babel-polyfill');
 }
 
+var defaultAs = 'asEnumerable';
+var typeAs = Symbol('typeAs');
+
+var clear = function clear(name) {
+    delete String.prototype[name];
+    delete Array.prototype[name];
+    delete Map.prototype[name];
+    delete Set.prototype[name];
+    delete Object.prototype[name];
+};
+
+var _Enumerable = void 0;
+var _extends = {
+    array: false,
+    string: false,
+    object: false
+};
+if (g.Enumerable) {
+    _Enumerable = g.Enumerable;
+    if (_Enumerable.config.as !== defaultAs) {
+        clear(_Enumerable.config.as);
+    }
+    clear(defaultAs);
+    _extends.array = _Enumerable.config.extends.array;
+    _Enumerable.config.extends.array = false;
+    _extends.string = _Enumerable.config.extends.string;
+    _Enumerable.config.extends.string = false;
+    _extends.object = _Enumerable.config.extends.object;
+    _Enumerable.config.extends.object = false;
+    if (_Enumerable.unextendAll) _Enumerable.unextendAll();
+}
+
 var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
@@ -16406,9 +16486,6 @@ var extendArray = require('./linq-array');
 var extendObject = require('./linq-object');
 var extendString = require('./linq-string');
 
-var defaultAs = 'asEnumerable';
-var typeAs = Symbol('typeAs');
-
 var config = {
     extends: {
         array: false,
@@ -16416,16 +16493,13 @@ var config = {
         string: false,
         lazy: false
     },
-    as: defaultAs
+    as: defaultAs,
+    noConflict: false
 };
 
 var initAs = function initAs(name) {
     if (name !== defaultAs && config.as && config.as !== defaultAs) {
-        delete String.prototype[config.as];
-        delete Array.prototype[config.as];
-        delete Map.prototype[config.as];
-        delete Set.prototype[config.as];
-        delete Object.prototype[config.as];
+        clear(config.as);
     }
     core.defineProperties(String.prototype, _defineProperty({}, name, function () {
         return new StringEnumerable(this);
@@ -16471,6 +16545,10 @@ Enumerable.types = core.types;
 Enumerable.config = {
     extends: {
         set array(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.array !== value) {
                 if (value) {
                     extendArray.install();
@@ -16484,6 +16562,10 @@ Enumerable.config = {
             return config.extends.array;
         },
         set object(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.object !== value) {
                 if (value) {
                     extendObject.install();
@@ -16497,6 +16579,10 @@ Enumerable.config = {
             return config.extends.object;
         },
         set string(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.string !== value) {
                 if (value) {
                     extendString.install();
@@ -16526,6 +16612,33 @@ Enumerable.config = {
         return config.as;
     }
 };
+Enumerable.noConflict = function (callback) {
+    if (this.isConflict) {
+        if (config.as !== defaultAs) {
+            clear(config.as);
+        }
+        clear(defaultAs);
+        this.config.extends.array = false;
+        this.config.extends.string = false;
+        this.config.extends.object = false;
+        this.unextendAll();
+        config.noConflict = true;
+        g.Enumerable = _Enumerable;
+        var as = g.Enumerable.config.as;
+        g.Enumerable.config.as = defaultAs;
+        if (as !== defaultAs) {
+            g.Enumerable.config.as = as;
+        }
+        g.Enumerable.config.extends.array = _extends.array;
+        g.Enumerable.config.extends.string = _extends.string;
+        g.Enumerable.config.extends.object = _extends.object;
+    }
+    if (callback && core.isFunction(callback)) callback(Enumerable);
+    return Enumerable;
+};
+core.defineProperty(Enumerable, 'isConflict', function () {
+    return _Enumerable && !config.noConflict;
+}, true, true);
 
 module.exports = Enumerable;
 

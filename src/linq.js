@@ -20,12 +20,24 @@ const clear = name => {
 };
 
 let _Enumerable;
+let _extends = {
+    array: false,
+    string: false,
+    object: false
+};
 if (g.Enumerable) {
     _Enumerable = g.Enumerable;
     if (_Enumerable.config.as !== defaultAs) {
         clear(_Enumerable.config.as);
     }
     clear(defaultAs);
+    _extends.array = _Enumerable.config.extends.array;
+    _Enumerable.config.extends.array = false;
+    _extends.string = _Enumerable.config.extends.string;
+    _Enumerable.config.extends.string = false;
+    _extends.object = _Enumerable.config.extends.object;
+    _Enumerable.config.extends.object = false;
+    if (_Enumerable.unextendAll) _Enumerable.unextendAll();
 }
 
 const core = require('./core/core');
@@ -49,7 +61,8 @@ const config = {
         string: false,
         lazy: false
     },
-    as: defaultAs
+    as: defaultAs,
+    noConflict: false
 };
 
 const initAs = (name) => {
@@ -110,6 +123,10 @@ Enumerable.types = core.types;
 Enumerable.config = {
     extends: {
         set array(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.array !== value) {
                 if (value) {
                     extendArray.install();
@@ -123,6 +140,10 @@ Enumerable.config = {
             return config.extends.array;
         },
         set object(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.object !== value) {
                 if (value) {
                     extendObject.install();
@@ -136,6 +157,10 @@ Enumerable.config = {
             return config.extends.object;
         },
         set string(value) {
+            if (config.noConflict) {
+                console.warn('Can not set this config after call the noConflict method');
+                return;
+            }
             if (config.extends.string !== value) {
                 if (value) {
                     extendString.install();
@@ -163,23 +188,34 @@ Enumerable.config = {
     },
     get as() {
         return config.as;
-    },
-    noConflict(callback) {
-        if (_Enumerable) {
-            if (config.as !== defaultAs) {
-                clear(config.as);
-            }
-            clear(defaultAs);
-            g.Enumerable = _Enumerable;
-            let as = g.Enumerable.config.as;
-            g.Enumerable.config.as = defaultAs;
-            if (as !== defaultAs) {
-                g.Enumerable.config.as = as;
-            }
-        }
-        callback && core.isFunction(callback) && callback(Enumerable);
-        return Enumerable;
     }
 };
+Enumerable.noConflict = function(callback) {
+    if (this.isConflict) {
+        if (config.as !== defaultAs) {
+            clear(config.as);
+        }
+        clear(defaultAs);
+        this.config.extends.array = false;
+        this.config.extends.string = false;
+        this.config.extends.object = false;
+        this.unextendAll();
+        config.noConflict = true;
+        g.Enumerable = _Enumerable;
+        let as = g.Enumerable.config.as;
+        g.Enumerable.config.as = defaultAs;
+        if (as !== defaultAs) {
+            g.Enumerable.config.as = as;
+        }
+        g.Enumerable.config.extends.array = _extends.array;
+        g.Enumerable.config.extends.string = _extends.string;
+        g.Enumerable.config.extends.object = _extends.object;
+    }
+    if (callback && core.isFunction(callback)) callback(Enumerable);
+    return Enumerable;
+};
+core.defineProperty(Enumerable, 'isConflict', () => {
+    return _Enumerable && !config.noConflict;
+}, true, true);
 
 module.exports = Enumerable;
