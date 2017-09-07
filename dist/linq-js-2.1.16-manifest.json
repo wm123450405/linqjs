@@ -1,0 +1,9 @@
+{
+  "name": "linq_js_2_1_16",
+  "content": {
+    "./node_modules/linq-js-2.1.16/dist/linq.js": {
+      "id": 0,
+      "meta": {}
+    }
+  }
+}

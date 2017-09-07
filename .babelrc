@@ -1,4 +1,5 @@
 {
 	"sourceMaps": false,
-	"presets": ["es2015", "stage-3"]
+	"comments": false,
+	"presets": [ "es2015", "stage-3" ]
 }
