@@ -32,7 +32,7 @@ const router = new VueRouter({
 						directory: load('directory'),
 						content: load('content')
 					},
-					children: Enumerable.selectMany(routes, entry => [ '', ':version(\\d+\\.\\d+\\.\\d+):pre(\\.pre)?/' ], (entry, prefix) => ({ path: prefix + entry.key, component: load(entry.value) }))
+					children: Enumerable.selectMany(Object.entries(routes).map(([key, value]) => ({ key, value })), entry => [ '', ':version(\\d+\\.\\d+\\.\\d+):pre(\\.pre)?/' ], (entry, prefix) => ({ path: prefix + entry.key, component: load(entry.value) }))
 						.concat([{ path: '', component: load('introduction') }, { path: ':version(\\d+\\.\\d+\\.\\d+):pre(\\.pre)?', component: load('introduction') }]).toArray()
 				}
 			]

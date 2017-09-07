@@ -5,14 +5,13 @@ const fs = require('fs');
 const extend = require('extend');
 const niv = require('npm-install-version');
 
-niv.install('linq-js', { destination: 'linq-js' });
-
 require('./pack');
 const common = require('./src/scripts/common');
 
 const pack = process.env.NODE_ENV === 'production';
 const reload = process.env.RUNTIME_RELOAD === 'reload';
 const ignoreSkip = process.env.IGNORE_SKIP;
+const getModuleName = module => module.replace(/[-.]/g, '_');
 const statsOptions = {
     hash: true,
     version: true,
@@ -35,11 +34,22 @@ const uglifyOptions = {
         warnings: false
     }
 };
+const serverOptions = {
+    host: '0.0.0.0',
+    port: 8040,
+    inline: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+    contentBase: path.resolve('./'),
+    publicPath: '/linqjs/dist/',
+    stats: statsOptions
+};
 
 const packages = new Map();
 
 const doPack = () => {
-    console.log('do pack');
+    let callback = () => { };
     let compiler = webpack({
         devtool: 'source-map',
         entry: {
@@ -79,11 +89,13 @@ const doPack = () => {
                 'vue-router': 'vue-router/dist/vue-router.common'
             }
         },
+        devServer: {
+            inline: true,
+            hot: true,
+            historyApiFallback: true,
+            contentBase: path.resolve('./')
+        },
         plugins: [
-            ...common.versions.map(version => new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require(`./dist/${ common.module(version) }-manifest.json`)
-            })),
             new webpack.optimize.CommonsChunkPlugin({
                 names: ['common'],
                 minChunks: Infinity
@@ -92,40 +104,39 @@ const doPack = () => {
                 Enumerable: 'linq-js',
                 Vue: 'vue',
                 VueRouter: 'vue-router'
-            })
+            }),
+            ...common.versions.map(version => new webpack.DllReferencePlugin({
+                context: path.join(__dirname, 'dist'),
+                manifest: require(`./dist/${ common.module(version) }-manifest.json`)
+            })),
+            new webpack.ProgressPlugin({ })
         ].concat(
             pack ?
                 [
                     new webpack.optimize.UglifyJsPlugin(uglifyOptions)
-                ] : []
+                ] : [ ]
         )
     }, (error, stats) => {
         process.stdout.write(stats.toString(statsOptions) + "\n");
         if (error) {
             console.error(error);
+        } else {
+            callback && callback();
         }
     });
     if (!pack) {
-        let serverOptions = {
-            host: '0.0.0.0',
-            port: 8040,
-            inline: true,
-            hot: true,
-            compress: true,
-            historyApiFallback: true,
-            contentBase: path.resolve('./'),
-            publicPath: '/linqjs/dist/'
-        };
         let server = new Server(compiler, serverOptions);
-        server.listen(serverOptions.port, serverOptions.host, function(error) {
-            if(error) console.error(error);
-            else console.log('Server will start at ' + serverOptions.host + ':' + serverOptions.port);
-        });
+        callback = () => {
+            server.listen(serverOptions.port, serverOptions.host, function(error) {
+                if(error) console.error(error);
+                else console.log('Server will start at ' + serverOptions.host + ':' + serverOptions.port);
+            });
+        };
     }
 };
 
 const dll = (module, callback) => {
-    let moduleName = module.replace(/[-.]/g, '_');
+    let moduleName = getModuleName(module);
     webpack({
         devtool: 'source-map',
         entry: {
@@ -133,6 +144,7 @@ const dll = (module, callback) => {
         },
         output: {
             path: path.resolve('./dist'),
+            publicPath: '/linqjs/dist/',
             filename: '[name].js',
             library: moduleName
         },
@@ -144,7 +156,8 @@ const dll = (module, callback) => {
                 path: path.join(__dirname, 'dist', '[name]-manifest.json'),
                 name: moduleName
             }),
-            new webpack.optimize.UglifyJsPlugin(uglifyOptions)
+            new webpack.optimize.UglifyJsPlugin(uglifyOptions),
+            new webpack.ProgressPlugin({ })
         ]
     }, (error, stats) => {
         process.stdout.write(stats.toString(statsOptions) + "\n");

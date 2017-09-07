@@ -4,10 +4,10 @@
   "description": "use linq and lamdba in javascript",
   "main": "",
   "scripts": {
-    "test:reload": "cross-env NODE_ENV=development RUNTIME_RELOAD=reload node webpack.config.js",
-    "test": "cross-env NODE_ENV=development node webpack.config.js",
-    "pack": "cross-env NODE_ENV=production node webpack.config.js",
-    "pack:all": "cross-env NODE_ENV=production IGNORE_SKIP=false node webpack.config.js"
+    "test:reload": "cross-env NODE_ENV=development RUNTIME_RELOAD=reload node webpack.js",
+    "test": "cross-env NODE_ENV=development node webpack.js",
+    "pack": "cross-env NODE_ENV=production node webpack.js",
+    "pack:all": "cross-env NODE_ENV=production IGNORE_SKIP=false node webpack.js"
   },
   "repository": {
     "type": "git",
