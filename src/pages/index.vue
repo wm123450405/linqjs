@@ -41,21 +41,17 @@
 	        this.close();
             let reg = /^\/(\w+-\w+)(\/\d+\.\d+\.\d+(\.pre)?)?(.*)?$/i;
             to = reg.exec(to.path);
-            console.log(to);
             to = {
                 lang: to && to[1] || common.defaultLang,
 				version: to && to[2] && to[2].substring(1) || common.lastest,
                 url: to && to[4] || '/'
 			};
-            console.log(to);
             from = reg.exec(from.path);
-            console.log(from);
             from = {
                 lang: from && from[1] || common.defaultLang,
                 version: from && from[2] && from[2].substring(1) || common.lastest,
                 url: from && from[4] || '/'
             };
-            console.log(from);
 			if (to.url !== from.url) {
 			    if (to.lang === from.lang && to.version === from.version) {
 			        next();

@@ -11,7 +11,7 @@
         "1. 优化了 join 方法的处理逻辑",
         "2. 将 IGrouping.prototype.key 与 IChunk.prototype.index 设置成只读",
         "3. 为 groupJoin, leftJoin, rightJoin 等方法的 resultSelector 参数设置了 defaultJoinSelector 默认值",
-        "4. 优化了 Enumerable.extend/Enumerable.unextend/Enumerable.addPlugins/Enumerble.removePlugins 等方法, 并新增了 Enumerable.unextendAll 方法",
+        "4. 优化了 Enumerable.extend/Enumerable.unextend/Enumerable.addPlugins/Enumerble.removePlugins 等方法, 并新增了 Enumerable.extendAll/Enumerable.unextendAll 方法",
         "",
         "修复(Fixed):",
         "1. 修复一处针对 String 扩展后 String.prototype.slice 返回超出预期的问题",

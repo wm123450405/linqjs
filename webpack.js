@@ -109,10 +109,7 @@ const doPack = () => {
                 VueRouter: 'vue-router'
             }),
             new webpack.NormalModuleReplacementPlugin(
-                /^linq-js-/, resource => {
-                    console.log('replace', resource);
-                    resource.request = resource.request.replace(/^linq-js-(.+)$/, 'linq-js-$1/dist/linq.min');
-                }
+                /^linq-js-/, resource => resource.request = resource.request.replace(/^linq-js-(.+)$/, 'linq-js-$1/dist/linq.min')
             ),
             new webpack.ProgressPlugin({ })
         ].concat(

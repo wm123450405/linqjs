@@ -13,6 +13,9 @@
         "新增 IEnumerable.prototype.chunk 方法用来对序列进行分块",
         "新增 IEnumerable.prototype.product 方法用来计算乘积",
         "新增 IEnumerable.prototype.leftPad、IEnumerable.prototype.rightPad 方法",
-        "新增 IEnumerable.prototype.rand 方法"
+        "新增 IEnumerable.prototype.rand 方法",
+        "",
+        "Bugs",
+        "调用 Object 对象的 asEnumerable 方法将会返回一个不可控的结果"
     ]
 }
