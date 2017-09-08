@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const Server = require('webpack-dev-server');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
+const cluster = require('cluster');
 const extend = require('extend');
 const niv = require('npm-install-version');
 
@@ -11,7 +13,6 @@ const common = require('./src/scripts/common');
 const pack = process.env.NODE_ENV === 'production';
 const reload = process.env.RUNTIME_RELOAD === 'reload';
 const ignoreSkip = process.env.IGNORE_SKIP;
-const getModuleName = module => module.replace(/[-.]/g, '_');
 const statsOptions = {
     hash: true,
     version: true,
@@ -30,6 +31,10 @@ const statsOptions = {
 };
 const uglifyOptions = {
     sourceMap: true,
+    parallel: {
+        cache: true,
+        workers: os.cpus() - 1
+    },
     compress: {
         warnings: false
     }
@@ -45,8 +50,6 @@ const serverOptions = {
     publicPath: '/linqjs/dist/',
     stats: statsOptions
 };
-
-const packages = new Map();
 
 const doPack = () => {
     let callback = () => { };
@@ -105,16 +108,22 @@ const doPack = () => {
                 Vue: 'vue',
                 VueRouter: 'vue-router'
             }),
-            ...common.versions.map(version => new webpack.DllReferencePlugin({
-                context: path.join(__dirname, 'dist'),
-                manifest: require(`./dist/${ common.module(version) }-manifest.json`)
-            })),
+            new webpack.NormalModuleReplacementPlugin(
+                /^linq-js-/, resource => {
+                    console.log('replace', resource);
+                    resource.request = resource.request.replace(/^linq-js-(.+)$/, 'linq-js-$1/dist/linq.min');
+                }
+            ),
             new webpack.ProgressPlugin({ })
         ].concat(
             pack ?
                 [
-                    new webpack.optimize.UglifyJsPlugin(uglifyOptions)
-                ] : [ ]
+                    new webpack.optimize.UglifyJsPlugin(extend({ exclude: /linq-js-/ }, uglifyOptions))
+                ]
+                :
+                [
+                    new webpack.NamedModulesPlugin()
+                ]
         )
     }, (error, stats) => {
         process.stdout.write(stats.toString(statsOptions) + "\n");
@@ -129,52 +138,19 @@ const doPack = () => {
         callback = () => {
             server.listen(serverOptions.port, serverOptions.host, function(error) {
                 if(error) console.error(error);
-                else console.log('Server will start at ' + serverOptions.host + ':' + serverOptions.port);
+                else console.log('Server is start at ' + serverOptions.host + ':' + serverOptions.port);
             });
         };
     }
 };
 
-const dll = (module, callback) => {
-    let moduleName = getModuleName(module);
-    webpack({
-        devtool: 'source-map',
-        entry: {
-            [module]: [ module ]
-        },
-        output: {
-            path: path.resolve('./dist'),
-            publicPath: '/linqjs/dist/',
-            filename: '[name].js',
-            library: moduleName
-        },
-        node: {
-            global: false
-        },
-        plugins: [
-            new webpack.DllPlugin({
-                path: path.join(__dirname, 'dist', '[name]-manifest.json'),
-                name: moduleName
-            }),
-            new webpack.optimize.UglifyJsPlugin(uglifyOptions),
-            new webpack.ProgressPlugin({ })
-        ]
-    }, (error, stats) => {
-        process.stdout.write(stats.toString(statsOptions) + "\n");
-        if(error) {
-            console.error(error);
-        } else {
-            callback && callback();
-        }
-    });
-};
-
 const install = (packageName, options) => {
     let module = options.destination || packageName;
-    if (!ignoreSkip && options.overwrite !== true && fs.existsSync(path.join(__dirname, 'node_modules', module)) && fs.existsSync(path.join(__dirname, 'dist', module + '.js'))) {
+    if (ignoreSkip) options.overwrite = true;
+    if (options.overwrite !== true && fs.existsSync(path.join(__dirname, 'node_modules', module)) && fs.existsSync(path.join(__dirname, 'dlls', module + '.js'))) {
         console.log(`Package ${ module } already exists, skipping`);
     } else {
-        packages.set(packageName, options);
+        niv.install(packageName, options);
     }
 };
 
@@ -186,20 +162,4 @@ for (let version of common.versions) {
     }
 }
 
-if (packages.size === 0) {
-    doPack();
-} else {
-    let tasks = [];
-    for (let [ packageName, options ] of packages) {
-        tasks.push({ packageName, options });
-    }
-    for (let { packageName, options } of tasks) {
-        niv.install(packageName, options);
-        dll(options.destination || packageName, () => {
-            packages.delete(packageName);
-            if (packages.size === 0) {
-                process.nextTick(() => doPack());
-            }
-        });
-    }
-}
+doPack();

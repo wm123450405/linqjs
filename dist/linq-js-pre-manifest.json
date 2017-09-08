@@ -1,9 +1,0 @@
-{
-  "name": "linq_js_pre",
-  "content": {
-    "./node_modules/linq-js-pre/dist/linq.min.js": {
-      "id": 0,
-      "meta": {}
-    }
-  }
-}
