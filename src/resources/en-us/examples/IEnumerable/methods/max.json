@@ -1,0 +1,4 @@
+{
+	"1.js": "let longs = [ 4294967296, 466855135, 81125 ];\r\n\r\nlet max = longs.asEnumerable().max();\r\n\r\nconsole.log(`The largest number is ${ max }.`);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The largest number is 4294967296.\r\n */",
+	"2.js": "let pets = [\r\n    { name: \"Barley\", age: 8 },\r\n    { name: \"Boots\", age: 4 },\r\n    { name: \"Whiskers\", age: 1 }\r\n];\r\n\r\nlet max = pets.asEnumerable().max(pet => pet.age + pet.name.length);\r\n\r\nconsole.log(`The maximum pet age plus name length is ${ max }.`);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The maximum pet age plus name length is 14.\r\n */"
+}

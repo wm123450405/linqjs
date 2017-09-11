@@ -1,0 +1,4 @@
+{
+	"1.js": "let longs = [ 4294967296, 466855135, 81125 ];\r\n\r\nlet min = longs.asEnumerable().min();\r\n\r\nconsole.log(`The smallest number is ${ min }.`);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The smallest number is 81125.\r\n */",
+	"2.js": "let pets = [\r\n    { name: \"Barley\", age: 8 },\r\n    { name: \"Boots\", age: 4 },\r\n    { name: \"Whiskers\", age: 1 }\r\n];\r\n\r\nlet min = pets.asEnumerable().min(pet => pet.age);\r\n\r\nconsole.log(`The youngest animal is age ${ min }.`);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The youngest animal is age 5.\r\n */"
+}
