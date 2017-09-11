@@ -59,7 +59,7 @@
 		"version": "2.1.18"
 	},
 	{
-		"prepublish": true,
+		"publish": "2017-09-08",
 		"contents": [
 			"新增(New):",
 			"1. 增加各 选择器(Selector)/比较器(Comparer)/筛选器(Predicate) 对 Number/Symbol 类型参数的支持",
