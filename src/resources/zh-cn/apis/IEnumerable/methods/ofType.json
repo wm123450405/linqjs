@@ -33,6 +33,29 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb360913(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 ofType 来筛选序列中的元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "since": "2.1.19",
+            "ref": true,
+            "overloads": [
+                {
+                    "examples": [
+                        {
+                            "script": {
+                                "href": "1-2.1.19.js"
+                            }
+                        }
                     ]
                 }
             ]
