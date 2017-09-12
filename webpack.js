@@ -89,7 +89,8 @@ const doPack = () => {
             extensions: ['.js', '.json', '.sass', '.vue'],
             alias: {
                 'vue': 'vue/dist/vue.common',
-                'vue-router': 'vue-router/dist/vue-router.common'
+                'vue-router': 'vue-router/dist/vue-router.common',
+                'linq-js': common.module(common.lastest)
             }
         },
         devServer: {

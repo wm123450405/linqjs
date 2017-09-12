@@ -48,6 +48,7 @@
     "close": "收起",
     "loadRuntime": "载入运行时",
     "executing": "执行中",
+    "enableExtend": "启用 Array 扩展",
     "newInstance": {
         "only": "只能使用new运算符",
         "both": "可以使用new运算符,也可以直接调用",

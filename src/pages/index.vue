@@ -15,6 +15,7 @@
 					<div class="btn btn-default" @click="clear"><i class="fa fa-fw fa-ban"></i>{{ caption.clear }}</div>
 					<div class="btn btn-default" @click="close"><i class="fa fa-fw fa-compress fa-flip-vertical"></i>{{ caption.close }}</div>
 					<div class="btn btn-default expand" @click="open"><i class="fa fa-fw fa-expand fa-flip-vertical"></i>{{ caption.try }}</div>
+					<div class="checkbox" :class="{ hidden: !extendEnabled }"><label><input type="checkbox" v-model="extend">{{ caption.enableExtend }}</label></div>
 					<div v-if="executing">{{ runtime ? caption.loadRuntime : caption.executing }}</div>
 				</div>
 				<ul class="list">
@@ -69,6 +70,8 @@
 				runtime: false,
 				executing: false,
 				identity: 0,
+				extend: true,
+				code: '',
 
                 caption: { }
 			}
@@ -83,13 +86,28 @@
                 this.caption = caption;
             });
 		},
+		watch: {
+            extend() {
+                this.tryCode(this.code);
+			}
+        },
+		computed: {
+            extendEnabled() {
+                return common.isOlder(this.version, '2.1.18');
+			}
+		},
 		methods: {
 	        open(code, run) {
 				this.active = true;
 				setTimeout(() => {
                     if (codeMirror) {
-                        if (typeof code === 'string') {
-                            codeMirror.setValue(code);
+                        if (typeof code === 'string' && code) {
+                            this.code = code;
+                            if (this.extend) {
+                                codeMirror.setValue(this.extendEnabled && /\.asEnumerable\(\)(?!;)/g.test(code) ? 'Enumerable.config.extends.array = true;\r\n\r\n' + code.replace(/\.asEnumerable\(\)/g, '') : code);
+                            } else {
+                                codeMirror.setValue(code);
+							}
 						} else if (!codeMirror.getValue()) {
                             codeMirror.setValue("console.log(1);");
 						}
@@ -158,12 +176,14 @@
                             delete String.prototype.asEnumerable;
                             delete Map.prototype.asEnumerable;
                             delete Set.prototype.asEnumerable;
+                            Enumerable.config.extends.array = false;
                         }, () => {
                             delete Object.prototype.asEnumerable;
                             delete Array.prototype.asEnumerable;
                             delete String.prototype.asEnumerable;
                             delete Map.prototype.asEnumerable;
                             delete Set.prototype.asEnumerable;
+                            Enumerable.config.extends.array = false;
                             require('linq-js');
 						});
                     }

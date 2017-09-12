@@ -45,6 +45,9 @@
     "run": "run",
     "clear": "clear",
     "close": "close",
+    "loadRuntime": "loading runtime",
+    "executing": "executing",
+    "enableExtend": "enable extends of Array",
     "newInstance": {
         "only": "can only use new operator",
         "both": "can use new operator or not",
