@@ -17274,9 +17274,9 @@ module.exports = function (array) {
 	};
 	return function (element, other) {
 		var elementIndex = enumerable.indexOf(element, 0, comparer);
-		elementIndex = elementIndex == -1 && last ? getCount() : elementIndex;
+		elementIndex = elementIndex === -1 && last ? getCount() : elementIndex;
 		var otherIndex = enumerable.indexOf(other, 0, comparer);
-		otherIndex = otherIndex == -1 && last ? getCount() : otherIndex;
+		otherIndex = otherIndex === -1 && last ? getCount() : otherIndex;
 		return elementIndex - otherIndex;
 	};
 };
@@ -17569,11 +17569,11 @@ module.exports = function (array) {
 		var elementIndex = enumerable.findIndex(function (predicate) {
 			return predicate(element);
 		});
-		elementIndex = elementIndex == -1 && last ? getCount() : elementIndex;
+		elementIndex = elementIndex === -1 && last ? getCount() : elementIndex;
 		var otherIndex = enumerable.findIndex(function (predicate) {
 			return predicate(other);
 		});
-		otherIndex = otherIndex == -1 && last ? getCount() : otherIndex;
+		otherIndex = otherIndex === -1 && last ? getCount() : otherIndex;
 		return elementIndex - otherIndex;
 	};
 };

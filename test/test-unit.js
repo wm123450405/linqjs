@@ -714,8 +714,8 @@ module.exports = function(Enumerable) {
 		assert.deepStrictEqual(array_copyWithin.copyWithin(2, 0).toArray(), ["alpha", "bravo", "alpha", "bravo"]);
 		assert.deepStrictEqual(array_copyWithin.toArray(), ["alpha", "bravo", "alpha", "bravo"]);
 		//every
-		assert.strictEqual([12, 5, 8, 130, 44].every((element, index, array) => element >= 10), false);
-		assert.strictEqual([12, 54, 18, 130, 44].every((element, index, array) => element >= 10), true);
+		assert.strictEqual([12, 5, 8, 130, 44].every(element => element >= 10), false);
+		assert.strictEqual([12, 54, 18, 130, 44].every(element => element >= 10), true);
 		//fill
 		let array_fill = [1, 2, 3].asEnumerable();
 		assert.deepStrictEqual(array_fill.fill(4).toArray(), [4, 4, 4]);
@@ -820,8 +820,8 @@ module.exports = function(Enumerable) {
 		assert.deepStrictEqual(array_copyWithin.copyWithin(2, 0).toArray(), ["alpha", "bravo", "alpha", "bravo"]);
 		assert.deepStrictEqual(array_copyWithin.toArray(), ["alpha", "bravo", "alpha", "bravo"]);
 		//every
-		assert.strictEqual([12, 5, 8, 130, 44].every((element, index, array) => element >= 10), false);
-		assert.strictEqual([12, 54, 18, 130, 44].every((element, index, array) => element >= 10), true);
+		assert.strictEqual([12, 5, 8, 130, 44].every(element => element >= 10), false);
+		assert.strictEqual([12, 54, 18, 130, 44].every(element => element >= 10), true);
 		//fill
 		let array_fill = [1, 2, 3];
 		assert.deepStrictEqual(array_fill.fill(4).toArray(), [4, 4, 4]);
