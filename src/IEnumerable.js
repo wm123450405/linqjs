@@ -310,6 +310,12 @@ class IEnumerable extends Array {
     rand(count = 0) {
         return Enumerable.rand(this, count);
     }
+    wipe(predicate = defaultPredicate, count = 0) {
+        return Enumerable.wipe(this, predicate, count);
+    }
+    nearBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.nearBy(this, keySelector, elementSelector, resultSelector, comparer);
+    }
 }
 
 module.exports = IEnumerable;

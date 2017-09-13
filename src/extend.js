@@ -294,6 +294,12 @@ const extendObject = {
     rand(count = 0) {
         return Enumerable.rand(this, count);
     },
+    wipe(predicate = defaultPredicate, count = 0) {
+        return Enumerable.wipe(this, predicate, count);
+    },
+    nearBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.nearBy(this, keySelector, elementSelector, resultSelector, comparer);
+    },
     concat(...others) {
         if (core.isString(this) && core.string$concat && !core.lazy) {
             return core.string$concat.apply(this, others);

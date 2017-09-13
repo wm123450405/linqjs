@@ -386,6 +386,11 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.rightPad([a, b, c], 5, d).toArray(), [a, b, c, d, d]);
     //leftPad
     assert.deepStrictEqual(Enumerable.leftPad([a, b, c], 5, d).toArray(), [d, d, a, b, c]);
+    //wipe
+    assert.deepStrictEqual(Enumerable.wipe([a, b, c, a, b, c, a, b, c], e => e === a).toArray(), [b, c, b, c, b, c]);
+    assert.deepStrictEqual(Enumerable.wipe([a, b, c, a, b, c, a, b, c], e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
+    //nearBy
+	assert.deepStrictEqual(Enumerable.nearBy([a, a, b, b, b, a, c, c]).select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
 
 	//IEnumerable methods
 	//select
@@ -682,6 +687,11 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual([a, b, c].asEnumerable().rightPad(5, d).toArray(), [a, b, c, d, d]);
     //leftPad
     assert.deepStrictEqual([a, b, c].asEnumerable().leftPad(5, d).toArray(), [d, d, a, b, c]);
+    //wipe
+    assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].asEnumerable().wipe(e => e === a).toArray(), [b, c, b, c, b, c]);
+    assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].asEnumerable().wipe(e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
+    //nearBy
+    assert.deepStrictEqual([a, a, b, b, b, a, c, c].asEnumerable().nearBy().select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
 
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);

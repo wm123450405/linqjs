@@ -13,7 +13,7 @@ class RandEnumerable extends IEnumerable {
             let temp = Enumerable.toArray(source);
             let count = 0;
             while (length === 0 && temp.length || count < length) {
-                yield* temp.splice(parseInt(temp.length * Math.random()), 1);
+                yield* temp.splice(Math.floor(temp.length * Math.random()), 1);
                 count++;
             }
         });

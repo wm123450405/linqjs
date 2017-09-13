@@ -63,14 +63,20 @@ Enumerable.getIterator = function(enumerable) {
 Enumerable.repeat = function(element, count = 0) {
     return new RepeatEnumerable(element, count);
 };
-Enumerable.range = function(start, count) {
-    return new RangeEnumerable(start, count);
+Enumerable.range = function(start, count, step = 1) {
+    return new RangeEnumerable(start, count, step);
+};
+Enumerable.between = function(start, end, step = 1) {
+    return new BetweenEnumerable(start, end, step);
 };
 Enumerable.empty = function() {
     return new EmptyEnumerable();
 };
 Enumerable.asEnumerable = function(object) {
     return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
+};
+Enumerable.from = function(object) {
+    return this.asEnumerable(object);
 };
 Enumerable.toArray = function(source) {
     if (core.isArray(source)) {
@@ -750,16 +756,38 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
     }
 };
 Enumerable.chunk = function(source, chunk, offset = 0) {
-    return new ChunkEnumerable(source, chunk, offset);
+    return new ChunkEnumerable(asIterable(source), chunk, offset);
 };
 Enumerable.leftPad = function(source, length, value) {
-    return new LeftPadEnumerable(source, length, value);
+    return new LeftPadEnumerable(asIterable(source), length, value);
 };
 Enumerable.rightPad = function(source, length, value) {
-    return new RightPadEnumerable(source, length, value);
+    return new RightPadEnumerable(asIterable(source), length, value);
 };
 Enumerable.rand = function(source, count = 0) {
-    return new RandEnumerable(source, count);
+    return new RandEnumerable(asIterable(source), count);
+};
+Enumerable.random = function(source) {
+    let array = this.toArray(asIterable(source));
+    if (array.length) {
+        return array[Math.floor(Math.random() * array.length)];
+    } else {
+        throw new NoSuchElementsException();
+    }
+};
+Enumerable.randomOrDefault = function(source, defaultValue) {
+    let array = this.toArray(asIterable(source));
+    if (array.length) {
+        return array[Math.floor(Math.random() * array.length)];
+    } else {
+        return defaultValue;
+    }
+};
+Enumerable.wipe = function(source, predicate = defaultPredicate, count = 0) {
+    return new WipeEnumerable(asIterable(source), predicate, count);
+};
+Enumerable.nearBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
+    return new NearGroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
@@ -919,3 +947,6 @@ const ChunkEnumerable = require('./enumerables/ChunkEnumerable');
 const LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
 const RightPadEnumerable = require('./enumerables/RightPadEnumerable');
 const RandEnumerable = require('./enumerables/RandEnumerable');
+const WipeEnumerable = require('./enumerables/WipeEnumerable');
+const NearGroupedEnumerable = require('./enumerables/NearGroupedEnumerable');
+const BetweenEnumerable = require('./enumerables/BetweenEnumerable');
