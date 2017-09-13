@@ -55,5 +55,6 @@
   "bugs": {
     "url": "https://github.com/wm123450405/linqjs/issues"
   },
-  "homepage": "https://github.com/wm123450405/linqjs#readme"
+  "homepage": "https://github.com/wm123450405/linqjs#readme",
+  "types": "src/linq.d.ts"
 }

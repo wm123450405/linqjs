@@ -69,6 +69,9 @@ Enumerable.range = function(start, count, step = 1) {
 Enumerable.between = function(start, end, step = 1) {
     return new BetweenEnumerable(start, end, step);
 };
+Enumerable.generate = function(generate, count = 0) {
+    return new GenerateEnumerable(generate, count);
+};
 Enumerable.empty = function() {
     return new EmptyEnumerable();
 };
@@ -950,3 +953,4 @@ const RandEnumerable = require('./enumerables/RandEnumerable');
 const WipeEnumerable = require('./enumerables/WipeEnumerable');
 const NearGroupedEnumerable = require('./enumerables/NearGroupedEnumerable');
 const BetweenEnumerable = require('./enumerables/BetweenEnumerable');
+const GenerateEnumerable = require('./enumerables/GenerateEnumerable');
