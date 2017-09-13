@@ -2,7 +2,7 @@ let names = [ "李小龙", "李连杰", "甄子丹", "成龙", "洪金宝" ];
 
 let index = 20;
 
-let name = names.asEnumerable().elementAtOrDefault("【这个位置上没有人】", index);
+let name = names.asEnumerable().elementAtOrDefault(index, "【这个位置上没有人】");
 
 console.log(`在位置${ index }上的名字是“${ name }”。`);
 

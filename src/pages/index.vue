@@ -93,7 +93,7 @@
         },
 		computed: {
             extendEnabled() {
-                return common.isOlder(this.version, '2.1.18');
+                return common.isOlder(this.version, '2.1.20');
 			}
 		},
 		methods: {
@@ -163,8 +163,10 @@
 									});
 									console.error(e);
 								}
+                                Enumerable.config.extends.array = false;
                                 console.log = log;
                             }
+                            console.log('executed', Enumerable.config.extends.lazy);
 							this.$nextTick(() => {
 								let list = $('.result .list');
 								list.scrollTop(list.get(0).scrollHeight);
@@ -183,8 +185,7 @@
                             delete String.prototype.asEnumerable;
                             delete Map.prototype.asEnumerable;
                             delete Set.prototype.asEnumerable;
-                            Enumerable.config.extends.array = false;
-                            require('linq-js');
+                            Enumerable = require('linq-js');
 						});
                     }
 				}

@@ -6,21 +6,21 @@
                 {
                     "parameters": [
                         {
-                            "name": "defaultValue",
-                            "types": [
-                                "any"
-                            ],
-                            "descriptions": [
-                                "如果 index 超出范围时返回的默认值"
-                            ]
-                        },
-                        {
                             "name": "index",
                             "types": [
                                 "number"
                             ],
                             "descriptions": [
                                 "要检索的从零开始的元素索引"
+                            ]
+                        },
+                        {
+                            "name": "defaultValue",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "如果 index 超出范围时返回的默认值"
                             ]
                         }
                     ],

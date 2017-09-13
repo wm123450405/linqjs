@@ -1,0 +1,19 @@
+{
+    "prepublish": true,
+    "contents": [
+        "新增(New):",
+        "1. 新增 IEnumerable.prototype.random / IEnumerable.prototype.randomOrDefault 方法, 用来从序列中随机获取一个元素",
+        "2. 新增 IEnumerable.prototype.wipe 方法, 用来剔除序列中满足条件指定数量的元素",
+        "3. 新增 IEnumerable.prototype.nearBy 方法, 用来对序列中相同且相邻的元素进行分组",
+        "4. 新增 Enumerable.between 方法, 生成范围内的整数序列",
+        "5. 新增 Enumerable.from 方法, 功能与 asEnumerable 方法一致",
+        "6. 为 Enumerable.range 方法新增第三个参数, 设置步长",
+        "7. 新增 Enumerable.generate 方法, 通过生成方法构建新序列",
+        "",
+        "优化(Optimization):",
+        "1. 优化 chunk/leftPad/rightPad/rand 方法的逻辑",
+        "",
+        "修复(Fixed):",
+        "1. 修复 开启扩展后 average/defaultIfEmpty/join 方法返回超出预期或报错的bug"
+    ]
+}

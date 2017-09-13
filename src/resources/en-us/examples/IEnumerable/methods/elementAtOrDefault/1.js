@@ -2,7 +2,7 @@ let names = [ "Hartono, Tommy", "Adams, Terry", "Andersen, Henriette Thaulow", "
 
 let index = 20;
 
-let name = names.asEnumerable().elementAtOrDefault("[no name at this index]", index);
+let name = names.asEnumerable().elementAtOrDefault(index, "[no name at this index]");
 
 console.log(`The name chosen at index ${ index } is '${ name }'.`);
 
