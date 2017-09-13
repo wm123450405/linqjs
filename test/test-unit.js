@@ -802,9 +802,310 @@ module.exports = function(Enumerable) {
 
 	let testExtends = lazy => {
 		Enumerable.config.extends.array = true;
-		Enumerable.config.extends.object = true;
-        Enumerable.config.extends.string = true;
+		//Enumerable.config.extends.object = true;
+        //Enumerable.config.extends.string = true;
         Enumerable.config.extends.lazy = lazy;
+
+
+        //select
+        assert.deepStrictEqual([a, b, c].select().toArray(), [a, b, c]);
+        assert.deepStrictEqual([a, b, c].select(v => v + v).toArray(), ['aa', 'bb', 'cc']);
+        //where
+        assert.deepStrictEqual([0, 1, 2, 3, 4, 5].where().toArray(), [0, 1, 2, 3, 4, 5]);
+        assert.deepStrictEqual([0, 1, 2, 3, 4, 5].where(v => v % 2 === 0).toArray(), [0, 2, 4]);
+        //any
+        assert.isStrictTrue([a, b, c].any(v => v === b));
+        //all
+        assert.isStrictFalse([a, b, c].all(v => v === b));
+        //sum
+        assert.strictEqual([1, 2, 3].sum(), 6);
+        assert.strictEqual([1, 2, 3, 4].sum(v => v * v), 30);
+        assert.isStrictNaN([a, b, c].sum(), NaN);
+        //average
+        assert.strictEqual([1, 2, 3].average(), 2);
+        assert.strictEqual([1, 2, 3, 4].average(v => v * v), 7.5);
+        assert.isStrictNaN([a, b, c].average(), NaN);
+        //aggregate
+        assert.strictEqual([4, 3, 2, 1].aggregate(5, (seed, v) => seed + v), 15);
+        assert.strictEqual([4, 3, 2, 1].aggregate(5, (seed, v) => seed + v, r => r * 2), 30);
+        //max
+        assert.strictEqual([5, 7, 3, 1, 9].max(), 9);
+        assert.strictEqual([b, c, d, a].max(v => '-' + v), '-d');
+        assert.strictEqual([b, c, d, a].max(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-a');
+        //min
+        assert.strictEqual([5, 7, 3, 1, 9].min(), 1);
+        assert.strictEqual([b, c, d, a].min(v => '-' + v), '-a');
+        assert.strictEqual([b, c, d, a].min(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-d');
+        //concat
+        assert.deepStrictEqual([a, b].concat([d, e]).toArray(), [a, b, d, e]);
+        //contains
+        assert.isStrictTrue([a, b, c, d].contains(c));
+        assert.isStrictFalse([1, 2, 3, 4, 5].contains(6));
+        assert.isStrictTrue([1, 2, 3, 4, 5].contains(6, (element, value) => element === value % 4));
+        //count
+        assert.strictEqual([1, 2, 3, 4, 5].count(), 5);
+        assert.strictEqual([1, 2, 3, 4, 5].count(element => element % 2 === 0), 2);
+        //defaultIfEmpty
+        assert.deepStrictEqual([].defaultIfEmpty(a).toArray(), [a]);
+        assert.deepStrictEqual([a, b].defaultIfEmpty(a).toArray(), [a, b]);
+        //distinct
+        assert.deepStrictEqual([a, b, c, c, b, b, c, a].distinct().toArray(), [a, b, c]);
+        assert.deepStrictEqual([1, 2, 3, 3, 2, 2, 3, 1].distinct((element, value) => element % 2 === value % 2).toArray(), [1, 2]);
+        //except
+        assert.deepStrictEqual([a, b, c, d, e, c].except([d, b]).toArray(), [a, c, e]);
+        assert.deepStrictEqual([1, 2, 3, 4, 5, 3, 6].except([2, 4], (element, value) => element % 3 === value % 3).toArray(), [3]); //in this equality comparer 3 is equal to 6, so number 6 was been ignored
+        //union
+        assert.deepStrictEqual([a, b, c].union([b, c, d, e]).toArray(), [a, b, c, d, e]);
+        assert.deepStrictEqual([1, 2, 3, 4].union([5, 3, 6], (element, value) => element % 3 === value % 3).toArray(), [1, 2, 3]);
+        //itersect
+        assert.deepStrictEqual([a, b, c].intersect([b, c, d, e]).toArray(), [b, c]);
+        assert.deepStrictEqual([1, 2, 3, 4].intersect([5, 3, 6], (element, value) => element % 3 === value % 3).toArray(), [2, 3]);
+        //elementAt
+        assert.strictEqual([a, b, c, d, e].elementAt(2), c);
+        assert.throws(() => [a, b, c, d, e].elementAt(10), OutOfRangeException);
+        assert.throws(() => [a, b, c, d, e].elementAt(-1), OutOfRangeException);
+        //elementAtOrDefault
+        assert.strictEqual([a, b, c, d, e].elementAtOrDefault(2, f), c);
+        assert.strictEqual([a, b].elementAtOrDefault(2, f), f);
+        //first
+        assert.strictEqual([a, b, c].first(), a);
+        assert.throws(() => Enumerable.first([]), NoSuchElementsException);
+        //firstOrDefault
+        assert.strictEqual([a, b, c].firstOrDefault(f), a);
+        assert.strictEqual(Enumerable.firstOrDefault([], f), f);
+        //last
+        assert.strictEqual([a, b, c].last(), c);
+        assert.throws(() => Enumerable.last([]), NoSuchElementsException);
+        //lastOrDefault
+        assert.strictEqual([a, b, c].lastOrDefault(f), c);
+        assert.strictEqual(Enumerable.lastOrDefault([], f), f);
+        //single
+        assert.strictEqual([a].single(), a);
+        assert.throws(() => [a, b, c].single(), TooManyElementsException);
+        assert.throws(() => Enumerable.single([]), NoSuchElementsException);
+        //singleOrDefault
+        assert.throws(() => [a, b, c].singleOrDefault(f), TooManyElementsException);
+        assert.strictEqual(Enumerable.singleOrDefault([], f), f);
+        assert.strictEqual([a].singleOrDefault(f), a);
+        //join
+        assert.strictEqual([a, b, c].join('|'), 'a|b|c');
+        //ofType
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(String).toArray(), [a, b, c, '']);
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(Number).toArray(), [1, 0.2, 1E2]);
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(Boolean).toArray(), [true]);
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(Array).toArray(), [
+            [1, 2]
+        ]);
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(RegExp).toArray(), [/\w/ig]);
+        assert.deepStrictEqual([1, a, undefined, {}, undefined, /\w/ig, [1, 2], b, 0.2, () => {}, c, true, 1E2, ''].ofType(Object).toArray(), [{}]);
+        //reverse
+        assert.deepStrictEqual([a, b, c].reverse().toArray(), [c, b, a]);
+        //sequenceEqual
+        assert.isStrictFalse([a, b, c].sequenceEqual([a, b, d]));
+        assert.isStrictTrue([0, 1, 2].sequenceEqual([3, 4, 5], (element, value) => element % 3 === value % 3));
+        //skip
+        assert.deepStrictEqual([a, b, c, d, e].skip(2).toArray(), [c, d, e]);
+        //skipWhile
+        assert.deepStrictEqual([1, 2, 3, 4, 5].skipWhile(v => v < 3).toArray(), [3, 4, 5]);
+        //take
+        assert.deepStrictEqual([a, b, c, d, e].take(3).toArray(), [a, b, c]);
+        //takeWhile
+        assert.deepStrictEqual([1, 2, 3, 4, 5].takeWhile(v => v <= 3).toArray(), [1, 2, 3]);
+        //zip
+        assert.deepStrictEqual([1, 2, 3].zip([a, b, c], (element, other) => element + other).toArray(), ['1a', '2b', '3c']);
+        //orderBy
+        assert.deepStrictEqual([d, a, c, b].orderBy().toArray(), [a, b, c, d]);
+        assert.deepStrictEqual([d, a, c, b].orderBy(v => v + v).toArray(), [a, b, c, d]);
+        assert.deepStrictEqual([d, a, c, b].orderBy(v => v + v, (element, other) => element > other ? -1 : element === other ? 0 : 1).toArray(), [d, c, b, a]);
+        //orderByDescending
+        assert.deepStrictEqual([d, a, c, b].orderByDescending().toArray(), [d, c, b, a]);
+        assert.deepStrictEqual([d, a, c, b].orderByDescending(v => v + v).toArray(), [d, c, b, a]);
+        assert.deepStrictEqual([d, a, c, b].orderByDescending(v => v + v, (element, other) => element > other ? -1 : element === other ? 0 : 1).toArray(), [a, b, c, d]);
+        //join
+        assert.deepStrictEqual([1, 2, 3, 4].join([2, 3, 4, 5], (outerElement, innerElement) => outerElement * innerElement).toArray(), [4, 9, 16]);
+        assert.deepStrictEqual([{
+            key: 1,
+            value: 2
+        }, {
+            key: 2,
+            value: 3
+        }, {
+            key: 3,
+            value: 4
+        }, {
+            key: 4,
+            value: 5
+        }].join([2, 3, 4, 5], (outerElement, innerElement) => outerElement.value * innerElement, v => v.key).toArray(), [6, 12, 20]);
+        assert.deepStrictEqual([{
+            id: 1,
+            firstName: d
+        }, {
+            id: 2,
+            firstName: e
+        }, {
+            id: 3,
+            firstName: f
+        }].join([{
+            id: 2,
+            lastName: a
+        }, {
+            id: 3,
+            lastName: b
+        }, {
+            id: 4,
+            lastName: c
+        }], (outerElement, innerElement) => outerElement.firstName + ' ' + innerElement.lastName, outerElement => outerElement.id, innerElement => innerElement.id).toArray(), ['e a', 'f b']);
+        assert.deepStrictEqual([{
+            id: 1,
+            firstName: d
+        }, {
+            id: 2,
+            firstName: e
+        }, {
+            id: 3,
+            firstName: f
+        }].join([{
+            code: 100,
+            lastName: a
+        }, {
+            code: 101,
+            lastName: b
+        }, {
+            code: 102,
+            lastName: c
+        }], (outerElement, innerElement) => outerElement.firstName + ' ' + innerElement.lastName, outerElement => outerElement.id, innerElement => innerElement.code, (element, other) => element === other - 100).toArray(), ['d b', 'e c']);
+        //groupBy
+        assert.deepStrictEqual([3, 2, 1, 4, 3, 3, 1].groupBy().select(grouping => grouping.toArray()).toArray(), [
+            [3, 3, 3],
+            [2],
+            [1, 1],
+            [4]
+        ]);
+        assert.deepStrictEqual([3, 2, 1, 4, 3, 3, 1].groupBy(v => v % 3).select(grouping => grouping.toArray()).toArray(), [
+            [3, 3, 3],
+            [2],
+            [1, 4, 1]
+        ]);
+        assert.deepStrictEqual([3, 2, 1, 4, 3, 3, 1].groupBy(v => v % 3, v => v * v).select(grouping => grouping.toArray()).toArray(), [
+            [9, 9, 9],
+            [4],
+            [1, 16, 1]
+        ]);
+        assert.deepStrictEqual([3, 2, 1, 4, 3, 3, 1].groupBy(v => v % 3, v => v * v, (key, grouping) => grouping.toArray()).toArray(), [
+            [9, 9, 9],
+            [4],
+            [1, 16, 1]
+        ]);
+        assert.deepStrictEqual([3, 2, 1, 4, 3, 3, 1].groupBy(v => v % 3, v => v * v, (key, grouping) => grouping.toArray(), (element, other) => element % 2 === other % 2).toArray(), [
+            [9, 4, 9, 9],
+            [1, 16, 1]
+        ]);
+        //selectMany
+        assert.deepStrictEqual([
+            [a, b, c],
+            [d],
+            [e, f]
+        ].selectMany().toArray(), [a, b, c, d, e, f]);
+        assert.deepStrictEqual([{
+            key: 'vowel',
+            values: [a, e]
+        }, {
+            key: 'other',
+            values: [b, c, d, f]
+        }].selectMany(v => v.values).toArray(), [a, e, b, c, d, f]);
+        assert.deepStrictEqual([{
+            key: 'vowel',
+            values: [a, e]
+        }, {
+            key: 'other',
+            values: [b, c, d, f]
+        }].selectMany(v => v.values, (v, value) => value + a).toArray(), [a + a, e + a, b + a, c + a, d + a, f + a]);
+        //groupJoin
+        assert.deepStrictEqual([1, 2, 3, 4].groupJoin([2, 4, 3, 4, 5], (outerElement, innerGrouping) => innerGrouping.toArray()).toArray(), [
+            [],
+            [2],
+            [3],
+            [4, 4]
+        ]);
+        assert.deepStrictEqual([{
+            key: 1,
+            value: 2
+        }, {
+            key: 2,
+            value: 3
+        }, {
+            key: 3,
+            value: 4
+        }, {
+            key: 4,
+            value: 5
+        }].groupJoin([2, 4, 3, 4, 5], (outerElement, innerGrouping) => innerGrouping.toArray(), v => v.key).toArray(), [
+            [],
+            [2],
+            [3],
+            [4, 4]
+        ]);
+        assert.deepStrictEqual([{
+            id: 1,
+            firstName: d
+        }, {
+            id: 2,
+            firstName: e
+        }, {
+            id: 3,
+            firstName: f
+        }].groupJoin([{
+            id: 2,
+            lastName: a
+        }, {
+            id: 3,
+            lastName: b
+        }, {
+            id: 3,
+            lastName: '!'
+        }, {
+            id: 4,
+            lastName: c
+        }], (outerElement, innerGrouping) => outerElement.firstName + ' ' + innerGrouping.select(v => v.lastName).join(' '), outerElement => outerElement.id, innerElement => innerElement.id).toArray(), ['d ', 'e a', 'f b !']);
+        assert.deepStrictEqual([{
+            id: 1,
+            firstName: d
+        }, {
+            id: 2,
+            firstName: e
+        }, {
+            id: 3,
+            firstName: f
+        }].groupJoin([{
+            code: 100,
+            lastName: a
+        }, {
+            code: 101,
+            lastName: b
+        }, {
+            code: 101,
+            lastName: '!'
+        }, {
+            code: 102,
+            lastName: c
+        }], (outerElement, innerGrouping) => outerElement.firstName + ' ' + innerGrouping.select(v => v.lastName).join(' '), outerElement => outerElement.id, innerElement => innerElement.code, (element, other) => element === other - 100).toArray(), ['d b !', 'e c', 'f ']);
+        //chunk
+        assert.deepStrictEqual([a, b, c, d, e].chunk(3, 1).count(), 3);
+        assert.deepStrictEqual([a, b, c, d].chunk(2).select(c => c.toArray()).toArray(), [ [a, b], [c, d] ]);
+        assert.deepStrictEqual([a, b, c, d, e, f].chunk(3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
+        assert.deepStrictEqual([a, b, c, d].chunk(2).select(c => c.index).toArray(), [ 0, 1 ]);
+        assert.deepStrictEqual([a, b, c, d, e, f].chunk(3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+        //product
+        assert.strictEqual([1, 2, 3, 4, 5].product(), 120);
+        //rightPad
+        assert.deepStrictEqual([a, b, c].rightPad(5, d).toArray(), [a, b, c, d, d]);
+        //leftPad
+        assert.deepStrictEqual([a, b, c].leftPad(5, d).toArray(), [d, d, a, b, c]);
+        //wipe
+        assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].wipe(e => e === a).toArray(), [b, c, b, c, b, c]);
+        assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].wipe(e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
+        //nearBy
+        assert.deepStrictEqual([a, a, b, b, b, a, c, c].nearBy().select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
 
 		//splice
 		let array_splice = [1, 2, 4, 3, 5, 6];

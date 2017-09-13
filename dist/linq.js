@@ -16108,6 +16108,7 @@ var methods = require('./methods/methods');
 
 var defaultPredicate = require('./methods/defaultPredicate');
 var defaultSelector = require('./methods/defaultSelector');
+var defaultJoinSelector = require('./methods/defaultJoinSelector');
 var defaultSameComparer = require('./methods/defaultSameComparer');
 var defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 var defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
@@ -16197,6 +16198,9 @@ var extendObject = {
     elementAt: function elementAt(index) {
         return Enumerable.elementAt(this, index);
     },
+    elementAtOrDefault: function elementAtOrDefault(index, defaultValue) {
+        return Enumerable.elementAtOrDefault(this, index, defaultValue);
+    },
     distinct: function distinct() {
         var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEqualityComparer;
 
@@ -16263,36 +16267,51 @@ var extendObject = {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     },
     join: function join(inner) {
-        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
         var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
         var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
         var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-        return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+        if (arguments.length === 1) {
+            return Enumerable.join(this, inner);
+        } else {
+            return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+        }
     },
-    leftJoin: function leftJoin(inner, resultSelector) {
+    innerJoin: function innerJoin(inner) {
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
+        var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+        var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+        var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+        return Enumerable.innerJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    },
+    leftJoin: function leftJoin(inner) {
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
         var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
         var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
         var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
         return Enumerable.leftJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    rightJoin: function rightJoin(inner, resultSelector) {
+    rightJoin: function rightJoin(inner) {
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
         var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
         var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
         var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
         return Enumerable.rightJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    groupJoin: function groupJoin(inner, resultSelector) {
+    groupJoin: function groupJoin(inner) {
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
         var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
         var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
         var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
         return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    defaultIfEmpty: function defaultIfEmpty() {
-        return Enumerable.defaultIfEmpty(this);
+    defaultIfEmpty: function defaultIfEmpty(defaultValue) {
+        return Enumerable.defaultIfEmpty(this, defaultValue);
     },
     all: function all() {
         var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
@@ -16370,9 +16389,9 @@ var extendObject = {
         return Enumerable.min(this, selector, comparer);
     },
     average: function average() {
-        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
 
-        return Enumerable.average(this, predicate);
+        return Enumerable.average(this, selector);
     },
     aggregate: function aggregate(seed, func) {
         var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
@@ -16855,7 +16874,7 @@ Enumerable.extend = function (prototype, type) {
     return prototype;
 };
 
-},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":374,"./methods/defaultComparer":375,"./methods/defaultEqualityComparer":376,"./methods/defaultKeySelector":379,"./methods/defaultPredicate":380,"./methods/defaultResultSelector":381,"./methods/defaultSameComparer":382,"./methods/defaultSelector":383,"./methods/defaultStrictEqualityComparer":384,"./methods/defaultValueSelector":385,"./methods/methods":391}],369:[function(require,module,exports){
+},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":374,"./methods/defaultComparer":375,"./methods/defaultEqualityComparer":376,"./methods/defaultJoinSelector":378,"./methods/defaultKeySelector":379,"./methods/defaultPredicate":380,"./methods/defaultResultSelector":381,"./methods/defaultSameComparer":382,"./methods/defaultSelector":383,"./methods/defaultStrictEqualityComparer":384,"./methods/defaultValueSelector":385,"./methods/methods":391}],369:[function(require,module,exports){
 'use strict';
 
 /**

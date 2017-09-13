@@ -7,6 +7,7 @@ const methods = require('./methods/methods');
 
 const defaultPredicate = require('./methods/defaultPredicate');
 const defaultSelector = require('./methods/defaultSelector');
+const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
 const defaultStrictEqualityComparer = require('./methods/defaultStrictEqualityComparer');
@@ -67,6 +68,9 @@ const extendObject = {
     elementAt(index) {
         return Enumerable.elementAt(this, index);
     },
+    elementAtOrDefault(index, defaultValue) {
+        return Enumerable.elementAtOrDefault(this, index, defaultValue);
+    },
     distinct(comparer = defaultEqualityComparer) {
         return Enumerable.distinct(this, comparer);
     },
@@ -106,20 +110,27 @@ const extendObject = {
     selectMany(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     },
-    join(inner, resultSelector = undefined, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-        return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        if (arguments.length === 1) {
+            return Enumerable.join(this, inner);
+        } else {
+            return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+        }
     },
-    leftJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    innerJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.innerJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    },
+    leftJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.leftJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    rightJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    rightJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.rightJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    groupJoin(inner, resultSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+    groupJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.groupJoin(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
-    defaultIfEmpty() {
-        return Enumerable.defaultIfEmpty(this);
+    defaultIfEmpty(defaultValue) {
+        return Enumerable.defaultIfEmpty(this, defaultValue);
     },
     all(predicate = defaultPredicate) {
         return Enumerable.all(this, predicate);
@@ -166,8 +177,8 @@ const extendObject = {
     min(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.min(this, selector, comparer);
     },
-    average(predicate = defaultPredicate) {
-        return Enumerable.average(this, predicate);
+    average(selector = defaultSelector) {
+        return Enumerable.average(this, selector);
     },
     aggregate(seed, func, selector = defaultSelector) {
         return Enumerable.aggregate(this, seed, func, selector);
