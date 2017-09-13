@@ -69,6 +69,7 @@ module.exports = function(Enumerable) {
 	assert.deepStrictEqual(Enumerable.empty().toArray(), []);
 	assert.deepStrictEqual(Enumerable.repeat(1, 4).toArray(), [1, 1, 1, 1]);
 	assert.deepStrictEqual(Enumerable.range(1, 4).toArray(), [1, 2, 3, 4]);
+	assert.deepStrictEqual(Enumerable.range(2, 4).toArray(), Enumerable.between(2, 5).toArray());
 
 	//Enumerable static methods for extends IEnumerable
 	//select
