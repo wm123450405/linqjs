@@ -95,6 +95,7 @@ declare namespace Enumerable {
     export function firstOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: string | number | symbol | T | any): T;
 
     export function forEach<T>(source: T[] | IEnumerable<T>, action: (element: T, index?: number, source?: IEnumerable<T>) => void, thisArg?: any): void;
+    export function forEach<TKey, TValue>(source: IMapEnumerable<TKey, TValue>, action: (element: TValue, key: TKey, source?: IMapEnumerable<TKey, TValue>) => void, thisArg?: any): void;
 
     export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
     export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
