@@ -12,10 +12,10 @@ declare namespace Enumerable {
     const defaultSameComparer;
 
     export function asEnumerable(obj: string) : IEnumerable<string>;
-    export function asEnumerable<T>(obj: T[]) : IEnumerable<T>;
+    export function asEnumerable<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function asEnumerable<T>(obj: any) : IEnumerable<T>;
     export function from(obj: string) : IEnumerable<string>;
-    export function from<T>(obj: T[]) : IEnumerable<T>;
+    export function from<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function from<T>(obj: any) : IEnumerable<T>;
     export function range(start: number, count: number, step: number = 1): IEnumerable<number>;
     export function between(start: number, end: number, step: number = 1): IEnumerable<number>;
@@ -26,280 +26,290 @@ declare namespace Enumerable {
     export function noConflict(flag: boolean = false);
     export function noConflict(callback: (Enumerable) => void);
 
-    export function where<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): IEnumerable<TSource>;
-    export function where<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): IEnumerable<TSource>;
+    export function where<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): IEnumerable<T>;
+    export function where<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
 
-    export function select<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => TResult = defaultSelector): IEnumerable<TResult>;
-    export function select<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): IEnumerable<TResult>;
+    export function select<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult = defaultSelector): IEnumerable<TResult>;
+    export function select<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol): IEnumerable<TResult>;
 
-    export function aggregate<TSource, TSeed, TResult>(source: TSource[] | IEnumerable<TSource>, seed: TSeed, func: (seed: TSeed, element: TSource, index?: number) => TSeed, resultSelector: (result: TSeed) => TResult = defaultSelector): TResult;
-    export function aggregate<TSource, TSeed, TResult>(source: TSource[] | IEnumerable<TSource>, seed: TSeed, func: (seed: TSeed, element: TSource, index?: number) => TSeed, resultSelector: string | number | symbol): TResult;
+    export function aggregate<T, TSeed, TResult>(source: T[] | IEnumerable<T>, seed: TSeed, func: (seed: TSeed, element: T, index?: number) => TSeed, resultSelector: (result: TSeed) => TResult = defaultSelector): TResult;
+    export function aggregate<T, TSeed, TResult>(source: T[] | IEnumerable<T>, seed: TSeed, func: (seed: TSeed, element: T, index?: number) => TSeed, resultSelector: string | number | symbol): TResult;
 
-    export function all<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): boolean;
-    export function all<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): boolean;
+    export function all<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): boolean;
+    export function all<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): boolean;
 
-    export function any<TSource>(source: TSource[] | IEnumerable<TSource>): boolean;
-    export function any<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): boolean;
-    export function any<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): boolean;
+    export function any<T>(source: T[] | IEnumerable<T>): boolean;
+    export function any<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): boolean;
+    export function any<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): boolean;
 
-    export function asEnumerable<TSource>(source: TSource[] | IEnumerable<TSource>): IEnumerable<TSource>;
+    export function asEnumerable<T>(source: T[] | IEnumerable<T>): IEnumerable<T>;
 
-    export function average<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => number = defaultSelector): number;
-    export function average<TSource>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): number;
+    export function average<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function average<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
 
-    export function chunk<TSource>(source: TSource[] | IEnumerable<TSource>, chunk, offset = 0): IEnumerable<IChunk<TSource>>;
+    export function chunk<T>(source: T[] | IEnumerable<T>, chunk, offset = 0): IEnumerable<IChunk<T>>;
 
-    export function concat<TSource>(source: TSource[] | IEnumerable<TSource>, ...other: TSource[][]): IEnumerable<TSource>;
-    export function concat<TSource>(source: TSource[] | IEnumerable<TSource>, ...other: TSource[]): IEnumerable<TSource>;
-    export function concat<TSource>(source: TSource[] | IEnumerable<TSource>, ...other: IEnumerable<TSource>[]): IEnumerable<TSource>;
+    export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[][]): IEnumerable<T>;
+    export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[]): IEnumerable<T>;
+    export function concat<T>(source: T[] | IEnumerable<T>, ...other: IEnumerable<T>[]): IEnumerable<T>;
 
-    export function contains<TSource>(source: TSource[] | IEnumerable<TSource>, value: TSource): boolean;
-    export function contains<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, value: TOther, comparer: (element: TSource, other: TOther) => boolean = defaultEqualityComparer): boolean;
-    export function contains<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, value: TOther, comparer: string | number | symbol): boolean;
+    export function contains<T>(source: T[] | IEnumerable<T>, value: T): boolean;
+    export function contains<T, TOther>(source: T[] | IEnumerable<T>, value: TOther, comparer: (element: T, other: TOther) => boolean = defaultEqualityComparer): boolean;
+    export function contains<T, TOther>(source: T[] | IEnumerable<T>, value: TOther, comparer: string | number | symbol): boolean;
 
-    export function copyWithin<TSource>(source: TSource[] | IEnumerable<TSource>, target: number = 0, start: number = 0, end: number = Number.POSITIVE_INFINITY): IEnumerable<TSource>;
+    export function copyWithin<T>(source: T[] | IEnumerable<T>, target: number = 0, start: number = 0, end: number = Number.POSITIVE_INFINITY): IEnumerable<T>;
 
-    export function count<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): number;
-    export function count<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): number;
+    export function count<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): number;
+    export function count<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): number;
 
-    export function defaultIfEmpty<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue?: TSource): IEnumerable<TSource>;
+    export function defaultIfEmpty<T>(source: T[] | IEnumerable<T>, defaultValue?: T): IEnumerable<T>;
 
-    export function distinct<TSource>(source: TSource[] | IEnumerable<TSource>, comparer: (element: TSource, other: TSource) => boolean = defaultEqualityComparer): IEnumerable<TSource>;
-    export function distinct<TSource>(source: TSource[] | IEnumerable<TSource>, comparer: string | number | symbol): IEnumerable<TSource>;
+    export function distinct<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultEqualityComparer): IEnumerable<T>;
+    export function distinct<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
-    export function elementAt<TSource>(source: TSource[] | IEnumerable<TSource>, index: number): TSource;
+    export function elementAt<T>(source: T[] | IEnumerable<T>, index: number): T;
 
-    export function elementAtOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, index: number, defaultValue: TSource): TSource;
+    export function elementAtOrDefault<T>(source: T[] | IEnumerable<T>, index: number, defaultValue: T): T;
 
-    export function every<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): boolean;
+    export function every<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): boolean;
 
-    export function except<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: (element: TSource, other: TOther) => boolean = defaultEqualityComparer): IEnumerable<TSource>;
-    export function except<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): IEnumerable<TSource>;
+    export function except<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: (element: T, other: TOther) => boolean = defaultEqualityComparer): IEnumerable<T>;
+    export function except<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): IEnumerable<T>;
 
-    export function fill<TSource>(source: TSource[] | IEnumerable<TSource>, value: TSource, start: number = 0, end: number = Number.POSITIVE_INFINITY);
+    export function fill<T>(source: T[] | IEnumerable<T>, value: T, start: number = 0, end: number = Number.POSITIVE_INFINITY);
 
-    export function filter<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => TResult, thisArg?: any): IEnumerable<TResult>;
+    export function filter<T, TResult>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => TResult, thisArg?: any): IEnumerable<TResult>;
 
-    export function find<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): TSource;
+    export function find<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): T;
 
-    export function findIndex<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): number;
+    export function findIndex<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): number;
 
-    export function findLast<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): TSource;
+    export function findLast<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): T;
 
-    export function findLastIndex<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): number;
+    export function findLastIndex<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): number;
 
-    export function first<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): TSource;
-    export function first<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): TSource;
+    export function first<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): T;
+    export function first<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): T;
 
-    export function firstOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): TSource;
-    export function firstOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: string | number | symbol | TSource | any): TSource;
+    export function firstOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: (element: T, index?: number) => boolean = defaultPredicate): T;
+    export function firstOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: string | number | symbol | T | any): T;
 
-    export function forEach<TSource>(source: TSource[] | IEnumerable<TSource>, action: (element: TSource, index?: number, source?: IEnumerable<TSource>) => void, thisArg?: any): void;
+    export function forEach<T>(source: T[] | IEnumerable<T>, action: (element: T, index?: number, source?: IEnumerable<T>) => void, thisArg?: any): void;
 
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function groupBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function groupBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
 
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function groupJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function groupJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
 
-    export function includes<TSource>(source: TSource[] | IEnumerable<TSource>, element: TSource, start: number = 0): boolean;
+    export function includes<T>(source: T[] | IEnumerable<T>, element: T, start: number = 0): boolean;
 
-    export function indexOf<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, element: TOther, start: number = 0, comparer: (element: TSource, other: TOther) => boolean = defaultStrictEqualityComparer): number;
-    export function indexOf<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, element: TOther, start: number = 0, comparer: string | number | symbol): number;
+    export function indexOf<T, TOther>(source: T[] | IEnumerable<T>, element: TOther, start: number = 0, comparer: (element: T, other: TOther) => boolean = defaultStrictEqualityComparer): number;
+    export function indexOf<T, TOther>(source: T[] | IEnumerable<T>, element: TOther, start: number = 0, comparer: string | number | symbol): number;
 
-    export function lastIndexOf<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, element: TOther, start: number = 0, comparer: (element: TSource, other: TOther) => boolean = defaultStrictEqualityComparer): number;
-    export function lastIndexOf<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, element: TOther, start: number = 0, comparer: string | number | symbol): number;
+    export function lastIndexOf<T, TOther>(source: T[] | IEnumerable<T>, element: TOther, start: number = 0, comparer: (element: T, other: TOther) => boolean = defaultStrictEqualityComparer): number;
+    export function lastIndexOf<T, TOther>(source: T[] | IEnumerable<T>, element: TOther, start: number = 0, comparer: string | number | symbol): number;
 
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function innerJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function innerJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
 
-    export function intersect<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: (element: TSource, other: TOther) => boolean = defaultEqualityComparer): IEnumerable<TSource>;
-    export function intersect<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): IEnumerable<TSource>;
+    export function intersect<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: (element: T, other: TOther) => boolean = defaultEqualityComparer): IEnumerable<T>;
+    export function intersect<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): IEnumerable<T>;
 
-    export function join<TSource>(source: TSource[] | IEnumerable<TSource>, split: string): string;
+    export function join<T>(source: T[] | IEnumerable<T>, split: string): string;
 
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function join<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function join<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, other: TInner) => TResult, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
 
-    export function last<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index: number) => boolean = defaultPredicate): TSource;
-    export function last<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): TSource;
+    export function last<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index: number) => boolean = defaultPredicate): T;
+    export function last<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): T;
 
-    export function lastOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: (element: TSource, index: number) => boolean = defaultPredicate): TSource;
-    export function lastOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: string | number | symbol | TSource | any): TSource;
+    export function lastOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: (element: T, index: number) => boolean = defaultPredicate): T;
+    export function lastOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: string | number | symbol | T | any): T;
 
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function leftJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function leftJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
 
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: TSource, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
-    export function rightJoin<TSource, TInner, TOuterKey, TInnerKey, TResult>(source: TSource[] | IEnumerable<TSource>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: TSource, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: (key: TOuterKey, other: TInnerKey) => boolean = defaultEqualityComparer): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: (element: TInner, index?: number) => TInnerKey = defaultKeySelector, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: (element: T, index?: number) => TOuterKey = defaultKeySelector, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
+    export function rightJoin<T, TInner, TOuterKey, TInnerKey, TResult>(source: T[] | IEnumerable<T>, inner: TInner[] | IEnumerable<TInner>, resultSelector: (element: T, grouping: IGrouping<TOuterKey, TInner>) => TResult = defaultJoinSelector, outerKeySelect: string | number | symbol, innerKeySelect: string | number | symbol, comparer: string | number | symbol): IEnumerable<TResult>;
 
-    export function leftPad<TSource>(source: TSource[] | IEnumerable<TSource>, length: number, value: TSource): IEnumerable<TSource>;
+    export function leftPad<T>(source: T[] | IEnumerable<T>, length: number, value: T): IEnumerable<T>;
 
-    export function rightPad<TSource>(source: TSource[] | IEnumerable<TSource>, length: number, value: TSource): IEnumerable<TSource>;
+    export function rightPad<T>(source: T[] | IEnumerable<T>, length: number, value: T): IEnumerable<T>;
 
-    export function map<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => TOther, thisArg?: any): IEnumerable<TOther>;
+    export function map<T, TOther>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => TOther, thisArg?: any): IEnumerable<TOther>;
 
-    export function max<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => number = defaultSelector): number;
-    export function max<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => string): string;
-    export function max<TSource>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): number | string;
-    export function max<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function max<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function max<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function max<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): string;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number | string;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
 
-    export function min<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => number = defaultSelector): number;
-    export function min<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => string): string;
-    export function min<TSource>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): number | string;
-    export function min<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function min<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function min<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function min<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): string;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number | string;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
 
-    export function ofType<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, type: string): IEnumerable<TResult>;
-    export function ofType<TSource, TResult>(source: TSource[] | IEnumerable<TSource>, type: any): IEnumerable<TResult>;
+    export function ofType<T, TResult>(source: T[] | IEnumerable<T>, type: string): IEnumerable<TResult>;
+    export function ofType<T, TResult>(source: T[] | IEnumerable<T>, type: any): IEnumerable<TResult>;
 
-    export function orderBy<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultSelector, comparer: (element: TSource, other: TSource) => number = defaultComparer): IOrderedEnumerable<TSource>;
-    export function orderBy<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, comparer: (element: TSource, other: TSource) => number = defaultComparer): IOrderedEnumerable<TSource>;
-    export function orderBy<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<TSource>;
-    export function orderBy<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<TSource>;
+    export function orderBy<T, TKey>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function orderBy<T, TKey>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function orderBy<T, TKey>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<T>;
+    export function orderBy<T, TKey>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<T>;
 
-    export function orderByDescending<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultSelector, comparer: (element: TSource, other: TSource) => number = defaultComparer): IOrderedEnumerable<TSource>;
-    export function orderByDescending<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, comparer: (element: TSource, other: TSource) => number = defaultComparer): IOrderedEnumerable<TSource>;
-    export function orderByDescending<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<TSource>;
-    export function orderByDescending<TSource, TKey>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<TSource>;
+    export function orderByDescending<T, TKey>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function orderByDescending<T, TKey>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function orderByDescending<T, TKey>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<T>;
+    export function orderByDescending<T, TKey>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<T>;
 
-    export function pop<TSource>(source: TSource[] | IEnumerable<TSource>): TSource;
+    export function pop<T>(source: T[] | IEnumerable<T>): T;
 
-    export function product<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => number = defaultSelector): number;
-    export function product<TSource>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): number;
+    export function product<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function product<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
 
-    export function push<TSource>(source: TSource[] | IEnumerable<TSource>, ...values: TSource[]): number;
+    export function push<T>(source: T[] | IEnumerable<T>, ...values: T[]): number;
 
-    export function rand<TSource>(source: TSource[] | IEnumerable<TSource>, count: number): IEnumerable<TSource>;
+    export function rand<T>(source: T[] | IEnumerable<T>, count: number): IEnumerable<T>;
 
-    export function reduce<TSource, TSeed>(source: TSource[] | IEnumerable<TSource>, callback: (seed: TSeed, element: TSource, index?: number) => TSeed, initialValue: TSeed): TSeed;
+    export function reduce<T, TSeed>(source: T[] | IEnumerable<T>, callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 
-    export function reduceRight<TSource, TSeed>(source: TSource[] | IEnumerable<TSource>, callback: (seed: TSeed, element: TSource, index?: number) => TSeed, initialValue: TSeed): TSeed;
+    export function reduceRight<T, TSeed>(source: T[] | IEnumerable<T>, callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 
-    export function reverse<TSource>(source: TSource[] | IEnumerable<TSource>): IEnumerable<TSource>;
+    export function reverse<T>(source: T[] | IEnumerable<T>): IEnumerable<T>;
 
-    export function selectMany<TSource, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, collectionSelector: (element: TSource, index?: number) => TElement[] | IEnumerable<TElement> = defaultSelector, resultSelector: (sourceElement: TSource, collectionElement: TElement) => TResult = defaultResultSelector): IEnumerable<TResult>;
-    export function selectMany<TSource, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, collectionSelector: string | number | symbol, resultSelector: (sourceElement: TSource, collectionElement: TElement) => TResult = defaultResultSelector): IEnumerable<TResult>;
+    export function selectMany<T, TElement, TResult>(source: T[] | IEnumerable<T>, collectionSelector: (element: T, index?: number) => TElement[] | IEnumerable<TElement> = defaultSelector, resultSelector: (sourceElement: T, collectionElement: TElement) => TResult = defaultResultSelector): IEnumerable<TResult>;
+    export function selectMany<T, TElement, TResult>(source: T[] | IEnumerable<T>, collectionSelector: string | number | symbol, resultSelector: (sourceElement: T, collectionElement: TElement) => TResult = defaultResultSelector): IEnumerable<TResult>;
 
-    export function sequenceEqual<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: (element: TSource, other: TOther) => boolean = defaultEqualityComparer): boolean;
-    export function sequenceEqual<TSource, TOther>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): boolean;
+    export function sequenceEqual<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: (element: T, other: TOther) => boolean = defaultEqualityComparer): boolean;
+    export function sequenceEqual<T, TOther>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, comparer: string | number | symbol): boolean;
 
-    export function shift<TSource>(source: TSource[] | IEnumerable<TSource>): TSource;
+    export function shift<T>(source: T[] | IEnumerable<T>): T;
 
-    export function single<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): TSource;
-    export function single<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): TSource;
+    export function single<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): T;
+    export function single<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): T;
 
-    export function singleOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: (element: TSource, index?: number) => boolean = defaultPredicate): TSource;
-    export function singleOrDefault<TSource>(source: TSource[] | IEnumerable<TSource>, defaultValue: TSource, predicate: string | number | symbol | TSource | any): TSource;
+    export function singleOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: (element: T, index?: number) => boolean = defaultPredicate): T;
+    export function singleOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, predicate: string | number | symbol | T | any): T;
 
-    export function skip<TSource>(source: TSource[] | IEnumerable<TSource>, count: number): IEnumerable<TSource>;
+    export function skip<T>(source: T[] | IEnumerable<T>, count: number): IEnumerable<T>;
 
-    export function skipWhile<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean): IEnumerable<TSource>;
-    export function skipWhile<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): IEnumerable<TSource>;
+    export function skipWhile<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
+    export function skipWhile<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
 
-    export function take<TSource>(source: TSource[] | IEnumerable<TSource>, count: number): IEnumerable<TSource>;
+    export function take<T>(source: T[] | IEnumerable<T>, count: number): IEnumerable<T>;
 
-    export function takeWhile<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean): IEnumerable<TSource>;
-    export function takeWhile<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any): IEnumerable<TSource>;
+    export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
+    export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
 
-    export function slice<TSource>(source: TSource[] | IEnumerable<TSource>, start: number, end: number): IEnumerable<TSource>;
+    export function slice<T>(source: T[] | IEnumerable<T>, start: number, end: number): IEnumerable<T>;
 
-    export function some<TSource>(source: TSource[] | IEnumerable<TSource>, callback: (element: TSource, index?: number, source?: IEnumerable<TSource>) => boolean, thisArg?: any): boolean;
+    export function some<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): boolean;
 
-    export function sort<TSource>(source: TSource[] | IEnumerable<TSource>, comparer: (element: TSource, other: TSource) => number = defaultComparer): IEnumerable<TSource>;
-    export function sort<TSource>(source: TSource[] | IEnumerable<TSource>, comparer: string | number | symbol): IEnumerable<TSource>;
+    export function sort<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => number = defaultComparer): IEnumerable<T>;
+    export function sort<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
-    export function sum<TSource>(source: TSource[] | IEnumerable<TSource>, selector: (element: TSource, index?: number) => number = defaultSelector): number;
-    export function sum<TSource>(source: TSource[] | IEnumerable<TSource>, selector: string | number | symbol): number;
+    export function sum<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function sum<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
 
-    export function union<TSource>(source: TSource[] | IEnumerable<TSource>, other: TSource[] | IEnumerable<TSource>, comparer: (element: TSource, other: TSource) => boolean = defaultEqualityComparer): IEnumerable<TSource>;
-    export function union<TSource>(source: TSource[] | IEnumerable<TSource>, other: TSource[] | IEnumerable<TSource>, comparer: string | number | symbol): IEnumerable<TSource>;
+    export function union<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultEqualityComparer): IEnumerable<T>;
+    export function union<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
-    export function unshift<TSource>(source: TSource[] | IEnumerable<TSource>, ...values: TSource[]): number;
+    export function unshift<T>(source: T[] | IEnumerable<T>, ...values: T[]): number;
 
-    export function zip<TSource, TOther, TResult>(source: TSource[] | IEnumerable<TSource>, other: TOther[] | IEnumerable<TOther>, resultSelector: (element: TSource, other: TOther) => TResult): IEnumerable<TResult>;
+    export function zip<T, TOther, TResult>(source: T[] | IEnumerable<T>, other: TOther[] | IEnumerable<TOther>, resultSelector: (element: T, other: TOther) => TResult): IEnumerable<TResult>;
 
-    export function wipe<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: (element: TSource, index?: number) => boolean = defaultPredicate, count: number = 0): IEnumerable<TSource>;
-    export function wipe<TSource>(source: TSource[] | IEnumerable<TSource>, predicate: string | number | symbol | TSource | any, count: number = 0): IEnumerable<TSource>;
+    export function wipe<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate, count: number = 0): IEnumerable<T>;
+    export function wipe<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any, count: number = 0): IEnumerable<T>;
 
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: (element: TSource, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
-    export function nearBy<TSource, TKey, TElement, TResult>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<TSource>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+    export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
 
-    export function toArray<TSource>(source: TSource[] | IEnumerable<TSource>): TSource[];
+    export function toArray<T>(source: T[] | IEnumerable<T>): T[];
 
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: string | number | symbol, comparer: string | number | symbol) : Directory<TKey, TValue>;
-    export function toDirectory<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: string | number | symbol, comparer: string | number | symbol) : Directory<TKey, TValue>;
+    export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : Directory<TKey, TValue>;
 
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => TKey, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
-    export function toLookup<TSource, TKey, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
+    export function toLookup<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
 
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => string, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => string, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => string, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: (element: TSource, index?: number) => TValue, comparer: string | number | symbol) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: (element: TSource, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
-    export function toObject<TSource, TValue>(source: TSource[] | IEnumerable<TSource>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+    export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+
+    export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: string | number | symbol, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<T>;
+    export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<T>;
+
+    export function thenByDescending<T, TKey>(source: IOrderedEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function thenByDescending<T, TKey>(source: IOrderedEnumerable<T>, keySelector: string | number | symbol, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
+    export function thenByDescending<T, TKey>(source: IOrderedEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: string | number | symbol): IOrderedEnumerable<T>;
+    export function thenByDescending<T, TKey>(source: IOrderedEnumerable<T>, keySelector: string | number | symbol, comparer: string | number | symbol): IOrderedEnumerable<T>;
 
     class Exception extends Error {
         constructor(message: string);
@@ -370,7 +380,7 @@ declare namespace Enumerable {
         readonly default: (element: any, index?: number) => void;
     };
 
-    export const config: {
+    export var config: {
         readonly extends: {
             array: boolean;
             object: boolean;

@@ -750,11 +750,18 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
     if (core.isArray(source) && core.array$forEach) {
         core.array$forEach.call(source, action, thisArg);
     } else {
-        let index = 0;
-        let callback = (element, index) => action.call(thisArg, element, index, source);
-        source = asIterable(source);
-        for (let element of source) {
-            callback(element, index++);
+        if (source instanceof IMapEnumerable) {
+            let callback = (element, key) => action.call(thisArg, element, key, source);
+            for (let entry of source) {
+                callback(entry.value, entry.key);
+            }
+        } else {
+            let index = 0;
+            let callback = (element, index) => action.call(thisArg, element, index, source);
+            source = asIterable(source);
+            for (let element of source) {
+                callback(element, index++);
+            }
         }
     }
 };
@@ -909,6 +916,7 @@ require('./extend');
 const IEnumerator = require('./IEnumerator');
 
 const IEnumerable = require('./IEnumerable');
+const IMapEnumerable = require('./enumerables/IMapEnumerable');
 const RepeatEnumerable = require('./enumerables/RepeatEnumerable');
 const RangeEnumerable = require('./enumerables/RangeEnumerable');
 const EmptyEnumerable = require('./enumerables/EmptyEnumerable');
