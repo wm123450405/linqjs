@@ -91,6 +91,7 @@
 			"5. 新增 Enumerable.from 方法, 功能与 asEnumerable 方法一致",
 			"6. 为 Enumerable.range 方法新增第三个参数, 设置步长",
 			"7. 新增 Enumerable.generate 方法, 通过生成方法构建新序列",
+			"8. 新增 IEnumerable.prototype.separate / IEnumerable.prototype.combine 方法, 分别用来对递归的结构进行拆解与合并",
 			"",
 			"优化(Optimization):",
 			"1. 优化 chunk/leftPad/rightPad/rand 方法的逻辑",
