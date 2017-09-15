@@ -14,6 +14,8 @@ const defaultResultSelector = require('./methods/defaultResultSelector');
 const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
+const defaultParentSelector = require('./methods/defaultParentSelector');
+const defaultChildrenSelector = require('./methods/defaultChildrenSelector');
 const defaultAction = require('./methods/defaultAction');
 
 const arrayComparer = require('./methods/arrayComparer');
@@ -799,6 +801,12 @@ Enumerable.wipe = function(source, predicate = defaultPredicate, count = 0) {
 Enumerable.nearBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
     return new NearGroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
+Enumerable.combine = function(source, parentSelector = defaultParentSelector, keySelector = defaultKeySelector, valueSelector = defaultSelector, comparer = defaultEqualityComparer) {
+    return new CombineEnumerable(asIterable(source), parentSelector, keySelector, valueSelector, comparer);
+};
+Enumerable.separate = function(source, childrenSelector = defaultChildrenSelector, valueSelector = defaultValueSelector) {
+    return new SeparateEnumerable(asIterable(source), childrenSelector, valueSelector);
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
@@ -962,3 +970,5 @@ const WipeEnumerable = require('./enumerables/WipeEnumerable');
 const NearGroupedEnumerable = require('./enumerables/NearGroupedEnumerable');
 const BetweenEnumerable = require('./enumerables/BetweenEnumerable');
 const GenerateEnumerable = require('./enumerables/GenerateEnumerable');
+const SeparateEnumerable = require('./enumerables/SeparateEnumerable');
+const CombineEnumerable = require('./enumerables/CombineEnumerable');

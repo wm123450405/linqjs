@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = (element, index) => typeof element.key === 'undefined' ? element : element.value;
+module.exports = (element, index) => typeof element.value === 'undefined' ? element : element.value;

@@ -12,6 +12,8 @@ const defaultResultSelector = require('./methods/defaultResultSelector');
 const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
+const defaultParentSelector = require('./methods/defaultParentSelector');
+const defaultChildrenSelector = require('./methods/defaultChildrenSelector');
 const defaultAction = require('./methods/defaultAction');
 
 const hasProxy = typeof Proxy !== 'undefined' && Proxy.toString().match(/native code/);
@@ -315,6 +317,12 @@ class IEnumerable extends Array {
     }
     nearBy(keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.nearBy(this, keySelector, elementSelector, resultSelector, comparer);
+    }
+    combine(parentSelector = defaultParentSelector, keySelector = defaultKeySelector, valueSelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.combine(this, parentSelector, keySelector, valueSelector, comparer);
+    }
+    separate(childrenSelector = defaultChildrenSelector, valueSelector = defaultValueSelector) {
+        return Enumerable.separate(this, childrenSelector, valueSelector);
     }
 }
 

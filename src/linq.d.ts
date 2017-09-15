@@ -7,6 +7,8 @@ declare namespace Enumerable {
     const defaultSelector;
     const defaultKeySelector;
     const defaultValueSelector;
+    const defaultParentSelector;
+    const defaultChildrenSelector;
     const defaultResultSelector;
     const defaultJoinSelector;
     const defaultSameComparer;
@@ -272,6 +274,28 @@ declare namespace Enumerable {
     export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: (element: T, index?: number) => TElement = defaultValueSelector, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
     export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
     export function nearBy<T, TKey, TElement, TResult>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
+
+    export function separate<T, TResult>(source: T[] | IEnumerable<T>, childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: (element: T) => TResult = defaultValueSelector): IEnumerable<TResult>;
+    export function separate<T, TResult>(source: T[] | IEnumerable<T>, childrenSelector: string | number | symbol, valueSelector: (element: T) => TResult = defaultValueSelector): IEnumerable<TResult>;
+    export function separate<T, TResult>(source: T[] | IEnumerable<T>, childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: string | number | symbol): IEnumerable<TResult>;
+    export function separate<T, TResult>(source: T[] | IEnumerable<T>, childrenSelector: string | number | symbol, valueSelector: string | number | symbol): IEnumerable<TResult>;
+
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+    export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
 
     export function toArray<T>(source: T[] | IEnumerable<T>): T[];
 
@@ -659,6 +683,28 @@ declare namespace Enumerable {
         nearBy<TKey, TElement, TResult>(keySelector: (element: T, index?: number) => TKey = defaultKeySelector, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
         nearBy<TKey, TElement, TResult>(keySelector: string | number | symbol, elementSelector: string | number | symbol, resultSelector: (key: TKey, grouping: IGrouping<TKey, TElement>) => TResult = defaultResultSelector, comparer: string | number | symbol): IEnumerable<IGrouping<T>>;
 
+        separate<TResult>(childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: (element: T) => TResult = defaultValueSelector): IEnumerable<TResult>;
+        separate<TResult>(childrenSelector: string | number | symbol, valueSelector: (element: T) => TResult = defaultValueSelector): IEnumerable<TResult>;
+        separate<TResult>(childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: string | number | symbol): IEnumerable<TResult>;
+        separate<TResult>(childrenSelector: string | number | symbol, valueSelector: string | number | symbol): IEnumerable<TResult>;
+
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (key: TKey, other: TKey) => boolean = defaultEqualityComparer): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+        combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+
         toArray(): T[];
 
         toDirectory<TKey, TValue>(keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
@@ -743,6 +789,18 @@ declare namespace Enumerable {
     export interface IChunk<T> extends IEnumerable<T> {
 
         readonly index: number;
+
+    }
+
+    export interface ICombine<TKey, TValue> extends IEnumerable<ICombine<TKey, TValue>> {
+
+        readonly key: TKey;
+        readonly parent: TKey;
+
+        readonly value: TValue;
+        readonly children: IEnumerable<ICombine<TKey, TValue>>;
+
+        toObject(): any;
 
     }
 

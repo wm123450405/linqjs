@@ -54,7 +54,8 @@ class GroupedEnumerable extends IEnumerable {
             };
             while (groupings.length > 0 || hasNext()) {
                 if (groupings.length > 0) {
-                    yield resultSelector(Enumerable.first(groupings).key, groupings.shift());
+                    let grouping = groupings.shift();
+                    yield resultSelector(grouping.key, grouping);
                 }
             }
         });

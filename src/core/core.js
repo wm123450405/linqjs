@@ -99,6 +99,12 @@ const core = {
 	isObject(value) {
 		return this.getType(value) === this.types.Object;
 	},
+    isSet(value) {
+        return this.getType(value) === this.types.Set;
+    },
+    isMap(value) {
+        return this.getType(value) === this.types.Map;
+    },
 	isSymbol(value) {
 		return this.getType(value) === this.types.Symbol;
 	},
@@ -117,6 +123,10 @@ const core = {
 	isProto(value) {
 		let type = this.getType(value);
     	return type === this.types.Array || type === this.types.String;
+	},
+	isList(value) {
+        let type = this.getType(value);
+        return type === this.types.Array || type === this.types.Enumerable || type === this.types.Set;
 	},
 	isInteger(value) {
 		return (/^[-+]?\d+$/.test(value) || Number.isInteger(value));

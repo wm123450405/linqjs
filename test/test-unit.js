@@ -60,6 +60,47 @@ module.exports = function(Enumerable) {
 			id: 6,
 			value: 6
 		};
+    const nodea = { key: a, value: a };
+    const nodeb = { key: b, value: b, parent: a };
+    const nodec = { key: c, value: c, parent: b };
+    const noded = { key: d, value: d, parent: b };
+    const nodee = { key: e, value: e, parent: a };
+    const nodef = { key: f, value: f };
+    const nodes = [ nodea, nodeb, nodec, noded, nodee, nodef ];
+    const tree = [
+        {
+            key: a,
+            value: nodea,
+            children: [
+                {
+                    key: b,
+                    value: nodeb,
+                    parent: a,
+                    children: [
+                        {
+                            key: c,
+                            value: nodec,
+                            parent: b
+                        },
+                        {
+                            key: d,
+                            value: noded,
+                            parent: b
+                        }
+                    ]
+                },
+                {
+                    key: e,
+                    value: nodee,
+                    parent: a
+                }
+            ]
+        },
+        {
+            key: f,
+            value: nodef
+        }
+    ];
 	const OutOfRangeException = Enumerable.exceptions.OutOfRangeException;
 	const NoSuchElementsException = Enumerable.exceptions.NoSuchElementsException;
 	const TooManyElementsException = Enumerable.exceptions.TooManyElementsException;
@@ -393,6 +434,13 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.wipe([a, b, c, a, b, c, a, b, c], e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
     //nearBy
 	assert.deepStrictEqual(Enumerable.nearBy([a, a, b, b, b, a, c, c]).select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
+	//combine
+    assert.deepStrictEqual(Enumerable.combine(nodes).select(v => v.toObject()).toArray(), tree);
+    assert.deepStrictEqual(Enumerable.combine(nodes, node => node.parent, node => node.key).select(v => v.toObject()).toArray(), tree);
+	//separate
+	assert.deepStrictEqual(Enumerable.separate([[[a, b], c, d], [e, f], a]).toArray(), [a, b, c, d, e, f, a]);
+    assert.deepStrictEqual(Enumerable.separate(tree).toArray(), nodes);
+	assert.deepStrictEqual(Enumerable.separate(tree, v => v.children).toArray(), nodes);
 
 	//IEnumerable methods
 	//select
@@ -694,6 +742,13 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].asEnumerable().wipe(e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
     //nearBy
     assert.deepStrictEqual([a, a, b, b, b, a, c, c].asEnumerable().nearBy().select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
+    //combine
+    assert.deepStrictEqual(nodes.asEnumerable().combine().select(v => v.toObject()).toArray(), tree);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).select(v => v.toObject()).toArray(), tree);
+    //separate
+    assert.deepStrictEqual([[[a, b], c, d], [e, f], a].asEnumerable().separate().toArray(), [a, b, c, d, e, f, a]);
+    assert.deepStrictEqual(tree.asEnumerable().separate().toArray(), nodes);
+    assert.deepStrictEqual(tree.asEnumerable().separate(v => v.children).toArray(), nodes);
 
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
