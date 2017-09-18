@@ -95,6 +95,7 @@
 			"",
 			"优化(Optimization):",
 			"1. 优化 chunk/leftPad/rightPad/rand 方法的逻辑",
+			"2. 优化 defaultValueSelector",
 			"",
 			"修复(Fixed):",
 			"1. 修复 开启扩展后 average/defaultIfEmpty/join 方法返回超出预期或报错的bug"
