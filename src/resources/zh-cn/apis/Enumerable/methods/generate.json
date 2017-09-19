@@ -1,7 +1,7 @@
 {
     "histroys": [
         {
-            "since": "2.1.15",
+            "since": "2.1.20",
             "overloads": [
                 {
                     "static": true,
