@@ -1,0 +1,35 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.20",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "defaultValue",
+                            "types": [
+                                "any"
+                            ],
+                            "descriptions": [
+                                "找不到元素时返回的默认值"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "序列中随机的一个元素. 如果未找到元素, 则返回 defaultValue"
+                        ]
+                    },
+                    "description": "返回序列中随机的一个元素. 如果未找到元素, 则返回默认值",
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "random"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

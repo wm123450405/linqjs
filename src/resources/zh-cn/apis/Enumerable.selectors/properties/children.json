@@ -1,0 +1,18 @@
+{
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.20",
+            "readonly": true,
+            "description": "默认的子节点集选择器",
+            "remarks": [
+                "该选择器是一个一元选择器, 它接受一个输入值, 如果输入值包含 children 属性, 将返回输入值的 children 属性值, 否则返回输入的值本身. 通常表示为 defaultChildrenSelector"
+            ],
+            "sees": [
+                {
+                    "guide": "selector"
+                }
+            ]
+        }
+    ]
+}

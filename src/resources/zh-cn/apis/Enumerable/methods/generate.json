@@ -7,12 +7,25 @@
                     "static": true,
                     "parameters": [
                         {
-                            "name": "start",
+                            "name": "generate",
                             "types": [
-                                "number"
+                                "function"
                             ],
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            },
                             "descriptions": [
-                                "序列中第一个整数的值"
+                                "用于生成每个元素的函数"
                             ]
                         },
                         {
@@ -20,42 +33,21 @@
                             "types": [
                                 "number"
                             ],
+                            "defaultValue": 0,
                             "descriptions": [
-                                "要生成的连续整数的数目"
+                                "在生成序列中元素的数目"
                             ]
                         }
                     ],
                     "returns": {
                         "type": "IEnumerable",
                         "descriptions": [
-                            "一个包含范围内连续的整数序列"
+                            "一个使用指定的生成器生成了所有元素的新序列"
                         ]
                     },
-                    "description": "生成指定范围内的整数序列",
+                    "description": "将使用生成器生成一个序列",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
-                    ]
-                }
-            ]
-        },
-        {
-            "since": "2.1.20",
-            "ref": true,
-            "overloads": [
-                {
-                    "parameters": [
-                        { },
-                        { },
-                        {
-                            "name": "step",
-                            "types": [
-                                "number"
-                            ],
-                            "defaultValue": 1,
-                            "descriptions": [
-                                "步长"
-                            ]
-                        }
                     ]
                 }
             ]

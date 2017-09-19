@@ -242,6 +242,34 @@
 			]
 		},
 		{
+			"name": "combine",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过将一组序列中每个元素中父节点的键与元素的键进行比对, 聚合成一个新的递归结构的序列",
+							"parameters": [
+								{
+									"name": "parentSelector"
+								},
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "concat",
 			"histroys": [
 				{
@@ -1645,6 +1673,34 @@
 			]
 		},
 		{
+			"name": "nearBy",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "根据指定的键选择器函数对序列中相邻的相同元素进行分组, 并且从每个组及其键中创建结果值. 通过使用指定的比较器对键值进行比较, 并且通过使用指定的函数对每个组的元素进行投影",
+							"parameters": [
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "elementSelector"
+								},
+								{
+									"name": "resultSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "ofType",
 			"histroys": [
 				{
@@ -1836,6 +1892,40 @@
 							"parameters": [
 								{
 									"name": "count"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "random",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "randomOrDefault",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素. 如果未找到元素, 则返回默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
 								}
 							]
 						}
@@ -2049,6 +2139,28 @@
 								},
 								{
 									"name": "resultSelector"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "separate",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "将一个递归结构的序列的展开为一个一维解构的序列",
+							"parameters": [
+								{
+									"name": "childrenSelector"
+								},
+								{
+									"name": "valueSelector"
 								}
 							]
 						}
@@ -2753,6 +2865,28 @@
 							"parameters": [
 								{
 									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "wipe",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过筛选器剔除序列中满足条件的一定数量的元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								},
+								{
+									"name": "count"
 								}
 							]
 						}

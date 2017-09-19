@@ -4,6 +4,17 @@
 	"name": "Enumerable.selectors",
 	"properties": [
 		{
+			"name": "children",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"description": "默认的子节点集选择器",
+					"readonly": true
+				}
+			]
+		},
+		{
 			"name": "default",
 			"histroys": [
 				{
@@ -32,6 +43,17 @@
 					"since": "2.1.15",
 					"deprecated": 0,
 					"description": "默认的键选择器",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "parent",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"description": "默认的父节点键选择器",
 					"readonly": true
 				}
 			]

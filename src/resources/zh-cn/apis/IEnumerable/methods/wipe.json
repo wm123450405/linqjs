@@ -1,0 +1,72 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.20",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "count",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": 0,
+                            "descriptions": [
+                                "需要剔除的数量, 默认全部剔除"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "剔除输入序列中满足条件的指定数量的元素组成的新序列"
+                        ]
+                    },
+                    "description": "通过筛选器剔除序列中满足条件的一定数量的元素",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "guide": "predicate"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

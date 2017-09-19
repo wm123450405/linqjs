@@ -6,7 +6,7 @@
             "readonly": true,
             "description": "默认的键选择器",
             "remarks": [
-                "该选择器是一个一元选择器, 它接受一个输入值, 如果输入值为key-value类型结构的数据, 将返回输入值的key值, 否则返回输入的值本身. 通常表示为 defaultKeySelector"
+                "该选择器是一个一元选择器, 它接受一个输入值, 如果输入值为 key-value 类型结构的数据, 将返回输入值的 key 属性值, 否则返回输入的值本身. 通常表示为 defaultKeySelector"
             ],
             "sees": [
                 {

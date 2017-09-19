@@ -1,7 +1,7 @@
 {
     "histroys": [
         {
-            "since": "2.1.15",
+            "since": "2.1.20",
             "overloads": [
                 {
                     "static": true,
@@ -16,12 +16,22 @@
                             ]
                         },
                         {
-                            "name": "count",
+                            "name": "end",
                             "types": [
                                 "number"
                             ],
                             "descriptions": [
-                                "要生成的连续整数的数目"
+                                "序列中最后一个整数的最大值"
+                            ]
+                        },
+                        {
+                            "name": "step",
+                            "types": [
+                                "number"
+                            ],
+                            "defaultValue": 1,
+                            "descriptions": [
+                                "步长"
                             ]
                         }
                     ],
@@ -33,29 +43,8 @@
                     },
                     "description": "生成指定范围内的整数序列",
                     "remarks": [
-                        "此方法通过延迟执行的方式实现"
-                    ]
-                }
-            ]
-        },
-        {
-            "since": "2.1.20",
-            "ref": true,
-            "overloads": [
-                {
-                    "parameters": [
-                        { },
-                        { },
-                        {
-                            "name": "step",
-                            "types": [
-                                "number"
-                            ],
-                            "defaultValue": 1,
-                            "descriptions": [
-                                "步长"
-                            ]
-                        }
+                        "此方法通过延迟执行的方式实现",
+                        "一般的, 生成的新序列中包含 start 与 end."
                     ]
                 }
             ]

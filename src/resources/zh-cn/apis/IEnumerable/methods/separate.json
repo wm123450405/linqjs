@@ -1,0 +1,94 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.20",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "childrenSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于提取每个元素的子节点集合的函数"
+                            ],
+                            "defaultValue": "defaultChildrenSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "IEnumerable"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "valueSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于将每个源节点映射到结果序列中的元素的函数"
+                            ],
+                            "defaultValue": "defaultValueSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "展开后的序列"
+                        ]
+                    },
+                    "description": "将一个递归结构的序列的展开为一个一维解构的序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "selectMany"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "combine"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "children"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "value"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

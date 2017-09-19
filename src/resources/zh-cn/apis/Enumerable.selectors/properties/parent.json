@@ -1,0 +1,18 @@
+{
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.20",
+            "readonly": true,
+            "description": "默认的父节点键选择器",
+            "remarks": [
+                "该选择器是一个一元选择器, 它接受一个输入值, 返回输入值的 parent 属性值. 通常表示为 defaultParentSelector"
+            ],
+            "sees": [
+                {
+                    "guide": "selector"
+                }
+            ]
+        }
+    ]
+}

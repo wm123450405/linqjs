@@ -1,0 +1,161 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.20",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "parentSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于提取每个元素的父节点键的函数"
+                            ],
+                            "defaultValue": "defaultParentSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "keySelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于提取每个元素的键的函数"
+                            ],
+                            "defaultValue": "defaultKeySelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "valueSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于提取每个元素的值的函数"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于对键进行比较相等比较器"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "聚合后的新序列"
+                        ]
+                    },
+                    "description": "通过将一组序列中每个元素中父节点的键与元素的键进行比对, 聚合成一个新的递归结构的序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "所有父节点键未被匹配的元素将成为新序列的顶层元素"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "groupBy"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "separate"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "parent"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "key"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "value"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
