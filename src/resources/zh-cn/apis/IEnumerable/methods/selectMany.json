@@ -97,6 +97,29 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb534732(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 selectMany 在数组上执行的一对多投影。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 selectMany 在数组上执行的一对多投影并使用每个外部元素的索引。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 selectMany 在数组上执行的一对多投影并且使用结果选择器函数来保持结果元素与源序列的对应关系。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "3.js"
+                            }
+                        }
                     ]
                 }
             ]
