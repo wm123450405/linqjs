@@ -97,6 +97,15 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb548916(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 orderByDescending 对序列中使用转换函数和自定义比较器按降序对元素进行排序。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]

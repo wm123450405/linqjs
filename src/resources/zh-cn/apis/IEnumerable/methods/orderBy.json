@@ -97,6 +97,15 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb549422(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 orderBy 序列的元素进行排序。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]

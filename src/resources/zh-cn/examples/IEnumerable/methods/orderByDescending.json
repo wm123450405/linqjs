@@ -1,1 +1,3 @@
-{}
+{
+	"1.js": "const specialComparer = (d1, d2) => {\r\n    let f1 = d1 * 1e16 % 1e16 / 1e16;\r\n    let f2 = d2 * 1e16 % 1e16 / 1e16;\r\n    if (f1 === f2) {\r\n        return d1 - d2;\r\n    } else if (f1 > f2) {\r\n        return 1;\r\n    } else {\r\n        return -1;\r\n    }\r\n};\r\n\r\nlet decimals = [ 6.2, 8.3, 0.5, 1.3, 6.3, 9.7 ];\r\n\r\nlet query = decimals.asEnumerable().orderByDescending(num => num, specialComparer);\r\n\r\nfor (let num of query) {\r\n    console.log(num);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 9.7\r\n 0.5\r\n 8.3\r\n 6.3\r\n 1.3\r\n 6.2\r\n*/"
+}

@@ -19,7 +19,7 @@
 					<div v-if="executing">{{ runtime ? caption.loadRuntime : caption.executing }}</div>
 				</div>
 				<ul class="list">
-					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <pre v-for="log in logs.contents">{{ log | json }}</pre></li>
+					<li v-for="logs in logList" :class="logs.type"><i class="fa fa-fw" :class="logs.type === 'result' ? 'fa-angle-left' : logs.type === 'error' ? 'fa-times-circle' : ''"></i> <pre v-for="log in logs.contents" style="padding-right: .5em;">{{ log | json }}</pre></li>
 				</ul>
 			</div>
 		</div>
