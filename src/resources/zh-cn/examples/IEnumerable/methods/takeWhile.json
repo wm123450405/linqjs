@@ -1,0 +1,4 @@
+{
+	"1.js": "let fruits = [ \"苹果\", \"香蕉\", \"芒果\", \"橘子\", \"百香果\", \"葡萄\" ];\r\n\r\nlet query = fruits.asEnumerable().takeWhile(fruit => \"橘子\" !== fruit);\r\n\r\nfor (let fruit of query) {\r\n    console.log(fruit);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 苹果\r\n 香蕉\r\n 芒果\r\n*/",
+	"2.js": "let fruits = [ \"苹果\", \"百香果\", \"香蕉\", \"芒果\", \"橘子\", \"蓝莓\", \"葡萄\", \"草莓\" ];\r\n\r\nlet query = fruits.asEnumerable().takeWhile((fruit, index) => fruit.length >= index);\r\n\r\nfor (let fruit of query) {\r\n    console.log(fruit);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 苹果\r\n 百香果\r\n 香蕉\r\n*/"
+}

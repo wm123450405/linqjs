@@ -41,6 +41,15 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb358985(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 skip 跳过指定的数量的已排序数组中的元素并返回其余元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]

@@ -1,0 +1,6 @@
+{
+	"1.js": "let fruits1 = [ \"橘子\" ];\r\n\r\nlet fruit1 = fruits1.asEnumerable().single();\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 橘子\r\n*/",
+	"2.js": "let fruits2 = [ \"橘子\", \"苹果\" ];\r\nlet fruit2 = null;\r\n\r\ntry {\r\n    fruit2 = fruits2.asEnumerable().single();\r\n    console.log(fruit2);\r\n} catch (e) {\r\n    console.log(\"集合中不包含恰好一个元素。\");\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 集合中不包含恰好一个元素。\r\n*/\r\n",
+	"3.js": "let fruits = [ \"苹果\", \"香蕉\", \"芒果\", \"橘子\", \"百香果\", \"葡萄\" ];\r\n\r\nlet fruit1 = fruits.asEnumerable().single(fruit => fruit.length > 2);\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 百香果\r\n*/",
+	"4.js": "let fruits = [ \"苹果\", \"香蕉\", \"芒果\", \"橘子\", \"百香果\", \"葡萄\" ];\r\nlet fruit2 = null;\r\n\r\ntry {\r\n    fruit2 = fruits.asEnumerable().single(fruit => fruit.length > 5);\r\n\r\n    console.log(fruit2);\r\n} catch (e) {\r\n    console.log(\"集合中不包含恰好一个长度超过5的元素。\");\r\n}\r\n\r\n// 这段代码的输出结果如下：\r\n//\r\n// 集合中不包含恰好一个长度超过5的元素。"
+}

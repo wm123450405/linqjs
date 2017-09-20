@@ -63,6 +63,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb549288(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 skipWhile 跳过数组开头部分连续的通过条件测试的元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 skipWhile 跳过一个数组开头部分取决于元素的索引某个条件为真的元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

@@ -1,0 +1,4 @@
+{
+	"1.js": "let pet1 = { name: \"小白\", age: 2 };\r\nlet pet2 = { name: \"旺财\", age: 8 };\r\n\r\n// 创建两个宠物列表.\r\nlet pets1 = [ pet1, pet2 ];\r\nlet pets2 = [ pet1, pet2 ];\r\n\r\nlet equal = pets1.asEnumerable().sequenceEqual(pets2);\r\n\r\nconsole.log(`这些宠物列表${ equal ? \"是\" : \"不是\" }相同的。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 这些宠物列表是相同的。\r\n*/",
+	"2.js": "// 一个自定义的比较器。\r\nlet productComparer = (x, y) => {\r\n    if (x === y) return true;\r\n    if (!x || !y) return false;\r\n    // 如果产品的名称和数目相等，则表示是相同的产品。\r\n    return x.code === y.code && x.name === y.name;\r\n};\r\n\r\nlet storeA = [\r\n    { name: \"苹果\", code: 9 },\r\n    { name: \"橘子\", code: 4 }\r\n];\r\n\r\nlet storeB = [\r\n    { name: \"苹果\", code: 9 },\r\n    { name: \"橘子\", code: 4 }\r\n];\r\n\r\nlet equalAB = storeA.asEnumerable().sequenceEqual(storeB, productComparer);\r\n\r\nconsole.log(\"相同? \" + equalAB);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 相同? True\r\n*/"
+}

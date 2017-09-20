@@ -1,0 +1,4 @@
+{
+	"1.js": "let grades = [ 59, 82, 70, 56, 92, 98, 85 ];\r\n\r\nlet lowerGrades = grades.asEnumerable().orderByDescending().skipWhile(grade => grade >= 80);\r\n\r\nconsole.log(\"All grades below 80:\");\r\nfor (let grade of lowerGrades) {\r\n    console.log(grade);\r\n}\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n All grades below 80:\r\n 70\r\n 59\r\n 56\r\n*/",
+	"2.js": "let amounts = [ 5000, 2500, 9000, 8000, 6500, 4000, 1500, 5500 ];\r\n\r\nlet query = amounts.asEnumerable().skipWhile((amount, index) => amount > index * 1000);\r\n\r\nfor (let amount of query) {\r\n    console.log(amount);\r\n}\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n 4000\r\n 1500\r\n 5500\r\n*/"
+}

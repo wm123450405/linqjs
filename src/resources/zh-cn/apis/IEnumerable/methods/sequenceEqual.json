@@ -65,6 +65,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb342073(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 sequenceEqual 以确定两个序列是否相等。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的示例演示如何实现可在 sequenceEqual 方法中使用的相等比较器，并通过此比较器确定两个序列是否相等。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

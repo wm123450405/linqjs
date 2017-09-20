@@ -1,0 +1,3 @@
+{
+	"1.js": "let grades = [ 59, 82, 70, 56, 92, 98, 85 ];\r\n\r\nlet lowerGrades = grades.asEnumerable().orderByDescending().skip(3);\r\n\r\nconsole.log(\"不包含最大三个数其余数字有：\");\r\nfor (let grade of lowerGrades) {\r\n    console.log(grade);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 不包含最大三个数其余数字有：\r\n 82\r\n 70\r\n 59\r\n 56\r\n*/"
+}

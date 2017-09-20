@@ -1,0 +1,6 @@
+{
+	"1.js": "let fruits1 = [ \"橘子\" ];\r\n\r\nlet fruit1 = fruits1.asEnumerable().singleOrDefault(\"没有这样的水果！\");\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 橘子\r\n*/",
+	"2.js": "let fruits2 = [];\r\n\r\nlet fruit2 = fruits2.asEnumerable().singleOrDefault(\"没有这样的水果！\");\r\n\r\nconsole.log(fruit2);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 没有这样的水果！\r\n*/",
+	"3.js": "let fruits = [ \"苹果\", \"香蕉\", \"芒果\", \"橘子\", \"百香果\", \"葡萄\" ];\r\n\r\nlet fruit1 = fruits.asEnumerable().singleOrDefault(\"没有这样的水果！\", fruit => fruit.length > 2);\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 百香果\r\n*/",
+	"4.js": "let fruits = [ \"苹果\", \"香蕉\", \"芒果\", \"橘子\", \"百香果\", \"葡萄\" ];\r\n\r\nlet fruit2 = fruits.asEnumerable().singleOrDefault(\"没有这样的水果！\", fruit => fruit.length > 5);\r\n\r\nconsole.log(fruit2);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 没有这样的水果！\r\n*/"
+}

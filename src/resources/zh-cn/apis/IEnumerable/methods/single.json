@@ -59,6 +59,36 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb535118(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 single 来选择数组的唯一元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示 single 在序列不包含恰好一个元素时引发异常。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 single 来选择数组中满足条件的唯一元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "3.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示 single 在序列不包含恰好一个元素满足条件时引发异常。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "4.js"
+                            }
+                        }
                     ]
                 }
             ]

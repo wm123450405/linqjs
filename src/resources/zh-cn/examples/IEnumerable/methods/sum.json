@@ -1,0 +1,4 @@
+{
+	"1.js": "let numbers = [ 43.68, 1.25, 583.7, 6.5 ];\r\n\r\nlet sum = numbers.asEnumerable().sum();\r\n\r\nconsole.log(`所有数的和是${ sum }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 所有数的和是635.13。\r\n*/",
+	"2.js": "let packages = [\r\n    { company: \"化肥\", weight: 25.2 },\r\n    { company: \"水泥\", weight: 18.7 },\r\n    { company: \"海绵\", weight: 6.0 },\r\n    { company: \"黄沙\", weight: 33.9 }\r\n];\r\n\r\nlet totalWeight = packages.asEnumerable().sum(pkg => pkg.weight);\r\n\r\nconsole.log(`所有袋子的总重量是：${ totalWeight }`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 所有袋子的总重量是：83.8\r\n*/"
+}

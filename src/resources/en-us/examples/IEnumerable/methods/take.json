@@ -1,0 +1,3 @@
+{
+	"1.js": "let grades = [ 59, 82, 70, 56, 92, 98, 85 ];\r\n\r\nlet topThreeGrades = grades.asEnumerable().orderByDescending().take(3);\r\n\r\nconsole.log(\"The top three grades are:\");\r\nfor (let grade of topThreeGrades) {\r\n    console.log(grade);\r\n}\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n The top three grades are:\r\n 98\r\n 92\r\n 85\r\n*/"
+}

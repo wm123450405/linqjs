@@ -1,0 +1,6 @@
+{
+	"1.js": "let fruits1 = [ \"orange\" ];\r\n\r\nlet fruit1 = fruits1.asEnumerable().singleOrDefault(\"No such string!\");\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n orange\r\n*/",
+	"2.js": "let fruits2 = [];\r\n\r\nlet fruit2 = fruits2.asEnumerable().singleOrDefault(\"No such string!\");\r\n\r\nconsole.log(fruit2);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n No such string!\r\n*/",
+	"3.js": "let fruits = [ \"apple\", \"banana\", \"mango\", \"orange\", \"passionfruit\", \"grape\" ];\r\n\r\nlet fruit1 = fruits.asEnumerable().singleOrDefault(\"No such string!\", fruit => fruit.length > 10);\r\n\r\nconsole.log(fruit1);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n passionfruit\r\n*/",
+	"4.js": "let fruits = [ \"apple\", \"banana\", \"mango\", \"orange\", \"passionfruit\", \"grape\" ];\r\n\r\nlet fruit2 = fruits.asEnumerable().singleOrDefault(\"No such string!\", fruit => fruit.length > 15);\r\n\r\nconsole.log(fruit2);\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n No such string!\r\n*/"
+}
