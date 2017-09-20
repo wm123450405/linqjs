@@ -18220,8 +18220,8 @@ var core = require('./../core/core');
 
 var PropertyExpressionInvalidException = require('./../core/exceptions/PropertyExpressionInvalidException');
 
-var regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")\]))(\.\2|\3)*$/ig;
-var regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")\]/ig;
+var regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))(\.([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))*$/ig;
+var regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")]/ig;
 
 module.exports = function (property) {
 	if (core.isSymbol(property) || core.isNumber(property)) {
@@ -18235,7 +18235,7 @@ module.exports = function (property) {
 	} else {
 		regValid.lastIndex = 0;
 		if (regValid.test(property)) {
-			return function (element, index) {
+			return function (element) {
 				regSplit.lastIndex = 0;
 				var result = void 0;
 				while (typeof element !== 'undefined' && (result = regSplit.exec(property))) {
