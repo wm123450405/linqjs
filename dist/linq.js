@@ -8723,6 +8723,12 @@ core.defineProperty(Enumerable, 'selectors', function () {
         get value() {
             return defaultValueSelector;
         },
+        get children() {
+            return defaultChildrenSelector;
+        },
+        get parent() {
+            return defaultParentSelector;
+        },
         get result() {
             return defaultResultSelector;
         },

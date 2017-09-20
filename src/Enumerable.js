@@ -846,6 +846,12 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     get value() {
         return defaultValueSelector;
     },
+    get children() {
+        return defaultChildrenSelector;
+    },
+    get parent() {
+        return defaultParentSelector;
+    },
     get result() {
         return defaultResultSelector;
     },
