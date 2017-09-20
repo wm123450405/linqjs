@@ -201,7 +201,6 @@ const createDirectory = refreshLangName => {
 	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
 	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));
     fs.writeFileSync(path.join(scripts, 'histroy.js'), 'module.exports = (version, callback, pre, post) => { ' + common.versions.map(version => `if (version === '${ version }') return require.ensure([], function(require) { if (callback) { pre && pre(); callback(require('${ common.module(version) }')); post && post(); } }, '${ common.module(version) }');`).join(' else ') + ' };');
-    //fs.writeFileSync(path.join(scripts, 'histroy.js'), 'if(Boolean(0)) { ' + common.versions.map(version => `require('linq-js-${ version }');`).join('') + '}');
 
 	console.log('apis:' + defaultApis);
 

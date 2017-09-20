@@ -3,13 +3,13 @@ const Server = require('webpack-dev-server');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const cluster = require('cluster');
 const extend = require('extend');
 const niv = require('npm-install-version');
 
 require('./pack');
 const common = require('./src/scripts/common');
 
+const libs = path.join(__dirname, 'libs');
 const pack = process.env.NODE_ENV === 'production';
 const reload = process.env.RUNTIME_RELOAD === 'reload';
 const ignoreSkip = process.env.IGNORE_SKIP;
@@ -150,6 +150,10 @@ const install = (packageName, options) => {
     } else {
         niv.install(packageName, options);
     }
+    fs.writeFileSync(path.join(libs, `${ module }.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js')));
+    fs.writeFileSync(path.join(libs, `${ module }.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js')));
+    fs.writeFileSync(path.join(libs, `${ module }.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js.map')));
+    fs.writeFileSync(path.join(libs, `${ module }.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js.map')));
 };
 
 for (let version of common.versions) {
@@ -159,5 +163,12 @@ for (let version of common.versions) {
         install('linq-js@' + version, { destination: common.module(version) });
     }
 }
+(() => {
+    let module = common.module(common.lastest);
+    fs.writeFileSync(path.join(libs, `linq-js.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js')));
+    fs.writeFileSync(path.join(libs, `linq-js.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js')));
+    fs.writeFileSync(path.join(libs, `linq-js.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js.map')));
+    fs.writeFileSync(path.join(libs, `linq-js.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js.map')));
+})();
 
 doPack();
