@@ -35,6 +35,9 @@
             "details": [
                 {
                     "type": "example",
+                    "descriptions": [
+                        "模块化项目中可使用 require 引入"
+                    ],
                     "scripts": [
                         {
                             "type": "javascript",
@@ -43,6 +46,22 @@
                     ],
                     "remarks": [
                         "说明:本module依赖于ES6,建议项目在中使用ES6,以下案例中将均使用ES6写法"
+                    ]
+                },
+                {
+                    "type": "example",
+                    "descriptions": [
+                        "也可以直接在 html 中引入"
+                    ],
+                    "scripts": [
+                        {
+                            "type": "<script>",
+                            "src": "libs/linq-js.min.js"
+                        },
+                        {
+                            "type": "<script>",
+                            "src": "libs/linq-js.js"
+                        }
                     ]
                 }
             ]
