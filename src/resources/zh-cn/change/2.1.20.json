@@ -1,5 +1,5 @@
 {
-    "prepublish": true,
+    "publish": "2017-09-22",
     "contents": [
         "新增(New):",
         "1. 新增 IEnumerable.prototype.random / IEnumerable.prototype.randomOrDefault 方法, 用来从序列中随机获取一个元素",

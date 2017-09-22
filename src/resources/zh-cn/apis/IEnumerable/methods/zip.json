@@ -69,8 +69,17 @@
                             "guide": "selector"
                         },
                         {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb548775(v=vs.110).aspx",
+                            "href": "https://msdn.microsoft.com/{language}/library/dd267698(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 zip 方法以合并两个序列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
                         }
                     ]
                 }

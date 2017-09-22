@@ -76,6 +76,22 @@
                             "href": "https://msdn.microsoft.com/{language}/library/bb358407(v=vs.110).aspx",
                             "title": "Microsoft MSDN"
                         }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 union 以获取两个整数的序列的并集。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的示例演示如何实现在 union 方法中可用的相等比较器，并使用此比较器获取两个序列的并集。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
                     ]
                 }
             ]

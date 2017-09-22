@@ -1,0 +1,4 @@
+{
+	"1.js": "let fruits = [ \"apple\", \"passionfruit\", \"banana\", \"mango\", \"orange\", \"blueberry\", \"grape\", \"strawberry\" ];\r\n\r\nlet query = fruits.asEnumerable().where(fruit => fruit.length < 6);\r\n\r\nfor (let fruit of query) {\r\n    console.log(fruit);\r\n}\r\n/*\r\n This code produces the following output:\r\n\r\n apple\r\n mango\r\n grape\r\n*/",
+	"2.js": "let numbers = [ 0, 30, 20, 15, 90, 85, 40, 75 ];\r\n\r\nlet query = numbers.asEnumerable().where((number, index) => number <= index * 10);\r\n\r\nfor (let number of query) {\r\n    console.log(number);\r\n}\r\n\r\n/*\r\n This code produces the following output:\r\n\r\n 0\r\n 20\r\n 15\r\n 40\r\n*/"
+}
