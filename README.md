@@ -6,13 +6,18 @@
 [![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.org/wm123450405/linqjs)
 
 use linq and lambda in javascript
+
 在javascript中使用linq与lambda
 
 在1.0.0中使用了字符串的lambda表达式,过于繁琐,并且不支持延迟操作
+
 Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory is used less and using deferred execution.
+
 从2.1.0开始整体代码重新编写,使用全新的ES6的特性,性能更好,同时对数据的操作是延时操作,占用更少
 
+
 [帮助文档(完善中)](http://wm123450405.github.io/linqjs/#/zh-cn) :+1:
+
 [Documentation(not completed)](http://wm123450405.github.io/linqjs/#/en-us) :+1:
 
 ## Usage 用法
@@ -80,6 +85,7 @@ function asEnumerable():IEnumerable;
 > ```
 
 :*[see msdn(IEnumerable<T>)](https://msdn.microsoft.com/en-us/library/ckzcawb8(v=vs.110).aspx)*
-:*[参考 MSDN(IEnumerable<T>)](https://msdn.microsoft.com/zh-cn/library/ckzcawb8(v=vs.110).aspx)*  
+:*[参考 MSDN(IEnumerable<T>)](https://msdn.microsoft.com/zh-cn/library/ckzcawb8(v=vs.110).aspx)*
+
 :*[see msdn(Enumerable)](https://msdn.microsoft.com/en-us/library/system.linq.enumerable_methods(v=vs.110).aspx)*
 :*[参考 MSDN(Enumerable)](https://msdn.microsoft.com/zh-cn/library/system.linq.enumerable_methods(v=vs.110).aspx)*
