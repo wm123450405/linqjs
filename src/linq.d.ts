@@ -297,6 +297,15 @@ declare namespace Enumerable {
     export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
     export function combine<T, TKey, TValue>(source: T[] | IEnumerable<T>, parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
 
+    export function isSub<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): boolean;
+    export function isSub<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: string | number | symbol): boolean;
+
+    export function isSuper<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): boolean;
+    export function isSuper<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: string | number | symbol): boolean;
+
+    export function symmetric<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): IEnumerable<T>;
+    export function symmetric<T>(source: T[] | IEnumerable<T>, other: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
+
     export function toArray<T>(source: T[] | IEnumerable<T>): T[];
 
     export function toDirectory<T, TKey, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => TKey, valueSelector: (element: T, index?: number) => TValue, comparer: (element: TKey, other: TKey) => boolean = defaultSameComparer) : Directory<TKey, TValue>;
@@ -704,6 +713,15 @@ declare namespace Enumerable {
         combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: (element: T) => TKey = defaultKeySelector, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
         combine<TKey, TValue>(parentSelector: (element: T) => TKey = defaultParentSelector, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
         combine<TKey, TValue>(parentSelector: string | number | symbol, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol): IEnumerable<ICombine<TKey, TValue>>;
+
+        isSub(other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): boolean;
+        isSub(other: T[] | IEnumerable<T>, comparer: string | number | symbol): boolean;
+
+        isSuper(other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): boolean;
+        isSuper(other: T[] | IEnumerable<T>, comparer: string | number | symbol): boolean;
+
+        symmetric(other: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean): IEnumerable<T>;
+        symmetric(other: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
         toArray(): T[];
 

@@ -441,6 +441,14 @@ module.exports = function(Enumerable) {
 	assert.deepStrictEqual(Enumerable.separate([[[a, b], c, d], [e, f], a]).toArray(), [a, b, c, d, e, f, a]);
     assert.deepStrictEqual(Enumerable.separate(tree).toArray(), nodes);
 	assert.deepStrictEqual(Enumerable.separate(tree, v => v.children).toArray(), nodes);
+	//isSub
+    assert.strictEqual(Enumerable.isSub([1, 2, 3], [5, 4, 3, 2, 1]), true);
+    assert.strictEqual(Enumerable.isSub([1, 2, 3], [5, 4, 3]), false);
+    //isSuper
+    assert.strictEqual(Enumerable.isSuper([5, 4, 3, 2, 1], [1, 2, 3]), true);
+    assert.strictEqual(Enumerable.isSuper([5, 4, 3], [1, 2, 3]), false);
+    //symmetric
+	assert.deepStrictEqual(Enumerable.symmetric([1, 2, 3], [3, 4, 5]).toArray(), [1, 2, 4, 5]);
 
 	//IEnumerable methods
 	//select
@@ -749,6 +757,14 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual([[[a, b], c, d], [e, f], a].asEnumerable().separate().toArray(), [a, b, c, d, e, f, a]);
     assert.deepStrictEqual(tree.asEnumerable().separate().toArray(), nodes);
     assert.deepStrictEqual(tree.asEnumerable().separate(v => v.children).toArray(), nodes);
+    //isSub
+    assert.strictEqual([1, 2, 3].asEnumerable().isSub([5, 4, 3, 2, 1]), true);
+    assert.strictEqual([1, 2, 3].asEnumerable().isSub([5, 4, 3]), false);
+    //isSuper
+    assert.strictEqual([5, 4, 3, 2, 1].asEnumerable().isSuper([1, 2, 3]), true);
+    assert.strictEqual([5, 4, 3].asEnumerable().isSuper([1, 2, 3]), false);
+    //symmetric
+    assert.deepStrictEqual([1, 2, 3].asEnumerable().symmetric([3, 4, 5]).toArray(), [1, 2, 4, 5]);
 
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
@@ -1161,6 +1177,21 @@ module.exports = function(Enumerable) {
         assert.deepStrictEqual([a, b, c, a, b, c, a, b, c].wipe(e => e === a, 2).toArray(), [b, c, b, c, a, b, c]);
         //nearBy
         assert.deepStrictEqual([a, a, b, b, b, a, c, c].nearBy().select(g => g.toArray()).toArray(), [[a, a], [b, b, b], [a], [c, c]]);
+        //combine
+        assert.deepStrictEqual(nodes.combine().select(v => v.toObject()).toArray(), tree);
+        assert.deepStrictEqual(nodes.combine(node => node.parent, node => node.key).select(v => v.toObject()).toArray(), tree);
+        //separate
+        assert.deepStrictEqual([[[a, b], c, d], [e, f], a].separate().toArray(), [a, b, c, d, e, f, a]);
+        assert.deepStrictEqual(tree.separate().toArray(), nodes);
+        assert.deepStrictEqual(tree.separate(v => v.children).toArray(), nodes);
+        //isSub
+        assert.strictEqual([1, 2, 3].isSub([5, 4, 3, 2, 1]), true);
+        assert.strictEqual([1, 2, 3].isSub([5, 4, 3]), false);
+        //isSuper
+        assert.strictEqual([5, 4, 3, 2, 1].isSuper([1, 2, 3]), true);
+        assert.strictEqual([5, 4, 3].isSuper([1, 2, 3]), false);
+        //symmetric
+        assert.deepStrictEqual([1, 2, 3].symmetric([3, 4, 5]).toArray(), [1, 2, 4, 5]);
 
 		//splice
 		let array_splice = [1, 2, 4, 3, 5, 6];
