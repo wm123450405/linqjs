@@ -11,13 +11,30 @@ const Enumerable = require('./../Enumerable');
 const defaultSelector = require('./../methods/defaultSelector');
 const defaultComparer = require('./../methods/defaultComparer');
 
+const FIRST = Symbol.for('FIRST');
+
 class IOrderedEnumerable extends IEnumerable {
     constructor(source, orderByComparer = defaultComparer) {
         super(source);
         orderByComparer = methods.asComparer(orderByComparer);
         core.defineProperty(this, Symbol.iterator, function* OrderedIterator() {
-            for (let element of Enumerable.toArray(source).sort(orderByComparer)) {
-                yield element;
+            let temp = [];
+            let first = FIRST;
+            for (let element of source) {
+                if (first === FIRST) {
+                    first = element;
+                } else if (orderByComparer(first, element) <= 0) {
+                    temp.push(element);
+                } else {
+                    temp.unshift(first);
+                    first = element;
+                }
+            }
+            if (first !== FIRST) {
+                yield first;
+                for (let element of temp.sort(orderByComparer)) {
+                    yield element;
+                }
             }
         });
         core.defineProperties(this, {
