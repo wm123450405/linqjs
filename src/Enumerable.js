@@ -807,6 +807,21 @@ Enumerable.combine = function(source, parentSelector = defaultParentSelector, ke
 Enumerable.separate = function(source, childrenSelector = defaultChildrenSelector, valueSelector = defaultValueSelector) {
     return new SeparateEnumerable(asIterable(source), childrenSelector, valueSelector);
 };
+Enumerable.isSub = function(source, other, comparer = defaultEqualityComparer) {
+    source = asIterable(source);
+    for (let element of source) {
+        if (!this.contains(other, element, comparer)) {
+            return false;
+        }
+    }
+    return true;
+};
+Enumerable.isSuper = function(source, other, comparer = defaultEqualityComparer) {
+    return this.isSub(other, source, comparer);
+};
+Enumerable.symmetric = function(source, other, comparer = defaultEqualityComparer) {
+    return new SymmetricEnumerable(asIterable(source), asIterable(other), comparer);
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
@@ -978,3 +993,4 @@ const BetweenEnumerable = require('./enumerables/BetweenEnumerable');
 const GenerateEnumerable = require('./enumerables/GenerateEnumerable');
 const SeparateEnumerable = require('./enumerables/SeparateEnumerable');
 const CombineEnumerable = require('./enumerables/CombineEnumerable');
+const SymmetricEnumerable = require('./enumerables/SymmetricEnumerable');

@@ -324,6 +324,15 @@ class IEnumerable extends Array {
     separate(childrenSelector = defaultChildrenSelector, valueSelector = defaultValueSelector) {
         return Enumerable.separate(this, childrenSelector, valueSelector);
     }
+    isSub(other, comparer = defaultEqualityComparer) {
+        return Enumerable.isSub(this, other, comparer);
+    }
+    isSuper(other, comparer = defaultEqualityComparer) {
+        return Enumerable.isSuper(this, other, comparer);
+    }
+    symmetric(other, comparer = defaultEqualityComparer) {
+        return Enumerable.symmetric(this, other, comparer);
+    }
 }
 
 module.exports = IEnumerable;
