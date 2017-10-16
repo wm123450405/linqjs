@@ -1,0 +1,13 @@
+{
+    "prepublish": true,
+    "contents": [
+        "新增(New):",
+        "1. 新增 IEnumerable.prototype.isSub / IEnumerable.prototype.isSuper 方法, 用来判断两个序列的从属关系",
+        "2. 新增 IEnumerable.prototype.symmetric 方法, 用来计算两个序列的对称差集",
+        "",
+        "优化(Optimization):",
+        "1. 优化 orderBy/orderByDescending/thenBy/thenByDescending 方法的性能",
+        "",
+        "修复(Fixed):"
+    ]
+}
