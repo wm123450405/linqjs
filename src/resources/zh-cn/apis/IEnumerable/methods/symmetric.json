@@ -1,9 +1,10 @@
 {
     "histroys": [
         {
-            "since": "2.1.15",
+            "since": "2.1.21",
             "overloads": [
                 {
+                    "lazy": true,
                     "parameters": [
                         {
                             "name": "other",
@@ -15,17 +16,19 @@
                                 "string"
                             ],
                             "descriptions": [
-                                "需要做对比的另一个序列"
+                                "需要与源序列合并计算对称差分的序列"
                             ]
                         },
                         {
                             "name": "comparer",
                             "types": [
                                 "function",
-                                "string"
+                                "string",
+                                "symbol",
+                                "number"
                             ],
                             "descriptions": [
-                                "用于对值进行比较的相等比较器"
+                                "用于判定两个序列元素的值是否相等的相等比较器"
                             ],
                             "defaultValue": "defaultEqualityComparer",
                             "declare": {
@@ -50,55 +53,19 @@
                         }
                     ],
                     "returns": {
-                        "type": "boolean",
+                        "type": "IEnumerable",
                         "descriptions": [
-                            "如果两个源序列的长度相等, 并且其相应元素根据 comparer 比较器比较的结果都为相等, 则返回true, 否则返回 false"
+                            "包含这两个序列不出现在对方序列中的所有元素的集合"
                         ]
                     },
-                    "description": "确定两个序列通过使用指定的相等比较器比较它们的元素是否相等",
+                    "description": "生成两个序列的对称差分",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
                     "sees": [
                         {
                             "apis": "Enumerable.comparers",
                             "property": "equality"
-                        },
-                        {
-                            "href": "https://msdn.microsoft.com/{language}/library/bb342073(v=vs.110).aspx",
-                            "title": "Microsoft MSDN"
-                        }
-                    ],
-                    "examples": [
-                        {
-                            "description": "下面的代码示例演示如何使用 sequenceEqual 以确定两个序列是否相等。",
-                            "script": {
-                                "type": "javascript",
-                                "href": "1.js"
-                            }
-                        },
-                        {
-                            "description": "下面的示例演示如何实现可在 sequenceEqual 方法中使用的相等比较器，并通过此比较器确定两个序列是否相等。",
-                            "script": {
-                                "type": "javascript",
-                                "href": "2.js"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "since": "2.1.19",
-            "ref": true,
-            "overloads": [
-                {
-                    "parameters": [
-                        { },
-                        {
-                            "types": [
-                                "function",
-                                "string",
-                                "symbol",
-                                "number"
-                            ]
                         }
                     ]
                 }

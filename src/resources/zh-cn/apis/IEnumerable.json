@@ -1221,6 +1221,50 @@
 			]
 		},
 		{
+			"name": "isSub",
+			"histroys": [
+				{
+					"since": "2.1.21",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "确定一个源序列是否是另一个序列的子集",
+							"parameters": [
+								{
+									"name": "other"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isSuper",
+			"histroys": [
+				{
+					"since": "2.1.21",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "确定一个源序列是否是另一个序列的超集",
+							"parameters": [
+								{
+									"name": "other"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "join",
 			"histroys": [
 				{
@@ -2543,6 +2587,28 @@
 							"parameters": [
 								{
 									"name": "selector"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "symmetric",
+			"histroys": [
+				{
+					"since": "2.1.21",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "生成两个序列的对称差分",
+							"parameters": [
+								{
+									"name": "other"
+								},
+								{
+									"name": "comparer"
 								}
 							]
 						}

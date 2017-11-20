@@ -103,7 +103,7 @@
 		"version": "2.1.20"
 	},
 	{
-		"prepublish": true,
+		"publish": "2017-11-20",
 		"contents": [
 			"新增(New):",
 			"1. 新增 IEnumerable.prototype.isSub / IEnumerable.prototype.isSuper 方法, 用来判断两个序列的从属关系",
@@ -114,6 +114,6 @@
 			"",
 			"修复(Fixed):"
 		],
-		"version": "2.1.21.pre"
+		"version": "2.1.21"
 	}
 ]
