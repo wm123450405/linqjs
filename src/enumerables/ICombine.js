@@ -34,6 +34,47 @@ class ICombine extends IteratorEnumerable {
         }
         return obj;
     }
+    /**
+     * 六种遍历顺序
+     **/
+    dlr() {
+
+    }
+    ldr() {
+
+    }
+    lrd() {
+
+    }
+    /**
+     * 深度
+     */
+    get deep() {
+        return this.children.maxOrDefault(child => child.deep, 0) + 1;
+    }
+    /**
+     * 是否为二叉树
+     */
+    get isBinary() {
+        let count = this.children.count();
+        return count <= 2 && this.children.all(child => child.isBinary());
+    }
+    /**
+     * 是否为满二叉树
+     */
+    get isFullBinary() {
+        let count = this.children.count();
+        return count === 0 || count === 2 && this.children.all(child => child.isFullBinary());
+    }
+    get isCompleteBinary() {
+
+    }
+    get isPerfectBinary() {
+
+    }
+    asBinary() {
+
+    }
 }
 
 module.exports = ICombine;

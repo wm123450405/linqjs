@@ -596,6 +596,26 @@ Enumerable.max = function(source, selector = defaultSelector, comparer = default
         return max;
     }
 };
+Enumerable.maxOrDefault = function(source, defaultValue, selector = defaultSelector, comparer = defaultComparer) {
+    let max = false, first = true, index = 0;
+    source = asIterable(source);
+    selector = methods.asSelector(selector);
+    comparer = methods.asComparer(comparer);
+    for (let element of source) {
+        element = selector(element, index++);
+        if (first) {
+            max = element;
+        } else {
+            max = comparer(max, element) > 0 ? max : element;
+        }
+        first = false;
+    }
+    if (first) {
+        return defaultValue;
+    } else {
+        return max;
+    }
+};
 Enumerable.min = function(source, selector = defaultSelector, comparer = defaultComparer) {
     let min = false, first = true, index = 0;
     source = asIterable(source);
@@ -612,6 +632,26 @@ Enumerable.min = function(source, selector = defaultSelector, comparer = default
     }
     if (first) {
         throw new NoSuchElementsException();
+    } else {
+        return min;
+    }
+};
+Enumerable.minOrDefault = function(source, defaultValue, selector = defaultSelector, comparer = defaultComparer) {
+    let min = false, first = true, index = 0;
+    source = asIterable(source);
+    selector = methods.asSelector(selector);
+    comparer = methods.asComparer(comparer);
+    for (let element of source) {
+        element = selector(element, index++);
+        if (first) {
+            min = element;
+        } else {
+            min = comparer(min, element) < 0 ? min : element;
+        }
+        first = false;
+    }
+    if (first) {
+        throw defaultValue;
     } else {
         return min;
     }
