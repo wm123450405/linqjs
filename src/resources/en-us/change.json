@@ -115,5 +115,20 @@
 			"修复(Fixed):"
 		],
 		"version": "2.1.21"
+	},
+	{
+		"prepublish": true,
+		"contents": [
+			"新增(New):",
+			"1. 新增 ITree 接口, 拥有对树形结构的基本操作. 包含: deep, degree, isBinary, isFullBinary, isCompleteBinary, isProfectBinary, asBinary 等方法",
+			"2. 新增 BinaryTree 类, 拥有对二叉树的基本操作. 包含: left, right 等属性, 包含: hasLeft, hasRight, preOrder, inOrder, postOrder 等方法",
+			"3. 修改 ICombine 继承 ITree 接口",
+			"",
+			"优化(Optimization):",
+			"1. 优化 IteratorEnumerable",
+			"",
+			"修复(Fixed):"
+		],
+		"version": "2.1.22.pre"
 	}
 ]
