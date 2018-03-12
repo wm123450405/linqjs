@@ -6,13 +6,13 @@ const Enumerable = require('./../Enumerable');
 
 const core = require('./../core/core');
 
+const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
 
 class ITree extends IteratorEnumerable {
-    constructor(key, parent, value, iterator) {
+    constructor(parentGetter, value, iterator) {
         super(iterator);
-        core.defineProperty(this, 'key', () => key, true, true);
-        core.defineProperty(this, 'parent', () => parent, true, true);
+        core.defineProperty(this, 'parent', parentGetter, true, true);
         core.defineProperty(this, 'value', () => value, true, true);
         iterator = this[Symbol.iterator];
         core.defineProperty(this, Symbol.iterator, function ITreeIterator() {
@@ -74,13 +74,15 @@ class ITree extends IteratorEnumerable {
      * 广度
      */
     degree(predicate = defaultPredicate) {
-        return Enumerable.count(this.children, predicate);
+        predicate = methods.asPredicate(predicate);
+        return Enumerable.count(this.children, (element, index) => predicate(element.value, index));
     }
     /**
      * 深度
      */
     deep(predicate = defaultPredicate) {
-        return Enumerable.where(this.children, predicate).maxOrDefault(child => child.deep(), 0) + 1;
+        predicate = methods.asPredicate(predicate);
+        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(child => child.deep(), 0) + 1;
     }
     /**
      * 是否为二叉树
@@ -150,7 +152,7 @@ class ITree extends IteratorEnumerable {
         return true;
     }
     asBinary() {
-        return new BinaryTree(this.key, this.parent, this.value, this[Symbol.iterator]);
+        return new BinaryTree(() => this.parent && this.parent.asBinary(), this.value, this[Symbol.iterator]);
     }
 }
 

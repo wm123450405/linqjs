@@ -5,8 +5,9 @@ const ITree = require('./ITree');
 const core = require('./../core/core');
 
 class ICombine extends ITree {
-    constructor(key, parent, value, iterator) {
-        super(key, parent, value, iterator);
+    constructor(key, parentGetter, value, iterator) {
+        super(parentGetter, value, iterator);
+        core.defineProperty(this, 'key', () => key, true, true);
         iterator = this[Symbol.iterator];
         core.defineProperty(this, Symbol.iterator, function ICombineIterator() {
             return iterator();

@@ -810,10 +810,52 @@ declare namespace Enumerable {
 
     }
 
-    export interface ICombine<TKey, TValue> extends IEnumerable<ICombine<TKey, TValue>> {
+    export interface ITree<TValue> extends IEnumerable<ITree<TValue>> {
+
+        readonly parent: ITree<TValue>;
+
+        breadth(): IEnumerable<TValue>;
+
+        path(): IEnumerable<TValue>;
+
+        degree(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
+        degree(predicate: string | number | symbol | TValue | any): number;
+
+        deep(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
+        deep(predicate: string | number | symbol | TValue | any): number;
+
+        isBinary(): boolean;
+
+        isFullBinary(): boolean;
+
+        isCompleteBinary(): boolean;
+
+        isPerfectBinary(): boolean;
+
+        asBinary(): BinaryTree<TValue>;
+
+    }
+
+    export interface BinaryTree<TValue> extends ITree<TValue> {
+
+        readonly left: BinaryTree<TValue>;
+        readonly right: BinaryTree<TValue>;
+
+        hasLeft(): boolean;
+
+        hasRight(): boolean;
+
+        preOrder(): IEnumerable<TValue>;
+
+        inOrder(): IEnumerable<TValue>;
+
+        postOrder(): IEnumerable<TValue>;
+    }
+
+    export interface ICombine<TKey, TValue> extends IEnumerable<ICombine<TKey, TValue>>, ITree<TValue> {
 
         readonly key: TKey;
-        readonly parent: TKey;
+        readonly parent: ICombine<TKey, TValue>;
 
         readonly value: TValue;
         readonly children: IEnumerable<ICombine<TKey, TValue>>;

@@ -9,12 +9,12 @@ class IteratorEnumerable extends IterableEnumerable {
         super(iterator);
         let temp = [], first = true;
         core.defineProperty(this, Symbol.iterator, function* IteratorIterator() {
-            let next;
-            while (!(next = iterator.next()).done) {
-                temp.push(next.value);
-                yield next.value;
-            }
     		if (first) {
+                let next;
+                while (!(next = iterator.next()).done) {
+                    yield next.value;
+                    temp.push(next.value);
+                }
     			first = false;
     		} else {
     			yield* temp;
