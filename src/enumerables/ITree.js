@@ -3,6 +3,7 @@
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');
+const IterableEnumerable = require('./IterableEnumerable');
 
 const core = require('./../core/core');
 
@@ -58,15 +59,27 @@ class ITree extends GeneratorEnumerable {
     }
 
     /**
-     * 搜索当前节点的路径
+     * 搜索当前节点的路径(深度优先搜索)
      */
     path(root) {
-        let current = this;
-        let path = [];
-        do {
-            path.unshift(current.value);
-        } while (core.isUndefined(current.parent) && (current = current.parent));
-        return Enumerable.asEnumerable(path);
+        return root.pathTo(this);
+    }
+    pathTo(node) {
+        let search = (result, current) => {
+            result.push(current);
+            if (current === node) {
+                return result;
+            } else {
+                for (let child of current) {
+                    if (search(result, child)) {
+                        return result;
+                    }
+                }
+                result.pop();
+                return false;
+            }
+        };
+        return new IterableEnumerable(search([], this));
     }
 
     /**

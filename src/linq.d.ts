@@ -848,7 +848,8 @@ declare namespace Enumerable {
 
         breadth(): IEnumerable<TValue>;
 
-        path(): IEnumerable<TValue>;
+        path(root: ITree<TValue>): IEnumerable<TValue>;
+        pathTo(node: ITree<TValue>): IEnumerable<TValue>;
 
         degree(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
         degree(predicate: string | number | symbol | TValue | any): number;
