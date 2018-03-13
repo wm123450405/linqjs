@@ -201,8 +201,14 @@ class IEnumerable extends Array {
     max(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.max(this, selector, comparer);
     }
+    maxOrDefault(defaultValue, selector = defaultSelector, comparer = defaultComparer) {
+        return Enumerable.maxOrDefault(this, defaultValue, selector, comparer);
+    }
     min(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.min(this, selector, comparer);
+    }
+    minOrDefault(defaultValue, selector = defaultSelector, comparer = defaultComparer) {
+        return Enumerable.minOrDefault(this, defaultValue, selector, comparer);
     }
     average(selector = defaultSelector) {
         return Enumerable.average(this, selector);

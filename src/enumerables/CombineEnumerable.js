@@ -22,7 +22,7 @@ class CombineEnumerable extends IEnumerable {
         keySelector = methods.asSelector(keySelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* CombineIterator() {
-            let temp = Enumerable.select(source, element => ({ key: keySelector(element), parentKey: parentSelector(element), value: valueSelector(element), children: [] })).toArray();
+            let temp = Enumerable.select(source, element => ({ key: keySelector(element), parent: parentSelector(element), value: valueSelector(element), children: [] })).toArray();
             let result = [];
             let length = temp.length;
             for (let i = 0; i < length; i++) {
@@ -31,8 +31,7 @@ class CombineEnumerable extends IEnumerable {
                 for (let j = 0; j < length; j++) {
                     if (i !== j) {
                         let parent = temp[j];
-                        if (comparer(parent.key, value.parentKey)) {
-                            value.parent = parent;
+                        if (comparer(parent.key, value.parent)) {
                             parent.children.push(value);
                             hasParent = true;
                             break;
@@ -43,11 +42,11 @@ class CombineEnumerable extends IEnumerable {
                     result.push(value);
                 }
             }
-            let combine = value => value.ref = new ICombine(value.key, () => value.parent.ref || combine(value.parent), value.value, (function* () {
+            let combine = value => new ICombine(value.key, value.parent, value.value, function* () {
                 for (let sub of value.children) {
                     yield combine(sub);
                 }
-            })());
+            });
             for (let value of result) {
                 yield combine(value);
             }

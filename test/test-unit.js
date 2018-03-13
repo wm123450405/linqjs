@@ -769,6 +769,24 @@ module.exports = function(Enumerable) {
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
 
+	//ITree
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).degree(), 2);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).deep(), 3);
+
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).degree(node => node.value === b), 1);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).deep(node => node.value !== b), 2);
+
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadth().select(node => node.value).toArray(), [ a, b, e, c, d ]);
+
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isBinary(), true);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isFullBinary(), true);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isCompleteBinary(), true);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isPerfectBinary(), false);
+
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().preOrder().select(node => node.value).toArray(), [ a, b, c, d, e ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().inOrder().select(node => node.value).toArray(), [ c, b, d, a, e ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().postOrder().select(node => node.value).toArray(), [ c, d, b, e, a ]);
+
     //builtins array function
 	(() => {
 		//splice

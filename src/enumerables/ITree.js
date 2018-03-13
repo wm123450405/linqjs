@@ -1,6 +1,6 @@
 'use strict';
 
-const IteratorEnumerable = require('./IteratorEnumerable');
+const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');
 
@@ -9,17 +9,16 @@ const core = require('./../core/core');
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
 
-class ITree extends IteratorEnumerable {
-    constructor(parentGetter, value, iterator) {
-        super(iterator);
-        core.defineProperty(this, 'parent', parentGetter, true, true);
+class ITree extends GeneratorEnumerable {
+    constructor(value, generator) {
+        super(generator);
         core.defineProperty(this, 'value', () => value, true, true);
-        iterator = this[Symbol.iterator];
+        let iterator = this[Symbol.iterator];
         core.defineProperty(this, Symbol.iterator, function ITreeIterator() {
             return iterator();
         });
         core.defineProperty(this, 'children', function() {
-            return new IteratorEnumerable(iterator());
+            return new GeneratorEnumerable(iterator);
         }, true, true);
     }
     toObject() {
@@ -41,7 +40,7 @@ class ITree extends IteratorEnumerable {
      */
     breadth() {
         let tree = this;
-        return new IteratorEnumerable(function* () {
+        return new GeneratorEnumerable(function* () {
             let queue = [ [ tree ] ];
             while (queue.length) {
                 for (let element of queue.shift()) {
@@ -59,9 +58,9 @@ class ITree extends IteratorEnumerable {
     }
 
     /**
-     * 获取当前节点的路径
+     * 搜索当前节点的路径
      */
-    path() {
+    path(root) {
         let current = this;
         let path = [];
         do {
@@ -82,7 +81,7 @@ class ITree extends IteratorEnumerable {
      */
     deep(predicate = defaultPredicate) {
         predicate = methods.asPredicate(predicate);
-        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(child => child.deep(), 0) + 1;
+        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(0, child => child.deep(predicate)) + 1;
     }
     /**
      * 是否为二叉树
@@ -108,7 +107,7 @@ class ITree extends IteratorEnumerable {
         while (queue.length) {
             current = queue.shift();
             if (end) {
-                if (current.degree !== 0) {
+                if (current.degree() !== 0) {
                     return false;
                 }
             } else {
@@ -152,7 +151,7 @@ class ITree extends IteratorEnumerable {
         return true;
     }
     asBinary() {
-        return new BinaryTree(() => this.parent && this.parent.asBinary(), this.value, this[Symbol.iterator]);
+        return new BinaryTree(this.value, this[Symbol.iterator]);
     }
 }
 

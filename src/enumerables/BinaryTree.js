@@ -5,6 +5,7 @@ const ITree = require('./ITree');
 const core = require('./../core/core');
 
 const Enumerable = require('./../Enumerable');
+const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const DEFAULT_LEFT = Symbol('left');
 const DEFAULT_RIGHT = Symbol('right');
@@ -12,17 +13,17 @@ const DEFAULT_RIGHT = Symbol('right');
 const subTree = sub => sub && sub.asBinary();
 
 class BinaryTree extends ITree {
-    constructor(parentGetter, value, iterator) {
-        super(parentGetter, value, iterator);
+    constructor(value, generator) {
+        super(value, generator);
         let left = DEFAULT_LEFT, right = DEFAULT_RIGHT;
-        iterator = this[Symbol.iterator];
+        let iterator = this[Symbol.iterator];
         core.defineProperty(this, Symbol.iterator, function* BinaryTreeIterator() {
             let it = iterator();
             let itLeft = it.next();
-            if (itLeft.done) {
+            if (!itLeft.done) {
                 yield left = subTree(itLeft.value);
                 let itRight = it.next();
-                if (itRight.done) {
+                if (!itRight.done) {
                     yield right = subTree(itRight.value);
                 } else {
                     right = undefined;
@@ -31,6 +32,23 @@ class BinaryTree extends ITree {
                 left = undefined;
             }
         });
+        core.defineProperty(this, 'children', function() {
+            return new GeneratorEnumerable(function* () {
+                let it = iterator();
+                let itLeft = it.next();
+                if (!itLeft.done) {
+                    yield left = subTree(itLeft.value);
+                    let itRight = it.next();
+                    if (!itRight.done) {
+                        yield right = subTree(itRight.value);
+                    } else {
+                        right = undefined;
+                    }
+                } else {
+                    left = undefined;
+                }
+            });
+        }, true, true);
         core.defineProperty(this, 'left', () => left === DEFAULT_LEFT ? left = Enumerable.elementAtOrDefault(this, 0) : left, true, true);
         core.defineProperty(this, 'right', () => right === DEFAULT_RIGHT ? right = Enumerable.elementAtOrDefault(this, 1) : right, true, true);
     }
@@ -45,7 +63,7 @@ class BinaryTree extends ITree {
      **/
     preOrder() {
         let tree = this;
-        return new IteratorEnumerable(function* () {
+        return new GeneratorEnumerable(function* () {
             yield tree.value;
             if (tree.hasLeft()) {
                 yield* tree.left.preOrder();
@@ -61,7 +79,7 @@ class BinaryTree extends ITree {
      */
     inOrder() {
         let tree = this;
-        return new IteratorEnumerable(function* () {
+        return new GeneratorEnumerable(function* () {
             if (tree.hasLeft()) {
                 yield* tree.left.inOrder();
             }
@@ -76,14 +94,14 @@ class BinaryTree extends ITree {
      */
     postOrder() {
         let tree = this;
-        return new IteratorEnumerable(function* () {
+        return new GeneratorEnumerable(function* () {
             if (tree.hasLeft()) {
                 yield* tree.left.postOrder();
             }
             if (tree.hasRight()) {
                 yield* tree.right.postOrder();
             }
-            yield this.value;
+            yield tree.value;
         });
     }
     get isBinary() {
