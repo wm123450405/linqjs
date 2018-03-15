@@ -389,6 +389,9 @@ declare namespace Enumerable {
     class PluginRepeatException extends Exception {
         constructor(plugin: Plugin, builtin = false);
     }
+    class NotAncestorOfException<TValue> extends Exception {
+        constructor(ancestor:ITree<TValue>, descendant:ITree<TValue>)
+    }
 
     export const exceptions: {
         readonly NoSuchElementsException: NoSuchElementsException;
@@ -399,6 +402,7 @@ declare namespace Enumerable {
         readonly PropertyExpressionInvalidException: PropertyExpressionInvalidException;
         readonly InvalidFunctionException: InvalidFunctionException;
         readonly PluginRepeatException: PluginRepeatException;
+        readonly NotAncestorOfException: NotAncestorOfException;
     };
     export const comparers: {
         readonly default: (element: any, other: any) => number;
@@ -844,9 +848,19 @@ declare namespace Enumerable {
 
     export interface ITree<TValue> extends IEnumerable<ITree<TValue>> {
 
-        readonly parent: ITree<TValue>;
+        readonly value: TValue;
+        readonly children: IEnumerable<ITree<TValue>>;
+        readonly values: IEnumerable<TValue>;
+
+        getChild(index: number): ITree<TValue>;
+        getValue(index: number): TValue;
 
         breadth(): IEnumerable<TValue>;
+
+        lowestAncestor(root: ITree<TValue>, ...trees: ITree<TValue>[]): ITree<TValue>;
+
+        isDescendantOf(root: ITree<TValue>): boolean;
+        isAncestorOf(node: ITree<TValue>): boolean;
 
         path(root: ITree<TValue>): IEnumerable<TValue>;
         pathTo(node: ITree<TValue>): IEnumerable<TValue>;
@@ -890,7 +904,6 @@ declare namespace Enumerable {
         readonly key: TKey;
         readonly parent: ICombine<TKey, TValue>;
 
-        readonly value: TValue;
         readonly children: IEnumerable<ICombine<TKey, TValue>>;
 
         toObject(): any;

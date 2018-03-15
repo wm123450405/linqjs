@@ -39,6 +39,7 @@ const NotEnumerableException = require('./core/exceptions/NotEnumerableException
 const PluginRepeatException = require('./core/exceptions/PluginRepeatException');
 const PropertyExpressionInvalidException = require('./core/exceptions/PropertyExpressionInvalidException');
 const InvalidFunctionException = require('./core/exceptions/InvalidFunctionException');
+const NotAncestorOfException = require('./core/exceptions/NotAncestorOfException');
 
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
@@ -972,6 +973,9 @@ core.defineProperty(Enumerable, 'exceptions', () => ({
     },
     get PluginRepeatException() {
         return PluginRepeatException;
+    },
+    get NotAncestorOfException() {
+        return NotAncestorOfException;
     }
 }), true, true);
 core.defineProperty(Enumerable, 'IComparable', () => IComparable, true, true);

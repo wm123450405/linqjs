@@ -10,6 +10,8 @@ const core = require('./../core/core');
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
 
+const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
+
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {
         super(generator);
@@ -21,6 +23,15 @@ class ITree extends GeneratorEnumerable {
         core.defineProperty(this, 'children', function() {
             return new GeneratorEnumerable(iterator);
         }, true, true);
+    }
+    get values() {
+        return Enumerable.select(this.children, child => child.value);
+    }
+    getChild(index) {
+        return Enumerable.elementAt(this.children, index);
+    }
+    getValue(index) {
+        return this.getChild(index).value;
     }
     toObject() {
         let obj = {
@@ -51,11 +62,42 @@ class ITree extends GeneratorEnumerable {
             }
         });
     }
-    /**
-     * 最近的根节点
-     */
-    lowestRoot(...trees) {
 
+    /**
+     * 在指定树中的最小公共祖先
+     */
+    lowestAncestor(root, ...trees) {
+        let path = root.pathTo(this);
+        for (let tree of trees) {
+            path = Enumerable.zip(path, root.pathTo(tree), (pValue, tValue) => pValue === tValue ? pValue : false)
+        }
+        return Enumerable.takeWhile(path, value => value !== false).last();
+    }
+    /**
+     * 是否是后辈节点
+     */
+    isDescendantOf(root) {
+        return root.isAncestorOf(this);
+    }
+    /**
+     * 是否是祖先节点
+     */
+    isAncestorOf(node) {
+        let search = (result, current) => {
+            result.push(current);
+            if (current === node || current.value === node.value) {
+                return true;
+            } else {
+                for (let child of current) {
+                    if (search(result, child)) {
+                        return true;
+                    }
+                }
+                result.pop();
+                return false;
+            }
+        };
+        return search([], this);
     }
 
     /**
@@ -67,7 +109,7 @@ class ITree extends GeneratorEnumerable {
     pathTo(node) {
         let search = (result, current) => {
             result.push(current);
-            if (current === node) {
+            if (current === node || current.value === node.value) {
                 return result;
             } else {
                 for (let child of current) {
@@ -79,7 +121,12 @@ class ITree extends GeneratorEnumerable {
                 return false;
             }
         };
-        return new IterableEnumerable(search([], this));
+        let result = search([], this);
+        if (result) {
+            return Enumerable.select(result, node => node.value);
+        } else {
+            throw new NotAncestorOfException(this, node);
+        }
     }
 
     /**
