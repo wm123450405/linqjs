@@ -69,7 +69,7 @@ class ITree extends GeneratorEnumerable {
     lowestAncestor(root, ...trees) {
         let path = root.pathTo(this);
         for (let tree of trees) {
-            path = Enumerable.zip(path, root.pathTo(tree), (pValue, tValue) => pValue === tValue ? pValue : false)
+            path = Enumerable.zip(path, root.pathTo(tree), (pValue, tValue) => pValue === tValue ? pValue : false);
         }
         return Enumerable.takeWhile(path, value => value !== false).last();
     }

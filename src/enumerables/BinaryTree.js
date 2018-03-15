@@ -21,10 +21,12 @@ class BinaryTree extends ITree {
             let it = iterator();
             let itLeft = it.next();
             if (!itLeft.done) {
-                yield left = subTree(itLeft.value);
+                left = subTree(itLeft.value);
+                yield left;
                 let itRight = it.next();
                 if (!itRight.done) {
-                    yield right = subTree(itRight.value);
+                    right = subTree(itRight.value);
+                    yield right;
                 } else {
                     right = undefined;
                 }
@@ -37,10 +39,12 @@ class BinaryTree extends ITree {
                 let it = iterator();
                 let itLeft = it.next();
                 if (!itLeft.done) {
-                    yield left = subTree(itLeft.value);
+                    left = subTree(itLeft.value);
+                    yield left;
                     let itRight = it.next();
                     if (!itRight.done) {
-                        yield right = subTree(itRight.value);
+                        right = subTree(itRight.value);
+                        yield right;
                     } else {
                         right = undefined;
                     }
