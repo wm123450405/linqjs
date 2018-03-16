@@ -4,6 +4,8 @@ const BinaryTree = require('./BinaryTree');
 
 const Enumerable = require('./../Enumerable');
 
+const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
 class PostOrderTree extends BinaryTree {
     constructor(source) {
         let tree = { };

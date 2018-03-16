@@ -15,7 +15,7 @@ class PreOrderEnumerable extends IEnumerable {
             if (tree.hasRight()) {
                 yield* new PreOrderEnumerable(tree.right);
             }
-        })
+        });
     }
 }
 

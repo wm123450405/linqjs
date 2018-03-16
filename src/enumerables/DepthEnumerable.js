@@ -24,7 +24,7 @@ class DepthEnumerable extends IEnumerable {
                     pop = false;
                 }
             }
-        })
+        });
     }
 }
 

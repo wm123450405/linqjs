@@ -15,7 +15,7 @@ class InOrderEnumerable extends IEnumerable {
             if (tree.hasRight()) {
                 yield* new InOrderEnumerable(tree.right);
             }
-        })
+        });
     }
 }
 

@@ -15,7 +15,7 @@ class PostOrderEnumerable extends IEnumerable {
                 yield* new PostOrderEnumerable(tree.right);
             }
             yield tree.value;
-        })
+        });
     }
 }
 
