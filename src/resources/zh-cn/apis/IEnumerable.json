@@ -274,6 +274,21 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
+					"deprecated": "2.1.19",
+					"overloads": [
+						{
+							"override": true,
+							"description": "连接两个序列",
+							"parameters": [
+								{
+									"name": "other"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.20",
 					"deprecated": 0,
 					"overloads": [
 						{

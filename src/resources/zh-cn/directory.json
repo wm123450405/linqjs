@@ -168,6 +168,12 @@
 				"deprecated": "2.1.22.pre"
 			},
 			{
+				"code": "ITree",
+				"title": "ITree 接口",
+				"since": "2.1.22",
+				"deprecated": "2.1.22.pre"
+			},
+			{
 				"code": "Lookup",
 				"title": "Lookup 类",
 				"since": "2.1.15",

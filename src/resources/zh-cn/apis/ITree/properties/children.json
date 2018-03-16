@@ -1,0 +1,10 @@
+{
+    "histroys": [
+        {
+            "type": "IEnumerable",
+            "since": "2.1.22",
+            "readonly": true,
+            "description": "包含当前节点所有子节点的集合"
+        }
+    ]
+}

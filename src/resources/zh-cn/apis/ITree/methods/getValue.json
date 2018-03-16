@@ -1,0 +1,47 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "index",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "要检索的从零开始的子节点索引"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "ITree",
+                        "descriptions": [
+                            "子节点中指定位置处的节点值"
+                        ]
+                    },
+                    "description": "返回当前节点所有子节点的指定索引处的节点值",
+                    "remarks": [
+                        "如果 index 超出范围, 此方法将引发异常."
+                    ],
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "getChild"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 getValue 以返回特定位置处的节点值。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

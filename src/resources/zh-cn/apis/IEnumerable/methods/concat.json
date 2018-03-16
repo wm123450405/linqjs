@@ -57,6 +57,22 @@
                     ]
                 }
             ]
+        },
+        {
+            "since": "2.1.20",
+            "ref": true,
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "params": true,
+                            "descriptions": [
+                                "要与源序列连接的另一个(或多个)序列"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -1,0 +1,42 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "一个通过深度优先遍历算法遍历树形结构得到元素序列"
+                        ]
+                    },
+                    "description": "通过深度优先遍历算法遍历树形结构,将其展开得到新的值序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "depthSearch"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "breadthTraverse"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 breadthTraverse 对一个树进行深度优先遍历。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
