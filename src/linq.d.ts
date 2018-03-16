@@ -878,18 +878,21 @@ declare namespace Enumerable {
         depthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
         depthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
 
-        lowestAncestor(tree: ITree<TValue>, ...trees: ITree<TValue>[]): ITree<TValue>;
+        lowestAncestor(tree: ITree<TValue> | TValue, ...trees: (ITree<TValue> | TValue)[]): ITree<TValue>;
 
         isDescendantOf(root: ITree<TValue>): boolean;
         isAncestorOf(node: ITree<TValue>): boolean;
 
         path(root: ITree<TValue>): IEnumerable<TValue>;
-        pathTo(node: ITree<TValue>): IEnumerable<TValue>;
+        pathTo(node: ITree<TValue> | TValue): IEnumerable<TValue>;
 
-        degree(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
+        subTree(predicate: (element: TValue) => boolean): ITree<TValue>;
+        subTrees(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
+
+        degree(predicate: (element: TValue) => boolean = defaultPredicate): number;
         degree(predicate: string | number | symbol | TValue | any): number;
 
-        depth(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
+        depth(predicate: (element: TValue) => boolean = defaultPredicate): number;
         depth(predicate: string | number | symbol | TValue | any): number;
 
         isBinary(): boolean;
