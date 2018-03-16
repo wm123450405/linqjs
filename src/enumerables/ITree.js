@@ -3,9 +3,6 @@
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');
-const PathToEnumerable = require('./PathToEnumerable');
-const BreadthEnumerable = require('./BreadthEnumerable');
-const DepthEnumerable = require('./DepthEnumerable');
 
 const core = require('./../core/core');
 
@@ -76,12 +73,12 @@ class ITree extends GeneratorEnumerable {
     }
 
     /**
-     * 在指定树中的最小公共祖先
+     * 多个节点的最小公共祖先
      */
-    lowestAncestor(root, ...trees) {
-        let path = root.pathTo(this);
-        for (let tree of trees) {
-            path = Enumerable.zip(path, root.pathTo(tree), (pValue, tValue) => pValue === tValue ? pValue : false);
+    lowestAncestor(tree, ...trees) {
+        let path = this.pathTo(tree);
+        for (let t of trees) {
+            path = Enumerable.zip(path, this.pathTo(t), (pValue, tValue) => pValue === tValue ? pValue : false);
         }
         return Enumerable.takeWhile(path, value => value !== false).last();
     }
@@ -97,7 +94,7 @@ class ITree extends GeneratorEnumerable {
     isAncestorOf(node) {
         let search = (result, current) => {
             result.push(current);
-            if (current === node || current.value === node.value) {
+            if (current === node || current.value === node || node instanceof ITree && current.value === node.value) {
                 return true;
             } else {
                 for (let child of current) {
@@ -120,6 +117,16 @@ class ITree extends GeneratorEnumerable {
     }
     pathTo(node) {
         return new PathToEnumerable(this, node);
+    }
+
+    /**
+     * 搜索符合条件的子树
+     */
+    subTree(predicate) {
+        return this.subTrees(predicate).first();
+    }
+    subTrees(predicate) {
+        return new SubTreeEnumerable(this, predicate);
     }
 
     /**
@@ -211,3 +218,7 @@ class ITree extends GeneratorEnumerable {
 module.exports = ITree;
 
 const BinaryTree = require('./BinaryTree');
+const PathToEnumerable = require('./PathToEnumerable');
+const BreadthEnumerable = require('./BreadthEnumerable');
+const DepthEnumerable = require('./DepthEnumerable');
+const SubTreeEnumerable = require('./SubTreeEnumerable');

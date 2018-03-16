@@ -878,7 +878,7 @@ declare namespace Enumerable {
         depthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
         depthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
 
-        lowestAncestor(root: ITree<TValue>, ...trees: ITree<TValue>[]): ITree<TValue>;
+        lowestAncestor(tree: ITree<TValue>, ...trees: ITree<TValue>[]): ITree<TValue>;
 
         isDescendantOf(root: ITree<TValue>): boolean;
         isAncestorOf(node: ITree<TValue>): boolean;

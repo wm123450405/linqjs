@@ -805,7 +805,8 @@ module.exports = function(Enumerable) {
 
         assert.deepStrictEqual(theTree.pathTo(cTree).toArray(), [ nodea, nodeb, nodec ]);
 
-        assert.strictEqual(cTree.lowestAncestor(theTree, dTree), nodeb);
+        assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
+        assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 	})();
 
     (() => {
@@ -822,7 +823,8 @@ module.exports = function(Enumerable) {
 
         assert.deepStrictEqual(theTree.pathTo(cTree).toArray(), [ nodea, nodeb, nodec ]);
 
-        assert.strictEqual(cTree.lowestAncestor(theTree, dTree), nodeb);
+        assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
+        assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
     })();
 
     assert.deepStrictEqual(Enumerable.toPreOrder([ a, b, c, d, e, f ]).preOrder().toArray(), [ a, b, c, d, e, f ]);
