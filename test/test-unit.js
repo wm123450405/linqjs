@@ -820,9 +820,9 @@ module.exports = function(Enumerable) {
         assert.strictEqual(dTree.isAncestorOf(eTree), false);
         assert.strictEqual(eTree.isDescendantOf(dTree), false);
 
-        assert.deepStrictEqual(theTree.pathTo(cTree).select(node => node.value).toArray(), [ nodea, nodeb, nodec ]);
+        assert.deepStrictEqual(theTree.pathTo(cTree).toArray(), [ nodea, nodeb, nodec ]);
 
-        assert.strictEqual(cTree.lowestAncestor(theTree, dTree).value, nodeb);
+        assert.strictEqual(cTree.lowestAncestor(theTree, dTree), nodeb);
     })();
 
     assert.deepStrictEqual(Enumerable.toPreOrder([ a, b, c, d, e, f ]).preOrder().toArray(), [ a, b, c, d, e, f ]);

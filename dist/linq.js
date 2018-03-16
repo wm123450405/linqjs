@@ -7086,7 +7086,9 @@ Enumerable.empty = function () {
     return new EmptyEnumerable();
 };
 Enumerable.asEnumerable = function (object, childrenSelector) {
-    return object.asEnumerable ? object.asEnumerable(childrenSelector) : new IteratorEnumerable(object);
+    var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
+
+    return object.asEnumerable ? object.asEnumerable(childrenSelector, valueSelector) : new IteratorEnumerable(object);
 };
 Enumerable.from = function (object, childrenSelector) {
     return this.asEnumerable(object, childrenSelector);
@@ -9183,8 +9185,14 @@ var IEnumerable = function (_extendableBuiltin2) {
         }
     }, {
         key: 'asEnumerable',
-        value: function asEnumerable() {
-            return this;
+        value: function asEnumerable(childrenSelector) {
+            var valueSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSelector;
+
+            if (core.isUndefined(childrenSelector)) {
+                return this;
+            } else {
+                return Enumerable.asEnumerable(childrenSelector, valueSelector);
+            }
         }
     }, {
         key: 'concat',
@@ -17946,17 +17954,20 @@ var ITree = require('./ITree');
 var methods = require('./../methods/methods');
 
 var defaultChildrenSelector = require('./../methods/defaultChildrenSelector');
+var defaultValueSelector = require('./../methods/defaultValueSelector');
 
 var TreeEnumerable = function (_ITree) {
     _inherits(TreeEnumerable, _ITree);
 
     function TreeEnumerable(source) {
         var childrenSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultChildrenSelector;
+        var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
 
         _classCallCheck(this, TreeEnumerable);
 
         childrenSelector = methods.asSelector(childrenSelector);
-        return _possibleConstructorReturn(this, (TreeEnumerable.__proto__ || Object.getPrototypeOf(TreeEnumerable)).call(this, source, regeneratorRuntime.mark(function _callee() {
+        valueSelector = methods.asSelector(valueSelector);
+        return _possibleConstructorReturn(this, (TreeEnumerable.__proto__ || Object.getPrototypeOf(TreeEnumerable)).call(this, valueSelector(source), regeneratorRuntime.mark(function _callee() {
             var children, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -17984,7 +17995,7 @@ var TreeEnumerable = function (_ITree) {
 
                             child = _step.value;
                             _context.next = 11;
-                            return new TreeEnumerable(child, childrenSelector);
+                            return new TreeEnumerable(child, childrenSelector, valueSelector);
 
                         case 11:
                             _iteratorNormalCompletion = true;
@@ -18039,7 +18050,7 @@ var TreeEnumerable = function (_ITree) {
 
 module.exports = TreeEnumerable;
 
-},{"./../methods/defaultChildrenSelector":393,"./../methods/methods":411,"./ITree":339}],382:[function(require,module,exports){
+},{"./../methods/defaultChildrenSelector":393,"./../methods/defaultValueSelector":405,"./../methods/methods":411,"./ITree":339}],382:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19617,7 +19628,7 @@ var initAs = function initAs(name) {
     core.defineProperties(Set.prototype, _defineProperty({}, name, function () {
         return new ArrayEnumerable(this);
     }));
-    core.defineProperties(Object.prototype, _defineProperty({}, name, function (childrenSelector) {
+    core.defineProperties(Object.prototype, _defineProperty({}, name, function (childrenSelector, valueSelector) {
         if (core.isIterator(this)) {
             return new IteratorEnumerable(this);
         } else {
@@ -19630,7 +19641,7 @@ var initAs = function initAs(name) {
             } else if (this[typeAs] === core.types.Iterator) {
                 return new IteratorEnumerable(this);
             } else {
-                return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector);
+                return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector, valueSelector);
             }
         }
     }));
