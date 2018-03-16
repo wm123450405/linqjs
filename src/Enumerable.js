@@ -78,8 +78,8 @@ Enumerable.generate = function(generate, count = 0) {
 Enumerable.empty = function() {
     return new EmptyEnumerable();
 };
-Enumerable.asEnumerable = function(object, childrenSelector) {
-    return object.asEnumerable ? object.asEnumerable(childrenSelector) : new IteratorEnumerable(object);
+Enumerable.asEnumerable = function(object, childrenSelector, valueSelector = defaultValueSelector) {
+    return object.asEnumerable ? object.asEnumerable(childrenSelector, valueSelector) : new IteratorEnumerable(object);
 };
 Enumerable.from = function(object, childrenSelector) {
     return this.asEnumerable(object, childrenSelector);

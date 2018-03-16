@@ -123,7 +123,7 @@ const initAs = (name) => {
         }
     });
     core.defineProperties(Object.prototype, {
-        [name](childrenSelector) {
+        [name](childrenSelector, valueSelector) {
             if (core.isIterator(this)) {
                 return new IteratorEnumerable(this);
             } else {
@@ -136,7 +136,7 @@ const initAs = (name) => {
                 } else if (this[typeAs] === core.types.Iterator) {
                     return new IteratorEnumerable(this);
                 } else {
-                    return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector);
+                    return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector, valueSelector);
                 }
             }
         }

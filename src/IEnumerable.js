@@ -92,8 +92,12 @@ class IEnumerable extends Array {
     elementAtOrDefault(index, defaultValue) {
         return Enumerable.elementAtOrDefault(this, index, defaultValue);
     }
-    asEnumerable() {
-        return this;
+    asEnumerable(childrenSelector, valueSelector = defaultValueSelector) {
+        if (core.isUndefined(childrenSelector)) {
+            return this;
+        } else {
+            return Enumerable.asEnumerable(childrenSelector, valueSelector);
+        }
     }
     concat(...others) {
         return Enumerable.concat(this, ...others);

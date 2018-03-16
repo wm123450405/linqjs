@@ -16,8 +16,10 @@ declare namespace Enumerable {
     export function asEnumerable(obj: string) : IEnumerable<string>;
     export function asEnumerable<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function asEnumerable<T>(obj: any) : IEnumerable<T>;
-    export function asEnumerable<T>(obj: object, childrenSelector: (element: T, index?: number) => T[] | IEnumerable<T> = defaultChildrenSelector): ITree<T>;
-    export function asEnumerable<T>(obj: object, childrenSelector: string | number | symbol): ITree<T>;
+    export function asEnumerable<T, TValue>(obj: object, childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: (element: T) => TValue = defaultValueSelector): ITree<TValue>;
+    export function asEnumerable<T, TValue>(obj: object, childrenSelector: string | number | symbol, valueSelector: (element: T) => TValue = defaultValueSelector): ITree<T>;
+    export function asEnumerable<T, TValue>(obj: object, childrenSelector: (element: T) => T[] | IEnumerable<T> = defaultChildrenSelector, valueSelector: string | number | symbol): ITree<TValue>;
+    export function asEnumerable<T, TValue>(obj: object, childrenSelector: string | number | symbol, valueSelector: string | number | symbol): ITree<T>;
     export function from(obj: string) : IEnumerable<string>;
     export function from<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function from<T>(obj: any) : IEnumerable<T>;
@@ -489,6 +491,10 @@ declare namespace Enumerable {
         any(predicate: string | number | symbol | T | any): boolean;
 
         asEnumerable(): IEnumerable<T>;
+        asEnumerable<TValue>(childrenSelector: (element: T, index?: number) => T[] | IEnumerable<T>, valueSelector: (element: TValue, index?: number) => TValue = defaultValueSelector): ITree<TValue>;
+        asEnumerable<TValue>(childrenSelector: (element: T, index?: number) => T[] | IEnumerable<T>, valueSelector: string | number | symbol): ITree<TValue>;
+        asEnumerable<TValue>(childrenSelector: string | number | symbol, valueSelector: (element: TValue, index?: number) => TValue = defaultValueSelector): ITree<TValue>;
+        asEnumerable<TValue>(childrenSelector: string | number | symbol, valueSelector: string | number | symbol): ITree<TValue>;
 
         average(selector: (element: T, index?: number) => number = defaultSelector): number;
         average(selector: string | number | symbol): number;
