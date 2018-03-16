@@ -6,26 +6,27 @@ const core = require('./../core/core');
 
 const Enumerable = require('./../Enumerable');
 const GeneratorEnumerable = require('./GeneratorEnumerable');
+const PreOrderEnumerable = require('./PreOrderEnumerable');
+const InOrderEnumerable = require('./InOrderEnumerable');
+const PostOrderEnumerable = require('./PostOrderEnumerable');
 
 const DEFAULT_LEFT = Symbol('left');
 const DEFAULT_RIGHT = Symbol('right');
 
-const subTree = sub => sub && sub.asBinary();
-
 class BinaryTree extends ITree {
-    constructor(value, generator) {
-        super(value, generator);
+    constructor(tree) {
+        super(tree.value, function* () { yield* (tree.children || []); });
         let left = DEFAULT_LEFT, right = DEFAULT_RIGHT;
         let iterator = this[Symbol.iterator];
         core.defineProperty(this, Symbol.iterator, function* BinaryTreeIterator() {
             let it = iterator();
             let itLeft = it.next();
             if (!itLeft.done) {
-                left = subTree(itLeft.value);
+                left = itLeft.value && new BinaryTree(itLeft.value);
                 yield left;
                 let itRight = it.next();
                 if (!itRight.done) {
-                    right = subTree(itRight.value);
+                    right = itRight.value && new BinaryTree(itRight.value);
                     yield right;
                 } else {
                     right = undefined;
@@ -39,11 +40,11 @@ class BinaryTree extends ITree {
                 let it = iterator();
                 let itLeft = it.next();
                 if (!itLeft.done) {
-                    left = subTree(itLeft.value);
+                    left = itLeft.value && new BinaryTree(itLeft.value);
                     yield left;
                     let itRight = it.next();
                     if (!itRight.done) {
-                        right = subTree(itRight.value);
+                        right = itRight.value && new BinaryTree(itRight.value);
                         yield right;
                     } else {
                         right = undefined;
@@ -66,47 +67,20 @@ class BinaryTree extends ITree {
      * 前序遍历
      **/
     preOrder() {
-        let tree = this;
-        return new GeneratorEnumerable(function* () {
-            yield tree.value;
-            if (tree.hasLeft()) {
-                yield* tree.left.preOrder();
-            }
-            if (tree.hasRight()) {
-                yield* tree.right.preOrder();
-            }
-        });
+        return new PreOrderEnumerable(this);
     }
 
     /**
      * 中序遍历
      */
     inOrder() {
-        let tree = this;
-        return new GeneratorEnumerable(function* () {
-            if (tree.hasLeft()) {
-                yield* tree.left.inOrder();
-            }
-            yield tree.value;
-            if (tree.hasRight()) {
-                yield* tree.right.inOrder();
-            }
-        });
+        return new InOrderEnumerable(this);
     }
     /**
      * 后序遍历
      */
     postOrder() {
-        let tree = this;
-        return new GeneratorEnumerable(function* () {
-            if (tree.hasLeft()) {
-                yield* tree.left.postOrder();
-            }
-            if (tree.hasRight()) {
-                yield* tree.right.postOrder();
-            }
-            yield tree.value;
-        });
+        return new PostOrderEnumerable(this);
     }
     get isBinary() {
         return true;

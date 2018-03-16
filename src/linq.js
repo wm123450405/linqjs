@@ -71,6 +71,7 @@ const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
 const StringEnumerable = require('./enumerables/StringEnumerable');
 const IteratorEnumerable = require('./enumerables/IteratorEnumerable');
 const ObjectEnumerable = require('./enumerables/ObjectEnumerable');
+const TreeEnumerable = require('./enumerables/TreeEnumerable');
 
 const extendArray = require('./linq-array');
 const extendObject = require('./linq-object');
@@ -122,7 +123,7 @@ const initAs = (name) => {
         }
     });
     core.defineProperties(Object.prototype, {
-        [name]() {
+        [name](childrenSelector) {
             if (core.isIterator(this)) {
                 return new IteratorEnumerable(this);
             } else {
@@ -135,7 +136,7 @@ const initAs = (name) => {
                 } else if (this[typeAs] === core.types.Iterator) {
                     return new IteratorEnumerable(this);
                 } else {
-                    return new ObjectEnumerable(this);
+                    return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector);
                 }
             }
         }

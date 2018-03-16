@@ -298,6 +298,15 @@ const extendObject = {
     toObject(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         return Enumerable.toDictionary(this, keySelector, elementSelector, comparer).toObject();
     },
+    toPreOrder() {
+        return Enumerable.toPreOrder(this);
+    },
+    toInOrder() {
+        return Enumerable.toInOrder(this);
+    },
+    toPostOrder() {
+        return Enumerable.toPostOrder(this);
+    },
     forEach(action = defaultAction, thisArg = undefined) {
         return Enumerable.forEach(this, action, thisArg);
     },

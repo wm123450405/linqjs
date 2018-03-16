@@ -3,14 +3,14 @@
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');
-const IterableEnumerable = require('./IterableEnumerable');
+const PathToEnumerable = require('./PathToEnumerable');
+const BreadthEnumerable = require('./BreadthEnumerable');
+const DepthEnumerable = require('./DepthEnumerable');
 
 const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
-
-const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
 
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {
@@ -50,17 +50,29 @@ class ITree extends GeneratorEnumerable {
     /**
      * 广度优先遍历
      */
-    breadth() {
-        let tree = this;
-        return new GeneratorEnumerable(function* () {
-            let queue = [ [ tree ] ];
-            while (queue.length) {
-                for (let element of queue.shift()) {
-                    yield element.value;
-                    queue.push(element);
-                }
-            }
-        });
+    breadthTraverse() {
+        return new BreadthEnumerable(this);
+    }
+
+    /**
+     * 搜索(广度优先搜索)
+     */
+    breadthSearch(predicate = defaultPredicate) {
+        return Enumerable.first(this.breadthTraverse(), predicate);
+    }
+
+    /**
+     * 深度优先遍历
+     */
+    depthTraverse() {
+        return new DepthEnumerable(this);
+    }
+
+    /**
+     * 搜索(深度优先搜索)
+     */
+    depthSearch(predicate = defaultPredicate) {
+        return Enumerable.first(this.depthTraverse(), predicate);
     }
 
     /**
@@ -107,26 +119,7 @@ class ITree extends GeneratorEnumerable {
         return root.pathTo(this);
     }
     pathTo(node) {
-        let search = (result, current) => {
-            result.push(current);
-            if (current === node || current.value === node.value) {
-                return result;
-            } else {
-                for (let child of current) {
-                    if (search(result, child)) {
-                        return result;
-                    }
-                }
-                result.pop();
-                return false;
-            }
-        };
-        let result = search([], this);
-        if (result) {
-            return Enumerable.select(result, node => node.value);
-        } else {
-            throw new NotAncestorOfException(this, node);
-        }
+        return new PathToEnumerable(this, node);
     }
 
     /**
@@ -139,9 +132,9 @@ class ITree extends GeneratorEnumerable {
     /**
      * 深度
      */
-    deep(predicate = defaultPredicate) {
+    depth(predicate = defaultPredicate) {
         predicate = methods.asPredicate(predicate);
-        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(0, child => child.deep(predicate)) + 1;
+        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(0, child => child.depth(predicate)) + 1;
     }
     /**
      * 是否为二叉树
@@ -211,7 +204,7 @@ class ITree extends GeneratorEnumerable {
         return true;
     }
     asBinary() {
-        return new BinaryTree(this.value, this[Symbol.iterator]);
+        return new BinaryTree(this);
     }
 }
 

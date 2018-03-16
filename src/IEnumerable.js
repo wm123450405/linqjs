@@ -303,6 +303,15 @@ class IEnumerable extends Array {
     toLookup(keySelector = defaultSelector, elementSelector = defaultSelector, comparer = defaultSameComparer) {
         return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
     }
+    toPreOrder() {
+        return Enumerable.toPreOrder(this);
+    }
+    toInOrder() {
+        return Enumerable.toInOrder(this);
+    }
+    toPostOrder() {
+        return Enumerable.toPostOrder(this);
+    }
     forEach(action = defaultAction, thisArg = undefined) {
         return Enumerable.forEach(this, action, thisArg);
     }

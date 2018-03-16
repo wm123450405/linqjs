@@ -771,12 +771,16 @@ module.exports = function(Enumerable) {
 
 	//ITree
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).degree(), 2);
-    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).deep(), 3);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depth(), 3);
 
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).degree(node => node.value === b), 1);
-    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).deep(node => node.value !== b), 2);
+    assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depth(node => node.value !== b), 2);
 
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadth().toArray(), [ nodea, nodeb, nodee, nodec, noded ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthTraverse().toArray(), [ nodea, nodeb, nodee, nodec, noded ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthTraverse().toArray(), [ nodea, nodeb, nodec, noded, nodee ]);
+
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthSearch(node => node.value === e), nodee);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSearch(node => node.value === c), nodec);
 
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isFullBinary(), true);
@@ -787,20 +791,46 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().inOrder().toArray(), [ nodec, nodeb, noded, nodea, nodee ]);
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().postOrder().toArray(), [ nodec, noded, nodeb, nodee, nodea ]);
 
-    let theTree = nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0);
-    let bTree = theTree.getChild(0);
-    let eTree = theTree.getChild(1);
-    let cTree = bTree.getChild(0);
-    let dTree = bTree.getChild(1);
+	(() => {
+        let theTree = nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0);
+        let bTree = theTree.getChild(0);
+        let eTree = theTree.getChild(1);
+        let cTree = bTree.getChild(0);
+        let dTree = bTree.getChild(1);
 
-    assert.strictEqual(theTree.isAncestorOf(eTree), true);
-    assert.strictEqual(eTree.isDescendantOf(theTree), true);
-    assert.strictEqual(dTree.isAncestorOf(eTree), false);
-    assert.strictEqual(eTree.isDescendantOf(dTree), false);
+        assert.strictEqual(theTree.isAncestorOf(eTree), true);
+        assert.strictEqual(eTree.isDescendantOf(theTree), true);
+        assert.strictEqual(dTree.isAncestorOf(eTree), false);
+        assert.strictEqual(eTree.isDescendantOf(dTree), false);
 
-    assert.deepStrictEqual(theTree.pathTo(cTree).toArray(), [ nodea, nodeb, nodec ]);
+        assert.deepStrictEqual(theTree.pathTo(cTree).toArray(), [ nodea, nodeb, nodec ]);
 
-    assert.strictEqual(cTree.lowestAncestor(theTree, dTree), nodeb);
+        assert.strictEqual(cTree.lowestAncestor(theTree, dTree), nodeb);
+	})();
+
+    (() => {
+        let theTree = tree[0].asEnumerable(node => node.children);
+        let bTree = theTree.getChild(0);
+        let eTree = theTree.getChild(1);
+        let cTree = bTree.getChild(0);
+        let dTree = bTree.getChild(1);
+
+        assert.strictEqual(theTree.isAncestorOf(eTree), true);
+        assert.strictEqual(eTree.isDescendantOf(theTree), true);
+        assert.strictEqual(dTree.isAncestorOf(eTree), false);
+        assert.strictEqual(eTree.isDescendantOf(dTree), false);
+
+        assert.deepStrictEqual(theTree.pathTo(cTree).select(node => node.value).toArray(), [ nodea, nodeb, nodec ]);
+
+        assert.strictEqual(cTree.lowestAncestor(theTree, dTree).value, nodeb);
+    })();
+
+    assert.deepStrictEqual(Enumerable.toPreOrder([ a, b, c, d, e, f ]).preOrder().toArray(), [ a, b, c, d, e, f ]);
+    assert.deepStrictEqual(Enumerable.toInOrder([ a, b, c, d, e, f ]).inOrder().toArray(), [ a, b, c, d, e, f ]);
+    assert.deepStrictEqual(Enumerable.toPostOrder([ a, b, c, d, e, f ]).postOrder().toArray(), [ a, b, c, d, e, f ]);
+    assert.deepStrictEqual([ a, b, c, d, e, f ].asEnumerable().toPreOrder().preOrder().toArray(), [ a, b, c, d, e, f ]);
+    assert.deepStrictEqual([ a, b, c, d, e, f ].asEnumerable().toInOrder().inOrder().toArray(), [ a, b, c, d, e, f ]);
+    assert.deepStrictEqual([ a, b, c, d, e, f ].asEnumerable().toPostOrder().postOrder().toArray(), [ a, b, c, d, e, f ]);
 
     //builtins array function
 	(() => {

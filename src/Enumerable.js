@@ -78,11 +78,11 @@ Enumerable.generate = function(generate, count = 0) {
 Enumerable.empty = function() {
     return new EmptyEnumerable();
 };
-Enumerable.asEnumerable = function(object) {
-    return object.asEnumerable ? object.asEnumerable() : new IteratorEnumerable(object);
+Enumerable.asEnumerable = function(object, childrenSelector) {
+    return object.asEnumerable ? object.asEnumerable(childrenSelector) : new IteratorEnumerable(object);
 };
-Enumerable.from = function(object) {
-    return this.asEnumerable(object);
+Enumerable.from = function(object, childrenSelector) {
+    return this.asEnumerable(object, childrenSelector);
 };
 Enumerable.toArray = function(source) {
     if (core.isArray(source)) {
@@ -125,6 +125,15 @@ Enumerable.toLookup = function(source, keySelector = defaultSelector, elementSel
         index++;
     }
     return lookup;
+};
+Enumerable.toPreOrder = function(source) {
+    return new PreOrderTree(asIterable(source));
+};
+Enumerable.toInOrder = function(source) {
+    return new InOrderTree(asIterable(source));
+};
+Enumerable.toPostOrder = function(source) {
+    return new PostOrderTree(asIterable(source));
 };
 Enumerable.where = function(source, predicate = defaultPredicate) {
     return new WhereEnumerable(asIterable(source), predicate);
@@ -1038,3 +1047,7 @@ const GenerateEnumerable = require('./enumerables/GenerateEnumerable');
 const SeparateEnumerable = require('./enumerables/SeparateEnumerable');
 const CombineEnumerable = require('./enumerables/CombineEnumerable');
 const SymmetricEnumerable = require('./enumerables/SymmetricEnumerable');
+
+const PreOrderTree = require('./enumerables/PreOrderTree');
+const InOrderTree = require('./enumerables/InOrderTree');
+const PostOrderTree = require('./enumerables/PostOrderTree');

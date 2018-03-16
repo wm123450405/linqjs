@@ -16,6 +16,8 @@ declare namespace Enumerable {
     export function asEnumerable(obj: string) : IEnumerable<string>;
     export function asEnumerable<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function asEnumerable<T>(obj: any) : IEnumerable<T>;
+    export function asEnumerable<T>(obj: object, childrenSelector: (element: T, index?: number) => T[] | IEnumerable<T> = defaultChildrenSelector): ITree<T>;
+    export function asEnumerable<T>(obj: object, childrenSelector: string | number | symbol): ITree<T>;
     export function from(obj: string) : IEnumerable<string>;
     export function from<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
     export function from<T>(obj: any) : IEnumerable<T>;
@@ -350,6 +352,10 @@ declare namespace Enumerable {
     export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
     export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
     export function toObject<T, TValue>(source: T[] | IEnumerable<T>, keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+
+    export function toPreOrder<T>(source: T[] | IEnumerable<T>): BinaryTree<T>;
+    export function toInOrder<T>(source: T[] | IEnumerable<T>): BinaryTree<T>;
+    export function toPostOrder<T>(source: T[] | IEnumerable<T>): BinaryTree<T>;
 
     export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: (element: T, index?: number) => TKey = defaultSelector, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
     export function thenBy<T, TKey>(source: IOrderedEnumerable<T>, keySelector: string | number | symbol, comparer: (element: T, other: T) => number = defaultComparer): IOrderedEnumerable<T>;
@@ -787,6 +793,10 @@ declare namespace Enumerable {
         toObject<TValue>(keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
         toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
         toObject<TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+
+        toPreOrder(): BinaryTree<T>;
+        toInOrder(): BinaryTree<T>;
+        toPostOrder(): BinaryTree<T>;
     }
 
     export class Entry<TKey, TValue> {
@@ -855,7 +865,12 @@ declare namespace Enumerable {
         getChild(index: number): ITree<TValue>;
         getValue(index: number): TValue;
 
-        breadth(): IEnumerable<TValue>;
+        breadthTraverse(): IEnumerable<TValue>;
+        breadthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
+        breadthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
+        depthTraverse(): IEnumerable<TValue>;
+        depthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
+        depthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
 
         lowestAncestor(root: ITree<TValue>, ...trees: ITree<TValue>[]): ITree<TValue>;
 
@@ -868,8 +883,8 @@ declare namespace Enumerable {
         degree(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
         degree(predicate: string | number | symbol | TValue | any): number;
 
-        deep(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
-        deep(predicate: string | number | symbol | TValue | any): number;
+        depth(predicate: (element: TValue, index?: number) => boolean = defaultPredicate): number;
+        depth(predicate: string | number | symbol | TValue | any): number;
 
         isBinary(): boolean;
 
