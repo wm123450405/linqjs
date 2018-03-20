@@ -874,17 +874,13 @@ declare namespace Enumerable {
         breadthTraverse(): IEnumerable<TValue>;
         breadthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
         breadthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
-        breadthSubTree(predicate: (element: TValue) => boolean): ITree<TValue>;
-        breadthSubTree(predicate: string | number | symbol | TValue | any): ITree<TValue>;
-        breadthSubTrees(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
-        breadthSubTrees(predicate: string | number | symbol | TValue | any): IEnumerable<ITree<TValue>>;
+        breadthSubTree(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
+        breadthSubTree(predicate: string | number | symbol | TValue | any): IEnumerable<ITree<TValue>>;
         depthTraverse(): IEnumerable<TValue>;
         depthSearch(predicate: (element: TValue) => boolean = defaultPredicate): IEnumerable<TValue>;
         depthSearch(predicate: string | number | symbol | TValue | any): IEnumerable<TValue>;
-        depthSubTree(predicate: (element: TValue) => boolean): ITree<TValue>;
-        depthSubTree(predicate: string | number | symbol | TValue | any): ITree<TValue>;
-        depthSubTrees(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
-        depthSubTrees(predicate: string | number | symbol | TValue | any): IEnumerable<ITree<TValue>>;
+        depthSubTree(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
+        depthSubTree(predicate: string | number | symbol | TValue | any): IEnumerable<ITree<TValue>>;
 
         lowestAncestor(tree: ITree<TValue> | TValue, ...trees: (ITree<TValue> | TValue)[]): ITree<TValue>;
 

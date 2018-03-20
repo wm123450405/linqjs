@@ -13590,11 +13590,6 @@ var ITree = function (_GeneratorEnumerable) {
     }, {
         key: 'breadthSubTree',
         value: function breadthSubTree(predicate) {
-            return this.breadthSubTrees(predicate).first();
-        }
-    }, {
-        key: 'breadthSubTrees',
-        value: function breadthSubTrees(predicate) {
             return new BreadthSubTreeEnumerable(this, predicate);
         }
 
@@ -13627,11 +13622,6 @@ var ITree = function (_GeneratorEnumerable) {
     }, {
         key: 'depthSubTree',
         value: function depthSubTree(predicate) {
-            return this.depthSubTrees(predicate).first();
-        }
-    }, {
-        key: 'depthSubTrees',
-        value: function depthSubTrees(predicate) {
             return new DepthSubTreeEnumerable(this, predicate);
         }
 

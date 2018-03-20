@@ -62,9 +62,6 @@ class ITree extends GeneratorEnumerable {
      * 搜索符合条件的子树(广度优先搜索)
      */
     breadthSubTree(predicate) {
-        return this.breadthSubTrees(predicate).first();
-    }
-    breadthSubTrees(predicate) {
         return new BreadthSubTreeEnumerable(this, predicate);
     }
 
@@ -86,9 +83,6 @@ class ITree extends GeneratorEnumerable {
      * 搜索符合条件的子树(深度优先搜索)
      */
     depthSubTree(predicate) {
-        return this.depthSubTrees(predicate).first();
-    }
-    depthSubTrees(predicate) {
         return new DepthSubTreeEnumerable(this, predicate);
     }
 
