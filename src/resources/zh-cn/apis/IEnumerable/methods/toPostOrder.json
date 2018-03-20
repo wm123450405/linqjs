@@ -1,0 +1,24 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [],
+                    "returns": {
+                        "type": "BinaryTree",
+                        "descriptions": [
+                            "一个二叉树"
+                        ]
+                    },
+                    "description": "创建一个完全二叉树,使得此二叉树的后序遍历结果与源序列一致",
+                    "remarks": [
+                        "可以理解为树形结构后序遍历的逆运算"
+                    ],
+                    "sees": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

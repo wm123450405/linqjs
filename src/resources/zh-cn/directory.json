@@ -84,6 +84,12 @@
 		"title": "API文档",
 		"children": [
 			{
+				"code": "BinaryTree",
+				"title": "BinaryTree 类",
+				"since": "2.1.22",
+				"deprecated": "2.1.22.pre"
+			},
+			{
 				"code": "Directory",
 				"title": "Directory 类",
 				"since": "2.1.15",

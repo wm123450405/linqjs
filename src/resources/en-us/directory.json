@@ -84,6 +84,12 @@
 		"title": "APIs",
 		"children": [
 			{
+				"code": "BinaryTree",
+				"title": "BinaryTree Class",
+				"since": "2.1.22",
+				"deprecated": "2.1.22.pre"
+			},
+			{
 				"code": "Directory",
 				"title": "Directory Class",
 				"since": "2.1.15",

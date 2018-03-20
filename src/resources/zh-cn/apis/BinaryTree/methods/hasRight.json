@@ -1,0 +1,21 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "是否有右子树"
+                        ]
+                    },
+                    "description": "获取一个节点是否存在右子树",
+                    "sees": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

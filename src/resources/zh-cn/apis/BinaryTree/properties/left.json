@@ -1,0 +1,10 @@
+{
+    "histroys": [
+        {
+            "type": "any",
+            "since": "2.1.22",
+            "readonly": true,
+            "description": "此节点的左子树"
+        }
+    ]
+}

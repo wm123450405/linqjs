@@ -2758,6 +2758,21 @@
 			]
 		},
 		{
+			"name": "toInOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "创建一个完全二叉树,使得此二叉树的中序遍历结果与源序列一致",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "toLookup",
 			"histroys": [
 				{
@@ -2842,6 +2857,36 @@
 									"name": "comparer"
 								}
 							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toPostOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "创建一个完全二叉树,使得此二叉树的后序遍历结果与源序列一致",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toPreOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "创建一个完全二叉树,使得此二叉树的前序遍历结果与源序列一致",
+							"parameters": []
 						}
 					]
 				}

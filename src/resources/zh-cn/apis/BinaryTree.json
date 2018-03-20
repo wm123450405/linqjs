@@ -1,0 +1,109 @@
+{
+	"type": "class",
+	"since": "2.1.22",
+	"extends": [
+		"ITree"
+	],
+	"name": "BinaryTree",
+	"properties": [
+		{
+			"name": "left",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "此节点的左子树",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "right",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "此节点的右子树",
+					"readonly": true
+				}
+			]
+		}
+	],
+	"methods": [
+		{
+			"name": "hasLeft",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取一个节点是否存在左子树",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "hasRight",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取一个节点是否存在右子树",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "inOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "对树形结构进行中序遍历,得到此树形结构按照中序遍历后的新序列",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "postOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "对树形结构进行后序遍历,得到此树形结构按照后序遍历后的新序列",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "preOrder",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "对树形结构进行前序遍历,得到此树形结构按照前序遍历后的新序列",
+							"parameters": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
