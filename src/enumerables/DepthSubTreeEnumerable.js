@@ -11,13 +11,20 @@ class BreadthSubTreeEnumerable extends IEnumerable {
         super([]);
         predicate = methods.asPredicate(predicate);
         core.defineProperty(this, Symbol.iterator, function* BreadthSubTreeIterator(){
-            let queue = [ [ tree ] ];
-            while (queue.length) {
-                for (let element of queue.shift()) {
-                    if (predicate(element.value)) {
-                        yield element;
-                    }
-                    queue.push(element);
+            let nodes = [ tree ];
+            let iterators = [ tree[Symbol.iterator]() ];
+            let pop = false;
+            while (nodes.length && iterators.length) {
+                if (!pop && predicate(nodes[nodes.length - 1].value)) yield nodes[nodes.length - 1].value;
+                let next = iterators[iterators.length - 1].next();
+                if (next.done) {
+                    iterators.pop();
+                    nodes.pop();
+                    pop = true;
+                } else {
+                    nodes.push(next.value);
+                    iterators.push(next.value[Symbol.iterator]());
+                    pop = false;
                 }
             }
         });

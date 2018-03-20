@@ -12064,94 +12064,50 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
 
         predicate = methods.asPredicate(predicate);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function BreadthSubTreeIterator() {
-            var queue, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
-
+            var nodes, iterators, pop, next;
             return regeneratorRuntime.wrap(function BreadthSubTreeIterator$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            queue = [[tree]];
+                            nodes = [tree];
+                            iterators = [tree[Symbol.iterator]()];
+                            pop = false;
 
-                        case 1:
-                            if (!queue.length) {
-                                _context.next = 32;
+                        case 3:
+                            if (!(nodes.length && iterators.length)) {
+                                _context.next = 11;
                                 break;
                             }
 
-                            _iteratorNormalCompletion = true;
-                            _didIteratorError = false;
-                            _iteratorError = undefined;
-                            _context.prev = 5;
-                            _iterator = queue.shift()[Symbol.iterator]();
+                            if (!(!pop && predicate(nodes[nodes.length - 1].value))) {
+                                _context.next = 7;
+                                break;
+                            }
+
+                            _context.next = 7;
+                            return nodes[nodes.length - 1].value;
 
                         case 7:
-                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                _context.next = 16;
-                                break;
+                            next = iterators[iterators.length - 1].next();
+
+                            if (next.done) {
+                                iterators.pop();
+                                nodes.pop();
+                                pop = true;
+                            } else {
+                                nodes.push(next.value);
+                                iterators.push(next.value[Symbol.iterator]());
+                                pop = false;
                             }
-
-                            element = _step.value;
-
-                            if (!predicate(element.value)) {
-                                _context.next = 12;
-                                break;
-                            }
-
-                            _context.next = 12;
-                            return element;
-
-                        case 12:
-                            queue.push(element);
-
-                        case 13:
-                            _iteratorNormalCompletion = true;
-                            _context.next = 7;
+                            _context.next = 3;
                             break;
 
-                        case 16:
-                            _context.next = 22;
-                            break;
-
-                        case 18:
-                            _context.prev = 18;
-                            _context.t0 = _context['catch'](5);
-                            _didIteratorError = true;
-                            _iteratorError = _context.t0;
-
-                        case 22:
-                            _context.prev = 22;
-                            _context.prev = 23;
-
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
-
-                        case 25:
-                            _context.prev = 25;
-
-                            if (!_didIteratorError) {
-                                _context.next = 28;
-                                break;
-                            }
-
-                            throw _iteratorError;
-
-                        case 28:
-                            return _context.finish(25);
-
-                        case 29:
-                            return _context.finish(22);
-
-                        case 30:
-                            _context.next = 1;
-                            break;
-
-                        case 32:
+                        case 11:
                         case 'end':
                             return _context.stop();
                     }
                 }
-            }, BreadthSubTreeIterator, this, [[5, 18, 22, 30], [23,, 25, 29]]);
+            }, BreadthSubTreeIterator, this);
         }));
         return _this;
     }
