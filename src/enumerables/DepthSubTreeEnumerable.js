@@ -15,7 +15,7 @@ class BreadthSubTreeEnumerable extends IEnumerable {
             let iterators = [ tree[Symbol.iterator]() ];
             let pop = false;
             while (nodes.length && iterators.length) {
-                if (!pop && predicate(nodes[nodes.length - 1].value)) yield nodes[nodes.length - 1].value;
+                if (!pop && predicate(nodes[nodes.length - 1].value)) yield nodes[nodes.length - 1];
                 let next = iterators[iterators.length - 1].next();
                 if (next.done) {
                     iterators.pop();
