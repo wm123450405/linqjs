@@ -6,11 +6,11 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-class SubTreeEnumerable extends IEnumerable {
+class BreadthSubTreeEnumerable extends IEnumerable {
     constructor(tree, predicate) {
         super([]);
         predicate = methods.asPredicate(predicate);
-        core.defineProperty(this, Symbol.iterator, function* SubTreeIterator(){
+        core.defineProperty(this, Symbol.iterator, function* BreadthSubTreeIterator(){
             let queue = [ [ tree ] ];
             while (queue.length) {
                 for (let element of queue.shift()) {
@@ -24,4 +24,4 @@ class SubTreeEnumerable extends IEnumerable {
     }
 }
 
-module.exports = SubTreeEnumerable;
+module.exports = BreadthSubTreeEnumerable;

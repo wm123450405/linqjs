@@ -59,6 +59,16 @@ class ITree extends GeneratorEnumerable {
     }
 
     /**
+     * 搜索符合条件的子树(广度优先搜索)
+     */
+    breadthSubTree(predicate) {
+        return this.breadthSubTrees(predicate).first();
+    }
+    breadthSubTrees(predicate) {
+        return new BreadthSubTreeEnumerable(this, predicate);
+    }
+
+    /**
      * 深度优先遍历
      */
     depthTraverse() {
@@ -70,6 +80,16 @@ class ITree extends GeneratorEnumerable {
      */
     depthSearch(predicate = defaultPredicate) {
         return Enumerable.first(this.depthTraverse(), predicate);
+    }
+
+    /**
+     * 搜索符合条件的子树(深度优先搜索)
+     */
+    depthSubTree(predicate) {
+        return this.depthSubTrees(predicate).first();
+    }
+    depthSubTrees(predicate) {
+        return new DepthSubTreeEnumerable(this, predicate);
     }
 
     /**
@@ -117,16 +137,6 @@ class ITree extends GeneratorEnumerable {
     }
     pathTo(node) {
         return new PathToEnumerable(this, node);
-    }
-
-    /**
-     * 搜索符合条件的子树
-     */
-    subTree(predicate) {
-        return this.subTrees(predicate).first();
-    }
-    subTrees(predicate) {
-        return new SubTreeEnumerable(this, predicate);
     }
 
     /**
@@ -221,4 +231,5 @@ const BinaryTree = require('./BinaryTree');
 const PathToEnumerable = require('./PathToEnumerable');
 const BreadthEnumerable = require('./BreadthEnumerable');
 const DepthEnumerable = require('./DepthEnumerable');
-const SubTreeEnumerable = require('./SubTreeEnumerable');
+const BreadthSubTreeEnumerable = require('./BreadthSubTreeEnumerable');
+const DepthSubTreeEnumerable = require('./DepthSubTreeEnumerable');
