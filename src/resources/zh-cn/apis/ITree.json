@@ -1,0 +1,249 @@
+{
+	"type": "interface",
+	"since": "2.1.22",
+	"extends": [
+		"IEnumerable"
+	],
+	"name": "ITree",
+	"properties": [
+		{
+			"name": "children",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "包含当前节点所有子节点的集合",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "value",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "当前节点的值",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "values",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "包含当前节点所有子节点值的集合",
+					"readonly": true
+				}
+			]
+		}
+	],
+	"methods": [
+		{
+			"name": "breadthSearch",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过广度优先遍历算法查找树形结构,找到满足条件的元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "breadthTraverse",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过广度优先遍历算法遍历树形结构,将其展开得到新的值序列",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "depthSearch",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过深度优先遍历算法查找树形结构,找到满足条件的元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "depthTraverse",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过深度优先遍历算法遍历树形结构,将其展开得到新的值序列",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "getChild",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回当前节点所有子节点的指定索引处的节点",
+							"parameters": [
+								{
+									"name": "index"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "getValue",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回当前节点所有子节点的指定索引处的节点值",
+							"parameters": [
+								{
+									"name": "index"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isAncestorOf",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断一个节点是否是另一个节点的祖先节点",
+							"parameters": [
+								{
+									"name": "node"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isDescendantOf",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断一个节点是否是另一个节点的子孙节点",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "lowestAncestor",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找所有指定节点的最小公共祖先节点",
+							"parameters": [
+								{
+									"name": "tree"
+								},
+								{
+									"name": "trees"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "path",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取从祖先节点到当前节点路径上所有的节点值序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pathTo",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取从当前节点到子孙节点路径上所有的节点值序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

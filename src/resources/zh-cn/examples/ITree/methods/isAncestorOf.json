@@ -1,0 +1,4 @@
+{
+	"1.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);\r\n\r\nconsole.log(tree.isAncestorOf(tree.getChild(0).getChild(1)));\r\n\r\n// 这段代码的输出结果如下：\r\n//\r\n// true",
+	"2.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);\r\n\r\nconsole.log(tree.isAncestorOf('c'));\r\nconsole.log(tree.isAncestorOf('f'));\r\n\r\n// 这段代码的输出结果如下：\r\n//\r\n// true\r\n// false"
+}
