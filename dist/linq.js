@@ -12085,7 +12085,7 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
                             }
 
                             _context.next = 7;
-                            return nodes[nodes.length - 1].value;
+                            return nodes[nodes.length - 1];
 
                         case 7:
                             next = iterators[iterators.length - 1].next();
