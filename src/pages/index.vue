@@ -167,7 +167,6 @@
                                 Enumerable.config.extends.array = false;
                                 console.log = log;
                             }
-                            console.log('executed', Enumerable.config.extends.lazy);
 							this.$nextTick(() => {
 								let list = $('.result .list');
 								list.scrollTop(list.get(0).scrollHeight);

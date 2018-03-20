@@ -61,6 +61,25 @@
 			]
 		},
 		{
+			"name": "breadthSubTree",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过广度优先遍历算法遍历树形结构,获取所有满足条件的子树组成的序列",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "breadthTraverse",
 			"histroys": [
 				{
@@ -84,6 +103,25 @@
 					"overloads": [
 						{
 							"description": "通过深度优先遍历算法查找树形结构,找到满足条件的元素",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "depthSubTree",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过深度优先遍历算法遍历树形结构,获取所有满足条件的子树组成的序列",
 							"parameters": [
 								{
 									"name": "predicate"

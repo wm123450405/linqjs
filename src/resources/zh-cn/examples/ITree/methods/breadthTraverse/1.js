@@ -16,4 +16,4 @@ console.log(tree.breadthTraverse().toArray());
 
 // 这段代码的输出结果如下：
 //
-// a, b, e, c, d
+// a,b,e,c,d
