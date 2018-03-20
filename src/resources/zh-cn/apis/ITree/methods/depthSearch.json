@@ -1,0 +1,72 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "通过深度优先遍历算法查找树形结构得到第一个满足条件的元素"
+                        ]
+                    },
+                    "description": "通过深度优先遍历算法查找树形结构,找到满足条件的元素",
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "depthTraverse"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "breadthSearch"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 depthSearch 对一个树进行深度优先遍历查找。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

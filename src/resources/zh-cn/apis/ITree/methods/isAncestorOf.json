@@ -1,0 +1,52 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "node",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用来校验节点关系的子孙节点或节点的值"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "一个节点是否为另一个节点的祖先节点"
+                        ]
+                    },
+                    "description": "判断一个节点是否是另一个节点的祖先节点",
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "isDescendantOf"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 isAncestorOf 判断节点是否为指定节点的祖先节点。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        },
+                        {
+                            "description": "下面的代码示例演示如何使用 isAncestorOf 判断值是否为指定节点值的祖先节点。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "2.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

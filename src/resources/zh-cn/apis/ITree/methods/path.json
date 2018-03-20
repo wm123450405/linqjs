@@ -1,0 +1,49 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "root",
+                            "types": [
+                                "ITree"
+                            ],
+                            "descriptions": [
+                                "祖先节点"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "从祖先节点到当前节点路径上所有的节点值序列"
+                        ]
+                    },
+                    "description": "获取从祖先节点到当前节点路径上所有的节点值序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "此路径的结果序列中包含祖先节点与当前节点本身"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "pathTo"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 path 获取从祖先节点到当前节点路径上所有的节点。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
