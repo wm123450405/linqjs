@@ -782,6 +782,9 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthSearch(node => node.value === e), nodee);
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSearch(node => node.value === c), nodec);
 
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthSubTree(node => node.value === e).select(node => node.value).toArray(), [ nodee ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSubTree(node => node.value === c).select(node => node.value).toArray(), [ nodec ]);
+
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isFullBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isCompleteBinary(), true);
