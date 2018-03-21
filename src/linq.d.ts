@@ -791,14 +791,14 @@ declare namespace Enumerable {
         toLookup<TKey, TValue>(keySelector: (element: T, index?: number) => TKey, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
         toLookup<TKey, TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : Lookup<TKey, TValue>;
 
-        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-        toObject<TValue>(keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-        toObject<TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : any;
-        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
-        toObject<TValue>(keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : any;
-        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
-        toObject<TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : any;
+        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : object;
+        toObject<TValue>(keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: (element: string, other: string) => boolean = defaultSameComparer) : object;
+        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : object;
+        toObject<TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: (element: string, other: string) => boolean = defaultSameComparer) : object;
+        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : object;
+        toObject<TValue>(keySelector: string | number | symbol, valueSelector: (element: T, index?: number) => TValue, comparer: string | number | symbol) : object;
+        toObject<TValue>(keySelector: (element: T, index?: number) => string, valueSelector: string | number | symbol, comparer: string | number | symbol) : object;
+        toObject<TValue>(keySelector: string | number | symbol, valueSelector: string | number | symbol, comparer: string | number | symbol) : object;
 
         toPreOrder(): BinaryTree<T>;
         toInOrder(): BinaryTree<T>;
@@ -905,6 +905,8 @@ declare namespace Enumerable {
         isPerfectBinary(): boolean;
 
         asBinary(): BinaryTree<TValue>;
+
+        toValue<TObjValue>(childrenName: string = 'children', valueSelector: (value: TValue) => TObjValue): TObjValue;
 
     }
 
