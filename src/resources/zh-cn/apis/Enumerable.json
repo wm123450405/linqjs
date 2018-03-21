@@ -117,6 +117,21 @@
 				},
 				{
 					"since": "2.1.20",
+					"deprecated": "2.1.21",
+					"overloads": [
+						{
+							"static": true,
+							"description": "通过指定的 source 创建一个 IEnumerable 对象",
+							"parameters": [
+								{
+									"name": "source"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.22",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -125,6 +140,18 @@
 							"parameters": [
 								{
 									"name": "source"
+								}
+							]
+						},
+						{
+							"static": true,
+							"description": "将一个对象通过子节点选择器与值选择器转化为一个树形结构",
+							"parameters": [
+								{
+									"name": "childrenSelector"
+								},
+								{
+									"name": "valueSelector"
 								}
 							]
 						}

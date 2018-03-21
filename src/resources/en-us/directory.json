@@ -15,67 +15,67 @@
 				"code": "instance",
 				"title": "Get IEnumerable instance",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "use",
 				"title": "Start use",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "config",
 				"title": "Configuration",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "selector",
 				"title": "Selector",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "predicate",
 				"title": "Predicate",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "comparer",
 				"title": "Comparer",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "action",
 				"title": "Action",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "iterator",
 				"title": "迭代器",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "enumerator",
 				"title": "枚举器",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "extend",
 				"title": "扩展",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "plugin",
 				"title": "插件",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			}
 		]
 	},
@@ -87,115 +87,115 @@
 				"code": "BinaryTree",
 				"title": "BinaryTree Class",
 				"since": "2.1.22",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Directory",
 				"title": "Directory Class",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Entry",
 				"title": "Entry Class",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable",
 				"title": "Enumerable Class",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable.actions",
 				"title": "Enumerable.actions Object",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable.comparers",
 				"title": "Enumerable.comparers Object",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable.config",
 				"title": "Enumerable.config Object",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable.predicates",
 				"title": "Enumerable.predicates Object",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Enumerable.selectors",
 				"title": "Enumerable.selectors Object",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IChunk",
 				"title": "IChunk Interface",
 				"since": "2.1.18",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "ICombine",
 				"title": "ICombine Interface",
 				"since": "2.1.22",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IEnumerable",
 				"title": "IEnumerable Interface",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IEnumerator",
 				"title": "IEnumerator Interface",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IGrouping",
 				"title": "IGrouping Interface",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IMapEnumerable",
 				"title": "IMapEnumerable Interface",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "IOrderedEnumerable",
 				"title": "IOrderedEnumerable Interface",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "ITree",
 				"title": "ITree Interface",
 				"since": "2.1.22",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Lookup",
 				"title": "Lookup Class",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			},
 			{
 				"code": "Plugin",
 				"title": "Plugin Class",
 				"since": "2.1.15",
-				"deprecated": "2.1.22"
+				"deprecated": "2.1.23.pre"
 			}
 		]
 	},

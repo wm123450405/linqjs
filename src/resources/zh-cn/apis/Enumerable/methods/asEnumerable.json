@@ -36,6 +36,86 @@
                     ]
                 }
             ]
+        },
+        {
+            "since": "2.1.22",
+            "ref": true,
+            "overloads": [
+                { },
+                {
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "childrenSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用来从对象中查找子节点的选择器"
+                            ],
+                            "defaultValue": "defaultChildrenSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "IEnumerable"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "node",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "valueSelector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用来从对象中映射值的选择器"
+                            ],
+                            "defaultValue": "defaultValueSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "node",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "ITree",
+                        "descriptions": [
+                            "转化后的树形结构"
+                        ]
+                    },
+                    "description": "将一个对象通过子节点选择器与值选择器转化为一个树形结构",
+                    "sees": [
+                        {
+                            "apis": "ITree"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

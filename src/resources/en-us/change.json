@@ -133,5 +133,17 @@
 			"修复(Fixed):"
 		],
 		"version": "2.1.22"
+	},
+	{
+		"publish": "2018-03-21",
+		"contents": [
+			"新增(New):",
+			"1. 增加 ITree.prototype.toValue 方法,将树形结构转化为JSON数据",
+			"",
+			"优化(Optimization):",
+			"",
+			"修复(Fixed):"
+		],
+		"version": "2.1.23.pre"
 	}
 ]
