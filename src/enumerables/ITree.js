@@ -8,7 +8,7 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
-const defaultSelector = require('./../methods/defaultSelector');
+const defaultToValueSelector = require('./../methods/defaultToValueSelector');
 
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {
@@ -31,12 +31,12 @@ class ITree extends GeneratorEnumerable {
     getValue(index) {
         return this.getChild(index).value;
     }
-    toValue(childrenName = 'children', valueSelector = defaultSelector) {
+    toValue(childrenName = 'children', valueSelector = defaultToValueSelector) {
         valueSelector = methods.asSelector(valueSelector);
         let obj = valueSelector(this.value);
         let children = Enumerable.select(this, sub => sub.toValue(childrenName, valueSelector)).toArray();
         if (children.length) {
-            obj[childrenName] = children;
+            core.defineProperty(obj, childrenName, () => children, true, true);
         }
         return obj;
     }
