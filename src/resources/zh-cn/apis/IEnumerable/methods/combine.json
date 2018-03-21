@@ -156,6 +156,28 @@
                     ]
                 }
             ]
+        },
+        {
+            "ref": true,
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "returns": {
+                        "type": "IEnumerable<ICombine>"
+                    },
+                    "sees": [
+                        { },
+                        { },
+                        { },
+                        { },
+                        { },
+                        { },
+                        {
+                            "apis": "ICombine"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

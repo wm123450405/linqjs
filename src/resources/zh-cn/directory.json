@@ -144,6 +144,12 @@
 				"deprecated": "2.1.22.pre"
 			},
 			{
+				"code": "ICombine",
+				"title": "ICombine 接口",
+				"since": "2.1.22",
+				"deprecated": "2.1.22.pre"
+			},
+			{
 				"code": "IEnumerable",
 				"title": "IEnumerable 接口",
 				"since": "2.1.15",

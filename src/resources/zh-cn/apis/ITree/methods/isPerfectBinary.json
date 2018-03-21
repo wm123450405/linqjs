@@ -1,0 +1,43 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [ ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "是否是完美二叉树"
+                        ]
+                    },
+                    "description": "判断树形结构是否是完美二叉树，即一个每一个层的结点数都达到最大值的二叉树",
+                    "sees": [
+
+                        {
+                            "apis": "ITree",
+                            "method": "isBinary"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "isFullBinary"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "isCompleteBinary"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 isPerfectBinary 判断一个树是否为完美二叉树。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "当前节点的度"
+                        ]
+                    },
+                    "description": "获取节点的度(子节点数),只计算满足条件的子节点",
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "depth"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 degree 获取一个节点的度。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

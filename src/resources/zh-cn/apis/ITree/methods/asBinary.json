@@ -1,0 +1,35 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [ ],
+                    "returns": {
+                        "type": "BinaryTree",
+                        "descriptions": [
+                            "转化后的二叉树"
+                        ]
+                    },
+                    "description": "将一个满足二叉树结构的树形结构转化为一个二叉树",
+                    "sees": [
+
+                        {
+                            "apis": "ITree",
+                            "method": "isBinary"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 asBinary 将一个树转化为一个二叉树。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

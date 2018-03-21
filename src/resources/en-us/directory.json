@@ -144,6 +144,12 @@
 				"deprecated": "2.1.22.pre"
 			},
 			{
+				"code": "ICombine",
+				"title": "ICombine Interface",
+				"since": "2.1.22",
+				"deprecated": "2.1.22.pre"
+			},
+			{
 				"code": "IEnumerable",
 				"title": "IEnumerable Interface",
 				"since": "2.1.15",

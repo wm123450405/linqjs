@@ -246,6 +246,29 @@
 			"histroys": [
 				{
 					"since": "2.1.20",
+					"deprecated": "2.1.21",
+					"overloads": [
+						{
+							"description": "通过将一组序列中每个元素中父节点的键与元素的键进行比对, 聚合成一个新的递归结构的序列",
+							"parameters": [
+								{
+									"name": "parentSelector"
+								},
+								{
+									"name": "keySelector"
+								},
+								{
+									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.22",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -1693,6 +1716,31 @@
 			]
 		},
 		{
+			"name": "maxOrDefault",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值，如果序列中不包含任何元素则返回一个默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "min",
 			"histroys": [
 				{
@@ -1719,6 +1767,31 @@
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值",
 							"parameters": [
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "minOrDefault",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值，如果序列中不包含任何元素则返回一个默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
 								{
 									"name": "selector"
 								},

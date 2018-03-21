@@ -42,6 +42,21 @@
 	],
 	"methods": [
 		{
+			"name": "asBinary",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "将一个满足二叉树结构的树形结构转化为一个二叉树",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "breadthSearch",
 			"histroys": [
 				{
@@ -89,6 +104,44 @@
 						{
 							"description": "通过广度优先遍历算法遍历树形结构,将其展开得到新的值序列",
 							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "degree",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取节点的度(子节点数),只计算满足条件的子节点",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "depth",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取树的深度,只计算符合条件的子孙节点",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
 						}
 					]
 				}
@@ -205,6 +258,36 @@
 			]
 		},
 		{
+			"name": "isBinary",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断树形结构是否是二叉树，即所有的节点的度(子节点数)不超过2",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isCompleteBinary",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断树形结构是否是完全二叉树。若设二叉树的深度为 h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "isDescendantOf",
 			"histroys": [
 				{
@@ -218,6 +301,36 @@
 									"name": "root"
 								}
 							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isFullBinary",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断树形结构是否是满二叉树，即所有的节点的度(子节点数)为0或者为2",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isPerfectBinary",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断树形结构是否是完美二叉树，即一个每一个层的结点数都达到最大值的二叉树",
+							"parameters": []
 						}
 					]
 				}

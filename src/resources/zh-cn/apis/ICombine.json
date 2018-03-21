@@ -1,0 +1,33 @@
+{
+	"type": "interface",
+	"since": "2.1.22",
+	"extends": [
+		"ITree"
+	],
+	"name": "ICombine",
+	"properties": [
+		{
+			"name": "key",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "此聚合的key",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "parent",
+			"histroys": [
+				{
+					"since": "2.1.22",
+					"deprecated": 0,
+					"description": "此聚合父节点的key",
+					"readonly": true
+				}
+			]
+		}
+	],
+	"methods": []
+}

@@ -1,0 +1,43 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.22",
+            "overloads": [
+                {
+                    "parameters": [ ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "是否是满二叉树"
+                        ]
+                    },
+                    "description": "判断树形结构是否是满二叉树，即所有的节点的度(子节点数)为0或者为2",
+                    "sees": [
+
+                        {
+                            "apis": "ITree",
+                            "method": "isBinary"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "isCompleteBinary"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "isPerfectBinary"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 isFullBinary 判断一个树是否为满二叉树。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
