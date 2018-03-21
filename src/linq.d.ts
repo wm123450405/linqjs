@@ -927,11 +927,9 @@ declare namespace Enumerable {
     export interface ICombine<TKey, TValue> extends IEnumerable<ICombine<TKey, TValue>>, ITree<TValue> {
 
         readonly key: TKey;
-        readonly parent: ICombine<TKey, TValue>;
+        readonly parent: TKey;
 
         readonly children: IEnumerable<ICombine<TKey, TValue>>;
-
-        toObject(): any;
 
     }
 
