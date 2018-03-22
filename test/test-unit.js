@@ -745,6 +745,11 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().chunk(3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
     assert.deepStrictEqual([a, b, c, d].asEnumerable().chunk(2).select(c => c.index).toArray(), [ 0, 1 ]);
     assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().chunk(3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+    //split
+    assert.deepStrictEqual([a, b, c, b, d, e].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+    assert.deepStrictEqual([b, a, c, b, d, e].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+    assert.deepStrictEqual([a, b, c, b, d, e, b].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+    assert.deepStrictEqual([b, a, b, b, c, b, d, e, b].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
     //product
     assert.strictEqual([1, 2, 3, 4, 5].asEnumerable().product(), 120);
     //rightPad
@@ -1240,6 +1245,11 @@ module.exports = function(Enumerable) {
         assert.deepStrictEqual([a, b, c, d, e, f].chunk(3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
         assert.deepStrictEqual([a, b, c, d].chunk(2).select(c => c.index).toArray(), [ 0, 1 ]);
         assert.deepStrictEqual([a, b, c, d, e, f].chunk(3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+		//split
+        assert.deepStrictEqual([a, b, c, b, d, e].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+        assert.deepStrictEqual([b, a, c, b, d, e].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+        assert.deepStrictEqual([a, b, c, b, d, e, b].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+        assert.deepStrictEqual([b, a, b, b, c, b, d, e, b].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
         //product
         assert.strictEqual([1, 2, 3, 4, 5].product(), 120);
         //rightPad

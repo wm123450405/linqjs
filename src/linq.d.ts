@@ -3,6 +3,7 @@ declare namespace Enumerable {
     const defaultEqualityComparer;
     const defaultStrictEqualityComparer;
     const defaultPredicate;
+    const defaultFalsePredicate;
     const defaultExistsPredicate;
     const defaultSelector;
     const defaultKeySelector;
@@ -54,6 +55,9 @@ declare namespace Enumerable {
     export function average<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
 
     export function chunk<T>(source: T[] | IEnumerable<T>, chunk, offset = 0): IEnumerable<IChunk<T>>;
+
+    export function split<T>(source: T[] | IEnumerable<T>, splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
+    export function split<T>(source: T[] | IEnumerable<T>, splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
 
     export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[][]): IEnumerable<T>;
     export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[]): IEnumerable<T>;
@@ -502,6 +506,9 @@ declare namespace Enumerable {
         average(selector: string | number | symbol): number;
 
         chunk(chunk, offset = 0): IEnumerable<IChunk<T>>;
+
+        split(splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
+        split(splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
 
         concat(...other: T[][]): IEnumerable<T>;
         concat(...other: T[]): IEnumerable<T>;
