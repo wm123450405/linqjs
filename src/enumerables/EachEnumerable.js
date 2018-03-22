@@ -15,7 +15,7 @@ class EachEnumerable extends IEnumerable {
                 action(element, index++);
                 yield element;
             }
-        })
+        });
     }
 }
 

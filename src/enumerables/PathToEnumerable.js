@@ -14,7 +14,7 @@ class PathToEnumerable extends IEnumerable {
         core.defineProperty(this, Symbol.iterator, function* PathToIterator() {
             let search = (result, current) => {
                 result.push(current);
-                if (current === node || current.value === node || node instanceof ITree && current.value === node.value) {
+                if (ITree.isSameNode(current, node)) {
                     return result;
                 } else {
                     for (let child of current) {

@@ -888,11 +888,16 @@ declare namespace Enumerable {
 
         lowestAncestor(tree: ITree<TValue> | TValue, ...trees: (ITree<TValue> | TValue)[]): ITree<TValue>;
 
+        isChildOf(root: ITree<TValue>): boolean;
+        isParentOf(node: ITree<TValue> | TValue): boolean;
+
         isDescendantOf(root: ITree<TValue>): boolean;
         isAncestorOf(node: ITree<TValue> | TValue): boolean;
 
         path(root: ITree<TValue>): IEnumerable<TValue>;
         pathTo(node: ITree<TValue> | TValue): IEnumerable<TValue>;
+
+        getParent(node: ITree<TValue> | TValue): TValue;
 
         degree(predicate: (element: TValue) => boolean = defaultPredicate): number;
         degree(predicate: string | number | symbol | TValue | any): number;

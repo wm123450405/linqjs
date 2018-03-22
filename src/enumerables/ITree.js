@@ -5,6 +5,7 @@ const GeneratorEnumerable = require('./GeneratorEnumerable');
 const Enumerable = require('./../Enumerable');
 
 const core = require('./../core/core');
+const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
 
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
@@ -107,6 +108,18 @@ class ITree extends GeneratorEnumerable {
         return Enumerable.takeWhile(path, value => value !== false).last();
     }
     /**
+     * 是否是子节点
+     */
+    isChildOf(root) {
+        return root.isParentOf(this);
+    }
+    /**
+     * 是否是父节点
+     */
+    isParentOf(node) {
+        return this.any(current => ITree.isSameNode(current, node));
+    }
+    /**
      * 是否是后辈节点
      */
     isDescendantOf(root) {
@@ -116,21 +129,46 @@ class ITree extends GeneratorEnumerable {
      * 是否是祖先节点
      */
     isAncestorOf(node) {
-        let search = (result, current) => {
-            result.push(current);
-            if (current === node || current.value === node || node instanceof ITree && current.value === node.value) {
+        let search = current => {
+            if (ITree.isSameNode(current, node)) {
                 return true;
             } else {
                 for (let child of current) {
-                    if (search(result, child)) {
+                    if (search(child)) {
                         return true;
                     }
                 }
-                result.pop();
                 return false;
             }
         };
-        return search([], this);
+        return search(this);
+    }
+
+    /**
+     * 获取一个节点的父节点
+     */
+    getParent(node) {
+        let search = current => {
+            if (ITree.isSameNode(current, node)) {
+                return true;
+            } else {
+                for (let child of current) {
+                    let res = search(child);
+                    if (res === true) {
+                        return current;
+                    } else if (res) {
+                        return res;
+                    }
+                }
+                return false;
+            }
+        };
+        let result = search(this);
+        if (result && result !== true) {
+            return result.value;
+        } else {
+            throw new NotAncestorOfException(this, node);
+        }
     }
 
     /**
@@ -228,6 +266,8 @@ class ITree extends GeneratorEnumerable {
         return new BinaryTree(this);
     }
 }
+
+ITree.isSameNode = (current, node) => current === node || current.value === node || node instanceof ITree && current.value === node.value;
 
 module.exports = ITree;
 
