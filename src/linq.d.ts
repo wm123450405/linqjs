@@ -893,7 +893,7 @@ declare namespace Enumerable {
         depthSubTree(predicate: (element: TValue) => boolean): IEnumerable<ITree<TValue>>;
         depthSubTree(predicate: string | number | symbol | TValue | any): IEnumerable<ITree<TValue>>;
 
-        lowestAncestor(tree: ITree<TValue> | TValue, ...trees: (ITree<TValue> | TValue)[]): ITree<TValue>;
+        lowestAncestor(...nodes: (ITree<TValue> | TValue)[]): TValue;
 
         isChildOf(root: ITree<TValue>): boolean;
         isParentOf(node: ITree<TValue> | TValue): boolean;

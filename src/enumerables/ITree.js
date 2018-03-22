@@ -10,6 +10,7 @@ const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfExcept
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
 const defaultToValueSelector = require('./../methods/defaultToValueSelector');
+const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {
@@ -100,12 +101,35 @@ class ITree extends GeneratorEnumerable {
     /**
      * 多个节点的最小公共祖先
      */
-    lowestAncestor(tree, ...trees) {
-        let path = this.pathTo(tree);
-        for (let t of trees) {
-            path = Enumerable.zip(path, this.pathTo(t), (pValue, tValue) => pValue === tValue ? pValue : false);
+    lowestAncestor(...nodes) {
+        let matchCount = nodes.length;
+        let isMatch = new Array(matchCount).fill(false);
+        let search = current => {
+            let index = 0;
+            for (let node of nodes) {
+                if (!isMatch[index] && ITree.isSameNode(current, node)) {
+                    isMatch[index] = true;
+                    matchCount--;
+                    break;
+                }
+                index++;
+            }
+            for (let child of current) {
+                let result = search(child);
+                if (result) {
+                    return result;
+                } else if (matchCount === 0) {
+                    return current;
+                }
+            }
+            return false;
+        };
+        let result = search(this);
+        if (result) {
+            return result.value;
+        } else {
+            throw new NotAncestorOfException(this, nodes[isMatch.map((match, index) => ({ match, index })).find(({ match }) => !match).index]);
         }
-        return Enumerable.takeWhile(path, value => value !== false).last();
     }
     /**
      * 是否是子节点
@@ -267,7 +291,10 @@ class ITree extends GeneratorEnumerable {
     }
 }
 
-ITree.isSameNode = (current, node) => current === node || current.value === node || node instanceof ITree && current.value === node.value;
+ITree.isSameNode = (current, node, comparer = defaultEqualityComparer) => {
+    comparer = methods.asComparer(comparer);
+    return current === node || (node instanceof ITree ? comparer(current.value, node.value) : comparer(current.value, node));
+};
 
 module.exports = ITree;
 
