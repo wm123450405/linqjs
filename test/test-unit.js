@@ -422,6 +422,12 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.toArray()).toArray(), [ [c, d, e], [f] ]);
     assert.deepStrictEqual(Enumerable.chunk([a, b, c, d], 2).select(c => c.index).toArray(), [ 0, 1 ]);
     assert.deepStrictEqual(Enumerable.chunk([a, b, c, d, e, f], 3, 2).skip(1).select(c => c.index).toArray(), [ 1, 2 ]);
+	//split
+    assert.deepStrictEqual(Enumerable.split([a, b, c, b, d, e], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+    assert.deepStrictEqual(Enumerable.split([b, a, c, b, d, e], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+    assert.deepStrictEqual(Enumerable.split([a, b, c, b, d, e, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+    assert.deepStrictEqual(Enumerable.split([b, a, b, b, c, b, d, e, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
+    assert.deepStrictEqual(Enumerable.split('babbcbdeb', /b/).select(chunk => chunk.join('')).toArray(), [ '', 'a', '', 'c', 'de', '' ]);
     //product
     assert.strictEqual(Enumerable.product([1, 2, 3, 4, 5]), 120);
     assert.strictEqual(Enumerable.range(1, 5).product(), 120);

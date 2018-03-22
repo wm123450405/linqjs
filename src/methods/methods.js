@@ -21,6 +21,8 @@ const methods = {
 			return selectorPredicate(predicate);
 		} else if (type === core.types.Function) {
 			return predicate;
+		} else if (type === core.types.RegExp) {
+			return regexpPredicate(predicate);
 		} else if (type === core.types.Array || type === core.types.Object) {
 			return propertiesPredicate(predicate);
 		} else {
@@ -82,3 +84,4 @@ const defaultSameComparer = require('./defaultSameComparer');
 const defaultComparer = require('./defaultComparer');
 const arrayComparer = require('./arrayComparer');
 const propertiesPredicate = require('./propertiesPredicate');
+const regexpPredicate = require('./regexpPredicate');

@@ -5,6 +5,7 @@ const core = require('./core/core');
 const methods = require('./methods/methods');
 
 const defaultPredicate = require('./methods/defaultPredicate');
+const defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 const defaultSelector = require('./methods/defaultSelector');
 const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
@@ -823,6 +824,9 @@ Enumerable.each = function(source, action = defaultAction) {
 Enumerable.chunk = function(source, chunk, offset = 0) {
     return new ChunkEnumerable(asIterable(source), chunk, offset);
 };
+Enumerable.split = function(source, splitPredicate = defaultFalsePredicate) {
+    return new SplitEnumerable(asIterable(source), splitPredicate);
+};
 Enumerable.leftPad = function(source, length, value) {
     return new LeftPadEnumerable(asIterable(source), length, value);
 };
@@ -1040,6 +1044,7 @@ const FillEnumerable = require('./enumerables/FillEnumerable');
 const SortEnumerable = require('./enumerables/SortEnumerable');
 const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 const ChunkEnumerable = require('./enumerables/ChunkEnumerable');
+const SplitEnumerable = require('./enumerables/SplitEnumerable');
 const LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
 const RightPadEnumerable = require('./enumerables/RightPadEnumerable');
 const RandEnumerable = require('./enumerables/RandEnumerable');

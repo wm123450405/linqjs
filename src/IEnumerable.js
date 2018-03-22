@@ -3,6 +3,7 @@
 const core = require('./core/core');
 
 const defaultPredicate = require('./methods/defaultPredicate');
+const defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 const defaultSelector = require('./methods/defaultSelector');
 const defaultSameComparer = require('./methods/defaultSameComparer');
 const defaultEqualityComparer = require('./methods/defaultEqualityComparer');
@@ -324,6 +325,9 @@ class IEnumerable extends Array {
     }
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
+    }
+    split(splitPredicate = defaultFalsePredicate) {
+        return Enumerable.split(this, splitPredicate);
     }
     leftPad(length, value) {
         return Enumerable.leftPad(this, length, value);

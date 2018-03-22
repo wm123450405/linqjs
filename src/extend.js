@@ -6,6 +6,7 @@ const Enumerable = require('./Enumerable');
 const methods = require('./methods/methods');
 
 const defaultPredicate = require('./methods/defaultPredicate');
+const defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 const defaultSelector = require('./methods/defaultSelector');
 const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultSameComparer = require('./methods/defaultSameComparer');
@@ -315,6 +316,9 @@ const extendObject = {
     },
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
+    },
+    split(splitPredicate = defaultFalsePredicate) {
+        return Enumerable.split(this, splitPredicate);
     },
     leftPad(length, value) {
         return Enumerable.leftPad(this, length, value);
