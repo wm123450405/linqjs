@@ -38,23 +38,24 @@ class NearGroupedEnumerable extends IEnumerable {
                     if (prevKey === noneKey || !comparer(key, prevKey)) {
                         array = [];
                         prevKey = key;
-                        groupings.push(new IGrouping(key, (function(array){
-                            return (function* () {
-                                while (array.length > 0 || hasNext()) {
-                                    if (array.length > 0) {
-                                        yield array.shift();
-                                    }
+                        groupings.push(new IGrouping(key, (array => function* () {
+                            let index = 0;
+                            while (array.length > index || hasNext()) {
+                                if (array.length > index) {
+                                    yield array[index++];
                                 }
-                            })();
+                            }
                         })(array)));
                     }
                     array.push(element);
                 }
                 return !next.done;
             };
-            while (groupings.length > 0 || hasNext()) {
-                if (groupings.length > 0) {
-                    yield resultSelector(Enumerable.first(groupings).key, groupings.shift());
+            let gi = 0;
+            while (groupings.length > gi || hasNext()) {
+                if (groupings.length > gi) {
+                    let grouping = groupings[gi++];
+                    yield resultSelector(grouping.key, grouping);
                 }
             }
         });

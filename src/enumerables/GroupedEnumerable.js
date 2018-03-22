@@ -37,7 +37,7 @@ class GroupedEnumerable extends IEnumerable {
                     let trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
                     if (trueKey === noneKey) {
                         iterators.set(key, []);
-                        groupings.push(new IGrouping(key, function* () {
+                        groupings.push(new IGrouping(key, (key => function* () {
                             let array = iterators.get(key);
                             let index = 0;
                             while (array.length > index || hasNext()) {
@@ -45,7 +45,7 @@ class GroupedEnumerable extends IEnumerable {
                                     yield array[index++];
                                 }
                             }
-                        }));
+                        })(key)));
                     } else {
                         key = trueKey;
                     }

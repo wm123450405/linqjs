@@ -20,12 +20,12 @@ class SplitEnumerable extends IEnumerable {
             let chunks = [];
             let index = 0;
             let addChunk = () => {
-                chunks.push((chunk => new IChunk(chunkIndex++, function*() {
+                chunks.push(new IChunk(chunkIndex++, (chunk => function*() {
                     let i = 0;
                     while (chunk.length > i || hasNext() && chunk.length > i) {
-                        yield chunk[i];
+                        yield chunk[i++];
                     }
-                }))(chunk));
+                })(chunk)));
             };
             let hasNext = () => {
                 let next = iterator.next();

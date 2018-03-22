@@ -11232,7 +11232,7 @@ var ChunkEnumerable = function (_IEnumerable) {
 
         offset = offset < 0 ? (offset % chunk + chunk) % chunk : offset;
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function ChunkIterator() {
-            var index, chunks, last, it, hasNext;
+            var index, chunks, last, it, hasNext, ci;
             return regeneratorRuntime.wrap(function ChunkIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -11252,23 +11252,27 @@ var ChunkEnumerable = function (_IEnumerable) {
                                         });
                                         last.chunk = function (last) {
                                             return new IChunk(index, regeneratorRuntime.mark(function _callee() {
+                                                var index;
                                                 return regeneratorRuntime.wrap(function _callee$(_context) {
                                                     while (1) {
                                                         switch (_context.prev = _context.next) {
                                                             case 0:
-                                                                if (!(last.array.length || hasNext() && last.array.length)) {
-                                                                    _context.next = 5;
+                                                                index = 0;
+
+                                                            case 1:
+                                                                if (!(last.array.length > index || hasNext() && last.array.length > index)) {
+                                                                    _context.next = 6;
                                                                     break;
                                                                 }
 
-                                                                _context.next = 3;
-                                                                return last.array.shift();
+                                                                _context.next = 4;
+                                                                return last.array[index++];
 
-                                                            case 3:
-                                                                _context.next = 0;
+                                                            case 4:
+                                                                _context.next = 1;
                                                                 break;
 
-                                                            case 5:
+                                                            case 6:
                                                             case 'end':
                                                                 return _context.stop();
                                                         }
@@ -11283,25 +11287,27 @@ var ChunkEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 4:
-                            if (!(chunks.length || hasNext())) {
-                                _context2.next = 10;
+                            ci = 0;
+
+                        case 5:
+                            if (!(chunks.length > ci || hasNext())) {
+                                _context2.next = 11;
                                 break;
                             }
 
-                            if (!chunks.length) {
-                                _context2.next = 8;
+                            if (!(chunks.length > ci)) {
+                                _context2.next = 9;
                                 break;
                             }
 
-                            _context2.next = 8;
-                            return chunks.shift().chunk;
+                            _context2.next = 9;
+                            return chunks[ci++].chunk;
 
-                        case 8:
-                            _context2.next = 4;
+                        case 9:
+                            _context2.next = 5;
                             break;
 
-                        case 10:
+                        case 11:
                         case 'end':
                             return _context2.stop();
                     }
@@ -12922,7 +12928,7 @@ var createGrouping = function createGrouping(array, key, comparer, hasNext) {
                 }
             }
         }, _callee, this);
-    })());
+    }));
 };
 
 var GroupJoinEnumerable = function (_IEnumerable) {
@@ -13075,7 +13081,7 @@ var GroupedEnumerable = function (_IEnumerable) {
         resultSelector = methods.asSelector(resultSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function GroupedIterator() {
-            var groupings, iterators, noneKey, it, hasNext, grouping;
+            var groupings, iterators, noneKey, it, hasNext, gi, grouping;
             return regeneratorRuntime.wrap(function GroupedIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -13093,39 +13099,42 @@ var GroupedEnumerable = function (_IEnumerable) {
                                     var trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
                                     if (trueKey === noneKey) {
                                         iterators.set(key, []);
-                                        groupings.push(new IGrouping(key, regeneratorRuntime.mark(function _callee() {
-                                            var array;
-                                            return regeneratorRuntime.wrap(function _callee$(_context) {
-                                                while (1) {
-                                                    switch (_context.prev = _context.next) {
-                                                        case 0:
-                                                            array = iterators.get(key);
+                                        groupings.push(new IGrouping(key, function (key) {
+                                            return regeneratorRuntime.mark(function _callee() {
+                                                var array, index;
+                                                return regeneratorRuntime.wrap(function _callee$(_context) {
+                                                    while (1) {
+                                                        switch (_context.prev = _context.next) {
+                                                            case 0:
+                                                                array = iterators.get(key);
+                                                                index = 0;
 
-                                                        case 1:
-                                                            if (!(array.length > 0 || hasNext())) {
-                                                                _context.next = 7;
+                                                            case 2:
+                                                                if (!(array.length > index || hasNext())) {
+                                                                    _context.next = 8;
+                                                                    break;
+                                                                }
+
+                                                                if (!(array.length > index)) {
+                                                                    _context.next = 6;
+                                                                    break;
+                                                                }
+
+                                                                _context.next = 6;
+                                                                return array[index++];
+
+                                                            case 6:
+                                                                _context.next = 2;
                                                                 break;
-                                                            }
 
-                                                            if (!(array.length > 0)) {
-                                                                _context.next = 5;
-                                                                break;
-                                                            }
-
-                                                            _context.next = 5;
-                                                            return array.shift();
-
-                                                        case 5:
-                                                            _context.next = 1;
-                                                            break;
-
-                                                        case 7:
-                                                        case 'end':
-                                                            return _context.stop();
+                                                            case 8:
+                                                            case 'end':
+                                                                return _context.stop();
+                                                        }
                                                     }
-                                                }
-                                            }, _callee, this);
-                                        })()));
+                                                }, _callee, this);
+                                            });
+                                        }(key)));
                                     } else {
                                         key = trueKey;
                                     }
@@ -13134,26 +13143,28 @@ var GroupedEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 5:
-                            if (!(groupings.length > 0 || hasNext())) {
-                                _context2.next = 12;
+                            gi = 0;
+
+                        case 6:
+                            if (!(groupings.length > gi || hasNext())) {
+                                _context2.next = 13;
                                 break;
                             }
 
-                            if (!(groupings.length > 0)) {
-                                _context2.next = 10;
+                            if (!(groupings.length > gi)) {
+                                _context2.next = 11;
                                 break;
                             }
 
-                            grouping = groupings.shift();
-                            _context2.next = 10;
+                            grouping = groupings[gi++];
+                            _context2.next = 11;
                             return resultSelector(grouping.key, grouping);
 
-                        case 10:
-                            _context2.next = 5;
+                        case 11:
+                            _context2.next = 6;
                             break;
 
-                        case 12:
+                        case 13:
                         case 'end':
                             return _context2.stop();
                     }
@@ -13252,22 +13263,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IteratorEnumerable = require('./IteratorEnumerable');
+var GeneratorEnumerable = require('./GeneratorEnumerable');
 
 var core = require('./../core/core');
 
-var IGrouping = function (_IteratorEnumerable) {
-    _inherits(IGrouping, _IteratorEnumerable);
+var IGrouping = function (_GeneratorEnumerable) {
+    _inherits(IGrouping, _GeneratorEnumerable);
 
-    function IGrouping(key, iterator) {
+    function IGrouping(key, generator) {
         _classCallCheck(this, IGrouping);
 
-        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, iterator));
+        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, generator));
 
         core.defineProperty(_this, 'key', function () {
             return key;
         }, true, true);
-        iterator = _this[Symbol.iterator];
+        var iterator = _this[Symbol.iterator];
         core.defineProperty(_this, Symbol.iterator, function GroupingIterator() {
             return iterator();
         });
@@ -13275,11 +13286,11 @@ var IGrouping = function (_IteratorEnumerable) {
     }
 
     return IGrouping;
-}(IteratorEnumerable);
+}(GeneratorEnumerable);
 
 module.exports = IGrouping;
 
-},{"./../core/core":303,"./IteratorEnumerable":347}],340:[function(require,module,exports){
+},{"./../core/core":303,"./GeneratorEnumerable":334}],340:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -15229,7 +15240,7 @@ var NearGroupedEnumerable = function (_IEnumerable) {
         resultSelector = methods.asSelector(resultSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function NearGroupedIterator() {
-            var groupings, array, noneKey, prevKey, it, hasNext;
+            var groupings, array, noneKey, prevKey, it, hasNext, gi, grouping;
             return regeneratorRuntime.wrap(function NearGroupedIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -15250,34 +15261,38 @@ var NearGroupedEnumerable = function (_IEnumerable) {
                                         prevKey = key;
                                         groupings.push(new IGrouping(key, function (array) {
                                             return regeneratorRuntime.mark(function _callee() {
+                                                var index;
                                                 return regeneratorRuntime.wrap(function _callee$(_context) {
                                                     while (1) {
                                                         switch (_context.prev = _context.next) {
                                                             case 0:
-                                                                if (!(array.length > 0 || hasNext())) {
-                                                                    _context.next = 6;
+                                                                index = 0;
+
+                                                            case 1:
+                                                                if (!(array.length > index || hasNext())) {
+                                                                    _context.next = 7;
                                                                     break;
                                                                 }
 
-                                                                if (!(array.length > 0)) {
-                                                                    _context.next = 4;
+                                                                if (!(array.length > index)) {
+                                                                    _context.next = 5;
                                                                     break;
                                                                 }
 
-                                                                _context.next = 4;
-                                                                return array.shift();
+                                                                _context.next = 5;
+                                                                return array[index++];
 
-                                                            case 4:
-                                                                _context.next = 0;
+                                                            case 5:
+                                                                _context.next = 1;
                                                                 break;
 
-                                                            case 6:
+                                                            case 7:
                                                             case 'end':
                                                                 return _context.stop();
                                                         }
                                                     }
                                                 }, _callee, this);
-                                            })();
+                                            });
                                         }(array)));
                                     }
                                     array.push(element);
@@ -15285,25 +15300,28 @@ var NearGroupedEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 6:
-                            if (!(groupings.length > 0 || hasNext())) {
+                            gi = 0;
+
+                        case 7:
+                            if (!(groupings.length > gi || hasNext())) {
+                                _context2.next = 14;
+                                break;
+                            }
+
+                            if (!(groupings.length > gi)) {
                                 _context2.next = 12;
                                 break;
                             }
 
-                            if (!(groupings.length > 0)) {
-                                _context2.next = 10;
-                                break;
-                            }
-
-                            _context2.next = 10;
-                            return resultSelector(Enumerable.first(groupings).key, groupings.shift());
-
-                        case 10:
-                            _context2.next = 6;
-                            break;
+                            grouping = groupings[gi++];
+                            _context2.next = 12;
+                            return resultSelector(grouping.key, grouping);
 
                         case 12:
+                            _context2.next = 7;
+                            break;
+
+                        case 14:
                         case 'end':
                             return _context2.stop();
                     }
@@ -17852,7 +17870,7 @@ var SplitEnumerable = function (_IEnumerable) {
 
         splitPredicate = methods.asPredicate(splitPredicate);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function SplitIterator() {
-            var iterator, chunkIndex, chunk, chunks, index, addChunk, hasNext;
+            var iterator, chunkIndex, chunk, chunks, index, addChunk, hasNext, ci;
             return regeneratorRuntime.wrap(function SplitIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -17864,44 +17882,36 @@ var SplitEnumerable = function (_IEnumerable) {
                             index = 0;
 
                             addChunk = function addChunk() {
-                                chunks.push(function (chunk) {
-                                    return new IChunk(chunkIndex++, regeneratorRuntime.mark(function _callee() {
+                                chunks.push(new IChunk(chunkIndex++, function (chunk) {
+                                    return regeneratorRuntime.mark(function _callee() {
+                                        var i;
                                         return regeneratorRuntime.wrap(function _callee$(_context) {
                                             while (1) {
                                                 switch (_context.prev = _context.next) {
                                                     case 0:
-                                                        if (!(chunk.length > 0 || hasNext())) {
-                                                            _context.next = 9;
-                                                            break;
-                                                        }
+                                                        i = 0;
 
-                                                        if (!(chunk.length > 0)) {
+                                                    case 1:
+                                                        if (!(chunk.length > i || hasNext() && chunk.length > i)) {
                                                             _context.next = 6;
                                                             break;
                                                         }
 
                                                         _context.next = 4;
-                                                        return chunk.shift();
+                                                        return chunk[i++];
 
                                                     case 4:
-                                                        _context.next = 7;
+                                                        _context.next = 1;
                                                         break;
 
                                                     case 6:
-                                                        return _context.abrupt('break', 9);
-
-                                                    case 7:
-                                                        _context.next = 0;
-                                                        break;
-
-                                                    case 9:
                                                     case 'end':
                                                         return _context.stop();
                                                 }
                                             }
                                         }, _callee, this);
-                                    }));
-                                }(chunk));
+                                    });
+                                }(chunk)));
                             };
 
                             hasNext = function hasNext() {
@@ -17920,26 +17930,27 @@ var SplitEnumerable = function (_IEnumerable) {
                             };
 
                             addChunk();
+                            ci = 0;
 
-                        case 8:
-                            if (!(chunks.length > 0 || hasNext())) {
-                                _context2.next = 14;
+                        case 9:
+                            if (!(chunks.length > ci || hasNext())) {
+                                _context2.next = 15;
                                 break;
                             }
 
-                            if (!(chunks.length > 0)) {
-                                _context2.next = 12;
+                            if (!(chunks.length > ci)) {
+                                _context2.next = 13;
                                 break;
                             }
 
-                            _context2.next = 12;
-                            return chunks.shift();
+                            _context2.next = 13;
+                            return chunks[ci++];
 
-                        case 12:
-                            _context2.next = 8;
+                        case 13:
+                            _context2.next = 9;
                             break;
 
-                        case 14:
+                        case 15:
                         case 'end':
                             return _context2.stop();
                     }
