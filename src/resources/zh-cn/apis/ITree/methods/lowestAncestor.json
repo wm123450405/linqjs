@@ -28,18 +28,57 @@
                         }
                     ],
                     "returns": {
-                        "type": "ITree",
+                        "type": "any",
                         "descriptions": [
-                            "所有参与运算的节点在指定树形结构中的最小公共祖先节点"
+                            "所有参与运算的节点在指定树形结构中的最小公共祖先节点值"
                         ]
                     },
-                    "description": "在树形结构中查找所有指定节点的最小公共祖先节点",
+                    "description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
                     "sees": [
 
                     ],
                     "examples": [
                         {
-                            "description": "下面的代码示例演示如何使用 lowestAncestor 对一个树进行广度优先遍历。",
+                            "description": "下面的代码示例演示如何使用 lowestAncestor 查找多个节点的最小公共祖先节点值。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "nodes",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "params": true,
+                            "descriptions": [
+                                "用于共同计算结果的所有节点"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "所有参与运算的节点在指定树形结构中的最小公共祖先节点值"
+                        ]
+                    },
+                    "description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
+                    "sees": [
+
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 lowestAncestor 查找多个节点的最小公共祖先节点值。",
                             "script": {
                                 "type": "javascript",
                                 "href": "1.js"

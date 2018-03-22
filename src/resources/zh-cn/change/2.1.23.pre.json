@@ -10,7 +10,10 @@
         "优化(Optimization):",
         "1. 优化 ITree.prototype.isAncestorOf, ITree.prototype.isDescendantOf 方法的性能",
         "2. 优化 IEnumerable.prototype.chunk, IEnumerable.prototype.groupBy, IEnumerable.prototype.groupJoin 等方法性能",
+        "3. 优化 ITree.prototype.lowestAncestor 方法的性能",
         "",
-        "修复(Fixed):"
+        "修复(Fixed):",
+        "1. 修复 ITree.prototype.lowestAncestor 在处理节点值为false的情况下返回错误的问题",
+        "2. 修复 ITree.prototype.lowestAncestor 在处理节点值类型与参数值类型不同但数值相等的情况下返回错误的问题"
     ]
 }

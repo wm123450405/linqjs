@@ -341,16 +341,30 @@
 			"histroys": [
 				{
 					"since": "2.1.22",
-					"deprecated": 0,
+					"deprecated": "2.1.22",
 					"overloads": [
 						{
-							"description": "在树形结构中查找所有指定节点的最小公共祖先节点",
+							"description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
 							"parameters": [
 								{
 									"name": "tree"
 								},
 								{
 									"name": "trees"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
+							"parameters": [
+								{
+									"name": "nodes"
 								}
 							]
 						}
