@@ -27,8 +27,9 @@ class ChunkEnumerable extends IEnumerable {
                         });
                         last.chunk = (last => {
                             return new IChunk(index, function* () {
-                                while (last.array.length || hasNext() && last.array.length) {
-                                    yield last.array.shift();
+                                let index = 0;
+                                while (last.array.length > index || hasNext() && last.array.length > index) {
+                                    yield last.array[index++];
                                 }
                             });
                         })(last);
@@ -38,9 +39,10 @@ class ChunkEnumerable extends IEnumerable {
                 }
                 return !next.done;
             };
-            while (chunks.length || hasNext()) {
-                if (chunks.length) {
-                    yield chunks.shift().chunk;
+            let ci = 0;
+            while (chunks.length > ci || hasNext()) {
+                if (chunks.length > ci) {
+                    yield chunks[ci++].chunk;
                 }
             }
         });

@@ -21,12 +21,9 @@ class SplitEnumerable extends IEnumerable {
             let index = 0;
             let addChunk = () => {
                 chunks.push((chunk => new IChunk(chunkIndex++, function*() {
-                    while (chunk.length > 0 || hasNext()) {
-                        if (chunk.length > 0) {
-                            yield chunk.shift();
-                        } else {
-                            break;
-                        }
+                    let i = 0;
+                    while (chunk.length > i || hasNext() && chunk.length > i) {
+                        yield chunk[i];
                     }
                 }))(chunk));
             };
@@ -45,9 +42,10 @@ class SplitEnumerable extends IEnumerable {
                 }
             };
             addChunk();
-            while (chunks.length > 0 || hasNext()) {
-                if (chunks.length > 0) {
-                    yield chunks.shift();
+            let ci = 0;
+            while (chunks.length > ci || hasNext()) {
+                if (chunks.length > ci) {
+                    yield chunks[ci++];
                 }
             }
         });
