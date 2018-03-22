@@ -817,6 +817,9 @@ Enumerable.forEach = function(source, action = defaultAction, thisArg = undefine
         }
     }
 };
+Enumerable.each = function(source, action = defaultAction) {
+    return new EachEnumerable(asIterable(source), action);
+};
 Enumerable.chunk = function(source, chunk, offset = 0) {
     return new ChunkEnumerable(asIterable(source), chunk, offset);
 };
@@ -1047,6 +1050,7 @@ const GenerateEnumerable = require('./enumerables/GenerateEnumerable');
 const SeparateEnumerable = require('./enumerables/SeparateEnumerable');
 const CombineEnumerable = require('./enumerables/CombineEnumerable');
 const SymmetricEnumerable = require('./enumerables/SymmetricEnumerable');
+const EachEnumerable = require('./enumerables/EachEnumerable');
 
 const PreOrderTree = require('./enumerables/PreOrderTree');
 const InOrderTree = require('./enumerables/InOrderTree');

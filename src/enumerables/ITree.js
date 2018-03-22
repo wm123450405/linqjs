@@ -36,7 +36,21 @@ class ITree extends GeneratorEnumerable {
         let obj = valueSelector(this.value);
         let children = Enumerable.select(this, sub => sub.toValue(childrenName, valueSelector)).toArray();
         if (children.length) {
-            core.defineProperty(obj, childrenName, () => children, true, true);
+            obj[childrenName] = children;
+        }
+        return obj;
+    }
+    toObject() {
+        let obj = {
+            key: this.key,
+            value: this.value
+        };
+        let children = Enumerable.select(this, sub => sub.toObject()).toArray();
+        if (children.length) {
+            obj.children = children;
+        }
+        if (!core.isUndefined(this.parent)) {
+            obj.parent = this.parent;
         }
         return obj;
     }

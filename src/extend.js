@@ -310,6 +310,9 @@ const extendObject = {
     forEach(action = defaultAction, thisArg = undefined) {
         return Enumerable.forEach(this, action, thisArg);
     },
+    each(action = defaultAction) {
+        return Enumerable.each(this, action);
+    },
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
     },
