@@ -61,6 +61,35 @@
                     }
                 }
             ]
+        },
+        {
+            "title": " 通过 Object.prototype.asEnumerable / Enumerable.asEnumerable 方法获取一个 ITree 对象",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "可以通过 Object.prototype.asEnumerable / Enumerable.asEnumerable 从一个有树形结构的 objcet 对象上获取一个 ITree 对象"
+                },
+                {
+                    "type": "warning",
+                    "content": "需要最低版本:2.1.22"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "asTree.js",
+                        "tryHref": "asTree.try.js"
+                    }
+                },
+                {
+                    "type": "see",
+                    "content": {
+                        "apis": "Enumerable",
+                        "method": "asEnumerable",
+                        "index": 1
+                    }
+                }
+            ]
         }
     ]
 }

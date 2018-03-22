@@ -1,6 +1,8 @@
 {
 	"asEnumerable.js": "let a = [1, 2, 3].asEnumerable();\r\nlet o = ({ key: 1, value: 'a' }).asEnumerable();\r\nlet s = 'abc'.asEnumerable();",
 	"asEnumerable.try.js": "let a = [1, 2, 3].asEnumerable();\r\nconsole.log(a);\r\nlet o = ({ key: 1, value: 'a' }).asEnumerable();\r\nconsole.log(o);\r\nlet s = 'abc'.asEnumerable();\r\nconsole.log(s);",
+	"asTree.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);",
+	"asTree.try.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);\r\n\r\nconsole.log(tree.pathTo('d').toArray());\r\n\r\n// 这段代码的输出结果如下：\r\n//\r\n// a,b,d\r\n",
 	"Enumerable.asEnumerable.js": "let enumerable = Enumerable.asEnumerable([1, 2, 3]);",
 	"Enumerable.asEnumerable.try.js": "let enumerable = Enumerable.asEnumerable([1, 2, 3]);\r\nconsole.log(enumerable);",
 	"Enumerable.js": "let enumerable = Enumerable([1, 2, 3]);",
