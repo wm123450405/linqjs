@@ -1,0 +1,97 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "childrenSetter",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "应用在每个节点上用于设置子节点集合的函数"
+                            ],
+                            "defaultValue": "defaultChildrenSetter",
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "children",
+                                        "types": [
+                                            "any[]"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "valueSetter",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "应用在每个节点上用于设置节点值的函数"
+                            ],
+                            "defaultValue": "defaultValueSetter",
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "value",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "object",
+                        "descriptions": [
+                            "转换后的对象"
+                        ]
+                    },
+                    "description": "将树形结构转化为一个 object 对象 ( JSON 数据 ). 每个节点生成一个新对象, 使用节点值设置函数设置对象的值, 并将所有子节点生成的对象联合成数组通过设置器设置到节点对象中.",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.setters",
+                            "property": "children"
+                        },
+                        {
+                            "apis": "Enumerable.setters",
+                            "property": "value"
+                        },
+                        {
+                            "guide": "setter"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

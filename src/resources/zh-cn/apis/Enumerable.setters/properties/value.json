@@ -1,0 +1,18 @@
+{
+    "histroys": [
+        {
+            "type": "function",
+            "since": "2.1.23",
+            "readonly": true,
+            "description": "默认的值设置器",
+            "remarks": [
+                "该选择器接受两个输入值, 并将第二个输入值设置为第一个输入值的 value 属性的值. 通常表示为 defaultValueSetter"
+            ],
+            "sees": [
+                {
+                    "guide": "setter"
+                }
+            ]
+        }
+    ]
+}

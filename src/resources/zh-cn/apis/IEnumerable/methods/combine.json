@@ -146,10 +146,6 @@
                             "property": "key"
                         },
                         {
-                            "apis": "Enumerable.selectors",
-                            "property": "value"
-                        },
-                        {
                             "apis": "Enumerable.comparers",
                             "property": "equality"
                         }
@@ -166,7 +162,6 @@
                         "type": "IEnumerable<ICombine>"
                     },
                     "sees": [
-                        { },
                         { },
                         { },
                         { },

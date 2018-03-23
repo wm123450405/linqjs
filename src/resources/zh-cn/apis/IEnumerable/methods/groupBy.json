@@ -129,6 +129,11 @@
                     ],
                     "returns": {
                         "type": "IEnumerable",
+                        "generics": [
+                            {
+                                "name": "IGrouping"
+                            }
+                        ],
                         "descriptions": [
                             "对一组及其键的投影的结果的集合"
                         ]

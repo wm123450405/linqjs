@@ -1,0 +1,62 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "property",
+                            "types": [
+                                "string",
+                                "symbol",
+                                "number"
+                            ]
+                        },
+                        {
+                            "name": "ignoreInvalid",
+                            "types": [
+                                "boolean"
+                            ],
+                            "defaultValue": "false",
+                            "descriptions": [
+                                "是否忽略错误的属性参数. 设置为忽略后设置错误的属性将不会抛出异常"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "function",
+                        "declare": {
+                            "returns": {
+                                "type": "void"
+                            },
+                            "parameters": [
+                                {
+                                    "name": "element",
+                                    "types": [
+                                        "any"
+                                    ]
+                                },
+                                {
+                                    "name": "value",
+                                    "types": [
+                                        "any"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "description": "获取一个属性设置器",
+                    "remarks": [
+                        "返回一个设置器函数, 该设置器使用第二个输入值设置第一个输入值的指定属性值"
+                    ],
+                    "sees": [
+                        {
+                            "guide": "setter"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

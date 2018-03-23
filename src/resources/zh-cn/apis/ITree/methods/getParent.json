@@ -1,0 +1,42 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "node",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用于结算其父节点值的子节点"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "指定节点的父节点值"
+                        ]
+                    },
+                    "description": "在树形结构中查找指定节点的父节点的值",
+                    "sees": [
+
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 getParent 查找指定节点父节点的值。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

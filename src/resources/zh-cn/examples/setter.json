@@ -1,0 +1,4 @@
+{
+	"1.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);\r\n\r\ntree.toValue(\"children\");\r\n//上述代码等价于以下代码\r\ntree.toValue((obj, value) => obj.children = value);",
+	"1.try.js": "let tree = ({\r\n    value: 'a',\r\n    children: [\r\n        {\r\n            value: 'b',\r\n            children: [\r\n                { value: 'c' },\r\n                { value: 'd' }\r\n            ]\r\n        },\r\n        { value: 'e', }\r\n    ]\r\n}).asEnumerable(node => node.children, node => node.value);\r\n\r\nconsole.log(tree.toValue(\"children\"));\r\n//上述代码等价于以下代码\r\nconsole.log(tree.toValue((obj, value) => obj.children = value));\r\n"
+}

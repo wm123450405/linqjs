@@ -28,6 +28,11 @@
                     ],
                     "returns": {
                         "type": "IEnumerable",
+                        "generics": [
+                            {
+                                "name": "IChunk"
+                            }
+                        ],
                         "descriptions": [
                             "分块后的序列"
                         ]

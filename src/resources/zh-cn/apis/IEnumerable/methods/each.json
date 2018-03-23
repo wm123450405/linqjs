@@ -1,0 +1,63 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "types": [
+                                "function"
+                            ],
+                            "descriptions": [
+                                "循环的执行体"
+                            ],
+                            "defaultValue": "defaultAction",
+                            "declare": {
+                                "returns": {
+                                    "type": "void"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "源序列本身"
+                        ]
+                    },
+                    "description": "遍历序列中的每个元素, 为每一个元素执行指定的操作, 然后返回序列本身",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "Enumerable.actions",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "forEach"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

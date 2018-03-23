@@ -1,0 +1,39 @@
+{
+    "title": "设置器",
+    "contents": [
+        {
+            "title": "什么是设置器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "设置器是一个将一个输入值设置到另一个输入值中的函数"
+                },
+                {
+                    "type": "description",
+                    "content": "该函数接受二个输入值, 将第二个参数的值设置到第一个参数的值中. 此方法不需要返回任何值"
+                },
+                {
+                    "type": "warning",
+                    "content": "自 2.1.23 版本后才能使用设置器"
+                }
+            ]
+        },
+        {
+            "title": "使用字符串/数字/符号代替设置器",
+            "descriptions": [
+                {
+                    "type": "description",
+                    "content": "可以使用字符串、数字或符号代替设置器，以下实例展示字符串或数字代替的设置器与设置器的等价关系"
+                },
+                {
+                    "type": "example",
+                    "content": {
+                        "type": "javascript",
+                        "href": "1.js",
+                        "tryHref": "1.try.js"
+                    }
+                }
+            ]
+        }
+    ]
+}

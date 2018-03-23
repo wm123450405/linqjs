@@ -242,6 +242,28 @@
 			]
 		},
 		{
+			"name": "combination",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从源序列中的抽取指定个数的元素不管顺序组成一个组合项, 并由所有不同的组合项组成新的序列",
+							"parameters": [
+								{
+									"name": "count"
+								},
+								{
+									"name": "repeatable"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "combine",
 			"histroys": [
 				{
@@ -484,6 +506,25 @@
 							"parameters": [
 								{
 									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "each",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "遍历序列中的每个元素, 为每一个元素执行指定的操作, 然后返回序列本身",
+							"parameters": [
+								{
+									"name": "action"
 								}
 							]
 						}
@@ -1181,6 +1222,25 @@
 								},
 								{
 									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "indices",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "使用指定的索引序列从源序列中生成一个新的序列",
+							"parameters": [
+								{
+									"name": "indices"
 								}
 							]
 						}
@@ -1944,6 +2004,28 @@
 			]
 		},
 		{
+			"name": "permutation",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从源序列中的抽取指定个数的元素组成一个排列项, 并由所有不同的排列项组成新的序列",
+							"parameters": [
+								{
+									"name": "count"
+								},
+								{
+									"name": "repeatable"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "pop",
 			"histroys": [
 				{
@@ -2642,6 +2724,25 @@
 								},
 								{
 									"name": "values"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "split",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过筛选器筛拆分序列",
+							"parameters": [
+								{
+									"name": "splitPredicate"
 								}
 							]
 						}

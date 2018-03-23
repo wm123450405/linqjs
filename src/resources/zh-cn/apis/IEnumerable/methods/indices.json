@@ -1,0 +1,42 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "indices",
+                            "types": [
+                                "array < number >",
+                                "IEnumerable < number >"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "使用索引序列从源序列中生成的新序列"
+                        ]
+                    },
+                    "description": "使用指定的索引序列从源序列中生成一个新的序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "新序列中包含元素与索引序列的元素个数一致. 若索引序列在索引位 N 的元素值为 M, 则新序列在索引为 N 的元素值等于源序列在索引为 M 的元素值."
+                    ],
+                    "sees": [
+                        {
+                            "guide": "predicate"
+                        }
+                    ],
+                    "examples": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

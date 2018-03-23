@@ -1,0 +1,59 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "count",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "排列中的每个排列项的元素个数"
+                            ]
+                        },
+                        {
+                            "name": "repeatable",
+                            "types": [
+                                "boolean"
+                            ],
+                            "defaultValue": "false",
+                            "descriptions": [
+                                "指示排列项中的元素是否可重复"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "generics": [
+                            {
+                                "name": "IEnumerable"
+                            }
+                        ],
+                        "descriptions": [
+                            "包含所有排列项的新序列"
+                        ]
+                    },
+                    "description": "从源序列中的抽取指定个数的元素组成一个排列项, 并由所有不同的排列项组成新的序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现"
+                    ],
+                    "warnings": [
+                        "源序列中索引不相同的元素被视为不同的元素, 即使元素的值可能相同."
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "combination"
+                        }
+                    ],
+                    "examples": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -101,6 +101,20 @@
 				},
 				{
 					"since": "2.1.19",
+					"deprecated": "2.1.22",
+					"overloads": [
+						{
+							"description": "获取一个属性选择器",
+							"parameters": [
+								{
+									"name": "property"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.23",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -108,6 +122,9 @@
 							"parameters": [
 								{
 									"name": "property"
+								},
+								{
+									"name": "ignoreInvalid"
 								}
 							]
 						}

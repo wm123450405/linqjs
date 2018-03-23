@@ -220,6 +220,25 @@
 			]
 		},
 		{
+			"name": "getParent",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点的父节点的值",
+							"parameters": [
+								{
+									"name": "node"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "getValue",
 			"histroys": [
 				{
@@ -273,6 +292,25 @@
 			]
 		},
 		{
+			"name": "isChildOf",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断一个节点是否是另一个节点的子节点",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "isCompleteBinary",
 			"histroys": [
 				{
@@ -316,6 +354,25 @@
 						{
 							"description": "判断树形结构是否是满二叉树，即所有的节点的度(子节点数)为0或者为2",
 							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "isParentOf",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "判断一个节点是否是另一个节点的父节点",
+							"parameters": [
+								{
+									"name": "node"
+								}
+							]
 						}
 					]
 				}
@@ -403,6 +460,28 @@
 							"parameters": [
 								{
 									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toValue",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "将树形结构转化为一个 object 对象 ( JSON 数据 ). 每个节点生成一个新对象, 使用节点值设置函数设置对象的值, 并将所有子节点生成的对象联合成数组通过设置器设置到节点对象中.",
+							"parameters": [
+								{
+									"name": "childrenSetter"
+								},
+								{
+									"name": "valueSetter"
 								}
 							]
 						}

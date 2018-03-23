@@ -1,0 +1,53 @@
+{
+	"type": "object",
+	"since": "2.1.23",
+	"name": "Enumerable.setters",
+	"properties": [
+		{
+			"name": "children",
+			"histroys": [
+				{
+					"since": "2.1.20",
+					"deprecated": 0,
+					"description": "默认的子节点选择器",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"name": "value",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"description": "默认的值设置器",
+					"readonly": true
+				}
+			]
+		}
+	],
+	"methods": [
+		{
+			"name": "property",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取一个属性设置器",
+							"parameters": [
+								{
+									"name": "property"
+								},
+								{
+									"name": "ignoreInvalid"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
