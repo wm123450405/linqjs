@@ -18,6 +18,7 @@ const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultParentSelector = require('./methods/defaultParentSelector');
 const defaultChildrenSelector = require('./methods/defaultChildrenSelector');
 const defaultChildrenSetter = require('./methods/defaultChildrenSetter');
+const defaultValueSetter = require('./methods/defaultValueSetter');
 const defaultAction = require('./methods/defaultAction');
 
 const arrayComparer = require('./methods/arrayComparer');
@@ -930,6 +931,9 @@ core.defineProperty(Enumerable, 'comparers', () => ({
 core.defineProperty(Enumerable, 'setters', () => ({
     get children() {
         return defaultChildrenSetter;
+    },
+    get value() {
+        return defaultValueSetter;
     },
     property(property, ignoreInvalid = false) {
         return propertySetter(property, ignoreInvalid);

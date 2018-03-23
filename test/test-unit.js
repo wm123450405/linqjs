@@ -125,40 +125,6 @@ module.exports = function(Enumerable) {
             value: nodef
         }
     ];
-    const treeValue = [
-        {
-            key: a,
-            value: a,
-            children: [
-                {
-                    key: b,
-                    value: b,
-                    parent: a,
-                    children: [
-                        {
-                            key: c,
-                            value: c,
-                            parent: b
-                        },
-                        {
-                            key: d,
-                            value: d,
-                            parent: b
-                        }
-                    ]
-                },
-                {
-                    key: e,
-                    value: e,
-                    parent: a
-                }
-            ]
-        },
-        {
-            key: f,
-            value: f
-        }
-    ];
 	const OutOfRangeException = Enumerable.exceptions.OutOfRangeException;
 	const NoSuchElementsException = Enumerable.exceptions.NoSuchElementsException;
 	const TooManyElementsException = Enumerable.exceptions.TooManyElementsException;
@@ -911,7 +877,7 @@ module.exports = function(Enumerable) {
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 
         assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toObject(), tree[0]);
-        assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toValue(), treeValue[0]);
+        assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toValue(), tree[0]);
 	})();
 
     (() => {
@@ -932,7 +898,7 @@ module.exports = function(Enumerable) {
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 
         assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toObject(), treeNoKey[0]);
-        assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toValue(), treeValue[0]);
+        assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toValue(), treeNoKey[0]);
     })();
 
     assert.deepStrictEqual(Enumerable.toPreOrder([ a, b, c, d, e, f ]).preOrder().toArray(), [ a, b, c, d, e, f ]);

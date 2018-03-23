@@ -14,6 +14,7 @@ declare namespace Enumerable {
     const defaultJoinSelector;
     const defaultSameComparer;
     const defaultChildrenSetter;
+    const defaultValueSetter;
 
     export function asEnumerable(obj: string) : IEnumerable<string>;
     export function asEnumerable<T>(obj: T[] | IEnumerable<T>) : IEnumerable<T>;
@@ -935,8 +936,10 @@ declare namespace Enumerable {
 
         asBinary(): BinaryTree<TValue>;
 
-        toValue<TObjValue>(childrenName: (obj: TObjValue, children: TObjValue[]) => TObjValue = defaultChildrenSetter, valueSelector: (value: TValue) => TObjValue): TObjValue;
-        toValue<TObjValue>(childrenName: string | number | symbol, valueSelector: (value: TValue) => TObjValue): TObjValue;
+        toValue(childrenSetter: (obj: object, children: object[]) => void = defaultChildrenSetter, valueSetter: (obj: object, value: TValue) => void = defaultValueSetter): object;
+        toValue(childrenSetter: string | number | symbol, valueSetter: (obj: object, value: TValue) => void = defaultValueSetter): object;
+        toValue(childrenSetter: (obj: object, children: object[]) => void = defaultChildrenSetter, valueSetter: string | number | symbol): object;
+        toValue(childrenSetter: string | number | symbol, valueSetter: string | number | symbol): object;
 
     }
 

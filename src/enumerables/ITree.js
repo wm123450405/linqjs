@@ -11,8 +11,8 @@ const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfExcept
 
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
-const defaultSelector = require('./../methods/defaultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultValueSetter = require('./../methods/defaultValueSetter');
 const defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
 
 class ITree extends GeneratorEnumerable {
@@ -36,12 +36,14 @@ class ITree extends GeneratorEnumerable {
     getValue(index) {
         return this.getChild(index).value;
     }
-    toValue(childrenSetter = defaultChildrenSetter, valueSelector = defaultSelector) {
-        valueSelector = methods.asSelector(valueSelector);
+    toValue(childrenSetter = defaultChildrenSetter, valueSetter = defaultValueSetter) {
+        valueSetter = methods.asSetter(valueSetter);
         childrenSetter = methods.asSetter(childrenSetter);
-        let type = core.getType(this.value);
-        let obj = valueSelector(type === core.types.Object ? extend(true, { }, this.value) : type === core.types.Array || type === core.types.Enumerable ? extend(true, [], Enumerable.toArray(this.value)) : this.value);
-        let children = Enumerable.select(this, sub => sub.toValue(childrenSetter, valueSelector)).toArray();
+        let obj = { };
+        if (typeof this.value !== 'undefined') {
+            valueSetter(obj, this.value);
+        }
+        let children = Enumerable.select(this, sub => sub.toValue(childrenSetter, valueSetter)).toArray();
         if (children.length) {
             childrenSetter(obj, children);
         }
