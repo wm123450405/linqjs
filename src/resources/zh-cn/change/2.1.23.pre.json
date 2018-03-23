@@ -6,6 +6,7 @@
         "2. 增加 ITree.prototype.isParentOf, ITree.prototype.isChildOf, ITree.prototype.getParent 方法,操作树形的各节点关系",
         "3. 增加 IEnumerable.prototype.each 方法,对序列中的每个元素执行一次操作,并返回序列本身",
         "4. 增加 IEnumerable.prototype.split 方法,对序列按照指定的条件进行拆分",
+        "5. 增加 IEnumerable.prototype.permutation, IEnumerable.prototype.combination 方法,用来计算排列与组合",
         "",
         "优化(Optimization):",
         "1. 优化 ITree.prototype.isAncestorOf, ITree.prototype.isDescendantOf 方法的性能",
