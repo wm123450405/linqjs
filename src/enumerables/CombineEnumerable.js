@@ -20,6 +20,7 @@ class CombineEnumerable extends IEnumerable {
         super(source);
         parentSelector = methods.asSelector(parentSelector);
         keySelector = methods.asSelector(keySelector);
+        valueSelector = methods.asSelector(valueSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* CombineIterator() {
             let temp = Enumerable.select(source, element => ({ key: keySelector(element), parent: parentSelector(element), value: valueSelector(element), children: [] })).toArray();

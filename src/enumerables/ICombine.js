@@ -14,6 +14,12 @@ class ICombine extends ITree {
             return iterator();
         });
     }
+    toObject() {
+        let obj = super.toObject();
+        if (typeof this.key !== 'undefined' && this.key !== null) obj.key = this.key;
+        if (typeof this.parent !== 'undefined' && this.parent !== null) obj.parent = this.parent;
+        return obj;
+    }
 }
 
 module.exports = ICombine;

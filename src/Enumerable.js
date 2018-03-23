@@ -17,10 +17,12 @@ const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultParentSelector = require('./methods/defaultParentSelector');
 const defaultChildrenSelector = require('./methods/defaultChildrenSelector');
+const defaultChildrenSetter = require('./methods/defaultChildrenSetter');
 const defaultAction = require('./methods/defaultAction');
 
 const arrayComparer = require('./methods/arrayComparer');
 const predicateComparer = require('./methods/predicateComparer');
+const propertySetter = require('./methods/propertySetter');
 const propertySelector = require('./methods/propertySelector');
 const regexpPredicate = require('./methods/regexpPredicate');
 const defaultExistsPredicate = require('./methods/defaultExistsPredicate');
@@ -925,6 +927,14 @@ core.defineProperty(Enumerable, 'comparers', () => ({
         return ignoreCaseComparer(selector);
     }
 }), true, true);
+core.defineProperty(Enumerable, 'setters', () => ({
+    get children() {
+        return defaultChildrenSetter;
+    },
+    property(property, ignoreInvalid = false) {
+        return propertySetter(property, ignoreInvalid);
+    }
+}), true, true);
 core.defineProperty(Enumerable, 'selectors', () => ({
     get default() {
         return defaultSelector;
@@ -947,8 +957,8 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     get join() {
         return defaultJoinSelector;
     },
-    property(property) {
-    	return propertySelector(property);
+    property(property, ignoreInvalid = false) {
+    	return propertySelector(property, ignoreInvalid);
     }
 }), true, true);
 core.defineProperty(Enumerable, 'actions', () => ({

@@ -6,22 +6,35 @@ const PropertyExpressionInvalidException = require('./../core/exceptions/Propert
 
 const regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))(\.([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))*$/ig;
 const regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")]/ig;
+const FIRST = Symbol('first');
 
 module.exports = (property, ignoreInvalid = false) => {
 	if (core.isSymbol(property) || core.isNumber(property)) {
-		return (element, index) => typeof element !== 'undefined' && element !== null ? element[property] : element;
+		return (element, value) => {
+			if (typeof element !== 'undefined' && element !== null) {
+				element[property] = value;
+            } else if (!ignoreInvalid) {
+				throw new PropertyExpressionInvalidException(property);
+            }
+		};
 	} else if (property === '') {
-		return (element, index) => element;
+        throw new PropertyExpressionInvalidException(property);
 	} else {
 		regValid.lastIndex = 0;
 		if (regValid.test(property)) {
-			return element => {
+			return (element, value) => {
 				regSplit.lastIndex = 0;
 				let result;
+				let prop = FIRST;
 				while(typeof element !== 'undefined' && element !== null && (result = regSplit.exec(property))) {
-					element = element[result[1] || result[2] || result[3] || result[4]];
+					if (prop !== FIRST) element = element[prop];
+                    prop = result[1] || result[2] || result[3] || result[4];
 				}
-				return element;
+				if (typeof element !== 'undefined' && element !== null && prop !== FIRST) {
+					element[prop] = value;
+				} else if (!ignoreInvalid) {
+					throw new PropertyExpressionInvalidException(property);
+				}
 			};
 		} else if (!ignoreInvalid) {
 			throw new PropertyExpressionInvalidException(property);

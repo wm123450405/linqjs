@@ -15,6 +15,16 @@ const methods = {
 			throw new InvalidFunctionException(selector);
 		}
 	},
+    asSetter(setter) {
+        let type = core.getType(setter);
+        if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+            return propertySetter(setter);
+        } else if (type === core.types.Function) {
+            return setter;
+        } else {
+            throw new InvalidFunctionException(setter);
+        }
+    },
 	asPredicate(predicate) {
 		let type = core.getType(predicate);
 		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
@@ -75,6 +85,7 @@ const methods = {
 
 module.exports = methods;
 
+const propertySetter = require('./propertySetter');
 const propertySelector = require('./propertySelector');
 const selectorPredicate = require('./selectorPredicate');
 const selectorComparer = require('./selectorComparer');

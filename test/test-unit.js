@@ -101,6 +101,64 @@ module.exports = function(Enumerable) {
             value: nodef
         }
     ];
+    const treeNoKey = [
+        {
+            value: nodea,
+            children: [
+                {
+                    value: nodeb,
+                    children: [
+                        {
+                            value: nodec,
+                        },
+                        {
+                            value: noded,
+                        }
+                    ]
+                },
+                {
+                    value: nodee,
+                }
+            ]
+        },
+        {
+            value: nodef
+        }
+    ];
+    const treeValue = [
+        {
+            key: a,
+            value: a,
+            children: [
+                {
+                    key: b,
+                    value: b,
+                    parent: a,
+                    children: [
+                        {
+                            key: c,
+                            value: c,
+                            parent: b
+                        },
+                        {
+                            key: d,
+                            value: d,
+                            parent: b
+                        }
+                    ]
+                },
+                {
+                    key: e,
+                    value: e,
+                    parent: a
+                }
+            ]
+        },
+        {
+            key: f,
+            value: f
+        }
+    ];
 	const OutOfRangeException = Enumerable.exceptions.OutOfRangeException;
 	const NoSuchElementsException = Enumerable.exceptions.NoSuchElementsException;
 	const TooManyElementsException = Enumerable.exceptions.TooManyElementsException;
@@ -818,21 +876,21 @@ module.exports = function(Enumerable) {
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depth(node => node.value !== b), 2);
 
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthTraverse().toArray(), [ nodea, nodeb, nodee, nodec, noded ]);
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthTraverse().toArray(), [ nodea, nodeb, nodec, noded, nodee ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthTraverse().toArray(),   [ nodea, nodeb, nodec, noded, nodee ]);
 
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthSearch(node => node.value === e), nodee);
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSearch(node => node.value === c), nodec);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSearch(node => node.value === c),   nodec);
 
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).breadthSubTree(node => node.value === e).select(node => node.value).toArray(), [ nodee ]);
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSubTree(node => node.value === c).select(node => node.value).toArray(), [ nodec ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).depthSubTree(node => node.value === c).select(node => node.value).toArray(),   [ nodec ]);
 
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isFullBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isCompleteBinary(), true);
     assert.strictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).isPerfectBinary(), false);
 
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().preOrder().toArray(), [ nodea, nodeb, nodec, noded, nodee ]);
-    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().inOrder().toArray(), [ nodec, nodeb, noded, nodea, nodee ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().preOrder().toArray(),  [ nodea, nodeb, nodec, noded, nodee ]);
+    assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().inOrder().toArray(),   [ nodec, nodeb, noded, nodea, nodee ]);
     assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).asBinary().postOrder().toArray(), [ nodec, noded, nodeb, nodee, nodea ]);
 
 	(() => {
@@ -851,6 +909,9 @@ module.exports = function(Enumerable) {
 
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
+
+        assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toObject(), tree[0]);
+        assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toValue(), treeValue[0]);
 	})();
 
     (() => {
@@ -869,6 +930,9 @@ module.exports = function(Enumerable) {
 
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
+
+        assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toObject(), treeNoKey[0]);
+        assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toValue(), treeValue[0]);
     })();
 
     assert.deepStrictEqual(Enumerable.toPreOrder([ a, b, c, d, e, f ]).preOrder().toArray(), [ a, b, c, d, e, f ]);

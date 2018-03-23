@@ -1,5 +1,7 @@
 'use strict';
 
+const extend = require('extend');
+
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');
@@ -9,8 +11,9 @@ const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfExcept
 
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
-const defaultToValueSelector = require('./../methods/defaultToValueSelector');
+const defaultSelector = require('./../methods/defaultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
 
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {
@@ -33,18 +36,19 @@ class ITree extends GeneratorEnumerable {
     getValue(index) {
         return this.getChild(index).value;
     }
-    toValue(childrenName = 'children', valueSelector = defaultToValueSelector) {
+    toValue(childrenSetter = defaultChildrenSetter, valueSelector = defaultSelector) {
         valueSelector = methods.asSelector(valueSelector);
-        let obj = valueSelector(this.value);
-        let children = Enumerable.select(this, sub => sub.toValue(childrenName, valueSelector)).toArray();
+        childrenSetter = methods.asSetter(childrenSetter);
+        let type = core.getType(this.value);
+        let obj = valueSelector(type === core.types.Object ? extend(true, { }, this.value) : type === core.types.Array || type === core.types.Enumerable ? extend(true, [], Enumerable.toArray(this.value)) : this.value);
+        let children = Enumerable.select(this, sub => sub.toValue(childrenSetter, valueSelector)).toArray();
         if (children.length) {
-            obj[childrenName] = children;
+            childrenSetter(obj, children);
         }
         return obj;
     }
     toObject() {
         let obj = {
-            key: this.key,
             value: this.value
         };
         let children = Enumerable.select(this, sub => sub.toObject()).toArray();
