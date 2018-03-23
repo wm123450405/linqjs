@@ -323,6 +323,15 @@ class IEnumerable extends Array {
     each(action = defaultAction) {
         return Enumerable.each(this, action);
     }
+    indices(indices) {
+        return Enumerable.indices(this, indices);
+    }
+    permutation(count) {
+        return Enumerable.permutation(this, count);
+    }
+    combination(count) {
+        return Enumerable.combination(this, count);
+    }
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
     }

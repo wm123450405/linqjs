@@ -455,6 +455,15 @@ module.exports = function(Enumerable) {
     assert.strictEqual(Enumerable.isSuper([5, 4, 3], [1, 2, 3]), false);
     //symmetric
 	assert.deepStrictEqual(Enumerable.symmetric([1, 2, 3], [3, 4, 5]).toArray(), [1, 2, 4, 5]);
+	//indices
+    assert.deepStrictEqual(Enumerable.indices([a, b, c, d, e, f], [0, 2, 4]).toArray(), [a, c, e]);
+    assert.deepStrictEqual(Enumerable.indices([a, b, c, d, e, f], [3, 2, 3, 5, 0]).toArray(), [d, c, d, f, a]);
+    //permutation
+	assert.deepStrictEqual(Enumerable.permutation([a, b, c], 2).select(per => per.toArray()).toArray(), [ [a, b], [a, c], [b, a], [b, c], [c, a], [c, b] ]);
+    assert.deepStrictEqual(Enumerable.permutation([a, b, c, d, e], 3).count(), 60);
+    //combination
+    assert.deepStrictEqual(Enumerable.combination([a, b, c], 2).select(com => com.toArray()).toArray(), [ [a, b], [a, c], [b, c] ]);
+    assert.deepStrictEqual(Enumerable.combination([a, b, c, d, e], 3).count(), 10);
 
 	//IEnumerable methods
 	//select
@@ -884,6 +893,9 @@ module.exports = function(Enumerable) {
 		assert.strictEqual([12, 5, 8, 130, 44].asEnumerable().findIndex(element => element >= 15), 3);
 		//forEach
 		//ignore
+		//indices
+        assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().indices([0, 2, 4]).toArray(), [a, c, e]);
+        assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().indices([3, 2, 3, 5, 0]).toArray(), [d, c, d, f, a]);
 		//includes
 		assert.strictEqual([1, 2, 3].asEnumerable().includes(2), true);
 		assert.strictEqual([1, 2, 3].asEnumerable().includes(4), false);
@@ -1311,6 +1323,9 @@ module.exports = function(Enumerable) {
 		assert.strictEqual([12, 5, 8, 130, 44].findIndex(element => element >= 15), 3);
 		//forEach
 		//ignore
+        //indices
+        assert.deepStrictEqual([a, b, c, d, e, f].indices([0, 2, 4]).toArray(), [a, c, e]);
+        assert.deepStrictEqual([a, b, c, d, e, f].indices([3, 2, 3, 5, 0]).toArray(), [d, c, d, f, a]);
 		//includes
 		assert.strictEqual([1, 2, 3].includes(2), true);
 		assert.strictEqual([1, 2, 3].includes(4), false);
