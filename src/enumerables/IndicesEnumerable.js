@@ -27,7 +27,7 @@ class IndicesEnumerable extends IEnumerable {
                     index++;
                 }
             }
-        })
+        });
     }
 }
 

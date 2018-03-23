@@ -8,6 +8,8 @@ const IndicesEnumerable = require('./IndicesEnumerable');
 
 const core = require('./../core/core');
 
+const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
 class PermutationEnumerable extends IEnumerable {
     constructor(source, count) {
         super(source);
@@ -31,17 +33,17 @@ class PermutationEnumerable extends IEnumerable {
             let nextIndices = () => {
                 for (let i = count - 1; i >= 0; i--) {
                     used[indices[i]] = false;
-                    let nextNext = false;
+                    let needNext = false;
                     do {
                         indices[i]++;
                         if (array.length <= indices[i]) {
                             if (end || !hasNext()) {
-                                nextNext = true;//need i--
+                                needNext = true;
                             }
                             if (end) break;
                         }
                     } while(used[indices[i]]);
-                    if (!nextNext) {
+                    if (!needNext) {
                         used[indices[i]] = true;
                         for (let j = i + 1; j < count; j++) {
                             for (let k = 0; k < used.length; k++) {

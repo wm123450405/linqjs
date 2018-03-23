@@ -824,11 +824,19 @@ Enumerable.each = function(source, action = defaultAction) {
 Enumerable.indices = function(source, indices) {
     return new IndicesEnumerable(asIterable(source), asIterable(indices));
 };
-Enumerable.permutation = function(source, count) {
-    return new PermutationEnumerable(asIterable(source), count);
+Enumerable.permutation = function(source, count, repeatable = false) {
+    if (repeatable) {
+        return new PermutationRepeatableEnumerable(asIterable(source), count);
+    } else {
+        return new PermutationEnumerable(asIterable(source), count);
+    }
 };
-Enumerable.combination = function(source, count) {
-    return new CombinationEnumerable(asIterable(source), count);
+Enumerable.combination = function(source, count, repeatable = false) {
+    if (repeatable) {
+        return new CombinationRepeatableEnumerable(asIterable(source), count);
+    } else {
+        return new CombinationEnumerable(asIterable(source), count);
+    }
 };
 Enumerable.chunk = function(source, chunk, offset = 0) {
     return new ChunkEnumerable(asIterable(source), chunk, offset);
@@ -1067,7 +1075,9 @@ const SymmetricEnumerable = require('./enumerables/SymmetricEnumerable');
 const EachEnumerable = require('./enumerables/EachEnumerable');
 const IndicesEnumerable = require('./enumerables/IndicesEnumerable');
 const PermutationEnumerable = require('./enumerables/PermutationEnumerable');
+const PermutationRepeatableEnumerable = require('./enumerables/PermutationRepeatableEnumerable');
 const CombinationEnumerable = require('./enumerables/CombinationEnumerable');
+const CombinationRepeatableEnumerable = require('./enumerables/CombinationRepeatableEnumerable');
 
 const PreOrderTree = require('./enumerables/PreOrderTree');
 const InOrderTree = require('./enumerables/InOrderTree');

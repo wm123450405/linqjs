@@ -10,12 +10,12 @@ const core = require('./../core/core');
 
 const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
 
-class CombinationEnumerable extends IEnumerable {
+class PermutationRepeatableEnumerable extends IEnumerable {
     constructor(source, count) {
         super(source);
-        core.defineProperty(this, Symbol.iterator, function* CombinationIterator() {
+        core.defineProperty(this, Symbol.iterator, function* PermutationRepeatableIterator() {
             let iterator = source[Symbol.iterator]();
-            let indices = Enumerable.range(0, count).toArray();
+            let indices = Enumerable.repeat(0, count).toArray();
             let array = [];
             let end = false;
             let hasNext = () => {
@@ -30,34 +30,30 @@ class CombinationEnumerable extends IEnumerable {
             };
             let nextIndices = () => {
                 for (let i = count - 1; i >= 0; i--) {
-                    let needNext = false;
                     indices[i]++;
-                    if (indices[i] + (count - i) - 1 >= array.length) {
+                    let needNext = false;
+                    if (array.length <= indices[i]) {
                         if (end || !hasNext()) {
+                            indices[i] = 0;
                             needNext = true;
                         }
                     }
                     if (!needNext) {
-                        for (let j = i + 1, k = 1; j < count; j++, k++) {
-                            indices[j] = indices[i] + k;
-                        }
                         return true;
                     }
                 }
                 return false;
             };
 
-            let lastIndex = indices[count - 1];
-            while (array.length <= lastIndex) {
-                if (!hasNext()) {
-                    throw new NoSuchElementsException();
-                }
+            if (hasNext()) {
+                do {
+                    yield new IndicesEnumerable(array, [...indices]);
+                } while (nextIndices());
+            } else {
+                throw new NoSuchElementsException();
             }
-            do {
-                yield new IndicesEnumerable(array, [...indices]);
-            } while (nextIndices());
         });
     }
 }
 
-module.exports = CombinationEnumerable;
+module.exports = PermutationRepeatableEnumerable;

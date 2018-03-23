@@ -15,7 +15,7 @@ class CombinationEnumerable extends IEnumerable {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* CombinationIterator() {
             let iterator = source[Symbol.iterator]();
-            let indices = Enumerable.range(0, count).toArray();
+            let indices = Enumerable.repeat(0, count).toArray();
             let array = [];
             let end = false;
             let hasNext = () => {
@@ -32,14 +32,14 @@ class CombinationEnumerable extends IEnumerable {
                 for (let i = count - 1; i >= 0; i--) {
                     let needNext = false;
                     indices[i]++;
-                    if (indices[i] + (count - i) - 1 >= array.length) {
+                    if (indices[i] >= array.length) {
                         if (end || !hasNext()) {
                             needNext = true;
                         }
                     }
                     if (!needNext) {
-                        for (let j = i + 1, k = 1; j < count; j++, k++) {
-                            indices[j] = indices[i] + k;
+                        for (let j = i + 1; j < count; j++) {
+                            indices[j] = indices[i];
                         }
                         return true;
                     }
@@ -47,15 +47,13 @@ class CombinationEnumerable extends IEnumerable {
                 return false;
             };
 
-            let lastIndex = indices[count - 1];
-            while (array.length <= lastIndex) {
-                if (!hasNext()) {
-                    throw new NoSuchElementsException();
-                }
+            if (hasNext()) {
+                do {
+                    yield new IndicesEnumerable(array, [...indices]);
+                } while (nextIndices());
+            } else {
+                throw new NoSuchElementsException();
             }
-            do {
-                yield new IndicesEnumerable(array, [...indices]);
-            } while (nextIndices());
         });
     }
 }

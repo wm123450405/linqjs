@@ -461,9 +461,15 @@ module.exports = function(Enumerable) {
     //permutation
 	assert.deepStrictEqual(Enumerable.permutation([a, b, c], 2).select(per => per.toArray()).toArray(), [ [a, b], [a, c], [b, a], [b, c], [c, a], [c, b] ]);
     assert.deepStrictEqual(Enumerable.permutation([a, b, c, d, e], 3).count(), 60);
+    assert.deepStrictEqual(Enumerable.permutation([a, b, c], 2, true).select(per => per.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, a], [b, b], [b, c], [c, a], [c, b], [c, c] ]);
+    assert.deepStrictEqual(Enumerable.permutation([a, b, c, d, e], 3, true).count(), 125);
+    assert.deepStrictEqual(Enumerable.permutation([a, b, c], 4, true).count(), 81);
     //combination
     assert.deepStrictEqual(Enumerable.combination([a, b, c], 2).select(com => com.toArray()).toArray(), [ [a, b], [a, c], [b, c] ]);
     assert.deepStrictEqual(Enumerable.combination([a, b, c, d, e], 3).count(), 10);
+    assert.deepStrictEqual(Enumerable.combination([a, b, c], 2, true).select(com => com.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, b], [b, c], [c, c] ]);
+    assert.deepStrictEqual(Enumerable.combination([a, b, c, d, e], 3, true).count(), 35);
+    assert.deepStrictEqual(Enumerable.combination([a, b, c], 4, true).count(), 15);
 
 	//IEnumerable methods
 	//select
@@ -785,6 +791,21 @@ module.exports = function(Enumerable) {
     assert.strictEqual([5, 4, 3].asEnumerable().isSuper([1, 2, 3]), false);
     //symmetric
     assert.deepStrictEqual([1, 2, 3].asEnumerable().symmetric([3, 4, 5]).toArray(), [1, 2, 4, 5]);
+    //indices
+    assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().indices([0, 2, 4]).toArray(), [a, c, e]);
+    assert.deepStrictEqual([a, b, c, d, e, f].asEnumerable().indices([3, 2, 3, 5, 0]).toArray(), [d, c, d, f, a]);
+    //permutation
+    assert.deepStrictEqual([a, b, c].asEnumerable().permutation(2).select(per => per.toArray()).toArray(), [ [a, b], [a, c], [b, a], [b, c], [c, a], [c, b] ]);
+    assert.deepStrictEqual([a, b, c, d, e].asEnumerable().permutation(3).count(), 60);
+    assert.deepStrictEqual([a, b, c].asEnumerable().permutation(2, true).select(per => per.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, a], [b, b], [b, c], [c, a], [c, b], [c, c] ]);
+    assert.deepStrictEqual([a, b, c, d, e].asEnumerable().permutation(3, true).count(), 125);
+    assert.deepStrictEqual([a, b, c].asEnumerable().permutation(4, true).count(), 81);
+    //combination
+    assert.deepStrictEqual([a, b, c].asEnumerable().combination(2).select(com => com.toArray()).toArray(), [ [a, b], [a, c], [b, c] ]);
+    assert.deepStrictEqual([a, b, c, d, e].asEnumerable().combination(3).count(), 10);
+    assert.deepStrictEqual([a, b, c].asEnumerable().combination(2, true).select(com => com.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, b], [b, c], [c, c] ]);
+    assert.deepStrictEqual([a, b, c, d, e].asEnumerable().combination(3, true).count(), 35);
+    assert.deepStrictEqual([a, b, c].asEnumerable().combination(4, true).count(), 15);
 
 	//for Syntax
 	assert.deepStrictEqual([...Enumerable.asEnumerable([1, 2, 3, 4, 5, 6]).where(v => v % 2 === 0)], [2, 4, 6]);
@@ -1288,6 +1309,21 @@ module.exports = function(Enumerable) {
         assert.strictEqual([5, 4, 3].isSuper([1, 2, 3]), false);
         //symmetric
         assert.deepStrictEqual([1, 2, 3].symmetric([3, 4, 5]).toArray(), [1, 2, 4, 5]);
+        //indices
+        assert.deepStrictEqual([a, b, c, d, e, f].indices([0, 2, 4]).toArray(), [a, c, e]);
+        assert.deepStrictEqual([a, b, c, d, e, f].indices([3, 2, 3, 5, 0]).toArray(), [d, c, d, f, a]);
+        //permutation
+        assert.deepStrictEqual([a, b, c].permutation(2).select(per => per.toArray()).toArray(), [ [a, b], [a, c], [b, a], [b, c], [c, a], [c, b] ]);
+        assert.deepStrictEqual([a, b, c, d, e].permutation(3).count(), 60);
+        assert.deepStrictEqual([a, b, c].permutation(2, true).select(per => per.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, a], [b, b], [b, c], [c, a], [c, b], [c, c] ]);
+        assert.deepStrictEqual([a, b, c, d, e].permutation(3, true).count(), 125);
+        assert.deepStrictEqual([a, b, c].permutation(4, true).count(), 81);
+        //combination
+        assert.deepStrictEqual([a, b, c].combination(2).select(com => com.toArray()).toArray(), [ [a, b], [a, c], [b, c] ]);
+        assert.deepStrictEqual([a, b, c, d, e].combination(3).count(), 10);
+        assert.deepStrictEqual([a, b, c].combination(2, true).select(com => com.toArray()).toArray(), [ [a, a], [a, b], [a, c], [b, b], [b, c], [c, c] ]);
+        assert.deepStrictEqual([a, b, c, d, e].combination(3, true).count(), 35);
+        assert.deepStrictEqual([a, b, c].combination(4, true).count(), 15);
 
 		//splice
 		let array_splice = [1, 2, 4, 3, 5, 6];

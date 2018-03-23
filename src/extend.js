@@ -317,11 +317,11 @@ const extendObject = {
     indices(indices) {
         return Enumerable.indices(this, indices);
     },
-    permutation(count) {
-        return Enumerable.permutation(this, count);
+    permutation(count, repeatable = false) {
+        return Enumerable.permutation(this, count, repeatable);
     },
-    combination(count) {
-        return Enumerable.combination(this, count);
+    combination(count, repeatable = false) {
+        return Enumerable.combination(this, count, repeatable);
     },
     chunk(chunk, offset = 0) {
         return Enumerable.chunk(this, chunk, offset);
