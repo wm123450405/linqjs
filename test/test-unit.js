@@ -876,6 +876,15 @@ module.exports = function(Enumerable) {
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 
+        assert.strictEqual(theTree.getParentTree(nodec).value, bTree.value);
+
+        assert.deepStrictEqual(theTree.prevAll(noded).toArray(), [ nodec ]);
+        assert.deepStrictEqual(theTree.prev(noded), nodec);
+        assert.deepStrictEqual(theTree.nextAll(nodec).toArray(), [ noded ]);
+        assert.deepStrictEqual(theTree.next(nodec), noded);
+        assert.deepStrictEqual(theTree.siblings(noded).toArray(), [ nodec ]);
+        assert.deepStrictEqual(theTree.siblings(nodec).toArray(), [ noded ]);
+
         assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toObject(), tree[0]);
         assert.deepStrictEqual(nodes.asEnumerable().combine(node => node.parent, node => node.key).elementAt(0).toValue(), tree[0]);
 	})();
@@ -896,6 +905,15 @@ module.exports = function(Enumerable) {
 
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
+
+        assert.strictEqual(theTree.getParentTree(nodec).value, bTree.value);
+
+        assert.deepStrictEqual(theTree.prevAll(noded).toArray(), [ nodec ]);
+        assert.deepStrictEqual(theTree.prev(noded), nodec);
+        assert.deepStrictEqual(theTree.nextAll(nodec).toArray(), [ noded ]);
+        assert.deepStrictEqual(theTree.next(nodec), noded);
+        assert.deepStrictEqual(theTree.siblings(noded).toArray(), [ nodec ]);
+        assert.deepStrictEqual(theTree.siblings(nodec).toArray(), [ noded ]);
 
         assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toObject(), treeNoKey[0]);
         assert.deepStrictEqual(tree[0].asEnumerable(node => node.children).toValue(), treeNoKey[0]);

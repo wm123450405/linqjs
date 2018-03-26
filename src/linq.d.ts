@@ -919,6 +919,14 @@ declare namespace Enumerable {
         pathTo(node: ITree<TValue> | TValue): IEnumerable<TValue>;
 
         getParent(node: ITree<TValue> | TValue): TValue;
+        getParentTree(node: ITree<TValue> | TValue): ITree<TValue>;
+
+        prev(node: ITree<TValue> | TValue, predicate = defaultPredicate): TValue;
+        next(node: ITree<TValue> | TValue, predicate = defaultPredicate): TValue;
+
+        prevAll(node: ITree<TValue> | TValue, predicate = defaultPredicate): IEnumerable<TValue>;
+        nextAll(node: ITree<TValue> | TValue, predicate = defaultPredicate): IEnumerable<TValue>;
+        siblings(node: ITree<TValue> | TValue, predicate = defaultPredicate): IEnumerable<TValue>;
 
         degree(predicate: (element: TValue) => boolean = defaultPredicate): number;
         degree(predicate: string | number | symbol | TValue | any): number;
