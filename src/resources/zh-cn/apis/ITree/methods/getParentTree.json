@@ -1,0 +1,38 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "node",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用于计算其父节点的子节点"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "ITree",
+                        "descriptions": [
+                            "指定节点的父节点"
+                        ]
+                    },
+                    "description": "在树形结构中查找指定节点的父节点,返回以其父节点为根的子树",
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "getParent"
+                        }
+                    ],
+                    "examples": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

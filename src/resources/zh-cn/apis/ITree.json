@@ -239,6 +239,25 @@
 			]
 		},
 		{
+			"name": "getParentTree",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点的父节点,返回以其父节点为根的子树",
+							"parameters": [
+								{
+									"name": "node"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "getValue",
 			"histroys": [
 				{
@@ -398,7 +417,7 @@
 			"histroys": [
 				{
 					"since": "2.1.22",
-					"deprecated": "2.1.22",
+					"deprecated": "2.1.24.pre",
 					"overloads": [
 						{
 							"description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
@@ -422,6 +441,50 @@
 							"parameters": [
 								{
 									"name": "nodes"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "next",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点之后的满足条件的同辈节点的值",
+							"parameters": [
+								{
+									"name": "node"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "nextAll",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点之后的满足条件的同辈节点的值序列",
+							"parameters": [
+								{
+									"name": "node"
+								},
+								{
+									"name": "predicate"
 								}
 							]
 						}
@@ -460,6 +523,72 @@
 							"parameters": [
 								{
 									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "prev",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点之前的满足条件的同辈节点的值",
+							"parameters": [
+								{
+									"name": "node"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "prevAll",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点之前的满足条件的同辈节点的值序列",
+							"parameters": [
+								{
+									"name": "node"
+								},
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "siblings",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "在树形结构中查找指定节点的满足条件的同辈节点的值序列",
+							"parameters": [
+								{
+									"name": "node"
+								},
+								{
+									"name": "predicate"
 								}
 							]
 						}

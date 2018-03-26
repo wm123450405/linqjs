@@ -12,7 +12,7 @@
                                 "any"
                             ],
                             "descriptions": [
-                                "用于结算其父节点值的子节点"
+                                "用于计算其父节点值的子节点"
                             ]
                         }
                     ],
@@ -24,7 +24,10 @@
                     },
                     "description": "在树形结构中查找指定节点的父节点的值",
                     "sees": [
-
+                        {
+                            "apis": "ITree",
+                            "method": "getParentTree"
+                        }
                     ],
                     "examples": [
                         {

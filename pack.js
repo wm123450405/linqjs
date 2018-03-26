@@ -199,6 +199,7 @@ const createDirectory = refreshLangName => {
 	let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.less(common.isNewer)).toArray();
 
 	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
+	if (!common.versions[common.versions.length - 1].endsWith('pre')) common.versions.push(common.preVersion(common.versions[common.versions.length - 1]));
 	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));
     fs.writeFileSync(path.join(scripts, 'histroy.js'), 'module.exports = (version, callback, pre, post) => { ' + common.versions.map(version => `if (version === '${ version }') return require.ensure([], function(require) { if (callback) { pre && pre(); callback(require('${ common.module(version) }')); post && post(); } }, '${ common.module(version) }');`).join(' else ') + ' };');
 

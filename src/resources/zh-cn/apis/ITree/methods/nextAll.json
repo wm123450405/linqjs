@@ -1,0 +1,80 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "node",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用于计算其之后的同辈节点值序列的节点"
+                            ]
+                        },
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用于检测每个节点值是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "指定节点之后的同辈节点值的序列"
+                        ]
+                    },
+                    "description": "在树形结构中查找指定节点之后的满足条件的同辈节点的值序列",
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "next"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "prevAll"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "siblings"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 prevAll 查找指定节点之后的所有同辈节点值。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

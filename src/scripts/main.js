@@ -1,5 +1,7 @@
 import '../styles/main.sass';
 
+import './histroy';
+
 import './extends';
 import './filters';
 import routes from './routes';

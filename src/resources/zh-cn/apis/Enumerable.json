@@ -102,7 +102,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.19",
+					"deprecated": "2.1.21.pre",
 					"overloads": [
 						{
 							"static": true,
@@ -117,7 +117,7 @@
 				},
 				{
 					"since": "2.1.20",
-					"deprecated": "2.1.21",
+					"deprecated": "2.1.23.pre",
 					"overloads": [
 						{
 							"static": true,
@@ -269,7 +269,7 @@
 			"histroys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.19",
+					"deprecated": "2.1.21.pre",
 					"overloads": [
 						{
 							"static": true,

@@ -51,6 +51,13 @@
                         }
                     ],
                     "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 permutation 计算序列按指定数量的所有排列。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
                     ]
                 }
             ]

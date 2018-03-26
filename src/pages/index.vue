@@ -118,7 +118,7 @@
                     }
 				});
 			},
-			close() {
+			close() {z
 	            this.active = false;
 			},
 			clear() {

@@ -44,6 +44,11 @@ module.exports = {
 	nextVersion(version) {
 		return Enumerable.where(this.versions, ver => this.versionComparer(ver, version) > 0).min('', this.versionComparer);
 	},
+	preVersion(version) {
+		let versions = version.split('.');
+		versions[versions.length - 1] = parseInt(versions[versions.length - 1]) + 1;
+		return versions.join('.') + '.pre';
+	},
 	asVersion(version) {
 		return asVersion(version);
 	},
