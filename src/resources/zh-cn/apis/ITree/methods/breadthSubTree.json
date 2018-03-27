@@ -36,6 +36,11 @@
                     ],
                     "returns": {
                         "type": "IEnumerable",
+                        "generics": [
+                            {
+                                "name": "ITree"
+                            }
+                        ],
                         "descriptions": [
                             "满足指定条件的子树组成的序列"
                         ]

@@ -26,7 +26,7 @@
                     "sees": [
                         {
                             "apis": "ITree",
-                            "method": "getParentTree"
+                            "method": "getParentNode"
                         }
                     ],
                     "examples": [

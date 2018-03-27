@@ -53,7 +53,15 @@
                     "sees": [
                         {
                             "apis": "ITree",
+                            "method": "next"
+                        },
+                        {
+                            "apis": "ITree",
                             "method": "prevAll"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "prevNode"
                         }
                     ],
                     "examples": [

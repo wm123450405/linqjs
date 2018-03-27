@@ -62,6 +62,10 @@
                         {
                             "apis": "ITree",
                             "method": "siblings"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "prevAllNodes"
                         }
                     ],
                     "examples": [

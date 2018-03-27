@@ -62,11 +62,15 @@
                         {
                             "apis": "ITree",
                             "method": "siblings"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "nextAllNodes"
                         }
                     ],
                     "examples": [
                         {
-                            "description": "下面的代码示例演示如何使用 prevAll 查找指定节点之后的所有同辈节点值。",
+                            "description": "下面的代码示例演示如何使用 nextAll 查找指定节点之后的所有同辈节点值。",
                             "script": {
                                 "type": "javascript",
                                 "href": "1.js"

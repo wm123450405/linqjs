@@ -1,11 +1,20 @@
 {
     "histroys": [
         {
-            "since": "2.1.22",
+            "since": "2.1.23",
             "overloads": [
                 {
-                    "lazy": true,
                     "parameters": [
+                        {
+                            "name": "node",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "用于计算其之前的同辈节点序列的节点"
+                            ]
+                        },
                         {
                             "name": "predicate",
                             "types": [
@@ -17,7 +26,7 @@
                                 "object"
                             ],
                             "descriptions": [
-                                "用于检测每个元素是否满足条件的函数"
+                                "用于检测每个节点值是否满足条件的函数"
                             ],
                             "declare": {
                                 "returns": {
@@ -42,27 +51,17 @@
                             }
                         ],
                         "descriptions": [
-                            "满足指定条件的子树组成的序列"
+                            "指定节点之前的同辈节点的序列"
                         ]
                     },
-                    "description": "通过深度优先遍历算法遍历树形结构,获取所有满足条件的子树组成的序列",
-                    "remarks": [
-                        "此方法通过延迟执行的方式实现"
-                    ],
+                    "description": "在树形结构中查找指定节点之前的满足条件的同辈节点序列",
                     "sees": [
                         {
                             "apis": "ITree",
-                            "method": "breadthSubTree"
+                            "method": "prevAll"
                         }
                     ],
                     "examples": [
-                        {
-                            "description": "下面的代码示例演示如何使用 depthSubTree 获得所有满足条件的子树。",
-                            "script": {
-                                "type": "javascript",
-                                "href": "1.js"
-                            }
-                        }
                     ]
                 }
             ]

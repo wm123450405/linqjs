@@ -58,6 +58,10 @@
                         {
                             "apis": "ITree",
                             "method": "nextAll"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "siblingNodes"
                         }
                     ],
                     "examples": [
