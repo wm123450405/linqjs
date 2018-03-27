@@ -14,13 +14,13 @@ class NextEnumerable extends IEnumerable {
         super([]);
         predicate = methods.asPredicate(predicate);
         core.defineProperty(this, Symbol.iterator, function* NextIterator() {
-            let parent = tree.getParentTree(node);
+            let parent = tree.getParentNode(node);
             let next = false;
             for (let child of parent.children) {
                 if (next && predicate(child.value)) {
                     yield child.value;
                 }
-                if (ITree.isSameNode(child, node)) {
+                if (!next && ITree.isSameNode(child, node)) {
                     next = true;
                 }
             }

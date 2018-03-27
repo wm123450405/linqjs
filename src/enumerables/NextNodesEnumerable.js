@@ -9,22 +9,23 @@ const core = require('./../core/core');
 const methods = require('./../methods/methods');
 const defaultPredicate = require('./../methods/defaultPredicate');
 
-class SiblingsEnumerable extends IEnumerable {
+class NextEnumerable extends IEnumerable {
     constructor(tree, node, predicate = defaultPredicate) {
         super([]);
         predicate = methods.asPredicate(predicate);
-        core.defineProperty(this, Symbol.iterator, function* SiblingsIterator() {
+        core.defineProperty(this, Symbol.iterator, function* NextIterator() {
             let parent = tree.getParentNode(node);
-            let skip = false;
+            let next = false;
             for (let child of parent.children) {
-                if (!skip && ITree.isSameNode(child, node)) {
-                    skip = true;
-                } else if (predicate(child.value)) {
-                    yield child.value;
+                if (next && predicate(child.value)) {
+                    yield child;
+                }
+                if (!next && ITree.isSameNode(child, node)) {
+                    next = true;
                 }
             }
         });
     }
 }
 
-module.exports = SiblingsEnumerable;
+module.exports = NextEnumerable;

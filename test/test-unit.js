@@ -876,7 +876,7 @@ module.exports = function(Enumerable) {
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 
-        assert.strictEqual(theTree.getParentTree(nodec).value, bTree.value);
+        assert.strictEqual(theTree.getParentNode(nodec).value, bTree.value);
 
         assert.deepStrictEqual(theTree.prevAll(noded).toArray(), [ nodec ]);
         assert.deepStrictEqual(theTree.prev(noded), nodec);
@@ -906,7 +906,7 @@ module.exports = function(Enumerable) {
         assert.strictEqual(theTree.lowestAncestor(cTree, dTree), nodeb);
         assert.strictEqual(theTree.lowestAncestor(nodec, noded), nodeb);
 
-        assert.strictEqual(theTree.getParentTree(nodec).value, bTree.value);
+        assert.strictEqual(theTree.getParentNode(nodec).value, bTree.value);
 
         assert.deepStrictEqual(theTree.prevAll(noded).toArray(), [ nodec ]);
         assert.deepStrictEqual(theTree.prev(noded), nodec);

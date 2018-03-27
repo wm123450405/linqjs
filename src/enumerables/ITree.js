@@ -178,9 +178,9 @@ class ITree extends GeneratorEnumerable {
      * 获取一个节点的父节点
      */
     getParent(node) {
-        return this.getParentTree(node).value;
+        return this.getParentNode(node).value;
     }
-    getParentTree(node) {
+    getParentNode(node) {
         let search = current => {
             if (ITree.isSameNode(current, node)) {
                 return true;
@@ -206,6 +206,25 @@ class ITree extends GeneratorEnumerable {
 
     /**
      * 同辈节点的操作
+     */
+    prevAllNodes(node, predicate = defaultPredicate) {
+        return new PrevNodesEnumerable(this, node, predicate);
+    }
+    prevNode(node, predicate = defaultPredicate) {
+        return Enumerable.last(this.prevAllNodes(node, predicate));
+    }
+    nextAllNodes(node, predicate = defaultPredicate) {
+        return new NextNodesEnumerable(this, node, predicate);
+    }
+    nextNode(node, predicate = defaultPredicate) {
+        return Enumerable.first(this.nextAllNodes(node, predicate));
+    }
+    siblingNodes(node, predicate = defaultPredicate) {
+        return new SiblingNodesEnumerable(this, node, predicate);
+    }
+
+    /**
+     * 同辈节点值的操作
      */
     prevAll(node, predicate = defaultPredicate) {
         return new PrevEnumerable(this, node, predicate);
@@ -335,3 +354,6 @@ const DepthSubTreeEnumerable = require('./DepthSubTreeEnumerable');
 const PrevEnumerable = require('./PrevEnumerable');
 const NextEnumerable = require('./NextEnumerable');
 const SiblingsEnumerable = require('./SiblingsEnumerable');
+const PrevNodesEnumerable = require('./PrevNodesEnumerable');
+const NextNodesEnumerable = require('./NextNodesEnumerable');
+const SiblingNodesEnumerable = require('./SiblingNodesEnumerable');

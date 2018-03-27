@@ -20,7 +20,7 @@ class SiblingsEnumerable extends IEnumerable {
                 if (!skip && ITree.isSameNode(child, node)) {
                     skip = true;
                 } else if (predicate(child.value)) {
-                    yield child.value;
+                    yield child;
                 }
             }
         });
