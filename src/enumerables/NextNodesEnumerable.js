@@ -13,7 +13,7 @@ class NextEnumerable extends IEnumerable {
     constructor(tree, node, predicate = defaultPredicate) {
         super([]);
         predicate = methods.asPredicate(predicate);
-        core.defineProperty(this, Symbol.iterator, function* NextIterator() {
+        core.defineProperty(this, Symbol.iterator, function* NextNodesIterator() {
             let parent = tree.getParentNode(node);
             let next = false;
             for (let child of parent.children) {

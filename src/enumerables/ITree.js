@@ -251,6 +251,12 @@ class ITree extends GeneratorEnumerable {
     pathTo(node) {
         return new PathToEnumerable(this, node);
     }
+    pathNodes(root) {
+        return root.pathNodesTo(this);
+    }
+    pathNodesTo(node) {
+        return new PathNodesToEnumerable(this, node);
+    }
 
     /**
      * 广度
@@ -347,6 +353,7 @@ module.exports = ITree;
 
 const BinaryTree = require('./BinaryTree');
 const PathToEnumerable = require('./PathToEnumerable');
+const PathNodesToEnumerable = require('./PathNodesToEnumerable');
 const BreadthEnumerable = require('./BreadthEnumerable');
 const DepthEnumerable = require('./DepthEnumerable');
 const BreadthSubTreeEnumerable = require('./BreadthSubTreeEnumerable');

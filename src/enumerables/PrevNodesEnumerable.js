@@ -13,7 +13,7 @@ class PrevEnumerable extends IEnumerable {
     constructor(tree, node, predicate = defaultPredicate) {
         super([]);
         predicate = methods.asPredicate(predicate);
-        core.defineProperty(this, Symbol.iterator, function* PrevIterator() {
+        core.defineProperty(this, Symbol.iterator, function* PrevNodesIterator() {
             let parent = tree.getParentNode(node);
             for (let child of parent.children) {
                 if (ITree.isSameNode(child, node)) {

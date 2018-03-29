@@ -918,6 +918,9 @@ declare namespace Enumerable {
         path(root: ITree<TValue>): IEnumerable<TValue>;
         pathTo(node: ITree<TValue> | TValue): IEnumerable<TValue>;
 
+        pathNodes(root: ITree<TValue>): IEnumerable<ITree<TValue>>;
+        pathNodesTo(node: ITree<TValue> | TValue): IEnumerable<ITree<TValue>>;
+
         getParent(node: ITree<TValue> | TValue): TValue;
         getParentNode(node: ITree<TValue> | TValue): ITree<TValue>;
 

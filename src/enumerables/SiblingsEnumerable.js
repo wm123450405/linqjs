@@ -13,7 +13,7 @@ class SiblingsEnumerable extends IEnumerable {
     constructor(tree, node, predicate = defaultPredicate) {
         super([]);
         predicate = methods.asPredicate(predicate);
-        core.defineProperty(this, Symbol.iterator, function* SiblingsIterator() {
+        core.defineProperty(this, Symbol.iterator, function* SiblingNodesIterator() {
             let parent = tree.getParentNode(node);
             let skip = false;
             for (let child of parent.children) {
