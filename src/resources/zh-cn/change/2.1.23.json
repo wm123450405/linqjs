@@ -1,9 +1,9 @@
 {
-    "prepublish": true,
+    "publish": "2018-03-29",
     "contents": [
         "新增(New):",
         "1. 增加 ITree.prototype.toValue 方法,将树形结构转化 object 对象 ( JSON 数据 )",
-        "2. 增加 ITree.prototype.isParentOf, ITree.prototype.isChildOf, ITree.prototype.getParent, ITree.prototype.prev, ITree.prototype.prevAll, ITree.prototype.next, ITree.prototype.nextAll, ITree.prototype.siblings, ITree.prototype.getParentNode, ITree.prototype.prevNode, ITree.prototype.prevAllNodes, ITree.prototype.nextNode, ITree.prototype.nextAllNodes, ITree.prototype.siblingNodes 方法,操作树形的各节点关系",
+        "2. 增加 ITree.prototype.isParentOf, ITree.prototype.isChildOf, ITree.prototype.getParent, ITree.prototype.prev, ITree.prototype.prevAll, ITree.prototype.next, ITree.prototype.nextAll, ITree.prototype.siblings, ITree.prototype.getParentNode, ITree.prototype.prevNode, ITree.prototype.prevAllNodes, ITree.prototype.nextNode, ITree.prototype.nextAllNodes, ITree.prototype.siblingNodes, ITree.prototype.pathNodes, ITree.prototype.pathNodesTo 方法,操作树形的各节点关系",
         "3. 增加 IEnumerable.prototype.each 方法,对序列中的每个元素执行一次操作,并返回序列本身 ( 与 forEach 方法的区别在于 each 方法可以继续链式调用 )",
         "4. 增加 IEnumerable.prototype.split 方法,对序列按照指定的条件进行拆分",
         "5. 增加 IEnumerable.prototype.indices 方法,用使用一个索引序列从源序列中生成一个新序列",

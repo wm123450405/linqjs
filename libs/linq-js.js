@@ -30,7 +30,7 @@ define(String.prototype, "padRight", "".padEnd);
 });
 }).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"core-js/fn/regexp/escape":2,"core-js/shim":295,"regenerator-runtime/runtime":297}],2:[function(require,module,exports){
+},{"core-js/fn/regexp/escape":2,"core-js/shim":295,"regenerator-runtime/runtime":298}],2:[function(require,module,exports){
 require('../../modules/core.regexp.escape');
 module.exports = require('../../modules/_core').RegExp.escape;
 },{"../../modules/_core":23,"../../modules/core.regexp.escape":119}],3:[function(require,module,exports){
@@ -6085,6 +6085,94 @@ require('./modules/web.immediate');
 require('./modules/web.dom.iterable');
 module.exports = require('./modules/_core');
 },{"./modules/_core":23,"./modules/es6.array.copy-within":120,"./modules/es6.array.every":121,"./modules/es6.array.fill":122,"./modules/es6.array.filter":123,"./modules/es6.array.find":125,"./modules/es6.array.find-index":124,"./modules/es6.array.for-each":126,"./modules/es6.array.from":127,"./modules/es6.array.index-of":128,"./modules/es6.array.is-array":129,"./modules/es6.array.iterator":130,"./modules/es6.array.join":131,"./modules/es6.array.last-index-of":132,"./modules/es6.array.map":133,"./modules/es6.array.of":134,"./modules/es6.array.reduce":136,"./modules/es6.array.reduce-right":135,"./modules/es6.array.slice":137,"./modules/es6.array.some":138,"./modules/es6.array.sort":139,"./modules/es6.array.species":140,"./modules/es6.date.now":141,"./modules/es6.date.to-iso-string":142,"./modules/es6.date.to-json":143,"./modules/es6.date.to-primitive":144,"./modules/es6.date.to-string":145,"./modules/es6.function.bind":146,"./modules/es6.function.has-instance":147,"./modules/es6.function.name":148,"./modules/es6.map":149,"./modules/es6.math.acosh":150,"./modules/es6.math.asinh":151,"./modules/es6.math.atanh":152,"./modules/es6.math.cbrt":153,"./modules/es6.math.clz32":154,"./modules/es6.math.cosh":155,"./modules/es6.math.expm1":156,"./modules/es6.math.fround":157,"./modules/es6.math.hypot":158,"./modules/es6.math.imul":159,"./modules/es6.math.log10":160,"./modules/es6.math.log1p":161,"./modules/es6.math.log2":162,"./modules/es6.math.sign":163,"./modules/es6.math.sinh":164,"./modules/es6.math.tanh":165,"./modules/es6.math.trunc":166,"./modules/es6.number.constructor":167,"./modules/es6.number.epsilon":168,"./modules/es6.number.is-finite":169,"./modules/es6.number.is-integer":170,"./modules/es6.number.is-nan":171,"./modules/es6.number.is-safe-integer":172,"./modules/es6.number.max-safe-integer":173,"./modules/es6.number.min-safe-integer":174,"./modules/es6.number.parse-float":175,"./modules/es6.number.parse-int":176,"./modules/es6.number.to-fixed":177,"./modules/es6.number.to-precision":178,"./modules/es6.object.assign":179,"./modules/es6.object.create":180,"./modules/es6.object.define-properties":181,"./modules/es6.object.define-property":182,"./modules/es6.object.freeze":183,"./modules/es6.object.get-own-property-descriptor":184,"./modules/es6.object.get-own-property-names":185,"./modules/es6.object.get-prototype-of":186,"./modules/es6.object.is":190,"./modules/es6.object.is-extensible":187,"./modules/es6.object.is-frozen":188,"./modules/es6.object.is-sealed":189,"./modules/es6.object.keys":191,"./modules/es6.object.prevent-extensions":192,"./modules/es6.object.seal":193,"./modules/es6.object.set-prototype-of":194,"./modules/es6.object.to-string":195,"./modules/es6.parse-float":196,"./modules/es6.parse-int":197,"./modules/es6.promise":198,"./modules/es6.reflect.apply":199,"./modules/es6.reflect.construct":200,"./modules/es6.reflect.define-property":201,"./modules/es6.reflect.delete-property":202,"./modules/es6.reflect.enumerate":203,"./modules/es6.reflect.get":206,"./modules/es6.reflect.get-own-property-descriptor":204,"./modules/es6.reflect.get-prototype-of":205,"./modules/es6.reflect.has":207,"./modules/es6.reflect.is-extensible":208,"./modules/es6.reflect.own-keys":209,"./modules/es6.reflect.prevent-extensions":210,"./modules/es6.reflect.set":212,"./modules/es6.reflect.set-prototype-of":211,"./modules/es6.regexp.constructor":213,"./modules/es6.regexp.flags":214,"./modules/es6.regexp.match":215,"./modules/es6.regexp.replace":216,"./modules/es6.regexp.search":217,"./modules/es6.regexp.split":218,"./modules/es6.regexp.to-string":219,"./modules/es6.set":220,"./modules/es6.string.anchor":221,"./modules/es6.string.big":222,"./modules/es6.string.blink":223,"./modules/es6.string.bold":224,"./modules/es6.string.code-point-at":225,"./modules/es6.string.ends-with":226,"./modules/es6.string.fixed":227,"./modules/es6.string.fontcolor":228,"./modules/es6.string.fontsize":229,"./modules/es6.string.from-code-point":230,"./modules/es6.string.includes":231,"./modules/es6.string.italics":232,"./modules/es6.string.iterator":233,"./modules/es6.string.link":234,"./modules/es6.string.raw":235,"./modules/es6.string.repeat":236,"./modules/es6.string.small":237,"./modules/es6.string.starts-with":238,"./modules/es6.string.strike":239,"./modules/es6.string.sub":240,"./modules/es6.string.sup":241,"./modules/es6.string.trim":242,"./modules/es6.symbol":243,"./modules/es6.typed.array-buffer":244,"./modules/es6.typed.data-view":245,"./modules/es6.typed.float32-array":246,"./modules/es6.typed.float64-array":247,"./modules/es6.typed.int16-array":248,"./modules/es6.typed.int32-array":249,"./modules/es6.typed.int8-array":250,"./modules/es6.typed.uint16-array":251,"./modules/es6.typed.uint32-array":252,"./modules/es6.typed.uint8-array":253,"./modules/es6.typed.uint8-clamped-array":254,"./modules/es6.weak-map":255,"./modules/es6.weak-set":256,"./modules/es7.array.includes":257,"./modules/es7.asap":258,"./modules/es7.error.is-error":259,"./modules/es7.map.to-json":260,"./modules/es7.math.iaddh":261,"./modules/es7.math.imulh":262,"./modules/es7.math.isubh":263,"./modules/es7.math.umulh":264,"./modules/es7.object.define-getter":265,"./modules/es7.object.define-setter":266,"./modules/es7.object.entries":267,"./modules/es7.object.get-own-property-descriptors":268,"./modules/es7.object.lookup-getter":269,"./modules/es7.object.lookup-setter":270,"./modules/es7.object.values":271,"./modules/es7.observable":272,"./modules/es7.reflect.define-metadata":273,"./modules/es7.reflect.delete-metadata":274,"./modules/es7.reflect.get-metadata":276,"./modules/es7.reflect.get-metadata-keys":275,"./modules/es7.reflect.get-own-metadata":278,"./modules/es7.reflect.get-own-metadata-keys":277,"./modules/es7.reflect.has-metadata":279,"./modules/es7.reflect.has-own-metadata":280,"./modules/es7.reflect.metadata":281,"./modules/es7.set.to-json":282,"./modules/es7.string.at":283,"./modules/es7.string.match-all":284,"./modules/es7.string.pad-end":285,"./modules/es7.string.pad-start":286,"./modules/es7.string.trim-left":287,"./modules/es7.string.trim-right":288,"./modules/es7.symbol.async-iterator":289,"./modules/es7.symbol.observable":290,"./modules/es7.system.global":291,"./modules/web.dom.iterable":292,"./modules/web.immediate":293,"./modules/web.timers":294}],296:[function(require,module,exports){
+'use strict';
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+
+var isArray = function isArray(arr) {
+	if (typeof Array.isArray === 'function') {
+		return Array.isArray(arr);
+	}
+
+	return toStr.call(arr) === '[object Array]';
+};
+
+var isPlainObject = function isPlainObject(obj) {
+	if (!obj || toStr.call(obj) !== '[object Object]') {
+		return false;
+	}
+
+	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
+	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+	// Not own constructor property must be Object
+	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
+		return false;
+	}
+
+	// Own properties are enumerated firstly, so to speed up,
+	// if last one is own, then all properties are own.
+	var key;
+	for (key in obj) { /**/ }
+
+	return typeof key === 'undefined' || hasOwn.call(obj, key);
+};
+
+module.exports = function extend() {
+	var options, name, src, copy, copyIsArray, clone;
+	var target = arguments[0];
+	var i = 1;
+	var length = arguments.length;
+	var deep = false;
+
+	// Handle a deep copy situation
+	if (typeof target === 'boolean') {
+		deep = target;
+		target = arguments[1] || {};
+		// skip the boolean and the target
+		i = 2;
+	}
+	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
+		target = {};
+	}
+
+	for (; i < length; ++i) {
+		options = arguments[i];
+		// Only deal with non-null/undefined values
+		if (options != null) {
+			// Extend the base object
+			for (name in options) {
+				src = target[name];
+				copy = options[name];
+
+				// Prevent never-ending loop
+				if (target !== copy) {
+					// Recurse if we're merging plain objects or arrays
+					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+						if (copyIsArray) {
+							copyIsArray = false;
+							clone = src && isArray(src) ? src : [];
+						} else {
+							clone = src && isPlainObject(src) ? src : {};
+						}
+
+						// Never move original objects, clone them
+						target[name] = extend(deep, clone, copy);
+
+					// Don't bring in undefined values
+					} else if (typeof copy !== 'undefined') {
+						target[name] = copy;
+					}
+				}
+			}
+		}
+	}
+
+	// Return the modified object
+	return target;
+};
+
+},{}],297:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -6266,7 +6354,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],297:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 (function (process,global){
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -6994,7 +7082,7 @@ process.umask = function() { return 0; };
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"_process":296}],298:[function(require,module,exports){
+},{"_process":297}],299:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -7004,6 +7092,7 @@ var core = require('./core/core');
 var methods = require('./methods/methods');
 
 var defaultPredicate = require('./methods/defaultPredicate');
+var defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 var defaultSelector = require('./methods/defaultSelector');
 var defaultSameComparer = require('./methods/defaultSameComparer');
 var defaultEqualityComparer = require('./methods/defaultEqualityComparer');
@@ -7015,10 +7104,13 @@ var defaultKeySelector = require('./methods/defaultKeySelector');
 var defaultValueSelector = require('./methods/defaultValueSelector');
 var defaultParentSelector = require('./methods/defaultParentSelector');
 var defaultChildrenSelector = require('./methods/defaultChildrenSelector');
+var defaultChildrenSetter = require('./methods/defaultChildrenSetter');
+var defaultValueSetter = require('./methods/defaultValueSetter');
 var defaultAction = require('./methods/defaultAction');
 
 var arrayComparer = require('./methods/arrayComparer');
 var predicateComparer = require('./methods/predicateComparer');
+var propertySetter = require('./methods/propertySetter');
 var propertySelector = require('./methods/propertySelector');
 var regexpPredicate = require('./methods/regexpPredicate');
 var defaultExistsPredicate = require('./methods/defaultExistsPredicate');
@@ -8716,10 +8808,41 @@ Enumerable.forEach = function (source) {
         }
     }
 };
+Enumerable.each = function (source) {
+    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
+
+    return new EachEnumerable(asIterable(source), action);
+};
+Enumerable.indices = function (source, indices) {
+    return new IndicesEnumerable(asIterable(source), asIterable(indices));
+};
+Enumerable.permutation = function (source, count) {
+    var repeatable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (repeatable) {
+        return new PermutationRepeatableEnumerable(asIterable(source), count);
+    } else {
+        return new PermutationEnumerable(asIterable(source), count);
+    }
+};
+Enumerable.combination = function (source, count) {
+    var repeatable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (repeatable) {
+        return new CombinationRepeatableEnumerable(asIterable(source), count);
+    } else {
+        return new CombinationEnumerable(asIterable(source), count);
+    }
+};
 Enumerable.chunk = function (source, chunk) {
     var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
     return new ChunkEnumerable(asIterable(source), chunk, offset);
+};
+Enumerable.split = function (source) {
+    var splitPredicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultFalsePredicate;
+
+    return new SplitEnumerable(asIterable(source), splitPredicate);
 };
 Enumerable.leftPad = function (source, length, value) {
     return new LeftPadEnumerable(asIterable(source), length, value);
@@ -8861,6 +8984,21 @@ core.defineProperty(Enumerable, 'comparers', function () {
         }
     };
 }, true, true);
+core.defineProperty(Enumerable, 'setters', function () {
+    return {
+        get children() {
+            return defaultChildrenSetter;
+        },
+        get value() {
+            return defaultValueSetter;
+        },
+        property: function property(_property) {
+            var ignoreInvalid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return propertySetter(_property, ignoreInvalid);
+        }
+    };
+}, true, true);
 core.defineProperty(Enumerable, 'selectors', function () {
     return {
         get default() {
@@ -8884,8 +9022,10 @@ core.defineProperty(Enumerable, 'selectors', function () {
         get join() {
             return defaultJoinSelector;
         },
-        property: function property(_property) {
-            return propertySelector(_property);
+        property: function property(_property2) {
+            var ignoreInvalid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return propertySelector(_property2, ignoreInvalid);
         }
     };
 }, true, true);
@@ -9017,6 +9157,7 @@ var FillEnumerable = require('./enumerables/FillEnumerable');
 var SortEnumerable = require('./enumerables/SortEnumerable');
 var CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 var ChunkEnumerable = require('./enumerables/ChunkEnumerable');
+var SplitEnumerable = require('./enumerables/SplitEnumerable');
 var LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
 var RightPadEnumerable = require('./enumerables/RightPadEnumerable');
 var RandEnumerable = require('./enumerables/RandEnumerable');
@@ -9027,12 +9168,18 @@ var GenerateEnumerable = require('./enumerables/GenerateEnumerable');
 var SeparateEnumerable = require('./enumerables/SeparateEnumerable');
 var CombineEnumerable = require('./enumerables/CombineEnumerable');
 var SymmetricEnumerable = require('./enumerables/SymmetricEnumerable');
+var EachEnumerable = require('./enumerables/EachEnumerable');
+var IndicesEnumerable = require('./enumerables/IndicesEnumerable');
+var PermutationEnumerable = require('./enumerables/PermutationEnumerable');
+var PermutationRepeatableEnumerable = require('./enumerables/PermutationRepeatableEnumerable');
+var CombinationEnumerable = require('./enumerables/CombinationEnumerable');
+var CombinationRepeatableEnumerable = require('./enumerables/CombinationRepeatableEnumerable');
 
 var PreOrderTree = require('./enumerables/PreOrderTree');
 var InOrderTree = require('./enumerables/InOrderTree');
 var PostOrderTree = require('./enumerables/PostOrderTree');
 
-},{"./IEnumerable":299,"./IEnumerator":300,"./core/IComparable":301,"./core/IEquatable":302,"./core/core":303,"./core/exceptions/InvalidFunctionException":305,"./core/exceptions/KeysForMultiElementsException":306,"./core/exceptions/NeedExecuteBeforeException":307,"./core/exceptions/NoSuchElementsException":308,"./core/exceptions/NotAncestorOfException":309,"./core/exceptions/NotEnumerableException":310,"./core/exceptions/OutOfRangeException":311,"./core/exceptions/PluginRepeatException":312,"./core/exceptions/PropertyExpressionInvalidException":313,"./core/exceptions/TooManyElementsException":314,"./enumerables/BetweenEnumerable":316,"./enumerables/ChunkEnumerable":320,"./enumerables/CombineEnumerable":321,"./enumerables/ConcatEnumerable":322,"./enumerables/CopyWithinEnumerable":323,"./enumerables/Dictionary":326,"./enumerables/DistinctEnumerable":327,"./enumerables/EmptyEnumerable":328,"./enumerables/ExceptEnumerable":330,"./enumerables/FillEnumerable":331,"./enumerables/GenerateEnumerable":332,"./enumerables/GroupJoinEnumerable":334,"./enumerables/GroupedEnumerable":335,"./enumerables/IMapEnumerable":339,"./enumerables/IOrderedEnumerable":340,"./enumerables/InOrderTree":343,"./enumerables/IntersectEnumerable":344,"./enumerables/IteratorEnumerable":346,"./enumerables/JoinEnumerable":347,"./enumerables/LeftJoinEnumerable":348,"./enumerables/LeftPadEnumerable":349,"./enumerables/Lookup":350,"./enumerables/NearGroupedEnumerable":352,"./enumerables/OfTypeEnumerable":354,"./enumerables/OrderByDescendingEnumerable":355,"./enumerables/OrderByEnumerable":356,"./enumerables/PostOrderTree":359,"./enumerables/PreOrderTree":361,"./enumerables/RandEnumerable":362,"./enumerables/RangeEnumerable":363,"./enumerables/RepeatEnumerable":364,"./enumerables/ReverseEnumerable":365,"./enumerables/RightJoinEnumerable":366,"./enumerables/RightPadEnumerable":367,"./enumerables/SelectEnumerable":368,"./enumerables/SelectManyEnumerable":369,"./enumerables/SeparateEnumerable":370,"./enumerables/SingleEnumerable":371,"./enumerables/SkipEnumerable":372,"./enumerables/SkipWhileEnumerable":373,"./enumerables/SliceEnumerable":374,"./enumerables/SortEnumerable":375,"./enumerables/SpliceEnumerable":376,"./enumerables/SymmetricEnumerable":378,"./enumerables/TakeEnumerable":379,"./enumerables/TakeWhileEnumerable":380,"./enumerables/ThenByDescendingEnumerable":381,"./enumerables/ThenByEnumerable":382,"./enumerables/UnionEnumerable":384,"./enumerables/WhereEnumerable":385,"./enumerables/WipeEnumerable":386,"./enumerables/ZipEnumerable":387,"./extend":388,"./methods/arrayComparer":393,"./methods/defaultAction":394,"./methods/defaultChildrenSelector":395,"./methods/defaultComparer":396,"./methods/defaultEqualityComparer":397,"./methods/defaultExistsPredicate":398,"./methods/defaultJoinSelector":399,"./methods/defaultKeySelector":400,"./methods/defaultParentSelector":401,"./methods/defaultPredicate":402,"./methods/defaultResultSelector":403,"./methods/defaultSameComparer":404,"./methods/defaultSelector":405,"./methods/defaultStrictEqualityComparer":406,"./methods/defaultValueSelector":407,"./methods/equalityPredicate":409,"./methods/greaterComparer":410,"./methods/ignoreCaseComparer":411,"./methods/lessComparer":412,"./methods/methods":413,"./methods/notPredicate":414,"./methods/predicateComparer":415,"./methods/propertySelector":417,"./methods/regexpPredicate":418,"./methods/selectorPredicate":420,"./plugin":422}],299:[function(require,module,exports){
+},{"./IEnumerable":300,"./IEnumerator":301,"./core/IComparable":302,"./core/IEquatable":303,"./core/core":304,"./core/exceptions/InvalidFunctionException":306,"./core/exceptions/KeysForMultiElementsException":307,"./core/exceptions/NeedExecuteBeforeException":308,"./core/exceptions/NoSuchElementsException":309,"./core/exceptions/NotAncestorOfException":310,"./core/exceptions/NotEnumerableException":311,"./core/exceptions/OutOfRangeException":312,"./core/exceptions/PluginRepeatException":313,"./core/exceptions/PropertyExpressionInvalidException":314,"./core/exceptions/TooManyElementsException":315,"./enumerables/BetweenEnumerable":317,"./enumerables/ChunkEnumerable":321,"./enumerables/CombinationEnumerable":322,"./enumerables/CombinationRepeatableEnumerable":323,"./enumerables/CombineEnumerable":324,"./enumerables/ConcatEnumerable":325,"./enumerables/CopyWithinEnumerable":326,"./enumerables/Dictionary":329,"./enumerables/DistinctEnumerable":330,"./enumerables/EachEnumerable":331,"./enumerables/EmptyEnumerable":332,"./enumerables/ExceptEnumerable":334,"./enumerables/FillEnumerable":335,"./enumerables/GenerateEnumerable":336,"./enumerables/GroupJoinEnumerable":338,"./enumerables/GroupedEnumerable":339,"./enumerables/IMapEnumerable":343,"./enumerables/IOrderedEnumerable":344,"./enumerables/InOrderTree":347,"./enumerables/IndicesEnumerable":348,"./enumerables/IntersectEnumerable":349,"./enumerables/IteratorEnumerable":351,"./enumerables/JoinEnumerable":352,"./enumerables/LeftJoinEnumerable":353,"./enumerables/LeftPadEnumerable":354,"./enumerables/Lookup":355,"./enumerables/NearGroupedEnumerable":357,"./enumerables/OfTypeEnumerable":361,"./enumerables/OrderByDescendingEnumerable":362,"./enumerables/OrderByEnumerable":363,"./enumerables/PermutationEnumerable":366,"./enumerables/PermutationRepeatableEnumerable":367,"./enumerables/PostOrderTree":369,"./enumerables/PreOrderTree":371,"./enumerables/RandEnumerable":374,"./enumerables/RangeEnumerable":375,"./enumerables/RepeatEnumerable":376,"./enumerables/ReverseEnumerable":377,"./enumerables/RightJoinEnumerable":378,"./enumerables/RightPadEnumerable":379,"./enumerables/SelectEnumerable":380,"./enumerables/SelectManyEnumerable":381,"./enumerables/SeparateEnumerable":382,"./enumerables/SingleEnumerable":385,"./enumerables/SkipEnumerable":386,"./enumerables/SkipWhileEnumerable":387,"./enumerables/SliceEnumerable":388,"./enumerables/SortEnumerable":389,"./enumerables/SpliceEnumerable":390,"./enumerables/SplitEnumerable":391,"./enumerables/SymmetricEnumerable":393,"./enumerables/TakeEnumerable":394,"./enumerables/TakeWhileEnumerable":395,"./enumerables/ThenByDescendingEnumerable":396,"./enumerables/ThenByEnumerable":397,"./enumerables/UnionEnumerable":399,"./enumerables/WhereEnumerable":400,"./enumerables/WipeEnumerable":401,"./enumerables/ZipEnumerable":402,"./extend":403,"./methods/arrayComparer":408,"./methods/defaultAction":409,"./methods/defaultChildrenSelector":410,"./methods/defaultChildrenSetter":411,"./methods/defaultComparer":412,"./methods/defaultEqualityComparer":413,"./methods/defaultExistsPredicate":414,"./methods/defaultFalsePredicate":415,"./methods/defaultJoinSelector":416,"./methods/defaultKeySelector":417,"./methods/defaultParentSelector":418,"./methods/defaultPredicate":419,"./methods/defaultResultSelector":420,"./methods/defaultSameComparer":421,"./methods/defaultSelector":422,"./methods/defaultStrictEqualityComparer":423,"./methods/defaultValueSelector":424,"./methods/defaultValueSetter":425,"./methods/equalityPredicate":427,"./methods/greaterComparer":428,"./methods/ignoreCaseComparer":429,"./methods/lessComparer":430,"./methods/methods":431,"./methods/notPredicate":432,"./methods/predicateComparer":433,"./methods/propertySelector":435,"./methods/propertySetter":436,"./methods/regexpPredicate":437,"./methods/selectorPredicate":439,"./plugin":441}],300:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -9071,6 +9218,7 @@ function _extendableBuiltin(cls) {
 var core = require('./core/core');
 
 var defaultPredicate = require('./methods/defaultPredicate');
+var defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 var defaultSelector = require('./methods/defaultSelector');
 var defaultSameComparer = require('./methods/defaultSameComparer');
 var defaultEqualityComparer = require('./methods/defaultEqualityComparer');
@@ -9705,11 +9853,44 @@ var IEnumerable = function (_extendableBuiltin2) {
             return Enumerable.forEach(this, action, thisArg);
         }
     }, {
+        key: 'each',
+        value: function each() {
+            var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultAction;
+
+            return Enumerable.each(this, action);
+        }
+    }, {
+        key: 'indices',
+        value: function indices(_indices) {
+            return Enumerable.indices(this, _indices);
+        }
+    }, {
+        key: 'permutation',
+        value: function permutation(count) {
+            var repeatable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return Enumerable.permutation(this, count, repeatable);
+        }
+    }, {
+        key: 'combination',
+        value: function combination(count) {
+            var repeatable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            return Enumerable.combination(this, count, repeatable);
+        }
+    }, {
         key: 'chunk',
         value: function chunk(_chunk) {
             var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
             return Enumerable.chunk(this, _chunk, offset);
+        }
+    }, {
+        key: 'split',
+        value: function split() {
+            var splitPredicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultFalsePredicate;
+
+            return Enumerable.split(this, splitPredicate);
         }
     }, {
         key: 'leftPad',
@@ -9804,7 +9985,7 @@ module.exports = IEnumerable;
 
 var Enumerable = require('./Enumerable');
 
-},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":394,"./methods/defaultChildrenSelector":395,"./methods/defaultComparer":396,"./methods/defaultEqualityComparer":397,"./methods/defaultJoinSelector":399,"./methods/defaultKeySelector":400,"./methods/defaultParentSelector":401,"./methods/defaultPredicate":402,"./methods/defaultResultSelector":403,"./methods/defaultSameComparer":404,"./methods/defaultSelector":405,"./methods/defaultStrictEqualityComparer":406,"./methods/defaultValueSelector":407}],300:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304,"./methods/defaultAction":409,"./methods/defaultChildrenSelector":410,"./methods/defaultComparer":412,"./methods/defaultEqualityComparer":413,"./methods/defaultFalsePredicate":415,"./methods/defaultJoinSelector":416,"./methods/defaultKeySelector":417,"./methods/defaultParentSelector":418,"./methods/defaultPredicate":419,"./methods/defaultResultSelector":420,"./methods/defaultSameComparer":421,"./methods/defaultSelector":422,"./methods/defaultStrictEqualityComparer":423,"./methods/defaultValueSelector":424}],301:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9841,7 +10022,7 @@ var IEnumerator = function IEnumerator(enumerable) {
 
 module.exports = IEnumerator;
 
-},{"./core/core":303,"./core/exceptions/NeedExecuteBeforeException":307}],301:[function(require,module,exports){
+},{"./core/core":304,"./core/exceptions/NeedExecuteBeforeException":308}],302:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -9865,7 +10046,7 @@ var IComparable = function () {
 
 module.exports = IComparable;
 
-},{}],302:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -9889,7 +10070,7 @@ var IEquatable = function () {
 
 module.exports = IEquatable;
 
-},{}],303:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -10168,7 +10349,7 @@ module.exports = core;
 
 }).call(this,require('_process'))
 
-},{"_process":296}],304:[function(require,module,exports){
+},{"_process":297}],305:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10224,7 +10405,7 @@ var Exception = function (_extendableBuiltin2) {
 
 module.exports = Exception;
 
-},{"./../core":303}],305:[function(require,module,exports){
+},{"./../core":304}],306:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10249,7 +10430,7 @@ var InvalidFunctionException = function (_Exception) {
 
 module.exports = InvalidFunctionException;
 
-},{"./Exception":304}],306:[function(require,module,exports){
+},{"./Exception":305}],307:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10283,7 +10464,7 @@ var KeysForMultiElementsException = function (_Exception) {
 
 module.exports = KeysForMultiElementsException;
 
-},{"./../core":303,"./Exception":304}],307:[function(require,module,exports){
+},{"./../core":304,"./Exception":305}],308:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10308,7 +10489,7 @@ var NeedExecuteBeforeException = function (_Exception) {
 
 module.exports = NeedExecuteBeforeException;
 
-},{"./Exception":304}],308:[function(require,module,exports){
+},{"./Exception":305}],309:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10333,7 +10514,7 @@ var NoSuchElementsException = function (_Exception) {
 
 module.exports = NoSuchElementsException;
 
-},{"./Exception":304}],309:[function(require,module,exports){
+},{"./Exception":305}],310:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10360,7 +10541,7 @@ var NotAncestorOfException = function (_Exception) {
 
 module.exports = NotAncestorOfException;
 
-},{"./../core":303,"./Exception":304}],310:[function(require,module,exports){
+},{"./../core":304,"./Exception":305}],311:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10387,7 +10568,7 @@ var NoEnumerableException = function (_Exception) {
 
 module.exports = NoEnumerableException;
 
-},{"./../core":303,"./Exception":304}],311:[function(require,module,exports){
+},{"./../core":304,"./Exception":305}],312:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10412,7 +10593,7 @@ var OutOfRangeException = function (_Exception) {
 
 module.exports = OutOfRangeException;
 
-},{"./Exception":304}],312:[function(require,module,exports){
+},{"./Exception":305}],313:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10439,7 +10620,7 @@ var PluginRepeatException = function (_Exception) {
 
 module.exports = PluginRepeatException;
 
-},{"./Exception":304}],313:[function(require,module,exports){
+},{"./Exception":305}],314:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10464,7 +10645,7 @@ var PropertyExpressionInvalidException = function (_Exception) {
 
 module.exports = PropertyExpressionInvalidException;
 
-},{"./Exception":304}],314:[function(require,module,exports){
+},{"./Exception":305}],315:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10489,7 +10670,7 @@ var TooManyElementsException = function (_Exception) {
 
 module.exports = TooManyElementsException;
 
-},{"./Exception":304}],315:[function(require,module,exports){
+},{"./Exception":305}],316:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10664,7 +10845,7 @@ var ArrayEnumerable = function (_IterableEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultAction":394,"./../methods/defaultEqualityComparer":397,"./../methods/defaultJoinSelector":399,"./../methods/defaultSelector":405,"./../methods/defaultStrictEqualityComparer":406,"./../methods/methods":413,"./IterableEnumerable":345}],316:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/core":304,"./../methods/defaultAction":409,"./../methods/defaultEqualityComparer":413,"./../methods/defaultJoinSelector":416,"./../methods/defaultSelector":422,"./../methods/defaultStrictEqualityComparer":423,"./../methods/methods":431,"./IterableEnumerable":350}],317:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10724,7 +10905,7 @@ var BetweenEnumerable = function (_IEnumerable) {
 
 module.exports = BetweenEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],317:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],318:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10940,7 +11121,7 @@ var BinaryTree = function (_ITree) {
 
 module.exports = BinaryTree;
 
-},{"./../Enumerable":298,"./../core/core":303,"./GeneratorEnumerable":333,"./ITree":341,"./InOrderEnumerable":342,"./PostOrderEnumerable":358,"./PreOrderEnumerable":360}],318:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/core":304,"./GeneratorEnumerable":337,"./ITree":345,"./InOrderEnumerable":346,"./PostOrderEnumerable":368,"./PreOrderEnumerable":370}],319:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11053,7 +11234,7 @@ var BreadthEnumerable = function (_IEnumerable) {
 
 module.exports = BreadthEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],319:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],320:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11175,7 +11356,7 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/methods":413}],320:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/methods":431}],321:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11204,7 +11385,7 @@ var ChunkEnumerable = function (_IEnumerable) {
 
         offset = offset < 0 ? (offset % chunk + chunk) % chunk : offset;
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function ChunkIterator() {
-            var index, chunks, last, it, hasNext;
+            var index, chunks, last, it, hasNext, ci;
             return regeneratorRuntime.wrap(function ChunkIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -11224,29 +11405,33 @@ var ChunkEnumerable = function (_IEnumerable) {
                                         });
                                         last.chunk = function (last) {
                                             return new IChunk(index, regeneratorRuntime.mark(function _callee() {
+                                                var index;
                                                 return regeneratorRuntime.wrap(function _callee$(_context) {
                                                     while (1) {
                                                         switch (_context.prev = _context.next) {
                                                             case 0:
-                                                                if (!(last.array.length || hasNext() && last.array.length)) {
-                                                                    _context.next = 5;
+                                                                index = 0;
+
+                                                            case 1:
+                                                                if (!(last.array.length > index || hasNext() && last.array.length > index)) {
+                                                                    _context.next = 6;
                                                                     break;
                                                                 }
 
-                                                                _context.next = 3;
-                                                                return last.array.shift();
+                                                                _context.next = 4;
+                                                                return last.array[index++];
 
-                                                            case 3:
-                                                                _context.next = 0;
+                                                            case 4:
+                                                                _context.next = 1;
                                                                 break;
 
-                                                            case 5:
+                                                            case 6:
                                                             case 'end':
                                                                 return _context.stop();
                                                         }
                                                     }
                                                 }, _callee, this);
-                                            })());
+                                            }));
                                         }(last);
                                     }
                                     last.array.push(next.value);
@@ -11255,25 +11440,27 @@ var ChunkEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 4:
-                            if (!(chunks.length || hasNext())) {
-                                _context2.next = 10;
+                            ci = 0;
+
+                        case 5:
+                            if (!(chunks.length > ci || hasNext())) {
+                                _context2.next = 11;
                                 break;
                             }
 
-                            if (!chunks.length) {
-                                _context2.next = 8;
+                            if (!(chunks.length > ci)) {
+                                _context2.next = 9;
                                 break;
                             }
 
-                            _context2.next = 8;
-                            return chunks.shift().chunk;
+                            _context2.next = 9;
+                            return chunks[ci++].chunk;
 
-                        case 8:
-                            _context2.next = 4;
+                        case 9:
+                            _context2.next = 5;
                             break;
 
-                        case 10:
+                        case 11:
                         case 'end':
                             return _context2.stop();
                     }
@@ -11288,7 +11475,228 @@ var ChunkEnumerable = function (_IEnumerable) {
 
 module.exports = ChunkEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./IChunk":336}],321:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./IChunk":340}],322:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var Enumerable = require('./../Enumerable');
+
+var IndicesEnumerable = require('./IndicesEnumerable');
+
+var core = require('./../core/core');
+
+var NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
+var CombinationEnumerable = function (_IEnumerable) {
+    _inherits(CombinationEnumerable, _IEnumerable);
+
+    function CombinationEnumerable(source, count) {
+        _classCallCheck(this, CombinationEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (CombinationEnumerable.__proto__ || Object.getPrototypeOf(CombinationEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function CombinationIterator() {
+            var iterator, indices, array, end, hasNext, nextIndices, lastIndex;
+            return regeneratorRuntime.wrap(function CombinationIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            iterator = source[Symbol.iterator]();
+                            indices = Enumerable.range(0, count).toArray();
+                            array = [];
+                            end = false;
+
+                            hasNext = function hasNext() {
+                                var next = iterator.next();
+                                if (next.done) {
+                                    end = true;
+                                    return false;
+                                } else {
+                                    array.push(next.value);
+                                    return true;
+                                }
+                            };
+
+                            nextIndices = function nextIndices() {
+                                for (var i = count - 1; i >= 0; i--) {
+                                    var needNext = false;
+                                    indices[i]++;
+                                    if (indices[i] + (count - i) - 1 >= array.length) {
+                                        if (end || !hasNext()) {
+                                            needNext = true;
+                                        }
+                                    }
+                                    if (!needNext) {
+                                        for (var j = i + 1, k = 1; j < count; j++, k++) {
+                                            indices[j] = indices[i] + k;
+                                        }
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+
+                            lastIndex = indices[count - 1];
+
+                        case 7:
+                            if (!(array.length <= lastIndex)) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                            if (hasNext()) {
+                                _context.next = 10;
+                                break;
+                            }
+
+                            throw new NoSuchElementsException();
+
+                        case 10:
+                            _context.next = 7;
+                            break;
+
+                        case 12:
+                            _context.next = 14;
+                            return new IndicesEnumerable(array, [].concat(_toConsumableArray(indices)));
+
+                        case 14:
+                            if (nextIndices()) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                        case 15:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, CombinationIterator, this);
+        }));
+        return _this;
+    }
+
+    return CombinationEnumerable;
+}(IEnumerable);
+
+module.exports = CombinationEnumerable;
+
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NoSuchElementsException":309,"./IndicesEnumerable":348}],323:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var Enumerable = require('./../Enumerable');
+
+var IndicesEnumerable = require('./IndicesEnumerable');
+
+var core = require('./../core/core');
+
+var NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
+var CombinationEnumerable = function (_IEnumerable) {
+    _inherits(CombinationEnumerable, _IEnumerable);
+
+    function CombinationEnumerable(source, count) {
+        _classCallCheck(this, CombinationEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (CombinationEnumerable.__proto__ || Object.getPrototypeOf(CombinationEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function CombinationIterator() {
+            var iterator, indices, array, end, hasNext, nextIndices;
+            return regeneratorRuntime.wrap(function CombinationIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            iterator = source[Symbol.iterator]();
+                            indices = Enumerable.repeat(0, count).toArray();
+                            array = [];
+                            end = false;
+
+                            hasNext = function hasNext() {
+                                var next = iterator.next();
+                                if (next.done) {
+                                    end = true;
+                                    return false;
+                                } else {
+                                    array.push(next.value);
+                                    return true;
+                                }
+                            };
+
+                            nextIndices = function nextIndices() {
+                                for (var i = count - 1; i >= 0; i--) {
+                                    var needNext = false;
+                                    indices[i]++;
+                                    if (indices[i] >= array.length) {
+                                        if (end || !hasNext()) {
+                                            needNext = true;
+                                        }
+                                    }
+                                    if (!needNext) {
+                                        for (var j = i + 1; j < count; j++) {
+                                            indices[j] = indices[i];
+                                        }
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+
+                            if (!hasNext()) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                        case 7:
+                            _context.next = 9;
+                            return new IndicesEnumerable(array, [].concat(_toConsumableArray(indices)));
+
+                        case 9:
+                            if (nextIndices()) {
+                                _context.next = 7;
+                                break;
+                            }
+
+                        case 10:
+                            _context.next = 13;
+                            break;
+
+                        case 12:
+                            throw new NoSuchElementsException();
+
+                        case 13:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, CombinationIterator, this);
+        }));
+        return _this;
+    }
+
+    return CombinationEnumerable;
+}(IEnumerable);
+
+module.exports = CombinationEnumerable;
+
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NoSuchElementsException":309,"./IndicesEnumerable":348}],324:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11327,6 +11735,7 @@ var CombineEnumerable = function (_IEnumerable) {
 
         parentSelector = methods.asSelector(parentSelector);
         keySelector = methods.asSelector(keySelector);
+        valueSelector = methods.asSelector(valueSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function CombineIterator() {
             var temp, result, length, i, value, hasParent, j, parent, combine, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _value;
@@ -11532,7 +11941,7 @@ var CombineEnumerable = function (_IEnumerable) {
 
 module.exports = CombineEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultKeySelector":400,"./../methods/defaultParentSelector":401,"./../methods/defaultSelector":405,"./../methods/methods":413,"./ICombine":337}],322:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultKeySelector":417,"./../methods/defaultParentSelector":418,"./../methods/defaultSelector":422,"./../methods/methods":431,"./ICombine":341}],325:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11676,7 +12085,7 @@ var ConcatEnumerable = function (_IEnumerable) {
 
 module.exports = ConcatEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],323:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],326:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11964,7 +12373,7 @@ module.exports = CopyWithinEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],324:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304}],327:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12039,7 +12448,7 @@ var DepthEnumerable = function (_IEnumerable) {
 
 module.exports = DepthEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],325:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],328:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12117,7 +12526,7 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/methods":413}],326:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/methods":431}],329:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12177,7 +12586,7 @@ var Dictionary = function (_MapEnumerable) {
 
 module.exports = Dictionary;
 
-},{"./MapEnumerable":351}],327:[function(require,module,exports){
+},{"./MapEnumerable":356}],330:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12292,7 +12701,112 @@ var DistinctEnumerable = function (_IEnumerable) {
 
 module.exports = DistinctEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/methods":413}],328:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/methods":431}],331:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var defaultAction = require('./../methods/defaultAction');
+
+var EachEnumerable = function (_IEnumerable) {
+    _inherits(EachEnumerable, _IEnumerable);
+
+    function EachEnumerable(source) {
+        var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
+
+        _classCallCheck(this, EachEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (EachEnumerable.__proto__ || Object.getPrototypeOf(EachEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function EachIterator() {
+            var index, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
+
+            return regeneratorRuntime.wrap(function EachIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            index = 0;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 4;
+                            _iterator = source[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 14;
+                                break;
+                            }
+
+                            element = _step.value;
+
+                            action(element, index++);
+                            _context.next = 11;
+                            return element;
+
+                        case 11:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 6;
+                            break;
+
+                        case 14:
+                            _context.next = 20;
+                            break;
+
+                        case 16:
+                            _context.prev = 16;
+                            _context.t0 = _context['catch'](4);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 20:
+                            _context.prev = 20;
+                            _context.prev = 21;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 23:
+                            _context.prev = 23;
+
+                            if (!_didIteratorError) {
+                                _context.next = 26;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 26:
+                            return _context.finish(23);
+
+                        case 27:
+                            return _context.finish(20);
+
+                        case 28:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, EachIterator, this, [[4, 16, 20, 28], [21,, 23, 27]]);
+        }));
+        return _this;
+    }
+
+    return EachEnumerable;
+}(IEnumerable);
+
+module.exports = EachEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultAction":409}],332:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12335,7 +12849,7 @@ var EmptyEnumerable = function (_IEnumerable) {
 
 module.exports = EmptyEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],329:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],333:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12370,7 +12884,7 @@ var Entry = function () {
 
 module.exports = Entry;
 
-},{}],330:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12490,7 +13004,7 @@ var ExceptEnumerable = function (_IEnumerable) {
 
 module.exports = ExceptEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/methods":413}],331:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/methods":431}],335:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -12634,7 +13148,7 @@ module.exports = FillEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],332:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304}],336:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12694,7 +13208,7 @@ var GenerateEnumerable = function (_IEnumerable) {
 
 module.exports = GenerateEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],333:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],337:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12726,7 +13240,7 @@ var GeneratorEnumerable = function (_IEnumerable) {
 
 module.exports = GeneratorEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],334:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],338:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12789,7 +13303,7 @@ var createGrouping = function createGrouping(array, key, comparer, hasNext) {
                 }
             }
         }, _callee, this);
-    })());
+    }));
 };
 
 var GroupJoinEnumerable = function (_IEnumerable) {
@@ -12900,7 +13414,7 @@ var GroupJoinEnumerable = function (_IEnumerable) {
 
 module.exports = GroupJoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultJoinSelector":399,"./../methods/defaultSelector":405,"./../methods/methods":413,"./Entry":329,"./IGrouping":338}],335:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultJoinSelector":416,"./../methods/defaultSelector":422,"./../methods/methods":431,"./Entry":333,"./IGrouping":342}],339:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12942,7 +13456,7 @@ var GroupedEnumerable = function (_IEnumerable) {
         resultSelector = methods.asSelector(resultSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function GroupedIterator() {
-            var groupings, iterators, noneKey, it, hasNext, grouping;
+            var groupings, iterators, noneKey, it, hasNext, gi, grouping;
             return regeneratorRuntime.wrap(function GroupedIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -12960,39 +13474,42 @@ var GroupedEnumerable = function (_IEnumerable) {
                                     var trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
                                     if (trueKey === noneKey) {
                                         iterators.set(key, []);
-                                        groupings.push(new IGrouping(key, regeneratorRuntime.mark(function _callee() {
-                                            var array;
-                                            return regeneratorRuntime.wrap(function _callee$(_context) {
-                                                while (1) {
-                                                    switch (_context.prev = _context.next) {
-                                                        case 0:
-                                                            array = iterators.get(key);
+                                        groupings.push(new IGrouping(key, function (key) {
+                                            return regeneratorRuntime.mark(function _callee() {
+                                                var array, index;
+                                                return regeneratorRuntime.wrap(function _callee$(_context) {
+                                                    while (1) {
+                                                        switch (_context.prev = _context.next) {
+                                                            case 0:
+                                                                array = iterators.get(key);
+                                                                index = 0;
 
-                                                        case 1:
-                                                            if (!(array.length > 0 || hasNext())) {
-                                                                _context.next = 7;
+                                                            case 2:
+                                                                if (!(array.length > index || hasNext())) {
+                                                                    _context.next = 8;
+                                                                    break;
+                                                                }
+
+                                                                if (!(array.length > index)) {
+                                                                    _context.next = 6;
+                                                                    break;
+                                                                }
+
+                                                                _context.next = 6;
+                                                                return array[index++];
+
+                                                            case 6:
+                                                                _context.next = 2;
                                                                 break;
-                                                            }
 
-                                                            if (!(array.length > 0)) {
-                                                                _context.next = 5;
-                                                                break;
-                                                            }
-
-                                                            _context.next = 5;
-                                                            return array.shift();
-
-                                                        case 5:
-                                                            _context.next = 1;
-                                                            break;
-
-                                                        case 7:
-                                                        case 'end':
-                                                            return _context.stop();
+                                                            case 8:
+                                                            case 'end':
+                                                                return _context.stop();
+                                                        }
                                                     }
-                                                }
-                                            }, _callee, this);
-                                        })()));
+                                                }, _callee, this);
+                                            });
+                                        }(key)));
                                     } else {
                                         key = trueKey;
                                     }
@@ -13001,26 +13518,28 @@ var GroupedEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 5:
-                            if (!(groupings.length > 0 || hasNext())) {
-                                _context2.next = 12;
+                            gi = 0;
+
+                        case 6:
+                            if (!(groupings.length > gi || hasNext())) {
+                                _context2.next = 13;
                                 break;
                             }
 
-                            if (!(groupings.length > 0)) {
-                                _context2.next = 10;
+                            if (!(groupings.length > gi)) {
+                                _context2.next = 11;
                                 break;
                             }
 
-                            grouping = groupings.shift();
-                            _context2.next = 10;
+                            grouping = groupings[gi++];
+                            _context2.next = 11;
                             return resultSelector(grouping.key, grouping);
 
-                        case 10:
-                            _context2.next = 5;
+                        case 11:
+                            _context2.next = 6;
                             break;
 
-                        case 12:
+                        case 13:
                         case 'end':
                             return _context2.stop();
                     }
@@ -13035,7 +13554,7 @@ var GroupedEnumerable = function (_IEnumerable) {
 
 module.exports = GroupedEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultResultSelector":403,"./../methods/defaultSelector":405,"./../methods/equalityPredicate":409,"./../methods/methods":413,"./IGrouping":338}],336:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultResultSelector":420,"./../methods/defaultSelector":422,"./../methods/equalityPredicate":427,"./../methods/methods":431,"./IGrouping":342}],340:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13044,22 +13563,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IteratorEnumerable = require('./IteratorEnumerable');
+var GeneratorEnumerable = require('./GeneratorEnumerable');
 
 var core = require('./../core/core');
 
-var IChunk = function (_IteratorEnumerable) {
-    _inherits(IChunk, _IteratorEnumerable);
+var IChunk = function (_GeneratorEnumerable) {
+    _inherits(IChunk, _GeneratorEnumerable);
 
-    function IChunk(index, iterator) {
+    function IChunk(index, generator) {
         _classCallCheck(this, IChunk);
 
-        var _this = _possibleConstructorReturn(this, (IChunk.__proto__ || Object.getPrototypeOf(IChunk)).call(this, iterator));
+        var _this = _possibleConstructorReturn(this, (IChunk.__proto__ || Object.getPrototypeOf(IChunk)).call(this, generator));
 
         core.defineProperty(_this, 'index', function () {
             return index;
         }, true, true);
-        iterator = _this[Symbol.iterator];
+        var iterator = _this[Symbol.iterator];
         core.defineProperty(_this, Symbol.iterator, function IChunkIterator() {
             return iterator();
         });
@@ -13067,12 +13586,16 @@ var IChunk = function (_IteratorEnumerable) {
     }
 
     return IChunk;
-}(IteratorEnumerable);
+}(GeneratorEnumerable);
 
 module.exports = IChunk;
 
-},{"./../core/core":303,"./IteratorEnumerable":346}],337:[function(require,module,exports){
+},{"./../core/core":304,"./GeneratorEnumerable":337}],341:[function(require,module,exports){
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13083,6 +13606,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ITree = require('./ITree');
 
 var core = require('./../core/core');
+
+var defaultValueSetter = require('./../methods/defaultValueSetter');
+var defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
 
 var ICombine = function (_ITree) {
     _inherits(ICombine, _ITree);
@@ -13105,12 +13631,33 @@ var ICombine = function (_ITree) {
         return _this;
     }
 
+    _createClass(ICombine, [{
+        key: 'toObject',
+        value: function toObject() {
+            var obj = _get(ICombine.prototype.__proto__ || Object.getPrototypeOf(ICombine.prototype), 'toObject', this).call(this);
+            if (typeof this.key !== 'undefined' && this.key !== null) obj.key = this.key;
+            if (typeof this.parent !== 'undefined' && this.parent !== null) obj.parent = this.parent;
+            return obj;
+        }
+    }, {
+        key: 'toValue',
+        value: function toValue() {
+            var childrenSetter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultChildrenSetter;
+            var valueSetter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSetter;
+
+            var obj = _get(ICombine.prototype.__proto__ || Object.getPrototypeOf(ICombine.prototype), 'toObject', this).call(this, childrenSetter, valueSetter);
+            if (typeof this.key !== 'undefined' && this.key !== null) obj.key = this.key;
+            if (typeof this.parent !== 'undefined' && this.parent !== null) obj.parent = this.parent;
+            return obj;
+        }
+    }]);
+
     return ICombine;
 }(ITree);
 
 module.exports = ICombine;
 
-},{"./../core/core":303,"./ITree":341}],338:[function(require,module,exports){
+},{"./../core/core":304,"./../methods/defaultChildrenSetter":411,"./../methods/defaultValueSetter":425,"./ITree":345}],342:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13119,22 +13666,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IteratorEnumerable = require('./IteratorEnumerable');
+var GeneratorEnumerable = require('./GeneratorEnumerable');
 
 var core = require('./../core/core');
 
-var IGrouping = function (_IteratorEnumerable) {
-    _inherits(IGrouping, _IteratorEnumerable);
+var IGrouping = function (_GeneratorEnumerable) {
+    _inherits(IGrouping, _GeneratorEnumerable);
 
-    function IGrouping(key, iterator) {
+    function IGrouping(key, generator) {
         _classCallCheck(this, IGrouping);
 
-        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, iterator));
+        var _this = _possibleConstructorReturn(this, (IGrouping.__proto__ || Object.getPrototypeOf(IGrouping)).call(this, generator));
 
         core.defineProperty(_this, 'key', function () {
             return key;
         }, true, true);
-        iterator = _this[Symbol.iterator];
+        var iterator = _this[Symbol.iterator];
         core.defineProperty(_this, Symbol.iterator, function GroupingIterator() {
             return iterator();
         });
@@ -13142,11 +13689,11 @@ var IGrouping = function (_IteratorEnumerable) {
     }
 
     return IGrouping;
-}(IteratorEnumerable);
+}(GeneratorEnumerable);
 
 module.exports = IGrouping;
 
-},{"./../core/core":303,"./IteratorEnumerable":346}],339:[function(require,module,exports){
+},{"./../core/core":304,"./GeneratorEnumerable":337}],343:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13251,7 +13798,7 @@ var IMapEnumerable = function (_IEnumerable) {
 
 module.exports = IMapEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultAction":394,"./../methods/defaultKeySelector":400,"./../methods/defaultSameComparer":404,"./../methods/defaultValueSelector":407,"./../methods/methods":413}],340:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultAction":409,"./../methods/defaultKeySelector":417,"./../methods/defaultSameComparer":421,"./../methods/defaultValueSelector":424,"./../methods/methods":431}],344:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13446,7 +13993,7 @@ IOrderedEnumerable.orderByComparer = Symbol('IOrderedEnumerable.orderByComparer'
 
 module.exports = IOrderedEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultComparer":396,"./../methods/defaultSelector":405,"./../methods/methods":413}],341:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultComparer":412,"./../methods/defaultSelector":422,"./../methods/methods":431}],345:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13459,14 +14006,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var extend = require('extend');
+
 var GeneratorEnumerable = require('./GeneratorEnumerable');
 
 var Enumerable = require('./../Enumerable');
 
 var core = require('./../core/core');
+var NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
 
 var methods = require('./../methods/methods');
 var defaultPredicate = require('./../methods/defaultPredicate');
+var defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+var defaultValueSetter = require('./../methods/defaultValueSetter');
+var defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
 
 var ITree = function (_GeneratorEnumerable) {
     _inherits(ITree, _GeneratorEnumerable);
@@ -13500,10 +14053,29 @@ var ITree = function (_GeneratorEnumerable) {
             return this.getChild(index).value;
         }
     }, {
+        key: 'toValue',
+        value: function toValue() {
+            var childrenSetter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultChildrenSetter;
+            var valueSetter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultValueSetter;
+
+            valueSetter = methods.asSetter(valueSetter);
+            childrenSetter = methods.asSetter(childrenSetter);
+            var obj = {};
+            if (typeof this.value !== 'undefined') {
+                valueSetter(obj, this.value);
+            }
+            var children = Enumerable.select(this, function (sub) {
+                return sub.toValue(childrenSetter, valueSetter);
+            }).toArray();
+            if (children.length) {
+                childrenSetter(obj, children);
+            }
+            return obj;
+        }
+    }, {
         key: 'toObject',
         value: function toObject() {
             var obj = {
-                key: this.key,
                 value: this.value
             };
             var children = Enumerable.select(this, function (sub) {
@@ -13587,43 +14159,108 @@ var ITree = function (_GeneratorEnumerable) {
 
     }, {
         key: 'lowestAncestor',
-        value: function lowestAncestor(tree) {
-            var path = this.pathTo(tree);
-
-            for (var _len = arguments.length, trees = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-                trees[_key - 1] = arguments[_key];
+        value: function lowestAncestor() {
+            for (var _len = arguments.length, nodes = Array(_len), _key = 0; _key < _len; _key++) {
+                nodes[_key] = arguments[_key];
             }
 
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var matchCount = nodes.length;
+            var isMatch = new Array(matchCount).fill(false);
+            var search = function search(current) {
+                var index = 0;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
 
-            try {
-                for (var _iterator = trees[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var t = _step.value;
-
-                    path = Enumerable.zip(path, this.pathTo(t), function (pValue, tValue) {
-                        return pValue === tValue ? pValue : false;
-                    });
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
+                    for (var _iterator = nodes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var node = _step.value;
+
+                        if (!isMatch[index] && ITree.isSameNode(current, node)) {
+                            isMatch[index] = true;
+                            matchCount--;
+                            break;
+                        }
+                        index++;
                     }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
                 } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
                     }
                 }
-            }
 
-            return Enumerable.takeWhile(path, function (value) {
-                return value !== false;
-            }).last();
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = current[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var child = _step2.value;
+
+                        var _result = search(child);
+                        if (_result) {
+                            return _result;
+                        } else if (matchCount === 0) {
+                            return current;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                return false;
+            };
+            var result = search(this);
+            if (result) {
+                return result.value;
+            } else {
+                throw new NotAncestorOfException(this, nodes[isMatch.map(function (match, index) {
+                    return { match: match, index: index };
+                }).find(function (_ref) {
+                    var match = _ref.match;
+                    return !match;
+                }).index]);
+            }
+        }
+        /**
+         * 是否是子节点
+         */
+
+    }, {
+        key: 'isChildOf',
+        value: function isChildOf(root) {
+            return root.isParentOf(this);
+        }
+        /**
+         * 是否是父节点
+         */
+
+    }, {
+        key: 'isParentOf',
+        value: function isParentOf(node) {
+            return Enumerable.any(this, function (current) {
+                return ITree.isSameNode(current, node);
+            });
         }
         /**
          * 是否是后辈节点
@@ -13641,43 +14278,178 @@ var ITree = function (_GeneratorEnumerable) {
     }, {
         key: 'isAncestorOf',
         value: function isAncestorOf(node) {
-            var search = function search(result, current) {
-                result.push(current);
-                if (current === node || current.value === node || node instanceof ITree && current.value === node.value) {
+            var search = function search(current) {
+                if (ITree.isSameNode(current, node)) {
                     return true;
                 } else {
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
+                    var _iteratorNormalCompletion3 = true;
+                    var _didIteratorError3 = false;
+                    var _iteratorError3 = undefined;
 
                     try {
-                        for (var _iterator2 = current[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var child = _step2.value;
+                        for (var _iterator3 = current[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                            var child = _step3.value;
 
-                            if (search(result, child)) {
+                            if (search(child)) {
                                 return true;
                             }
                         }
                     } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
+                        _didIteratorError3 = true;
+                        _iteratorError3 = err;
                     } finally {
                         try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
+                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                _iterator3.return();
                             }
                         } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
+                            if (_didIteratorError3) {
+                                throw _iteratorError3;
                             }
                         }
                     }
 
-                    result.pop();
                     return false;
                 }
             };
-            return search([], this);
+            return search(this);
+        }
+
+        /**
+         * 获取一个节点的父节点
+         */
+
+    }, {
+        key: 'getParent',
+        value: function getParent(node) {
+            return this.getParentNode(node).value;
+        }
+    }, {
+        key: 'getParentNode',
+        value: function getParentNode(node) {
+            var search = function search(current) {
+                if (ITree.isSameNode(current, node)) {
+                    return true;
+                } else {
+                    var _iteratorNormalCompletion4 = true;
+                    var _didIteratorError4 = false;
+                    var _iteratorError4 = undefined;
+
+                    try {
+                        for (var _iterator4 = current[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                            var child = _step4.value;
+
+                            var res = search(child);
+                            if (res === true) {
+                                return current;
+                            } else if (res) {
+                                return res;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError4 = true;
+                        _iteratorError4 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                _iterator4.return();
+                            }
+                        } finally {
+                            if (_didIteratorError4) {
+                                throw _iteratorError4;
+                            }
+                        }
+                    }
+
+                    return false;
+                }
+            };
+            var result = search(this);
+            if (result && result !== true) {
+                return result;
+            } else {
+                throw new NotAncestorOfException(this, node);
+            }
+        }
+
+        /**
+         * 同辈节点的操作
+         */
+
+    }, {
+        key: 'prevAllNodes',
+        value: function prevAllNodes(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new PrevNodesEnumerable(this, node, predicate);
+        }
+    }, {
+        key: 'prevNode',
+        value: function prevNode(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return Enumerable.last(this.prevAllNodes(node, predicate));
+        }
+    }, {
+        key: 'nextAllNodes',
+        value: function nextAllNodes(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new NextNodesEnumerable(this, node, predicate);
+        }
+    }, {
+        key: 'nextNode',
+        value: function nextNode(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return Enumerable.first(this.nextAllNodes(node, predicate));
+        }
+    }, {
+        key: 'siblingNodes',
+        value: function siblingNodes(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new SiblingNodesEnumerable(this, node, predicate);
+        }
+
+        /**
+         * 同辈节点值的操作
+         */
+
+    }, {
+        key: 'prevAll',
+        value: function prevAll(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new PrevEnumerable(this, node, predicate);
+        }
+    }, {
+        key: 'prev',
+        value: function prev(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return Enumerable.last(this.prevAll(node, predicate));
+        }
+    }, {
+        key: 'nextAll',
+        value: function nextAll(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new NextEnumerable(this, node, predicate);
+        }
+    }, {
+        key: 'next',
+        value: function next(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return Enumerable.first(this.nextAll(node, predicate));
+        }
+    }, {
+        key: 'siblings',
+        value: function siblings(node) {
+            var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
+
+            return new SiblingsEnumerable(this, node, predicate);
         }
 
         /**
@@ -13693,6 +14465,16 @@ var ITree = function (_GeneratorEnumerable) {
         key: 'pathTo',
         value: function pathTo(node) {
             return new PathToEnumerable(this, node);
+        }
+    }, {
+        key: 'pathNodes',
+        value: function pathNodes(root) {
+            return root.pathNodesTo(this);
+        }
+    }, {
+        key: 'pathNodesTo',
+        value: function pathNodesTo(node) {
+            return new PathNodesToEnumerable(this, node);
         }
 
         /**
@@ -13827,16 +14609,30 @@ var ITree = function (_GeneratorEnumerable) {
     return ITree;
 }(GeneratorEnumerable);
 
+ITree.isSameNode = function (current, node) {
+    var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
+
+    comparer = methods.asComparer(comparer);
+    return current === node || (node instanceof ITree ? comparer(current.value, node.value) : comparer(current.value, node));
+};
+
 module.exports = ITree;
 
 var BinaryTree = require('./BinaryTree');
 var PathToEnumerable = require('./PathToEnumerable');
+var PathNodesToEnumerable = require('./PathNodesToEnumerable');
 var BreadthEnumerable = require('./BreadthEnumerable');
 var DepthEnumerable = require('./DepthEnumerable');
 var BreadthSubTreeEnumerable = require('./BreadthSubTreeEnumerable');
 var DepthSubTreeEnumerable = require('./DepthSubTreeEnumerable');
+var PrevEnumerable = require('./PrevEnumerable');
+var NextEnumerable = require('./NextEnumerable');
+var SiblingsEnumerable = require('./SiblingsEnumerable');
+var PrevNodesEnumerable = require('./PrevNodesEnumerable');
+var NextNodesEnumerable = require('./NextNodesEnumerable');
+var SiblingNodesEnumerable = require('./SiblingNodesEnumerable');
 
-},{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultPredicate":402,"./../methods/methods":413,"./BinaryTree":317,"./BreadthEnumerable":318,"./BreadthSubTreeEnumerable":319,"./DepthEnumerable":324,"./DepthSubTreeEnumerable":325,"./GeneratorEnumerable":333,"./PathToEnumerable":357}],342:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/core":304,"./../core/exceptions/NotAncestorOfException":310,"./../methods/defaultChildrenSetter":411,"./../methods/defaultEqualityComparer":413,"./../methods/defaultPredicate":419,"./../methods/defaultValueSetter":425,"./../methods/methods":431,"./BinaryTree":318,"./BreadthEnumerable":319,"./BreadthSubTreeEnumerable":320,"./DepthEnumerable":327,"./DepthSubTreeEnumerable":328,"./GeneratorEnumerable":337,"./NextEnumerable":358,"./NextNodesEnumerable":359,"./PathNodesToEnumerable":364,"./PathToEnumerable":365,"./PrevEnumerable":372,"./PrevNodesEnumerable":373,"./SiblingNodesEnumerable":383,"./SiblingsEnumerable":384,"extend":296}],346:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13896,7 +14692,7 @@ var InOrderEnumerable = function (_IEnumerable) {
 
 module.exports = InOrderEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],343:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],347:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13956,7 +14752,147 @@ var InOrderTree = function (_BinaryTree) {
 
 module.exports = InOrderTree;
 
-},{"./../Enumerable":298,"./../core/exceptions/NoSuchElementsException":308,"./BinaryTree":317}],344:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/exceptions/NoSuchElementsException":309,"./BinaryTree":318}],348:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var IndicesEnumerable = function (_IEnumerable) {
+    _inherits(IndicesEnumerable, _IEnumerable);
+
+    function IndicesEnumerable(source, indices) {
+        _classCallCheck(this, IndicesEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (IndicesEnumerable.__proto__ || Object.getPrototypeOf(IndicesEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function IndicesIterator() {
+            var iterator, next, index, array, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
+
+            return regeneratorRuntime.wrap(function IndicesIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            iterator = indices[Symbol.iterator]();
+                            next = iterator.next();
+
+                            if (next.done) {
+                                _context.next = 41;
+                                break;
+                            }
+
+                            index = 0;
+                            array = [];
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 8;
+                            _iterator = source[Symbol.iterator]();
+
+                        case 10:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 27;
+                                break;
+                            }
+
+                            element = _step.value;
+
+                            array.push(element);
+
+                            if (!(index === next.value)) {
+                                _context.next = 23;
+                                break;
+                            }
+
+                            _context.next = 16;
+                            return element;
+
+                        case 16:
+                            if (!(!(next = iterator.next()).done && next.value <= index)) {
+                                _context.next = 21;
+                                break;
+                            }
+
+                            _context.next = 19;
+                            return array[next.value];
+
+                        case 19:
+                            _context.next = 16;
+                            break;
+
+                        case 21:
+                            if (!next.done) {
+                                _context.next = 23;
+                                break;
+                            }
+
+                            return _context.abrupt('break', 27);
+
+                        case 23:
+                            index++;
+
+                        case 24:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 10;
+                            break;
+
+                        case 27:
+                            _context.next = 33;
+                            break;
+
+                        case 29:
+                            _context.prev = 29;
+                            _context.t0 = _context['catch'](8);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 33:
+                            _context.prev = 33;
+                            _context.prev = 34;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 36:
+                            _context.prev = 36;
+
+                            if (!_didIteratorError) {
+                                _context.next = 39;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 39:
+                            return _context.finish(36);
+
+                        case 40:
+                            return _context.finish(33);
+
+                        case 41:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, IndicesIterator, this, [[8, 29, 33, 41], [34,, 36, 40]]);
+        }));
+        return _this;
+    }
+
+    return IndicesEnumerable;
+}(IEnumerable);
+
+module.exports = IndicesEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304}],349:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14076,7 +15012,7 @@ var IntersectEnumerable = function (_IEnumerable) {
 
 module.exports = IntersectEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/methods":413}],345:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/methods":431}],350:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14119,7 +15055,7 @@ var IterableEnumerable = function (_IEnumerable) {
 
 module.exports = IterableEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],346:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],351:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14192,7 +15128,7 @@ var IteratorEnumerable = function (_IterableEnumerable) {
 
 module.exports = IteratorEnumerable;
 
-},{"./../core/core":303,"./IterableEnumerable":345}],347:[function(require,module,exports){
+},{"./../core/core":304,"./IterableEnumerable":350}],352:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14443,7 +15379,7 @@ var JoinEnumerable = function (_IEnumerable) {
 
 module.exports = JoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultJoinSelector":399,"./../methods/defaultSelector":405,"./../methods/methods":413}],348:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultJoinSelector":416,"./../methods/defaultSelector":422,"./../methods/methods":431}],353:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14716,7 +15652,7 @@ var LeftJoinEnumerable = function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultJoinSelector":399,"./../methods/defaultSelector":405,"./../methods/methods":413}],349:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultJoinSelector":416,"./../methods/defaultSelector":422,"./../methods/methods":431}],354:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14780,7 +15716,7 @@ var LeftPadEnumerable = function (_IEnumerable) {
 
 module.exports = LeftPadEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],350:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304}],355:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14805,7 +15741,7 @@ var Lookup = function (_Dictionary) {
 
 module.exports = Lookup;
 
-},{"./Dictionary":326}],351:[function(require,module,exports){
+},{"./Dictionary":329}],356:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14962,7 +15898,7 @@ var MapEnumerable = function (_IMapEnumerable) {
 
 module.exports = MapEnumerable;
 
-},{"./../core/core":303,"./../methods/defaultSameComparer":404,"./../methods/equalityPredicate":409,"./../methods/methods":413,"./Entry":329,"./IMapEnumerable":339}],352:[function(require,module,exports){
+},{"./../core/core":304,"./../methods/defaultSameComparer":421,"./../methods/equalityPredicate":427,"./../methods/methods":431,"./Entry":333,"./IMapEnumerable":343}],357:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15004,7 +15940,7 @@ var NearGroupedEnumerable = function (_IEnumerable) {
         resultSelector = methods.asSelector(resultSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function NearGroupedIterator() {
-            var groupings, array, noneKey, prevKey, it, hasNext;
+            var groupings, array, noneKey, prevKey, it, hasNext, gi, grouping;
             return regeneratorRuntime.wrap(function NearGroupedIterator$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -15025,34 +15961,38 @@ var NearGroupedEnumerable = function (_IEnumerable) {
                                         prevKey = key;
                                         groupings.push(new IGrouping(key, function (array) {
                                             return regeneratorRuntime.mark(function _callee() {
+                                                var index;
                                                 return regeneratorRuntime.wrap(function _callee$(_context) {
                                                     while (1) {
                                                         switch (_context.prev = _context.next) {
                                                             case 0:
-                                                                if (!(array.length > 0 || hasNext())) {
-                                                                    _context.next = 6;
+                                                                index = 0;
+
+                                                            case 1:
+                                                                if (!(array.length > index || hasNext())) {
+                                                                    _context.next = 7;
                                                                     break;
                                                                 }
 
-                                                                if (!(array.length > 0)) {
-                                                                    _context.next = 4;
+                                                                if (!(array.length > index)) {
+                                                                    _context.next = 5;
                                                                     break;
                                                                 }
 
-                                                                _context.next = 4;
-                                                                return array.shift();
+                                                                _context.next = 5;
+                                                                return array[index++];
 
-                                                            case 4:
-                                                                _context.next = 0;
+                                                            case 5:
+                                                                _context.next = 1;
                                                                 break;
 
-                                                            case 6:
+                                                            case 7:
                                                             case 'end':
                                                                 return _context.stop();
                                                         }
                                                     }
                                                 }, _callee, this);
-                                            })();
+                                            });
                                         }(array)));
                                     }
                                     array.push(element);
@@ -15060,25 +16000,28 @@ var NearGroupedEnumerable = function (_IEnumerable) {
                                 return !next.done;
                             };
 
-                        case 6:
-                            if (!(groupings.length > 0 || hasNext())) {
+                            gi = 0;
+
+                        case 7:
+                            if (!(groupings.length > gi || hasNext())) {
+                                _context2.next = 14;
+                                break;
+                            }
+
+                            if (!(groupings.length > gi)) {
                                 _context2.next = 12;
                                 break;
                             }
 
-                            if (!(groupings.length > 0)) {
-                                _context2.next = 10;
-                                break;
-                            }
-
-                            _context2.next = 10;
-                            return resultSelector(Enumerable.first(groupings).key, groupings.shift());
-
-                        case 10:
-                            _context2.next = 6;
-                            break;
+                            grouping = groupings[gi++];
+                            _context2.next = 12;
+                            return resultSelector(grouping.key, grouping);
 
                         case 12:
+                            _context2.next = 7;
+                            break;
+
+                        case 14:
                         case 'end':
                             return _context2.stop();
                     }
@@ -15093,7 +16036,245 @@ var NearGroupedEnumerable = function (_IEnumerable) {
 
 module.exports = NearGroupedEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultResultSelector":403,"./../methods/defaultSelector":405,"./../methods/equalityPredicate":409,"./../methods/methods":413,"./IGrouping":338}],353:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultResultSelector":420,"./../methods/defaultSelector":422,"./../methods/equalityPredicate":427,"./../methods/methods":431,"./IGrouping":342}],358:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var NextEnumerable = function (_IEnumerable) {
+    _inherits(NextEnumerable, _IEnumerable);
+
+    function NextEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, NextEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (NextEnumerable.__proto__ || Object.getPrototypeOf(NextEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function NextIterator() {
+            var parent, next, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function NextIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            next = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 5;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 7:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!(next && predicate(child.value))) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                            _context.next = 12;
+                            return child.value;
+
+                        case 12:
+                            if (!next && ITree.isSameNode(child, node)) {
+                                next = true;
+                            }
+
+                        case 13:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 7;
+                            break;
+
+                        case 16:
+                            _context.next = 22;
+                            break;
+
+                        case 18:
+                            _context.prev = 18;
+                            _context.t0 = _context['catch'](5);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 22:
+                            _context.prev = 22;
+                            _context.prev = 23;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 25:
+                            _context.prev = 25;
+
+                            if (!_didIteratorError) {
+                                _context.next = 28;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 28:
+                            return _context.finish(25);
+
+                        case 29:
+                            return _context.finish(22);
+
+                        case 30:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, NextIterator, this, [[5, 18, 22, 30], [23,, 25, 29]]);
+        }));
+        return _this;
+    }
+
+    return NextEnumerable;
+}(IEnumerable);
+
+module.exports = NextEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],359:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var NextEnumerable = function (_IEnumerable) {
+    _inherits(NextEnumerable, _IEnumerable);
+
+    function NextEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, NextEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (NextEnumerable.__proto__ || Object.getPrototypeOf(NextEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function NextNodesIterator() {
+            var parent, next, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function NextNodesIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            next = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 5;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 7:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!(next && predicate(child.value))) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                            _context.next = 12;
+                            return child;
+
+                        case 12:
+                            if (!next && ITree.isSameNode(child, node)) {
+                                next = true;
+                            }
+
+                        case 13:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 7;
+                            break;
+
+                        case 16:
+                            _context.next = 22;
+                            break;
+
+                        case 18:
+                            _context.prev = 18;
+                            _context.t0 = _context['catch'](5);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 22:
+                            _context.prev = 22;
+                            _context.prev = 23;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 25:
+                            _context.prev = 25;
+
+                            if (!_didIteratorError) {
+                                _context.next = 28;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 28:
+                            return _context.finish(25);
+
+                        case 29:
+                            return _context.finish(22);
+
+                        case 30:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, NextNodesIterator, this, [[5, 18, 22, 30], [23,, 25, 29]]);
+        }));
+        return _this;
+    }
+
+    return NextEnumerable;
+}(IEnumerable);
+
+module.exports = NextEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],360:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15193,7 +16374,7 @@ var ObjectEnumerable = function (_IMapEnumerable) {
 
 module.exports = ObjectEnumerable;
 
-},{"./../core/core":303,"./Entry":329,"./IMapEnumerable":339}],354:[function(require,module,exports){
+},{"./../core/core":304,"./Entry":333,"./IMapEnumerable":343}],361:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15327,7 +16508,7 @@ var OfTypeEnumerable = function (_IEnumerable) {
 
 module.exports = OfTypeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],355:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],362:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15364,7 +16545,7 @@ var OrderByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":396,"./../methods/defaultSelector":405,"./../methods/descendingComparer":408,"./../methods/methods":413,"./../methods/selectorComparer":419,"./IOrderedEnumerable":340}],356:[function(require,module,exports){
+},{"./../methods/defaultComparer":412,"./../methods/defaultSelector":422,"./../methods/descendingComparer":426,"./../methods/methods":431,"./../methods/selectorComparer":438,"./IOrderedEnumerable":344}],363:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15400,7 +16581,160 @@ var OrderByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByEnumerable;
 
-},{"./../methods/defaultComparer":396,"./../methods/defaultSelector":405,"./../methods/methods":413,"./../methods/selectorComparer":419,"./IOrderedEnumerable":340}],357:[function(require,module,exports){
+},{"./../methods/defaultComparer":412,"./../methods/defaultSelector":422,"./../methods/methods":431,"./../methods/selectorComparer":438,"./IOrderedEnumerable":344}],364:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var ITree = require('./ITree');
+
+var core = require('./../core/core');
+
+var NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
+
+var PathNodesToEnumerable = function (_IEnumerable) {
+    _inherits(PathNodesToEnumerable, _IEnumerable);
+
+    function PathNodesToEnumerable(root, node) {
+        _classCallCheck(this, PathNodesToEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (PathNodesToEnumerable.__proto__ || Object.getPrototypeOf(PathNodesToEnumerable)).call(this, []));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function PathNodesToIterator() {
+            var search, result, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, n;
+
+            return regeneratorRuntime.wrap(function PathNodesToIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            search = function search(result, current) {
+                                result.push(current);
+                                if (ITree.isSameNode(current, node)) {
+                                    return result;
+                                } else {
+                                    var _iteratorNormalCompletion = true;
+                                    var _didIteratorError = false;
+                                    var _iteratorError = undefined;
+
+                                    try {
+                                        for (var _iterator = current[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                            var child = _step.value;
+
+                                            if (search(result, child)) {
+                                                return result;
+                                            }
+                                        }
+                                    } catch (err) {
+                                        _didIteratorError = true;
+                                        _iteratorError = err;
+                                    } finally {
+                                        try {
+                                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                                _iterator.return();
+                                            }
+                                        } finally {
+                                            if (_didIteratorError) {
+                                                throw _iteratorError;
+                                            }
+                                        }
+                                    }
+
+                                    result.pop();
+                                    return false;
+                                }
+                            };
+
+                            result = search([], root);
+
+                            if (!result) {
+                                _context.next = 31;
+                                break;
+                            }
+
+                            _iteratorNormalCompletion2 = true;
+                            _didIteratorError2 = false;
+                            _iteratorError2 = undefined;
+                            _context.prev = 6;
+                            _iterator2 = result[Symbol.iterator]();
+
+                        case 8:
+                            if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                                _context.next = 15;
+                                break;
+                            }
+
+                            n = _step2.value;
+                            _context.next = 12;
+                            return n;
+
+                        case 12:
+                            _iteratorNormalCompletion2 = true;
+                            _context.next = 8;
+                            break;
+
+                        case 15:
+                            _context.next = 21;
+                            break;
+
+                        case 17:
+                            _context.prev = 17;
+                            _context.t0 = _context['catch'](6);
+                            _didIteratorError2 = true;
+                            _iteratorError2 = _context.t0;
+
+                        case 21:
+                            _context.prev = 21;
+                            _context.prev = 22;
+
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+
+                        case 24:
+                            _context.prev = 24;
+
+                            if (!_didIteratorError2) {
+                                _context.next = 27;
+                                break;
+                            }
+
+                            throw _iteratorError2;
+
+                        case 27:
+                            return _context.finish(24);
+
+                        case 28:
+                            return _context.finish(21);
+
+                        case 29:
+                            _context.next = 32;
+                            break;
+
+                        case 31:
+                            throw new NotAncestorOfException(root, node);
+
+                        case 32:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, PathNodesToIterator, this, [[6, 17, 21, 29], [22,, 24, 28]]);
+        }));
+        return _this;
+    }
+
+    return PathNodesToEnumerable;
+}(IEnumerable);
+
+module.exports = PathNodesToEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NotAncestorOfException":310,"./ITree":345}],365:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15434,7 +16768,7 @@ var PathToEnumerable = function (_IEnumerable) {
                         case 0:
                             search = function search(result, current) {
                                 result.push(current);
-                                if (current === node || current.value === node || node instanceof ITree && current.value === node.value) {
+                                if (ITree.isSameNode(current, node)) {
                                     return result;
                                 } else {
                                     var _iteratorNormalCompletion = true;
@@ -15553,7 +16887,240 @@ var PathToEnumerable = function (_IEnumerable) {
 
 module.exports = PathToEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../core/exceptions/NotAncestorOfException":309,"./ITree":341}],358:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NotAncestorOfException":310,"./ITree":345}],366:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var Enumerable = require('./../Enumerable');
+
+var IndicesEnumerable = require('./IndicesEnumerable');
+
+var core = require('./../core/core');
+
+var NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
+var PermutationEnumerable = function (_IEnumerable) {
+    _inherits(PermutationEnumerable, _IEnumerable);
+
+    function PermutationEnumerable(source, count) {
+        _classCallCheck(this, PermutationEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (PermutationEnumerable.__proto__ || Object.getPrototypeOf(PermutationEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function PermutationIterator() {
+            var iterator, indices, used, array, end, hasNext, nextIndices, lastIndex;
+            return regeneratorRuntime.wrap(function PermutationIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            iterator = source[Symbol.iterator]();
+                            indices = Enumerable.range(0, count).toArray();
+                            used = Enumerable.repeat(true, count).toArray();
+                            array = [];
+                            end = false;
+
+                            hasNext = function hasNext() {
+                                var next = iterator.next();
+                                if (next.done) {
+                                    end = true;
+                                    return false;
+                                } else {
+                                    array.push(next.value);
+                                    while (used.length < array.length) {
+                                        used.push(false);
+                                    }return true;
+                                }
+                            };
+
+                            nextIndices = function nextIndices() {
+                                for (var i = count - 1; i >= 0; i--) {
+                                    used[indices[i]] = false;
+                                    var needNext = false;
+                                    do {
+                                        indices[i]++;
+                                        if (array.length <= indices[i]) {
+                                            if (end || !hasNext()) {
+                                                needNext = true;
+                                            }
+                                            if (end) break;
+                                        }
+                                    } while (used[indices[i]]);
+                                    if (!needNext) {
+                                        used[indices[i]] = true;
+                                        for (var j = i + 1; j < count; j++) {
+                                            for (var k = 0; k < used.length; k++) {
+                                                if (!used[k]) {
+                                                    indices[j] = k;
+                                                    used[k] = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+
+                            lastIndex = indices[count - 1];
+
+                        case 8:
+                            if (!(array.length <= lastIndex)) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            if (hasNext()) {
+                                _context.next = 11;
+                                break;
+                            }
+
+                            throw new NoSuchElementsException();
+
+                        case 11:
+                            _context.next = 8;
+                            break;
+
+                        case 13:
+                            _context.next = 15;
+                            return new IndicesEnumerable(array, [].concat(_toConsumableArray(indices)));
+
+                        case 15:
+                            if (nextIndices()) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                        case 16:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, PermutationIterator, this);
+        }));
+        return _this;
+    }
+
+    return PermutationEnumerable;
+}(IEnumerable);
+
+module.exports = PermutationEnumerable;
+
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NoSuchElementsException":309,"./IndicesEnumerable":348}],367:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var Enumerable = require('./../Enumerable');
+
+var IndicesEnumerable = require('./IndicesEnumerable');
+
+var core = require('./../core/core');
+
+var NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+
+var PermutationRepeatableEnumerable = function (_IEnumerable) {
+    _inherits(PermutationRepeatableEnumerable, _IEnumerable);
+
+    function PermutationRepeatableEnumerable(source, count) {
+        _classCallCheck(this, PermutationRepeatableEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (PermutationRepeatableEnumerable.__proto__ || Object.getPrototypeOf(PermutationRepeatableEnumerable)).call(this, source));
+
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function PermutationRepeatableIterator() {
+            var iterator, indices, array, end, hasNext, nextIndices;
+            return regeneratorRuntime.wrap(function PermutationRepeatableIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            iterator = source[Symbol.iterator]();
+                            indices = Enumerable.repeat(0, count).toArray();
+                            array = [];
+                            end = false;
+
+                            hasNext = function hasNext() {
+                                var next = iterator.next();
+                                if (next.done) {
+                                    end = true;
+                                    return false;
+                                } else {
+                                    array.push(next.value);
+                                    return true;
+                                }
+                            };
+
+                            nextIndices = function nextIndices() {
+                                for (var i = count - 1; i >= 0; i--) {
+                                    indices[i]++;
+                                    var needNext = false;
+                                    if (array.length <= indices[i]) {
+                                        if (end || !hasNext()) {
+                                            indices[i] = 0;
+                                            needNext = true;
+                                        }
+                                    }
+                                    if (!needNext) {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+
+                            if (!hasNext()) {
+                                _context.next = 12;
+                                break;
+                            }
+
+                        case 7:
+                            _context.next = 9;
+                            return new IndicesEnumerable(array, [].concat(_toConsumableArray(indices)));
+
+                        case 9:
+                            if (nextIndices()) {
+                                _context.next = 7;
+                                break;
+                            }
+
+                        case 10:
+                            _context.next = 13;
+                            break;
+
+                        case 12:
+                            throw new NoSuchElementsException();
+
+                        case 13:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, PermutationRepeatableIterator, this);
+        }));
+        return _this;
+    }
+
+    return PermutationRepeatableEnumerable;
+}(IEnumerable);
+
+module.exports = PermutationRepeatableEnumerable;
+
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../core/exceptions/NoSuchElementsException":309,"./IndicesEnumerable":348}],368:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15613,7 +17180,7 @@ var PostOrderEnumerable = function (_IEnumerable) {
 
 module.exports = PostOrderEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],359:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],369:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15673,7 +17240,7 @@ var PostOrderTree = function (_BinaryTree) {
 
 module.exports = PostOrderTree;
 
-},{"./../Enumerable":298,"./../core/exceptions/NoSuchElementsException":308,"./BinaryTree":317}],360:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/exceptions/NoSuchElementsException":309,"./BinaryTree":318}],370:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15733,7 +17300,7 @@ var PreOrderEnumerable = function (_IEnumerable) {
 
 module.exports = PreOrderEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],361:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],371:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15793,7 +17360,249 @@ var PreOrderTree = function (_BinaryTree) {
 
 module.exports = PreOrderTree;
 
-},{"./../Enumerable":298,"./../core/exceptions/NoSuchElementsException":308,"./BinaryTree":317}],362:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/exceptions/NoSuchElementsException":309,"./BinaryTree":318}],372:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var PrevEnumerable = function (_IEnumerable) {
+    _inherits(PrevEnumerable, _IEnumerable);
+
+    function PrevEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, PrevEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (PrevEnumerable.__proto__ || Object.getPrototypeOf(PrevEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function PrevIterator() {
+            var parent, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function PrevIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 4;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!ITree.isSameNode(child, node)) {
+                                _context.next = 10;
+                                break;
+                            }
+
+                            return _context.abrupt('break', 16);
+
+                        case 10:
+                            if (!predicate(child.value)) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            _context.next = 13;
+                            return child.value;
+
+                        case 13:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 6;
+                            break;
+
+                        case 16:
+                            _context.next = 22;
+                            break;
+
+                        case 18:
+                            _context.prev = 18;
+                            _context.t0 = _context['catch'](4);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 22:
+                            _context.prev = 22;
+                            _context.prev = 23;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 25:
+                            _context.prev = 25;
+
+                            if (!_didIteratorError) {
+                                _context.next = 28;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 28:
+                            return _context.finish(25);
+
+                        case 29:
+                            return _context.finish(22);
+
+                        case 30:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, PrevIterator, this, [[4, 18, 22, 30], [23,, 25, 29]]);
+        }));
+        return _this;
+    }
+
+    return PrevEnumerable;
+}(IEnumerable);
+
+module.exports = PrevEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],373:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var PrevEnumerable = function (_IEnumerable) {
+    _inherits(PrevEnumerable, _IEnumerable);
+
+    function PrevEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, PrevEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (PrevEnumerable.__proto__ || Object.getPrototypeOf(PrevEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function PrevNodesIterator() {
+            var parent, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function PrevNodesIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 4;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!ITree.isSameNode(child, node)) {
+                                _context.next = 10;
+                                break;
+                            }
+
+                            return _context.abrupt('break', 16);
+
+                        case 10:
+                            if (!predicate(child.value)) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            _context.next = 13;
+                            return child;
+
+                        case 13:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 6;
+                            break;
+
+                        case 16:
+                            _context.next = 22;
+                            break;
+
+                        case 18:
+                            _context.prev = 18;
+                            _context.t0 = _context['catch'](4);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 22:
+                            _context.prev = 22;
+                            _context.prev = 23;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 25:
+                            _context.prev = 25;
+
+                            if (!_didIteratorError) {
+                                _context.next = 28;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 28:
+                            return _context.finish(25);
+
+                        case 29:
+                            return _context.finish(22);
+
+                        case 30:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, PrevNodesIterator, this, [[4, 18, 22, 30], [23,, 25, 29]]);
+        }));
+        return _this;
+    }
+
+    return PrevEnumerable;
+}(IEnumerable);
+
+module.exports = PrevEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],374:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15855,7 +17664,7 @@ var RandEnumerable = function (_IEnumerable) {
 
 module.exports = RandEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],363:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304}],375:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15915,7 +17724,7 @@ var RangeEnumerable = function (_IEnumerable) {
 
 module.exports = RangeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],364:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],376:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15975,7 +17784,7 @@ var RepeatEnumerable = function (_IEnumerable) {
 
 module.exports = RepeatEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],365:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],377:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16036,7 +17845,7 @@ var ReverseEnumerable = function (_IEnumerable) {
 
 module.exports = ReverseEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303}],366:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304}],378:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16309,7 +18118,7 @@ var LeftJoinEnumerable = function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/defaultJoinSelector":399,"./../methods/defaultSelector":405,"./../methods/methods":413}],367:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/defaultJoinSelector":416,"./../methods/defaultSelector":422,"./../methods/methods":431}],379:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16426,7 +18235,7 @@ var RightPadEnumerable = function (_IEnumerable) {
 
 module.exports = RightPadEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],368:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],380:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16532,7 +18341,7 @@ var SelectEnumerable = function (_IEnumerable) {
 
 module.exports = SelectEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultSelector":405,"./../methods/methods":413}],369:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultSelector":422,"./../methods/methods":431}],381:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16695,7 +18504,7 @@ module.exports = SelectManyEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultResultSelector":403,"./../methods/defaultSelector":405,"./../methods/methods":413}],370:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultResultSelector":420,"./../methods/defaultSelector":422,"./../methods/methods":431}],382:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16842,7 +18651,255 @@ var SeparateEnumerable = function (_IEnumerable) {
 
 module.exports = SeparateEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultChildrenSelector":395,"./../methods/defaultValueSelector":407,"./../methods/methods":413}],371:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultChildrenSelector":410,"./../methods/defaultValueSelector":424,"./../methods/methods":431}],383:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var SiblingsEnumerable = function (_IEnumerable) {
+    _inherits(SiblingsEnumerable, _IEnumerable);
+
+    function SiblingsEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, SiblingsEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (SiblingsEnumerable.__proto__ || Object.getPrototypeOf(SiblingsEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function SiblingsIterator() {
+            var parent, skip, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function SiblingsIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            skip = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 5;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 7:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 19;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!(!skip && ITree.isSameNode(child, node))) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            skip = true;
+                            _context.next = 16;
+                            break;
+
+                        case 13:
+                            if (!predicate(child.value)) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            _context.next = 16;
+                            return child;
+
+                        case 16:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 7;
+                            break;
+
+                        case 19:
+                            _context.next = 25;
+                            break;
+
+                        case 21:
+                            _context.prev = 21;
+                            _context.t0 = _context['catch'](5);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 25:
+                            _context.prev = 25;
+                            _context.prev = 26;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 28:
+                            _context.prev = 28;
+
+                            if (!_didIteratorError) {
+                                _context.next = 31;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 31:
+                            return _context.finish(28);
+
+                        case 32:
+                            return _context.finish(25);
+
+                        case 33:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, SiblingsIterator, this, [[5, 21, 25, 33], [26,, 28, 32]]);
+        }));
+        return _this;
+    }
+
+    return SiblingsEnumerable;
+}(IEnumerable);
+
+module.exports = SiblingsEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],384:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ITree = require('./ITree');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultPredicate = require('./../methods/defaultPredicate');
+
+var SiblingsEnumerable = function (_IEnumerable) {
+    _inherits(SiblingsEnumerable, _IEnumerable);
+
+    function SiblingsEnumerable(tree, node) {
+        var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
+
+        _classCallCheck(this, SiblingsEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (SiblingsEnumerable.__proto__ || Object.getPrototypeOf(SiblingsEnumerable)).call(this, []));
+
+        predicate = methods.asPredicate(predicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function SiblingNodesIterator() {
+            var parent, skip, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, child;
+
+            return regeneratorRuntime.wrap(function SiblingNodesIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            parent = tree.getParentNode(node);
+                            skip = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 5;
+                            _iterator = parent.children[Symbol.iterator]();
+
+                        case 7:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 19;
+                                break;
+                            }
+
+                            child = _step.value;
+
+                            if (!(!skip && ITree.isSameNode(child, node))) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            skip = true;
+                            _context.next = 16;
+                            break;
+
+                        case 13:
+                            if (!predicate(child.value)) {
+                                _context.next = 16;
+                                break;
+                            }
+
+                            _context.next = 16;
+                            return child.value;
+
+                        case 16:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 7;
+                            break;
+
+                        case 19:
+                            _context.next = 25;
+                            break;
+
+                        case 21:
+                            _context.prev = 21;
+                            _context.t0 = _context['catch'](5);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 25:
+                            _context.prev = 25;
+                            _context.prev = 26;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 28:
+                            _context.prev = 28;
+
+                            if (!_didIteratorError) {
+                                _context.next = 31;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 31:
+                            return _context.finish(28);
+
+                        case 32:
+                            return _context.finish(25);
+
+                        case 33:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, SiblingNodesIterator, this, [[5, 21, 25, 33], [26,, 28, 32]]);
+        }));
+        return _this;
+    }
+
+    return SiblingsEnumerable;
+}(IEnumerable);
+
+module.exports = SiblingsEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431,"./ITree":345}],385:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16886,7 +18943,7 @@ var SingleEnumerable = function (_IEnumerable) {
 
 module.exports = SingleEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],372:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],386:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16994,7 +19051,7 @@ var SkipEnumerable = function (_IEnumerable) {
 
 module.exports = SkipEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],373:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],387:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17108,7 +19165,7 @@ var SkipWhileEnumerable = function (_IEnumerable) {
 
 module.exports = SkipWhileEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":402,"./../methods/methods":413}],374:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431}],388:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -17242,7 +19299,7 @@ var SliceEnumerable = function (_IEnumerable) {
 
 module.exports = SliceEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],375:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],389:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -17308,7 +19365,7 @@ module.exports = SortEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultComparer":396,"./../methods/methods":413}],376:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultComparer":412,"./../methods/methods":431}],390:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -17597,7 +19654,132 @@ var SpliceEnumerable = function (_IEnumerable) {
 
 module.exports = SpliceEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],377:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],391:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IChunk = require('./IChunk');
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+var defaultFalsePredicate = require('./../methods/defaultFalsePredicate');
+
+var SplitEnumerable = function (_IEnumerable) {
+    _inherits(SplitEnumerable, _IEnumerable);
+
+    function SplitEnumerable(source) {
+        var splitPredicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultFalsePredicate;
+
+        _classCallCheck(this, SplitEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (SplitEnumerable.__proto__ || Object.getPrototypeOf(SplitEnumerable)).call(this, source));
+
+        splitPredicate = methods.asPredicate(splitPredicate);
+        core.defineProperty(_this, Symbol.iterator, regeneratorRuntime.mark(function SplitIterator() {
+            var iterator, chunkIndex, chunk, chunks, index, addChunk, hasNext, ci;
+            return regeneratorRuntime.wrap(function SplitIterator$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            iterator = source[Symbol.iterator]();
+                            chunkIndex = 0;
+                            chunk = [];
+                            chunks = [];
+                            index = 0;
+
+                            addChunk = function addChunk() {
+                                chunks.push(new IChunk(chunkIndex++, function (chunk) {
+                                    return regeneratorRuntime.mark(function _callee() {
+                                        var i;
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        i = 0;
+
+                                                    case 1:
+                                                        if (!(chunk.length > i || hasNext() && chunk.length > i)) {
+                                                            _context.next = 6;
+                                                            break;
+                                                        }
+
+                                                        _context.next = 4;
+                                                        return chunk[i++];
+
+                                                    case 4:
+                                                        _context.next = 1;
+                                                        break;
+
+                                                    case 6:
+                                                    case 'end':
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    });
+                                }(chunk)));
+                            };
+
+                            hasNext = function hasNext() {
+                                var next = iterator.next();
+                                if (next.done) {
+                                    return false;
+                                } else {
+                                    if (splitPredicate(next.value, index++)) {
+                                        chunk = [];
+                                        addChunk();
+                                    } else {
+                                        chunk.push(next.value);
+                                    }
+                                    return true;
+                                }
+                            };
+
+                            addChunk();
+                            ci = 0;
+
+                        case 9:
+                            if (!(chunks.length > ci || hasNext())) {
+                                _context2.next = 15;
+                                break;
+                            }
+
+                            if (!(chunks.length > ci)) {
+                                _context2.next = 13;
+                                break;
+                            }
+
+                            _context2.next = 13;
+                            return chunks[ci++];
+
+                        case 13:
+                            _context2.next = 9;
+                            break;
+
+                        case 15:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, SplitIterator, this);
+        }));
+        return _this;
+    }
+
+    return SplitEnumerable;
+}(IEnumerable);
+
+module.exports = SplitEnumerable;
+
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultFalsePredicate":415,"./../methods/methods":431,"./IChunk":340}],392:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17665,7 +19847,7 @@ var StringEnumerable = function (_IterableEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"./../Enumerable":298,"./../core/core":303,"./../methods/defaultStrictEqualityComparer":406,"./../methods/methods":413,"./IterableEnumerable":345}],378:[function(require,module,exports){
+},{"./../Enumerable":299,"./../core/core":304,"./../methods/defaultStrictEqualityComparer":423,"./../methods/methods":431,"./IterableEnumerable":350}],393:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17853,7 +20035,7 @@ var SymmetricEnumerable = function (_IEnumerable) {
 
 module.exports = SymmetricEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/methods":413}],379:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/methods":431}],394:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17968,7 +20150,7 @@ var TakeEnumerable = function (_IEnumerable) {
 
 module.exports = TakeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303}],380:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304}],395:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18089,7 +20271,7 @@ var TakeWhileEnumerable = function (_IEnumerable) {
 
 module.exports = TakeWhileEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":402,"./../methods/methods":413}],381:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431}],396:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18127,7 +20309,7 @@ var ThenByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":396,"./../methods/defaultSelector":405,"./../methods/descendingComparer":408,"./../methods/methods":413,"./../methods/selectorComparer":419,"./../methods/thenByComparer":421,"./IOrderedEnumerable":340}],382:[function(require,module,exports){
+},{"./../methods/defaultComparer":412,"./../methods/defaultSelector":422,"./../methods/descendingComparer":426,"./../methods/methods":431,"./../methods/selectorComparer":438,"./../methods/thenByComparer":440,"./IOrderedEnumerable":344}],397:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18164,7 +20346,7 @@ var ThenByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByEnumerable;
 
-},{"./../methods/defaultComparer":396,"./../methods/defaultSelector":405,"./../methods/methods":413,"./../methods/selectorComparer":419,"./../methods/thenByComparer":421,"./IOrderedEnumerable":340}],383:[function(require,module,exports){
+},{"./../methods/defaultComparer":412,"./../methods/defaultSelector":422,"./../methods/methods":431,"./../methods/selectorComparer":438,"./../methods/thenByComparer":440,"./IOrderedEnumerable":344}],398:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18274,7 +20456,7 @@ var TreeEnumerable = function (_ITree) {
 
 module.exports = TreeEnumerable;
 
-},{"./../methods/defaultChildrenSelector":395,"./../methods/defaultValueSelector":407,"./../methods/methods":413,"./ITree":341}],384:[function(require,module,exports){
+},{"./../methods/defaultChildrenSelector":410,"./../methods/defaultValueSelector":424,"./../methods/methods":431,"./ITree":345}],399:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18452,7 +20634,7 @@ var UnionEnumerable = function (_IEnumerable) {
 
 module.exports = UnionEnumerable;
 
-},{"./../Enumerable":298,"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultEqualityComparer":397,"./../methods/methods":413}],385:[function(require,module,exports){
+},{"./../Enumerable":299,"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultEqualityComparer":413,"./../methods/methods":431}],400:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18564,7 +20746,7 @@ var WhereEnumerable = function (_IEnumerable) {
 
 module.exports = WhereEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":402,"./../methods/methods":413}],386:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431}],401:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18681,7 +20863,7 @@ var WipeEnumerable = function (_IEnumerable) {
 
 module.exports = WipeEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultPredicate":402,"./../methods/methods":413}],387:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultPredicate":419,"./../methods/methods":431}],402:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18749,7 +20931,7 @@ var ZipEnumerable = function (_IEnumerable) {
 
 module.exports = ZipEnumerable;
 
-},{"./../IEnumerable":299,"./../core/core":303,"./../methods/defaultResultSelector":403}],388:[function(require,module,exports){
+},{"./../IEnumerable":300,"./../core/core":304,"./../methods/defaultResultSelector":420}],403:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -18766,6 +20948,7 @@ var Enumerable = require('./Enumerable');
 var methods = require('./methods/methods');
 
 var defaultPredicate = require('./methods/defaultPredicate');
+var defaultFalsePredicate = require('./methods/defaultFalsePredicate');
 var defaultSelector = require('./methods/defaultSelector');
 var defaultJoinSelector = require('./methods/defaultJoinSelector');
 var defaultSameComparer = require('./methods/defaultSameComparer');
@@ -19233,10 +21416,33 @@ var extendObject = {
 
         return Enumerable.forEach(this, action, thisArg);
     },
+    each: function each() {
+        var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultAction;
+
+        return Enumerable.each(this, action);
+    },
+    indices: function indices(_indices) {
+        return Enumerable.indices(this, _indices);
+    },
+    permutation: function permutation(count) {
+        var repeatable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+        return Enumerable.permutation(this, count, repeatable);
+    },
+    combination: function combination(count) {
+        var repeatable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+        return Enumerable.combination(this, count, repeatable);
+    },
     chunk: function chunk(_chunk) {
         var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
         return Enumerable.chunk(this, _chunk, offset);
+    },
+    split: function split() {
+        var splitPredicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultFalsePredicate;
+
+        return Enumerable.split(this, splitPredicate);
     },
     leftPad: function leftPad(length, value) {
         return Enumerable.leftPad(this, length, value);
@@ -19585,7 +21791,7 @@ Enumerable.extend = function (prototype, type) {
     return prototype;
 };
 
-},{"./Enumerable":298,"./core/core":303,"./methods/defaultAction":394,"./methods/defaultChildrenSelector":395,"./methods/defaultComparer":396,"./methods/defaultEqualityComparer":397,"./methods/defaultJoinSelector":399,"./methods/defaultKeySelector":400,"./methods/defaultParentSelector":401,"./methods/defaultPredicate":402,"./methods/defaultResultSelector":403,"./methods/defaultSameComparer":404,"./methods/defaultSelector":405,"./methods/defaultStrictEqualityComparer":406,"./methods/defaultValueSelector":407,"./methods/methods":413}],389:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304,"./methods/defaultAction":409,"./methods/defaultChildrenSelector":410,"./methods/defaultComparer":412,"./methods/defaultEqualityComparer":413,"./methods/defaultFalsePredicate":415,"./methods/defaultJoinSelector":416,"./methods/defaultKeySelector":417,"./methods/defaultParentSelector":418,"./methods/defaultPredicate":419,"./methods/defaultResultSelector":420,"./methods/defaultSameComparer":421,"./methods/defaultSelector":422,"./methods/defaultStrictEqualityComparer":423,"./methods/defaultValueSelector":424,"./methods/methods":431}],404:[function(require,module,exports){
 'use strict';
 
 /**
@@ -19695,7 +21901,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":298,"./core/core":303}],390:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304}],405:[function(require,module,exports){
 'use strict';
 
 /**
@@ -19714,7 +21920,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":298,"./core/core":303}],391:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304}],406:[function(require,module,exports){
 'use strict';
 
 /**
@@ -19733,7 +21939,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":298,"./core/core":303}],392:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304}],407:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -19988,7 +22194,7 @@ module.exports = g.Enumerable = Enumerable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":298,"./core/core":303,"./enumerables/ArrayEnumerable":315,"./enumerables/IteratorEnumerable":346,"./enumerables/MapEnumerable":351,"./enumerables/ObjectEnumerable":353,"./enumerables/StringEnumerable":377,"./enumerables/TreeEnumerable":383,"./linq-array":389,"./linq-object":390,"./linq-string":391,"babel-polyfill":1}],393:[function(require,module,exports){
+},{"./Enumerable":299,"./core/core":304,"./enumerables/ArrayEnumerable":316,"./enumerables/IteratorEnumerable":351,"./enumerables/MapEnumerable":356,"./enumerables/ObjectEnumerable":360,"./enumerables/StringEnumerable":392,"./enumerables/TreeEnumerable":398,"./linq-array":404,"./linq-object":405,"./linq-string":406,"babel-polyfill":1}],408:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -20014,19 +22220,28 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":397,"./methods":413}],394:[function(require,module,exports){
+},{"./defaultEqualityComparer":413,"./methods":431}],409:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, key) {};
 
-},{}],395:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.children === 'undefined' ? element : element.children;
 };
 
-},{}],396:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
+'use strict';
+
+module.exports = function (element, value) {
+    if (typeof element !== 'undefined' && element !== null) {
+        element.children = value;
+    }
+};
+
+},{}],412:[function(require,module,exports){
 'use strict';
 
 var IComparable = require('./../core/IComparable');
@@ -20035,7 +22250,7 @@ module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
 
-},{"./../core/IComparable":301}],397:[function(require,module,exports){
+},{"./../core/IComparable":302}],413:[function(require,module,exports){
 'use strict';
 
 var IEquatable = require('./../core/IEquatable');
@@ -20044,77 +22259,93 @@ module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
-},{"./../core/IEquatable":302}],398:[function(require,module,exports){
+},{"./../core/IEquatable":303}],414:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element !== 'undefined' && element !== null;
 };
 
-},{}],399:[function(require,module,exports){
+},{}],415:[function(require,module,exports){
+'use strict';
+
+module.exports = function (element, index) {
+  return false;
+};
+
+},{}],416:[function(require,module,exports){
 'use strict';
 
 module.exports = function (outer, inner) {
   return { outer: outer, inner: inner };
 };
 
-},{}],400:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.key;
 };
 
-},{}],401:[function(require,module,exports){
+},{}],418:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element.parent;
 };
 
-},{}],402:[function(require,module,exports){
+},{}],419:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
-},{}],403:[function(require,module,exports){
+},{}],420:[function(require,module,exports){
 'use strict';
 
 module.exports = function (key, result) {
   return result;
 };
 
-},{}],404:[function(require,module,exports){
+},{}],421:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other || typeof element === 'number' && typeof other === 'number' && isNaN(element) && isNaN(other);
 };
 
-},{}],405:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element;
 };
 
-},{}],406:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other;
 };
 
-},{}],407:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.value === 'undefined' ? element : element.value;
 };
 
-},{}],408:[function(require,module,exports){
+},{}],425:[function(require,module,exports){
+'use strict';
+
+module.exports = function (element, value) {
+    if (typeof element !== 'undefined' && element !== null) {
+        element.value = value;
+    }
+};
+
+},{}],426:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderBy) {
@@ -20123,7 +22354,7 @@ module.exports = function (orderBy) {
   };
 };
 
-},{}],409:[function(require,module,exports){
+},{}],427:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -20139,7 +22370,7 @@ module.exports = function (value) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":397,"./methods":413}],410:[function(require,module,exports){
+},{"./defaultEqualityComparer":413,"./methods":431}],428:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -20159,7 +22390,7 @@ module.exports = function (greaterThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":397,"./methods":413}],411:[function(require,module,exports){
+},{"./defaultEqualityComparer":413,"./methods":431}],429:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -20177,7 +22408,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":405,"./methods":413}],412:[function(require,module,exports){
+},{"./defaultSelector":422,"./methods":431}],430:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -20197,7 +22428,7 @@ module.exports = function (lessThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":397,"./methods":413}],413:[function(require,module,exports){
+},{"./defaultEqualityComparer":413,"./methods":431}],431:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -20215,12 +22446,24 @@ var methods = {
 			throw new InvalidFunctionException(selector);
 		}
 	},
+	asSetter: function asSetter(setter) {
+		var type = core.getType(setter);
+		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+			return propertySetter(setter);
+		} else if (type === core.types.Function) {
+			return setter;
+		} else {
+			throw new InvalidFunctionException(setter);
+		}
+	},
 	asPredicate: function asPredicate(predicate) {
 		var type = core.getType(predicate);
 		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
 			return selectorPredicate(predicate);
 		} else if (type === core.types.Function) {
 			return predicate;
+		} else if (type === core.types.RegExp) {
+			return regexpPredicate(predicate);
 		} else if (type === core.types.Array || type === core.types.Object) {
 			return propertiesPredicate(predicate);
 		} else {
@@ -20273,6 +22516,7 @@ var methods = {
 
 module.exports = methods;
 
+var propertySetter = require('./propertySetter');
 var propertySelector = require('./propertySelector');
 var selectorPredicate = require('./selectorPredicate');
 var selectorComparer = require('./selectorComparer');
@@ -20282,8 +22526,9 @@ var defaultSameComparer = require('./defaultSameComparer');
 var defaultComparer = require('./defaultComparer');
 var arrayComparer = require('./arrayComparer');
 var propertiesPredicate = require('./propertiesPredicate');
+var regexpPredicate = require('./regexpPredicate');
 
-},{"./../core/core":303,"./../core/exceptions/InvalidFunctionException":305,"./arrayComparer":393,"./defaultComparer":396,"./defaultEqualityComparer":397,"./defaultSameComparer":404,"./defaultStrictEqualityComparer":406,"./propertiesPredicate":416,"./propertySelector":417,"./selectorComparer":419,"./selectorPredicate":420}],414:[function(require,module,exports){
+},{"./../core/core":304,"./../core/exceptions/InvalidFunctionException":306,"./arrayComparer":408,"./defaultComparer":412,"./defaultEqualityComparer":413,"./defaultSameComparer":421,"./defaultStrictEqualityComparer":423,"./propertiesPredicate":434,"./propertySelector":435,"./propertySetter":436,"./regexpPredicate":437,"./selectorComparer":438,"./selectorPredicate":439}],432:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -20299,7 +22544,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":398,"./methods":413}],415:[function(require,module,exports){
+},{"./defaultExistsPredicate":414,"./methods":431}],433:[function(require,module,exports){
 'use strict';
 
 module.exports = function (array) {
@@ -20325,7 +22570,7 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./methods":413}],416:[function(require,module,exports){
+},{"./methods":431}],434:[function(require,module,exports){
 'use strict';
 
 var defaultSameComparer = require('./defaultSameComparer');
@@ -20363,7 +22608,7 @@ module.exports = function (properties) {
 var methods = require('./methods');
 var core = require('./../core/core');
 
-},{"./../core/core":303,"./defaultSameComparer":404,"./methods":413,"./propertySelector":417}],417:[function(require,module,exports){
+},{"./../core/core":304,"./defaultSameComparer":421,"./methods":431,"./propertySelector":435}],435:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -20374,9 +22619,11 @@ var regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))(\.([_$\w][
 var regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")]/ig;
 
 module.exports = function (property) {
+	var ignoreInvalid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
 	if (core.isSymbol(property) || core.isNumber(property)) {
 		return function (element, index) {
-			return element && element[property];
+			return typeof element !== 'undefined' && element !== null ? element[property] : element;
 		};
 	} else if (property === '') {
 		return function (element, index) {
@@ -20388,34 +22635,81 @@ module.exports = function (property) {
 			return function (element) {
 				regSplit.lastIndex = 0;
 				var result = void 0;
-				while (typeof element !== 'undefined' && (result = regSplit.exec(property))) {
+				while (typeof element !== 'undefined' && element !== null && (result = regSplit.exec(property))) {
 					element = element[result[1] || result[2] || result[3] || result[4]];
 				}
 				return element;
 			};
-		} else {
+		} else if (!ignoreInvalid) {
 			throw new PropertyExpressionInvalidException(property);
 		}
 	}
 };
 
-},{"./../core/core":303,"./../core/exceptions/PropertyExpressionInvalidException":313}],418:[function(require,module,exports){
+},{"./../core/core":304,"./../core/exceptions/PropertyExpressionInvalidException":314}],436:[function(require,module,exports){
+'use strict';
+
+var core = require('./../core/core');
+
+var PropertyExpressionInvalidException = require('./../core/exceptions/PropertyExpressionInvalidException');
+
+var regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))(\.([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))*$/ig;
+var regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")]/ig;
+var FIRST = Symbol('first');
+
+module.exports = function (property) {
+	var ignoreInvalid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+	if (core.isSymbol(property) || core.isNumber(property)) {
+		return function (element, value) {
+			if (typeof element !== 'undefined' && element !== null) {
+				element[property] = value;
+			} else if (!ignoreInvalid) {
+				throw new PropertyExpressionInvalidException(property);
+			}
+		};
+	} else if (property === '') {
+		throw new PropertyExpressionInvalidException(property);
+	} else {
+		regValid.lastIndex = 0;
+		if (regValid.test(property)) {
+			return function (element, value) {
+				regSplit.lastIndex = 0;
+				var result = void 0;
+				var prop = FIRST;
+				while (typeof element !== 'undefined' && element !== null && (result = regSplit.exec(property))) {
+					if (prop !== FIRST) element = element[prop];
+					prop = result[1] || result[2] || result[3] || result[4];
+				}
+				if (typeof element !== 'undefined' && element !== null && prop !== FIRST) {
+					element[prop] = value;
+				} else if (!ignoreInvalid) {
+					throw new PropertyExpressionInvalidException(property);
+				}
+			};
+		} else if (!ignoreInvalid) {
+			throw new PropertyExpressionInvalidException(property);
+		}
+	}
+};
+
+},{"./../core/core":304,"./../core/exceptions/PropertyExpressionInvalidException":314}],437:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
 
 module.exports = function (regexp) {
-	var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
 
-	keySelector = methods.asSelector(keySelector);
-	return function (element, index) {
-		return regexp.test(keySelector(element, index));
-	};
+    keySelector = methods.asSelector(keySelector);
+    return function (element) {
+        return regexp.test(keySelector(element));
+    };
 };
 
 var methods = require('./methods');
 
-},{"./defaultSelector":405,"./methods":413}],419:[function(require,module,exports){
+},{"./defaultSelector":422,"./methods":431}],438:[function(require,module,exports){
 'use strict';
 
 module.exports = function (selector, comparer) {
@@ -20427,7 +22721,7 @@ module.exports = function (selector, comparer) {
 
 var methods = require('./methods');
 
-},{"./methods":413}],420:[function(require,module,exports){
+},{"./methods":431}],439:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -20444,7 +22738,7 @@ module.exports = function (selector) {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":398,"./methods":413}],421:[function(require,module,exports){
+},{"./defaultExistsPredicate":414,"./methods":431}],440:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderByComparer, thenByComparer) {
@@ -20454,7 +22748,7 @@ module.exports = function (orderByComparer, thenByComparer) {
     };
 };
 
-},{}],422:[function(require,module,exports){
+},{}],441:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -20695,6 +22989,6 @@ Enumerable.removePlugins = function () {
 	return this;
 };
 
-},{"./Enumerable":298,"./IEnumerable":299,"./core/core":303,"./core/exceptions/PluginRepeatException":312}]},{},[392])(392)
+},{"./Enumerable":299,"./IEnumerable":300,"./core/core":304,"./core/exceptions/PluginRepeatException":313}]},{},[407])(407)
 });
 //# sourceMappingURL=linq.js.map

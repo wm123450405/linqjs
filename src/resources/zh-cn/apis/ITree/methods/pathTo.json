@@ -52,6 +52,21 @@
                     ]
                 }
             ]
+        },
+        {
+            "since": "2.1.23",
+            "ref": true,
+            "overloads": [
+                {
+                    "sees": [
+                        { },
+                        {
+                            "apis": "ITree",
+                            "method": "pathNodesTo"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -541,6 +541,20 @@
 			"histroys": [
 				{
 					"since": "2.1.22",
+					"deprecated": "2.1.24.pre",
+					"overloads": [
+						{
+							"description": "获取从祖先节点到当前节点路径上所有的节点值序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.23",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -556,10 +570,62 @@
 			]
 		},
 		{
+			"name": "pathNodes",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取从祖先节点到当前节点路径上所有的节点序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pathNodesTo",
+			"histroys": [
+				{
+					"since": "2.1.23",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "获取从当前节点到子孙节点路径上所有的节点序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "pathTo",
 			"histroys": [
 				{
 					"since": "2.1.22",
+					"deprecated": "2.1.24.pre",
+					"overloads": [
+						{
+							"description": "获取从当前节点到子孙节点路径上所有的节点值序列",
+							"parameters": [
+								{
+									"name": "root"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.23",
 					"deprecated": 0,
 					"overloads": [
 						{

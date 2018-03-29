@@ -15,73 +15,73 @@
 				"code": "instance",
 				"title": "获取 IEnumerable 实例",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "use",
 				"title": "开始使用",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "config",
 				"title": "配置",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "selector",
 				"title": "选择器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "predicate",
 				"title": "筛选器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "comparer",
 				"title": "比较器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "action",
 				"title": "执行器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "setter",
 				"title": "设置器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "iterator",
 				"title": "迭代器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "plugin",
 				"title": "插件",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "extend",
 				"title": "扩展",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "enumerator",
 				"title": "枚举器",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			}
 		]
 	},
@@ -93,49 +93,49 @@
 				"code": "BinaryTree",
 				"title": "BinaryTree 类",
 				"since": "2.1.22",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Directory",
 				"title": "Directory 类",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Entry",
 				"title": "Entry 类",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable",
 				"title": "Enumerable 类",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable.actions",
 				"title": "Enumerable.actions 对象",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable.comparers",
 				"title": "Enumerable.comparers 对象",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable.config",
 				"title": "Enumerable.config 对象",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable.predicates",
 				"title": "Enumerable.predicates 对象",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Enumerable.selectors",
@@ -147,49 +147,49 @@
 				"code": "Enumerable.setters",
 				"title": "Enumerable.setters 对象",
 				"since": "2.1.20",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IChunk",
 				"title": "IChunk 接口",
 				"since": "2.1.18",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "ICombine",
 				"title": "ICombine 接口",
 				"since": "2.1.22",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IEnumerable",
 				"title": "IEnumerable 接口",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IEnumerator",
 				"title": "IEnumerator 接口",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IGrouping",
 				"title": "IGrouping 接口",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IMapEnumerable",
 				"title": "IMapEnumerable 接口",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "IOrderedEnumerable",
 				"title": "IOrderedEnumerable 接口",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "ITree",
@@ -201,13 +201,13 @@
 				"code": "Lookup",
 				"title": "Lookup 类",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			},
 			{
 				"code": "Plugin",
 				"title": "Plugin 类",
 				"since": "2.1.15",
-				"deprecated": "2.1.23.pre"
+				"deprecated": "2.1.23"
 			}
 		]
 	},

@@ -1,0 +1,52 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.23",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "root",
+                            "types": [
+                                "ITree",
+                                "any"
+                            ],
+                            "descriptions": [
+                                "子孙节点或节点的值"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "generics": [
+                            {
+                                "name": "ITree"
+                            }
+                        ],
+                        "descriptions": [
+                            "从当前节点到子孙节点路径上所有的节点序列"
+                        ]
+                    },
+                    "description": "获取从当前节点到子孙节点路径上所有的节点序列",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "此路径的结果序列中包含当前节点与子孙节点本身"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "ITree",
+                            "method": "pathTo"
+                        },
+                        {
+                            "apis": "ITree",
+                            "method": "pathNodes"
+                        }
+                    ],
+                    "examples": [
+                    ]
+                }
+            ]
+        }
+    ]
+}
