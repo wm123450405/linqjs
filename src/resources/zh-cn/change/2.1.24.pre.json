@@ -1,0 +1,11 @@
+{
+    "prepublish": true,
+    "contents": [
+        "新增(New):",
+        "1. 为一些方法增加别名, 方便其他语言使用者更容易的转移",
+        "",
+        "优化(Optimization):",
+        "",
+        "修复(Fixed):"
+    ]
+}
