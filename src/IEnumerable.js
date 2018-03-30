@@ -130,6 +130,9 @@ class IEnumerable extends Array {
     takeWhile(predicate = defaultPredicate()) {
         return Enumerable.takeWhile(this, predicate);
     }
+    sorted(keySelector = defaultSelector, comparer = defaultComparer) {
+        return Enumerable.sorted(this, keySelector, comparer);
+    }
     orderBy(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.orderBy(this, keySelector, comparer);
     }
@@ -142,12 +145,21 @@ class IEnumerable extends Array {
     selectMany(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     }
+    flatMap(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
+        return Enumerable.flatMap(this, collectionSelector, resultSelector);
+    }
+    flatten(collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
+        return Enumerable.flatten(this, collectionSelector, resultSelector);
+    }
     join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (arguments.length === 1) {
             return Enumerable.join(this, inner);
         } else {
             return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
+    }
+    joining(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.joining(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
     innerJoin(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
@@ -167,8 +179,14 @@ class IEnumerable extends Array {
     all(predicate = defaultPredicate) {
         return Enumerable.all(this, predicate);
     }
+    allMatch(predicate = defaultPredicate) {
+        return Enumerable.allMatch(this, predicate);
+    }
     any(predicate = defaultPredicate) {
         return Enumerable.any(this, predicate);
+    }
+    anyMatch(predicate = defaultPredicate) {
+        return Enumerable.anyMatch(this, predicate);
     }
     isEmpty() {
         return Enumerable.isEmpty(this);

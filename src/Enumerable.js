@@ -172,7 +172,7 @@ Enumerable.take = function(source, count) {
 Enumerable.takeWhile = function(source, predicate = defaultPredicate) {
     return new TakeWhileEnumerable(asIterable(source), predicate);
 };
-Enumerable.orderBy = function(source, keySelector = defaultSelector, comparer = defaultComparer) {
+Enumerable.orderBy = Enumerable.sorted = function(source, keySelector = defaultSelector, comparer = defaultComparer) {
     return new OrderByEnumerable(asIterable(source), keySelector, comparer);
 };
 Enumerable.orderByDescending = function(source, keySelector = defaultSelector, comparer = defaultComparer) {
@@ -195,7 +195,7 @@ Enumerable.thenByDescending = function(orderedSource, keySelector = defaultSelec
 Enumerable.groupBy = function(source, keySelector = defaultSelector, elementSelector = defaultSelector, resultSelector = defaultResultSelector, comparer = defaultEqualityComparer) {
     return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
-Enumerable.selectMany = function(source, collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
+Enumerable.selectMany = Enumerable.flatMap = Enumerable.flatten = function(source, collectionSelector = defaultSelector, resultSelector = defaultResultSelector) {
     return new SelectManyEnumerable(asIterable(source), collectionSelector, resultSelector);
 };
 Enumerable.join = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -209,7 +209,7 @@ Enumerable.join = function(outer, inner, resultSelector = defaultJoinSelector, o
         return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
 };
-Enumerable.innerJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
+Enumerable.innerJoin = Enumerable.joining = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
     return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 Enumerable.leftJoin = function(outer, inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
@@ -361,7 +361,7 @@ Enumerable.copyWithin = function(source, target = 0, start = 0, end = Infinity) 
 Enumerable.defaultIfEmpty = function(source, defaultValue) {
     return this.isEmpty(source) ? new SingleEnumerable(defaultValue) : this.asEnumerable(source);
 };
-Enumerable.all = function(source, predicate = defaultPredicate) {
+Enumerable.all = Enumerable.allMatch = function(source, predicate = defaultPredicate) {
     let index = 0;
     source = asIterable(source);
     predicate = methods.asPredicate(predicate);
@@ -372,7 +372,7 @@ Enumerable.all = function(source, predicate = defaultPredicate) {
     }
     return true;
 };
-Enumerable.any = function(source, predicate = defaultPredicate) {
+Enumerable.any = Enumerable.anyMatch = function(source, predicate = defaultPredicate) {
     let index = 0;
     source = asIterable(source);
     predicate = methods.asPredicate(predicate);
