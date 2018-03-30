@@ -7339,7 +7339,7 @@ Enumerable.takeWhile = function (source) {
 
     return new TakeWhileEnumerable(asIterable(source), predicate);
 };
-Enumerable.orderBy = function (source) {
+Enumerable.orderBy = Enumerable.sorted = function (source) {
     var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
     var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
 
@@ -7379,7 +7379,7 @@ Enumerable.groupBy = function (source) {
 
     return new GroupedEnumerable(asIterable(source), keySelector, elementSelector, resultSelector, comparer);
 };
-Enumerable.selectMany = function (source) {
+Enumerable.selectMany = Enumerable.flatMap = Enumerable.flatten = function (source) {
     var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
     var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultResultSelector;
 
@@ -7401,7 +7401,7 @@ Enumerable.join = function (outer, inner) {
         return new JoinEnumerable(asIterable(outer), asIterable(inner), resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
 };
-Enumerable.innerJoin = function (outer, inner) {
+Enumerable.innerJoin = Enumerable.joining = function (outer, inner) {
     var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultJoinSelector;
     var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
     var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
@@ -7741,7 +7741,7 @@ Enumerable.copyWithin = function (source) {
 Enumerable.defaultIfEmpty = function (source, defaultValue) {
     return this.isEmpty(source) ? new SingleEnumerable(defaultValue) : this.asEnumerable(source);
 };
-Enumerable.all = function (source) {
+Enumerable.all = Enumerable.allMatch = function (source) {
     var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
     var index = 0;
@@ -7776,7 +7776,7 @@ Enumerable.all = function (source) {
 
     return true;
 };
-Enumerable.any = function (source) {
+Enumerable.any = Enumerable.anyMatch = function (source) {
     var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
     var index = 0;
@@ -9409,6 +9409,14 @@ var IEnumerable = function (_extendableBuiltin2) {
             return Enumerable.takeWhile(this, predicate);
         }
     }, {
+        key: 'sorted',
+        value: function sorted() {
+            var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+            var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+            return Enumerable.sorted(this, keySelector, comparer);
+        }
+    }, {
         key: 'orderBy',
         value: function orderBy() {
             var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
@@ -9443,6 +9451,22 @@ var IEnumerable = function (_extendableBuiltin2) {
             return Enumerable.selectMany(this, collectionSelector, resultSelector);
         }
     }, {
+        key: 'flatMap',
+        value: function flatMap() {
+            var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+            var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultResultSelector;
+
+            return Enumerable.flatMap(this, collectionSelector, resultSelector);
+        }
+    }, {
+        key: 'flatten',
+        value: function flatten() {
+            var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+            var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultResultSelector;
+
+            return Enumerable.flatten(this, collectionSelector, resultSelector);
+        }
+    }, {
         key: 'join',
         value: function join(inner) {
             var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
@@ -9455,6 +9479,16 @@ var IEnumerable = function (_extendableBuiltin2) {
             } else {
                 return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
             }
+        }
+    }, {
+        key: 'joining',
+        value: function joining(inner) {
+            var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
+            var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+            var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+            var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+            return Enumerable.joining(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     }, {
         key: 'innerJoin',
@@ -9509,11 +9543,25 @@ var IEnumerable = function (_extendableBuiltin2) {
             return Enumerable.all(this, predicate);
         }
     }, {
+        key: 'allMatch',
+        value: function allMatch() {
+            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+            return Enumerable.allMatch(this, predicate);
+        }
+    }, {
         key: 'any',
         value: function any() {
             var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
             return Enumerable.any(this, predicate);
+        }
+    }, {
+        key: 'anyMatch',
+        value: function anyMatch() {
+            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+            return Enumerable.anyMatch(this, predicate);
         }
     }, {
         key: 'isEmpty',
@@ -21084,6 +21132,12 @@ var extendObject = {
 
         return Enumerable.takeWhile(this, predicate);
     },
+    sorted: function sorted() {
+        var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+
+        return Enumerable.sorted(this, keySelector, comparer);
+    },
     orderBy: function orderBy() {
         var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
         var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
@@ -21110,6 +21164,18 @@ var extendObject = {
 
         return Enumerable.selectMany(this, collectionSelector, resultSelector);
     },
+    flatMap: function flatMap() {
+        var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultResultSelector;
+
+        return Enumerable.flatMap(this, collectionSelector, resultSelector);
+    },
+    flatten: function flatten() {
+        var collectionSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultResultSelector;
+
+        return Enumerable.flatten(this, collectionSelector, resultSelector);
+    },
     join: function join(inner) {
         var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
         var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
@@ -21121,6 +21187,14 @@ var extendObject = {
         } else {
             return Enumerable.join(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
+    },
+    joining: function joining(inner) {
+        var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
+        var outerKeySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
+        var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
+        var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
+
+        return Enumerable.joining(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     },
     innerJoin: function innerJoin(inner) {
         var resultSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultJoinSelector;
@@ -21162,10 +21236,20 @@ var extendObject = {
 
         return Enumerable.all(this, predicate);
     },
+    allMatch: function allMatch() {
+        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+        return Enumerable.allMatch(this, predicate);
+    },
     any: function any() {
         var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
         return Enumerable.any(this, predicate);
+    },
+    anyMatch: function anyMatch() {
+        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+
+        return Enumerable.anyMatch(this, predicate);
     },
     isEmpty: function isEmpty() {
         return Enumerable.isEmpty(this);
