@@ -204,7 +204,7 @@ const createDirectory = refreshLangName => {
     if (!versions[versions.length - 1].endsWith('pre')) versions.push(common.preVersion(versions[versions.length - 1]));
     fs.writeFileSync(path.join(scripts, 'histroy.js'), 'module.exports = (version, callback, pre, post) => { ' + versions.reverse().map(version => `if (version === '${ version }') return require.ensure([], function(require) { if (callback) { pre && pre(); callback(require('${ common.module(version) }')); post && post(); } }, '${ common.module(version) }');`).join(' else ') + ' };');
 
-	console.log('apis:' + defaultApis);;
+	console.log('apis:' + defaultApis);
 
 	let langNames = fs.readdirSync(resources);
 	for (let langName of langNames) {
