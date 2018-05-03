@@ -377,6 +377,9 @@ const extendObject = {
     symmetric(other, comparer = defaultEqualityComparer) {
         return Enumerable.symmetric(this, other, comparer);
     },
+    conflict(selector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.conflict(this, selector, comparer);
+    },
     concat(...others) {
         if (core.isString(this) && core.string$concat && !core.lazy) {
             return core.string$concat.apply(this, others);

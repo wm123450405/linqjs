@@ -386,6 +386,9 @@ class IEnumerable extends Array {
     symmetric(other, comparer = defaultEqualityComparer) {
         return Enumerable.symmetric(this, other, comparer);
     }
+    conflict(selector = defaultSelector, comparer = defaultEqualityComparer) {
+        return Enumerable.conflict(this, selector, comparer);
+    }
 }
 
 module.exports = IEnumerable;

@@ -899,6 +899,23 @@ Enumerable.isSuper = function(source, other, comparer = defaultEqualityComparer)
 Enumerable.symmetric = function(source, other, comparer = defaultEqualityComparer) {
     return new SymmetricEnumerable(asIterable(source), asIterable(other), comparer);
 };
+Enumerable.conflict = function(source, selector = defaultSelector, comparer = defdaultEqualityComparer) {
+    let temp = [];
+    let index = 0;
+    selector = methods.asSelector(selector);
+    comparer = methods.asEqualityComparer(comparer);
+    for (let element of asIterable(source)) {
+        let key = selector(element, index);
+        for (let other of temp) {
+            if (comparer(key, other)) {
+                return true;
+            }
+        }
+        temp.push(key);
+        index++;
+    }
+    return false;
+};
 core.defineProperty(Enumerable, 'comparers', () => ({
     get default() {
         return defaultComparer;
