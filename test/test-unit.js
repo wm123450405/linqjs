@@ -452,6 +452,12 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.split([a, b, c, b, d, e, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
     assert.deepStrictEqual(Enumerable.split([b, a, b, b, c, b, d, e, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
     assert.deepStrictEqual(Enumerable.split('babbcbdeb', /b/).select(chunk => chunk.join('')).toArray(), [ '', 'a', '', 'c', 'de', '' ]);
+    assert.deepStrictEqual(Enumerable.nearSplit('babbcbdeb', /b/).select(chunk => chunk.join('')).toArray(), [ '', 'a', 'c', 'de', '' ]);
+    //nearSplit
+    assert.deepStrictEqual(Enumerable.nearSplit([a, b, c, b, b, d, e], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+    assert.deepStrictEqual(Enumerable.nearSplit([b, b, a, c, b, d, e], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+    assert.deepStrictEqual(Enumerable.nearSplit([a, b, c, b, d, e, b, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+    assert.deepStrictEqual(Enumerable.nearSplit([b, a, b, b, b, c, b, d, e, b], element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [c], [d, e], [] ]);
     //product
     assert.strictEqual(Enumerable.product([1, 2, 3, 4, 5]), 120);
     assert.strictEqual(Enumerable.range(1, 5).product(), 120);
@@ -789,6 +795,11 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual([b, a, c, b, d, e].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
     assert.deepStrictEqual([a, b, c, b, d, e, b].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
     assert.deepStrictEqual([b, a, b, b, c, b, d, e, b].asEnumerable().split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
+    //nearSplit
+    assert.deepStrictEqual([a, b, c, b, b, d, e].asEnumerable().nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+    assert.deepStrictEqual([b, b, a, c, b, d, e].asEnumerable().nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+    assert.deepStrictEqual([a, b, c, b, d, e, b, b].asEnumerable().nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+    assert.deepStrictEqual([b, a, b, b, b, c, b, d, e, b].asEnumerable().nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [c], [d, e], [] ]);
     //product
     assert.strictEqual([1, 2, 3, 4, 5].asEnumerable().product(), 120);
     //rightPad
@@ -1331,6 +1342,11 @@ module.exports = function(Enumerable) {
         assert.deepStrictEqual([b, a, c, b, d, e].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
         assert.deepStrictEqual([a, b, c, b, d, e, b].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
         assert.deepStrictEqual([b, a, b, b, c, b, d, e, b].split(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [], [c], [d, e], [] ]);
+        //nearSplit
+        assert.deepStrictEqual([a, b, c, b, b, d, e].nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e] ]);
+        assert.deepStrictEqual([b, b, a, c, b, d, e].nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a, c], [d, e] ]);
+        assert.deepStrictEqual([a, b, c, b, d, e, b, b].nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [a], [c], [d, e], [] ]);
+        assert.deepStrictEqual([b, a, b, b, b, c, b, d, e, b].nearSplit(element => element === b).select(chunk => chunk.toArray()).toArray(), [ [], [a], [c], [d, e], [] ]);
         //product
         assert.strictEqual([1, 2, 3, 4, 5].product(), 120);
         //rightPad

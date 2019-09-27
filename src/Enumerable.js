@@ -847,6 +847,9 @@ Enumerable.chunk = function(source, chunk, offset = 0) {
 Enumerable.split = function(source, splitPredicate = defaultFalsePredicate) {
     return new SplitEnumerable(asIterable(source), splitPredicate);
 };
+Enumerable.nearSplit = function(source, splitPredicate = defaultFalsePredicate) {
+    return new NearSplitEnumerable(asIterable(source), splitPredicate);
+};
 Enumerable.leftPad = function(source, length, value) {
     return new LeftPadEnumerable(asIterable(source), length, value);
 };
@@ -899,7 +902,7 @@ Enumerable.isSuper = function(source, other, comparer = defaultEqualityComparer)
 Enumerable.symmetric = function(source, other, comparer = defaultEqualityComparer) {
     return new SymmetricEnumerable(asIterable(source), asIterable(other), comparer);
 };
-Enumerable.conflict = function(source, selector = defaultSelector, comparer = defdaultEqualityComparer) {
+Enumerable.conflict = function(source, selector = defaultSelector, comparer = defaultEqualityComparer) {
     let temp = [];
     let index = 0;
     selector = methods.asSelector(selector);
@@ -1093,6 +1096,7 @@ const SortEnumerable = require('./enumerables/SortEnumerable');
 const CopyWithinEnumerable = require('./enumerables/CopyWithinEnumerable');
 const ChunkEnumerable = require('./enumerables/ChunkEnumerable');
 const SplitEnumerable = require('./enumerables/SplitEnumerable');
+const NearSplitEnumerable = require('./enumerables/NearSplitEnumerable');
 const LeftPadEnumerable = require('./enumerables/LeftPadEnumerable');
 const RightPadEnumerable = require('./enumerables/RightPadEnumerable');
 const RandEnumerable = require('./enumerables/RandEnumerable');

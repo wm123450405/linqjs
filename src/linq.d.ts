@@ -61,6 +61,9 @@ declare namespace Enumerable {
     export function split<T>(source: T[] | IEnumerable<T>, splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
     export function split<T>(source: T[] | IEnumerable<T>, splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
 
+    export function nearSplit<T>(source: T[] | IEnumerable<T>, splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
+    export function nearSplit<T>(source: T[] | IEnumerable<T>, splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
+
     export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[][]): IEnumerable<T>;
     export function concat<T>(source: T[] | IEnumerable<T>, ...other: T[]): IEnumerable<T>;
     export function concat<T>(source: T[] | IEnumerable<T>, ...other: IEnumerable<T>[]): IEnumerable<T>;
@@ -517,6 +520,9 @@ declare namespace Enumerable {
 
         split(splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
         split(splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
+
+        nearSplit(splitPredicate: (element: T, index?: number) => boolean = defaultFalsePredicate): IEnumerable<IChunk<T>>;
+        nearSplit(splitPredicate: string | number | symbol | T | RegExp | any): IEnumerable<IChunk<T>>;
 
         concat(...other: T[][]): IEnumerable<T>;
         concat(...other: T[]): IEnumerable<T>;

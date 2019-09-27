@@ -347,6 +347,9 @@ const extendObject = {
     split(splitPredicate = defaultFalsePredicate) {
         return Enumerable.split(this, splitPredicate);
     },
+    nearSplit(splitPredicate = defaultFalsePredicate) {
+        return Enumerable.nearSplit(this, splitPredicate);
+    },
     leftPad(length, value) {
         return Enumerable.leftPad(this, length, value);
     },
