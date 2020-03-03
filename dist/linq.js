@@ -8500,6 +8500,11 @@ Enumerable.skipWhile = function (source) {
 
     return new SkipWhileEnumerable(asIterable(source), predicate);
 };
+Enumerable.skipSame = function (source) {
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
+
+    return new SkipSameEnumerable(asIterable(source), comparer);
+};
 Enumerable.take = function (source, count) {
     return new TakeEnumerable(asIterable(source), count);
 };
@@ -8507,6 +8512,11 @@ Enumerable.takeWhile = function (source) {
     var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
 
     return new TakeWhileEnumerable(asIterable(source), predicate);
+};
+Enumerable.takeSame = function (source) {
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
+
+    return new TakeSameEnumerable(asIterable(source), comparer);
 };
 Enumerable.orderBy = Enumerable.sorted = function (source) {
     var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
@@ -10371,8 +10381,10 @@ var IntersectEnumerable = require('./enumerables/IntersectEnumerable');
 var OfTypeEnumerable = require('./enumerables/OfTypeEnumerable');
 var SkipEnumerable = require('./enumerables/SkipEnumerable');
 var SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
+var SkipSameEnumerable = require('./enumerables/SkipSameEnumerable');
 var TakeEnumerable = require('./enumerables/TakeEnumerable');
 var TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
+var TakeSameEnumerable = require('./enumerables/TakeSameEnumerable');
 var IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
 var OrderByEnumerable = require('./enumerables/OrderByEnumerable');
 var OrderByDescendingEnumerable = require('./enumerables/OrderByDescendingEnumerable');
@@ -10418,7 +10430,7 @@ var PreOrderTree = require('./enumerables/PreOrderTree');
 var InOrderTree = require('./enumerables/InOrderTree');
 var PostOrderTree = require('./enumerables/PostOrderTree');
 
-},{"./IEnumerable":335,"./IEnumerator":336,"./core/IComparable":337,"./core/IEquatable":338,"./core/core":339,"./core/exceptions/InvalidFunctionException":341,"./core/exceptions/KeysForMultiElementsException":342,"./core/exceptions/NeedExecuteBeforeException":343,"./core/exceptions/NoSuchElementsException":344,"./core/exceptions/NotAncestorOfException":345,"./core/exceptions/NotEnumerableException":346,"./core/exceptions/OutOfRangeException":347,"./core/exceptions/PluginRepeatException":348,"./core/exceptions/PropertyExpressionInvalidException":349,"./core/exceptions/TooManyElementsException":350,"./enumerables/BetweenEnumerable":352,"./enumerables/ChunkEnumerable":356,"./enumerables/CombinationEnumerable":357,"./enumerables/CombinationRepeatableEnumerable":358,"./enumerables/CombineEnumerable":359,"./enumerables/ConcatEnumerable":360,"./enumerables/CopyWithinEnumerable":361,"./enumerables/Dictionary":364,"./enumerables/DistinctEnumerable":365,"./enumerables/EachEnumerable":366,"./enumerables/EmptyEnumerable":367,"./enumerables/ExceptEnumerable":369,"./enumerables/FillEnumerable":370,"./enumerables/GenerateEnumerable":371,"./enumerables/GroupJoinEnumerable":373,"./enumerables/GroupedEnumerable":374,"./enumerables/IMapEnumerable":378,"./enumerables/IOrderedEnumerable":379,"./enumerables/InOrderTree":382,"./enumerables/IndicesEnumerable":383,"./enumerables/IntersectEnumerable":384,"./enumerables/IteratorEnumerable":386,"./enumerables/JoinEnumerable":387,"./enumerables/LeftJoinEnumerable":388,"./enumerables/LeftPadEnumerable":389,"./enumerables/Lookup":390,"./enumerables/NearGroupedEnumerable":392,"./enumerables/NearSplitEnumerable":393,"./enumerables/OfTypeEnumerable":397,"./enumerables/OrderByDescendingEnumerable":398,"./enumerables/OrderByEnumerable":399,"./enumerables/PermutationEnumerable":402,"./enumerables/PermutationRepeatableEnumerable":403,"./enumerables/PostOrderTree":405,"./enumerables/PreOrderTree":407,"./enumerables/RandEnumerable":410,"./enumerables/RangeEnumerable":411,"./enumerables/RepeatEnumerable":412,"./enumerables/ReverseEnumerable":413,"./enumerables/RightJoinEnumerable":414,"./enumerables/RightPadEnumerable":415,"./enumerables/SelectEnumerable":416,"./enumerables/SelectManyEnumerable":417,"./enumerables/SeparateEnumerable":418,"./enumerables/SingleEnumerable":421,"./enumerables/SkipEnumerable":422,"./enumerables/SkipWhileEnumerable":423,"./enumerables/SliceEnumerable":424,"./enumerables/SortEnumerable":425,"./enumerables/SpliceEnumerable":426,"./enumerables/SplitEnumerable":427,"./enumerables/SymmetricEnumerable":429,"./enumerables/TakeEnumerable":430,"./enumerables/TakeWhileEnumerable":431,"./enumerables/ThenByDescendingEnumerable":432,"./enumerables/ThenByEnumerable":433,"./enumerables/UnionEnumerable":435,"./enumerables/WhereEnumerable":436,"./enumerables/WipeEnumerable":437,"./enumerables/ZipEnumerable":438,"./extend":439,"./methods/arrayComparer":444,"./methods/defaultAction":445,"./methods/defaultChildrenSelector":446,"./methods/defaultChildrenSetter":447,"./methods/defaultComparer":448,"./methods/defaultEqualityComparer":449,"./methods/defaultExistsPredicate":450,"./methods/defaultFalsePredicate":451,"./methods/defaultJoinSelector":452,"./methods/defaultKeySelector":453,"./methods/defaultParentSelector":454,"./methods/defaultPredicate":455,"./methods/defaultResultSelector":456,"./methods/defaultSameComparer":457,"./methods/defaultSelector":458,"./methods/defaultStrictEqualityComparer":459,"./methods/defaultValueSelector":460,"./methods/defaultValueSetter":461,"./methods/equalityPredicate":463,"./methods/greaterComparer":464,"./methods/ignoreCaseComparer":465,"./methods/lessComparer":466,"./methods/methods":467,"./methods/notPredicate":468,"./methods/predicateComparer":469,"./methods/propertySelector":471,"./methods/propertySetter":472,"./methods/regexpPredicate":473,"./methods/selectorPredicate":475,"./plugin":477}],335:[function(require,module,exports){
+},{"./IEnumerable":335,"./IEnumerator":336,"./core/IComparable":337,"./core/IEquatable":338,"./core/core":339,"./core/exceptions/InvalidFunctionException":341,"./core/exceptions/KeysForMultiElementsException":342,"./core/exceptions/NeedExecuteBeforeException":343,"./core/exceptions/NoSuchElementsException":344,"./core/exceptions/NotAncestorOfException":345,"./core/exceptions/NotEnumerableException":346,"./core/exceptions/OutOfRangeException":347,"./core/exceptions/PluginRepeatException":348,"./core/exceptions/PropertyExpressionInvalidException":349,"./core/exceptions/TooManyElementsException":350,"./enumerables/BetweenEnumerable":352,"./enumerables/ChunkEnumerable":356,"./enumerables/CombinationEnumerable":357,"./enumerables/CombinationRepeatableEnumerable":358,"./enumerables/CombineEnumerable":359,"./enumerables/ConcatEnumerable":360,"./enumerables/CopyWithinEnumerable":361,"./enumerables/Dictionary":364,"./enumerables/DistinctEnumerable":365,"./enumerables/EachEnumerable":366,"./enumerables/EmptyEnumerable":367,"./enumerables/ExceptEnumerable":369,"./enumerables/FillEnumerable":370,"./enumerables/GenerateEnumerable":371,"./enumerables/GroupJoinEnumerable":373,"./enumerables/GroupedEnumerable":374,"./enumerables/IMapEnumerable":378,"./enumerables/IOrderedEnumerable":379,"./enumerables/InOrderTree":382,"./enumerables/IndicesEnumerable":383,"./enumerables/IntersectEnumerable":384,"./enumerables/IteratorEnumerable":386,"./enumerables/JoinEnumerable":387,"./enumerables/LeftJoinEnumerable":388,"./enumerables/LeftPadEnumerable":389,"./enumerables/Lookup":390,"./enumerables/NearGroupedEnumerable":392,"./enumerables/NearSplitEnumerable":393,"./enumerables/OfTypeEnumerable":397,"./enumerables/OrderByDescendingEnumerable":398,"./enumerables/OrderByEnumerable":399,"./enumerables/PermutationEnumerable":402,"./enumerables/PermutationRepeatableEnumerable":403,"./enumerables/PostOrderTree":405,"./enumerables/PreOrderTree":407,"./enumerables/RandEnumerable":410,"./enumerables/RangeEnumerable":411,"./enumerables/RepeatEnumerable":412,"./enumerables/ReverseEnumerable":413,"./enumerables/RightJoinEnumerable":414,"./enumerables/RightPadEnumerable":415,"./enumerables/SelectEnumerable":416,"./enumerables/SelectManyEnumerable":417,"./enumerables/SeparateEnumerable":418,"./enumerables/SingleEnumerable":421,"./enumerables/SkipEnumerable":422,"./enumerables/SkipSameEnumerable":423,"./enumerables/SkipWhileEnumerable":424,"./enumerables/SliceEnumerable":425,"./enumerables/SortEnumerable":426,"./enumerables/SpliceEnumerable":427,"./enumerables/SplitEnumerable":428,"./enumerables/SymmetricEnumerable":430,"./enumerables/TakeEnumerable":431,"./enumerables/TakeSameEnumerable":432,"./enumerables/TakeWhileEnumerable":433,"./enumerables/ThenByDescendingEnumerable":434,"./enumerables/ThenByEnumerable":435,"./enumerables/UnionEnumerable":437,"./enumerables/WhereEnumerable":438,"./enumerables/WipeEnumerable":439,"./enumerables/ZipEnumerable":440,"./extend":441,"./methods/arrayComparer":446,"./methods/defaultAction":447,"./methods/defaultChildrenSelector":448,"./methods/defaultChildrenSetter":449,"./methods/defaultComparer":450,"./methods/defaultEqualityComparer":451,"./methods/defaultExistsPredicate":452,"./methods/defaultFalsePredicate":453,"./methods/defaultJoinSelector":454,"./methods/defaultKeySelector":455,"./methods/defaultParentSelector":456,"./methods/defaultPredicate":457,"./methods/defaultResultSelector":458,"./methods/defaultSameComparer":459,"./methods/defaultSelector":460,"./methods/defaultStrictEqualityComparer":461,"./methods/defaultValueSelector":462,"./methods/defaultValueSetter":463,"./methods/equalityPredicate":465,"./methods/greaterComparer":466,"./methods/ignoreCaseComparer":467,"./methods/lessComparer":468,"./methods/methods":469,"./methods/notPredicate":470,"./methods/predicateComparer":471,"./methods/propertySelector":473,"./methods/propertySetter":474,"./methods/regexpPredicate":475,"./methods/selectorPredicate":477,"./plugin":479}],335:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -10631,9 +10643,16 @@ var IEnumerable = function (_extendableBuiltin2) {
     }, {
         key: 'skipWhile',
         value: function skipWhile() {
-            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
             return Enumerable.skipWhile(this, predicate);
+        }
+    }, {
+        key: 'skipSame',
+        value: function skipSame() {
+            var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
+
+            return Enumerable.skipSame(this, comparer);
         }
     }, {
         key: 'take',
@@ -10643,9 +10662,16 @@ var IEnumerable = function (_extendableBuiltin2) {
     }, {
         key: 'takeWhile',
         value: function takeWhile() {
-            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+            var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
             return Enumerable.takeWhile(this, predicate);
+        }
+    }, {
+        key: 'takeSame',
+        value: function takeSame() {
+            var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
+
+            return Enumerable.takeSame(this, comparer);
         }
     }, {
         key: 'sorted',
@@ -11287,7 +11313,7 @@ module.exports = IEnumerable;
 
 var Enumerable = require('./Enumerable');
 
-},{"./Enumerable":334,"./core/core":339,"./methods/defaultAction":445,"./methods/defaultChildrenSelector":446,"./methods/defaultComparer":448,"./methods/defaultEqualityComparer":449,"./methods/defaultFalsePredicate":451,"./methods/defaultJoinSelector":452,"./methods/defaultKeySelector":453,"./methods/defaultParentSelector":454,"./methods/defaultPredicate":455,"./methods/defaultResultSelector":456,"./methods/defaultSameComparer":457,"./methods/defaultSelector":458,"./methods/defaultStrictEqualityComparer":459,"./methods/defaultValueSelector":460}],336:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339,"./methods/defaultAction":447,"./methods/defaultChildrenSelector":448,"./methods/defaultComparer":450,"./methods/defaultEqualityComparer":451,"./methods/defaultFalsePredicate":453,"./methods/defaultJoinSelector":454,"./methods/defaultKeySelector":455,"./methods/defaultParentSelector":456,"./methods/defaultPredicate":457,"./methods/defaultResultSelector":458,"./methods/defaultSameComparer":459,"./methods/defaultSelector":460,"./methods/defaultStrictEqualityComparer":461,"./methods/defaultValueSelector":462}],336:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12147,7 +12173,7 @@ var ArrayEnumerable = function (_IterableEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"./../Enumerable":334,"./../core/core":339,"./../methods/defaultAction":445,"./../methods/defaultEqualityComparer":449,"./../methods/defaultJoinSelector":452,"./../methods/defaultSelector":458,"./../methods/defaultStrictEqualityComparer":459,"./../methods/methods":467,"./IterableEnumerable":385}],352:[function(require,module,exports){
+},{"./../Enumerable":334,"./../core/core":339,"./../methods/defaultAction":447,"./../methods/defaultEqualityComparer":451,"./../methods/defaultJoinSelector":454,"./../methods/defaultSelector":460,"./../methods/defaultStrictEqualityComparer":461,"./../methods/methods":469,"./IterableEnumerable":385}],352:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12658,7 +12684,7 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/methods":467}],356:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/methods":469}],356:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13243,7 +13269,7 @@ var CombineEnumerable = function (_IEnumerable) {
 
 module.exports = CombineEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultKeySelector":453,"./../methods/defaultParentSelector":454,"./../methods/defaultSelector":458,"./../methods/methods":467,"./ICombine":376}],360:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultKeySelector":455,"./../methods/defaultParentSelector":456,"./../methods/defaultSelector":460,"./../methods/methods":469,"./ICombine":376}],360:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13828,7 +13854,7 @@ var BreadthSubTreeEnumerable = function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/methods":467}],364:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/methods":469}],364:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -14003,7 +14029,7 @@ var DistinctEnumerable = function (_IEnumerable) {
 
 module.exports = DistinctEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/methods":467}],366:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/methods":469}],366:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14108,7 +14134,7 @@ var EachEnumerable = function (_IEnumerable) {
 
 module.exports = EachEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultAction":445}],367:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultAction":447}],367:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14306,7 +14332,7 @@ var ExceptEnumerable = function (_IEnumerable) {
 
 module.exports = ExceptEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/methods":467}],370:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/methods":469}],370:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -14716,7 +14742,7 @@ var GroupJoinEnumerable = function (_IEnumerable) {
 
 module.exports = GroupJoinEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultJoinSelector":452,"./../methods/defaultSelector":458,"./../methods/methods":467,"./Entry":368,"./IGrouping":377}],374:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultJoinSelector":454,"./../methods/defaultSelector":460,"./../methods/methods":469,"./Entry":368,"./IGrouping":377}],374:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14857,7 +14883,7 @@ var GroupedEnumerable = function (_IEnumerable) {
 
 module.exports = GroupedEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultResultSelector":456,"./../methods/defaultSelector":458,"./../methods/equalityPredicate":463,"./../methods/methods":467,"./IGrouping":377}],375:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultResultSelector":458,"./../methods/defaultSelector":460,"./../methods/equalityPredicate":465,"./../methods/methods":469,"./IGrouping":377}],375:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14960,7 +14986,7 @@ var ICombine = function (_ITree) {
 
 module.exports = ICombine;
 
-},{"./../core/core":339,"./../methods/defaultChildrenSetter":447,"./../methods/defaultValueSetter":461,"./ITree":380}],377:[function(require,module,exports){
+},{"./../core/core":339,"./../methods/defaultChildrenSetter":449,"./../methods/defaultValueSetter":463,"./ITree":380}],377:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15101,7 +15127,7 @@ var IMapEnumerable = function (_IEnumerable) {
 
 module.exports = IMapEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultAction":445,"./../methods/defaultKeySelector":453,"./../methods/defaultSameComparer":457,"./../methods/defaultValueSelector":460,"./../methods/methods":467}],379:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultAction":447,"./../methods/defaultKeySelector":455,"./../methods/defaultSameComparer":459,"./../methods/defaultValueSelector":462,"./../methods/methods":469}],379:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15296,7 +15322,7 @@ IOrderedEnumerable.orderByComparer = Symbol('IOrderedEnumerable.orderByComparer'
 
 module.exports = IOrderedEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultComparer":448,"./../methods/defaultSelector":458,"./../methods/methods":467}],380:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultComparer":450,"./../methods/defaultSelector":460,"./../methods/methods":469}],380:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -15935,7 +15961,7 @@ var PrevNodesEnumerable = require('./PrevNodesEnumerable');
 var NextNodesEnumerable = require('./NextNodesEnumerable');
 var SiblingNodesEnumerable = require('./SiblingNodesEnumerable');
 
-},{"./../Enumerable":334,"./../core/core":339,"./../core/exceptions/NotAncestorOfException":345,"./../methods/defaultChildrenSetter":447,"./../methods/defaultEqualityComparer":449,"./../methods/defaultPredicate":455,"./../methods/defaultValueSetter":461,"./../methods/methods":467,"./BinaryTree":353,"./BreadthEnumerable":354,"./BreadthSubTreeEnumerable":355,"./DepthEnumerable":362,"./DepthSubTreeEnumerable":363,"./GeneratorEnumerable":372,"./NextEnumerable":394,"./NextNodesEnumerable":395,"./PathNodesToEnumerable":400,"./PathToEnumerable":401,"./PrevEnumerable":408,"./PrevNodesEnumerable":409,"./SiblingNodesEnumerable":419,"./SiblingsEnumerable":420,"extend":332}],381:[function(require,module,exports){
+},{"./../Enumerable":334,"./../core/core":339,"./../core/exceptions/NotAncestorOfException":345,"./../methods/defaultChildrenSetter":449,"./../methods/defaultEqualityComparer":451,"./../methods/defaultPredicate":457,"./../methods/defaultValueSetter":463,"./../methods/methods":469,"./BinaryTree":353,"./BreadthEnumerable":354,"./BreadthSubTreeEnumerable":355,"./DepthEnumerable":362,"./DepthSubTreeEnumerable":363,"./GeneratorEnumerable":372,"./NextEnumerable":394,"./NextNodesEnumerable":395,"./PathNodesToEnumerable":400,"./PathToEnumerable":401,"./PrevEnumerable":408,"./PrevNodesEnumerable":409,"./SiblingNodesEnumerable":419,"./SiblingsEnumerable":420,"extend":332}],381:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16315,7 +16341,7 @@ var IntersectEnumerable = function (_IEnumerable) {
 
 module.exports = IntersectEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/methods":467}],385:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/methods":469}],385:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16682,7 +16708,7 @@ var JoinEnumerable = function (_IEnumerable) {
 
 module.exports = JoinEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultJoinSelector":452,"./../methods/defaultSelector":458,"./../methods/methods":467}],388:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultJoinSelector":454,"./../methods/defaultSelector":460,"./../methods/methods":469}],388:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16955,7 +16981,7 @@ var LeftJoinEnumerable = function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultJoinSelector":452,"./../methods/defaultSelector":458,"./../methods/methods":467}],389:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultJoinSelector":454,"./../methods/defaultSelector":460,"./../methods/methods":469}],389:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17201,7 +17227,7 @@ var MapEnumerable = function (_IMapEnumerable) {
 
 module.exports = MapEnumerable;
 
-},{"./../core/core":339,"./../methods/defaultSameComparer":457,"./../methods/equalityPredicate":463,"./../methods/methods":467,"./Entry":368,"./IMapEnumerable":378}],392:[function(require,module,exports){
+},{"./../core/core":339,"./../methods/defaultSameComparer":459,"./../methods/equalityPredicate":465,"./../methods/methods":469,"./Entry":368,"./IMapEnumerable":378}],392:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17340,7 +17366,7 @@ var NearGroupedEnumerable = function (_IEnumerable) {
 
 module.exports = NearGroupedEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultResultSelector":456,"./../methods/defaultSelector":458,"./../methods/equalityPredicate":463,"./../methods/methods":467,"./IGrouping":377}],393:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultResultSelector":458,"./../methods/defaultSelector":460,"./../methods/equalityPredicate":465,"./../methods/methods":469,"./IGrouping":377}],393:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17471,7 +17497,7 @@ var NearSplitEnumerable = function (_IEnumerable) {
 
 module.exports = NearSplitEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultFalsePredicate":451,"./../methods/methods":467,"./IChunk":375}],394:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultFalsePredicate":453,"./../methods/methods":469,"./IChunk":375}],394:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17590,7 +17616,7 @@ var NextEnumerable = function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],395:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],395:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17709,7 +17735,7 @@ var NextEnumerable = function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],396:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],396:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17980,7 +18006,7 @@ var OrderByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":448,"./../methods/defaultSelector":458,"./../methods/descendingComparer":462,"./../methods/methods":467,"./../methods/selectorComparer":474,"./IOrderedEnumerable":379}],399:[function(require,module,exports){
+},{"./../methods/defaultComparer":450,"./../methods/defaultSelector":460,"./../methods/descendingComparer":464,"./../methods/methods":469,"./../methods/selectorComparer":476,"./IOrderedEnumerable":379}],399:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18016,7 +18042,7 @@ var OrderByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = OrderByEnumerable;
 
-},{"./../methods/defaultComparer":448,"./../methods/defaultSelector":458,"./../methods/methods":467,"./../methods/selectorComparer":474,"./IOrderedEnumerable":379}],400:[function(require,module,exports){
+},{"./../methods/defaultComparer":450,"./../methods/defaultSelector":460,"./../methods/methods":469,"./../methods/selectorComparer":476,"./IOrderedEnumerable":379}],400:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18916,7 +18942,7 @@ var PrevEnumerable = function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],409:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],409:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19037,7 +19063,7 @@ var PrevEnumerable = function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],410:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],410:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19553,7 +19579,7 @@ var LeftJoinEnumerable = function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/defaultJoinSelector":452,"./../methods/defaultSelector":458,"./../methods/methods":467}],415:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/defaultJoinSelector":454,"./../methods/defaultSelector":460,"./../methods/methods":469}],415:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19776,7 +19802,7 @@ var SelectEnumerable = function (_IEnumerable) {
 
 module.exports = SelectEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultSelector":458,"./../methods/methods":467}],417:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultSelector":460,"./../methods/methods":469}],417:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19939,7 +19965,7 @@ module.exports = SelectManyEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultResultSelector":456,"./../methods/defaultSelector":458,"./../methods/methods":467}],418:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultResultSelector":458,"./../methods/defaultSelector":460,"./../methods/methods":469}],418:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20086,7 +20112,7 @@ var SeparateEnumerable = function (_IEnumerable) {
 
 module.exports = SeparateEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultChildrenSelector":446,"./../methods/defaultValueSelector":460,"./../methods/methods":467}],419:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultChildrenSelector":448,"./../methods/defaultValueSelector":462,"./../methods/methods":469}],419:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20210,7 +20236,7 @@ var SiblingsEnumerable = function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],420:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],420:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20334,7 +20360,7 @@ var SiblingsEnumerable = function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467,"./ITree":380}],421:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469,"./ITree":380}],421:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20501,6 +20527,143 @@ var core = require('./../core/core');
 
 var methods = require('./../methods/methods');
 
+var defaultSameComparer = require('./../methods/defaultSameComparer');
+
+var SkipSameEnumerable = function (_IEnumerable) {
+    _inherits(SkipSameEnumerable, _IEnumerable);
+
+    function SkipSameEnumerable(source) {
+        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
+
+        _classCallCheck(this, SkipSameEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (SkipSameEnumerable.__proto__ || Object.getPrototypeOf(SkipSameEnumerable)).call(this, source));
+
+        comparer = methods.asComparer(comparer);
+        core.defineProperty(_this, Symbol.iterator, /*#__PURE__*/regeneratorRuntime.mark(function SkipSameIterator() {
+            var first, firstElement, firstSkiped, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
+
+            return regeneratorRuntime.wrap(function SkipSameIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            first = true, firstElement = false, firstSkiped = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 4;
+                            _iterator = source[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 25;
+                                break;
+                            }
+
+                            element = _step.value;
+
+                            if (!first) {
+                                _context.next = 13;
+                                break;
+                            }
+
+                            firstElement = element;
+                            first = false;
+                            _context.next = 22;
+                            break;
+
+                        case 13:
+                            if (!firstSkiped) {
+                                _context.next = 18;
+                                break;
+                            }
+
+                            _context.next = 16;
+                            return element;
+
+                        case 16:
+                            _context.next = 22;
+                            break;
+
+                        case 18:
+                            if (comparer(element, firstElement)) {
+                                _context.next = 22;
+                                break;
+                            }
+
+                            firstSkiped = true;
+                            _context.next = 22;
+                            return element;
+
+                        case 22:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 6;
+                            break;
+
+                        case 25:
+                            _context.next = 31;
+                            break;
+
+                        case 27:
+                            _context.prev = 27;
+                            _context.t0 = _context['catch'](4);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 31:
+                            _context.prev = 31;
+                            _context.prev = 32;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 34:
+                            _context.prev = 34;
+
+                            if (!_didIteratorError) {
+                                _context.next = 37;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 37:
+                            return _context.finish(34);
+
+                        case 38:
+                            return _context.finish(31);
+
+                        case 39:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, SkipSameIterator, this, [[4, 27, 31, 39], [32,, 34, 38]]);
+        }));
+        return _this;
+    }
+
+    return SkipSameEnumerable;
+}(IEnumerable);
+
+module.exports = SkipSameEnumerable;
+
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultSameComparer":459,"./../methods/methods":469}],424:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+
 var defaultPredicate = require('./../methods/defaultPredicate');
 
 var SkipWhileEnumerable = function (_IEnumerable) {
@@ -20600,7 +20763,7 @@ var SkipWhileEnumerable = function (_IEnumerable) {
 
 module.exports = SkipWhileEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467}],424:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469}],425:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -20734,7 +20897,7 @@ var SliceEnumerable = function (_IEnumerable) {
 
 module.exports = SliceEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339}],425:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339}],426:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -20800,7 +20963,7 @@ module.exports = SortEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultComparer":448,"./../methods/methods":467}],426:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultComparer":450,"./../methods/methods":469}],427:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -21089,7 +21252,7 @@ var SpliceEnumerable = function (_IEnumerable) {
 
 module.exports = SpliceEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339}],427:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339}],428:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21215,7 +21378,7 @@ var SplitEnumerable = function (_IEnumerable) {
 
 module.exports = SplitEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultFalsePredicate":451,"./../methods/methods":467,"./IChunk":375}],428:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultFalsePredicate":453,"./../methods/methods":469,"./IChunk":375}],429:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21283,7 +21446,7 @@ var StringEnumerable = function (_IterableEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"./../Enumerable":334,"./../core/core":339,"./../methods/defaultStrictEqualityComparer":459,"./../methods/methods":467,"./IterableEnumerable":385}],429:[function(require,module,exports){
+},{"./../Enumerable":334,"./../core/core":339,"./../methods/defaultStrictEqualityComparer":461,"./../methods/methods":469,"./IterableEnumerable":385}],430:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21471,7 +21634,7 @@ var SymmetricEnumerable = function (_IEnumerable) {
 
 module.exports = SymmetricEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/methods":467}],430:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/methods":469}],431:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21586,7 +21749,141 @@ var TakeEnumerable = function (_IEnumerable) {
 
 module.exports = TakeEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339}],431:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339}],432:[function(require,module,exports){
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var methods = require('./../methods/methods');
+
+var defaultSameComparer = require('./../methods/defaultSameComparer');
+
+var TakeSameEnumerable = function (_IEnumerable) {
+    _inherits(TakeSameEnumerable, _IEnumerable);
+
+    function TakeSameEnumerable(source) {
+        var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
+
+        _classCallCheck(this, TakeSameEnumerable);
+
+        var _this = _possibleConstructorReturn(this, (TakeSameEnumerable.__proto__ || Object.getPrototypeOf(TakeSameEnumerable)).call(this, source));
+
+        comparer = methods.asComparer(comparer);
+        core.defineProperty(_this, Symbol.iterator, /*#__PURE__*/regeneratorRuntime.mark(function TakeSameIterator() {
+            var first, firstElement, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, element;
+
+            return regeneratorRuntime.wrap(function TakeSameIterator$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            first = true, firstElement = false;
+                            _iteratorNormalCompletion = true;
+                            _didIteratorError = false;
+                            _iteratorError = undefined;
+                            _context.prev = 4;
+                            _iterator = source[Symbol.iterator]();
+
+                        case 6:
+                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                _context.next = 24;
+                                break;
+                            }
+
+                            element = _step.value;
+
+                            if (!first) {
+                                _context.next = 15;
+                                break;
+                            }
+
+                            firstElement = element;
+                            first = false;
+                            _context.next = 13;
+                            return element;
+
+                        case 13:
+                            _context.next = 21;
+                            break;
+
+                        case 15:
+                            if (!comparer(element, firstElement)) {
+                                _context.next = 20;
+                                break;
+                            }
+
+                            _context.next = 18;
+                            return element;
+
+                        case 18:
+                            _context.next = 21;
+                            break;
+
+                        case 20:
+                            return _context.abrupt('break', 24);
+
+                        case 21:
+                            _iteratorNormalCompletion = true;
+                            _context.next = 6;
+                            break;
+
+                        case 24:
+                            _context.next = 30;
+                            break;
+
+                        case 26:
+                            _context.prev = 26;
+                            _context.t0 = _context['catch'](4);
+                            _didIteratorError = true;
+                            _iteratorError = _context.t0;
+
+                        case 30:
+                            _context.prev = 30;
+                            _context.prev = 31;
+
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+
+                        case 33:
+                            _context.prev = 33;
+
+                            if (!_didIteratorError) {
+                                _context.next = 36;
+                                break;
+                            }
+
+                            throw _iteratorError;
+
+                        case 36:
+                            return _context.finish(33);
+
+                        case 37:
+                            return _context.finish(30);
+
+                        case 38:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, TakeSameIterator, this, [[4, 26, 30, 38], [31,, 33, 37]]);
+        }));
+        return _this;
+    }
+
+    return TakeSameEnumerable;
+}(IEnumerable);
+
+module.exports = TakeSameEnumerable;
+
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultSameComparer":459,"./../methods/methods":469}],433:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21707,7 +22004,7 @@ var TakeWhileEnumerable = function (_IEnumerable) {
 
 module.exports = TakeWhileEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467}],432:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469}],434:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21745,7 +22042,7 @@ var ThenByDescendingEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":448,"./../methods/defaultSelector":458,"./../methods/descendingComparer":462,"./../methods/methods":467,"./../methods/selectorComparer":474,"./../methods/thenByComparer":476,"./IOrderedEnumerable":379}],433:[function(require,module,exports){
+},{"./../methods/defaultComparer":450,"./../methods/defaultSelector":460,"./../methods/descendingComparer":464,"./../methods/methods":469,"./../methods/selectorComparer":476,"./../methods/thenByComparer":478,"./IOrderedEnumerable":379}],435:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21782,7 +22079,7 @@ var ThenByEnumerable = function (_IOrderedEnumerable) {
 
 module.exports = ThenByEnumerable;
 
-},{"./../methods/defaultComparer":448,"./../methods/defaultSelector":458,"./../methods/methods":467,"./../methods/selectorComparer":474,"./../methods/thenByComparer":476,"./IOrderedEnumerable":379}],434:[function(require,module,exports){
+},{"./../methods/defaultComparer":450,"./../methods/defaultSelector":460,"./../methods/methods":469,"./../methods/selectorComparer":476,"./../methods/thenByComparer":478,"./IOrderedEnumerable":379}],436:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21892,7 +22189,7 @@ var TreeEnumerable = function (_ITree) {
 
 module.exports = TreeEnumerable;
 
-},{"./../methods/defaultChildrenSelector":446,"./../methods/defaultValueSelector":460,"./../methods/methods":467,"./ITree":380}],435:[function(require,module,exports){
+},{"./../methods/defaultChildrenSelector":448,"./../methods/defaultValueSelector":462,"./../methods/methods":469,"./ITree":380}],437:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22070,7 +22367,7 @@ var UnionEnumerable = function (_IEnumerable) {
 
 module.exports = UnionEnumerable;
 
-},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":449,"./../methods/methods":467}],436:[function(require,module,exports){
+},{"./../Enumerable":334,"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultEqualityComparer":451,"./../methods/methods":469}],438:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22182,7 +22479,7 @@ var WhereEnumerable = function (_IEnumerable) {
 
 module.exports = WhereEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467}],437:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469}],439:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22299,7 +22596,7 @@ var WipeEnumerable = function (_IEnumerable) {
 
 module.exports = WipeEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":455,"./../methods/methods":467}],438:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultPredicate":457,"./../methods/methods":469}],440:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22367,7 +22664,7 @@ var ZipEnumerable = function (_IEnumerable) {
 
 module.exports = ZipEnumerable;
 
-},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultResultSelector":456}],439:[function(require,module,exports){
+},{"./../IEnumerable":335,"./../core/core":339,"./../methods/defaultResultSelector":458}],441:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -22508,17 +22805,27 @@ var extendObject = {
         return Enumerable.skip(this, count);
     },
     skipWhile: function skipWhile() {
-        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
         return Enumerable.skipWhile(this, predicate);
+    },
+    skipSame: function skipSame() {
+        var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
+
+        return Enumerable.skipSame(this, comparer);
     },
     take: function take(count) {
         return Enumerable.take(this, count);
     },
     takeWhile: function takeWhile() {
-        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate();
+        var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
 
         return Enumerable.takeWhile(this, predicate);
+    },
+    takeSame: function takeSame() {
+        var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
+
+        return Enumerable.takeSame(this, comparer);
     },
     sorted: function sorted() {
         var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
@@ -23274,7 +23581,7 @@ Enumerable.extend = function (prototype, type) {
     return prototype;
 };
 
-},{"./Enumerable":334,"./core/core":339,"./methods/defaultAction":445,"./methods/defaultChildrenSelector":446,"./methods/defaultComparer":448,"./methods/defaultEqualityComparer":449,"./methods/defaultFalsePredicate":451,"./methods/defaultJoinSelector":452,"./methods/defaultKeySelector":453,"./methods/defaultParentSelector":454,"./methods/defaultPredicate":455,"./methods/defaultResultSelector":456,"./methods/defaultSameComparer":457,"./methods/defaultSelector":458,"./methods/defaultStrictEqualityComparer":459,"./methods/defaultValueSelector":460,"./methods/methods":467}],440:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339,"./methods/defaultAction":447,"./methods/defaultChildrenSelector":448,"./methods/defaultComparer":450,"./methods/defaultEqualityComparer":451,"./methods/defaultFalsePredicate":453,"./methods/defaultJoinSelector":454,"./methods/defaultKeySelector":455,"./methods/defaultParentSelector":456,"./methods/defaultPredicate":457,"./methods/defaultResultSelector":458,"./methods/defaultSameComparer":459,"./methods/defaultSelector":460,"./methods/defaultStrictEqualityComparer":461,"./methods/defaultValueSelector":462,"./methods/methods":469}],442:[function(require,module,exports){
 'use strict';
 
 /**
@@ -23384,7 +23691,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":334,"./core/core":339}],441:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339}],443:[function(require,module,exports){
 'use strict';
 
 /**
@@ -23403,7 +23710,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":334,"./core/core":339}],442:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339}],444:[function(require,module,exports){
 'use strict';
 
 /**
@@ -23422,7 +23729,7 @@ module.exports = {
 	}
 };
 
-},{"./Enumerable":334,"./core/core":339}],443:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339}],445:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -23677,7 +23984,7 @@ module.exports = g.Enumerable = Enumerable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":334,"./core/core":339,"./enumerables/ArrayEnumerable":351,"./enumerables/IteratorEnumerable":386,"./enumerables/MapEnumerable":391,"./enumerables/ObjectEnumerable":396,"./enumerables/StringEnumerable":428,"./enumerables/TreeEnumerable":434,"./linq-array":440,"./linq-object":441,"./linq-string":442,"babel-polyfill":1}],444:[function(require,module,exports){
+},{"./Enumerable":334,"./core/core":339,"./enumerables/ArrayEnumerable":351,"./enumerables/IteratorEnumerable":386,"./enumerables/MapEnumerable":391,"./enumerables/ObjectEnumerable":396,"./enumerables/StringEnumerable":429,"./enumerables/TreeEnumerable":436,"./linq-array":442,"./linq-object":443,"./linq-string":444,"babel-polyfill":1}],446:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -23703,19 +24010,19 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":449,"./methods":467}],445:[function(require,module,exports){
+},{"./defaultEqualityComparer":451,"./methods":469}],447:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, key) {};
 
-},{}],446:[function(require,module,exports){
+},{}],448:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.children === 'undefined' ? element : element.children;
 };
 
-},{}],447:[function(require,module,exports){
+},{}],449:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -23724,7 +24031,7 @@ module.exports = function (element, value) {
     }
 };
 
-},{}],448:[function(require,module,exports){
+},{}],450:[function(require,module,exports){
 'use strict';
 
 var IComparable = require('./../core/IComparable');
@@ -23733,7 +24040,7 @@ module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
 
-},{"./../core/IComparable":337}],449:[function(require,module,exports){
+},{"./../core/IComparable":337}],451:[function(require,module,exports){
 'use strict';
 
 var IEquatable = require('./../core/IEquatable');
@@ -23742,84 +24049,84 @@ module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
-},{"./../core/IEquatable":338}],450:[function(require,module,exports){
+},{"./../core/IEquatable":338}],452:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element !== 'undefined' && element !== null;
 };
 
-},{}],451:[function(require,module,exports){
+},{}],453:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return false;
 };
 
-},{}],452:[function(require,module,exports){
+},{}],454:[function(require,module,exports){
 'use strict';
 
 module.exports = function (outer, inner) {
   return { outer: outer, inner: inner };
 };
 
-},{}],453:[function(require,module,exports){
+},{}],455:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.key;
 };
 
-},{}],454:[function(require,module,exports){
+},{}],456:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element.parent;
 };
 
-},{}],455:[function(require,module,exports){
+},{}],457:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
-},{}],456:[function(require,module,exports){
+},{}],458:[function(require,module,exports){
 'use strict';
 
 module.exports = function (key, result) {
   return result;
 };
 
-},{}],457:[function(require,module,exports){
+},{}],459:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other || typeof element === 'number' && typeof other === 'number' && isNaN(element) && isNaN(other);
 };
 
-},{}],458:[function(require,module,exports){
+},{}],460:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element;
 };
 
-},{}],459:[function(require,module,exports){
+},{}],461:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other;
 };
 
-},{}],460:[function(require,module,exports){
+},{}],462:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.value === 'undefined' ? element : element.value;
 };
 
-},{}],461:[function(require,module,exports){
+},{}],463:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -23828,7 +24135,7 @@ module.exports = function (element, value) {
     }
 };
 
-},{}],462:[function(require,module,exports){
+},{}],464:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderBy) {
@@ -23837,7 +24144,7 @@ module.exports = function (orderBy) {
   };
 };
 
-},{}],463:[function(require,module,exports){
+},{}],465:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -23853,7 +24160,7 @@ module.exports = function (value) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":449,"./methods":467}],464:[function(require,module,exports){
+},{"./defaultEqualityComparer":451,"./methods":469}],466:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -23873,7 +24180,7 @@ module.exports = function (greaterThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":449,"./methods":467}],465:[function(require,module,exports){
+},{"./defaultEqualityComparer":451,"./methods":469}],467:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -23891,7 +24198,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":458,"./methods":467}],466:[function(require,module,exports){
+},{"./defaultSelector":460,"./methods":469}],468:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -23911,7 +24218,7 @@ module.exports = function (lessThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":449,"./methods":467}],467:[function(require,module,exports){
+},{"./defaultEqualityComparer":451,"./methods":469}],469:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -24011,7 +24318,7 @@ var arrayComparer = require('./arrayComparer');
 var propertiesPredicate = require('./propertiesPredicate');
 var regexpPredicate = require('./regexpPredicate');
 
-},{"./../core/core":339,"./../core/exceptions/InvalidFunctionException":341,"./arrayComparer":444,"./defaultComparer":448,"./defaultEqualityComparer":449,"./defaultSameComparer":457,"./defaultStrictEqualityComparer":459,"./propertiesPredicate":470,"./propertySelector":471,"./propertySetter":472,"./regexpPredicate":473,"./selectorComparer":474,"./selectorPredicate":475}],468:[function(require,module,exports){
+},{"./../core/core":339,"./../core/exceptions/InvalidFunctionException":341,"./arrayComparer":446,"./defaultComparer":450,"./defaultEqualityComparer":451,"./defaultSameComparer":459,"./defaultStrictEqualityComparer":461,"./propertiesPredicate":472,"./propertySelector":473,"./propertySetter":474,"./regexpPredicate":475,"./selectorComparer":476,"./selectorPredicate":477}],470:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -24027,7 +24334,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":450,"./methods":467}],469:[function(require,module,exports){
+},{"./defaultExistsPredicate":452,"./methods":469}],471:[function(require,module,exports){
 'use strict';
 
 module.exports = function (array) {
@@ -24053,7 +24360,7 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./methods":467}],470:[function(require,module,exports){
+},{"./methods":469}],472:[function(require,module,exports){
 'use strict';
 
 var defaultSameComparer = require('./defaultSameComparer');
@@ -24091,7 +24398,7 @@ module.exports = function (properties) {
 var methods = require('./methods');
 var core = require('./../core/core');
 
-},{"./../core/core":339,"./defaultSameComparer":457,"./methods":467,"./propertySelector":471}],471:[function(require,module,exports){
+},{"./../core/core":339,"./defaultSameComparer":459,"./methods":469,"./propertySelector":473}],473:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -24129,7 +24436,7 @@ module.exports = function (property) {
 	}
 };
 
-},{"./../core/core":339,"./../core/exceptions/PropertyExpressionInvalidException":349}],472:[function(require,module,exports){
+},{"./../core/core":339,"./../core/exceptions/PropertyExpressionInvalidException":349}],474:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -24176,7 +24483,7 @@ module.exports = function (property) {
 	}
 };
 
-},{"./../core/core":339,"./../core/exceptions/PropertyExpressionInvalidException":349}],473:[function(require,module,exports){
+},{"./../core/core":339,"./../core/exceptions/PropertyExpressionInvalidException":349}],475:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -24192,7 +24499,7 @@ module.exports = function (regexp) {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":458,"./methods":467}],474:[function(require,module,exports){
+},{"./defaultSelector":460,"./methods":469}],476:[function(require,module,exports){
 'use strict';
 
 module.exports = function (selector, comparer) {
@@ -24204,7 +24511,7 @@ module.exports = function (selector, comparer) {
 
 var methods = require('./methods');
 
-},{"./methods":467}],475:[function(require,module,exports){
+},{"./methods":469}],477:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -24221,7 +24528,7 @@ module.exports = function (selector) {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":450,"./methods":467}],476:[function(require,module,exports){
+},{"./defaultExistsPredicate":452,"./methods":469}],478:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderByComparer, thenByComparer) {
@@ -24231,7 +24538,7 @@ module.exports = function (orderByComparer, thenByComparer) {
     };
 };
 
-},{}],477:[function(require,module,exports){
+},{}],479:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -24472,6 +24779,6 @@ Enumerable.removePlugins = function () {
 	return this;
 };
 
-},{"./Enumerable":334,"./IEnumerable":335,"./core/core":339,"./core/exceptions/PluginRepeatException":348}]},{},[443])(443)
+},{"./Enumerable":334,"./IEnumerable":335,"./core/core":339,"./core/exceptions/PluginRepeatException":348}]},{},[445])(445)
 });
 //# sourceMappingURL=linq.js.map
