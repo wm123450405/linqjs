@@ -278,10 +278,16 @@ declare namespace Enumerable {
     export function skipWhile<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
     export function skipWhile<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
 
+    export function skipSame<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
+    export function skipSame<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
+
     export function take<T>(source: T[] | IEnumerable<T>, count: number): IEnumerable<T>;
 
     export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
     export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
+
+    export function takeSame<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
+    export function takeSame<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
     export function slice<T>(source: T[] | IEnumerable<T>, start: number, end: number): IEnumerable<T>;
 
@@ -737,10 +743,16 @@ declare namespace Enumerable {
         skipWhile(predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
         skipWhile(predicate: string | number | symbol | T | any): IEnumerable<T>;
 
+        skipSame(comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
+        skipSame(comparer: string | number | symbol): IEnumerable<T>;
+
         take(count: number): IEnumerable<T>;
 
         takeWhile(predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
         takeWhile(predicate: string | number | symbol | T | any): IEnumerable<T>;
+
+        takeSame(comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
+        takeSame(comparer: string | number | symbol): IEnumerable<T>;
 
         slice(start: number, end: number): IEnumerable<T>;
 

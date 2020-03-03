@@ -92,14 +92,20 @@ const extendObject = {
     skip(count) {
         return Enumerable.skip(this, count);
     },
-    skipWhile(predicate = defaultPredicate()) {
+    skipWhile(predicate = defaultPredicate) {
         return Enumerable.skipWhile(this, predicate);
+    },
+    skipSame(comparer = defaultSameComparer) {
+        return Enumerable.skipSame(this, comparer);
     },
     take(count) {
         return Enumerable.take(this, count);
     },
-    takeWhile(predicate = defaultPredicate()) {
+    takeWhile(predicate = defaultPredicate) {
         return Enumerable.takeWhile(this, predicate);
+    },
+    takeSame(comparer = defaultSameComparer) {
+        return Enumerable.takeSame(this, comparer);
     },
     sorted(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.sorted(this, keySelector, comparer);
