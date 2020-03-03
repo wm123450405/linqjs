@@ -160,15 +160,31 @@
 		"version": "2.1.23"
 	},
 	{
-		"prepublish": true,
+		"publish": "2020-03-03",
 		"contents": [
 			"新增(New):",
 			"1. 为一些方法增加别名, 方便其他语言使用者更容易的转移",
+			"2. 新增 conflict 方法用来判断一个序列中是否包含重复的元素",
+			"3. 新增 nearSplit 方法用来分割一个序列,与 split 方法区别在于连续的符合条件的分割元素之间将不会被分割出空序列",
+			"4. 新增 skipSame, takeSame 方法用来获取或忽略开头部分相同的元素",
 			"",
 			"优化(Optimization):",
 			"",
-			"修复(Fixed):"
+			"修复(Fixed):",
+			"1. 修复 skipWhile, takeWhile 方法默认参数错误的bug"
 		],
-		"version": "2.1.24.pre"
+		"version": "2.1.24"
+	},
+	{
+		"prepublish": true,
+		"contents": [
+			"新增(New):",
+			"",
+			"优化(Optimization):",
+			"",
+			"修复(Fixed):",
+			""
+		],
+		"version": "2.1.25.pre"
 	}
 ]

@@ -1,7 +1,7 @@
 {
     "histroys": [
         {
-            "since": "2.1.23",
+            "since": "2.1.24.pre",
             "overloads": [
                 {
                     "lazy": true,
@@ -51,7 +51,7 @@
                             "包含输入序列中被所有满足条件的元素拆分成若干序列的新序列"
                         ]
                     },
-                    "description": "通过筛选器筛拆分序列",
+                    "description": "通过筛选器筛拆分序列,相邻的符合条件的元素之间将不会拆分成新的空序列",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
                     ],
@@ -61,25 +61,13 @@
                         },
                         {
                             "apis": "IChunk"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "split"
                         }
                     ],
                     "examples": [
-                    ]
-                }
-            ]
-        },
-        {
-            "ref": true,
-            "since": "2.1.24.pre",
-            "overloads": [
-                {
-                    "sees": [
-                        { },
-                        { },
-                        {
-                            "apis": "IEnumerable",
-                            "method": "nearSplit"
-                        }
                     ]
                 }
             ]

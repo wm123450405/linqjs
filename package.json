@@ -29,7 +29,7 @@
     "file-loader": "^0.10.1",
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
-    "linq-js": "^2.1.19",
+    "linq-js": "git+https://gitee.com/wm123450405/linqjs#master",
     "node-sass": "^4.5.1",
     "npm-install-version": "^6.0.2",
     "sass-loader": "^6.0.3",
@@ -50,5 +50,9 @@
   "bugs": {
     "url": "https://github.com/wm123450405/linqjs/issues"
   },
-  "homepage": "https://github.com/wm123450405/linqjs#readme"
+  "homepage": "https://github.com/wm123450405/linqjs#readme",
+  "dependencies": {
+    "deasync": "^0.1.15",
+    "node-gyp": "^5.0.4"
+  }
 }

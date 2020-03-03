@@ -350,6 +350,28 @@
 			]
 		},
 		{
+			"name": "conflict",
+			"histroys": [
+				{
+					"since": "2.1.24.pre",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回序列中是否存在相同元素",
+							"parameters": [
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "contains",
 			"histroys": [
 				{
@@ -1893,6 +1915,25 @@
 			]
 		},
 		{
+			"name": "nearSplit",
+			"histroys": [
+				{
+					"since": "2.1.24.pre",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过筛选器筛拆分序列,相邻的符合条件的元素之间将不会拆分成新的空序列",
+							"parameters": [
+								{
+									"name": "splitPredicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "ofType",
 			"histroys": [
 				{
@@ -2560,6 +2601,25 @@
 			]
 		},
 		{
+			"name": "skipSame",
+			"histroys": [
+				{
+					"since": "2.1.24",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "跳过序列开头与第一个元素相同的所有元素，然后返回剩余元素",
+							"parameters": [
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "skipWhile",
 			"histroys": [
 				{
@@ -2736,6 +2796,20 @@
 			"histroys": [
 				{
 					"since": "2.1.23",
+					"deprecated": "2.1.24.NaN.pre",
+					"overloads": [
+						{
+							"description": "通过筛选器筛拆分序列",
+							"parameters": [
+								{
+									"name": "splitPredicate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.1.24.pre",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -2817,6 +2891,25 @@
 							"parameters": [
 								{
 									"name": "count"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "takeSame",
+			"histroys": [
+				{
+					"since": "2.1.24",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "捡取序列开头与第一个元素相同的所有元素，返回被捡取的所有元素，含第一个元素",
+							"parameters": [
+								{
+									"name": "comparer"
 								}
 							]
 						}

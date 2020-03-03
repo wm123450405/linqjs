@@ -1,23 +1,21 @@
 {
     "histroys": [
         {
-            "since": "2.1.23",
+            "since": "2.1.24",
             "overloads": [
                 {
                     "lazy": true,
                     "parameters": [
                         {
-                            "name": "splitPredicate",
+                            "name": "comparer",
                             "types": [
                                 "function",
                                 "string",
-                                "symbol",
                                 "number",
-                                "array",
-                                "object"
+                                "symbol"
                             ],
                             "descriptions": [
-                                "用于检测每个元素是否满足条件的函数"
+                                "用于检测与第一个元素是否相同的相等比较器"
                             ],
                             "declare": {
                                 "returns": {
@@ -31,9 +29,9 @@
                                         ]
                                     },
                                     {
-                                        "name": "index",
+                                        "name": "other",
                                         "types": [
-                                            "number"
+                                            "any"
                                         ]
                                     }
                                 ]
@@ -42,44 +40,32 @@
                     ],
                     "returns": {
                         "type": "IEnumerable",
-                        "generics": [
-                            {
-                                "name": "IChunk"
-                            }
-                        ],
                         "descriptions": [
-                            "包含输入序列中被所有满足条件的元素拆分成若干序列的新序列"
+                            "获取从源序列第一个元素开始, 连续所有与第一个元素相同的元素, 组成新的元素序列"
                         ]
                     },
-                    "description": "通过筛选器筛拆分序列",
+                    "description": "捡取序列开头与第一个元素相同的所有元素，返回被捡取的所有元素，含第一个元素",
                     "remarks": [
                         "此方法通过延迟执行的方式实现"
                     ],
                     "sees": [
                         {
-                            "guide": "predicate"
+                            "apis": "IEnumerable",
+                            "method": "take"
                         },
                         {
-                            "apis": "IChunk"
+                            "apis": "IEnumerable",
+                            "method": "takeWhile"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "skipSame"
+                        },
+                        {
+                            "guide": "comparer"
                         }
                     ],
                     "examples": [
-                    ]
-                }
-            ]
-        },
-        {
-            "ref": true,
-            "since": "2.1.24.pre",
-            "overloads": [
-                {
-                    "sees": [
-                        { },
-                        { },
-                        {
-                            "apis": "IEnumerable",
-                            "method": "nearSplit"
-                        }
                     ]
                 }
             ]

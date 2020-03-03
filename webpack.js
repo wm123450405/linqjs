@@ -157,8 +157,9 @@ const install = (packageName, options) => {
 };
 
 for (let version of common.versions) {
+    console.log('Installing linq-js@' + version);
     if (version.endsWith('.pre')) {
-        install('wm123450405/linqjs', { overwrite: pack || reload, destination: common.module(version) });
+        install('git+https://gitee.com/wm123450405/linqjs#master', { overwrite: pack || reload, destination: common.module(version) });
     } else {
         install('linq-js@' + version, { destination: common.module(version) });
     }

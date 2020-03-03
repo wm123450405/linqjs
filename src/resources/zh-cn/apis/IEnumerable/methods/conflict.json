@@ -1,0 +1,86 @@
+{
+    "histroys": [
+        {
+            "since": "2.1.24.pre",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "selector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于提取每个元素的属性的函数"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "any"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string"
+                            ],
+                            "descriptions": [
+                                "用于对值进行比较的相等比较器"
+                            ],
+                            "defaultValue": "defaultEqualityComparer",
+                            "declare": {
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ],
+                                "returns": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "boolean",
+                        "descriptions": [
+                            "表示序列中是否存在相同元素"
+                        ]
+                    },
+                    "description": "返回序列中是否存在相同元素",
+                    "sees": [
+                        {
+                            "apis": "Enumerable.selects",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "equality"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
