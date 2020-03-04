@@ -377,6 +377,9 @@ class IEnumerable extends Array {
     random() {
         return Enumerable.random(this);
     }
+    randomOrDefault(defaultValue) {
+        return Enumerable.randomOrDefault(this, defaultValue);
+    }
     wipe(predicate = defaultPredicate, count = 0) {
         return Enumerable.wipe(this, predicate, count);
     }

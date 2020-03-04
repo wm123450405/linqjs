@@ -255,6 +255,8 @@ declare namespace Enumerable {
 
     export function random<T>(source: T[] | IEnumerable<T>): T;
 
+    export function randomOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T): T;
+
     export function reduce<T, TSeed>(source: T[] | IEnumerable<T>, callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 
     export function reduceRight<T, TSeed>(source: T[] | IEnumerable<T>, callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
@@ -721,6 +723,8 @@ declare namespace Enumerable {
         rand(count: number): IEnumerable<T>;
 
         random(): T;
+
+        randomOrDefault(defaultValue: T): T;
 
         reduce<TSeed>(callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 
