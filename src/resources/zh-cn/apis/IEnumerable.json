@@ -2158,7 +2158,7 @@
 			"name": "random",
 			"histroys": [
 				{
-					"since": "2.1.20",
+					"since": "2.1.25",
 					"deprecated": 0,
 					"overloads": [
 						{
@@ -2173,7 +2173,7 @@
 			"name": "randomOrDefault",
 			"histroys": [
 				{
-					"since": "2.1.20",
+					"since": "2.1.25",
 					"deprecated": 0,
 					"overloads": [
 						{

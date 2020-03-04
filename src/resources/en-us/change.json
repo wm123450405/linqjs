@@ -183,7 +183,7 @@
 			"优化(Optimization):",
 			"",
 			"修复(Fixed):",
-			""
+			"1. 修复了 IEnumerable 中未注册 random、 randomOrDefault 方法的问题"
 		],
 		"version": "2.1.25.pre"
 	}
