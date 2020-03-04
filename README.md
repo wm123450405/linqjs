@@ -55,7 +55,7 @@ function asEnumerable():IEnumerable;
 
 ### 3. Use IEnumerable instance 使用IEnumerable对象
 
-> e.g. 案例
+> e.g. 案例 简单的判断数组中的数据
 > ```javascript
 > let pets = [ { name: "Barley", age: 8, vaccinated: true }, { name: "Boots", age: 4, vaccinated: false }, { name: "Whiskers", age: 1, vaccinated: false } ];
 > let unvaccinated = pets.asEnumerable().any(p => p.age > 1 && p.vaccinated === false);
@@ -64,7 +64,7 @@ function asEnumerable():IEnumerable;
 > //  There are unvaccinated animals over age one.
 > ```
 
-> e.g. 案例
+> e.g. 案例 两个数组进行内连接查询
 > ```javascript
 > let magnus = { name: "Hedlund, Magnus" }, terry = { name: "Adams, Terry" }, charlotte = { name: "Weiss, Charlotte" };
 > let barley = { name: "Barley", owner: terry }, boots = { name: "Boots", owner: terry }, whiskers = { name: "Whiskers", owner: charlotte }, daisy = { name: "Daisy", owner: magnus };
