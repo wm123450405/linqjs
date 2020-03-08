@@ -16,6 +16,7 @@ const defaultJoinSelector = require('./methods/defaultJoinSelector');
 const defaultKeySelector = require('./methods/defaultKeySelector');
 const defaultValueSelector = require('./methods/defaultValueSelector');
 const defaultParentSelector = require('./methods/defaultParentSelector');
+const defaultIndexSelector = require('./methods/defaultIndexSelector');
 const defaultChildrenSelector = require('./methods/defaultChildrenSelector');
 const defaultChildrenSetter = require('./methods/defaultChildrenSetter');
 const defaultValueSetter = require('./methods/defaultValueSetter');
@@ -567,6 +568,19 @@ Enumerable.count = function(source, predicate = defaultPredicate) {
     }
     return count;
 };
+Enumerable.proportion(source, predicate = defaultPredicate) {
+    if (predicate === defaultPredicate) return 1;
+    let count = 0, selected = 0, index = 0;
+    source = asIterable(source);
+    predicate = methods.asPredicate(predicate);
+    for (let element of source) {
+        if (predicate(element, index++)) {
+            selected++;
+        }
+        count++;
+    }
+    return count === 0 ? 1 : selected / count;
+}
 Enumerable.aggregate = function(source, seed, func, resultSelector = defaultSelector) {
     let index = 0;
     source = asIterable(source);
@@ -986,6 +1000,9 @@ core.defineProperty(Enumerable, 'selectors', () => ({
     },
     get join() {
         return defaultJoinSelector;
+    },
+    get index() {
+        return defaultIndexSelector;
     },
     property(property, ignoreInvalid = false) {
     	return propertySelector(property, ignoreInvalid);
