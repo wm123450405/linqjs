@@ -8,8 +8,7 @@ class TakeProportionEnumerable extends IEnumerable {
     constructor(source, proportion = 1) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* TakeProportionIterator() {
-            if (proportion !== 0) {
-                proportion = proportion > 0 ? proportion : (1 - proportion);
+            if (proportion > 0) {
                 let count = 0, taked = 0, queue = [];
                 for (let element of source) {
                     count++;

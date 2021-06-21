@@ -13290,12 +13290,11 @@ var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(proportion !== 0)) {
-                _context.next = 13;
+              if (!(proportion > 0)) {
+                _context.next = 12;
                 break;
               }
 
-              proportion = proportion > 0 ? proportion : 1 - proportion;
               count = 0, skiped = 0, queue = [];
               _iterator = _createForOfIteratorHelper(source);
 
@@ -13318,22 +13317,22 @@ var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
               _i = 0, _queue = queue;
 
-            case 6:
+            case 5:
               if (!(_i < _queue.length)) {
-                _context.next = 13;
+                _context.next = 12;
                 break;
               }
 
               element = _queue[_i];
-              _context.next = 10;
+              _context.next = 9;
               return element;
 
-            case 10:
+            case 9:
               _i++;
-              _context.next = 6;
+              _context.next = 5;
               break;
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -14660,21 +14659,20 @@ var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(proportion !== 0)) {
-                _context.next = 24;
+              if (!(proportion > 0)) {
+                _context.next = 23;
                 break;
               }
 
-              proportion = proportion > 0 ? proportion : 1 - proportion;
               count = 0, taked = 0, queue = [];
               _iterator = _createForOfIteratorHelper(source);
-              _context.prev = 4;
+              _context.prev = 3;
 
               _iterator.s();
 
-            case 6:
+            case 5:
               if ((_step = _iterator.n()).done) {
-                _context.next = 16;
+                _context.next = 15;
                 break;
               }
 
@@ -14683,41 +14681,41 @@ var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
               queue.push(element);
 
               if (!(taked + 1 <= count * proportion)) {
-                _context.next = 14;
+                _context.next = 13;
                 break;
               }
 
               taked++;
-              _context.next = 14;
+              _context.next = 13;
               return queue.shift();
 
-            case 14:
-              _context.next = 6;
+            case 13:
+              _context.next = 5;
               break;
 
-            case 16:
-              _context.next = 21;
+            case 15:
+              _context.next = 20;
               break;
 
-            case 18:
-              _context.prev = 18;
-              _context.t0 = _context["catch"](4);
+            case 17:
+              _context.prev = 17;
+              _context.t0 = _context["catch"](3);
 
               _iterator.e(_context.t0);
 
-            case 21:
-              _context.prev = 21;
+            case 20:
+              _context.prev = 20;
 
               _iterator.f();
 
-              return _context.finish(21);
+              return _context.finish(20);
 
-            case 24:
+            case 23:
             case "end":
               return _context.stop();
           }
         }
-      }, TakeProportionIterator, null, [[4, 18, 21, 24]]);
+      }, TakeProportionIterator, null, [[3, 17, 20, 23]]);
     }));
     return _this;
   }
