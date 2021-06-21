@@ -18,7 +18,7 @@ Since 2.1.0, I rewrite all to use new features of ES6. The performance be better
 后来我在 stackoverflow 中看到很多人对于树形结构的操作提了很多的问题,我想我的工具包应该要可以为他们提供帮助.于是在最新的几个版本中我加入了对树形结构的一些操作.
 
 
-[帮助文档(完善中)](http://wm123450405.oschina.io/linqjs/#/zh-cn) :+1:
+[帮助文档(完善中)](http://wm123450405.github.io/linqjs/#/zh-cn) :+1:
 
 [Documentation(not completed)](http://wm123450405.github.io/linqjs/#/en-us) :+1:
 

@@ -8,8 +8,11 @@ const babelify = require('babelify');
 const exorcist = require('exorcist');
 const sourcemaps = require('gulp-sourcemaps');
 const jshint = require('gulp-jshint');
+const extend = require('extend');
 
-gulp.task('hint', function() {
+const babelConfig = require('./babel.config.json');
+
+const hint = function() {
 	return gulp.src('./src/**/*.js')
 		.pipe(jshint({
 			esversion: 6,
@@ -22,41 +25,33 @@ gulp.task('hint', function() {
 			}
 		}))
 		.pipe(jshint.reporter('default'));
-});
+};
 
-gulp.task('unit', ['hint'], function() {
-	require('./test/test-unit')(require('./src/linq'));
-});
-
-gulp.task('pack', ['unit'], function() {
+const pack = function() {
 	return browserify({
-			entries: './src/linq.js',
-			standalone: 'Enumerable',
-			debug: true,
-			insertGlobalVars: {
-				global: function() {
-					return 'typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}';
-				}
+		entries: './src/linq.js',
+		standalone: 'Enumerable',
+		debug: true,
+		insertGlobalVars: {
+			global: function() {
+				return 'typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}';
 			}
-		})
-		.transform(babelify.configure({
-			presets: ['es2015', 'stage-3'],
-			plugins: [
-				['babel-plugin-transform-builtin-extend', {
-					globals: ['Error', 'Array'],
-					approximate: true
-				}]
-			],
-			sourceMaps: true
-		}))
+		}
+	})
+		.transform(babelify.configure(extend(true, babelConfig, { sourceMaps: true })))
 		.bundle()
 		.pipe(exorcist('./dist/linq.js.map', '', '', './dist/'))
 		.pipe(source('linq.js'))
 		.pipe(buffer())
 		.pipe(gulp.dest('./dist/'));
-});
+};
 
-gulp.task('min', ['pack'], function() {
+const unit = function(cb) {
+	require('./test/test-unit')(require('./src/linq'));
+	cb && cb();
+};
+
+const min = function() {
 	return gulp.src('./dist/linq.js')
 		.pipe(rename('linq.min.js'))
 		.pipe(sourcemaps.init({
@@ -67,12 +62,20 @@ gulp.task('min', ['pack'], function() {
 			// 	except: ['require', 'exports', 'module']
 			// },
 			mangle: {
-                keep_fnames: true
-            },
+				keep_fnames: true
+			},
 			compress: true
 		}))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
-});
+};
 
-gulp.task('default', ['min']);
+gulp.task('hint', hint);
+
+gulp.task('unit', gulp.series(hint, unit));
+
+gulp.task('pack', gulp.series(hint, unit, pack));
+
+gulp.task('min', gulp.series(hint, unit, pack, min));
+
+gulp.task('default', gulp.series(hint, unit, pack, min));

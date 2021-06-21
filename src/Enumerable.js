@@ -568,7 +568,7 @@ Enumerable.count = function(source, predicate = defaultPredicate) {
     }
     return count;
 };
-Enumerable.proportion(source, predicate = defaultPredicate) {
+Enumerable.proportion = function(source, predicate = defaultPredicate) {
     if (predicate === defaultPredicate) return 1;
     let count = 0, selected = 0, index = 0;
     source = asIterable(source);
@@ -580,7 +580,7 @@ Enumerable.proportion(source, predicate = defaultPredicate) {
         count++;
     }
     return count === 0 ? 1 : selected / count;
-}
+};
 Enumerable.aggregate = function(source, seed, func, resultSelector = defaultSelector) {
     let index = 0;
     source = asIterable(source);

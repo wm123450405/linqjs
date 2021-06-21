@@ -4,9 +4,9 @@ const g =
   typeof global === "object" ? global :
   typeof window === "object" ? window :
   typeof self === "object" ? self : this;
-if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
-    require('babel-polyfill');
-}
+// if (!g.regeneratorRuntime && typeof regeneratorRuntime === 'undefined') {
+//     require('@babel/polyfill');
+// }
 
 const CONFLICT_SET_CONFIG = 'Can not set this config after call the noConflict method. If you want, you can use Enumerable.noConflict method with one parameter which value is "true" to set Enumerable of global back to this module';
 const CONFLICT_SUGGEST = 'You may require this module twice or more. I suggest you to only require once. If you must to, you can also use Enumerable.noConflict method to solve the conflict';
