@@ -95,6 +95,9 @@ const extendObject = {
     skipWhile(predicate = defaultPredicate) {
         return Enumerable.skipWhile(this, predicate);
     },
+    skipProportion(proportion = 0) {
+        return Enumerable.skipProportion(this, proportion);
+    },
     skipSame(comparer = defaultSameComparer) {
         return Enumerable.skipSame(this, comparer);
     },
@@ -106,6 +109,9 @@ const extendObject = {
     },
     takeSame(comparer = defaultSameComparer) {
         return Enumerable.takeSame(this, comparer);
+    },
+    takeProportion(proportion = 0) {
+        return Enumerable.takeProportion(this, proportion);
     },
     sorted(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.sorted(this, keySelector, comparer);
@@ -403,6 +409,9 @@ const extendObject = {
         } else {
             return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
         }
+    },
+    proportion(predicate = defaultPredicate) {
+        return Enumerable.proportion(this, predicate);
     }
 };
 

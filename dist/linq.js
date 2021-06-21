@@ -596,6 +596,11 @@ Enumerable.skipSame = function (source) {
   return new SkipSameEnumerable(asIterable(source), comparer);
 };
 
+Enumerable.skipProportion = function (source) {
+  var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return new SkipProportionEnumerable(asIterable(source), proportion);
+};
+
 Enumerable.take = function (source, count) {
   return new TakeEnumerable(asIterable(source), count);
 };
@@ -608,6 +613,11 @@ Enumerable.takeWhile = function (source) {
 Enumerable.takeSame = function (source) {
   var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
   return new TakeSameEnumerable(asIterable(source), comparer);
+};
+
+Enumerable.takeProportion = function (source) {
+  var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return new TakeProportionEnumerable(asIterable(source), proportion);
 };
 
 Enumerable.orderBy = Enumerable.sorted = function (source) {
@@ -2338,11 +2348,15 @@ var SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
 
 var SkipSameEnumerable = require('./enumerables/SkipSameEnumerable');
 
+var SkipProportionEnumerable = require('./enumerables/SkipProportionEnumerable');
+
 var TakeEnumerable = require('./enumerables/TakeEnumerable');
 
 var TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
 
 var TakeSameEnumerable = require('./enumerables/TakeSameEnumerable');
+
+var TakeProportionEnumerable = require('./enumerables/TakeProportionEnumerable');
 
 var IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
 
@@ -2430,7 +2444,7 @@ var InOrderTree = require('./enumerables/InOrderTree');
 
 var PostOrderTree = require('./enumerables/PostOrderTree');
 
-},{"./IEnumerable":4,"./IEnumerator":5,"./core/IComparable":6,"./core/IEquatable":7,"./core/core":8,"./core/exceptions/InvalidFunctionException":10,"./core/exceptions/KeysForMultiElementsException":11,"./core/exceptions/NeedExecuteBeforeException":12,"./core/exceptions/NoSuchElementsException":13,"./core/exceptions/NotAncestorOfException":14,"./core/exceptions/NotEnumerableException":15,"./core/exceptions/OutOfRangeException":16,"./core/exceptions/PluginRepeatException":17,"./core/exceptions/PropertyExpressionInvalidException":18,"./core/exceptions/TooManyElementsException":19,"./enumerables/BetweenEnumerable":21,"./enumerables/ChunkEnumerable":25,"./enumerables/CombinationEnumerable":26,"./enumerables/CombinationRepeatableEnumerable":27,"./enumerables/CombineEnumerable":28,"./enumerables/ConcatEnumerable":29,"./enumerables/CopyWithinEnumerable":30,"./enumerables/Dictionary":33,"./enumerables/DistinctEnumerable":34,"./enumerables/EachEnumerable":35,"./enumerables/EmptyEnumerable":36,"./enumerables/ExceptEnumerable":38,"./enumerables/FillEnumerable":39,"./enumerables/GenerateEnumerable":40,"./enumerables/GroupJoinEnumerable":42,"./enumerables/GroupedEnumerable":43,"./enumerables/IMapEnumerable":47,"./enumerables/IOrderedEnumerable":48,"./enumerables/InOrderTree":51,"./enumerables/IndicesEnumerable":52,"./enumerables/IntersectEnumerable":53,"./enumerables/IteratorEnumerable":55,"./enumerables/JoinEnumerable":56,"./enumerables/LeftJoinEnumerable":57,"./enumerables/LeftPadEnumerable":58,"./enumerables/Lookup":59,"./enumerables/NearGroupedEnumerable":61,"./enumerables/NearSplitEnumerable":62,"./enumerables/OfTypeEnumerable":66,"./enumerables/OrderByDescendingEnumerable":67,"./enumerables/OrderByEnumerable":68,"./enumerables/PermutationEnumerable":71,"./enumerables/PermutationRepeatableEnumerable":72,"./enumerables/PostOrderTree":74,"./enumerables/PreOrderTree":76,"./enumerables/RandEnumerable":79,"./enumerables/RangeEnumerable":80,"./enumerables/RepeatEnumerable":81,"./enumerables/ReverseEnumerable":82,"./enumerables/RightJoinEnumerable":83,"./enumerables/RightPadEnumerable":84,"./enumerables/SelectEnumerable":85,"./enumerables/SelectManyEnumerable":86,"./enumerables/SeparateEnumerable":87,"./enumerables/SingleEnumerable":90,"./enumerables/SkipEnumerable":91,"./enumerables/SkipSameEnumerable":92,"./enumerables/SkipWhileEnumerable":93,"./enumerables/SliceEnumerable":94,"./enumerables/SortEnumerable":95,"./enumerables/SpliceEnumerable":96,"./enumerables/SplitEnumerable":97,"./enumerables/SymmetricEnumerable":99,"./enumerables/TakeEnumerable":100,"./enumerables/TakeSameEnumerable":101,"./enumerables/TakeWhileEnumerable":102,"./enumerables/ThenByDescendingEnumerable":103,"./enumerables/ThenByEnumerable":104,"./enumerables/UnionEnumerable":106,"./enumerables/WhereEnumerable":107,"./enumerables/WipeEnumerable":108,"./enumerables/ZipEnumerable":109,"./extend":110,"./methods/arrayComparer":115,"./methods/defaultAction":116,"./methods/defaultChildrenSelector":117,"./methods/defaultChildrenSetter":118,"./methods/defaultComparer":119,"./methods/defaultEqualityComparer":120,"./methods/defaultExistsPredicate":121,"./methods/defaultFalsePredicate":122,"./methods/defaultIndexSelector":123,"./methods/defaultJoinSelector":124,"./methods/defaultKeySelector":125,"./methods/defaultParentSelector":126,"./methods/defaultPredicate":127,"./methods/defaultResultSelector":128,"./methods/defaultSameComparer":129,"./methods/defaultSelector":130,"./methods/defaultStrictEqualityComparer":131,"./methods/defaultValueSelector":132,"./methods/defaultValueSetter":133,"./methods/equalityPredicate":135,"./methods/greaterComparer":136,"./methods/ignoreCaseComparer":137,"./methods/lessComparer":138,"./methods/methods":139,"./methods/notPredicate":140,"./methods/predicateComparer":141,"./methods/propertySelector":143,"./methods/propertySetter":144,"./methods/regexpPredicate":145,"./methods/selectorPredicate":147,"./plugin":149}],4:[function(require,module,exports){
+},{"./IEnumerable":4,"./IEnumerator":5,"./core/IComparable":6,"./core/IEquatable":7,"./core/core":8,"./core/exceptions/InvalidFunctionException":10,"./core/exceptions/KeysForMultiElementsException":11,"./core/exceptions/NeedExecuteBeforeException":12,"./core/exceptions/NoSuchElementsException":13,"./core/exceptions/NotAncestorOfException":14,"./core/exceptions/NotEnumerableException":15,"./core/exceptions/OutOfRangeException":16,"./core/exceptions/PluginRepeatException":17,"./core/exceptions/PropertyExpressionInvalidException":18,"./core/exceptions/TooManyElementsException":19,"./enumerables/BetweenEnumerable":21,"./enumerables/ChunkEnumerable":25,"./enumerables/CombinationEnumerable":26,"./enumerables/CombinationRepeatableEnumerable":27,"./enumerables/CombineEnumerable":28,"./enumerables/ConcatEnumerable":29,"./enumerables/CopyWithinEnumerable":30,"./enumerables/Dictionary":33,"./enumerables/DistinctEnumerable":34,"./enumerables/EachEnumerable":35,"./enumerables/EmptyEnumerable":36,"./enumerables/ExceptEnumerable":38,"./enumerables/FillEnumerable":39,"./enumerables/GenerateEnumerable":40,"./enumerables/GroupJoinEnumerable":42,"./enumerables/GroupedEnumerable":43,"./enumerables/IMapEnumerable":47,"./enumerables/IOrderedEnumerable":48,"./enumerables/InOrderTree":51,"./enumerables/IndicesEnumerable":52,"./enumerables/IntersectEnumerable":53,"./enumerables/IteratorEnumerable":55,"./enumerables/JoinEnumerable":56,"./enumerables/LeftJoinEnumerable":57,"./enumerables/LeftPadEnumerable":58,"./enumerables/Lookup":59,"./enumerables/NearGroupedEnumerable":61,"./enumerables/NearSplitEnumerable":62,"./enumerables/OfTypeEnumerable":66,"./enumerables/OrderByDescendingEnumerable":67,"./enumerables/OrderByEnumerable":68,"./enumerables/PermutationEnumerable":71,"./enumerables/PermutationRepeatableEnumerable":72,"./enumerables/PostOrderTree":74,"./enumerables/PreOrderTree":76,"./enumerables/RandEnumerable":79,"./enumerables/RangeEnumerable":80,"./enumerables/RepeatEnumerable":81,"./enumerables/ReverseEnumerable":82,"./enumerables/RightJoinEnumerable":83,"./enumerables/RightPadEnumerable":84,"./enumerables/SelectEnumerable":85,"./enumerables/SelectManyEnumerable":86,"./enumerables/SeparateEnumerable":87,"./enumerables/SingleEnumerable":90,"./enumerables/SkipEnumerable":91,"./enumerables/SkipProportionEnumerable":92,"./enumerables/SkipSameEnumerable":93,"./enumerables/SkipWhileEnumerable":94,"./enumerables/SliceEnumerable":95,"./enumerables/SortEnumerable":96,"./enumerables/SpliceEnumerable":97,"./enumerables/SplitEnumerable":98,"./enumerables/SymmetricEnumerable":100,"./enumerables/TakeEnumerable":101,"./enumerables/TakeProportionEnumerable":102,"./enumerables/TakeSameEnumerable":103,"./enumerables/TakeWhileEnumerable":104,"./enumerables/ThenByDescendingEnumerable":105,"./enumerables/ThenByEnumerable":106,"./enumerables/UnionEnumerable":108,"./enumerables/WhereEnumerable":109,"./enumerables/WipeEnumerable":110,"./enumerables/ZipEnumerable":111,"./extend":112,"./methods/arrayComparer":117,"./methods/defaultAction":118,"./methods/defaultChildrenSelector":119,"./methods/defaultChildrenSetter":120,"./methods/defaultComparer":121,"./methods/defaultEqualityComparer":122,"./methods/defaultExistsPredicate":123,"./methods/defaultFalsePredicate":124,"./methods/defaultIndexSelector":125,"./methods/defaultJoinSelector":126,"./methods/defaultKeySelector":127,"./methods/defaultParentSelector":128,"./methods/defaultPredicate":129,"./methods/defaultResultSelector":130,"./methods/defaultSameComparer":131,"./methods/defaultSelector":132,"./methods/defaultStrictEqualityComparer":133,"./methods/defaultValueSelector":134,"./methods/defaultValueSetter":135,"./methods/equalityPredicate":137,"./methods/greaterComparer":138,"./methods/ignoreCaseComparer":139,"./methods/lessComparer":140,"./methods/methods":141,"./methods/notPredicate":142,"./methods/predicateComparer":143,"./methods/propertySelector":145,"./methods/propertySetter":146,"./methods/regexpPredicate":147,"./methods/selectorPredicate":149,"./plugin":151}],4:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2671,6 +2685,12 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
       return Enumerable.skipSame(this, comparer);
     }
   }, {
+    key: "skipProportion",
+    value: function skipProportion() {
+      var proportion = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      return Enumerable.skipProportion(this, proportion);
+    }
+  }, {
     key: "take",
     value: function take(count) {
       return Enumerable.take(this, count);
@@ -2686,6 +2706,12 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
     value: function takeSame() {
       var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
       return Enumerable.takeSame(this, comparer);
+    }
+  }, {
+    key: "takeProportion",
+    value: function takeProportion() {
+      var proportion = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      return Enumerable.takeProportion(this, proportion);
     }
   }, {
     key: "sorted",
@@ -3258,6 +3284,12 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
       var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
       return Enumerable.conflict(this, selector, comparer);
     }
+  }, {
+    key: "proportion",
+    value: function proportion() {
+      var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+      return Enumerable.proportion(this, predicate);
+    }
   }]);
 
   return IEnumerable;
@@ -3267,7 +3299,7 @@ module.exports = IEnumerable;
 
 var Enumerable = require('./Enumerable');
 
-},{"./Enumerable":3,"./core/core":8,"./methods/defaultAction":116,"./methods/defaultChildrenSelector":117,"./methods/defaultComparer":119,"./methods/defaultEqualityComparer":120,"./methods/defaultFalsePredicate":122,"./methods/defaultJoinSelector":124,"./methods/defaultKeySelector":125,"./methods/defaultParentSelector":126,"./methods/defaultPredicate":127,"./methods/defaultResultSelector":128,"./methods/defaultSameComparer":129,"./methods/defaultSelector":130,"./methods/defaultStrictEqualityComparer":131,"./methods/defaultValueSelector":132}],5:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8,"./methods/defaultAction":118,"./methods/defaultChildrenSelector":119,"./methods/defaultComparer":121,"./methods/defaultEqualityComparer":122,"./methods/defaultFalsePredicate":124,"./methods/defaultJoinSelector":126,"./methods/defaultKeySelector":127,"./methods/defaultParentSelector":128,"./methods/defaultPredicate":129,"./methods/defaultResultSelector":130,"./methods/defaultSameComparer":131,"./methods/defaultSelector":132,"./methods/defaultStrictEqualityComparer":133,"./methods/defaultValueSelector":134}],5:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4301,7 +4333,7 @@ var ArrayEnumerable = /*#__PURE__*/function (_IterableEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"./../Enumerable":3,"./../core/core":8,"./../methods/defaultAction":116,"./../methods/defaultEqualityComparer":120,"./../methods/defaultJoinSelector":124,"./../methods/defaultSelector":130,"./../methods/defaultStrictEqualityComparer":131,"./../methods/methods":139,"./IterableEnumerable":54}],21:[function(require,module,exports){
+},{"./../Enumerable":3,"./../core/core":8,"./../methods/defaultAction":118,"./../methods/defaultEqualityComparer":122,"./../methods/defaultJoinSelector":126,"./../methods/defaultSelector":132,"./../methods/defaultStrictEqualityComparer":133,"./../methods/methods":141,"./IterableEnumerable":54}],21:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -4851,7 +4883,7 @@ var BreadthSubTreeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/methods":139}],25:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/methods":141}],25:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -5487,7 +5519,7 @@ var CombineEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = CombineEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultKeySelector":125,"./../methods/defaultParentSelector":126,"./../methods/defaultSelector":130,"./../methods/methods":139,"./ICombine":45}],29:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultKeySelector":127,"./../methods/defaultParentSelector":128,"./../methods/defaultSelector":132,"./../methods/methods":141,"./ICombine":45}],29:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6100,7 +6132,7 @@ var BreadthSubTreeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/methods":139}],33:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/methods":141}],33:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6289,7 +6321,7 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = DistinctEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/methods":139}],35:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/methods":141}],35:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6395,7 +6427,7 @@ var EachEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = EachEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultAction":116}],36:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultAction":118}],36:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6612,7 +6644,7 @@ var ExceptEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ExceptEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/methods":139}],39:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/methods":141}],39:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7069,7 +7101,7 @@ var GroupJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GroupJoinEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultJoinSelector":124,"./../methods/defaultSelector":130,"./../methods/methods":139,"./Entry":37,"./IGrouping":46}],43:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultJoinSelector":126,"./../methods/defaultSelector":132,"./../methods/methods":141,"./Entry":37,"./IGrouping":46}],43:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7231,7 +7263,7 @@ var GroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GroupedEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultResultSelector":128,"./../methods/defaultSelector":130,"./../methods/equalityPredicate":135,"./../methods/methods":139,"./IGrouping":46}],44:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultResultSelector":130,"./../methods/defaultSelector":132,"./../methods/equalityPredicate":137,"./../methods/methods":141,"./IGrouping":46}],44:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7371,7 +7403,7 @@ var ICombine = /*#__PURE__*/function (_ITree) {
 
 module.exports = ICombine;
 
-},{"./../core/core":8,"./../methods/defaultChildrenSetter":118,"./../methods/defaultValueSetter":133,"./ITree":49}],46:[function(require,module,exports){
+},{"./../core/core":8,"./../methods/defaultChildrenSetter":120,"./../methods/defaultValueSetter":135,"./ITree":49}],46:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7539,7 +7571,7 @@ var IMapEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IMapEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultAction":116,"./../methods/defaultKeySelector":125,"./../methods/defaultSameComparer":129,"./../methods/defaultValueSelector":132,"./../methods/methods":139}],48:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultAction":118,"./../methods/defaultKeySelector":127,"./../methods/defaultSameComparer":131,"./../methods/defaultValueSelector":134,"./../methods/methods":141}],48:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7704,7 +7736,7 @@ IOrderedEnumerable.source = Symbol('IOrderedEnumerable.source');
 IOrderedEnumerable.orderByComparer = Symbol('IOrderedEnumerable.orderByComparer');
 module.exports = IOrderedEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultComparer":119,"./../methods/defaultSelector":130,"./../methods/methods":139}],49:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultComparer":121,"./../methods/defaultSelector":132,"./../methods/methods":141}],49:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -8349,7 +8381,7 @@ var NextNodesEnumerable = require('./NextNodesEnumerable');
 
 var SiblingNodesEnumerable = require('./SiblingNodesEnumerable');
 
-},{"./../Enumerable":3,"./../core/core":8,"./../core/exceptions/NotAncestorOfException":14,"./../methods/defaultChildrenSetter":118,"./../methods/defaultEqualityComparer":120,"./../methods/defaultPredicate":127,"./../methods/defaultValueSetter":133,"./../methods/methods":139,"./BinaryTree":22,"./BreadthEnumerable":23,"./BreadthSubTreeEnumerable":24,"./DepthEnumerable":31,"./DepthSubTreeEnumerable":32,"./GeneratorEnumerable":41,"./NextEnumerable":63,"./NextNodesEnumerable":64,"./PathNodesToEnumerable":69,"./PathToEnumerable":70,"./PrevEnumerable":77,"./PrevNodesEnumerable":78,"./SiblingNodesEnumerable":88,"./SiblingsEnumerable":89,"extend":1}],50:[function(require,module,exports){
+},{"./../Enumerable":3,"./../core/core":8,"./../core/exceptions/NotAncestorOfException":14,"./../methods/defaultChildrenSetter":120,"./../methods/defaultEqualityComparer":122,"./../methods/defaultPredicate":129,"./../methods/defaultValueSetter":135,"./../methods/methods":141,"./BinaryTree":22,"./BreadthEnumerable":23,"./BreadthSubTreeEnumerable":24,"./DepthEnumerable":31,"./DepthSubTreeEnumerable":32,"./GeneratorEnumerable":41,"./NextEnumerable":63,"./NextNodesEnumerable":64,"./PathNodesToEnumerable":69,"./PathToEnumerable":70,"./PrevEnumerable":77,"./PrevNodesEnumerable":78,"./SiblingNodesEnumerable":88,"./SiblingsEnumerable":89,"extend":1}],50:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -8770,7 +8802,7 @@ var IntersectEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IntersectEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/methods":139}],54:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/methods":141}],54:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9133,7 +9165,7 @@ var JoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = JoinEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultJoinSelector":124,"./../methods/defaultSelector":130,"./../methods/methods":139}],57:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultJoinSelector":126,"./../methods/defaultSelector":132,"./../methods/methods":141}],57:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9374,7 +9406,7 @@ var LeftJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultJoinSelector":124,"./../methods/defaultSelector":130,"./../methods/methods":139}],58:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultJoinSelector":126,"./../methods/defaultSelector":132,"./../methods/methods":141}],58:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9653,7 +9685,7 @@ var MapEnumerable = /*#__PURE__*/function (_IMapEnumerable) {
 
 module.exports = MapEnumerable;
 
-},{"./../core/core":8,"./../methods/defaultSameComparer":129,"./../methods/equalityPredicate":135,"./../methods/methods":139,"./Entry":37,"./IMapEnumerable":47}],61:[function(require,module,exports){
+},{"./../core/core":8,"./../methods/defaultSameComparer":131,"./../methods/equalityPredicate":137,"./../methods/methods":141,"./Entry":37,"./IMapEnumerable":47}],61:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9813,7 +9845,7 @@ var NearGroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NearGroupedEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultResultSelector":128,"./../methods/defaultSelector":130,"./../methods/equalityPredicate":135,"./../methods/methods":139,"./IGrouping":46}],62:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultResultSelector":130,"./../methods/defaultSelector":132,"./../methods/equalityPredicate":137,"./../methods/methods":141,"./IGrouping":46}],62:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -9960,7 +9992,7 @@ var NearSplitEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NearSplitEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultFalsePredicate":122,"./../methods/methods":139,"./IChunk":44}],63:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultFalsePredicate":124,"./../methods/methods":141,"./IChunk":44}],63:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10082,7 +10114,7 @@ var NextEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],64:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],64:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10204,7 +10236,7 @@ var NextEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],65:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],65:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10478,7 +10510,7 @@ var OrderByDescendingEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = OrderByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":119,"./../methods/defaultSelector":130,"./../methods/descendingComparer":134,"./../methods/methods":139,"./../methods/selectorComparer":146,"./IOrderedEnumerable":48}],68:[function(require,module,exports){
+},{"./../methods/defaultComparer":121,"./../methods/defaultSelector":132,"./../methods/descendingComparer":136,"./../methods/methods":141,"./../methods/selectorComparer":148,"./IOrderedEnumerable":48}],68:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -10530,7 +10562,7 @@ var OrderByEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = OrderByEnumerable;
 
-},{"./../methods/defaultComparer":119,"./../methods/defaultSelector":130,"./../methods/methods":139,"./../methods/selectorComparer":146,"./IOrderedEnumerable":48}],69:[function(require,module,exports){
+},{"./../methods/defaultComparer":121,"./../methods/defaultSelector":132,"./../methods/methods":141,"./../methods/selectorComparer":148,"./IOrderedEnumerable":48}],69:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -11560,7 +11592,7 @@ var PrevEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],78:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],78:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -11684,7 +11716,7 @@ var PrevEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],79:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],79:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12261,7 +12293,7 @@ var LeftJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/defaultJoinSelector":124,"./../methods/defaultSelector":130,"./../methods/methods":139}],84:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/defaultJoinSelector":126,"./../methods/defaultSelector":132,"./../methods/methods":141}],84:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12487,7 +12519,7 @@ var SelectEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SelectEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSelector":130,"./../methods/methods":139}],86:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSelector":132,"./../methods/methods":141}],86:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12634,7 +12666,7 @@ module.exports = SelectManyEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultResultSelector":128,"./../methods/defaultSelector":130,"./../methods/methods":139}],87:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultResultSelector":130,"./../methods/defaultSelector":132,"./../methods/methods":141}],87:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12784,7 +12816,7 @@ var SeparateEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SeparateEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultChildrenSelector":117,"./../methods/defaultValueSelector":132,"./../methods/methods":139}],88:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultChildrenSelector":119,"./../methods/defaultValueSelector":134,"./../methods/methods":141}],88:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12911,7 +12943,7 @@ var SiblingsEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],89:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],89:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13038,7 +13070,7 @@ var SiblingsEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139,"./ITree":49}],90:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141,"./ITree":49}],90:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13238,6 +13270,115 @@ var IEnumerable = require('./../IEnumerable');
 
 var core = require('./../core/core');
 
+var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
+  _inherits(SkipProportionEnumerable, _IEnumerable);
+
+  var _super = _createSuper(SkipProportionEnumerable);
+
+  function SkipProportionEnumerable(source) {
+    var _this;
+
+    var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+    _classCallCheck(this, SkipProportionEnumerable);
+
+    _this = _super.call(this, source);
+    core.defineProperty(_assertThisInitialized(_this), Symbol.iterator, /*#__PURE__*/regeneratorRuntime.mark(function SkipProportionIterator() {
+      var count, skiped, queue, _iterator, _step, _element, _i, _queue, element;
+
+      return regeneratorRuntime.wrap(function SkipProportionIterator$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(proportion !== 0)) {
+                _context.next = 13;
+                break;
+              }
+
+              proportion = proportion > 0 ? proportion : 1 - proportion;
+              count = 0, skiped = 0, queue = [];
+              _iterator = _createForOfIteratorHelper(source);
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  _element = _step.value;
+                  count++;
+                  queue.push(_element);
+
+                  if (skiped + 1 <= count * proportion) {
+                    skiped++;
+                    queue.shift();
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
+              _i = 0, _queue = queue;
+
+            case 6:
+              if (!(_i < _queue.length)) {
+                _context.next = 13;
+                break;
+              }
+
+              element = _queue[_i];
+              _context.next = 10;
+              return element;
+
+            case 10:
+              _i++;
+              _context.next = 6;
+              break;
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, SkipProportionIterator);
+    }));
+    return _this;
+  }
+
+  return SkipProportionEnumerable;
+}(IEnumerable);
+
+module.exports = SkipProportionEnumerable;
+
+},{"./../IEnumerable":4,"./../core/core":8}],93:[function(require,module,exports){
+'use strict';
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
 var methods = require('./../methods/methods');
 
 var defaultSameComparer = require('./../methods/defaultSameComparer');
@@ -13346,7 +13487,7 @@ var SkipSameEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipSameEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSameComparer":129,"./../methods/methods":139}],93:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSameComparer":131,"./../methods/methods":141}],94:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13461,7 +13602,7 @@ var SkipWhileEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipWhileEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139}],94:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141}],95:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13606,7 +13747,7 @@ var SliceEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SliceEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8}],95:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8}],96:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13696,7 +13837,7 @@ module.exports = SortEnumerable;
 
 var Enumerable = require('./../Enumerable');
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultComparer":119,"./../methods/methods":139}],96:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultComparer":121,"./../methods/methods":141}],97:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13954,7 +14095,7 @@ var SpliceEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SpliceEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8}],97:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8}],98:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14097,7 +14238,7 @@ var SplitEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SplitEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultFalsePredicate":122,"./../methods/methods":139,"./IChunk":44}],98:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultFalsePredicate":124,"./../methods/methods":141,"./IChunk":44}],99:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14180,7 +14321,7 @@ var StringEnumerable = /*#__PURE__*/function (_IterableEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"./../Enumerable":3,"./../core/core":8,"./../methods/defaultStrictEqualityComparer":131,"./../methods/methods":139,"./IterableEnumerable":54}],99:[function(require,module,exports){
+},{"./../Enumerable":3,"./../core/core":8,"./../methods/defaultStrictEqualityComparer":133,"./../methods/methods":141,"./IterableEnumerable":54}],100:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14351,7 +14492,7 @@ var SymmetricEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SymmetricEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/methods":139}],100:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/methods":141}],101:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14468,7 +14609,125 @@ var TakeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8}],101:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8}],102:[function(require,module,exports){
+'use strict';
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var IEnumerable = require('./../IEnumerable');
+
+var core = require('./../core/core');
+
+var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
+  _inherits(TakeProportionEnumerable, _IEnumerable);
+
+  var _super = _createSuper(TakeProportionEnumerable);
+
+  function TakeProportionEnumerable(source) {
+    var _this;
+
+    var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+    _classCallCheck(this, TakeProportionEnumerable);
+
+    _this = _super.call(this, source);
+    core.defineProperty(_assertThisInitialized(_this), Symbol.iterator, /*#__PURE__*/regeneratorRuntime.mark(function TakeProportionIterator() {
+      var count, taked, queue, _iterator, _step, element;
+
+      return regeneratorRuntime.wrap(function TakeProportionIterator$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(proportion !== 0)) {
+                _context.next = 24;
+                break;
+              }
+
+              proportion = proportion > 0 ? proportion : 1 - proportion;
+              count = 0, taked = 0, queue = [];
+              _iterator = _createForOfIteratorHelper(source);
+              _context.prev = 4;
+
+              _iterator.s();
+
+            case 6:
+              if ((_step = _iterator.n()).done) {
+                _context.next = 16;
+                break;
+              }
+
+              element = _step.value;
+              count++;
+              queue.push(element);
+
+              if (!(taked + 1 <= count * proportion)) {
+                _context.next = 14;
+                break;
+              }
+
+              taked++;
+              _context.next = 14;
+              return queue.shift();
+
+            case 14:
+              _context.next = 6;
+              break;
+
+            case 16:
+              _context.next = 21;
+              break;
+
+            case 18:
+              _context.prev = 18;
+              _context.t0 = _context["catch"](4);
+
+              _iterator.e(_context.t0);
+
+            case 21:
+              _context.prev = 21;
+
+              _iterator.f();
+
+              return _context.finish(21);
+
+            case 24:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, TakeProportionIterator, null, [[4, 18, 21, 24]]);
+    }));
+    return _this;
+  }
+
+  return TakeProportionEnumerable;
+}(IEnumerable);
+
+module.exports = TakeProportionEnumerable;
+
+},{"./../IEnumerable":4,"./../core/core":8}],103:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14604,7 +14863,7 @@ var TakeSameEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeSameEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSameComparer":129,"./../methods/methods":139}],102:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultSameComparer":131,"./../methods/methods":141}],104:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14726,7 +14985,7 @@ var TakeWhileEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeWhileEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139}],103:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141}],105:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14782,7 +15041,7 @@ var ThenByDescendingEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = ThenByDescendingEnumerable;
 
-},{"./../methods/defaultComparer":119,"./../methods/defaultSelector":130,"./../methods/descendingComparer":134,"./../methods/methods":139,"./../methods/selectorComparer":146,"./../methods/thenByComparer":148,"./IOrderedEnumerable":48}],104:[function(require,module,exports){
+},{"./../methods/defaultComparer":121,"./../methods/defaultSelector":132,"./../methods/descendingComparer":136,"./../methods/methods":141,"./../methods/selectorComparer":148,"./../methods/thenByComparer":150,"./IOrderedEnumerable":48}],106:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14836,7 +15095,7 @@ var ThenByEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = ThenByEnumerable;
 
-},{"./../methods/defaultComparer":119,"./../methods/defaultSelector":130,"./../methods/methods":139,"./../methods/selectorComparer":146,"./../methods/thenByComparer":148,"./IOrderedEnumerable":48}],105:[function(require,module,exports){
+},{"./../methods/defaultComparer":121,"./../methods/defaultSelector":132,"./../methods/methods":141,"./../methods/selectorComparer":148,"./../methods/thenByComparer":150,"./IOrderedEnumerable":48}],107:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14948,7 +15207,7 @@ var TreeEnumerable = /*#__PURE__*/function (_ITree) {
 
 module.exports = TreeEnumerable;
 
-},{"./../methods/defaultChildrenSelector":117,"./../methods/defaultValueSelector":132,"./../methods/methods":139,"./ITree":49}],106:[function(require,module,exports){
+},{"./../methods/defaultChildrenSelector":119,"./../methods/defaultValueSelector":134,"./../methods/methods":141,"./ITree":49}],108:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -15109,7 +15368,7 @@ var UnionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = UnionEnumerable;
 
-},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":120,"./../methods/methods":139}],107:[function(require,module,exports){
+},{"./../Enumerable":3,"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultEqualityComparer":122,"./../methods/methods":141}],109:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -15223,7 +15482,7 @@ var WhereEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = WhereEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139}],108:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141}],110:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -15342,7 +15601,7 @@ var WipeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = WipeEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":127,"./../methods/methods":139}],109:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultPredicate":129,"./../methods/methods":141}],111:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -15425,7 +15684,7 @@ var ZipEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ZipEnumerable;
 
-},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultResultSelector":128}],110:[function(require,module,exports){
+},{"./../IEnumerable":4,"./../core/core":8,"./../methods/defaultResultSelector":130}],112:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -15594,6 +15853,10 @@ var extendObject = {
     var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
     return Enumerable.skipWhile(this, predicate);
   },
+  skipProportion: function skipProportion() {
+    var proportion = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    return Enumerable.skipProportion(this, proportion);
+  },
   skipSame: function skipSame() {
     var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
     return Enumerable.skipSame(this, comparer);
@@ -15608,6 +15871,10 @@ var extendObject = {
   takeSame: function takeSame() {
     var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSameComparer;
     return Enumerable.takeSame(this, comparer);
+  },
+  takeProportion: function takeProportion() {
+    var proportion = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    return Enumerable.takeProportion(this, proportion);
   },
   sorted: function sorted() {
     var keySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
@@ -16034,6 +16301,10 @@ var extendObject = {
     } else {
       return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
     }
+  },
+  proportion: function proportion() {
+    var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
+    return Enumerable.proportion(this, predicate);
   }
 };
 core.defineProperty(Enumerable, 'extends', function () {
@@ -16240,7 +16511,7 @@ Enumerable.extend = function (prototype, type) {
   return prototype;
 };
 
-},{"./Enumerable":3,"./core/core":8,"./methods/defaultAction":116,"./methods/defaultChildrenSelector":117,"./methods/defaultComparer":119,"./methods/defaultEqualityComparer":120,"./methods/defaultFalsePredicate":122,"./methods/defaultJoinSelector":124,"./methods/defaultKeySelector":125,"./methods/defaultParentSelector":126,"./methods/defaultPredicate":127,"./methods/defaultResultSelector":128,"./methods/defaultSameComparer":129,"./methods/defaultSelector":130,"./methods/defaultStrictEqualityComparer":131,"./methods/defaultValueSelector":132,"./methods/methods":139}],111:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8,"./methods/defaultAction":118,"./methods/defaultChildrenSelector":119,"./methods/defaultComparer":121,"./methods/defaultEqualityComparer":122,"./methods/defaultFalsePredicate":124,"./methods/defaultJoinSelector":126,"./methods/defaultKeySelector":127,"./methods/defaultParentSelector":128,"./methods/defaultPredicate":129,"./methods/defaultResultSelector":130,"./methods/defaultSameComparer":131,"./methods/defaultSelector":132,"./methods/defaultStrictEqualityComparer":133,"./methods/defaultValueSelector":134,"./methods/methods":141}],113:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -16323,7 +16594,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":3,"./core/core":8}],112:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8}],114:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -16342,7 +16613,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":3,"./core/core":8}],113:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8}],115:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -16361,7 +16632,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":3,"./core/core":8}],114:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8}],116:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -16642,7 +16913,7 @@ module.exports = g.Enumerable = Enumerable;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":3,"./core/core":8,"./enumerables/ArrayEnumerable":20,"./enumerables/IteratorEnumerable":55,"./enumerables/MapEnumerable":60,"./enumerables/ObjectEnumerable":65,"./enumerables/StringEnumerable":98,"./enumerables/TreeEnumerable":105,"./linq-array":111,"./linq-object":112,"./linq-string":113}],115:[function(require,module,exports){
+},{"./Enumerable":3,"./core/core":8,"./enumerables/ArrayEnumerable":20,"./enumerables/IteratorEnumerable":55,"./enumerables/MapEnumerable":60,"./enumerables/ObjectEnumerable":65,"./enumerables/StringEnumerable":99,"./enumerables/TreeEnumerable":107,"./linq-array":113,"./linq-object":114,"./linq-string":115}],117:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -16669,19 +16940,19 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":120,"./methods":139}],116:[function(require,module,exports){
+},{"./defaultEqualityComparer":122,"./methods":141}],118:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, key) {};
 
-},{}],117:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.children === 'undefined' ? element : element.children;
 };
 
-},{}],118:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -16690,7 +16961,7 @@ module.exports = function (element, value) {
   }
 };
 
-},{}],119:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 'use strict';
 
 var IComparable = require('./../core/IComparable');
@@ -16699,7 +16970,7 @@ module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
 
-},{"./../core/IComparable":6}],120:[function(require,module,exports){
+},{"./../core/IComparable":6}],122:[function(require,module,exports){
 'use strict';
 
 var IEquatable = require('./../core/IEquatable');
@@ -16708,28 +16979,28 @@ module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
-},{"./../core/IEquatable":7}],121:[function(require,module,exports){
+},{"./../core/IEquatable":7}],123:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element !== 'undefined' && element !== null;
 };
 
-},{}],122:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return false;
 };
 
-},{}],123:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return index;
 };
 
-},{}],124:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 'use strict';
 
 module.exports = function (outer, inner) {
@@ -16739,63 +17010,63 @@ module.exports = function (outer, inner) {
   };
 };
 
-},{}],125:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.key;
 };
 
-},{}],126:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element.parent;
 };
 
-},{}],127:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
-},{}],128:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 'use strict';
 
 module.exports = function (key, result) {
   return result;
 };
 
-},{}],129:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other || typeof element === 'number' && typeof other === 'number' && isNaN(element) && isNaN(other);
 };
 
-},{}],130:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element;
 };
 
-},{}],131:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other;
 };
 
-},{}],132:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.value === 'undefined' ? element : element.value;
 };
 
-},{}],133:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -16804,7 +17075,7 @@ module.exports = function (element, value) {
   }
 };
 
-},{}],134:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderBy) {
@@ -16813,7 +17084,7 @@ module.exports = function (orderBy) {
   };
 };
 
-},{}],135:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -16828,7 +17099,7 @@ module.exports = function (value) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":120,"./methods":139}],136:[function(require,module,exports){
+},{"./defaultEqualityComparer":122,"./methods":141}],138:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -16848,7 +17119,7 @@ module.exports = function (greaterThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":120,"./methods":139}],137:[function(require,module,exports){
+},{"./defaultEqualityComparer":122,"./methods":141}],139:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -16865,7 +17136,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":130,"./methods":139}],138:[function(require,module,exports){
+},{"./defaultSelector":132,"./methods":141}],140:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -16885,7 +17156,7 @@ module.exports = function (lessThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":120,"./methods":139}],139:[function(require,module,exports){
+},{"./defaultEqualityComparer":122,"./methods":141}],141:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -17001,7 +17272,7 @@ var propertiesPredicate = require('./propertiesPredicate');
 
 var regexpPredicate = require('./regexpPredicate');
 
-},{"./../core/core":8,"./../core/exceptions/InvalidFunctionException":10,"./arrayComparer":115,"./defaultComparer":119,"./defaultEqualityComparer":120,"./defaultSameComparer":129,"./defaultStrictEqualityComparer":131,"./propertiesPredicate":142,"./propertySelector":143,"./propertySetter":144,"./regexpPredicate":145,"./selectorComparer":146,"./selectorPredicate":147}],140:[function(require,module,exports){
+},{"./../core/core":8,"./../core/exceptions/InvalidFunctionException":10,"./arrayComparer":117,"./defaultComparer":121,"./defaultEqualityComparer":122,"./defaultSameComparer":131,"./defaultStrictEqualityComparer":133,"./propertiesPredicate":144,"./propertySelector":145,"./propertySetter":146,"./regexpPredicate":147,"./selectorComparer":148,"./selectorPredicate":149}],142:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -17016,7 +17287,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":121,"./methods":139}],141:[function(require,module,exports){
+},{"./defaultExistsPredicate":123,"./methods":141}],143:[function(require,module,exports){
 'use strict';
 
 module.exports = function (array) {
@@ -17043,7 +17314,7 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./methods":139}],142:[function(require,module,exports){
+},{"./methods":141}],144:[function(require,module,exports){
 'use strict';
 
 var defaultSameComparer = require('./defaultSameComparer');
@@ -17084,7 +17355,7 @@ var methods = require('./methods');
 
 var core = require('./../core/core');
 
-},{"./../core/core":8,"./defaultSameComparer":129,"./methods":139,"./propertySelector":143}],143:[function(require,module,exports){
+},{"./../core/core":8,"./defaultSameComparer":131,"./methods":141,"./propertySelector":145}],145:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -17125,7 +17396,7 @@ module.exports = function (property) {
   }
 };
 
-},{"./../core/core":8,"./../core/exceptions/PropertyExpressionInvalidException":18}],144:[function(require,module,exports){
+},{"./../core/core":8,"./../core/exceptions/PropertyExpressionInvalidException":18}],146:[function(require,module,exports){
 'use strict';
 
 var core = require('./../core/core');
@@ -17175,7 +17446,7 @@ module.exports = function (property) {
   }
 };
 
-},{"./../core/core":8,"./../core/exceptions/PropertyExpressionInvalidException":18}],145:[function(require,module,exports){
+},{"./../core/core":8,"./../core/exceptions/PropertyExpressionInvalidException":18}],147:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -17190,7 +17461,7 @@ module.exports = function (regexp) {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":130,"./methods":139}],146:[function(require,module,exports){
+},{"./defaultSelector":132,"./methods":141}],148:[function(require,module,exports){
 'use strict';
 
 module.exports = function (selector, comparer) {
@@ -17202,7 +17473,7 @@ module.exports = function (selector, comparer) {
 
 var methods = require('./methods');
 
-},{"./methods":139}],147:[function(require,module,exports){
+},{"./methods":141}],149:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -17218,7 +17489,7 @@ module.exports = function (selector) {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":121,"./methods":139}],148:[function(require,module,exports){
+},{"./defaultExistsPredicate":123,"./methods":141}],150:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderByComparer, thenByComparer) {
@@ -17228,7 +17499,7 @@ module.exports = function (orderByComparer, thenByComparer) {
   };
 };
 
-},{}],149:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -17420,6 +17691,6 @@ Enumerable.removePlugins = function () {
   return this;
 };
 
-},{"./Enumerable":3,"./IEnumerable":4,"./core/core":8,"./core/exceptions/PluginRepeatException":17}]},{},[114])(114)
+},{"./Enumerable":3,"./IEnumerable":4,"./core/core":8,"./core/exceptions/PluginRepeatException":17}]},{},[116])(116)
 });
 //# sourceMappingURL=linq.js.map

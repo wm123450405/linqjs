@@ -170,6 +170,9 @@ Enumerable.skipWhile = function(source, predicate = defaultPredicate) {
 Enumerable.skipSame = function(source, comparer = defaultSameComparer) {
     return new SkipSameEnumerable(asIterable(source), comparer);
 };
+Enumerable.skipProportion = function(source, proportion = 0) {
+    return new SkipProportionEnumerable(asIterable(source), proportion);
+};
 Enumerable.take = function(source, count) {
     return new TakeEnumerable(asIterable(source), count);
 };
@@ -178,6 +181,9 @@ Enumerable.takeWhile = function(source, predicate = defaultPredicate) {
 };
 Enumerable.takeSame = function(source, comparer = defaultSameComparer) {
     return new TakeSameEnumerable(asIterable(source), comparer);
+};
+Enumerable.takeProportion = function(source, proportion = 0) {
+    return new TakeProportionEnumerable(asIterable(source), proportion);
 };
 Enumerable.orderBy = Enumerable.sorted = function(source, keySelector = defaultSelector, comparer = defaultComparer) {
     return new OrderByEnumerable(asIterable(source), keySelector, comparer);
@@ -1095,9 +1101,11 @@ const OfTypeEnumerable = require('./enumerables/OfTypeEnumerable');
 const SkipEnumerable = require('./enumerables/SkipEnumerable');
 const SkipWhileEnumerable = require('./enumerables/SkipWhileEnumerable');
 const SkipSameEnumerable = require('./enumerables/SkipSameEnumerable');
+const SkipProportionEnumerable = require('./enumerables/SkipProportionEnumerable');
 const TakeEnumerable = require('./enumerables/TakeEnumerable');
 const TakeWhileEnumerable = require('./enumerables/TakeWhileEnumerable');
 const TakeSameEnumerable = require('./enumerables/TakeSameEnumerable');
+const TakeProportionEnumerable = require('./enumerables/TakeProportionEnumerable');
 const IOrderedEnumerable = require('./enumerables/IOrderedEnumerable');
 const OrderByEnumerable = require('./enumerables/OrderByEnumerable');
 const OrderByDescendingEnumerable = require('./enumerables/OrderByDescendingEnumerable');

@@ -127,6 +127,9 @@ class IEnumerable extends Array {
     skipSame(comparer = defaultSameComparer) {
         return Enumerable.skipSame(this, comparer);
     }
+    skipProportion(proportion = 0) {
+        return Enumerable.skipProportion(this, proportion);
+    }
     take(count) {
         return Enumerable.take(this, count);
     }
@@ -135,6 +138,9 @@ class IEnumerable extends Array {
     }
     takeSame(comparer = defaultSameComparer) {
         return Enumerable.takeSame(this, comparer);
+    }
+    takeProportion(proportion = 0) {
+        return Enumerable.takeProportion(this, proportion);
     }
     sorted(keySelector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.sorted(this, keySelector, comparer);
@@ -403,6 +409,9 @@ class IEnumerable extends Array {
     }
     conflict(selector = defaultSelector, comparer = defaultEqualityComparer) {
         return Enumerable.conflict(this, selector, comparer);
+    }
+    proportion(predicate = defaultPredicate) {
+        return Enumerable.proportion(this, predicate);
     }
 }
 
