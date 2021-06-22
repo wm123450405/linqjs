@@ -270,7 +270,7 @@ class ITree extends GeneratorEnumerable {
      */
     depth(predicate = defaultPredicate) {
         predicate = methods.asPredicate(predicate);
-        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).maxOrDefault(0, child => child.depth(predicate)) + 1;
+        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).select(child => child.depth(predicate)).maxOrDefault(0) + 1;
     }
     /**
      * 是否为二叉树

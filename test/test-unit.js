@@ -167,16 +167,24 @@ module.exports = function(Enumerable) {
 	assert.strictEqual(Enumerable.aggregate([4, 3, 2, 1], 5, (seed, v) => seed + v), 15);
 	assert.strictEqual(Enumerable.aggregate([4, 3, 2, 1], 5, (seed, v) => seed + v, r => r * 2), 30);
 	//max
+	assert.strictEqual(Enumerable.maxOrDefault([], 1), 1);
+
+	assert.strictEqual(Enumerable.maxOrDefault([5], 1), 5);
+
+	assert.strictEqual(Enumerable.maxOrDefault([5, 7], 1), 7);
+
+	assert.strictEqual(Enumerable.select([5, 7], v => v + 2).maxOrDefault(1), 9);
+
 	assert.strictEqual(Enumerable.max([5, 7, 3, 1, 9]), 9);
-	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v), '-d');
-	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-a');
-	assert.strictEqual(Enumerable.max([obb, obc, obd, oba], 'value'), d);
+	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v), d);
+	assert.strictEqual(Enumerable.max([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), a);
+	assert.strictEqual(Enumerable.max([obb, obc, obd, oba], 'value'), obd);
 	assert.strictEqual(Enumerable.max([obb, obc, obd, oba], '', 'key').value, d);
 	//min
 	assert.strictEqual(Enumerable.min([5, 7, 3, 1, 9]), 1);
-	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v), '-a');
-	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-d');
-	assert.strictEqual(Enumerable.min([obb, obc, obd, oba], 'value'), a);
+	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v), a);
+	assert.strictEqual(Enumerable.min([b, c, d, a], v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), d);
+	assert.strictEqual(Enumerable.min([obb, obc, obd, oba], 'value'), oba);
 	assert.strictEqual(Enumerable.min([obb, obc, obd, oba], '', 'key').value, a);
 	//concat
 	assert.deepStrictEqual(Enumerable.concat([a, b], [d, e]).toArray(), [a, b, d, e]);
@@ -535,12 +543,12 @@ module.exports = function(Enumerable) {
 	assert.strictEqual([4, 3, 2, 1].asEnumerable().aggregate(5, (seed, v) => seed + v, r => r * 2), 30);
 	//max
 	assert.strictEqual([5, 7, 3, 1, 9].asEnumerable().max(), 9);
-	assert.strictEqual([b, c, d, a].asEnumerable().max(v => '-' + v), '-d');
-	assert.strictEqual([b, c, d, a].asEnumerable().max(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-a');
+	assert.strictEqual([b, c, d, a].asEnumerable().max(v => '-' + v), d);
+	assert.strictEqual([b, c, d, a].asEnumerable().max(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), a);
 	//min
 	assert.strictEqual([5, 7, 3, 1, 9].asEnumerable().min(), 1);
-	assert.strictEqual([b, c, d, a].asEnumerable().min(v => '-' + v), '-a');
-	assert.strictEqual([b, c, d, a].asEnumerable().min(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-d');
+	assert.strictEqual([b, c, d, a].asEnumerable().min(v => '-' + v), a);
+	assert.strictEqual([b, c, d, a].asEnumerable().min(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), d);
 	//concat
 	assert.deepStrictEqual([a, b].asEnumerable().concat([d, e]).toArray(), [a, b, d, e]);
 	//contains
@@ -1092,12 +1100,12 @@ module.exports = function(Enumerable) {
         assert.strictEqual([4, 3, 2, 1].aggregate(5, (seed, v) => seed + v, r => r * 2), 30);
         //max
         assert.strictEqual([5, 7, 3, 1, 9].max(), 9);
-        assert.strictEqual([b, c, d, a].max(v => '-' + v), '-d');
-        assert.strictEqual([b, c, d, a].max(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-a');
+        assert.strictEqual([b, c, d, a].max(v => '-' + v), d);
+        assert.strictEqual([b, c, d, a].max(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), a);
         //min
         assert.strictEqual([5, 7, 3, 1, 9].min(), 1);
-        assert.strictEqual([b, c, d, a].min(v => '-' + v), '-a');
-        assert.strictEqual([b, c, d, a].min(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), '-d');
+        assert.strictEqual([b, c, d, a].min(v => '-' + v), a);
+        assert.strictEqual([b, c, d, a].min(v => '-' + v, (element, other) => element > other ? -1 : element === other ? 0 : 1), d);
         //concat
         assert.deepStrictEqual([a, b].concat([d, e]).toArray(), [a, b, d, e]);
         //contains
