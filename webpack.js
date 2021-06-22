@@ -160,8 +160,7 @@ const doPack = () => {
         },
         optimization: {
             splitChunks: {
-                minSize: 20000,
-                maxSize: 244000,
+                minSize: 128000,
             },
             minimize: pack,
             minimizer: [
