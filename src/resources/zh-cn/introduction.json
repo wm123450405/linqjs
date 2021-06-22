@@ -30,6 +30,6 @@
         "于是我又翻出了我的代码用 ES6 重写, 有了2.1版本, 并发布至npm上. 这一次我又借鉴了另外一些语言中的部分特性, 比如 php.我想我后面可能再会添加一些其他语言或框架类似的功能,比如 Java,Python 等.",
         "后来我在 stackoverflow 中看到很多人对于树形结构的操作提了很多的问题,我像我的工具包应该要可以为他们提供帮助.于是在最新的几个版本中我加入了对树形结构的一些操作.",
         "&nbsp;",
-        "穷人,求捐赠: <a href=\"http://git.oschina.net/wm123450405/linqjs\">http://git.oschina.net/wm123450405/linqjs</a> . 当然你的star也是对我最大的支持"
+        "穷人,求捐赠: <a href=\"https://gitee.com/wm123450405/linqjs\">https://gitee.com/wm123450405/linqjs</a> . 当然你的star也是对我最大的支持"
     ]
 }
