@@ -5,7 +5,7 @@
 	"properties": [
 		{
 			"name": "default",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "equality",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "same",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -38,7 +38,7 @@
 		},
 		{
 			"name": "strict",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -51,7 +51,7 @@
 	"methods": [
 		{
 			"name": "array",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -96,7 +96,7 @@
 		},
 		{
 			"name": "greater",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.17",
 					"deprecated": "2.1.20.pre",
@@ -135,7 +135,7 @@
 		},
 		{
 			"name": "ignoreCase",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": "2.1.20.pre",
@@ -168,7 +168,7 @@
 		},
 		{
 			"name": "less",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.17",
 					"deprecated": "2.1.20.pre",
@@ -207,7 +207,7 @@
 		},
 		{
 			"name": "predicate",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,

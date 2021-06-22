@@ -8,7 +8,7 @@
 	"properties": [
 		{
 			"name": "left",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -19,7 +19,7 @@
 		},
 		{
 			"name": "right",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -32,7 +32,7 @@
 	"methods": [
 		{
 			"name": "hasLeft",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -47,7 +47,7 @@
 		},
 		{
 			"name": "hasRight",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -62,7 +62,7 @@
 		},
 		{
 			"name": "inOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -77,7 +77,7 @@
 		},
 		{
 			"name": "postOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -92,7 +92,7 @@
 		},
 		{
 			"name": "preOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,

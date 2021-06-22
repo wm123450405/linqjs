@@ -5,7 +5,7 @@
 	"properties": [
 		{
 			"name": "children",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "default",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "join",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.19",
 					"deprecated": 0,
@@ -38,7 +38,7 @@
 		},
 		{
 			"name": "key",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -49,7 +49,7 @@
 		},
 		{
 			"name": "parent",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -60,7 +60,7 @@
 		},
 		{
 			"name": "result",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -71,7 +71,7 @@
 		},
 		{
 			"name": "value",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -84,7 +84,7 @@
 	"methods": [
 		{
 			"name": "property",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",

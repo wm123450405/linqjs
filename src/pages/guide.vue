@@ -2,7 +2,7 @@
     <content-template :title="data.title">
         <div v-for="(content, index) in data.contents" v-if="isNewer(content.since) && isOlder(content.deprecated)">
             <h4>{{ index + 1 }}. {{ capitalize(content.title) }}</h4>
-            <div v-for="description in histroys(content.descriptions)" class="indent" v-if="isNewer(description.since) && isOlder(description.deprecated)">
+            <div v-for="description in historys(content.descriptions)" class="indent" v-if="isNewer(description.since) && isOlder(description.deprecated)">
                 <p v-if="description.type === 'description'" v-html="capitalize(description.content)" class="text-success"></p>
                 <p v-if="description.type === 'remark'" v-html="capitalize(description.content)" class="text-info"></p>
                 <p v-if="description.type === 'warning'" v-html="capitalize(description.content)" class="text-warning"></p>

@@ -116,14 +116,14 @@ const createApis = (refreshLangName, refreshClassName) => {
 											let propertyMeta = JSON.parse(fs.readFileSync(path.join(propertiesPath, propertyFile)));
 											let property = {
 												name: path.basename(propertyFile, jsonExt),
-												histroys: common.histroys(propertyMeta.histroys).select(histroy => ({
-													since: histroy.since,
-													deprecated: histroy.deprecated,
-													static: histroy.static,
-													override: histroy.override,
-													description: histroy.description,
-													readonly: histroy.readonly,
-                                                    default: histroy.default
+												historys: common.historys(propertyMeta.historys).select(history => ({
+													since: history.since,
+													deprecated: history.deprecated,
+													static: history.static,
+													override: history.override,
+													description: history.description,
+													readonly: history.readonly,
+                                                    default: history.default
 												})).toArray()
 											};
 											classMeta.properties.push(property);
@@ -147,10 +147,10 @@ const createApis = (refreshLangName, refreshClassName) => {
 
 											let method = {
 												name: path.basename(methodFile, jsonExt),
-												histroys: common.histroys(methodMeta.histroys).select(histroy => ({
-													since: histroy.since,
-													deprecated: histroy.deprecated,
-													overloads: histroy.overloads.map(overload => ({
+												historys: common.historys(methodMeta.historys).select(history => ({
+													since: history.since,
+													deprecated: history.deprecated,
+													overloads: history.overloads.map(overload => ({
 														static: overload.static,
 														override: overload.override,
 														description: overload.description,
@@ -183,10 +183,10 @@ const createApis = (refreshLangName, refreshClassName) => {
 const createDirectory = refreshLangName => {
 	let defaultDirectoryMeta = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, directoryMetaFile)));
 	let defaultCaption = JSON.parse(fs.readFileSync(path.join(resources, common.defaultLang, captionFile)));
-	let defaultGuides = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
+	let defaultGuides = Enumerable.asEnumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'guides'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.array([
 		"instance", "use", "config", "selector", "predicate", "comparer", "action", "setter", "iterator"
 	], true)).toArray();
-	let defaultApis = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt)).toArray();
+	let defaultApis = Enumerable.asEnumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'apis'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt)).toArray();
 	// let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), (element, other) => {
 	// 	if (element === other) {
 	// 		return 0;
@@ -196,13 +196,13 @@ const createDirectory = refreshLangName => {
 	// 		return 1;
 	// 	}
 	// }).toArray();
-	let defaultChanges = Enumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.less(common.isNewer)).toArray();
+	let defaultChanges = Enumerable.asEnumerable(fs.readdirSync(path.join(resources, common.defaultLang, 'change'))).where(name => path.extname(name) === jsonExt).orderBy(element => path.basename(element, jsonExt), Enumerable.comparers.less(common.isNewer)).toArray();
 
 	common.versions = Enumerable.select(defaultChanges, change => path.basename(change, jsonExt)).toArray();
 	fs.writeFileSync(path.join(resources, 'versions.json'), JSON.stringify(common.versions));
 	let versions = [...common.versions];
     if (!versions[versions.length - 1].endsWith('pre')) versions.push(common.preVersion(versions[versions.length - 1]));
-    fs.writeFileSync(path.join(scripts, 'histroy.js'), 'module.exports = (version, callback, pre, post) => { ' + versions.reverse().map(version => `if (version === '${ version }') return require.ensure([], function(require) { if (callback) { pre && pre(); callback(require('${ common.module(version) }')); post && post(); } }, '${ common.module(version) }');`).join(' else ') + ' };');
+    fs.writeFileSync(path.join(scripts, 'history.js'), 'module.exports = (version, callback, pre, post) => { ' + versions.reverse().map(version => `if (version === '${ version }') return require.ensure([], function(require) { if (callback) { pre && pre(); callback(require('${ common.module(version) }')); post && post(); } }, '${ common.module(version) }');`).join(' else ') + ' };');
 
 	console.log('apis:' + defaultApis);
 
@@ -316,12 +316,12 @@ const createDirectory = refreshLangName => {
 						}
 						let since = apiContent.since || common.lastest, deprecated = apiContent.deprecated || common.newest;
 						for (let method of (apiContent.methods || [])) {
-							since = common.minVersion(Enumerable.min(common.histroys(method.histroys), histroy => histroy.since, common.versionComparer), since);
-							deprecated = common.maxVersion(Enumerable.max(common.histroys(method.histroys), histroy => histroy.deprecated || common.lastest, common.versionComparer), deprecated);
+							since = common.minVersion(Enumerable.min(common.historys(method.historys), history => history.since, common.versionComparer), since);
+							deprecated = common.maxVersion(Enumerable.max(common.historys(method.historys), history => history.deprecated || common.lastest, common.versionComparer), deprecated);
 						}
 						for (let property of (apiContent.properties || [])) {
-							since = common.minVersion(Enumerable.min(common.histroys(property.histroys), histroy => histroy.since, common.versionComparer), since);
-							deprecated = common.maxVersion(Enumerable.max(common.histroys(property.histroys), histroy => histroy.deprecated || common.lastest, common.versionComparer), deprecated);
+							since = common.minVersion(Enumerable.min(common.historys(property.historys), history => history.since, common.versionComparer), since);
+							deprecated = common.maxVersion(Enumerable.max(common.historys(property.historys), history => history.deprecated || common.lastest, common.versionComparer), deprecated);
 						}
 						apis.children.push({
 							code: path.basename(api, jsonExt),

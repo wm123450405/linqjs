@@ -40,14 +40,14 @@ export default {
 		}
 	},
 	methods: {
-		hasHistroys(metas) {
-			return Enumerable.any(metas, meta => meta && this.hasHistroy(meta.histroys));
+		hasHistorys(metas) {
+			return Enumerable.any(metas, meta => meta && this.hasHistory(meta.historys));
 		},
-		hasHistroy(histroys) {
-			return Enumerable.any(this.histroys(histroys), histroy => this.isNewer(histroy.since) && this.isOlder(histroy.deprecated));
+		hasHistory(historys) {
+			return Enumerable.any(this.historys(historys), history => this.isNewer(history.since) && this.isOlder(history.deprecated));
 		},
-		histroys(histroys) {
-			return common.histroys(histroys).toArray();
+		historys(historys) {
+			return common.historys(historys).toArray();
 		},
 		asVersion(version) {
 			return common.asVersion(version);
@@ -158,9 +158,9 @@ export default {
 			return promise;
 		},
 		getLanguages() {
-			return new Promise((revolse, reject) => {
+			return new Promise((resolve, reject) => {
 				try {
-					revolse && revolse(require(`../resources/lang.json`));
+					resolve && resolve(require(`../resources/lang.json`));
 				} catch(e) {
 					reject && reject(e);
 				}

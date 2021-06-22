@@ -1,13 +1,13 @@
 <template>
     <content-template :title="`${ className }.${ methodName } ${ capitalize(caption.method) }`">
-        <div v-for="histroy in histroys(methodMeta.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)">
-            <div class="activatable" v-for="(overload, overloadIndex) in histroy.overloads" v-if="overloadIndex === index">
+        <div v-for="history in historys(methodMeta.historys)" v-if="isNewer(history.since) && isOlder(history.deprecated)">
+            <div class="activatable" v-for="(overload, overloadIndex) in history.overloads" v-if="overloadIndex === index">
                 <div class="indent">
                     <p>
                         <i class="fa fa-fw fa-rocket text-success" :title="caption.method"></i>
                         <i class="fa fa-fw fa-strikethrough text-danger" v-if="overload.static" :title="caption.static"></i>
-                        <shields v-if="histroy.since" subject="since" :status="histroy.since" color="yellow" :title="`${ caption.since }: ${ histroy.since }`"></shields>
-                        <shields v-if="histroy.deprecated" subject="deprecated" :status="histroy.deprecated" color="yellow" :title="`${ caption.deprecated }: ${ histroy.deprecated }`"></shields>
+                        <shields v-if="history.since" subject="since" :status="history.since" color="yellow" :title="`${ caption.since }: ${ history.since }`"></shields>
+                        <shields v-if="history.deprecated" subject="deprecated" :status="history.deprecated" color="yellow" :title="`${ caption.deprecated }: ${ history.deprecated }`"></shields>
                         <shields v-if="overload.override" subject="override" :title="caption.override"></shields>
                         <shields v-if="overload.lazy" subject="lazy" :title="caption.lazy"></shields>
                     </p>

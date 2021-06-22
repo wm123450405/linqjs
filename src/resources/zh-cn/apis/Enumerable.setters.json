@@ -5,7 +5,7 @@
 	"properties": [
 		{
 			"name": "children",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "value",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -29,7 +29,7 @@
 	"methods": [
 		{
 			"name": "property",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,

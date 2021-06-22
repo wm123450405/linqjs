@@ -1,6 +1,6 @@
 {
 	"constructors": {
-		"histroys": [
+		"historys": [
 			{
 				"overloads": [
 					{
@@ -14,7 +14,7 @@
 	"properties": [
 		{
 			"name": "actions",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"description": "An object contains same useful actions"
@@ -23,7 +23,7 @@
 		},
 		{
 			"name": "comparers",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"description": "An object contains same useful comparers"
@@ -32,7 +32,7 @@
 		},
 		{
 			"name": "config",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"description": "Global config"
@@ -41,7 +41,7 @@
 		},
 		{
 			"name": "predicates",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"description": "An object contains same useful predicates"
@@ -50,7 +50,7 @@
 		},
 		{
 			"name": "selectors",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"description": "An object contains same useful selectors"
@@ -61,7 +61,7 @@
 	"methods": [
 		{
 			"name": "asEnumerable",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"overloads": [
@@ -74,7 +74,7 @@
 		},
 		{
 			"name": "empty",
-			"histroys": [
+			"historys": [
 				{
 					"deprecated": 0,
 					"overloads": [

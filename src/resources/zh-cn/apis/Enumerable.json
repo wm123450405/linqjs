@@ -4,7 +4,7 @@
 	"extends": [],
 	"implements": [],
 	"constructors": {
-		"histroys": [
+		"historys": [
 			{
 				"since": "2.1.15",
 				"overloads": [
@@ -37,7 +37,7 @@
 	"properties": [
 		{
 			"name": "actions",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -49,7 +49,7 @@
 		},
 		{
 			"name": "comparers",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -61,7 +61,7 @@
 		},
 		{
 			"name": "config",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -73,7 +73,7 @@
 		},
 		{
 			"name": "predicates",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -85,7 +85,7 @@
 		},
 		{
 			"name": "selectors",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -99,7 +99,7 @@
 	"methods": [
 		{
 			"name": "asEnumerable",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.21.pre",
@@ -161,7 +161,7 @@
 		},
 		{
 			"name": "between",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -187,7 +187,7 @@
 		},
 		{
 			"name": "empty",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -203,7 +203,7 @@
 		},
 		{
 			"name": "from",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -223,7 +223,7 @@
 		},
 		{
 			"name": "generate",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -246,7 +246,7 @@
 		},
 		{
 			"name": "noConflict",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.19",
 					"deprecated": 0,
@@ -266,7 +266,7 @@
 		},
 		{
 			"name": "range",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.21.pre",
@@ -310,7 +310,7 @@
 		},
 		{
 			"name": "repeat",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,

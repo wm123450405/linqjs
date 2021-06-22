@@ -21,7 +21,7 @@
             </code>
         </p>
         <p v-for="description in meta.descriptions" v-html="capitalize(description)" class="text-success"></p>
-        <div v-if="meta.constructors && hasHistroy(meta.constructors.histroys)">
+        <div v-if="meta.constructors && hasHistory(meta.constructors.historys)">
             <h3>{{ caption.constructors }}</h3>
             <table class="table table-bordered">
                 <thead>
@@ -31,10 +31,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <template v-for="histroy in histroys(meta.constructors.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)" class="activatable">
-                    <tr v-for="(overload, index) in histroy.overloads">
+                <template v-for="history in historys(meta.constructors.historys)" v-if="isNewer(history.since) && isOlder(history.deprecated)" class="activatable">
+                    <tr v-for="(overload, index) in history.overloads">
                         <td>
-                            <mark-to :to="`constructor${ histroy.overloads.length > 1 ? '-' + index : '' }`">{{ meta.name || name }}(<span v-for="(parameter, index) in overload.parameters"><span v-if="index !== 0">, </span>{{ parameter.name }}</span>)</mark-to>
+                            <mark-to :to="`constructor${ history.overloads.length > 1 ? '-' + index : '' }`">{{ meta.name || name }}(<span v-for="(parameter, index) in overload.parameters"><span v-if="index !== 0">, </span>{{ parameter.name }}</span>)</mark-to>
                         </td>
                         <td>
                             {{ overload.description }}
@@ -44,7 +44,7 @@
                 </tbody>
             </table>
         </div>
-        <div v-if="meta.properties && hasHistroys(meta.properties)">
+        <div v-if="meta.properties && hasHistorys(meta.properties)">
             <h3>{{ caption.properties }}</h3>
             <div v-if="meta.properties">
                 <table class="table table-bordered">
@@ -58,19 +58,20 @@
                     </thead>
                     <tbody>
                     <template v-for="property in meta.properties">
-                        <tr v-for="histroy in histroys(property.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)">
+                        <tr v-for="history in historys(property.historys)" v-if="isNewer(history.since) && isOlder(history.deprecated)">
                             <td>
                                 <i class="fa fa-fw fa-align-left fa-flip-vertical text-success" :title="caption.property"></i>
-                                <i class="fa fa-fw fa-strikethrough text-danger" v-if="histroy.static" :title="caption.static"></i>
-                                <i class="fa fa-fw fa-chevron-circle-up text-primary" v-if="histroy.override" :title="caption.override"></i>
-                                <i class="fa fa-fw fa-eye text-warning" v-if="histroy.readonly" :title="caption.readonly"></i>
+                                <i class="fa fa-fw fa-strikethrough text-danger" v-if="history.static" :title="caption.static"></i>
+                                <i class="fa fa-fw fa-chevron-circle-up text-primary" v-if="history.override" :title="caption.override"></i>
+                                <i class="fa fa-fw fa-eye text-warning" v-if="history.readonly" :title="caption.readonly"></i>
+                                <i class="fa fa-fw fa-fire text-danger" v-if="history.since === version || history.since + '.pre' === version" :title="caption.new"></i>
                             </td>
                             <td>
                                 <lang-link :to="`apis/${ name }/property/${ property.name }`">{{ property.name }}</lang-link>
                             </td>
-                            <td>{{ histroy.default | json(true) }}</td>
+                            <td>{{ history.default | json(true) }}</td>
                             <td>
-                                {{ histroy.description }}
+                                {{ history.description }}
                             </td>
                         </tr>
                     </template>
@@ -78,7 +79,7 @@
                 </table>
             </div>
         </div>
-        <div v-if="meta.methods && hasHistroys(meta.methods)">
+        <div v-if="meta.methods && hasHistorys(meta.methods)">
             <h3>{{ caption.methods }}</h3>
             <div v-if="meta.methods">
                 <table class="table table-bordered">
@@ -91,15 +92,16 @@
                     </thead>
                     <tbody>
                     <template v-for="method in meta.methods">
-                        <template v-for="histroy in histroys(method.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)">
-                            <tr v-for="(overload, overloadIndex) in histroy.overloads">
+                        <template v-for="history in historys(method.historys)" v-if="isNewer(history.since) && isOlder(history.deprecated)">
+                            <tr v-for="(overload, overloadIndex) in history.overloads">
                                 <td>
                                     <i class="fa fa-fw fa-rocket text-success" :title="caption.method"></i>
                                     <i class="fa fa-fw fa-strikethrough text-danger" v-if="overload.static" :title="caption.static"></i>
                                     <i class="fa fa-fw fa-chevron-circle-up text-primary" v-if="overload.override" :title="caption.override"></i>
+                                    <i class="fa fa-fw fa-fire text-danger" v-if="history.since === version || history.since + '.pre' === version" :title="caption.new"></i>
                                 </td>
                                 <td>
-                                    <lang-link :to="`apis/${ name }/method/${ method.name }${ histroy.overloads.length > 1 ? '/' + overloadIndex : '' }`">{{ method.name }}(<span v-for="(parameter, parameterIndex) in overload.parameters"><span v-if="parameterIndex !== 0">, </span>{{ parameter.name }}</span>)</lang-link>
+                                    <lang-link :to="`apis/${ name }/method/${ method.name }${ history.overloads.length > 1 ? '/' + overloadIndex : '' }`">{{ method.name }}(<span v-for="(parameter, parameterIndex) in overload.parameters"><span v-if="parameterIndex !== 0">, </span>{{ parameter.name }}</span>)</lang-link>
                                 </td>
                                 <td>
                                     {{ overload.description }}
@@ -113,15 +115,15 @@
         </div>
         <p v-for="remark in meta.remarks" v-html="capitalize(remark)" class="text-info"></p>
         <p v-for="warning in meta.warnings" v-html="capitalize(warning)" class="text-warning"></p>
-        <div v-if="meta.constructors && meta.constructors.histroys">
-            <div v-for="histroy in histroys(meta.constructors.histroys)" v-if="isNewer(histroy.since) && isOlder(histroy.deprecated)" class="activatable">
+        <div v-if="meta.constructors && meta.constructors.historys">
+            <div v-for="history in historys(meta.constructors.historys)" v-if="isNewer(history.since) && isOlder(history.deprecated)" class="activatable">
                 <h3>{{ caption.constructors }}</h3>
-                <div class="activatable" v-for="(overload, overloadIndex) in histroy.overloads">
+                <div class="activatable" v-for="(overload, overloadIndex) in history.overloads">
                     <h4>{{ overloadIndex + 1 }}. {{ meta.name }}(<template v-for="(parameter, index) in overload.parameters"><template v-if="index !== 0">, </template>{{ parameter.name }}</template>)<mark-link :id="`constructor${ meta.constructors.length > 1 ? '-' + overloadIndex : '' }`"></mark-link></h4>
                     <div class="indent">
                         <p>
-                            <shields v-if="histroy.since" subject="since" :status="histroy.since" color="yellow" :title="`${ caption.since }: ${ histroy.since }`"></shields>
-                            <shields v-if="histroy.deprecated" subject="since" :status="histroy.deprecated" color="yellow" :title="`${ caption.since }: ${ histroy.deprecated }`"></shields>
+                            <shields v-if="history.since" subject="since" :status="history.since" color="yellow" :title="`${ caption.since }: ${ history.since }`"></shields>
+                            <shields v-if="history.deprecated" subject="since" :status="history.deprecated" color="yellow" :title="`${ caption.since }: ${ history.deprecated }`"></shields>
                             <shields v-if="overload.newInstance" subject="new" :status="overload.newInstance" color="yellow" :title="caption.newInstance[overload.newInstance]"></shields>
                         </p>
                         <p v-if="overload.description" class="text-success">{{ capitalize(overload.description) }}</p>

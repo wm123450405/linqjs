@@ -9,7 +9,7 @@
 	"properties": [
 		{
 			"name": "length",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -21,7 +21,7 @@
 		},
 		{
 			"name": "size",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -34,7 +34,7 @@
 	"methods": [
 		{
 			"name": "aggregate",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -79,7 +79,7 @@
 		},
 		{
 			"name": "all",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -126,7 +126,7 @@
 		},
 		{
 			"name": "any",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -173,7 +173,7 @@
 		},
 		{
 			"name": "asEnumerable",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -188,7 +188,7 @@
 		},
 		{
 			"name": "average",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -221,7 +221,7 @@
 		},
 		{
 			"name": "chunk",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": 0,
@@ -243,7 +243,7 @@
 		},
 		{
 			"name": "combination",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -265,7 +265,7 @@
 		},
 		{
 			"name": "combine",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": "2.1.23.pre",
@@ -316,7 +316,7 @@
 		},
 		{
 			"name": "concat",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.21.pre",
@@ -351,7 +351,7 @@
 		},
 		{
 			"name": "conflict",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.24.pre",
 					"deprecated": 0,
@@ -373,7 +373,7 @@
 		},
 		{
 			"name": "contains",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -412,7 +412,7 @@
 		},
 		{
 			"name": "copyWithin",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -438,7 +438,7 @@
 		},
 		{
 			"name": "count",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -485,7 +485,7 @@
 		},
 		{
 			"name": "defaultIfEmpty",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -504,7 +504,7 @@
 		},
 		{
 			"name": "distinct",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -537,7 +537,7 @@
 		},
 		{
 			"name": "each",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -556,7 +556,7 @@
 		},
 		{
 			"name": "elementAt",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -575,7 +575,7 @@
 		},
 		{
 			"name": "elementAtOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -597,7 +597,7 @@
 		},
 		{
 			"name": "every",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -638,7 +638,7 @@
 		},
 		{
 			"name": "except",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -677,7 +677,7 @@
 		},
 		{
 			"name": "fill",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -703,7 +703,7 @@
 		},
 		{
 			"name": "filter",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -744,7 +744,7 @@
 		},
 		{
 			"name": "find",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -785,7 +785,7 @@
 		},
 		{
 			"name": "findIndex",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -826,7 +826,7 @@
 		},
 		{
 			"name": "findLast",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.17",
 					"deprecated": "2.1.20.pre",
@@ -867,7 +867,7 @@
 		},
 		{
 			"name": "findLastIndex",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -908,7 +908,7 @@
 		},
 		{
 			"name": "first",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -955,7 +955,7 @@
 		},
 		{
 			"name": "firstOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -1011,7 +1011,7 @@
 		},
 		{
 			"name": "forEach",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -1034,7 +1034,7 @@
 		},
 		{
 			"name": "getEnumerator",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -1049,7 +1049,7 @@
 		},
 		{
 			"name": "groupBy",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1100,7 +1100,7 @@
 		},
 		{
 			"name": "groupJoin",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.19.pre",
@@ -1183,7 +1183,7 @@
 		},
 		{
 			"name": "includes",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -1206,7 +1206,7 @@
 		},
 		{
 			"name": "indexOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1253,7 +1253,7 @@
 		},
 		{
 			"name": "indices",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -1272,7 +1272,7 @@
 		},
 		{
 			"name": "innerJoin",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.19",
 					"deprecated": 0,
@@ -1303,7 +1303,7 @@
 		},
 		{
 			"name": "intersect",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1342,7 +1342,7 @@
 		},
 		{
 			"name": "isSub",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.21",
 					"deprecated": 0,
@@ -1364,7 +1364,7 @@
 		},
 		{
 			"name": "isSuper",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.21",
 					"deprecated": 0,
@@ -1386,7 +1386,7 @@
 		},
 		{
 			"name": "join",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.19.pre",
@@ -1490,7 +1490,7 @@
 		},
 		{
 			"name": "last",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -1537,7 +1537,7 @@
 		},
 		{
 			"name": "lastIndexOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1584,7 +1584,7 @@
 		},
 		{
 			"name": "lastOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -1640,7 +1640,7 @@
 		},
 		{
 			"name": "leftJoin",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": "2.1.20.pre",
@@ -1697,7 +1697,7 @@
 		},
 		{
 			"name": "leftPad",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": 0,
@@ -1719,7 +1719,7 @@
 		},
 		{
 			"name": "map",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1760,7 +1760,7 @@
 		},
 		{
 			"name": "max",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1799,7 +1799,7 @@
 		},
 		{
 			"name": "maxOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -1824,7 +1824,7 @@
 		},
 		{
 			"name": "min",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1863,7 +1863,7 @@
 		},
 		{
 			"name": "minOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -1888,7 +1888,7 @@
 		},
 		{
 			"name": "nearBy",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -1916,7 +1916,7 @@
 		},
 		{
 			"name": "nearSplit",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.24.pre",
 					"deprecated": 0,
@@ -1935,7 +1935,7 @@
 		},
 		{
 			"name": "ofType",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -1968,7 +1968,7 @@
 		},
 		{
 			"name": "orderBy",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2007,7 +2007,7 @@
 		},
 		{
 			"name": "orderByDescending",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2046,7 +2046,7 @@
 		},
 		{
 			"name": "permutation",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -2068,7 +2068,7 @@
 		},
 		{
 			"name": "pop",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2084,7 +2084,7 @@
 		},
 		{
 			"name": "product",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": "2.1.20.pre",
@@ -2116,8 +2116,27 @@
 			]
 		},
 		{
+			"name": "proportion",
+			"historys": [
+				{
+					"since": "2.1.25",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "通过筛选器获取符合条件的元素占比",
+							"parameters": [
+								{
+									"name": "predicate"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "push",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2137,7 +2156,7 @@
 		},
 		{
 			"name": "rand",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": 0,
@@ -2156,7 +2175,7 @@
 		},
 		{
 			"name": "random",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.25",
 					"deprecated": 0,
@@ -2171,7 +2190,7 @@
 		},
 		{
 			"name": "randomOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.25",
 					"deprecated": 0,
@@ -2190,7 +2209,7 @@
 		},
 		{
 			"name": "reduce",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2213,7 +2232,7 @@
 		},
 		{
 			"name": "reduceRight",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2236,7 +2255,7 @@
 		},
 		{
 			"name": "reverse",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2252,7 +2271,7 @@
 		},
 		{
 			"name": "rightJoin",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": "2.1.20.pre",
@@ -2309,7 +2328,7 @@
 		},
 		{
 			"name": "rightPad",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": 0,
@@ -2331,7 +2350,7 @@
 		},
 		{
 			"name": "select",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2364,7 +2383,7 @@
 		},
 		{
 			"name": "selectMany",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.16",
 					"deprecated": "2.1.20.pre",
@@ -2403,7 +2422,7 @@
 		},
 		{
 			"name": "separate",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -2425,7 +2444,7 @@
 		},
 		{
 			"name": "sequenceEqual",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2464,7 +2483,7 @@
 		},
 		{
 			"name": "shift",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2480,7 +2499,7 @@
 		},
 		{
 			"name": "single",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -2527,7 +2546,7 @@
 		},
 		{
 			"name": "singleOrDefault",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -2583,7 +2602,7 @@
 		},
 		{
 			"name": "skip",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2601,8 +2620,27 @@
 			]
 		},
 		{
+			"name": "skipProportion",
+			"historys": [
+				{
+					"since": "2.1.25",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从序列的开头忽略指定的比例的连续元素, 返回剩余元素",
+							"parameters": [
+								{
+									"name": "proportion"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "skipSame",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.24",
 					"deprecated": 0,
@@ -2621,7 +2659,7 @@
 		},
 		{
 			"name": "skipWhile",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -2668,7 +2706,7 @@
 		},
 		{
 			"name": "slice",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2691,7 +2729,7 @@
 		},
 		{
 			"name": "some",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2732,7 +2770,7 @@
 		},
 		{
 			"name": "sort",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2767,7 +2805,7 @@
 		},
 		{
 			"name": "splice",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2793,7 +2831,7 @@
 		},
 		{
 			"name": "split",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": "2.1.24.NaN.pre",
@@ -2826,7 +2864,7 @@
 		},
 		{
 			"name": "sum",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -2859,7 +2897,7 @@
 		},
 		{
 			"name": "symmetric",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.21",
 					"deprecated": 0,
@@ -2881,7 +2919,7 @@
 		},
 		{
 			"name": "take",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2899,8 +2937,27 @@
 			]
 		},
 		{
+			"name": "takeProportion",
+			"historys": [
+				{
+					"since": "2.1.25",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从序列的开头返回指定的比例的连续元素",
+							"parameters": [
+								{
+									"name": "proportion"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "takeSame",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.24",
 					"deprecated": 0,
@@ -2919,7 +2976,7 @@
 		},
 		{
 			"name": "takeWhile",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -2966,7 +3023,7 @@
 		},
 		{
 			"name": "toArray",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -2981,7 +3038,7 @@
 		},
 		{
 			"name": "toDirectory",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -3026,7 +3083,7 @@
 		},
 		{
 			"name": "toInOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -3041,7 +3098,7 @@
 		},
 		{
 			"name": "toLookup",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -3086,7 +3143,7 @@
 		},
 		{
 			"name": "toObject",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -3131,7 +3188,7 @@
 		},
 		{
 			"name": "toPostOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -3146,7 +3203,7 @@
 		},
 		{
 			"name": "toPreOrder",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -3161,7 +3218,7 @@
 		},
 		{
 			"name": "union",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.20.pre",
@@ -3200,7 +3257,7 @@
 		},
 		{
 			"name": "unshift",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -3220,7 +3277,7 @@
 		},
 		{
 			"name": "where",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": "2.1.18.pre",
@@ -3267,7 +3324,7 @@
 		},
 		{
 			"name": "wipe",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.20",
 					"deprecated": 0,
@@ -3289,7 +3346,7 @@
 		},
 		{
 			"name": "zip",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,

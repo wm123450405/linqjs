@@ -8,7 +8,7 @@
 	"properties": [
 		{
 			"name": "children",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -19,7 +19,7 @@
 		},
 		{
 			"name": "value",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -30,7 +30,7 @@
 		},
 		{
 			"name": "values",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -43,7 +43,7 @@
 	"methods": [
 		{
 			"name": "asBinary",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -58,7 +58,7 @@
 		},
 		{
 			"name": "breadthSearch",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -77,7 +77,7 @@
 		},
 		{
 			"name": "breadthSubTree",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -96,7 +96,7 @@
 		},
 		{
 			"name": "breadthTraverse",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -111,7 +111,7 @@
 		},
 		{
 			"name": "degree",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -130,7 +130,7 @@
 		},
 		{
 			"name": "depth",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -149,7 +149,7 @@
 		},
 		{
 			"name": "depthSearch",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -168,7 +168,7 @@
 		},
 		{
 			"name": "depthSubTree",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -187,7 +187,7 @@
 		},
 		{
 			"name": "depthTraverse",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -202,7 +202,7 @@
 		},
 		{
 			"name": "getChild",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -221,7 +221,7 @@
 		},
 		{
 			"name": "getParent",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -240,7 +240,7 @@
 		},
 		{
 			"name": "getParentNode",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -259,7 +259,7 @@
 		},
 		{
 			"name": "getValue",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -278,7 +278,7 @@
 		},
 		{
 			"name": "isAncestorOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -297,7 +297,7 @@
 		},
 		{
 			"name": "isBinary",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -312,7 +312,7 @@
 		},
 		{
 			"name": "isChildOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -331,7 +331,7 @@
 		},
 		{
 			"name": "isCompleteBinary",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -346,7 +346,7 @@
 		},
 		{
 			"name": "isDescendantOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -365,7 +365,7 @@
 		},
 		{
 			"name": "isFullBinary",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -380,7 +380,7 @@
 		},
 		{
 			"name": "isParentOf",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -399,7 +399,7 @@
 		},
 		{
 			"name": "isPerfectBinary",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": 0,
@@ -414,7 +414,7 @@
 		},
 		{
 			"name": "lowestAncestor",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": "2.1.24.pre",
@@ -450,7 +450,7 @@
 		},
 		{
 			"name": "next",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -472,7 +472,7 @@
 		},
 		{
 			"name": "nextAll",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -494,7 +494,7 @@
 		},
 		{
 			"name": "nextAllNodes",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -516,7 +516,7 @@
 		},
 		{
 			"name": "nextNode",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -538,7 +538,7 @@
 		},
 		{
 			"name": "path",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": "2.1.24.pre",
@@ -571,7 +571,7 @@
 		},
 		{
 			"name": "pathNodes",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -590,7 +590,7 @@
 		},
 		{
 			"name": "pathNodesTo",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -609,7 +609,7 @@
 		},
 		{
 			"name": "pathTo",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.22",
 					"deprecated": "2.1.24.pre",
@@ -642,7 +642,7 @@
 		},
 		{
 			"name": "prev",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -664,7 +664,7 @@
 		},
 		{
 			"name": "prevAll",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -686,7 +686,7 @@
 		},
 		{
 			"name": "prevAllNodes",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -708,7 +708,7 @@
 		},
 		{
 			"name": "prevNode",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -730,7 +730,7 @@
 		},
 		{
 			"name": "siblingNodes",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -752,7 +752,7 @@
 		},
 		{
 			"name": "siblings",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,
@@ -774,7 +774,7 @@
 		},
 		{
 			"name": "toValue",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.23",
 					"deprecated": 0,

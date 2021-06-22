@@ -1,0 +1,72 @@
+{
+    "historys": [
+        {
+            "since": "2.1.25",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "predicate",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number",
+                                "array",
+                                "object"
+                            ],
+                            "descriptions": [
+                                "用于检测每个元素是否满足条件的函数"
+                            ],
+                            "declare": {
+                                "returns": {
+                                    "type": "boolean"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "number",
+                        "descriptions": [
+                            "输入序列中所有满足条件的元素占总元素个数的比例"
+                        ]
+                    },
+                    "description": "通过筛选器获取符合条件的元素占比",
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "skipProportion"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "takeProportion"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 proportion 来获取符合条件的元素占比。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

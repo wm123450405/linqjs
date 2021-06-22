@@ -7,7 +7,7 @@
 	"properties": [
 		{
 			"name": "key",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -17,7 +17,7 @@
 		},
 		{
 			"name": "value",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,

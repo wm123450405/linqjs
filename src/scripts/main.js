@@ -1,6 +1,6 @@
 import '../styles/main.sass';
 
-import './histroy';
+import './history';
 
 import './extends';
 import './filters';
@@ -8,13 +8,13 @@ import routes from './routes';
 import mixin from './mixin';
 import components from './components';
 
-const load = page => resolve => require([`../pages/${page}.vue`], resolve);
+const load = page => () => import(`../pages/${page}.vue`);
 
 Vue.use(VueRouter);
 Vue.mixin(mixin);
 
 for (let component of components) {
-	Vue.component(component, require(`../components/${ component }.vue`));
+	Vue.component(component, require(`../components/${ component }.vue`).default);
 }
 
 const router = new VueRouter({

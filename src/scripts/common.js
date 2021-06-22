@@ -19,10 +19,10 @@ module.exports = {
 	module(version) {
 		return ('linq-js-' + (version.endsWith('.pre') ? 'pre' : version));
 	},
-	histroys(histroys) {
-		if (histroys) {
+	historys(historys) {
+		if (historys) {
 			let prev = 0;
-			return Enumerable.zip(histroys, Enumerable.skip(histroys, 1).concat([0]), (v, next) => {
+			return Enumerable.zip(historys, Enumerable.skip(historys, 1).concat([0]), (v, next) => {
 				let deprecated = v.deprecated || next && next.since && this.preVersion(next.since);
 				if (v.ref && prev) {
 					v = extend(true, { }, prev, v);

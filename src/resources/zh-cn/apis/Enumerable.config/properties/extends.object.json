@@ -1,5 +1,5 @@
 {
-    "histroys": [
+    "historys": [
         {
             "type": "boolean",
             "since": "2.1.15",

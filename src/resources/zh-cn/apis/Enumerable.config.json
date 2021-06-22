@@ -5,7 +5,7 @@
 	"properties": [
 		{
 			"name": "as",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "extends.array",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "extends.lazy",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.18",
 					"deprecated": 0,
@@ -38,7 +38,7 @@
 		},
 		{
 			"name": "extends.object",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,
@@ -49,7 +49,7 @@
 		},
 		{
 			"name": "extends.string",
-			"histroys": [
+			"historys": [
 				{
 					"since": "2.1.15",
 					"deprecated": 0,

@@ -1,0 +1,62 @@
+{
+    "historys": [
+        {
+            "since": "2.1.25",
+            "overloads": [
+                {
+                    "lazy": true,
+                    "parameters": [
+                        {
+                            "name": "proportion",
+                            "types": [
+                                "number"
+                            ],
+                            "descriptions": [
+                                "要返回的元素占总元素个数的比例"
+                            ]
+                        }
+                    ],
+                    "returns": {
+                        "type": "IEnumerable",
+                        "descriptions": [
+                            "包含从输入序列的起始位置开始, 指定的比例的连续元素组成的新序列"
+                        ]
+                    },
+                    "description": "从序列的开头返回指定的比例的连续元素",
+                    "remarks": [
+                        "此方法通过延迟执行的方式实现",
+                        "如果参数proportion大于等于1, 则返回包含全部源序列元素的新序列",
+                        "如果proportion小于等于0, 则返回空序列"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "take"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "takeWhile"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "takeSame"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "skipProportion"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "description": "下面的代码示例演示如何使用 takeProportion 从序列的开头返回指定比例的元素。",
+                            "script": {
+                                "type": "javascript",
+                                "href": "1.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -33,7 +33,7 @@
 
 	let codeMirror;
 
-	const histroy = require('./../scripts/histroy');
+	const history = require('./../scripts/history');
 
 	export default {
         beforeRouteUpdate(to, from, next) {
@@ -138,7 +138,7 @@
                         this.identity++;
                         let identity = this.identity;
                         this.runtime = true;
-						histroy(this.version, Enumerable => {
+						history(this.version, Enumerable => {
                             this.runtime = false;
 						    if (identity === this.identity) {
                                 let log = console.log;

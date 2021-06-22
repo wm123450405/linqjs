@@ -13,6 +13,7 @@
 </template>
 <script>
     export default {
+        name: 'ContentTemplate',
     	props: {
     		title: String
         }

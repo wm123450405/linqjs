@@ -5,9 +5,13 @@ const fs = require('fs');
 const os = require('os');
 const extend = require('extend');
 const niv = require('npm-install-version');
+const VueLoaderPlugin = require('vue-loader/lib/plugin-webpack5');
+const TerserPlugin = require("terser-webpack-plugin");
 
 require('./pack');
 const common = require('./src/scripts/common');
+
+const babelConfig = require('./babel.config.json');
 
 const libs = path.join(__dirname, 'libs');
 const pack = process.env.NODE_ENV === 'production';
@@ -29,15 +33,8 @@ const statsOptions = {
     colors: true,
     performance: true
 };
-const uglifyOptions = {
-    sourceMap: true,
-    parallel: {
-        cache: true,
-        workers: os.cpus() - 1
-    },
-    compress: {
-        warnings: false
-    }
+const terserOptions = {
+    parallel: os.cpus().length - 1
 };
 const serverOptions = {
     host: '0.0.0.0',
@@ -52,9 +49,9 @@ const serverOptions = {
 };
 
 const doPack = () => {
-    let callback = () => { };
     let compiler = webpack({
         devtool: 'source-map',
+        mode: pack ? 'production' : 'development',
         entry: {
             'main': './src/scripts/main.js',
             'common': ['linq-js', 'vue', 'vue-router'],
@@ -66,23 +63,85 @@ const doPack = () => {
             chunkFilename: '[name].js'
         },
         module: {
-            loaders: [
-                { test: /\.js$/, loader: 'babel-loader', include: path.join(__dirname, 'src', 'scripts') },
+            rules: [
+                {
+                    test: /\.js$/,
+                    use: [
+                        {
+                            loader: 'thread-loader',
+                            options: babelConfig
+                        }
+                    ],
+                    include: path.join(__dirname, 'src', 'scripts'),
+                    exclude: [
+                        path.join(__dirname, 'libs'),
+                        path.join(__dirname, 'node_modules')
+                    ]
+                },
                 {
                     test: /\.vue$/,
-                    loader: 'vue-loader',
-                    include: [ path.join(__dirname, './src/pages'), path.join(__dirname, 'src', 'components') ],
+                    use: [
+                        'vue-loader'
+                    ],
+                    include: [
+                        path.join(__dirname, './src/pages'),
+                        path.join(__dirname, 'src', 'components')
+                    ]
+                },
+                {
+                    test: /\.json$/,
+                    loader: 'json5-loader',
+                    include: path.join(__dirname, 'src', 'resources'),
+                    exclude: path.join(__dirname, 'src', 'resources', '*', 'apis', '*'),
+                    type: 'javascript/auto',
                     options: {
-                        loaders: {
-                            scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-                            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-                        }
+                        esModule: false
                     }
                 },
-                { test: /\.json$/, loader: 'json-loader', include: path.join(__dirname, 'src', 'resources'), exclude: path.join(__dirname, 'src', 'resources', '*', 'apis', '*') },
-                { test: /\.css$/, loader: 'style-loader!css-loader', include: path.join(__dirname, 'src', 'styles') },
-                { test: /\.(sass|scss)$/, loader: 'style-loader!css-loader!sass-loader', include: path.join(__dirname, 'src', 'styles') },
-                { test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/, loader: 'url-loader?limit=40960', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'node_modules') ] }
+                {
+                    test: /\.css$/,
+                    use: [
+                        'vue-style-loader',
+                        'css-loader'
+                    ],
+                    include: [
+                        path.join(__dirname, 'src', 'styles'),
+                        path.join(__dirname, 'src', 'components'),
+                        path.join(__dirname, 'src', 'pages')
+                    ]
+                },
+                {
+                    test: /\.(scss|sass)$/,
+                    use: [
+                        'vue-style-loader',
+                        'css-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    indentedSyntax: true
+                                }
+                            }
+                        },
+                    ],
+                    include: [
+                        path.join(__dirname, 'src', 'styles'),
+                        path.join(__dirname, 'src', 'components'),
+                        path.join(__dirname, 'src', 'pages')
+                    ]
+                },
+                {
+                    test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf|html)$/,
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 40960
+                            }
+                        }
+                    ],
+                    include: [ path.join(__dirname, 'src'), path.join(__dirname, 'node_modules') ]
+                }
             ]
         },
         resolve: {
@@ -99,11 +158,19 @@ const doPack = () => {
             historyApiFallback: true,
             contentBase: path.resolve('./')
         },
+        optimization: {
+            splitChunks: {
+                minSize: 20000,
+                maxSize: 244000,
+            },
+            minimize: pack,
+            minimizer: [
+                new TerserPlugin(
+                    extend({ exclude: /linq-js-/ }, terserOptions)
+                )
+            ],
+        },
         plugins: [
-            new webpack.optimize.CommonsChunkPlugin({
-                names: ['common'],
-                minChunks: Infinity
-            }),
             new webpack.ProvidePlugin({
                 Enumerable: 'linq-js',
                 Vue: 'vue',
@@ -112,33 +179,28 @@ const doPack = () => {
             new webpack.NormalModuleReplacementPlugin(
                 /^linq-js-/, resource => resource.request = resource.request.replace(/^linq-js-(.+)$/, 'linq-js-$1/dist/linq.min')
             ),
-            new webpack.ProgressPlugin({ })
-        ].concat(
-            pack ?
-                [
-                    new webpack.optimize.UglifyJsPlugin(extend({ exclude: /linq-js-/ }, uglifyOptions))
-                ]
-                :
-                [
-                    new webpack.NamedModulesPlugin()
-                ]
-        )
-    }, (error, stats) => {
-        process.stdout.write(stats.toString(statsOptions) + "\n");
-        if (error) {
-            console.error(error);
-        } else {
-            callback && callback();
-        }
+            new webpack.ProgressPlugin({ }),
+            new VueLoaderPlugin(),
+            new webpack.SourceMapDevToolPlugin({
+                exclude: /linq-js-/
+            })
+        ]
     });
     if (!pack) {
         let server = new Server(compiler, serverOptions);
-        callback = () => {
-            server.listen(serverOptions.port, serverOptions.host, function(error) {
-                if(error) console.error(error);
-                else console.log('Server is start at ' + serverOptions.host + ':' + serverOptions.port);
-            });
-        };
+        server.listen(serverOptions.port, serverOptions.host, function(error) {
+            if(error) console.error(error);
+            else console.log('Server is start at ' + serverOptions.host + ':' + serverOptions.port);
+        });
+    } else {
+        compiler.run((error, stats) => {
+            if (stats) {
+                process.stdout.write(stats.toString(statsOptions) + "\n");
+            }
+            if (error) {
+                console.error(error);
+            }
+        });
     }
 };
 
