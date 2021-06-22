@@ -1,0 +1,3 @@
+{
+	"1.js": "let fruits = [ \"苹果\", \"百香果\", \"海南香蕉\", \"芒果\", \"橘子\", \"蓝莓\", \"新疆葡萄\", \"草莓\" ];\r\n\r\nlet proportion = fruits.asEnumerable().proportion(fruit => fruit.length < 3);\r\n\r\nconsole.log((proportion * 100) + '%');\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 62.5%\r\n*/"
+}

@@ -1,0 +1,3 @@
+{
+	"1.js": "let grades = [ 59, 82, 70, 56, 92, 98, 85 ];\r\n\r\nlet lowerFiftyPercentGrades = grades.asEnumerable().orderByDescending().skipProportion(0.5);\r\n\r\nconsole.log(\"50%名额外的低分成绩：\");\r\nfor (let grade of lowerFiftyPercentGrades) {\r\n    console.log(grade);\r\n}\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 50%名额外的低分成绩：\r\n 82\r\n 70\r\n 59\r\n 56\r\n*/"
+}
