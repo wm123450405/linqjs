@@ -7121,7 +7121,7 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
     _this = _super.call(this, source);
     comparer = methods.asEqualityComparer(comparer);
     core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, /*#__PURE__*/_regenerator.default.mark(function DistinctIterator() {
-      var temp, set, type, _iterator, _step, element;
+      var temp, set, _iterator, _step, element;
 
       return _regenerator.default.wrap(function DistinctIterator$(_context) {
         while (1) {
@@ -7135,80 +7135,58 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
             case 4:
               if ((_step = _iterator.n()).done) {
-                _context.next = 22;
-                break;
-              }
-
-              element = _step.value;
-              type = core.getType(element);
-
-              if (!(type === core.types.String || type === core.types.Number || type === core.types.Symbol || type === core.types.Boolean)) {
-                _context.next = 16;
-                break;
-              }
-
-              if (set.has(element)) {
                 _context.next = 14;
                 break;
               }
 
-              if (Enumerable.contains(temp, element, comparer)) {
-                _context.next = 13;
+              element = _step.value;
+
+              if (set.has(element)) {
+                _context.next = 12;
                 break;
               }
 
-              _context.next = 12;
+              if (Enumerable.contains(temp, element, comparer)) {
+                _context.next = 11;
+                break;
+              }
+
+              _context.next = 10;
               return element;
 
-            case 12:
+            case 10:
               temp.push(element);
 
-            case 13:
+            case 11:
               set.add(element);
 
-            case 14:
-              _context.next = 20;
-              break;
-
-            case 16:
-              if (Enumerable.contains(temp, element, comparer)) {
-                _context.next = 20;
-                break;
-              }
-
-              _context.next = 19;
-              return element;
-
-            case 19:
-              temp.push(element);
-
-            case 20:
+            case 12:
               _context.next = 4;
               break;
 
-            case 22:
-              _context.next = 27;
+            case 14:
+              _context.next = 19;
               break;
 
-            case 24:
-              _context.prev = 24;
+            case 16:
+              _context.prev = 16;
               _context.t0 = _context["catch"](2);
 
               _iterator.e(_context.t0);
 
-            case 27:
-              _context.prev = 27;
+            case 19:
+              _context.prev = 19;
 
               _iterator.f();
 
-              return _context.finish(27);
+              return _context.finish(19);
 
-            case 30:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, DistinctIterator, null, [[2, 24, 27, 30]]);
+      }, DistinctIterator, null, [[2, 16, 19, 22]]);
     }));
     return _this;
   }
@@ -8047,7 +8025,13 @@ var GroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
                 if (!next.done) {
                   var key = keySelector(next.value);
                   var element = elementSelector(next.value);
-                  var trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                  var trueKey;
+
+                  if (iterators.has(key)) {
+                    trueKey = key;
+                  } else {
+                    trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                  }
 
                   if (trueKey === noneKey) {
                     iterators.set(key, []);
@@ -8088,7 +8072,9 @@ var GroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
                       });
                     }(key)));
                   } else {
-                    key = trueKey;
+                    if (key !== trueKey) {
+                      iterators.set(key, iterators.get(trueKey));
+                    }
                   }
 
                   iterators.get(key).push(element);

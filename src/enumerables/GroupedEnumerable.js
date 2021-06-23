@@ -34,7 +34,12 @@ class GroupedEnumerable extends IEnumerable {
                 if (!next.done) {
                     let key = keySelector(next.value);
                     let element = elementSelector(next.value);
-                    let trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                    let trueKey;
+                    if (iterators.has(key)) {
+                        trueKey = key;
+                    } else {
+                        trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                    }
                     if (trueKey === noneKey) {
                         iterators.set(key, []);
                         groupings.push(new IGrouping(key, (key => function* () {
@@ -47,7 +52,9 @@ class GroupedEnumerable extends IEnumerable {
                             }
                         })(key)));
                     } else {
-                        key = trueKey;
+                        if (key !== trueKey) {
+                            iterators.set(key, iterators.get(trueKey));
+                        }
                     }
                     iterators.get(key).push(element);
                 }
