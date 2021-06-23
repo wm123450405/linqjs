@@ -1,7 +1,5 @@
 'use strict';
 
-const extend = require('extend');
-
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
 const Enumerable = require('./../Enumerable');

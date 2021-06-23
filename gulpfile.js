@@ -27,7 +27,7 @@ const hint = function() {
 		.pipe(jshint.reporter('default'));
 };
 
-const pack = function() {
+const packSlim = function() {
 	return browserify({
 		entries: './src/linq.js',
 		standalone: 'Enumerable',
@@ -46,12 +46,36 @@ const pack = function() {
 		.pipe(gulp.dest('./dist/'));
 };
 
-const unit = function(cb) {
+const packFull = function() {
+	return browserify({
+		entries: './src/linq.full.js',
+		standalone: 'Enumerable',
+		debug: true,
+		insertGlobalVars: {
+			global: function() {
+				return 'typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}';
+			}
+		}
+	})
+		.transform(babelify.configure(extend(true, babelConfig, { sourceMaps: true })))
+		.bundle()
+		.pipe(exorcist('./dist/linq.full.js.map', '', '', './dist/'))
+		.pipe(source('linq.full.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest('./dist/'));
+}
+
+const unitSlim = function(cb) {
 	require('./test/test-unit')(require('./src/linq'));
 	cb && cb();
 };
 
-const min = function() {
+const unitFull = function(cb) {
+	require('./test/full/test-unit')(require('./src/linq.full'));
+	cb && cb();
+};
+
+const minSlim = function() {
 	return gulp.src('./dist/linq.js')
 		.pipe(rename('linq.min.js'))
 		.pipe(sourcemaps.init({
@@ -70,12 +94,42 @@ const min = function() {
 		.pipe(gulp.dest('./dist/'));
 };
 
+
+const minFull = function() {
+	return gulp.src('./dist/linq.full.js')
+		.pipe(rename('linq.full.min.js'))
+		.pipe(sourcemaps.init({
+			loadMaps: true
+		}))
+		.pipe(uglify({
+			// mangle: {
+			// 	except: ['require', 'exports', 'module']
+			// },
+			mangle: {
+				keep_fnames: true
+			},
+			compress: true
+		}))
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest('./dist/'));
+};
+
 gulp.task('hint', hint);
 
-gulp.task('unit', gulp.series(hint, unit));
+gulp.task('unitSlim', gulp.series(hint, unitSlim));
 
-gulp.task('pack', gulp.series(hint, unit, pack));
+gulp.task('unitFull', gulp.series(hint, unitFull));
 
-gulp.task('min', gulp.series(hint, unit, pack, min));
+gulp.task('packSlim', gulp.series(hint, unitSlim, packSlim));
 
-gulp.task('default', gulp.series(hint, unit, pack, min));
+gulp.task('packFull', gulp.series(hint, unitFull, packFull));
+
+gulp.task('minSlim', gulp.series(hint, unitSlim, packSlim, minSlim));
+
+gulp.task('minFull', gulp.series(hint, unitFull, packFull, minFull));
+
+gulp.task('slim', gulp.series(hint, unitSlim, packSlim, minSlim));
+
+gulp.task('full', gulp.series(hint, unitFull, packFull, minFull));
+
+gulp.task('default', gulp.series(hint, unitSlim, unitFull, packSlim, packFull, minSlim, minFull));

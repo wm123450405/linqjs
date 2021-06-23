@@ -8,7 +8,6 @@ const g =
 //     require('@babel/polyfill');
 // }
 
-const CONFLICT_SET_CONFIG = 'Can not set this config after call the noConflict method. If you want, you can use Enumerable.noConflict method with one parameter which value is "true" to set Enumerable of global back to this module';
 const CONFLICT_SUGGEST = 'You may require this module twice or more. I suggest you to only require once. If you must to, you can also use Enumerable.noConflict method to solve the conflict';
 
 const defaultAs = 'asEnumerable';
@@ -22,42 +21,13 @@ const clear = name => {
     delete Object.prototype[name];
 };
 
-const save = (saved, enumerable) => {
-    if (enumerable.config.as !== defaultAs) clear(enumerable.config.as);
-    clear(defaultAs);
-    saved.config.extends.array = enumerable.config.extends.array;
-    enumerable.config.extends.array = false;
-    saved.config.extends.string = enumerable.config.extends.string;
-    enumerable.config.extends.string = false;
-    saved.config.extends.object = enumerable.config.extends.object;
-    enumerable.config.extends.object = false;
-    saved.extends = enumerable.extends;
-    if (enumerable.unextendAll) enumerable.unextendAll();
-};
-
-const restore = (saved, enumerable) => {
-    let as = enumerable.config.as;
-    enumerable.config.as = defaultAs;
-    if (as !== defaultAs) enumerable.config.as = as;
-    enumerable.config.extends.array = saved.config.extends.array;
-    enumerable.config.extends.string = saved.config.extends.string;
-    enumerable.config.extends.object = saved.config.extends.object;
-    enumerable.extendAll(saved.extends);
-};
-
 let _Enumerable;
 let _saved = {
-    config: {
-        extends: {
-            array: false,
-            string: false,
-            object: false
-        }
-    },
-    extends: new Map()
 };
+
 if (g.Enumerable) {
-    save(_saved, _Enumerable = g.Enumerable);
+    _Enumerable = g.Enumerable;
+    _Enumerable.save(_saved);
     delete g.Enumerable;
     console.warn(CONFLICT_SUGGEST);
 }
@@ -73,29 +43,11 @@ const IteratorEnumerable = require('./enumerables/IteratorEnumerable');
 const ObjectEnumerable = require('./enumerables/ObjectEnumerable');
 const TreeEnumerable = require('./enumerables/TreeEnumerable');
 
-const extendArray = require('./linq-array');
-const extendObject = require('./linq-object');
-const extendString = require('./linq-string');
-
 const config = {
-    extends: {
-        array: false,
-        object: false,
-        string: false,
-        lazy: false
-    },
     as: defaultAs,
     noConflict: false
 };
 const saved = {
-    config: {
-        extends: {
-            array: false,
-            object: false,
-            string: false
-        }
-    },
-    extends: []
 };
 
 const initAs = (name) => {
@@ -154,68 +106,6 @@ Enumerable.typeAs = (type, as) => {
 Enumerable.types = core.types;
 
 Enumerable.config = {
-    extends: {
-        set array(value) {
-            if (config.noConflict) {
-                console.warn(CONFLICT_SET_CONFIG);
-                return;
-            }
-            if (config.extends.array !== value) {
-                if (value) {
-                    extendArray.install();
-                } else {
-                    extendArray.uninstall();
-                }
-            }
-            config.extends.array = value;
-        },
-        get array() {
-            return config.extends.array;
-        },
-        set object(value) {
-            if (config.noConflict) {
-                console.warn(CONFLICT_SET_CONFIG);
-                return;
-            }
-            if (config.extends.object !== value) {
-                if (value) {
-                    extendObject.install();
-                } else {
-                    extendObject.uninstall();
-                }
-            }
-            config.extends.object = value;
-        },
-        get object() {
-            return config.extends.object;
-        },
-        set string(value) {
-            if (config.noConflict) {
-                console.warn(CONFLICT_SET_CONFIG);
-                return;
-            }
-            if (config.extends.string !== value) {
-                if (value) {
-                    extendString.install();
-                } else {
-                    extendString.uninstall();
-                }
-            }
-            config.extends.string = value;
-        },
-        get string() {
-            return config.extends.string;
-        },
-        set lazy(value) {
-            if (config.extends.lazy !== value) {
-                core.lazy = value;
-            }
-            config.extends.lazy = value;
-        },
-        get lazy() {
-            return config.extends.lazy;
-        }
-    },
     set as(name) {
         initAs(name);
     },
@@ -224,19 +114,30 @@ Enumerable.config = {
     }
 };
 
+Enumerable.save = function(saved) {
+    if (this.config.as !== defaultAs) clear(this.config.as);
+    clear(defaultAs);
+};
+Enumerable.restore = function(saved) {
+    let as = this.config.as;
+    this.config.as = defaultAs;
+    if (as !== defaultAs) this.config.as = as;
+};
+
 Enumerable.noConflict = function(callback = false) {
     if (callback !== true) {
         if (this.isConflict) {
-            save(saved, this);
+            this.save(saved);
             config.noConflict = true;
-            restore(_saved, g.Enumerable = _Enumerable);
+            g.Enumerable = _Enumerable;
+            g.Enumerable.restore(_saved);
 
             let noConflict = g.Enumerable.noConflict;
             g.Enumerable.noConflict = function(callback = false) {
                 if (callback === true) {
-                    save(_saved, g.Enumerable);
+                    g.Enumerable.save(_saved);
                     config.noConflict = false;
-                    restore(saved, Enumerable);
+                    Enumerable.restore(saved);
                     g.Enumerable.noConflict = noConflict;
                     return Enumerable;
                 } else {

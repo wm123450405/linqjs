@@ -4,11 +4,25 @@
   "description": "use linq and lamdba in javascript",
   "main": "dist/linq.min.js",
   "scripts": {
-    "test": "node test/test.js",
-    "test:compile": "npm run compile && node test/test-compile.js",
-    "test:babel": "npx babel-node test/test-babel.js",
-    "test:unit": "gulp unit",
+    "test": "node test/test.js && node test/full/test.js",
+    "test:compile": "npm run compile && node test/test-compile.js && node test/full/test-compile.js",
+    "test:babel": "npx babel-node test/test-babel.js && npx babel-node test/full/test-babel.js",
+    "test:unit": "gulp unitSlim && gulp unitFull",
+
+    "test:slim": "node test/test.js",
+    "test:slim:compile": "npm run compile:slim && node test/test-compile.js",
+    "test:slim:babel": "npx babel-node test/test-babel.js",
+    "test:slim:unit": "gulp unitSlim",
+
+    "test:full": "node test/full/test.js",
+    "test:full:compile": "npm run compile:full && node test/full/test-compile.js",
+    "test:full:babel": "npx babel-node test/full/test-babel.js",
+    "test:full:unit": "gulp unitFull",
+
+    "compile:slim": "gulp slim",
+    "compile:full": "gulp full",
     "compile": "gulp",
+
     "prepublish": "npm run compile"
   },
   "repository": {

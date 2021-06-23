@@ -48,7 +48,9 @@ const NotAncestorOfException = require('./core/exceptions/NotAncestorOfException
 
 const IComparable = require('./core/IComparable');
 const IEquatable = require('./core/IEquatable');
-const Node = require('./enumerables/Node');
+
+const ValueNode = require('./enumerables/ValueNode');
+const ProbabilityNode = require('./enumerables/ProbabilityNode');
 
 const asIterable = value => {
 	if (value[Symbol.iterator]) {
@@ -617,7 +619,7 @@ Enumerable.product = function(source, selector = defaultSelector) {
     }
     return index === 0 ? NaN : product;
 };
-Enumerable.maxNode = function(source, selector = defaultSelector, comparer = defaultComparer) {
+const maxNode = function(source, selector = defaultSelector, comparer = defaultComparer) {
     source = asIterable(source);
     selector = methods.asSelector(selector);
     comparer = methods.asComparer(comparer);
@@ -625,18 +627,20 @@ Enumerable.maxNode = function(source, selector = defaultSelector, comparer = def
     let next = iterator.next();
     if (!next.done) {
         let index = 0, value, element;
-        let max = new Node(next.value, index, {value: selector(next.value, index)});
+        let max = new ValueNode(next.value, index, selector(next.value, index));
         while (!(next = iterator.next()).done) {
             index++;
             element = next.value;
             value = selector(element, index);
-            max = comparer(max.options.value, value) > 0 ? max : new Node(element, index, { value });
+            if (comparer(max.value, value) <= 0) {
+                max.set(element, index, value);
+            }
         }
         return max;
     }
 };
 Enumerable.max = function(source, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.maxNode(source, selector, comparer);
+    let node = maxNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -644,7 +648,7 @@ Enumerable.max = function(source, selector = defaultSelector, comparer = default
     }
 };
 Enumerable.maxIndex = function(source, defaultValue, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.maxNode(source, selector, comparer);
+    let node = maxNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -652,14 +656,14 @@ Enumerable.maxIndex = function(source, defaultValue, selector = defaultSelector,
     }
 };
 Enumerable.maxOrDefault = function(source, defaultValue, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.maxNode(source, selector, comparer);
+    let node = maxNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         return defaultValue;
     } else {
         return node.element;
     }
 };
-Enumerable.minNode = function(source, selector = defaultSelector, comparer = defaultComparer) {
+const minNode = function(source, selector = defaultSelector, comparer = defaultComparer) {
     source = asIterable(source);
     selector = methods.asSelector(selector);
     comparer = methods.asComparer(comparer);
@@ -667,18 +671,20 @@ Enumerable.minNode = function(source, selector = defaultSelector, comparer = def
     let next = iterator.next();
     if (!next.done) {
         let index = 0, value, element;
-        let min = new Node(next.value, index, {value: selector(next.value, index)});
+        let min = new ValueNode(next.value, index, selector(next.value, index));
         while (!(next = iterator.next()).done) {
             index++;
             element = next.value;
             value = selector(element, index);
-            min = comparer(min.options.value, value) < 0 ? min : new Node(element, index, { value });
+            if (comparer(min.value, value) >= 0) {
+                min.set(element, index, value);
+            }
         }
         return min;
     }
 };
 Enumerable.min = function(source, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.minNode(source, selector, comparer);
+    let node = minNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -686,7 +692,7 @@ Enumerable.min = function(source, selector = defaultSelector, comparer = default
     }
 };
 Enumerable.minIndex = function(source, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.minNode(source, selector, comparer);
+    let node = minNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -694,7 +700,7 @@ Enumerable.minIndex = function(source, selector = defaultSelector, comparer = de
     }
 };
 Enumerable.minOrDefault = function(source, defaultValue, selector = defaultSelector, comparer = defaultComparer) {
-    let node = Enumerable.minNode(source, selector, comparer);
+    let node = minNode(source, selector, comparer);
     if (core.isUndefined(node)) {
         return defaultValue;
     } else {
@@ -906,20 +912,20 @@ Enumerable.randomOrDefault = function(source, defaultValue) {
         return defaultValue;
     }
 };
-Enumerable.randomNodeProbability = function(source, probabilitySelector) {
+const randomNodeProbability = function(source, probabilitySelector) {
     let array = [], index = 0, sum = 0, probability = 0;
     for (let element of asIterable(source)) {
         probability = probabilitySelector(array, index);
         if (probability > 0) {
             sum += probability;
-            array.push(new Node(element, index, { probability }));
+            array.push(new ProbabilityNode(element, index, probability));
         }
         index++;
     }
     if (array.length > 0) {
         let result = Math.random() * sum;
         for (let node of array) {
-            sum -= node.options.probability;
+            sum -= node.probability;
             if (sum <= result) {
                 return node;
             }
@@ -927,7 +933,7 @@ Enumerable.randomNodeProbability = function(source, probabilitySelector) {
     }
 };
 Enumerable.randomProbability = function(source, probabilitySelector) {
-    let node = Enumerable.randomNodeProbability(source, probabilitySelector);
+    let node = randomNodeProbability(source, probabilitySelector);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -935,7 +941,7 @@ Enumerable.randomProbability = function(source, probabilitySelector) {
     }
 };
 Enumerable.randomIndexProbability = function(source, probabilitySelector) {
-    let node = Enumerable.randomNodeProbability(source, probabilitySelector);
+    let node = randomNodeProbability(source, probabilitySelector);
     if (core.isUndefined(node)) {
         throw new NoSuchElementsException();
     } else {
@@ -943,7 +949,7 @@ Enumerable.randomIndexProbability = function(source, probabilitySelector) {
     }
 };
 Enumerable.randomProbabilityOrDefault = function(source, defaultValue, probabilitySelector) {
-    let node = Enumerable.randomNodeProbability(source, probabilitySelector);
+    let node = randomNodeProbability(source, probabilitySelector);
     if (core.isUndefined(node)) {
         return defaultValue;
     } else {
@@ -1127,9 +1133,6 @@ core.defineProperty(Enumerable, 'IComparable', () => IComparable, true, true);
 core.defineProperty(Enumerable, 'IEquatable', () => IEquatable, true, true);
 
 module.exports = Enumerable;
-
-require('./plugin');
-require('./extend');
 
 const IEnumerator = require('./IEnumerator');
 
