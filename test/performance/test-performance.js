@@ -98,11 +98,11 @@ logTable(
     'order+take',
     defaultGenerator,
     array => {
-        return Enumerable.orderBy(array).takeProportion(0.0001).toArray();
+        return Enumerable.orderBy(array).takeProportion(0.1).toArray();
     },
     array => {
         array = [...array].sort((a, b) => a - b);
-        return array.slice(0, array.length / 10000);
+        return array.slice(0, array.length / 10);
     },
     100000,
     500000
