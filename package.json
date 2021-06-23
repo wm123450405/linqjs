@@ -4,6 +4,8 @@
   "description": "use linq and lamdba in javascript",
   "main": "dist/linq.min.js",
   "scripts": {
+    "test:performance": "node test/performance/test.js",
+
     "test": "node test/test.js && node test/full/test.js",
     "test:compile": "npm run compile && node test/test-compile.js && node test/full/test-compile.js",
     "test:babel": "npx babel-node test/test-babel.js && npx babel-node test/full/test-babel.js",

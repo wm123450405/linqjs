@@ -36,23 +36,7 @@ class BinaryTree extends ITree {
             }
         });
         core.defineProperty(this, 'children', function() {
-            return new GeneratorEnumerable(function* () {
-                let it = iterator();
-                let itLeft = it.next();
-                if (!itLeft.done) {
-                    left = itLeft.value && new BinaryTree(itLeft.value);
-                    yield left;
-                    let itRight = it.next();
-                    if (!itRight.done) {
-                        right = itRight.value && new BinaryTree(itRight.value);
-                        yield right;
-                    } else {
-                        right = undefined;
-                    }
-                } else {
-                    left = undefined;
-                }
-            });
+            return new GeneratorEnumerable(this[Symbol.iterator]);
         }, true, true);
         core.defineProperty(this, 'left', () => left === DEFAULT_LEFT ? left = Enumerable.elementAtOrDefault(this, 0) : left, true, true);
         core.defineProperty(this, 'right', () => right === DEFAULT_RIGHT ? right = Enumerable.elementAtOrDefault(this, 1) : right, true, true);

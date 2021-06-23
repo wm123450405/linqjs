@@ -15,11 +15,20 @@ class DistinctEnumerable extends IEnumerable {
         super(source);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* DistinctIterator() {
-            let temp = [];
+            let temp = [], set = new Set(), type;
             for (let element of source) {
-                if (!Enumerable.contains(temp, element, comparer)) {
-                    temp.push(element);
+                type = core.getType(element);
+                if (type === core.types.String || type === core.types.Number || type === core.types.Symbol || type === core.types.Boolean) {
+                    if (!set.has(element)) {
+                        if (!Enumerable.contains(temp, element, comparer)) {
+                            yield element;
+                            temp.push(element);
+                        }
+                        set.add(element);
+                    }
+                } else if (!Enumerable.contains(temp, element, comparer)) {
                     yield element;
+                    temp.push(element);
                 }
             }
         });

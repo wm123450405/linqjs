@@ -4,21 +4,22 @@ const IEnumerable = require('./../IEnumerable');
 
 const core = require('./../core/core');
 
+const Enumerable = require('./../Enumerable');
+
 class SkipProportionEnumerable extends IEnumerable {
     constructor(source, proportion = 0) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* SkipProportionIterator() {
             if (proportion > 0) {
-                let count = 0, skiped = 0, queue = [];
-                for (let element of source) {
-                    count++;
-                    queue.push(element);
-                    if (skiped + 1 <= count * proportion) {
-                        skiped++;
-                        queue.shift();
+                if (proportion < 1) {
+                    let array = Enumerable.toArray(source);
+                    let length = array.length;
+                    for (let i = Math.floor(length * proportion); i < length; i++) {
+                        yield array[i];
                     }
                 }
-                for (let element of queue) {
+            } else {
+                for (let element of source) {
                     yield element;
                 }
             }

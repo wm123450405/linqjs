@@ -5497,57 +5497,7 @@ var BinaryTree = /*#__PURE__*/function (_ITree) {
       }, BinaryTreeIterator);
     }));
     core.defineProperty((0, _assertThisInitialized2.default)(_this), 'children', function () {
-      return new GeneratorEnumerable( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var it, itLeft, itRight;
-        return _regenerator.default.wrap(function _callee2$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                it = iterator();
-                itLeft = it.next();
-
-                if (itLeft.done) {
-                  _context3.next = 16;
-                  break;
-                }
-
-                left = itLeft.value && new BinaryTree(itLeft.value);
-                _context3.next = 6;
-                return left;
-
-              case 6:
-                itRight = it.next();
-
-                if (itRight.done) {
-                  _context3.next = 13;
-                  break;
-                }
-
-                right = itRight.value && new BinaryTree(itRight.value);
-                _context3.next = 11;
-                return right;
-
-              case 11:
-                _context3.next = 14;
-                break;
-
-              case 13:
-                right = undefined;
-
-              case 14:
-                _context3.next = 17;
-                break;
-
-              case 16:
-                left = undefined;
-
-              case 17:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee2);
-      }));
+      return new GeneratorEnumerable(this[Symbol.iterator]);
     }, true, true);
     core.defineProperty((0, _assertThisInitialized2.default)(_this), 'left', function () {
       return left === DEFAULT_LEFT ? left = Enumerable.elementAtOrDefault((0, _assertThisInitialized2.default)(_this), 0) : left;
@@ -7171,13 +7121,13 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
     _this = _super.call(this, source);
     comparer = methods.asEqualityComparer(comparer);
     core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, /*#__PURE__*/_regenerator.default.mark(function DistinctIterator() {
-      var temp, _iterator, _step, element;
+      var temp, set, type, _iterator, _step, element;
 
       return _regenerator.default.wrap(function DistinctIterator$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              temp = [];
+              temp = [], set = new Set();
               _iterator = _createForOfIteratorHelper(source);
               _context.prev = 2;
 
@@ -7185,48 +7135,80 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
             case 4:
               if ((_step = _iterator.n()).done) {
-                _context.next = 12;
+                _context.next = 22;
                 break;
               }
 
               element = _step.value;
+              type = core.getType(element);
 
-              if (Enumerable.contains(temp, element, comparer)) {
-                _context.next = 10;
+              if (!(type === core.types.String || type === core.types.Number || type === core.types.Symbol || type === core.types.Boolean)) {
+                _context.next = 16;
                 break;
               }
 
-              temp.push(element);
-              _context.next = 10;
+              if (set.has(element)) {
+                _context.next = 14;
+                break;
+              }
+
+              if (Enumerable.contains(temp, element, comparer)) {
+                _context.next = 13;
+                break;
+              }
+
+              _context.next = 12;
               return element;
 
-            case 10:
+            case 12:
+              temp.push(element);
+
+            case 13:
+              set.add(element);
+
+            case 14:
+              _context.next = 20;
+              break;
+
+            case 16:
+              if (Enumerable.contains(temp, element, comparer)) {
+                _context.next = 20;
+                break;
+              }
+
+              _context.next = 19;
+              return element;
+
+            case 19:
+              temp.push(element);
+
+            case 20:
               _context.next = 4;
               break;
 
-            case 12:
-              _context.next = 17;
+            case 22:
+              _context.next = 27;
               break;
 
-            case 14:
-              _context.prev = 14;
+            case 24:
+              _context.prev = 24;
               _context.t0 = _context["catch"](2);
 
               _iterator.e(_context.t0);
 
-            case 17:
-              _context.prev = 17;
+            case 27:
+              _context.prev = 27;
 
               _iterator.f();
 
-              return _context.finish(17);
+              return _context.finish(27);
 
-            case 20:
+            case 30:
             case "end":
               return _context.stop();
           }
         }
-      }, DistinctIterator, null, [[2, 14, 17, 20]]);
+      }, DistinctIterator, null, [[2, 24, 27, 30]]);
     }));
     return _this;
   }
@@ -14089,6 +14071,8 @@ var IEnumerable = require('./../IEnumerable');
 
 var core = require('./../core/core');
 
+var Enumerable = require('./../Enumerable');
+
 var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
   (0, _inherits2.default)(SkipProportionEnumerable, _IEnumerable);
 
@@ -14101,60 +14085,87 @@ var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
     (0, _classCallCheck2.default)(this, SkipProportionEnumerable);
     _this = _super.call(this, source);
     core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, /*#__PURE__*/_regenerator.default.mark(function SkipProportionIterator() {
-      var count, skiped, queue, _iterator, _step, _element, _i, _queue, element;
+      var array, length, i, _iterator, _step, element;
 
       return _regenerator.default.wrap(function SkipProportionIterator$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               if (!(proportion > 0)) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
-              count = 0, skiped = 0, queue = [];
-              _iterator = _createForOfIteratorHelper(source);
-
-              try {
-                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                  _element = _step.value;
-                  count++;
-                  queue.push(_element);
-
-                  if (skiped + 1 <= count * proportion) {
-                    skiped++;
-                    queue.shift();
-                  }
-                }
-              } catch (err) {
-                _iterator.e(err);
-              } finally {
-                _iterator.f();
+              if (!(proportion < 1)) {
+                _context.next = 11;
+                break;
               }
 
-              _i = 0, _queue = queue;
+              array = Enumerable.toArray(source);
+              length = array.length;
+              i = Math.floor(length * proportion);
 
             case 5:
-              if (!(_i < _queue.length)) {
-                _context.next = 12;
+              if (!(i < length)) {
+                _context.next = 11;
                 break;
               }
 
-              element = _queue[_i];
-              _context.next = 9;
-              return element;
+              _context.next = 8;
+              return array[i];
 
-            case 9:
-              _i++;
+            case 8:
+              i++;
               _context.next = 5;
               break;
 
-            case 12:
+            case 11:
+              _context.next = 30;
+              break;
+
+            case 13:
+              _iterator = _createForOfIteratorHelper(source);
+              _context.prev = 14;
+
+              _iterator.s();
+
+            case 16:
+              if ((_step = _iterator.n()).done) {
+                _context.next = 22;
+                break;
+              }
+
+              element = _step.value;
+              _context.next = 20;
+              return element;
+
+            case 20:
+              _context.next = 16;
+              break;
+
+            case 22:
+              _context.next = 27;
+              break;
+
+            case 24:
+              _context.prev = 24;
+              _context.t0 = _context["catch"](14);
+
+              _iterator.e(_context.t0);
+
+            case 27:
+              _context.prev = 27;
+
+              _iterator.f();
+
+              return _context.finish(27);
+
+            case 30:
             case "end":
               return _context.stop();
           }
         }
-      }, SkipProportionIterator);
+      }, SkipProportionIterator, null, [[14, 24, 27, 30]]);
     }));
     return _this;
   }
@@ -14164,7 +14175,7 @@ var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipProportionEnumerable;
 
-},{"./../IEnumerable":27,"./../core/core":31,"@babel/runtime/helpers/assertThisInitialized":3,"@babel/runtime/helpers/classCallCheck":4,"@babel/runtime/helpers/getPrototypeOf":9,"@babel/runtime/helpers/inherits":10,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/possibleConstructorReturn":16,"@babel/runtime/regenerator":23}],118:[function(require,module,exports){
+},{"./../Enumerable":26,"./../IEnumerable":27,"./../core/core":31,"@babel/runtime/helpers/assertThisInitialized":3,"@babel/runtime/helpers/classCallCheck":4,"@babel/runtime/helpers/getPrototypeOf":9,"@babel/runtime/helpers/inherits":10,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/possibleConstructorReturn":16,"@babel/runtime/regenerator":23}],118:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15430,18 +15441,22 @@ var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
     (0, _classCallCheck2.default)(this, TakeProportionEnumerable);
     _this = _super.call(this, source);
     core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, /*#__PURE__*/_regenerator.default.mark(function TakeProportionIterator() {
-      var count, taked, queue, _iterator, _step, element;
+      var _iterator, _step, element, count, take, nextCount, queue, _iterator2, _step2, _element, countProportion;
 
       return _regenerator.default.wrap(function TakeProportionIterator$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               if (!(proportion > 0)) {
-                _context.next = 23;
+                _context.next = 51;
                 break;
               }
 
-              count = 0, taked = 0, queue = [];
+              if (!(proportion >= 1)) {
+                _context.next = 21;
+                break;
+              }
+
               _iterator = _createForOfIteratorHelper(source);
               _context.prev = 3;
 
@@ -15449,50 +15464,112 @@ var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
             case 5:
               if ((_step = _iterator.n()).done) {
-                _context.next = 15;
+                _context.next = 11;
                 break;
               }
 
               element = _step.value;
-              count++;
-              queue.push(element);
+              _context.next = 9;
+              return element;
 
-              if (!(taked + 1 <= count * proportion)) {
-                _context.next = 13;
-                break;
-              }
-
-              taked++;
-              _context.next = 13;
-              return queue.shift();
-
-            case 13:
+            case 9:
               _context.next = 5;
               break;
 
-            case 15:
-              _context.next = 20;
+            case 11:
+              _context.next = 16;
               break;
 
-            case 17:
-              _context.prev = 17;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](3);
 
               _iterator.e(_context.t0);
 
-            case 20:
-              _context.prev = 20;
+            case 16:
+              _context.prev = 16;
 
               _iterator.f();
 
-              return _context.finish(20);
+              return _context.finish(16);
 
-            case 23:
+            case 19:
+              _context.next = 51;
+              break;
+
+            case 21:
+              count = 0, take = 0, nextCount = 1 / proportion, queue = [];
+              _iterator2 = _createForOfIteratorHelper(source);
+              _context.prev = 23;
+
+              _iterator2.s();
+
+            case 25:
+              if ((_step2 = _iterator2.n()).done) {
+                _context.next = 36;
+                break;
+              }
+
+              _element = _step2.value;
+              count++;
+              queue.push(_element);
+
+              if (!(nextCount < count && take < Math.floor(count * proportion))) {
+                _context.next = 34;
+                break;
+              }
+
+              _context.next = 32;
+              return queue[take];
+
+            case 32:
+              take++;
+              nextCount = (take + 1) / proportion;
+
+            case 34:
+              _context.next = 25;
+              break;
+
+            case 36:
+              _context.next = 41;
+              break;
+
+            case 38:
+              _context.prev = 38;
+              _context.t1 = _context["catch"](23);
+
+              _iterator2.e(_context.t1);
+
+            case 41:
+              _context.prev = 41;
+
+              _iterator2.f();
+
+              return _context.finish(41);
+
+            case 44:
+              countProportion = Math.floor(count * proportion);
+
+            case 45:
+              if (!(take < countProportion)) {
+                _context.next = 51;
+                break;
+              }
+
+              _context.next = 48;
+              return queue[take];
+
+            case 48:
+              take++;
+              _context.next = 45;
+              break;
+
+            case 51:
             case "end":
               return _context.stop();
           }
         }
-      }, TakeProportionIterator, null, [[3, 17, 20, 23]]);
+      }, TakeProportionIterator, null, [[3, 13, 16, 19], [23, 38, 41, 44]]);
     }));
     return _this;
   }

@@ -265,6 +265,7 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.skipSame([1, 1, 1, 4, 5], v => v < 3).toArray(), [4, 5]);
     //skipProportion
 	assert.deepStrictEqual(Enumerable.skipProportion([1, 1, 1, 4, 5], 0.5).toArray(), [1, 4, 5]);
+	assert.deepStrictEqual(Enumerable.skipProportion([1, 1, 1, 3, 4, 5], 0.5).toArray(), [3, 4, 5]);
 	//take
 	assert.deepStrictEqual(Enumerable.take([a, b, c, d, e], 3).toArray(), [a, b, c]);
 	//takeWhile
@@ -273,6 +274,7 @@ module.exports = function(Enumerable) {
     assert.deepStrictEqual(Enumerable.takeSame([1, 1, 1, 4, 5], v => v <= 3).toArray(), [1, 1, 1]);
 	//takeProportion
 	assert.deepStrictEqual(Enumerable.takeProportion([1, 1, 1, 4, 5], 0.5).toArray(), [1, 1]);
+	assert.deepStrictEqual(Enumerable.takeProportion([1, 1, 1, 3, 4, 5], 0.5).toArray(), [1, 1, 1]);
 	//proportion
 	assert.strictEqual(Enumerable.proportion([1, 2, 3, 4, 5], v => v <= 3), 0.6);
 	//zip
