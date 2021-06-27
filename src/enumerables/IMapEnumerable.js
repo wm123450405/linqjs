@@ -31,8 +31,8 @@ class IMapEnumerable extends IEnumerable {
         comparer = methods.asSameComparer(comparer);
         return super.toLookup(keySelector, elementSelector, comparer);
     }
-    forEach(action = defaultAction, thisArg) {
-        let callback = (element, key) => action.call(thisArg, element, key, source);
+    forEach(action = defaultAction, thisArg = undefined) {
+        let callback = (element, key) => action.call(thisArg, element, key, this);
         for (let entry of this) {
             callback(entry.value, entry.key);
         }

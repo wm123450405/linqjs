@@ -43,7 +43,7 @@ const firstNode = (enumerable, predicate = defaultPredicate) => {
         }
         index++;
     }
-}
+};
 const lastNode = (enumerable, predicate = defaultPredicate) => {
     let last, index = 0;
     predicate = methods.asPredicate(predicate);
@@ -58,7 +58,7 @@ const lastNode = (enumerable, predicate = defaultPredicate) => {
         index++;
     }
     return last;
-}
+};
 const singleNode = (enumerable, predicate = defaultPredicate) => {
     let single, index = 0;
     predicate = methods.asPredicate(predicate);
@@ -73,7 +73,7 @@ const singleNode = (enumerable, predicate = defaultPredicate) => {
         }
     }
     return single;
-}
+};
 const maxNode = function(enumerable, selector = defaultSelector, comparer = defaultComparer) {
     selector = methods.asSelector(selector);
     comparer = methods.asComparer(comparer);
@@ -553,7 +553,7 @@ class IEnumerable extends Array {
     findIndex(predicate, thisArg) {
         let index = 0;
         predicate = methods.asPredicate(predicate);
-        let callback = (element, index) => predicate.call(thisArg, element, index, source);
+        let callback = (element, index) => predicate.call(thisArg, element, index, this);
         for (let element of this) {
             if (callback(element, index)) {
                 return index;
@@ -724,7 +724,7 @@ class IEnumerable extends Array {
     }
     forEach(action = defaultAction, thisArg = undefined) {
         let index = 0;
-        let callback = (element, index) => action.call(thisArg, element, index, source);
+        let callback = (element, index) => action.call(thisArg, element, index, this);
         for (let element of this) {
             callback(element, index++);
         }

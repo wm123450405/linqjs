@@ -22,21 +22,21 @@ class StringEnumerable extends ProtoEnumerable {
     }
     indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
         if (comparer === defaultStrictEqualityComparer && core.string$indexOf) {
-            return core.string$indexOf.call(string, value, start);
+            return core.string$indexOf.call(this[core.delegate], value, start);
         } else {
             return super.indexOf(value, start, comparer);
         }
     }
     lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
         if (comparer === defaultStrictEqualityComparer && core.string$lastIndexOf) {
-            return core.string$lastIndexOf.call(string, value, start);
+            return core.string$lastIndexOf.call(this[core.delegate], value, start);
         } else {
             return super.lastIndexOf(value, start, comparer);
         }
     }
     includes(element, start = 0) {
         if (core.string$includes) {
-            return core.string$includes.call(string, element, start);
+            return core.string$includes.call(this[core.delegate], element, start);
         } else {
             return this[core.delegate].indexOf(element, start) !== -1;
         }
@@ -58,7 +58,7 @@ class StringEnumerable extends ProtoEnumerable {
     }
     toArray() {
         if (core.string$split) {
-            return core.string$split.call(this[core.delegate])
+            return core.string$split.call(this[core.delegate]);
         } else {
             return super.toArray();
         }

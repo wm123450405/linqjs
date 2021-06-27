@@ -18,10 +18,11 @@ class ArrayEnumerable extends ProtoEnumerable {
         super(array);
     }
     join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-        if (arguments.length <= 1 && core.array$join) {
+        if (arguments.length === 1 && core.array$join) {
             return core.array$join.call(this[core.delegate], inner);
+        } else {
+            return super.join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
-        return super.join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
     }
     indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
         if (comparer === defaultStrictEqualityComparer && core.array$indexOf) {
@@ -42,13 +43,6 @@ class ArrayEnumerable extends ProtoEnumerable {
             return core.array$findIndex.call(this[core.delegate], predicate, thisArg);
         } else {
             return super.findIndex(predicate, thisArg);
-        }
-    }
-    join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
-        if (arguments.length === 1 && core.array$join) {
-            return core.array$join.call(this[core.delegate], inner);
-        } else {
-            return super.join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
         }
     }
     every(callback, thisArg) {
