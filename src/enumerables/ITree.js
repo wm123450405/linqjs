@@ -2,8 +2,6 @@
 
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const core = require('./../core/core');
 const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
 
@@ -26,10 +24,10 @@ class ITree extends GeneratorEnumerable {
         }, true, true);
     }
     get values() {
-        return Enumerable.select(this.children, child => child.value);
+        return this.children.select(child => child.value);
     }
     getChild(index) {
-        return Enumerable.elementAt(this.children, index);
+        return this.children.elementAt(index);
     }
     getValue(index) {
         return this.getChild(index).value;
@@ -41,7 +39,7 @@ class ITree extends GeneratorEnumerable {
         if (typeof this.value !== 'undefined') {
             valueSetter(obj, this.value);
         }
-        let children = Enumerable.select(this, sub => sub.toValue(childrenSetter, valueSetter)).toArray();
+        let children = this.select(sub => sub.toValue(childrenSetter, valueSetter)).toArray();
         if (children.length) {
             childrenSetter(obj, children);
         }
@@ -51,7 +49,7 @@ class ITree extends GeneratorEnumerable {
         let obj = {
             value: this.value
         };
-        let children = Enumerable.select(this, sub => sub.toObject()).toArray();
+        let children = this.select(sub => sub.toObject()).toArray();
         if (children.length) {
             obj.children = children;
         }
@@ -71,7 +69,7 @@ class ITree extends GeneratorEnumerable {
      * 搜索(广度优先搜索)
      */
     breadthSearch(predicate = defaultPredicate) {
-        return Enumerable.first(this.breadthTraverse(), predicate);
+        return this.breadthTraverse().first(predicate);
     }
 
     /**
@@ -92,7 +90,7 @@ class ITree extends GeneratorEnumerable {
      * 搜索(深度优先搜索)
      */
     depthSearch(predicate = defaultPredicate) {
-        return Enumerable.first(this.depthTraverse(), predicate);
+        return this.depthTraverse().first(predicate);
     }
 
     /**
@@ -107,7 +105,7 @@ class ITree extends GeneratorEnumerable {
      */
     lowestAncestor(...nodes) {
         let matchCount = nodes.length;
-        let isMatch = new Array(matchCount).fill(false);
+        let isMatch = core.repeat(false, matchCount);
         let search = current => {
             let index = 0;
             for (let node of nodes) {
@@ -145,7 +143,7 @@ class ITree extends GeneratorEnumerable {
      * 是否是父节点
      */
     isParentOf(node) {
-        return Enumerable.any(this, current => ITree.isSameNode(current, node));
+        return this.any(current => ITree.isSameNode(current, node));
     }
     /**
      * 是否是后辈节点
@@ -209,13 +207,13 @@ class ITree extends GeneratorEnumerable {
         return new PrevNodesEnumerable(this, node, predicate);
     }
     prevNode(node, predicate = defaultPredicate) {
-        return Enumerable.last(this.prevAllNodes(node, predicate));
+        return this.prevAllNodes(node, predicate).last();
     }
     nextAllNodes(node, predicate = defaultPredicate) {
         return new NextNodesEnumerable(this, node, predicate);
     }
     nextNode(node, predicate = defaultPredicate) {
-        return Enumerable.first(this.nextAllNodes(node, predicate));
+        return this.nextAllNodes(node, predicate).first();
     }
     siblingNodes(node, predicate = defaultPredicate) {
         return new SiblingNodesEnumerable(this, node, predicate);
@@ -228,13 +226,13 @@ class ITree extends GeneratorEnumerable {
         return new PrevEnumerable(this, node, predicate);
     }
     prev(node, predicate = defaultPredicate) {
-        return Enumerable.last(this.prevAll(node, predicate));
+        return this.prevAll(node, predicate).last();
     }
     nextAll(node, predicate = defaultPredicate) {
         return new NextEnumerable(this, node, predicate);
     }
     next(node, predicate = defaultPredicate) {
-        return Enumerable.first(this.nextAll(node, predicate));
+        return this.nextAll(node, predicate).first();
     }
     siblings(node, predicate = defaultPredicate) {
         return new SiblingsEnumerable(this, node, predicate);
@@ -261,27 +259,27 @@ class ITree extends GeneratorEnumerable {
      */
     degree(predicate = defaultPredicate) {
         predicate = methods.asPredicate(predicate);
-        return Enumerable.count(this.children, (element, index) => predicate(element.value, index));
+        return this.children.count((element, index) => predicate(element.value, index));
     }
     /**
      * 深度
      */
     depth(predicate = defaultPredicate) {
         predicate = methods.asPredicate(predicate);
-        return Enumerable.where(this.children, (element, index) => predicate(element.value, index)).select(child => child.depth(predicate)).maxOrDefault(0) + 1;
+        return this.children.where((element, index) => predicate(element.value, index)).select(child => child.depth(predicate)).maxOrDefault(0) + 1;
     }
     /**
      * 是否为二叉树
      */
     isBinary() {
-        return this.degree() <= 2 && Enumerable.all(this.children, child => child.isBinary());
+        return this.degree() <= 2 && this.children.all(child => child.isBinary());
     }
     /**
      * 是否为满二叉树(国际标准)
      */
     isFullBinary() {
         let degree = this.degree();
-        return degree === 0 || degree === 2 && Enumerable.all(this.children, child => child.isFullBinary());
+        return degree === 0 || degree === 2 && this.children.all(child => child.isFullBinary());
     }
 
     /**
@@ -340,12 +338,11 @@ class ITree extends GeneratorEnumerable {
     asBinary() {
         return new BinaryTree(this);
     }
+    static isSameNode(current, node, comparer = defaultEqualityComparer) {
+        comparer = methods.asComparer(comparer);
+        return current === node || (node instanceof ITree ? comparer(current.value, node.value) : comparer(current.value, node));
+    }
 }
-
-ITree.isSameNode = (current, node, comparer = defaultEqualityComparer) => {
-    comparer = methods.asComparer(comparer);
-    return current === node || (node instanceof ITree ? comparer(current.value, node.value) : comparer(current.value, node));
-};
 
 module.exports = ITree;
 

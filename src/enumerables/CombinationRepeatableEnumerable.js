@@ -2,8 +2,6 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const IndicesEnumerable = require('./IndicesEnumerable');
 
 const core = require('./../core/core');
@@ -14,8 +12,8 @@ class CombinationEnumerable extends IEnumerable {
     constructor(source, count) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* CombinationIterator() {
-            let iterator = source[Symbol.iterator]();
-            let indices = Enumerable.repeat(0, count).toArray();
+            let iterator = source.getIterator();
+            let indices = core.repeat(0, count);
             let array = [];
             let end = false;
             let hasNext = () => {

@@ -6,8 +6,6 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-const Enumerable = require('./../Enumerable');
-
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class DistinctEnumerable extends IEnumerable {
@@ -15,10 +13,10 @@ class DistinctEnumerable extends IEnumerable {
         super(source);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* DistinctIterator() {
-            let temp = [], set = new Set();
+            let temp = core.asEnumerable([]), set = new Set();
             for (let element of source) {
                 if (!set.has(element)) {
-                    if (!Enumerable.contains(temp, element, comparer)) {
+                    if (!temp.contains(element, comparer)) {
                         yield element;
                         temp.push(element);
                     }

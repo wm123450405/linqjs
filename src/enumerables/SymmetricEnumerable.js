@@ -6,8 +6,6 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-const Enumerable = require('./../Enumerable');
-
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class SymmetricEnumerable extends IEnumerable {
@@ -15,18 +13,18 @@ class SymmetricEnumerable extends IEnumerable {
         super(source);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* SymmetricIterator() {
-            let temp = [];
+            let temp = core.asEnumerable([]);
             for (let element of source) {
-                if (!Enumerable.contains(other, element, comparer)) {
-                    if (!Enumerable.contains(temp, element, comparer)) {
+                if (!other.contains(element, comparer)) {
+                    if (!temp.contains(element, comparer)) {
                         temp.push(element);
                         yield element;
                     }
                 }
             }
             for (let element of other) {
-                if (!Enumerable.contains(source, element, comparer)) {
-                    if (!Enumerable.contains(temp, element, comparer)) {
+                if (!source.contains(element, comparer)) {
+                    if (!temp.contains(element, comparer)) {
                         temp.push(element);
                         yield element;
                     }

@@ -6,8 +6,6 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-const Enumerable = require('./../Enumerable');
-
 const defaultSelector = require('./../methods/defaultSelector');
 const defaultResultSelector = require('./../methods/defaultResultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
@@ -20,7 +18,7 @@ class GroupCountEnumerable extends IEnumerable {
         keySelector = methods.asSelector(keySelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* GroupCountIterator() {
-            for (let grouping of Enumerable.groupBy(source, keySelector, defaultSelector, defaultResultSelector, comparer)) {
+            for (let grouping of source.groupBy(keySelector, defaultSelector, defaultResultSelector, comparer)) {
                 yield new Entry(grouping.key, grouping.count());
             }
         });

@@ -6,8 +6,6 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-const Enumerable = require('./../Enumerable');
-
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
 
 class UnionEnumerable extends IEnumerable {
@@ -15,15 +13,15 @@ class UnionEnumerable extends IEnumerable {
         super(source);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* UnionIterator() {
-            let temp = [];
+            let temp = core.asEnumerable([]);
             for (let element of source) {
-                if (!Enumerable.contains(temp, element, comparer)) {
+                if (!temp.contains(element, comparer)) {
                     temp.push(element);
                     yield element;
                 }
             }
             for (let element of other) {
-                if (!Enumerable.contains(temp, element, comparer)) {
+                if (!temp.contains(element, comparer)) {
                     temp.push(element);
                     yield element;
                 }

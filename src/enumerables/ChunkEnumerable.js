@@ -2,8 +2,6 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const core = require('./../core/core');
 
 const IChunk = require('./IChunk');

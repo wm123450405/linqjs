@@ -1071,11 +1071,11 @@ module.exports = function(Enumerable) {
 	})();
 
 	let testExtends = lazy => {
+
 		Enumerable.config.extends.array = true;
 		//Enumerable.config.extends.object = true;
         //Enumerable.config.extends.string = true;
         Enumerable.config.extends.lazy = lazy;
-
 
         //select
         assert.deepStrictEqual([a, b, c].select().toArray(), [a, b, c]);
@@ -1540,8 +1540,8 @@ module.exports = function(Enumerable) {
         Enumerable.config.extends.lazy = false;
 	};
 
+	testExtends(false);
     testExtends(true);
-    testExtends(false);
 
 	assert.deepStrictEqual(Enumerable.toDictionary(['a', 'b', 'c']).toObject(), {
 		a: 'a',

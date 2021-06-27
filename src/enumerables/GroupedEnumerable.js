@@ -6,8 +6,6 @@ const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
 
-const Enumerable = require('./../Enumerable');
-
 const defaultSelector = require('./../methods/defaultSelector');
 const defaultResultSelector = require('./../methods/defaultResultSelector');
 const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
@@ -28,7 +26,7 @@ class GroupedEnumerable extends IEnumerable {
 
             let noneKey = Symbol('noneKey');
 
-            let it = source[Symbol.iterator]();
+            let it = source.getIterator();
             let hasNext = () => {
                 let next = it.next();
                 if (!next.done) {
@@ -38,7 +36,7 @@ class GroupedEnumerable extends IEnumerable {
                     if (iterators.has(key)) {
                         trueKey = key;
                     } else {
-                        trueKey = Enumerable.where(iterators.keys(), equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                        trueKey = core.asEnumerable(iterators.keys()).where(equalityPredicate(key, comparer)).firstOrDefault(noneKey);
                     }
                     if (trueKey === noneKey) {
                         iterators.set(key, []);

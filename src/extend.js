@@ -271,7 +271,13 @@ const extendObject = {
         return Enumerable.find(this, callback, thisArg);
     },
     includes(element, start = 0) {
-        return Enumerable.includes(this, element, start);
+        if (core.isString(this) && core.string$includes) {
+            return core.string$includes.call(this, element, start);
+        } else if ((core.isArray(this) || core.isArguments(this)) && core.array$includes) {
+            return core.array$includes.call(this, element, start);
+        } else {
+            return Enumerable.includes(this, element, start);
+        }
     },
     map(callback, thisArg) {
         if ((core.isArray(this) || core.isArguments(this)) && core.array$map && !core.lazy) {

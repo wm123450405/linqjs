@@ -2,8 +2,6 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
@@ -23,7 +21,8 @@ class CombineEnumerable extends IEnumerable {
         valueSelector = methods.asSelector(valueSelector);
         comparer = methods.asEqualityComparer(comparer);
         core.defineProperty(this, Symbol.iterator, function* CombineIterator() {
-            let temp = Enumerable.select(source, element => ({ key: keySelector(element), parent: parentSelector(element), value: valueSelector(element), children: [] })).toArray();
+            //todo: 可以优化
+            let temp = source.select(element => ({ key: keySelector(element), parent: parentSelector(element), value: valueSelector(element), children: [] })).toArray();
             let result = [];
             let length = temp.length;
             for (let i = 0; i < length; i++) {

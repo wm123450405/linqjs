@@ -9,6 +9,22 @@ const getter = (properties, property) => {
 
 const getFunctionName = fun => fun.name || (getFunctionNameReg.exec(fun) || [])[2] || '';
 
+const UNDEFINED = 'Undefined';
+const STRING = 'String';
+const ARRAY = 'Array';
+const OBJECT = 'Object';
+const MAP = 'Map';
+const SET = 'Set';
+const FUNCTION = 'Function';
+const REGEXP = 'RegExp';
+const BOOLEAN = 'Boolean';
+const NUMBER = 'Number';
+const SYMBOL = 'Symbol';
+const ARGUMENTS = 'Arguments';
+const ITERATOR = 'Iterator';
+const ENUMERABLE = 'Enumerable';
+const TREE = 'Tree';
+
 const core = {
 	isDev() {
 		return typeof process !== 'undefined' && process && process.env && process.env.NODE_ENV === 'development';
@@ -42,46 +58,49 @@ const core = {
 	},
 	types: {
 		get Undefined() {
-			return 'Undefined';
+			return UNDEFINED;
 		},
 		get String() {
-			return 'String';
+			return STRING;
 		},
 		get Array() {
-			return 'Array';
+			return ARRAY;
 		},
 		get Object() {
-			return 'Object';
+			return OBJECT;
 		},
 		get Map() {
-			return 'Map';
+			return MAP;
 		},
 		get Set() {
-			return 'Set';
+			return SET;
 		},
 		get Function() {
-			return 'Function';
+			return FUNCTION;
 		},
 		get RegExp() {
-			return 'RegExp';
+			return REGEXP;
 		},
 		get Boolean() {
-			return 'Boolean';
+			return BOOLEAN;
 		},
 		get Number() {
-			return 'Number';
+			return NUMBER;
 		},
 		get Symbol() {
-			return 'Symbol';
+			return SYMBOL;
 		},
 		get Arguments() {
-			return 'Arguments';
+			return ARGUMENTS;
 		},
 		get Iterator() {
-			return 'Iterator';
+			return ITERATOR;
 		},
 		get Enumerable() {
-			return 'Enumerable';
+			return ENUMERABLE;
+		},
+		get Tree() {
+			return TREE;
 		}
 	},
 	isUndefined(value) {
@@ -201,6 +220,65 @@ const core = {
 			this.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
 		}
 	},
+	asIterable(value) {
+		if (value[Symbol.iterator]) {
+			return value;
+		} else {
+			return this.asEnumerable(value);
+		}
+	},
+	asEnumerable(object, childrenSelector, valueSelector) {
+		let c;
+		if (this.isUndefined(childrenSelector)) {
+			if (this.isEnumerable(object)) {
+				return object;
+			} else if (this.isIterator(object)) {
+				c = require('../enumerables/IteratorEnumerable');
+			} else {
+				let type = object[this.typeAs] || this.getType(object);
+				if (type === core.types.String) {
+					c = require('../enumerables/StringEnumerable');
+				} else if (type === core.types.Array || type === core.types.Set || type === core.types.Arguments) {
+					c = require('../enumerables/ArrayEnumerable');
+				} else if (type === core.types.Map) {
+					c = require('../enumerables/MapEnumerable');
+				} else if (type === core.types.Iterator) {
+					c = require('../enumerables/IteratorEnumerable');
+				} else if (object[Symbol.iterator]) {
+					c = require('../enumerables/IterableEnumerable');
+				} else {
+					c = require('../enumerables/ObjectEnumerable');
+				}
+			}
+		} else {
+			c = require('../enumerables/TreeEnumerable');
+		}
+		return new c(object, childrenSelector, valueSelector);
+	},
+	toArray(source) {
+		if (this.isArray(source)) {
+			return source;
+		} else {
+			source = this.asIterable(source);
+			return Array.from(source);
+		}
+	},
+	range(start, count) {
+		let result = [];
+		for (let i = 0; i < count; start++, i++) {
+			result.push(start);
+		}
+		return result;
+	},
+	repeat(element, count) {
+		let result = [];
+		for (let i = 0; i < count; i++) {
+			result.push(element);
+		}
+		return result;
+	},
+	typeAs: Symbol('typeAs'),
+	delegate: Symbol.for('delegate'),
 	lazy: false,
 	array$every: Array.prototype.every,
 	array$concat: Array.prototype.concat,
@@ -229,7 +307,8 @@ const core = {
 	string$slice: String.prototype.slice,
 	string$includes: String.prototype.includes,
 	string$indexOf: String.prototype.indexOf,
-	string$lastIndexOf: String.prototype.lastIndexOf
+	string$lastIndexOf: String.prototype.lastIndexOf,
+	string$split: String.prototype.split
 };
 
 module.exports = core;

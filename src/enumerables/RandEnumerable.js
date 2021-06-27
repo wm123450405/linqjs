@@ -2,15 +2,13 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const core = require('./../core/core');
 
 class RandEnumerable extends IEnumerable {
     constructor(source, length = 0, repeatable = false) {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* RandIterator() {
-            let temp = Enumerable.toArray(source);
+            let temp = source.toArray();
             if (repeatable) {
                 for (let i = 0; i < length; i++) {
                     yield temp[Math.floor(temp.length * Math.random())];

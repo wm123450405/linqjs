@@ -2,8 +2,6 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const IndicesEnumerable = require('./IndicesEnumerable');
 
 const core = require('./../core/core');
@@ -15,8 +13,8 @@ class PermutationEnumerable extends IEnumerable {
         super(source);
         core.defineProperty(this, Symbol.iterator, function* PermutationIterator() {
             let iterator = source[Symbol.iterator]();
-            let indices = Enumerable.range(0, count).toArray();
-            let used = Enumerable.repeat(true, count).toArray();
+            let indices = core.range(0, count);
+            let used = core.repeat(true, count);
             let array = [];
             let end = false;
             let hasNext = () => {

@@ -2,11 +2,7 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const core = require('./../core/core');
-
 const methods = require('./../methods/methods');
-
-const Enumerable = require('./../Enumerable');
 
 const defaultKeySelector = require('./../methods/defaultKeySelector');
 const defaultValueSelector = require('./../methods/defaultValueSelector');
@@ -27,17 +23,18 @@ class IMapEnumerable extends IEnumerable {
         keySelector = methods.asSelector(keySelector);
         elementSelector = methods.asSelector(elementSelector);
         comparer = methods.asSameComparer(comparer);
-        return Enumerable.toDictionary(this, keySelector, elementSelector, comparer);
+        return super.toDictionary(keySelector, elementSelector, comparer);
     }
     toLookup(keySelector = defaultKeySelector, elementSelector = defaultValueSelector, comparer = defaultSameComparer) {
         keySelector = methods.asSelector(keySelector);
         elementSelector = methods.asSelector(elementSelector);
         comparer = methods.asSameComparer(comparer);
-        return Enumerable.toLookup(this, keySelector, elementSelector, comparer);
+        return super.toLookup(keySelector, elementSelector, comparer);
     }
-    forEach(action = defaultAction) {
+    forEach(action = defaultAction, thisArg) {
+        let callback = (element, key) => action.call(thisArg, element, key, source);
         for (let entry of this) {
-            action(entry.value, entry.key);
+            callback(entry.value, entry.key);
         }
     }
 }

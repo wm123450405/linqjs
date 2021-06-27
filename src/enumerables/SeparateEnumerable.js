@@ -2,8 +2,6 @@
 
 const IEnumerable = require('./../IEnumerable');
 
-const Enumerable = require('./../Enumerable');
-
 const core = require('./../core/core');
 
 const methods = require('./../methods/methods');
@@ -26,7 +24,7 @@ class SeparateEnumerable extends IEnumerable {
                         if (element !== collection) {
                             yield valueSelector(element);
                         }
-                        yield* Enumerable.separate(collection, childrenSelector, valueSelector);
+                        yield* core.asEnumerable(collection).separate(childrenSelector, valueSelector);
                     } else {
                         yield valueSelector(element);
                     }

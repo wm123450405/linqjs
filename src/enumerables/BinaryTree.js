@@ -4,7 +4,6 @@ const ITree = require('./ITree');
 
 const core = require('./../core/core');
 
-const Enumerable = require('./../Enumerable');
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 const PreOrderEnumerable = require('./PreOrderEnumerable');
 const InOrderEnumerable = require('./InOrderEnumerable');
@@ -38,8 +37,8 @@ class BinaryTree extends ITree {
         core.defineProperty(this, 'children', function() {
             return new GeneratorEnumerable(this[Symbol.iterator]);
         }, true, true);
-        core.defineProperty(this, 'left', () => left === DEFAULT_LEFT ? left = Enumerable.elementAtOrDefault(this, 0) : left, true, true);
-        core.defineProperty(this, 'right', () => right === DEFAULT_RIGHT ? right = Enumerable.elementAtOrDefault(this, 1) : right, true, true);
+        core.defineProperty(this, 'left', () => left === DEFAULT_LEFT ? left = this.elementAtOrDefault(0) : left, true, true);
+        core.defineProperty(this, 'right', () => right === DEFAULT_RIGHT ? right = this.elementAtOrDefault(1) : right, true, true);
     }
     hasLeft() {
         return !core.isUndefined(this.left);

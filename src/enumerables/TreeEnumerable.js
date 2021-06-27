@@ -1,5 +1,7 @@
 'use strict';
 
+const core = require('./../core/core');
+
 const ITree = require('./ITree');
 
 const methods = require('./../methods/methods');

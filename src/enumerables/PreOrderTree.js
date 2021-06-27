@@ -2,14 +2,12 @@
 
 const BinaryTree = require('./BinaryTree');
 
-const Enumerable = require('./../Enumerable');
-
 const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
 
 class PreOrderTree extends BinaryTree {
     constructor(source) {
         let tree = { };
-        let array = Enumerable.toArray(source);
+        let array = source.toArray();
         if (array.length) {
             let nodes = [ tree ];
             for (let i = 1; i < array.length; i += 2) {

@@ -13,7 +13,7 @@ const logTable = (title, init, enumerable, native, ...counts) => {
                 if (Array.isArray(er) && Array.isArray(nr)) {
                     if (er.length !== nr.length) {
                         console.error(title, 'result not same', er.length, nr.length);
-                    } else if (!Enumerable.zip(er, nr, (l, r) => l === r).all(e => e)) {
+                    } else if (!Enumerable.sequenceEqual(er, nr)) {
                         console.error(title, 'result not same', er, nr);
                     }
                 } else {

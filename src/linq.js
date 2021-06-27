@@ -11,7 +11,6 @@ const g =
 const CONFLICT_SUGGEST = 'You may require this module twice or more. I suggest you to only require once. If you must to, you can also use Enumerable.noConflict method to solve the conflict';
 
 const defaultAs = 'asEnumerable';
-const typeAs = Symbol('typeAs');
 
 const clear = name => {
     delete String.prototype[name];
@@ -36,13 +35,6 @@ const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
 
-const MapEnumerable = require('./enumerables/MapEnumerable');
-const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
-const StringEnumerable = require('./enumerables/StringEnumerable');
-const IteratorEnumerable = require('./enumerables/IteratorEnumerable');
-const ObjectEnumerable = require('./enumerables/ObjectEnumerable');
-const TreeEnumerable = require('./enumerables/TreeEnumerable');
-
 const config = {
     as: defaultAs,
     noConflict: false
@@ -54,6 +46,11 @@ const initAs = (name) => {
     if (name !== defaultAs && config.as && config.as !== defaultAs) {
         clear(config.as);
     }
+    core.defineProperties(Object.prototype, {
+        [name](childrenSelector, valueSelector) {
+            return core.asEnumerable(this, childrenSelector, valueSelector);
+        }
+    });
     core.defineProperties(String.prototype, {
         [name]() {
             return new StringEnumerable(this);
@@ -74,25 +71,6 @@ const initAs = (name) => {
             return new ArrayEnumerable(this);
         }
     });
-    core.defineProperties(Object.prototype, {
-        [name](childrenSelector, valueSelector) {
-            if (core.isIterator(this)) {
-                return new IteratorEnumerable(this);
-            } else {
-                if (this[typeAs] === core.types.String) {
-                    return new StringEnumerable(this);
-                } else if (this[typeAs] === core.types.Array || this[typeAs] === core.types.Set) {
-                    return new ArrayEnumerable(this);
-                } else if (this[typeAs] === core.types.Map) {
-                    return new MapEnumerable(this);
-                } else if (this[typeAs] === core.types.Iterator) {
-                    return new IteratorEnumerable(this);
-                } else {
-                    return core.isUndefined(childrenSelector) ? new ObjectEnumerable(this) : new TreeEnumerable(this, childrenSelector, valueSelector);
-                }
-            }
-        }
-    });
     config.as = name;
 };
 
@@ -100,7 +78,7 @@ initAs(defaultAs);
 
 Enumerable.typeAs = (type, as) => {
     if (type.constructor.prototype !== type) type = type.prototype;
-    type[typeAs] = as;
+    type[core.typeAs] = as;
 };
 
 Enumerable.types = core.types;
@@ -154,3 +132,7 @@ core.defineProperty(Enumerable, 'isConflict', () => {
 }, true, true);
 
 module.exports = g.Enumerable = Enumerable;
+
+const MapEnumerable = require('./enumerables/MapEnumerable');
+const ArrayEnumerable = require('./enumerables/ArrayEnumerable');
+const StringEnumerable = require('./enumerables/StringEnumerable');

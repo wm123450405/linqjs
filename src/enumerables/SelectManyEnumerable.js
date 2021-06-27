@@ -17,7 +17,7 @@ class SelectManyEnumerable extends IEnumerable {
         core.defineProperty(this, Symbol.iterator, function* SelectManyIterator() {
             let index = 0;
             for (let element of source) {
-                for (let collectionElement of Enumerable.asEnumerable(collectionSelector(element, index++))) {
+                for (let collectionElement of core.asEnumerable(collectionSelector(element, index++))) {
                     yield resultSelector(element, collectionElement);
                 }
             }
@@ -26,5 +26,3 @@ class SelectManyEnumerable extends IEnumerable {
 }
 
 module.exports = SelectManyEnumerable;
-
-const Enumerable = require('./../Enumerable');
