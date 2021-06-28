@@ -32,13 +32,13 @@ const core = {
 	getType(value) {
 		let typeName = typeof value;
 		if (typeName === 'undefined') {
-			return this.types.Undefined;
+			return core.types.Undefined;
 		} else if (typeName === 'string' || value instanceof String) {
-			return this.types.String;
+			return core.types.String;
 		} else if (typeName === 'number' || value instanceof Number) {
-			return this.types.Number;
+			return core.types.Number;
 		} else if (typeName === 'function' || value instanceof Function) {
-			return this.types.Function;
+			return core.types.Function;
 		} else {
 			let type = value[Symbol.toStringTag];
 			if (!type) {
@@ -104,48 +104,48 @@ const core = {
 		}
 	},
 	isUndefined(value) {
-		return this.getType(value) === this.types.Undefined;
+		return core.getType(value) === core.types.Undefined;
 	},
 	isString(value) {
-		return this.getType(value) === this.types.String;
+		return core.getType(value) === core.types.String;
 	},
 	isArray(value) {
-		return this.getType(value) === this.types.Array;
+		return core.getType(value) === core.types.Array;
 	},
 	isNumber(value) {
-		return this.getType(value) === this.types.Number;
+		return core.getType(value) === core.types.Number;
 	},
 	isObject(value) {
-		return this.getType(value) === this.types.Object;
+		return core.getType(value) === core.types.Object;
 	},
     isSet(value) {
-        return this.getType(value) === this.types.Set;
+        return core.getType(value) === core.types.Set;
     },
     isMap(value) {
-        return this.getType(value) === this.types.Map;
+        return core.getType(value) === core.types.Map;
     },
 	isSymbol(value) {
-		return this.getType(value) === this.types.Symbol;
+		return core.getType(value) === core.types.Symbol;
 	},
 	isFunction(value) {
-		return this.getType(value) === this.types.Function;
+		return core.getType(value) === core.types.Function;
 	},
     isArguments(value) {
-        return this.getType(value) === this.types.Arguments;
+        return core.getType(value) === core.types.Arguments;
 	},
 	isIterator(value) {
-		return this.getType(value).endsWith(this.types.Iterator);
+		return core.getType(value).endsWith(core.types.Iterator);
 	},
 	isEnumerable(value) {
-		return this.getType(value).endsWith(this.types.Enumerable);
+		return core.getType(value).endsWith(core.types.Enumerable);
 	},
 	isProto(value) {
-		let type = this.getType(value);
-    	return type === this.types.Array || type === this.types.String;
+		let type = core.getType(value);
+    	return type === core.types.Array || type === core.types.String;
 	},
 	isList(value) {
-        let type = this.getType(value);
-        return type === this.types.Array || type === this.types.Enumerable || type === this.types.Set;
+        let type = core.getType(value);
+        return type === core.types.Array || type === core.types.Enumerable || type === core.types.Set;
 	},
 	isInteger(value) {
 		return (/^[-+]?\d+$/.test(value) || Number.isInteger(value));
@@ -157,7 +157,7 @@ const core = {
 		if (typeof property !== 'symbol' && prototype.hasOwnProperty(property)) {
 			let newProperty = 'o$' + property;
 			if (prototype.hasOwnProperty(newProperty)) return;
-			if (this.isDev()) console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
+			if (core.isDev()) console.warn(property + ' already in ' + core.getType(prototype) + ', set original function to ' + newProperty);
 			Object.defineProperty(prototype, newProperty, {
 				enumerable: false,
 				writable: true,
@@ -183,19 +183,19 @@ const core = {
 		}
 	},
 	defineProperty(prototype, property, value, isGet = false, isEnumerable = false) {
-		this.conflict(prototype, property);
+		core.conflict(prototype, property);
 		if (property === Symbol.iterator) {
 			let name = (getFunctionName(value) || getFunctionName(prototype[Symbol.iterator])).replace(/\s*Iterator$/ig, ' Iterator');
 			if (name) {
-				this.defineProperty(value, Symbol.toStringTag, name);
+				core.defineProperty(value, Symbol.toStringTag, name);
 			}
 		}
-		this.setProperty(prototype, property, value, isGet, isEnumerable);
+		core.setProperty(prototype, property, value, isGet, isEnumerable);
 	},
 	defineProperties(prototype, properties, pascalOrPrefix = false) {
 		for (let property in properties) {
 			if (properties.hasOwnProperty(property)) {
-				this.defineProperty(prototype, pascalOrPrefix === true ? this.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
+				core.defineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
 			}
 		}
 	},
@@ -217,25 +217,25 @@ const core = {
 	},
 	undefineProperties(prototype, properties, pascalOrPrefix = false) {
 		for (let property of properties) {
-			this.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
+			core.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
 		}
 	},
 	asIterable(value) {
 		if (value[Symbol.iterator]) {
 			return value;
 		} else {
-			return this.asEnumerable(value);
+			return core.asEnumerable(value);
 		}
 	},
 	asEnumerable(object, childrenSelector, valueSelector) {
 		let c;
-		if (this.isUndefined(childrenSelector)) {
-			if (this.isEnumerable(object)) {
+		if (core.isUndefined(childrenSelector)) {
+			if (core.isEnumerable(object)) {
 				return object;
-			} else if (this.isIterator(object)) {
+			} else if (core.isIterator(object)) {
 				c = require('../enumerables/IteratorEnumerable');
 			} else {
-				let type = object[this.typeAs] || this.getType(object);
+				let type = object[core.typeAs] || core.getType(object);
 				if (type === core.types.String) {
 					c = require('../enumerables/StringEnumerable');
 				} else if (type === core.types.Array || type === core.types.Set || type === core.types.Arguments) {
@@ -256,10 +256,10 @@ const core = {
 		return new c(object, childrenSelector, valueSelector);
 	},
 	toArray(source) {
-		if (this.isArray(source)) {
+		if (core.isArray(source)) {
 			return source;
 		} else {
-			source = this.asIterable(source);
+			source = core.asIterable(source);
 			return Array.from(source);
 		}
 	},

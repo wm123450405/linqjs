@@ -1291,7 +1291,9 @@ try {
 },{}],26:[function(require,module,exports){
 'use strict';
 
-var core = require('./core/core');
+var _require = require('./core/core'),
+    asEnumerable = _require.asEnumerable,
+    defineProperty = _require.defineProperty;
 
 var defaultPredicate = require('./methods/defaultPredicate');
 
@@ -1375,15 +1377,15 @@ var IEquatable = require('./core/IEquatable');
 
 var Enumerable = function Enumerable(source, childrenSelector) {
   var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
-  return core.asEnumerable(source, childrenSelector, valueSelector);
+  return asEnumerable(source, childrenSelector, valueSelector);
 };
 
 Enumerable.getEnumerator = function (enumerable) {
-  return this.asEnumerable(enumerable).getEnumerator();
+  return asEnumerable(enumerable).getEnumerator();
 };
 
 Enumerable.getIterator = function (enumerable) {
-  return this.asEnumerable(enumerable).getIterator();
+  return asEnumerable(enumerable).getIterator();
 };
 
 Enumerable.repeat = function (element) {
@@ -1412,126 +1414,126 @@ Enumerable.empty = function () {
 
 Enumerable.asEnumerable = function (object, childrenSelector) {
   var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
-  return core.asEnumerable(object, childrenSelector, valueSelector);
+  return asEnumerable(object, childrenSelector, valueSelector);
 };
 
 Enumerable.from = function (object, childrenSelector) {
   var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
-  return this.asEnumerable(object, childrenSelector, valueSelector);
+  return asEnumerable(object, childrenSelector, valueSelector);
 };
 
 Enumerable.toArray = function (source) {
-  return this.asEnumerable(source).toArray();
+  return asEnumerable(source).toArray();
 };
 
 Enumerable.toDictionary = function (source) {
   var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
-  return this.asEnumerable(source).toDictionary(keySelector, elementSelector, comparer);
+  return asEnumerable(source).toDictionary(keySelector, elementSelector, comparer);
 };
 
 Enumerable.toLookup = function (source) {
   var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSameComparer;
-  return this.asEnumerable(source).toLookup(keySelector, elementSelector, comparer);
+  return asEnumerable(source).toLookup(keySelector, elementSelector, comparer);
 };
 
 Enumerable.toPreOrder = function (source) {
-  return this.asEnumerable(source).toPreOrder();
+  return asEnumerable(source).toPreOrder();
 };
 
 Enumerable.toInOrder = function (source) {
-  return this.asEnumerable(source).toInOrder();
+  return asEnumerable(source).toInOrder();
 };
 
 Enumerable.toPostOrder = function (source) {
-  return this.asEnumerable(source).toPostOrder();
+  return asEnumerable(source).toPostOrder();
 };
 
 Enumerable.where = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).where(predicate);
+  return asEnumerable(source).where(predicate);
 };
 
 Enumerable.select = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-  return this.asEnumerable(source).select(selector);
+  return asEnumerable(source).select(selector);
 };
 
 Enumerable.distinct = function (source) {
   var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityComparer;
-  return this.asEnumerable(source).distinct(comparer);
+  return asEnumerable(source).distinct(comparer);
 };
 
 Enumerable.except = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).except(other, comparer);
+  return asEnumerable(source).except(other, comparer);
 };
 
 Enumerable.union = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).union(other, comparer);
+  return asEnumerable(source).union(other, comparer);
 };
 
 Enumerable.intersect = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).intersect(other, comparer);
+  return asEnumerable(source).intersect(other, comparer);
 };
 
 Enumerable.ofType = function (source, type) {
-  return this.asEnumerable(source).ofType(type);
+  return asEnumerable(source).ofType(type);
 };
 
 Enumerable.skip = function (source, count) {
-  return this.asEnumerable(source).skip(count);
+  return asEnumerable(source).skip(count);
 };
 
 Enumerable.skipWhile = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).skipWhile(predicate);
+  return asEnumerable(source).skipWhile(predicate);
 };
 
 Enumerable.skipSame = function (source) {
   var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
-  return this.asEnumerable(source).skipSame(comparer);
+  return asEnumerable(source).skipSame(comparer);
 };
 
 Enumerable.skipProportion = function (source) {
   var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return this.asEnumerable(source).skipProportion(proportion);
+  return asEnumerable(source).skipProportion(proportion);
 };
 
 Enumerable.take = function (source, count) {
-  return this.asEnumerable(source).take(count);
+  return asEnumerable(source).take(count);
 };
 
 Enumerable.takeWhile = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).takeWhile(predicate);
+  return asEnumerable(source).takeWhile(predicate);
 };
 
 Enumerable.takeSame = function (source) {
   var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSameComparer;
-  return this.asEnumerable(source).takeSame(comparer);
+  return asEnumerable(source).takeSame(comparer);
 };
 
 Enumerable.takeProportion = function (source) {
   var proportion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return this.asEnumerable(source).takeProportion(proportion);
+  return asEnumerable(source).takeProportion(proportion);
 };
 
 Enumerable.orderBy = Enumerable.sorted = function (source) {
   var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-  return this.asEnumerable(source).orderBy(keySelector, comparer);
+  return asEnumerable(source).orderBy(keySelector, comparer);
 };
 
 Enumerable.orderByDescending = function (source) {
   var keySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-  return this.asEnumerable(source).orderByDescending(keySelector, comparer);
+  return asEnumerable(source).orderByDescending(keySelector, comparer);
 };
 
 Enumerable.thenBy = function (orderedSource) {
@@ -1561,13 +1563,13 @@ Enumerable.groupBy = function (source) {
   var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultResultSelector;
   var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-  return this.asEnumerable(source).groupBy(keySelector, elementSelector, resultSelector, comparer);
+  return asEnumerable(source).groupBy(keySelector, elementSelector, resultSelector, comparer);
 };
 
 Enumerable.selectMany = Enumerable.flatMap = Enumerable.flatten = function (source) {
   var collectionSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultResultSelector;
-  return this.asEnumerable(source).selectMany(collectionSelector, resultSelector);
+  return asEnumerable(source).selectMany(collectionSelector, resultSelector);
 };
 
 Enumerable.join = function (outer, inner) {
@@ -1577,9 +1579,9 @@ Enumerable.join = function (outer, inner) {
   var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
 
   if (arguments.length <= 2) {
-    return this.asEnumerable(outer).join(inner);
+    return asEnumerable(outer).join(inner);
   } else {
-    return this.asEnumerable(outer).join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+    return asEnumerable(outer).join(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
   }
 };
 
@@ -1588,7 +1590,7 @@ Enumerable.innerJoin = Enumerable.joining = function (outer, inner) {
   var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
   var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
   var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
-  return this.asEnumerable(outer).innerJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+  return asEnumerable(outer).innerJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 
 Enumerable.leftJoin = function (outer, inner) {
@@ -1596,7 +1598,7 @@ Enumerable.leftJoin = function (outer, inner) {
   var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
   var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
   var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
-  return this.asEnumerable(outer).leftJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+  return asEnumerable(outer).leftJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 
 Enumerable.rightJoin = function (outer, inner) {
@@ -1604,7 +1606,7 @@ Enumerable.rightJoin = function (outer, inner) {
   var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
   var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
   var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
-  return this.asEnumerable(outer).rightJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+  return asEnumerable(outer).rightJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 
 Enumerable.groupJoin = function (outer, inner) {
@@ -1612,362 +1614,362 @@ Enumerable.groupJoin = function (outer, inner) {
   var outerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
   var innerKeySelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultSelector;
   var comparer = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : defaultEqualityComparer;
-  return this.asEnumerable(outer).groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
+  return asEnumerable(outer).groupJoin(inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
 };
 
 Enumerable.reverse = function (source) {
-  return this.asEnumerable(source).reverse();
+  return asEnumerable(source).reverse();
 };
 
 Enumerable.zip = function (source, other) {
   var resultSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultResultSelector;
-  return this.asEnumerable(source).zip(other, resultSelector);
+  return asEnumerable(source).zip(other, resultSelector);
 };
 
 Enumerable.every = function (source, callback, thisArg) {
-  return this.asEnumerable(source).every(callback, thisArg);
+  return asEnumerable(source).every(callback, thisArg);
 };
 
 Enumerable.find = function (source, callback, thisArg) {
-  return this.asEnumerable(source).find(callback, thisArg);
+  return asEnumerable(source).find(callback, thisArg);
 };
 
 Enumerable.includes = function (source, element) {
   var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  return this.asEnumerable(source).includes(element, start);
+  return asEnumerable(source).includes(element, start);
 };
 
 Enumerable.map = function (source, callback, thisArg) {
-  return this.asEnumerable(source).map(callback, thisArg);
+  return asEnumerable(source).map(callback, thisArg);
 };
 
 Enumerable.filter = function (source, callback, thisArg) {
-  return this.asEnumerable(source).filter(callback, thisArg);
+  return asEnumerable(source).filter(callback, thisArg);
 };
 
 Enumerable.concat = function (source) {
-  var _this$asEnumerable;
+  var _asEnumerable;
 
   for (var _len = arguments.length, others = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     others[_key - 1] = arguments[_key];
   }
 
-  return (_this$asEnumerable = this.asEnumerable(source)).concat.apply(_this$asEnumerable, others);
+  return (_asEnumerable = asEnumerable(source)).concat.apply(_asEnumerable, others);
 };
 
 Enumerable.pop = function (source) {
-  return this.asEnumerable(source).pop();
+  return asEnumerable(source).pop();
 };
 
 Enumerable.push = function (source) {
-  var _this$asEnumerable2;
+  var _asEnumerable2;
 
   for (var _len2 = arguments.length, values = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
     values[_key2 - 1] = arguments[_key2];
   }
 
-  return (_this$asEnumerable2 = this.asEnumerable(source)).push.apply(_this$asEnumerable2, values);
+  return (_asEnumerable2 = asEnumerable(source)).push.apply(_asEnumerable2, values);
 };
 
 Enumerable.shift = function (source) {
-  return this.asEnumerable(source).shift();
+  return asEnumerable(source).shift();
 };
 
 Enumerable.unshift = function (source) {
-  var _this$asEnumerable3;
+  var _asEnumerable3;
 
   for (var _len3 = arguments.length, values = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
     values[_key3 - 1] = arguments[_key3];
   }
 
-  return (_this$asEnumerable3 = this.asEnumerable(source)).unshift.apply(_this$asEnumerable3, values);
+  return (_asEnumerable3 = asEnumerable(source)).unshift.apply(_asEnumerable3, values);
 };
 
 Enumerable.reduce = function (source, callback, initialValue) {
-  return this.asEnumerable(source).reduce(callback, initialValue);
+  return asEnumerable(source).reduce(callback, initialValue);
 };
 
 Enumerable.reduceRight = function (source, callback, initialValue) {
-  return this.asEnumerable(source).reduceRight(callback, initialValue);
+  return asEnumerable(source).reduceRight(callback, initialValue);
 };
 
 Enumerable.some = function (source, callback, thisArg) {
-  return this.asEnumerable(source).some(callback, thisArg);
+  return asEnumerable(source).some(callback, thisArg);
 };
 
 Enumerable.slice = function (source) {
   var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
-  return this.asEnumerable(source).slice(start, end);
+  return asEnumerable(source).slice(start, end);
 };
 
 Enumerable.splice = function (source, start, count) {
-  var _this$asEnumerable4;
+  var _asEnumerable4;
 
   for (var _len4 = arguments.length, values = new Array(_len4 > 3 ? _len4 - 3 : 0), _key4 = 3; _key4 < _len4; _key4++) {
     values[_key4 - 3] = arguments[_key4];
   }
 
-  return (_this$asEnumerable4 = this.asEnumerable(source)).splice.apply(_this$asEnumerable4, [start, count].concat(values));
+  return (_asEnumerable4 = asEnumerable(source)).splice.apply(_asEnumerable4, [start, count].concat(values));
 };
 
 Enumerable.fill = function (source, value) {
   var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
-  return this.asEnumerable(source).fill(value, start, end);
+  return asEnumerable(source).fill(value, start, end);
 };
 
 Enumerable.sort = function (source) {
   var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
-  return this.asEnumerable(source).sort(comparer);
+  return asEnumerable(source).sort(comparer);
 };
 
 Enumerable.copyWithin = function (source) {
   var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   var end = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Infinity;
-  return this.asEnumerable(source).copyWithin(target, start, end);
+  return asEnumerable(source).copyWithin(target, start, end);
 };
 
 Enumerable.defaultIfEmpty = function (source) {
-  var _this$asEnumerable5;
+  var _asEnumerable5;
 
   for (var _len5 = arguments.length, defaultValues = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
     defaultValues[_key5 - 1] = arguments[_key5];
   }
 
-  return (_this$asEnumerable5 = this.asEnumerable(source)).defaultIfEmpty.apply(_this$asEnumerable5, defaultValues);
+  return (_asEnumerable5 = asEnumerable(source)).defaultIfEmpty.apply(_asEnumerable5, defaultValues);
 };
 
 Enumerable.all = Enumerable.allMatch = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).all(predicate);
+  return asEnumerable(source).all(predicate);
 };
 
 Enumerable.any = Enumerable.anyMatch = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).any(predicate);
+  return asEnumerable(source).any(predicate);
 };
 
 Enumerable.isEmpty = function (source) {
-  return this.asEnumerable(source).isEmpty();
+  return asEnumerable(source).isEmpty();
 };
 
 Enumerable.sequenceEqual = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).sequenceEqual(other, comparer);
+  return asEnumerable(source).sequenceEqual(other, comparer);
 };
 
 Enumerable.first = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).first(predicate);
+  return asEnumerable(source).first(predicate);
 };
 
 Enumerable.firstOrDefault = function (source, defaultValue) {
   var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-  return this.asEnumerable(source).firstOrDefault(defaultValue, predicate);
+  return asEnumerable(source).firstOrDefault(defaultValue, predicate);
 };
 
 Enumerable.last = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).last(predicate);
+  return asEnumerable(source).last(predicate);
 };
 
 Enumerable.lastOrDefault = function (source, defaultValue) {
   var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-  return this.asEnumerable(source).lastOrDefault(defaultValue, predicate);
+  return asEnumerable(source).lastOrDefault(defaultValue, predicate);
 };
 
 Enumerable.single = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).single(predicate);
+  return asEnumerable(source).single(predicate);
 };
 
 Enumerable.singleOrDefault = function (source, defaultValue) {
   var predicate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPredicate;
-  return this.asEnumerable(source).singleOrDefault(defaultValue, predicate);
+  return asEnumerable(source).singleOrDefault(defaultValue, predicate);
 };
 
 Enumerable.count = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).count(predicate);
+  return asEnumerable(source).count(predicate);
 };
 
 Enumerable.proportion = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
-  return this.asEnumerable(source).proportion(predicate);
+  return asEnumerable(source).proportion(predicate);
 };
 
 Enumerable.aggregate = function (source, seed, func) {
   var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
-  return this.asEnumerable(source).aggregate(seed, func, resultSelector);
+  return asEnumerable(source).aggregate(seed, func, resultSelector);
 };
 
 Enumerable.sum = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-  return this.asEnumerable(source).sum(selector);
+  return asEnumerable(source).sum(selector);
 };
 
 Enumerable.product = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-  return this.asEnumerable(source).product(selector);
+  return asEnumerable(source).product(selector);
 };
 
 Enumerable.max = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-  return this.asEnumerable(source).max(selector, comparer);
+  return asEnumerable(source).max(selector, comparer);
 };
 
 Enumerable.maxIndex = function (source, defaultValue) {
   var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultComparer;
-  return this.asEnumerable(source).maxIndex(selector, comparer);
+  return asEnumerable(source).maxIndex(selector, comparer);
 };
 
 Enumerable.maxOrDefault = function (source, defaultValue) {
   var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultComparer;
-  return this.asEnumerable(source).maxOrDefault(defaultValue, selector, comparer);
+  return asEnumerable(source).maxOrDefault(defaultValue, selector, comparer);
 };
 
 Enumerable.min = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-  return this.asEnumerable(source).min(selector, comparer);
+  return asEnumerable(source).min(selector, comparer);
 };
 
 Enumerable.minIndex = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
-  return this.asEnumerable(source).minIndex(selector, comparer);
+  return asEnumerable(source).minIndex(selector, comparer);
 };
 
 Enumerable.minOrDefault = function (source, defaultValue) {
   var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultComparer;
-  return this.asEnumerable(source).minOrDefault(defaultValue, selector, comparer);
+  return asEnumerable(source).minOrDefault(defaultValue, selector, comparer);
 };
 
 Enumerable.average = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
-  return this.asEnumerable(source).average(selector);
+  return asEnumerable(source).average(selector);
 };
 
 Enumerable.contains = function (source, value) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).contains(value, comparer);
+  return asEnumerable(source).contains(value, comparer);
 };
 
 Enumerable.elementAt = function (source, index) {
-  return this.asEnumerable(source).elementAt(index);
+  return asEnumerable(source).elementAt(index);
 };
 
 Enumerable.elementAtOrDefault = function (source, index, defaultValue) {
-  return this.asEnumerable(source).elementAtOrDefault(index, defaultValue);
+  return asEnumerable(source).elementAtOrDefault(index, defaultValue);
 };
 
 Enumerable.indexOf = function (source, value) {
   var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
-  return this.asEnumerable(source).indexOf(value, start, comparer);
+  return asEnumerable(source).indexOf(value, start, comparer);
 };
 
 Enumerable.findIndex = function (source, callback, thisArg) {
-  return this.asEnumerable(source).findIndex(callback, thisArg);
+  return asEnumerable(source).findIndex(callback, thisArg);
 };
 
 Enumerable.findLast = function (source, callback, thisArg) {
-  return this.asEnumerable(source).findLast(callback, thisArg);
+  return asEnumerable(source).findLast(callback, thisArg);
 };
 
 Enumerable.lastIndexOf = function (source, value) {
   var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
   var comparer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultStrictEqualityComparer;
-  return this.asEnumerable(source).lastIndexOf(value, start, comparer);
+  return asEnumerable(source).lastIndexOf(value, start, comparer);
 };
 
 Enumerable.findLastIndex = function (source, callback, thisArg) {
-  return this.asEnumerable(source).findLastIndex(callback, thisArg);
+  return asEnumerable(source).findLastIndex(callback, thisArg);
 };
 
 Enumerable.forEach = function (source) {
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
   var thisArg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-  return this.asEnumerable(source).forEach(action, thisArg);
+  return asEnumerable(source).forEach(action, thisArg);
 };
 
 Enumerable.each = function (source) {
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
-  return this.asEnumerable(source).each(action);
+  return asEnumerable(source).each(action);
 };
 
 Enumerable.indices = function (source, indices) {
-  return this.asEnumerable(source).indices(indices);
+  return asEnumerable(source).indices(indices);
 };
 
 Enumerable.permutation = function (source, count) {
   var repeatable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  return this.asEnumerable(source).permutation(count, repeatable);
+  return asEnumerable(source).permutation(count, repeatable);
 };
 
 Enumerable.combination = function (source, count) {
   var repeatable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  return this.asEnumerable(source).combination(count, repeatable);
+  return asEnumerable(source).combination(count, repeatable);
 };
 
 Enumerable.chunk = function (source, chunk) {
   var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  return this.asEnumerable(source).chunk(chunk, offset);
+  return asEnumerable(source).chunk(chunk, offset);
 };
 
 Enumerable.split = function (source) {
   var splitPredicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultFalsePredicate;
-  return this.asEnumerable(source).split(splitPredicate);
+  return asEnumerable(source).split(splitPredicate);
 };
 
 Enumerable.nearSplit = function (source) {
   var splitPredicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultFalsePredicate;
-  return this.asEnumerable(source).nearSplit(splitPredicate);
+  return asEnumerable(source).nearSplit(splitPredicate);
 };
 
 Enumerable.leftPad = function (source, length, value) {
-  return this.asEnumerable(source).leftPad(length, value);
+  return asEnumerable(source).leftPad(length, value);
 };
 
 Enumerable.rightPad = function (source, length, value) {
-  return this.asEnumerable(source).rightPad(length, value);
+  return asEnumerable(source).rightPad(length, value);
 };
 
 Enumerable.rand = function (source) {
   var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return this.asEnumerable(source).rand(count);
+  return asEnumerable(source).rand(count);
 };
 
 Enumerable.random = function (source) {
-  return this.asEnumerable(source).random();
+  return asEnumerable(source).random();
 };
 
 Enumerable.randomOrDefault = function (source, defaultValue) {
-  return this.asEnumerable(source).randomOrDefault(defaultValue);
+  return asEnumerable(source).randomOrDefault(defaultValue);
 };
 
 Enumerable.randomProbability = function (source, probabilitySelector) {
-  return this.asEnumerable(source).randomProbability(probabilitySelector);
+  return asEnumerable(source).randomProbability(probabilitySelector);
 };
 
 Enumerable.randomIndexProbability = function (source, probabilitySelector) {
-  return this.asEnumerable(source).randomIndexProbability(probabilitySelector);
+  return asEnumerable(source).randomIndexProbability(probabilitySelector);
 };
 
 Enumerable.randomProbabilityOrDefault = function (source, defaultValue, probabilitySelector) {
-  return this.asEnumerable(source).randomProbabilityOrDefault(defaultValue, probabilitySelector);
+  return asEnumerable(source).randomProbabilityOrDefault(defaultValue, probabilitySelector);
 };
 
 Enumerable.wipe = function (source) {
   var predicate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPredicate;
   var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  return this.asEnumerable(source).wipe(predicate, count);
+  return asEnumerable(source).wipe(predicate, count);
 };
 
 Enumerable.nearBy = function (source) {
@@ -1975,7 +1977,7 @@ Enumerable.nearBy = function (source) {
   var elementSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   var resultSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultResultSelector;
   var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-  return this.asEnumerable(source).nearBy(keySelector, elementSelector, resultSelector, comparer);
+  return asEnumerable(source).nearBy(keySelector, elementSelector, resultSelector, comparer);
 };
 
 Enumerable.combine = function (source) {
@@ -1983,37 +1985,37 @@ Enumerable.combine = function (source) {
   var keySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultKeySelector;
   var valueSelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
   var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
-  return this.asEnumerable(source).combine(parentSelector, keySelector, valueSelector, comparer);
+  return asEnumerable(source).combine(parentSelector, keySelector, valueSelector, comparer);
 };
 
 Enumerable.separate = function (source) {
   var childrenSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultChildrenSelector;
   var valueSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultValueSelector;
-  return this.asEnumerable(source).separate(childrenSelector, valueSelector);
+  return asEnumerable(source).separate(childrenSelector, valueSelector);
 };
 
 Enumerable.isSub = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).isSub(other, comparer);
+  return asEnumerable(source).isSub(other, comparer);
 };
 
 Enumerable.isSuper = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).isSuper(other, comparer);
+  return asEnumerable(source).isSuper(other, comparer);
 };
 
 Enumerable.symmetric = function (source, other) {
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).symmetric(other, comparer);
+  return asEnumerable(source).symmetric(other, comparer);
 };
 
 Enumerable.conflict = function (source) {
   var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultEqualityComparer;
-  return this.asEnumerable(source).conflict(selector, comparer);
+  return asEnumerable(source).conflict(selector, comparer);
 };
 
-core.defineProperty(Enumerable, 'comparers', function () {
+defineProperty(Enumerable, 'comparers', function () {
   return {
     get default() {
       return defaultComparer;
@@ -2054,7 +2056,7 @@ core.defineProperty(Enumerable, 'comparers', function () {
     }
   };
 }, true, true);
-core.defineProperty(Enumerable, 'setters', function () {
+defineProperty(Enumerable, 'setters', function () {
   return {
     get children() {
       return defaultChildrenSetter;
@@ -2070,7 +2072,7 @@ core.defineProperty(Enumerable, 'setters', function () {
     }
   };
 }, true, true);
-core.defineProperty(Enumerable, 'selectors', function () {
+defineProperty(Enumerable, 'selectors', function () {
   return {
     get default() {
       return defaultSelector;
@@ -2110,7 +2112,7 @@ core.defineProperty(Enumerable, 'selectors', function () {
     }
   };
 }, true, true);
-core.defineProperty(Enumerable, 'actions', function () {
+defineProperty(Enumerable, 'actions', function () {
   return {
     get default() {
       return defaultAction;
@@ -2118,7 +2120,7 @@ core.defineProperty(Enumerable, 'actions', function () {
 
   };
 }, true, true);
-core.defineProperty(Enumerable, 'predicates', function () {
+defineProperty(Enumerable, 'predicates', function () {
   return {
     get default() {
       return defaultPredicate;
@@ -2152,7 +2154,7 @@ core.defineProperty(Enumerable, 'predicates', function () {
     }
   };
 }, true, true);
-core.defineProperty(Enumerable, 'exceptions', function () {
+defineProperty(Enumerable, 'exceptions', function () {
   return {
     get NoSuchElementsException() {
       return NoSuchElementsException;
@@ -2192,10 +2194,10 @@ core.defineProperty(Enumerable, 'exceptions', function () {
 
   };
 }, true, true);
-core.defineProperty(Enumerable, 'IComparable', function () {
+defineProperty(Enumerable, 'IComparable', function () {
   return IComparable;
 }, true, true);
-core.defineProperty(Enumerable, 'IEquatable', function () {
+defineProperty(Enumerable, 'IEquatable', function () {
   return IEquatable;
 }, true, true);
 module.exports = Enumerable;
@@ -4318,13 +4320,13 @@ var core = {
     var typeName = (0, _typeof2.default)(value);
 
     if (typeName === 'undefined') {
-      return this.types.Undefined;
+      return core.types.Undefined;
     } else if (typeName === 'string' || value instanceof String) {
-      return this.types.String;
+      return core.types.String;
     } else if (typeName === 'number' || value instanceof Number) {
-      return this.types.Number;
+      return core.types.Number;
     } else if (typeName === 'function' || value instanceof Function) {
-      return this.types.Function;
+      return core.types.Function;
     } else {
       var type = value[Symbol.toStringTag];
 
@@ -4407,48 +4409,48 @@ var core = {
 
   },
   isUndefined: function isUndefined(value) {
-    return this.getType(value) === this.types.Undefined;
+    return core.getType(value) === core.types.Undefined;
   },
   isString: function isString(value) {
-    return this.getType(value) === this.types.String;
+    return core.getType(value) === core.types.String;
   },
   isArray: function isArray(value) {
-    return this.getType(value) === this.types.Array;
+    return core.getType(value) === core.types.Array;
   },
   isNumber: function isNumber(value) {
-    return this.getType(value) === this.types.Number;
+    return core.getType(value) === core.types.Number;
   },
   isObject: function isObject(value) {
-    return this.getType(value) === this.types.Object;
+    return core.getType(value) === core.types.Object;
   },
   isSet: function isSet(value) {
-    return this.getType(value) === this.types.Set;
+    return core.getType(value) === core.types.Set;
   },
   isMap: function isMap(value) {
-    return this.getType(value) === this.types.Map;
+    return core.getType(value) === core.types.Map;
   },
   isSymbol: function isSymbol(value) {
-    return this.getType(value) === this.types.Symbol;
+    return core.getType(value) === core.types.Symbol;
   },
   isFunction: function isFunction(value) {
-    return this.getType(value) === this.types.Function;
+    return core.getType(value) === core.types.Function;
   },
   isArguments: function isArguments(value) {
-    return this.getType(value) === this.types.Arguments;
+    return core.getType(value) === core.types.Arguments;
   },
   isIterator: function isIterator(value) {
-    return this.getType(value).endsWith(this.types.Iterator);
+    return core.getType(value).endsWith(core.types.Iterator);
   },
   isEnumerable: function isEnumerable(value) {
-    return this.getType(value).endsWith(this.types.Enumerable);
+    return core.getType(value).endsWith(core.types.Enumerable);
   },
   isProto: function isProto(value) {
-    var type = this.getType(value);
-    return type === this.types.Array || type === this.types.String;
+    var type = core.getType(value);
+    return type === core.types.Array || type === core.types.String;
   },
   isList: function isList(value) {
-    var type = this.getType(value);
-    return type === this.types.Array || type === this.types.Enumerable || type === this.types.Set;
+    var type = core.getType(value);
+    return type === core.types.Array || type === core.types.Enumerable || type === core.types.Set;
   },
   isInteger: function isInteger(value) {
     return /^[-+]?\d+$/.test(value) || Number.isInteger(value);
@@ -4460,7 +4462,7 @@ var core = {
     if ((0, _typeof2.default)(property) !== 'symbol' && prototype.hasOwnProperty(property)) {
       var newProperty = 'o$' + property;
       if (prototype.hasOwnProperty(newProperty)) return;
-      if (this.isDev()) console.warn(property + ' already in ' + this.getType(prototype) + ', set original function to ' + newProperty);
+      if (core.isDev()) console.warn(property + ' already in ' + core.getType(prototype) + ', set original function to ' + newProperty);
       Object.defineProperty(prototype, newProperty, {
         enumerable: false,
         writable: true,
@@ -4491,24 +4493,24 @@ var core = {
   defineProperty: function defineProperty(prototype, property, value) {
     var isGet = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     var isEnumerable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-    this.conflict(prototype, property);
+    core.conflict(prototype, property);
 
     if (property === Symbol.iterator) {
       var name = (getFunctionName(value) || getFunctionName(prototype[Symbol.iterator])).replace(/\s*Iterator$/ig, ' Iterator');
 
       if (name) {
-        this.defineProperty(value, Symbol.toStringTag, name);
+        core.defineProperty(value, Symbol.toStringTag, name);
       }
     }
 
-    this.setProperty(prototype, property, value, isGet, isEnumerable);
+    core.setProperty(prototype, property, value, isGet, isEnumerable);
   },
   defineProperties: function defineProperties(prototype, properties) {
     var pascalOrPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     for (var property in properties) {
       if (properties.hasOwnProperty(property)) {
-        this.defineProperty(prototype, pascalOrPrefix === true ? this.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
+        core.defineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property, getter(properties, property), true, false);
       }
     }
   },
@@ -4538,7 +4540,7 @@ var core = {
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var property = _step.value;
-        this.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
+        core.undefineProperty(prototype, pascalOrPrefix === true ? core.asPascal(property) : pascalOrPrefix ? pascalOrPrefix + property : property);
       }
     } catch (err) {
       _iterator.e(err);
@@ -4550,19 +4552,19 @@ var core = {
     if (value[Symbol.iterator]) {
       return value;
     } else {
-      return this.asEnumerable(value);
+      return core.asEnumerable(value);
     }
   },
   asEnumerable: function asEnumerable(object, childrenSelector, valueSelector) {
     var c;
 
-    if (this.isUndefined(childrenSelector)) {
-      if (this.isEnumerable(object)) {
+    if (core.isUndefined(childrenSelector)) {
+      if (core.isEnumerable(object)) {
         return object;
-      } else if (this.isIterator(object)) {
+      } else if (core.isIterator(object)) {
         c = require('../enumerables/IteratorEnumerable');
       } else {
-        var type = object[this.typeAs] || this.getType(object);
+        var type = object[core.typeAs] || core.getType(object);
 
         if (type === core.types.String) {
           c = require('../enumerables/StringEnumerable');
@@ -4585,10 +4587,10 @@ var core = {
     return new c(object, childrenSelector, valueSelector);
   },
   toArray: function toArray(source) {
-    if (this.isArray(source)) {
+    if (core.isArray(source)) {
       return source;
     } else {
-      source = this.asIterable(source);
+      source = core.asIterable(source);
       return Array.from(source);
     }
   },
