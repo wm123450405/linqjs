@@ -18245,89 +18245,91 @@ var methods = require('./methods');
 },{"./defaultEqualityComparer":153,"./methods":172}],172:[function(require,module,exports){
 'use strict';
 
-var core = require('../core/core');
+var _require = require('../core/core'),
+    getType = _require.getType,
+    types = _require.types;
 
 var InvalidFunctionException = require('../core/exceptions/InvalidFunctionException');
 
 var methods = {
   asSelector: function asSelector(selector) {
-    var type = core.getType(selector);
+    var type = getType(selector);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return propertySelector(selector);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return selector;
     } else {
       throw new InvalidFunctionException(selector);
     }
   },
   asSetter: function asSetter(setter) {
-    var type = core.getType(setter);
+    var type = getType(setter);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return propertySetter(setter);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return setter;
     } else {
       throw new InvalidFunctionException(setter);
     }
   },
   asPredicate: function asPredicate(predicate) {
-    var type = core.getType(predicate);
+    var type = getType(predicate);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return selectorPredicate(predicate);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return predicate;
-    } else if (type === core.types.RegExp) {
+    } else if (type === types.RegExp) {
       return regexpPredicate(predicate);
-    } else if (type === core.types.Array || type === core.types.Object) {
+    } else if (type === types.Array || type === types.Object) {
       return propertiesPredicate(predicate);
     } else {
       throw new InvalidFunctionException(predicate);
     }
   },
   asEqualityComparer: function asEqualityComparer(comparer) {
-    var type = core.getType(comparer);
+    var type = getType(comparer);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return selectorComparer(comparer, defaultEqualityComparer);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return comparer;
     } else {
       throw new InvalidFunctionException(comparer);
     }
   },
   asStrictEqualityComparer: function asStrictEqualityComparer(comparer) {
-    var type = core.getType(comparer);
+    var type = getType(comparer);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return selectorComparer(comparer, defaultStrictEqualityComparer);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return comparer;
     } else {
       throw new InvalidFunctionException(comparer);
     }
   },
   asSameComparer: function asSameComparer(comparer) {
-    var type = core.getType(comparer);
+    var type = getType(comparer);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return selectorComparer(comparer, defaultSameComparer);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return comparer;
     } else {
       throw new InvalidFunctionException(comparer);
     }
   },
   asComparer: function asComparer(comparer) {
-    var type = core.getType(comparer);
+    var type = getType(comparer);
 
-    if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+    if (type === types.String || type === types.Number || type === types.Symbol) {
       return selectorComparer(comparer, defaultComparer);
-    } else if (type === core.types.Array || type === core.types.Enumerable) {
+    } else if (type === types.Array || type === types.Enumerable) {
       return arrayComparer(comparer);
-    } else if (type === core.types.Function) {
+    } else if (type === types.Function) {
       return comparer;
     } else {
       throw new InvalidFunctionException(comparer);

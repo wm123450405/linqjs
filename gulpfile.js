@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
@@ -22,6 +23,14 @@ const uglifyConfig = {
 		arguments: true
 	}
 };
+
+const terserConfig = {
+	keep_fnames: true,
+	mangle: true,
+	compress: {
+		arguments: true
+	}
+}
 
 const hint = function() {
 	return gulp.src('./src/**/*.js')
@@ -93,6 +102,7 @@ const minSlim = function() {
 			loadMaps: true
 		}))
 		.pipe(uglify(uglifyConfig))
+		// .pipe(terser(terserConfig))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 };
@@ -105,6 +115,7 @@ const minFull = function() {
 			loadMaps: true
 		}))
 		.pipe(uglify(uglifyConfig))
+		// .pipe(terser(terserConfig))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 };

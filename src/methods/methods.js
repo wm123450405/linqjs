@@ -1,81 +1,81 @@
 'use strict';
 
-const core = require('../core/core');
+const { getType, types } = require('../core/core');
 
 const InvalidFunctionException = require('../core/exceptions/InvalidFunctionException');
 
 const methods = {
 	asSelector(selector) {
-		let type = core.getType(selector);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(selector);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return propertySelector(selector);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return selector;
 		} else {
 			throw new InvalidFunctionException(selector);
 		}
 	},
     asSetter(setter) {
-        let type = core.getType(setter);
-        if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+        let type = getType(setter);
+        if (type === types.String || type === types.Number || type === types.Symbol) {
             return propertySetter(setter);
-        } else if (type === core.types.Function) {
+        } else if (type === types.Function) {
             return setter;
         } else {
             throw new InvalidFunctionException(setter);
         }
     },
 	asPredicate(predicate) {
-		let type = core.getType(predicate);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(predicate);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return selectorPredicate(predicate);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return predicate;
-		} else if (type === core.types.RegExp) {
+		} else if (type === types.RegExp) {
 			return regexpPredicate(predicate);
-		} else if (type === core.types.Array || type === core.types.Object) {
+		} else if (type === types.Array || type === types.Object) {
 			return propertiesPredicate(predicate);
 		} else {
 			throw new InvalidFunctionException(predicate);
 		}
 	},
 	asEqualityComparer(comparer) {
-		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(comparer);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return selectorComparer(comparer, defaultEqualityComparer);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asStrictEqualityComparer(comparer) {
-		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(comparer);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return selectorComparer(comparer, defaultStrictEqualityComparer);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asSameComparer(comparer) {
-		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(comparer);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return selectorComparer(comparer, defaultSameComparer);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
 		}
 	},
 	asComparer(comparer) {
-		let type = core.getType(comparer);
-		if (type === core.types.String || type === core.types.Number || type === core.types.Symbol) {
+		let type = getType(comparer);
+		if (type === types.String || type === types.Number || type === types.Symbol) {
 			return selectorComparer(comparer, defaultComparer);
-		} else if (type === core.types.Array || type === core.types.Enumerable) {
+		} else if (type === types.Array || type === types.Enumerable) {
 			return arrayComparer(comparer);
-		} else if (type === core.types.Function) {
+		} else if (type === types.Function) {
 			return comparer;
 		} else {
 			throw new InvalidFunctionException(comparer);
