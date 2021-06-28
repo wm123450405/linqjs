@@ -21,33 +21,33 @@ class StringEnumerable extends ProtoEnumerable {
         }
     }
     indexOf(value, start = 0, comparer = defaultStrictEqualityComparer) {
-        if (comparer === defaultStrictEqualityComparer && core.string$indexOf) {
-            return core.string$indexOf.call(this[core.delegate], value, start);
+        if (comparer === defaultStrictEqualityComparer && core.s$indexOf) {
+            return core.s$indexOf.call(this[core.delegate], value, start);
         } else {
             return super.indexOf(value, start, comparer);
         }
     }
     lastIndexOf(value, start = Infinity, comparer = defaultStrictEqualityComparer) {
-        if (comparer === defaultStrictEqualityComparer && core.string$lastIndexOf) {
-            return core.string$lastIndexOf.call(this[core.delegate], value, start);
+        if (comparer === defaultStrictEqualityComparer && core.s$lastIndexOf) {
+            return core.s$lastIndexOf.call(this[core.delegate], value, start);
         } else {
             return super.lastIndexOf(value, start, comparer);
         }
     }
     includes(element, start = 0) {
-        if (core.string$includes) {
-            return core.string$includes.call(this[core.delegate], element, start);
+        if (core.s$includes) {
+            return core.s$includes.call(this[core.delegate], element, start);
         } else {
             return this[core.delegate].indexOf(element, start) !== -1;
         }
     }
     split(splitPredicate = defaultFalsePredicate) {
-        if (core.string$split) {
+        if (core.s$split) {
             if (splitPredicate === defaultFalsePredicate) {
-                let result = core.string$split.call(this[core.delegate]);
+                let result = core.s$split.call(this[core.delegate]);
                 return core.asEnumerable(result);
             } else if (core.isString(splitPredicate)) {
-                let result = core.string$split.call(this[core.delegate], splitPredicate);
+                let result = core.s$split.call(this[core.delegate], splitPredicate);
                 return core.asEnumerable(result);
             } else {
                 return super.split(splitPredicate);
@@ -57,8 +57,8 @@ class StringEnumerable extends ProtoEnumerable {
         }
     }
     toArray() {
-        if (core.string$split) {
-            return core.string$split.call(this[core.delegate]);
+        if (core.s$split) {
+            return core.s$split.call(this[core.delegate]);
         } else {
             return super.toArray();
         }

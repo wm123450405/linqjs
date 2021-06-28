@@ -12,6 +12,17 @@ const extend = require('extend');
 
 const babelConfig = require('./babel.config.json');
 
+const uglifyConfig = {
+	// mangle: {
+	// 	except: ['require', 'exports', 'module']
+	// },
+	keep_fnames: true,
+	mangle: true,
+	compress: {
+		arguments: true
+	}
+};
+
 const hint = function() {
 	return gulp.src('./src/**/*.js')
 		.pipe(jshint({
@@ -81,15 +92,7 @@ const minSlim = function() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(uglify({
-			// mangle: {
-			// 	except: ['require', 'exports', 'module']
-			// },
-			mangle: {
-				keep_fnames: true
-			},
-			compress: true
-		}))
+		.pipe(uglify(uglifyConfig))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 };
@@ -101,15 +104,7 @@ const minFull = function() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(uglify({
-			// mangle: {
-			// 	except: ['require', 'exports', 'module']
-			// },
-			mangle: {
-				keep_fnames: true
-			},
-			compress: true
-		}))
+		.pipe(uglify(uglifyConfig))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/'));
 };

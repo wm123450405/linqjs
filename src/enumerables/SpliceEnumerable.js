@@ -7,8 +7,8 @@ const core = require('./../core/core');
 class SpliceEnumerable extends IEnumerable {
 	constructor(source, start, count, ...values) {
         super(source);
-        if (core.isArray(source) && core.array$splice) {
-            let deleteValues = core.array$splice.call(source, start, count, ...values);
+        if (core.isArray(source) && core.a$splice) {
+            let deleteValues = core.a$splice.call(source, start, count, ...values);
             core.setProperty(this, Symbol.iterator, function*() {
                 yield* deleteValues;
             });

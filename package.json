@@ -5,26 +5,21 @@
   "main": "dist/linq.min.js",
   "scripts": {
     "test:performance": "node test/performance/test.js",
-
     "test": "node test/test.js && node test/full/test.js",
     "test:compile": "npm run compile && node test/test-compile.js && node test/full/test-compile.js",
     "test:babel": "npx babel-node test/test-babel.js && npx babel-node test/full/test-babel.js",
     "test:unit": "gulp unitSlim && gulp unitFull",
-
     "test:slim": "node test/test.js",
     "test:slim:compile": "npm run compile:slim && node test/test-compile.js",
     "test:slim:babel": "npx babel-node test/test-babel.js",
     "test:slim:unit": "gulp unitSlim",
-
     "test:full": "node test/full/test.js",
     "test:full:compile": "npm run compile:full && node test/full/test-compile.js",
     "test:full:babel": "npx babel-node test/full/test-babel.js",
     "test:full:unit": "gulp unitFull",
-
     "compile:slim": "gulp slim",
     "compile:full": "gulp full",
     "compile": "gulp",
-
     "prepublish": "npm run compile"
   },
   "repository": {
@@ -47,6 +42,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.0",
+    "uglify-js": "^3.13.0",
     "jshint": "^2.13.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"

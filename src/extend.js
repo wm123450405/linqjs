@@ -244,8 +244,8 @@ const extendObject = {
         return Enumerable.reverse(this);
     },
     copyWithin(target = 0, start = 0, end = Infinity) {
-        if (core.isArray(this) && core.array$copyWithin && !core.lazy) {
-            return core.array$copyWithin.call(this, target, start, end);
+        if (core.isArray(this) && core.a$copyWithin && !core.lazy) {
+            return core.a$copyWithin.call(this, target, start, end);
         } else {
             return Enumerable.copyWithin(this, target, start, end);
         }
@@ -254,15 +254,15 @@ const extendObject = {
         return Enumerable.every(this, callback, thisArg);
     },
     fill(value, start = 0, end = Infinity) {
-        if (core.isArray(this) && core.array$fill && !core.lazy) {
-            return core.array$fill.call(this, value, start, end);
+        if (core.isArray(this) && core.a$fill && !core.lazy) {
+            return core.a$fill.call(this, value, start, end);
         } else {
             return Enumerable.fill(this, value, start, end);
         }
     },
     filter(callback, thisArg) {
-        if ((core.isArray(this) || core.isArguments(this)) && core.array$filter && !core.lazy) {
-            return core.array$filter.call(this, callback, thisArg);
+        if ((core.isArray(this) || core.isArguments(this)) && core.a$filter && !core.lazy) {
+            return core.a$filter.call(this, callback, thisArg);
         } else {
             return Enumerable.filter(this, callback, thisArg);
         }
@@ -271,17 +271,17 @@ const extendObject = {
         return Enumerable.find(this, callback, thisArg);
     },
     includes(element, start = 0) {
-        if (core.isString(this) && core.string$includes) {
-            return core.string$includes.call(this, element, start);
-        } else if ((core.isArray(this) || core.isArguments(this)) && core.array$includes) {
-            return core.array$includes.call(this, element, start);
+        if (core.isString(this) && core.s$includes) {
+            return core.s$includes.call(this, element, start);
+        } else if ((core.isArray(this) || core.isArguments(this)) && core.a$includes) {
+            return core.a$includes.call(this, element, start);
         } else {
             return Enumerable.includes(this, element, start);
         }
     },
     map(callback, thisArg) {
-        if ((core.isArray(this) || core.isArguments(this)) && core.array$map && !core.lazy) {
-            return core.array$map.call(this, callback, thisArg);
+        if ((core.isArray(this) || core.isArguments(this)) && core.a$map && !core.lazy) {
+            return core.a$map.call(this, callback, thisArg);
         } else {
             return Enumerable.map(this, callback, thisArg);
         }
@@ -290,13 +290,13 @@ const extendObject = {
         return Enumerable.pop(this);
     },
     push(...values) {
-        return Enumerable.push.apply(Enumerable, core.array$concat.call([this], values));
+        return Enumerable.push.apply(Enumerable, core.a$concat.call([this], values));
     },
     shift() {
         return Enumerable.shift(this);
     },
     unshift(...values) {
-        return Enumerable.unshift.apply(Enumerable, core.array$concat.call([this], values));
+        return Enumerable.unshift.apply(Enumerable, core.a$concat.call([this], values));
     },
     reduce(callback, initialValue) {
         return Enumerable.reduce(this, callback, initialValue);
@@ -305,23 +305,23 @@ const extendObject = {
         return Enumerable.reduceRight(this, callback, initialValue);
     },
     slice(start = 0, end = Infinity) {
-        if (core.isString(this) && core.string$slice && !core.lazy) {
-            return core.string$slice.call(this, start, end);
-        } else if ((core.isArray(this) || core.isArguments(this)) && core.array$slice && !core.lazy) {
-            return core.array$slice.call(this, start, end);
+        if (core.isString(this) && core.s$slice && !core.lazy) {
+            return core.s$slice.call(this, start, end);
+        } else if ((core.isArray(this) || core.isArguments(this)) && core.a$slice && !core.lazy) {
+            return core.a$slice.call(this, start, end);
         } else {
             return Enumerable.slice(this, start, end);
         }
     },
     splice(start, count, ...values) {
-        return Enumerable.splice.apply(Enumerable, core.array$concat.call([this, start, count], values));
+        return Enumerable.splice.apply(Enumerable, core.a$concat.call([this, start, count], values));
     },
     some(callback, thisArg) {
         return Enumerable.some(this, callback, thisArg);
     },
     sort(comparer = defaultComparer) {
-        if (core.isArray(this) && core.array$sort && !core.lazy) {
-            return core.array$sort.call(this, methods.asComparer(comparer));
+        if (core.isArray(this) && core.a$sort && !core.lazy) {
+            return core.a$sort.call(this, methods.asComparer(comparer));
         } else {
             return Enumerable.sort(this, comparer);
         }
@@ -408,12 +408,12 @@ const extendObject = {
         return Enumerable.conflict(this, selector, comparer);
     },
     concat(...others) {
-        if (core.isString(this) && core.string$concat && !core.lazy) {
-            return core.string$concat.apply(this, others);
-        } else if ((core.isArray(this) || core.isArguments(this))&& core.array$concat && !core.lazy) {
-            return core.array$concat.apply(this, others);
+        if (core.isString(this) && core.s$concat && !core.lazy) {
+            return core.s$concat.apply(this, others);
+        } else if ((core.isArray(this) || core.isArguments(this))&& core.a$concat && !core.lazy) {
+            return core.a$concat.apply(this, others);
         } else {
-            return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+            return Enumerable.concat.apply(Enumerable, core.a$concat.call([this], others));
         }
     },
     proportion(predicate = defaultPredicate) {

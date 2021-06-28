@@ -2725,7 +2725,7 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
       }
 
       // return new ConcatEnumerable(this, ...others);
-      return new (Function.prototype.bind.apply(ConcatEnumerable, core.array$concat.call([null], [this], others)))();
+      return new (Function.prototype.bind.apply(ConcatEnumerable, core.a$concat.call([null], [this], others)))();
     }
   }, {
     key: "distinct",
@@ -2862,8 +2862,8 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
       var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
       if (arguments.length <= 1) {
-        if (core.array$join) {
-          return core.array$join.call(this.toArray(), inner);
+        if (core.a$join) {
+          return core.a$join.call(this.toArray(), inner);
         } else {
           inner = inner || '';
           var result = '',
@@ -3709,7 +3709,7 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
       }
 
       // return new SpliceEnumerable(this, start, count, ...values);
-      return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [this, start, count], values)))();
+      return new (Function.prototype.bind.apply(SpliceEnumerable, core.a$concat.call([null], [this, start, count], values)))();
     }
   }, {
     key: "fill",
@@ -4675,35 +4675,35 @@ var core = {
   typeAs: Symbol('typeAs'),
   delegate: Symbol.for('delegate'),
   lazy: false,
-  array$every: Array.prototype.every,
-  array$concat: Array.prototype.concat,
-  array$splice: Array.prototype.splice,
-  array$slice: Array.prototype.slice,
-  array$fill: Array.prototype.fill,
-  array$find: Array.prototype.find,
-  array$includes: Array.prototype.includes,
-  array$map: Array.prototype.map,
-  array$filter: Array.prototype.filter,
-  array$shift: Array.prototype.shift,
-  array$unshift: Array.prototype.unshift,
-  array$pop: Array.prototype.pop,
-  array$push: Array.prototype.push,
-  array$reduce: Array.prototype.reduce,
-  array$reduceRight: Array.prototype.reduceRight,
-  array$some: Array.prototype.some,
-  array$sort: Array.prototype.sort,
-  array$copyWithin: Array.prototype.copyWithin,
-  array$join: Array.prototype.join,
-  array$indexOf: Array.prototype.indexOf,
-  array$lastIndexOf: Array.prototype.lastIndexOf,
-  array$findIndex: Array.prototype.findIndex,
-  array$forEach: Array.prototype.forEach,
-  string$concat: String.prototype.concat,
-  string$slice: String.prototype.slice,
-  string$includes: String.prototype.includes,
-  string$indexOf: String.prototype.indexOf,
-  string$lastIndexOf: String.prototype.lastIndexOf,
-  string$split: String.prototype.split
+  a$every: Array.prototype.every,
+  a$concat: Array.prototype.concat,
+  a$splice: Array.prototype.splice,
+  a$slice: Array.prototype.slice,
+  a$fill: Array.prototype.fill,
+  a$find: Array.prototype.find,
+  a$includes: Array.prototype.includes,
+  a$map: Array.prototype.map,
+  a$filter: Array.prototype.filter,
+  a$shift: Array.prototype.shift,
+  a$unshift: Array.prototype.unshift,
+  a$pop: Array.prototype.pop,
+  a$push: Array.prototype.push,
+  a$reduce: Array.prototype.reduce,
+  a$reduceRight: Array.prototype.reduceRight,
+  a$some: Array.prototype.some,
+  a$sort: Array.prototype.sort,
+  a$copyWithin: Array.prototype.copyWithin,
+  a$join: Array.prototype.join,
+  a$indexOf: Array.prototype.indexOf,
+  a$lastIndexOf: Array.prototype.lastIndexOf,
+  a$findIndex: Array.prototype.findIndex,
+  a$forEach: Array.prototype.forEach,
+  s$concat: String.prototype.concat,
+  s$slice: String.prototype.slice,
+  s$includes: String.prototype.includes,
+  s$indexOf: String.prototype.indexOf,
+  s$lastIndexOf: String.prototype.lastIndexOf,
+  s$split: String.prototype.split
 };
 module.exports = core;
 
@@ -5131,8 +5131,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var innerKeySelector = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultSelector;
       var comparer = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultEqualityComparer;
 
-      if (arguments.length === 1 && core.array$join) {
-        return core.array$join.call(this[core.delegate], inner);
+      if (arguments.length === 1 && core.a$join) {
+        return core.a$join.call(this[core.delegate], inner);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "join", this).call(this, inner, resultSelector, outerKeySelector, innerKeySelector, comparer);
       }
@@ -5143,8 +5143,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
 
-      if (comparer === defaultStrictEqualityComparer && core.array$indexOf) {
-        return core.array$indexOf.call(this[core.delegate], value, start);
+      if (comparer === defaultStrictEqualityComparer && core.a$indexOf) {
+        return core.a$indexOf.call(this[core.delegate], value, start);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "indexOf", this).call(this, value, start, comparer);
       }
@@ -5155,8 +5155,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
       var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
 
-      if (comparer === defaultStrictEqualityComparer && core.array$lastIndexOf) {
-        return core.array$lastIndexOf.call(this[core.delegate], value, start);
+      if (comparer === defaultStrictEqualityComparer && core.a$lastIndexOf) {
+        return core.a$lastIndexOf.call(this[core.delegate], value, start);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "lastIndexOf", this).call(this, value, start, comparer);
       }
@@ -5164,8 +5164,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "findIndex",
     value: function findIndex(predicate, thisArg) {
-      if (core.array$findIndex) {
-        return core.array$findIndex.call(this[core.delegate], predicate, thisArg);
+      if (core.a$findIndex) {
+        return core.a$findIndex.call(this[core.delegate], predicate, thisArg);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "findIndex", this).call(this, predicate, thisArg);
       }
@@ -5173,8 +5173,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "every",
     value: function every(callback, thisArg) {
-      if (core.array$every) {
-        return core.array$every.call(this[core.delegate], callback, thisArg);
+      if (core.a$every) {
+        return core.a$every.call(this[core.delegate], callback, thisArg);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "every", this).call(this, callback, thisArg);
       }
@@ -5182,8 +5182,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "find",
     value: function find(callback, thisArg) {
-      if (core.array$find) {
-        return core.array$find.call(this[core.delegate], callback, thisArg);
+      if (core.a$find) {
+        return core.a$find.call(this[core.delegate], callback, thisArg);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "find", this).call(this, callback, thisArg);
       }
@@ -5193,8 +5193,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
     value: function includes(element) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (core.array$includes) {
-        return core.array$includes.call(this[core.delegate], element, start);
+      if (core.a$includes) {
+        return core.a$includes.call(this[core.delegate], element, start);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "includes", this).call(this, element, start);
       }
@@ -5202,8 +5202,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "pop",
     value: function pop() {
-      if (core.array$pop) {
-        return core.array$pop.call(this[core.delegate]);
+      if (core.a$pop) {
+        return core.a$pop.call(this[core.delegate]);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "pop", this).call(this);
       }
@@ -5215,8 +5215,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
         values[_key] = arguments[_key];
       }
 
-      if (core.array$push) {
-        return core.array$push.apply(this[core.delegate], values);
+      if (core.a$push) {
+        return core.a$push.apply(this[core.delegate], values);
       } else {
         var _get2;
 
@@ -5226,8 +5226,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "shift",
     value: function shift() {
-      if (core.array$shift) {
-        return core.array$shift.call(this[core.delegate]);
+      if (core.a$shift) {
+        return core.a$shift.call(this[core.delegate]);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "shift", this).call(this);
       }
@@ -5239,8 +5239,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
         values[_key2] = arguments[_key2];
       }
 
-      if (core.array$unshift) {
-        return core.array$unshift.apply(this[core.delegate], values);
+      if (core.a$unshift) {
+        return core.a$unshift.apply(this[core.delegate], values);
       } else {
         var _get3;
 
@@ -5250,8 +5250,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "reduce",
     value: function reduce(callback, initialValue) {
-      if (core.array$reduce) {
-        return core.array$reduce.call(this[core.delegate], callback, initialValue);
+      if (core.a$reduce) {
+        return core.a$reduce.call(this[core.delegate], callback, initialValue);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "reduce", this).call(this, callback, initialValue);
       }
@@ -5259,8 +5259,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "reduceRight",
     value: function reduceRight(callback, initialValue) {
-      if (core.array$reduceRight) {
-        return core.array$reduceRight.call(this[core.delegate], callback, initialValue);
+      if (core.a$reduceRight) {
+        return core.a$reduceRight.call(this[core.delegate], callback, initialValue);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "reduceRight", this).call(this, callback, initialValue);
       }
@@ -5272,10 +5272,10 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
         values[_key3 - 2] = arguments[_key3];
       }
 
-      if (core.array$splice) {
-        var _core$array$splice;
+      if (core.a$splice) {
+        var _core$a$splice;
 
-        var result = (_core$array$splice = core.array$splice).call.apply(_core$array$splice, [this[core.delegate], start, count].concat(values));
+        var result = (_core$a$splice = core.a$splice).call.apply(_core$a$splice, [this[core.delegate], start, count].concat(values));
 
         return core.asEnumerable(result);
       } else {
@@ -5290,8 +5290,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-      if (core.array$fill) {
-        var result = core.array$fill.call(this[core.delegate], value, start, end);
+      if (core.a$fill) {
+        var result = core.a$fill.call(this[core.delegate], value, start, end);
         return core.asEnumerable(result);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "fill", this).call(this, value, start, end);
@@ -5300,20 +5300,20 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "some",
     value: function some(callback, thisArg) {
-      if (core.array$some) {
-        return core.array$some.call(this[core.delegate], callback, thisArg);
+      if (core.a$some) {
+        return core.a$some.call(this[core.delegate], callback, thisArg);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "some", this).call(this, callback, thisArg);
       }
     }
   }, {
     key: "forEach",
-    value: function forEach(source) {
-      var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAction;
-      var thisArg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+    value: function forEach() {
+      var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultAction;
+      var thisArg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
 
-      if (core.array$forEach) {
-        core.array$forEach.call(this[core.delegate], action, thisArg);
+      if (core.a$forEach) {
+        core.a$forEach.call(this[core.delegate], action, thisArg);
       } else {
         (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "forEach", this).call(this, action, thisArg);
       }
@@ -5328,9 +5328,9 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
     value: function sort() {
       var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultComparer;
 
-      if (core.array$sort) {
+      if (core.a$sort) {
         comparer = methods.asComparer(comparer);
-        var result = core.array$sort.call(this[core.delegate], comparer);
+        var result = core.a$sort.call(this[core.delegate], comparer);
         return core.asEnumerable(result);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "sort", this).call(this, comparer);
@@ -5343,8 +5343,8 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-      if (core.array$copyWithin) {
-        var result = core.array$copyWithin.call(this[core.delegate], target, start, end);
+      if (core.a$copyWithin) {
+        var result = core.a$copyWithin.call(this[core.delegate], target, start, end);
         return core.asEnumerable(result);
       } else {
         return (0, _get5.default)((0, _getPrototypeOf2.default)(ArrayEnumerable.prototype), "copyWithin", this).call(this, target, start, end);
@@ -14849,10 +14849,10 @@ var SpliceEnumerable = /*#__PURE__*/function (_IEnumerable) {
     (0, _classCallCheck2.default)(this, SpliceEnumerable);
     _this = _super.call(this, source);
 
-    if (core.isArray(source) && core.array$splice) {
-      var _core$array$splice;
+    if (core.isArray(source) && core.a$splice) {
+      var _core$a$splice;
 
-      var deleteValues = (_core$array$splice = core.array$splice).call.apply(_core$array$splice, [source, start, count].concat(values));
+      var deleteValues = (_core$a$splice = core.a$splice).call.apply(_core$a$splice, [source, start, count].concat(values));
 
       core.setProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
@@ -15253,8 +15253,8 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
 
-      if (comparer === defaultStrictEqualityComparer && core.string$indexOf) {
-        return core.string$indexOf.call(this[core.delegate], value, start);
+      if (comparer === defaultStrictEqualityComparer && core.s$indexOf) {
+        return core.s$indexOf.call(this[core.delegate], value, start);
       } else {
         return (0, _get2.default)((0, _getPrototypeOf2.default)(StringEnumerable.prototype), "indexOf", this).call(this, value, start, comparer);
       }
@@ -15265,8 +15265,8 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
       var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultStrictEqualityComparer;
 
-      if (comparer === defaultStrictEqualityComparer && core.string$lastIndexOf) {
-        return core.string$lastIndexOf.call(this[core.delegate], value, start);
+      if (comparer === defaultStrictEqualityComparer && core.s$lastIndexOf) {
+        return core.s$lastIndexOf.call(this[core.delegate], value, start);
       } else {
         return (0, _get2.default)((0, _getPrototypeOf2.default)(StringEnumerable.prototype), "lastIndexOf", this).call(this, value, start, comparer);
       }
@@ -15276,8 +15276,8 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
     value: function includes(element) {
       var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (core.string$includes) {
-        return core.string$includes.call(this[core.delegate], element, start);
+      if (core.s$includes) {
+        return core.s$includes.call(this[core.delegate], element, start);
       } else {
         return this[core.delegate].indexOf(element, start) !== -1;
       }
@@ -15287,12 +15287,12 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
     value: function split() {
       var splitPredicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultFalsePredicate;
 
-      if (core.string$split) {
+      if (core.s$split) {
         if (splitPredicate === defaultFalsePredicate) {
-          var result = core.string$split.call(this[core.delegate]);
+          var result = core.s$split.call(this[core.delegate]);
           return core.asEnumerable(result);
         } else if (core.isString(splitPredicate)) {
-          var _result = core.string$split.call(this[core.delegate], splitPredicate);
+          var _result = core.s$split.call(this[core.delegate], splitPredicate);
 
           return core.asEnumerable(_result);
         } else {
@@ -15305,8 +15305,8 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   }, {
     key: "toArray",
     value: function toArray() {
-      if (core.string$split) {
-        return core.string$split.call(this[core.delegate]);
+      if (core.s$split) {
+        return core.s$split.call(this[core.delegate]);
       } else {
         return (0, _get2.default)((0, _getPrototypeOf2.default)(StringEnumerable.prototype), "toArray", this).call(this);
       }
@@ -17146,8 +17146,8 @@ var extendObject = {
     var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-    if (core.isArray(this) && core.array$copyWithin && !core.lazy) {
-      return core.array$copyWithin.call(this, target, start, end);
+    if (core.isArray(this) && core.a$copyWithin && !core.lazy) {
+      return core.a$copyWithin.call(this, target, start, end);
     } else {
       return Enumerable.copyWithin(this, target, start, end);
     }
@@ -17159,15 +17159,15 @@ var extendObject = {
     var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Infinity;
 
-    if (core.isArray(this) && core.array$fill && !core.lazy) {
-      return core.array$fill.call(this, value, start, end);
+    if (core.isArray(this) && core.a$fill && !core.lazy) {
+      return core.a$fill.call(this, value, start, end);
     } else {
       return Enumerable.fill(this, value, start, end);
     }
   },
   filter: function filter(callback, thisArg) {
-    if ((core.isArray(this) || core.isArguments(this)) && core.array$filter && !core.lazy) {
-      return core.array$filter.call(this, callback, thisArg);
+    if ((core.isArray(this) || core.isArguments(this)) && core.a$filter && !core.lazy) {
+      return core.a$filter.call(this, callback, thisArg);
     } else {
       return Enumerable.filter(this, callback, thisArg);
     }
@@ -17178,17 +17178,17 @@ var extendObject = {
   includes: function includes(element) {
     var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-    if (core.isString(this) && core.string$includes) {
-      return core.string$includes.call(this, element, start);
-    } else if ((core.isArray(this) || core.isArguments(this)) && core.array$includes) {
-      return core.array$includes.call(this, element, start);
+    if (core.isString(this) && core.s$includes) {
+      return core.s$includes.call(this, element, start);
+    } else if ((core.isArray(this) || core.isArguments(this)) && core.a$includes) {
+      return core.a$includes.call(this, element, start);
     } else {
       return Enumerable.includes(this, element, start);
     }
   },
   map: function map(callback, thisArg) {
-    if ((core.isArray(this) || core.isArguments(this)) && core.array$map && !core.lazy) {
-      return core.array$map.call(this, callback, thisArg);
+    if ((core.isArray(this) || core.isArguments(this)) && core.a$map && !core.lazy) {
+      return core.a$map.call(this, callback, thisArg);
     } else {
       return Enumerable.map(this, callback, thisArg);
     }
@@ -17201,7 +17201,7 @@ var extendObject = {
       values[_key] = arguments[_key];
     }
 
-    return Enumerable.push.apply(Enumerable, core.array$concat.call([this], values));
+    return Enumerable.push.apply(Enumerable, core.a$concat.call([this], values));
   },
   shift: function shift() {
     return Enumerable.shift(this);
@@ -17211,7 +17211,7 @@ var extendObject = {
       values[_key2] = arguments[_key2];
     }
 
-    return Enumerable.unshift.apply(Enumerable, core.array$concat.call([this], values));
+    return Enumerable.unshift.apply(Enumerable, core.a$concat.call([this], values));
   },
   reduce: function reduce(callback, initialValue) {
     return Enumerable.reduce(this, callback, initialValue);
@@ -17223,10 +17223,10 @@ var extendObject = {
     var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
     var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Infinity;
 
-    if (core.isString(this) && core.string$slice && !core.lazy) {
-      return core.string$slice.call(this, start, end);
-    } else if ((core.isArray(this) || core.isArguments(this)) && core.array$slice && !core.lazy) {
-      return core.array$slice.call(this, start, end);
+    if (core.isString(this) && core.s$slice && !core.lazy) {
+      return core.s$slice.call(this, start, end);
+    } else if ((core.isArray(this) || core.isArguments(this)) && core.a$slice && !core.lazy) {
+      return core.a$slice.call(this, start, end);
     } else {
       return Enumerable.slice(this, start, end);
     }
@@ -17236,7 +17236,7 @@ var extendObject = {
       values[_key3 - 2] = arguments[_key3];
     }
 
-    return Enumerable.splice.apply(Enumerable, core.array$concat.call([this, start, count], values));
+    return Enumerable.splice.apply(Enumerable, core.a$concat.call([this, start, count], values));
   },
   some: function some(callback, thisArg) {
     return Enumerable.some(this, callback, thisArg);
@@ -17244,8 +17244,8 @@ var extendObject = {
   sort: function sort() {
     var comparer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultComparer;
 
-    if (core.isArray(this) && core.array$sort && !core.lazy) {
-      return core.array$sort.call(this, methods.asComparer(comparer));
+    if (core.isArray(this) && core.a$sort && !core.lazy) {
+      return core.a$sort.call(this, methods.asComparer(comparer));
     } else {
       return Enumerable.sort(this, comparer);
     }
@@ -17366,12 +17366,12 @@ var extendObject = {
       others[_key4] = arguments[_key4];
     }
 
-    if (core.isString(this) && core.string$concat && !core.lazy) {
-      return core.string$concat.apply(this, others);
-    } else if ((core.isArray(this) || core.isArguments(this)) && core.array$concat && !core.lazy) {
-      return core.array$concat.apply(this, others);
+    if (core.isString(this) && core.s$concat && !core.lazy) {
+      return core.s$concat.apply(this, others);
+    } else if ((core.isArray(this) || core.isArguments(this)) && core.a$concat && !core.lazy) {
+      return core.a$concat.apply(this, others);
     } else {
-      return Enumerable.concat.apply(Enumerable, core.array$concat.call([this], others));
+      return Enumerable.concat.apply(Enumerable, core.a$concat.call([this], others));
     }
   },
   proportion: function proportion() {

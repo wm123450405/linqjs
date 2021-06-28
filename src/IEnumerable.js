@@ -232,7 +232,7 @@ class IEnumerable extends Array {
         return new (
             Function.prototype.bind.apply(
                 ConcatEnumerable,
-                core.array$concat.call(
+                core.a$concat.call(
                     [null],
                     [this],
                     others
@@ -302,8 +302,8 @@ class IEnumerable extends Array {
     }
     join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (arguments.length <= 1) {
-            if (core.array$join) {
-                return core.array$join.call(this.toArray(), inner);
+            if (core.a$join) {
+                return core.a$join.call(this.toArray(), inner);
             } else {
                 inner = inner || '';
                 let result = '', first = true;
@@ -664,7 +664,7 @@ class IEnumerable extends Array {
     }
     splice(start, count, ...values) {
         // return new SpliceEnumerable(this, start, count, ...values);
-        return new (Function.prototype.bind.apply(SpliceEnumerable, core.array$concat.call([null], [this, start, count], values)))();
+        return new (Function.prototype.bind.apply(SpliceEnumerable, core.a$concat.call([null], [this, start, count], values)))();
     }
     fill(value, start = 0, end = Infinity) {
         return new FillEnumerable(this, value, start, end);
