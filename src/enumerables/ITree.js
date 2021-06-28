@@ -2,14 +2,14 @@
 
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
-const core = require('./../core/core');
-const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
+const core = require('../core/core');
+const NotAncestorOfException = require('../core/exceptions/NotAncestorOfException');
 
-const methods = require('./../methods/methods');
-const defaultPredicate = require('./../methods/defaultPredicate');
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
-const defaultValueSetter = require('./../methods/defaultValueSetter');
-const defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
+const methods = require('../methods/methods');
+const defaultPredicate = require('../methods/defaultPredicate');
+const defaultEqualityComparer = require('../methods/defaultEqualityComparer');
+const defaultValueSetter = require('../methods/defaultValueSetter');
+const defaultChildrenSetter = require('../methods/defaultChildrenSetter');
 
 class ITree extends GeneratorEnumerable {
     constructor(value, generator) {

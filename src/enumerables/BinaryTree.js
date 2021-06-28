@@ -2,7 +2,7 @@
 
 const ITree = require('./ITree');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 const PreOrderEnumerable = require('./PreOrderEnumerable');

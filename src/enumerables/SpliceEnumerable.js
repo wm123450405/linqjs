@@ -1,8 +1,8 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 class SpliceEnumerable extends IEnumerable {
 	constructor(source, start, count, ...values) {

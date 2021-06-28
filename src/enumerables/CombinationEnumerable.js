@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
 const IndicesEnumerable = require('./IndicesEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+const NoSuchElementsException = require('../core/exceptions/NoSuchElementsException');
 
 class CombinationEnumerable extends IEnumerable {
     constructor(source, count) {

@@ -2,7 +2,7 @@
 
 const BinaryTree = require('./BinaryTree');
 
-const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
+const NoSuchElementsException = require('../core/exceptions/NoSuchElementsException');
 
 class PreOrderTree extends BinaryTree {
     constructor(source) {

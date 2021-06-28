@@ -1125,7 +1125,7 @@ module.exports = function(Enumerable) {
 
 	assert.strictEqual(new TestArray().asEnumerable().elementAt(0), 0);
 
-    global.Enumerable = require('./../src/linq');
+    global.Enumerable = require('../src/linq');
     global.Enumerable.noConflict();
     global.Enumerable.noConflict(true);
 

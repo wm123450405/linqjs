@@ -2,10 +2,10 @@
 
 const ITree = require('./ITree');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const defaultValueSetter = require('./../methods/defaultValueSetter');
-const defaultChildrenSetter = require('./../methods/defaultChildrenSetter');
+const defaultValueSetter = require('../methods/defaultValueSetter');
+const defaultChildrenSetter = require('../methods/defaultChildrenSetter');
 
 class ICombine extends ITree {
     constructor(key, parent, value, generator) {

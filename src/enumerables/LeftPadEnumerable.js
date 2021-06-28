@@ -1,8 +1,8 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 class LeftPadEnumerable extends IEnumerable {
     constructor(source, length, value) {

@@ -1,6 +1,6 @@
 'use strict';
 
-const core = require('./../core');
+const core = require('../core');
 
 class Exception extends Error {
     constructor(message) {

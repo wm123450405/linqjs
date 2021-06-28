@@ -29,4 +29,4 @@ module.exports = (properties, comparer = defaultSameComparer) => {
 };
 
 const methods = require('./methods');
-const core = require('./../core/core');
+const core = require('../core/core');

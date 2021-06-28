@@ -1,10 +1,10 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const defaultResultSelector = require('./../methods/defaultResultSelector');
+const defaultResultSelector = require('../methods/defaultResultSelector');
 
 class ZipEnumerable extends IEnumerable {
     constructor(source, other, resultSelector = defaultResultSelector) {

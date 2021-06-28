@@ -2,12 +2,12 @@
 
 const ProtoEnumerable = require('./ProtoEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const defaultStrictEqualityComparer = require('./../methods/defaultStrictEqualityComparer');
-const defaultFalsePredicate = require('./../methods/defaultFalsePredicate');
+const defaultStrictEqualityComparer = require('../methods/defaultStrictEqualityComparer');
+const defaultFalsePredicate = require('../methods/defaultFalsePredicate');
 
-const OutOfRangeException = require('./../core/exceptions/OutOfRangeException');
+const OutOfRangeException = require('../core/exceptions/OutOfRangeException');
 
 class StringEnumerable extends ProtoEnumerable {
     constructor(string) {

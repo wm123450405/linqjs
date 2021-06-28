@@ -2,13 +2,13 @@
 
 const IOrderedEnumerable = require('./IOrderedEnumerable');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const thenByComparer = require('./../methods/thenByComparer');
-const selectorComparer = require('./../methods/selectorComparer');
-const defaultSelector = require('./../methods/defaultSelector');
-const defaultComparer = require('./../methods/defaultComparer');
-const descendingComparer = require('./../methods/descendingComparer');
+const thenByComparer = require('../methods/thenByComparer');
+const selectorComparer = require('../methods/selectorComparer');
+const defaultSelector = require('../methods/defaultSelector');
+const defaultComparer = require('../methods/defaultComparer');
+const descendingComparer = require('../methods/descendingComparer');
 
 class ThenByDescendingEnumerable extends IOrderedEnumerable {
     constructor(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {

@@ -2,7 +2,7 @@
 
 const IMapEnumerable = require('./IMapEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 const Entry = require('./Entry');
 

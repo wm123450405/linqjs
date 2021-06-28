@@ -1,10 +1,10 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const defaultAction = require('./../methods/defaultAction');
+const defaultAction = require('../methods/defaultAction');
 
 class EachEnumerable extends IEnumerable {
     constructor(source, action = defaultAction) {

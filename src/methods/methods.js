@@ -1,8 +1,8 @@
 'use strict';
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const InvalidFunctionException = require('./../core/exceptions/InvalidFunctionException');
+const InvalidFunctionException = require('../core/exceptions/InvalidFunctionException');
 
 const methods = {
 	asSelector(selector) {

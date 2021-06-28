@@ -2,7 +2,7 @@
 
 const Exception = require('./Exception');
 
-const core = require('./../core');
+const core = require('../core');
 
 class NoEnumerableException extends Exception {
 	constructor(value) {

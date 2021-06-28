@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultPredicate = require('./../methods/defaultPredicate');
+const defaultPredicate = require('../methods/defaultPredicate');
 
 class SkipWhileEnumerable extends IEnumerable {
     constructor(source, predicate = defaultPredicate) {

@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultIndexSelector = require('./../methods/defaultIndexSelector');
+const defaultIndexSelector = require('../methods/defaultIndexSelector');
 
 class EvenEnumerable extends IEnumerable {
     constructor(source, selector = defaultIndexSelector) {

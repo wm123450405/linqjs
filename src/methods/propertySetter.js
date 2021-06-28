@@ -1,8 +1,8 @@
 'use strict';
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const PropertyExpressionInvalidException = require('./../core/exceptions/PropertyExpressionInvalidException');
+const PropertyExpressionInvalidException = require('../core/exceptions/PropertyExpressionInvalidException');
 
 const regValid = /^(([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))(\.([_$\w][_$\w\d]*)|(\[((\d+)|'([^']+)'|"([^"]+)")]))*$/ig;
 const regSplit = /(?:^|\.)([_$\w][_$\w\d]*)|\[(?:(\d+)|'([^']+)'|"([^"]+)")]/ig;

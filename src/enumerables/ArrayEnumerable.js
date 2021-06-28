@@ -2,16 +2,16 @@
 
 const ProtoEnumerable = require('./ProtoEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultSelector = require('./../methods/defaultSelector');
-const defaultJoinSelector = require('./../methods/defaultJoinSelector');
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
-const defaultStrictEqualityComparer = require('./../methods/defaultStrictEqualityComparer');
-const defaultAction = require('./../methods/defaultAction');
-const defaultComparer = require('./../methods/defaultComparer');
+const defaultSelector = require('../methods/defaultSelector');
+const defaultJoinSelector = require('../methods/defaultJoinSelector');
+const defaultEqualityComparer = require('../methods/defaultEqualityComparer');
+const defaultStrictEqualityComparer = require('../methods/defaultStrictEqualityComparer');
+const defaultAction = require('../methods/defaultAction');
+const defaultComparer = require('../methods/defaultComparer');
 
 class ArrayEnumerable extends ProtoEnumerable {
     constructor(array) {

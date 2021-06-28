@@ -1,8 +1,8 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 class SliceEnumerable extends IEnumerable {
 	constructor(source, start = 0, end = Infinity) {

@@ -2,7 +2,7 @@
 
 const GeneratorEnumerable = require('./GeneratorEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 class IChunk extends GeneratorEnumerable {
     constructor(index, generator) {

@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultEqualityComparer = require('../methods/defaultEqualityComparer');
 
 class DistinctEnumerable extends IEnumerable {
     constructor(source, comparer = defaultEqualityComparer) {

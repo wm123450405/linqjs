@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
 const ITree = require('./ITree');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const NotAncestorOfException = require('./../core/exceptions/NotAncestorOfException');
+const NotAncestorOfException = require('../core/exceptions/NotAncestorOfException');
 
 class PathNodesToEnumerable extends IEnumerable {
     constructor(root, node) {

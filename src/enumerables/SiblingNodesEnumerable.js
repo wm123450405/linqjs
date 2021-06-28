@@ -2,12 +2,12 @@
 
 const ITree = require('./ITree');
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
-const defaultPredicate = require('./../methods/defaultPredicate');
+const methods = require('../methods/methods');
+const defaultPredicate = require('../methods/defaultPredicate');
 
 class SiblingsEnumerable extends IEnumerable {
     constructor(tree, node, predicate = defaultPredicate) {

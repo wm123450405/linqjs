@@ -1,8 +1,8 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
 const isInstanceOfBoolean = element => element instanceof Boolean || element === true || element === false;
 const isInstanceOfString = element => element instanceof String || core.getType(element) === core.types.String;

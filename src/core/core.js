@@ -25,6 +25,9 @@ const ITERATOR = 'Iterator';
 const ENUMERABLE = 'Enumerable';
 const TREE = 'Tree';
 
+const a$ = Array.prototype;
+const s$ = String.prototype;
+
 const core = {
 	isDev() {
 		return typeof process !== 'undefined' && process && process.env && process.env.NODE_ENV === 'development';
@@ -32,13 +35,13 @@ const core = {
 	getType(value) {
 		let typeName = typeof value;
 		if (typeName === 'undefined') {
-			return core.types.Undefined;
+			return UNDEFINED;
 		} else if (typeName === 'string' || value instanceof String) {
-			return core.types.String;
+			return STRING;
 		} else if (typeName === 'number' || value instanceof Number) {
-			return core.types.Number;
+			return NUMBER;
 		} else if (typeName === 'function' || value instanceof Function) {
-			return core.types.Function;
+			return FUNCTION;
 		} else {
 			let type = value[Symbol.toStringTag];
 			if (!type) {
@@ -104,48 +107,48 @@ const core = {
 		}
 	},
 	isUndefined(value) {
-		return core.getType(value) === core.types.Undefined;
+		return core.getType(value) === UNDEFINED;
 	},
 	isString(value) {
-		return core.getType(value) === core.types.String;
+		return core.getType(value) === STRING;
 	},
 	isArray(value) {
-		return core.getType(value) === core.types.Array;
+		return core.getType(value) === ARRAY;
 	},
 	isNumber(value) {
-		return core.getType(value) === core.types.Number;
+		return core.getType(value) === NUMBER;
 	},
 	isObject(value) {
-		return core.getType(value) === core.types.Object;
+		return core.getType(value) === OBJECT;
 	},
     isSet(value) {
-        return core.getType(value) === core.types.Set;
+        return core.getType(value) === SET;
     },
     isMap(value) {
-        return core.getType(value) === core.types.Map;
+        return core.getType(value) === MAP;
     },
 	isSymbol(value) {
-		return core.getType(value) === core.types.Symbol;
+		return core.getType(value) === SYMBOL;
 	},
 	isFunction(value) {
-		return core.getType(value) === core.types.Function;
+		return core.getType(value) === FUNCTION;
 	},
     isArguments(value) {
-        return core.getType(value) === core.types.Arguments;
+        return core.getType(value) === ARGUMENTS;
 	},
 	isIterator(value) {
-		return core.getType(value).endsWith(core.types.Iterator);
+		return core.getType(value).endsWith(ITERATOR);
 	},
 	isEnumerable(value) {
-		return core.getType(value).endsWith(core.types.Enumerable);
+		return core.getType(value).endsWith(ENUMERABLE);
 	},
 	isProto(value) {
 		let type = core.getType(value);
-    	return type === core.types.Array || type === core.types.String;
+    	return type === ARRAY || type === STRING;
 	},
 	isList(value) {
         let type = core.getType(value);
-        return type === core.types.Array || type === core.types.Enumerable || type === core.types.Set;
+        return type === ARRAY || type === ENUMERABLE || type === SET;
 	},
 	isInteger(value) {
 		return (/^[-+]?\d+$/.test(value) || Number.isInteger(value));
@@ -236,13 +239,13 @@ const core = {
 				c = require('../enumerables/IteratorEnumerable');
 			} else {
 				let type = object[core.typeAs] || core.getType(object);
-				if (type === core.types.String) {
+				if (type === STRING) {
 					c = require('../enumerables/StringEnumerable');
-				} else if (type === core.types.Array || type === core.types.Set || type === core.types.Arguments) {
+				} else if (type === ARRAY || type === SET || type === ARGUMENTS) {
 					c = require('../enumerables/ArrayEnumerable');
-				} else if (type === core.types.Map) {
+				} else if (type === MAP) {
 					c = require('../enumerables/MapEnumerable');
-				} else if (type === core.types.Iterator) {
+				} else if (type === ITERATOR) {
 					c = require('../enumerables/IteratorEnumerable');
 				} else if (object[Symbol.iterator]) {
 					c = require('../enumerables/IterableEnumerable');
@@ -280,35 +283,35 @@ const core = {
 	typeAs: Symbol('typeAs'),
 	delegate: Symbol.for('delegate'),
 	lazy: false,
-	a$every: Array.prototype.every,
-	a$concat: Array.prototype.concat,
-	a$splice: Array.prototype.splice,
-	a$slice: Array.prototype.slice,
-	a$fill: Array.prototype.fill,
-	a$find: Array.prototype.find,
-	a$includes: Array.prototype.includes,
-	a$map: Array.prototype.map,
-	a$filter: Array.prototype.filter,
-	a$shift: Array.prototype.shift,
-	a$unshift: Array.prototype.unshift,
-	a$pop: Array.prototype.pop,
-	a$push: Array.prototype.push,
-	a$reduce: Array.prototype.reduce,
-	a$reduceRight: Array.prototype.reduceRight,
-	a$some: Array.prototype.some,
-	a$sort: Array.prototype.sort,
-	a$copyWithin: Array.prototype.copyWithin,
-	a$join: Array.prototype.join,
-	a$indexOf: Array.prototype.indexOf,
-	a$lastIndexOf: Array.prototype.lastIndexOf,
-    a$findIndex: Array.prototype.findIndex,
-    a$forEach: Array.prototype.forEach,
-	s$concat: String.prototype.concat,
-	s$slice: String.prototype.slice,
-	s$includes: String.prototype.includes,
-	s$indexOf: String.prototype.indexOf,
-	s$lastIndexOf: String.prototype.lastIndexOf,
-	s$split: String.prototype.split
+	a$every: a$.every,
+	a$concat: a$.concat,
+	a$splice: a$.splice,
+	a$slice: a$.slice,
+	a$fill: a$.fill,
+	a$find: a$.find,
+	a$includes: a$.includes,
+	a$map: a$.map,
+	a$filter: a$.filter,
+	a$shift: a$.shift,
+	a$unshift: a$.unshift,
+	a$pop: a$.pop,
+	a$push: a$.push,
+	a$reduce: a$.reduce,
+	a$reduceRight: a$.reduceRight,
+	a$some: a$.some,
+	a$sort: a$.sort,
+	a$copyWithin: a$.copyWithin,
+	a$join: a$.join,
+	a$indexOf: a$.indexOf,
+	a$lastIndexOf: a$.lastIndexOf,
+    a$findIndex: a$.findIndex,
+    a$forEach: a$.forEach,
+	s$concat: s$.concat,
+	s$slice: s$.slice,
+	s$includes: s$.includes,
+	s$indexOf: s$.indexOf,
+	s$lastIndexOf: s$.lastIndexOf,
+	s$split: s$.split
 };
 
 module.exports = core;

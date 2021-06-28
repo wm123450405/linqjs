@@ -2,13 +2,13 @@
 
 const IterableEnumerable = require('./IterableEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const defaultPredicate = require('./../methods/defaultPredicate');
+const defaultPredicate = require('../methods/defaultPredicate');
 
-const OutOfRangeException = require('./../core/exceptions/OutOfRangeException');
-const NoSuchElementsException = require('./../core/exceptions/NoSuchElementsException');
-const TooManyElementsException = require('./../core/exceptions/TooManyElementsException');
+const OutOfRangeException = require('../core/exceptions/OutOfRangeException');
+const NoSuchElementsException = require('../core/exceptions/NoSuchElementsException');
+const TooManyElementsException = require('../core/exceptions/TooManyElementsException');
 
 class ProtoEnumerable extends IterableEnumerable {
     constructor(source) {

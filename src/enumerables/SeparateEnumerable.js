@@ -1,13 +1,13 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultValueSelector = require('./../methods/defaultValueSelector');
-const defaultChildrenSelector = require('./../methods/defaultChildrenSelector');
+const defaultValueSelector = require('../methods/defaultValueSelector');
+const defaultChildrenSelector = require('../methods/defaultChildrenSelector');
 
 class SeparateEnumerable extends IEnumerable {
     constructor(source, childrenSelector = defaultChildrenSelector, valueSelector = defaultValueSelector) {

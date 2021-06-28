@@ -1,13 +1,13 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultKeySelector = require('./../methods/defaultKeySelector');
-const defaultValueSelector = require('./../methods/defaultValueSelector');
-const defaultSameComparer = require('./../methods/defaultSameComparer');
-const defaultAction = require('./../methods/defaultAction');
+const defaultKeySelector = require('../methods/defaultKeySelector');
+const defaultValueSelector = require('../methods/defaultValueSelector');
+const defaultSameComparer = require('../methods/defaultSameComparer');
+const defaultAction = require('../methods/defaultAction');
 
 class IMapEnumerable extends IEnumerable {
     constructor() {

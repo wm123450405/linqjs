@@ -2,12 +2,12 @@
 
 const IChunk = require('./IChunk');
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
-const defaultFalsePredicate = require('./../methods/defaultFalsePredicate');
+const methods = require('../methods/methods');
+const defaultFalsePredicate = require('../methods/defaultFalsePredicate');
 
 class NearSplitEnumerable extends IEnumerable {
     constructor(source, splitPredicate = defaultFalsePredicate) {

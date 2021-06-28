@@ -1,12 +1,12 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultSelector = require('./../methods/defaultSelector');
+const defaultSelector = require('../methods/defaultSelector');
 
 class SelectEnumerable extends IEnumerable {
     constructor(source, selector = defaultSelector) {

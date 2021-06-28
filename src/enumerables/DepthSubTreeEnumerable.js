@@ -1,10 +1,10 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
 class BreadthSubTreeEnumerable extends IEnumerable {
     constructor(tree, predicate) {

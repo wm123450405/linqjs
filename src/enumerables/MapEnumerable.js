@@ -2,12 +2,12 @@
 
 const IMapEnumerable = require('./IMapEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultSameComparer = require('./../methods/defaultSameComparer');
-const equalityPredicate = require('./../methods/equalityPredicate');
+const defaultSameComparer = require('../methods/defaultSameComparer');
+const equalityPredicate = require('../methods/equalityPredicate');
 
 const Entry = require('./Entry');
 

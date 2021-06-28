@@ -1,15 +1,15 @@
 'use strict';
 
-const IEnumerable = require('./../IEnumerable');
+const IEnumerable = require('../IEnumerable');
 
-const core = require('./../core/core');
+const core = require('../core/core');
 
-const methods = require('./../methods/methods');
+const methods = require('../methods/methods');
 
-const defaultKeySelector = require('./../methods/defaultKeySelector');
-const defaultSelector = require('./../methods/defaultSelector');
-const defaultParentSelector = require('./../methods/defaultParentSelector');
-const defaultEqualityComparer = require('./../methods/defaultEqualityComparer');
+const defaultKeySelector = require('../methods/defaultKeySelector');
+const defaultSelector = require('../methods/defaultSelector');
+const defaultParentSelector = require('../methods/defaultParentSelector');
+const defaultEqualityComparer = require('../methods/defaultEqualityComparer');
 
 const ICombine = require('./ICombine');
 
