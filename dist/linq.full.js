@@ -5087,6 +5087,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+
 var _get5 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
@@ -5123,8 +5125,14 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   var _super = _createSuper(ArrayEnumerable);
 
   function ArrayEnumerable(array) {
+    var _this;
+
     (0, _classCallCheck2.default)(this, ArrayEnumerable);
-    return _super.call(this, array);
+    _this = _super.call(this, array);
+    core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, function ArrayIterator() {
+      return array[Symbol.iterator]();
+    });
+    return _this;
   }
 
   (0, _createClass2.default)(ArrayEnumerable, [{
@@ -5360,7 +5368,7 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"../core/core":35,"../methods/defaultAction":149,"../methods/defaultComparer":152,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/defaultStrictEqualityComparer":164,"../methods/methods":172,"./ProtoEnumerable":107,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],47:[function(require,module,exports){
+},{"../core/core":35,"../methods/defaultAction":149,"../methods/defaultComparer":152,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/defaultStrictEqualityComparer":164,"../methods/methods":172,"./ProtoEnumerable":107,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],47:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15210,6 +15218,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+
 var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
@@ -15238,8 +15248,14 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
   var _super = _createSuper(StringEnumerable);
 
   function StringEnumerable(string) {
+    var _this;
+
     (0, _classCallCheck2.default)(this, StringEnumerable);
-    return _super.call(this, string);
+    _this = _super.call(this, string);
+    core.defineProperty((0, _assertThisInitialized2.default)(_this), Symbol.iterator, function StringIterator() {
+      return string[Symbol.iterator]();
+    });
+    return _this;
   }
 
   (0, _createClass2.default)(StringEnumerable, [{
@@ -15321,7 +15337,7 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"../core/core":35,"../core/exceptions/OutOfRangeException":42,"../methods/defaultFalsePredicate":155,"../methods/defaultStrictEqualityComparer":164,"./ProtoEnumerable":107,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],129:[function(require,module,exports){
+},{"../core/core":35,"../core/exceptions/OutOfRangeException":42,"../methods/defaultFalsePredicate":155,"../methods/defaultStrictEqualityComparer":164,"./ProtoEnumerable":107,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],129:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

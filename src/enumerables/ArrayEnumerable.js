@@ -16,6 +16,9 @@ const defaultComparer = require('../methods/defaultComparer');
 class ArrayEnumerable extends ProtoEnumerable {
     constructor(array) {
         super(array);
+        core.defineProperty(this, Symbol.iterator, function ArrayIterator() {
+            return array[Symbol.iterator]();
+        });
     }
     join(inner, resultSelector = defaultJoinSelector, outerKeySelector = defaultSelector, innerKeySelector = defaultSelector, comparer = defaultEqualityComparer) {
         if (arguments.length === 1 && core.a$join) {

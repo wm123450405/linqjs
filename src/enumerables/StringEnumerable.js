@@ -12,6 +12,9 @@ const OutOfRangeException = require('../core/exceptions/OutOfRangeException');
 class StringEnumerable extends ProtoEnumerable {
     constructor(string) {
         super(string);
+        core.defineProperty(this, Symbol.iterator, function StringIterator() {
+            return string[Symbol.iterator]();
+        });
     }
     elementAt(index) {
         if (index >= 0 && index < this[core.delegate].length) {
