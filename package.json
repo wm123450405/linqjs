@@ -2,7 +2,7 @@
   "name": "linq-js",
   "version": "2.2.0",
   "description": "use linq and lamdba in javascript",
-  "main": "dist/linq.min.js",
+  "main": "dist/linq.full.min.js",
   "scripts": {
     "test:performance": "node test/performance/test.js",
     "test": "node test/test.js && node test/full/test.js",
