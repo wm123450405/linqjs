@@ -16748,9 +16748,7 @@ var _saved = {};
 
 if (g.Enumerable) {
   _Enumerable = g.Enumerable;
-
-  _Enumerable.save(_saved);
-
+  _Enumerable.save && _Enumerable.save(_saved);
   delete g.Enumerable;
   console.warn(CONFLICT_SUGGEST);
 }
@@ -16759,6 +16757,7 @@ var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
 
+Enumerable.version = '2.2.0';
 var config = {
   as: defaultAs,
   noConflict: false
@@ -16826,14 +16825,14 @@ Enumerable.noConflict = function () {
       this.save(saved);
       config.noConflict = true;
       g.Enumerable = _Enumerable;
-      g.Enumerable.restore(_saved);
+      g.Enumerable.restore && g.Enumerable.restore(_saved);
       var noConflict = g.Enumerable.noConflict;
 
       g.Enumerable.noConflict = function () {
         var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
         if (callback === true) {
-          g.Enumerable.save(_saved);
+          g.Enumerable.save && g.Enumerable.save(_saved);
           config.noConflict = false;
           Enumerable.restore(saved);
           g.Enumerable.noConflict = noConflict;

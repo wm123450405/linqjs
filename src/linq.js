@@ -26,7 +26,7 @@ let _saved = {
 
 if (g.Enumerable) {
     _Enumerable = g.Enumerable;
-    _Enumerable.save(_saved);
+    _Enumerable.save && _Enumerable.save(_saved);
     delete g.Enumerable;
     console.warn(CONFLICT_SUGGEST);
 }
@@ -34,6 +34,8 @@ if (g.Enumerable) {
 const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
+
+Enumerable.version = '2.2.0';
 
 const config = {
     as: defaultAs,
@@ -108,12 +110,12 @@ Enumerable.noConflict = function(callback = false) {
             this.save(saved);
             config.noConflict = true;
             g.Enumerable = _Enumerable;
-            g.Enumerable.restore(_saved);
+            g.Enumerable.restore && g.Enumerable.restore(_saved);
 
             let noConflict = g.Enumerable.noConflict;
             g.Enumerable.noConflict = function(callback = false) {
                 if (callback === true) {
-                    g.Enumerable.save(_saved);
+                    g.Enumerable.save && g.Enumerable.save(_saved);
                     config.noConflict = false;
                     Enumerable.restore(saved);
                     g.Enumerable.noConflict = noConflict;
