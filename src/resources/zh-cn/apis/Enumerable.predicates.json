@@ -32,7 +32,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个相等筛选器",
@@ -71,7 +71,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.18.pre",
+					"deprecated": "2.1.16",
 					"overloads": [
 						{
 							"description": "获取一个否定筛选器",
@@ -85,7 +85,7 @@
 				},
 				{
 					"since": "2.1.17",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个否定筛选器",
@@ -118,7 +118,7 @@
 			"historys": [
 				{
 					"since": "2.1.17",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个属性筛选器",
@@ -157,7 +157,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个正则筛选器",
@@ -215,7 +215,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.18.pre",
+					"deprecated": "2.1.16",
 					"overloads": [
 						{
 							"description": "获取一个映射筛选器",
@@ -232,7 +232,7 @@
 				},
 				{
 					"since": "2.1.17",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个映射筛选器",

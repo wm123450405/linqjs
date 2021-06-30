@@ -176,7 +176,10 @@ const doPack = () => {
                 VueRouter: 'vue-router'
             }),
             new webpack.NormalModuleReplacementPlugin(
-                /^linq-js-/, resource => resource.request = resource.request.replace(/^linq-js-(.+)$/, 'linq-js-$1/dist/linq.min')
+                /^linq-js-/, resource => resource.request = resource.request.replace(/^linq-js-(.+)$/, (moduleName, version) => {
+                    let full = version === 'pre' || common.isNewer('2.2.0', version);
+                    return `${ moduleName }/dist/linq${ full ? '.full' : '' }.min`;
+                })
             ),
             new webpack.ProgressPlugin({ }),
             new VueLoaderPlugin(),
@@ -203,7 +206,7 @@ const doPack = () => {
     }
 };
 
-const install = (packageName, options) => {
+const install = (packageName, options, full) => {
     let module = options.destination || packageName;
     if (ignoreSkip) options.overwrite = true;
     if (options.overwrite !== true && fs.existsSync(path.join(__dirname, 'node_modules', module)) && fs.existsSync(path.join(__dirname, 'dlls', module + '.js'))) {
@@ -211,26 +214,27 @@ const install = (packageName, options) => {
     } else {
         niv.install(packageName, options);
     }
-    fs.writeFileSync(path.join(libs, `${ module }.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js')));
-    fs.writeFileSync(path.join(libs, `${ module }.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js')));
-    fs.writeFileSync(path.join(libs, `${ module }.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js.map')));
-    fs.writeFileSync(path.join(libs, `${ module }.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js.map')));
+    fs.writeFileSync(path.join(libs, `${ module }.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.js`)));
+    fs.writeFileSync(path.join(libs, `${ module }.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.min.js`)));
+    fs.writeFileSync(path.join(libs, `${ module }.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.js.map`)));
+    fs.writeFileSync(path.join(libs, `${ module }.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.min.js.map`)));
 };
 
 for (let version of common.versions) {
     console.log('Installing linq-js@' + version);
     if (version.endsWith('.pre')) {
-        install('git+https://gitee.com/wm123450405/linqjs#master', { overwrite: pack || reload, destination: common.module(version) });
+        install('git+https://gitee.com/wm123450405/linqjs#master', { overwrite: pack || reload, destination: common.module(version) }, common.isNewer('2.2.0', version));
     } else {
-        install('linq-js@' + version, { destination: common.module(version) });
+        install('linq-js@' + version, { destination: common.module(version) }, common.isNewer('2.2.0', version));
     }
 }
 (() => {
     let module = common.module(common.lastest);
-    fs.writeFileSync(path.join(libs, `linq-js.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js')));
-    fs.writeFileSync(path.join(libs, `linq-js.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js')));
-    fs.writeFileSync(path.join(libs, `linq-js.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.js.map')));
-    fs.writeFileSync(path.join(libs, `linq-js.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', 'linq.min.js.map')));
+    let full = common.isNewer('2.2.0', common.lastest);
+    fs.writeFileSync(path.join(libs, `linq-js.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.js`)));
+    fs.writeFileSync(path.join(libs, `linq-js.min.js`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.min.js`)));
+    fs.writeFileSync(path.join(libs, `linq-js.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.js.map`)));
+    fs.writeFileSync(path.join(libs, `linq-js.min.js.map`), fs.readFileSync(path.join(__dirname, 'node_modules', module, 'dist', `linq${ full ? '.full' : '' }.min.js.map`)));
 })();
 
 doPack();

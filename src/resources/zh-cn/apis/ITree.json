@@ -417,7 +417,7 @@
 			"historys": [
 				{
 					"since": "2.1.22",
-					"deprecated": "2.1.24.pre",
+					"deprecated": "2.1.22",
 					"overloads": [
 						{
 							"description": "在树形结构中查找所有指定节点的最小公共祖先节点值",
@@ -541,7 +541,7 @@
 			"historys": [
 				{
 					"since": "2.1.22",
-					"deprecated": "2.1.24.pre",
+					"deprecated": "2.1.22",
 					"overloads": [
 						{
 							"description": "获取从祖先节点到当前节点路径上所有的节点值序列",
@@ -612,7 +612,7 @@
 			"historys": [
 				{
 					"since": "2.1.22",
-					"deprecated": "2.1.24.pre",
+					"deprecated": "2.1.22",
 					"overloads": [
 						{
 							"description": "获取从当前节点到子孙节点路径上所有的节点值序列",

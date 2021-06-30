@@ -139,39 +139,43 @@
                         let identity = this.identity;
                         this.runtime = true;
 						history(this.version, Enumerable => {
-                            this.runtime = false;
-						    if (identity === this.identity) {
-                                let log = console.log;
-                                console.log = (...contents) => {
-                                    this.logList.push({
-                                        type: "log",
-                                        contents
-                                    });
-                                    log(...contents);
-                                };
-								try {
-                                    Enumerable.config.as = 'asEnumerable';
-									let result = eval(code);
-									this.logList.push({
-										type: "result",
-										contents: [ result ]
-									});
-									log(result);
-								} catch(e) {
-									this.logList.push({
-										type: "error",
-										contents: [ e.toString() ]
-									});
-									console.error(e);
+							try {
+								this.runtime = false;
+								if (identity === this.identity) {
+									let log = console.log;
+									console.log = (...contents) => {
+										this.logList.push({
+											type: "log",
+											contents
+										});
+										log(...contents);
+									};
+									try {
+										Enumerable.config.as = 'asEnumerable';
+										let result = eval(code);
+										this.logList.push({
+											type: "result",
+											contents: [result]
+										});
+										log(result);
+									} catch (e) {
+										this.logList.push({
+											type: "error",
+											contents: [e.toString()]
+										});
+										console.error(e);
+									} finally {
+										console.log = log;
+										Enumerable.config.extends.array = false;
+									}
 								}
-                                Enumerable.config.extends.array = false;
-                                console.log = log;
-                            }
-							this.$nextTick(() => {
-								let list = $('.result .list');
-								list.scrollTop(list.get(0).scrollHeight);
-                                this.executing = false;
-							});
+							} finally {
+								this.$nextTick(() => {
+									let list = $('.result .list');
+									list.scrollTop(list.get(0).scrollHeight);
+									this.executing = false;
+								});
+							}
 						}, () => {
                             delete Object.prototype.asEnumerable;
                             delete Array.prototype.asEnumerable;

@@ -54,7 +54,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个大小比较器",
@@ -99,7 +99,7 @@
 			"historys": [
 				{
 					"since": "2.1.17",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "通过一个大于判断函数与一个相等比较器生成一个大小比较器",
@@ -138,7 +138,7 @@
 			"historys": [
 				{
 					"since": "2.1.18",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "通过一个键选择器生成一个忽略大小写的相等比较器",
@@ -171,7 +171,7 @@
 			"historys": [
 				{
 					"since": "2.1.17",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "通过一个小于判断函数与一个相等比较器生成一个大小比较器",

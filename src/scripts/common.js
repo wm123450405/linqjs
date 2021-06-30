@@ -23,7 +23,7 @@ module.exports = {
 		if (historys) {
 			let prev = 0;
 			return Enumerable.zip(historys, Enumerable.skip(historys, 1).concat([0]), (v, next) => {
-				let deprecated = v.deprecated || next && next.since && this.preVersion(next.since);
+				let deprecated = v.deprecated || next && next.since && this.prevVersion(next.since);
 				if (v.ref && prev) {
 					v = extend(true, { }, prev, v);
 				}
@@ -38,7 +38,7 @@ module.exports = {
 		let v = Enumerable.zip(asVersion(version).split('.'), asVersion(other).split('.'), (ver, otherVer) => ({ ver, otherVer })).firstOrDefault({ ver: 0, otherVer: 0 }, v => v.ver !== v.otherVer);
 		return v.ver === v.otherVer ? 0 : parseInt(v.ver) > parseInt(v.otherVer) ? 1 : -1;
 	},
-	preVersion(version) {
+	prevVersion(version) {
 		return Enumerable.where(this.versions, ver => this.versionComparer(ver, version) < 0).max('', this.versionComparer);
 	},
 	nextVersion(version) {
@@ -58,12 +58,12 @@ module.exports = {
 	minVersion(...versions) {
 		return Enumerable.min(versions, '', this.versionComparer);
 	},
-	isNewer(version, basaVersion) {
-		let v = Enumerable.zip(asVersion(version || this.earliest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+	isNewer(version, baseVersion) {
+		let v = Enumerable.zip(asVersion(version || this.earliest).split('.'), asVersion(baseVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) <= parseInt(v.baseVer);
 	},
-	isOlder(version, basaVersion) {
-		let v = Enumerable.zip(asVersion(version || this.newest).split('.'), asVersion(basaVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
+	isOlder(version, baseVersion) {
+		let v = Enumerable.zip(asVersion(version || this.newest).split('.'), asVersion(baseVersion).split('.'), (ver, baseVer) => ({ ver, baseVer })).firstOrDefault({ ver: 0, baseVer: 0 }, v => v.ver !== v.baseVer);
 		return parseInt(v.ver) >= parseInt(v.baseVer);
 	},
 	capitalize(value) {

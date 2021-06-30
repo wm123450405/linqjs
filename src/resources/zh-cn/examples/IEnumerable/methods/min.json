@@ -1,4 +1,5 @@
 {
 	"1.js": "let longs = [ 4294967296, 466855135, 81125 ];\r\n\r\nlet min = longs.asEnumerable().min();\r\n\r\nconsole.log(`最小的数字是${ min }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 最小的数字是81125。\r\n */",
-	"2.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet min = pets.asEnumerable().min(pet => pet.age);\r\n\r\nconsole.log(`年龄最小的宠物是${ min }岁。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 年龄最小的宠物是1岁。\r\n */"
+	"2.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet min = pets.asEnumerable().min(pet => pet.age);\r\n\r\nconsole.log(`年龄最小的宠物是${ min }岁。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 年龄最小的宠物是1岁。\r\n */",
+	"3.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet min = pets.asEnumerable().min(pet => pet.age);\r\n\r\nconsole.log(`年龄最小的宠物是${ min.name },${ min.age }岁。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 年龄最小的宠物是旺财,1岁。\r\n */"
 }

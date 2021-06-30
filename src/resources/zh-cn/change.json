@@ -178,15 +178,24 @@
 	{
 		"prepublish": true,
 		"contents": [
+			"调整(Change)",
+			"1. 调整了 min、minOrDefault、max、maxOrDefault 方法的逻辑；",
+			"",
 			"新增(New):",
-			"1. 增加 proportion、skipProportion、takeProportion 方法",
+			"1. 新增了 proportion、skipProportion、takeProportion 方法；",
+			"2. 新增了 minIndex, maxIndex 方法；",
+			"3. 新增了 randomProbability, randomProbabilityOrDefault, randomIndexProbability 方法；",
+			"4. 增加了性能基准的单元测试，方便查看方法的性能与传统写法性能的差距。延时方法势必会消耗部分性能；",
 			"",
 			"优化(Optimization):",
-			"1. 优化 rand 方法的性能及表现",
+			"1. 更新使用Babel7、Webpack5进行项目编译打包；",
+			"2. 优化了 rand 方法的性能及表现；",
+			"3. 优化了 min、minOrDefault、max、maxOrDefault 方法的性能及表现；",
+			"4. 优化了 groupBy、distinct 等方法的性能及表现；",
 			"",
 			"修复(Fixed):",
-			"1. 修复了 IEnumerable 中未注册 random、 randomOrDefault 方法的问题"
+			"1. 修复了 IEnumerable 中未注册 random、 randomOrDefault 方法的问题；"
 		],
-		"version": "2.1.25.pre"
+		"version": "2.2.0.pre"
 	}
 ]

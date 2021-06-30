@@ -87,7 +87,7 @@
 			"historys": [
 				{
 					"since": "2.1.15",
-					"deprecated": "2.1.20.pre",
+					"deprecated": "2.1.18",
 					"overloads": [
 						{
 							"description": "获取一个属性选择器",
@@ -101,7 +101,7 @@
 				},
 				{
 					"since": "2.1.19",
-					"deprecated": "2.1.24.pre",
+					"deprecated": "2.1.22",
 					"overloads": [
 						{
 							"description": "获取一个属性选择器",

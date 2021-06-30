@@ -7,7 +7,7 @@
         "新增(New):",
         "1. 新增了 proportion、skipProportion、takeProportion 方法；",
         "2. 新增了 minIndex, maxIndex 方法；",
-        "3. 新增了 randomProbability, randomIndexProbability 方法；",
+        "3. 新增了 randomProbability, randomProbabilityOrDefault, randomIndexProbability 方法；",
         "4. 增加了性能基准的单元测试，方便查看方法的性能与传统写法性能的差距。延时方法势必会消耗部分性能；",
         "",
         "优化(Optimization):",

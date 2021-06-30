@@ -1,4 +1,5 @@
 {
 	"1.js": "let longs = [ 4294967296, 466855135, 81125 ];\r\n\r\nlet max = longs.asEnumerable().max();\r\n\r\nconsole.log(`最大的数字是${ max }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 最大的数字是4294967296。\r\n */",
-	"2.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet max = pets.asEnumerable().max(pet => pet.age + pet.name.length);\r\n\r\nconsole.log(`最大的年龄加名字长度是${ max }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 最大的年龄加名字长度是10。\r\n */"
+	"2.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet max = pets.asEnumerable().max(pet => pet.age + pet.name.length);\r\n\r\nconsole.log(`最大的年龄加名字长度是${ max }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 最大的年龄加名字长度是10。\r\n */",
+	"3.js": "let pets = [\r\n    { name: \"小白\", age: 8 },\r\n    { name: \"机器人\", age: 4 },\r\n    { name: \"旺财\", age: 1 }\r\n];\r\n\r\nlet max = pets.asEnumerable().max(pet => pet.age + pet.name.length);\r\n\r\nconsole.log(`最大的年龄加名字长度是${ max.name }+${ max.age }。`);\r\n\r\n/*\r\n 这段代码的输出结果如下：\r\n\r\n 最大的年龄加名字长度是小白+8。\r\n */"
 }
