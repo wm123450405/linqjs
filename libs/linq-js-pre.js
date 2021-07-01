@@ -1351,6 +1351,82 @@ try {
 }
 
 },{}],30:[function(require,module,exports){
+module.exports={
+  "name": "linq-js",
+  "version": "2.2.0",
+  "description": "use linq and lamdba in javascript",
+  "main": "dist/linq.full.min.js",
+  "scripts": {
+    "test:performance": "node test/performance/test.js",
+    "test": "node test/test.js && node test/full/test.js",
+    "test:compile": "npm run compile && node test/test-compile.js && node test/full/test-compile.js",
+    "test:babel": "npx babel-node test/test-babel.js && npx babel-node test/full/test-babel.js",
+    "test:unit": "gulp unitSlim && gulp unitFull",
+    "test:slim": "node test/test.js",
+    "test:slim:compile": "npm run compile:slim && node test/test-compile.js",
+    "test:slim:babel": "npx babel-node test/test-babel.js",
+    "test:slim:unit": "gulp unitSlim",
+    "test:full": "node test/full/test.js",
+    "test:full:compile": "npm run compile:full && node test/full/test-compile.js",
+    "test:full:babel": "npx babel-node test/full/test-babel.js",
+    "test:full:unit": "gulp unitFull",
+    "compile:slim": "gulp slim",
+    "compile:full": "gulp full",
+    "compile": "gulp",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wm123450405/linqjs.git"
+  },
+  "devDependencies": {
+    "assertrue": "^1.0.4",
+    "@babel/core": "^7.13.0",
+    "@babel/node": "^7.13.0",
+    "@babel/cli": "^7.13.0",
+    "@babel/preset-env": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.0",
+    "core-js": "^3.15.0",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "exorcist": "^2.0.0",
+    "gulp": "^4.0.2",
+    "gulp-jshint": "^2.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-terser": "^2.0.1",
+    "uglify-js": "^3.13.0",
+    "terser": "^5.7.0",
+    "jshint": "^2.13.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "keywords": [
+    "linqjs",
+    "linq",
+    "js",
+    "array",
+    "lamdba",
+    "enumerable",
+    "queryable"
+  ],
+  "author": "wm123450405",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wm123450405/linqjs/issues"
+  },
+  "homepage": "https://github.com/wm123450405/linqjs#readme",
+  "types": "src/linq.d.ts",
+  "dependencies": {
+    "extend": "^3.0.1"
+  }
+}
+
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var _require = require('./core/core'),
@@ -2016,15 +2092,18 @@ Enumerable.randomOrDefault = function (source, defaultValue) {
   return asEnumerable(source).randomOrDefault(defaultValue);
 };
 
-Enumerable.randomProbability = function (source, probabilitySelector) {
+Enumerable.randomProbability = function (source) {
+  var probabilitySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   return asEnumerable(source).randomProbability(probabilitySelector);
 };
 
-Enumerable.randomIndexProbability = function (source, probabilitySelector) {
+Enumerable.randomIndexProbability = function (source) {
+  var probabilitySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   return asEnumerable(source).randomIndexProbability(probabilitySelector);
 };
 
-Enumerable.randomProbabilityOrDefault = function (source, defaultValue, probabilitySelector) {
+Enumerable.randomProbabilityOrDefault = function (source, defaultValue) {
+  var probabilitySelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultSelector;
   return asEnumerable(source).randomProbabilityOrDefault(defaultValue, probabilitySelector);
 };
 
@@ -2276,7 +2355,7 @@ var BetweenEnumerable = require('./enumerables/BetweenEnumerable');
 
 var GenerateEnumerable = require('./enumerables/GenerateEnumerable');
 
-},{"./core/IComparable":33,"./core/IEquatable":34,"./core/core":35,"./core/exceptions/InvalidFunctionException":37,"./core/exceptions/KeysForMultiElementsException":38,"./core/exceptions/NeedExecuteBeforeException":39,"./core/exceptions/NoSuchElementsException":40,"./core/exceptions/NotAncestorOfException":41,"./core/exceptions/OutOfRangeException":42,"./core/exceptions/PluginRepeatException":43,"./core/exceptions/PropertyExpressionInvalidException":44,"./core/exceptions/TooManyElementsException":45,"./enumerables/BetweenEnumerable":47,"./enumerables/EmptyEnumerable":62,"./enumerables/GenerateEnumerable":66,"./enumerables/IOrderedEnumerable":75,"./enumerables/RangeEnumerable":109,"./enumerables/RepeatEnumerable":110,"./methods/arrayComparer":148,"./methods/defaultAction":149,"./methods/defaultChildrenSelector":150,"./methods/defaultChildrenSetter":151,"./methods/defaultComparer":152,"./methods/defaultEqualityComparer":153,"./methods/defaultExistsPredicate":154,"./methods/defaultFalsePredicate":155,"./methods/defaultIndexSelector":156,"./methods/defaultJoinSelector":157,"./methods/defaultKeySelector":158,"./methods/defaultParentSelector":159,"./methods/defaultPredicate":160,"./methods/defaultResultSelector":161,"./methods/defaultSameComparer":162,"./methods/defaultSelector":163,"./methods/defaultStrictEqualityComparer":164,"./methods/defaultValueSelector":165,"./methods/defaultValueSetter":166,"./methods/equalityPredicate":168,"./methods/greaterComparer":169,"./methods/ignoreCaseComparer":170,"./methods/lessComparer":171,"./methods/notPredicate":173,"./methods/predicateComparer":174,"./methods/propertySelector":176,"./methods/propertySetter":177,"./methods/regexpPredicate":178,"./methods/selectorPredicate":180}],31:[function(require,module,exports){
+},{"./core/IComparable":34,"./core/IEquatable":35,"./core/core":36,"./core/exceptions/InvalidFunctionException":38,"./core/exceptions/KeysForMultiElementsException":39,"./core/exceptions/NeedExecuteBeforeException":40,"./core/exceptions/NoSuchElementsException":41,"./core/exceptions/NotAncestorOfException":42,"./core/exceptions/OutOfRangeException":43,"./core/exceptions/PluginRepeatException":44,"./core/exceptions/PropertyExpressionInvalidException":45,"./core/exceptions/TooManyElementsException":46,"./enumerables/BetweenEnumerable":48,"./enumerables/EmptyEnumerable":63,"./enumerables/GenerateEnumerable":67,"./enumerables/IOrderedEnumerable":76,"./enumerables/RangeEnumerable":110,"./enumerables/RepeatEnumerable":111,"./methods/arrayComparer":149,"./methods/defaultAction":150,"./methods/defaultChildrenSelector":151,"./methods/defaultChildrenSetter":152,"./methods/defaultComparer":153,"./methods/defaultEqualityComparer":154,"./methods/defaultExistsPredicate":155,"./methods/defaultFalsePredicate":156,"./methods/defaultIndexSelector":157,"./methods/defaultJoinSelector":158,"./methods/defaultKeySelector":159,"./methods/defaultParentSelector":160,"./methods/defaultPredicate":161,"./methods/defaultResultSelector":162,"./methods/defaultSameComparer":163,"./methods/defaultSelector":164,"./methods/defaultStrictEqualityComparer":165,"./methods/defaultValueSelector":166,"./methods/defaultValueSetter":167,"./methods/equalityPredicate":169,"./methods/greaterComparer":170,"./methods/ignoreCaseComparer":171,"./methods/lessComparer":172,"./methods/notPredicate":174,"./methods/predicateComparer":175,"./methods/propertySelector":177,"./methods/propertySetter":178,"./methods/regexpPredicate":179,"./methods/selectorPredicate":181}],32:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -2508,7 +2587,8 @@ var minNode = function minNode(enumerable) {
   }
 };
 
-var randomNodeProbability = function randomNodeProbability(enumerable, probabilitySelector) {
+var randomNodeProbability = function randomNodeProbability(enumerable) {
+  var probabilitySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
   var array = [],
       index = 0,
       sum = 0,
@@ -2521,7 +2601,7 @@ var randomNodeProbability = function randomNodeProbability(enumerable, probabili
   try {
     for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
       var element = _step4.value;
-      probability = probabilitySelector(array, index);
+      probability = probabilitySelector(element, index);
 
       if (probability > 0) {
         sum += probability;
@@ -3952,7 +4032,8 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
     }
   }, {
     key: "randomProbability",
-    value: function randomProbability(probabilitySelector) {
+    value: function randomProbability() {
+      var probabilitySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
       var node = randomNodeProbability(this, probabilitySelector);
 
       if (core.isUndefined(node)) {
@@ -3963,7 +4044,8 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
     }
   }, {
     key: "randomIndexProbability",
-    value: function randomIndexProbability(probabilitySelector) {
+    value: function randomIndexProbability() {
+      var probabilitySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
       var node = randomNodeProbability(this, probabilitySelector);
 
       if (core.isUndefined(node)) {
@@ -3974,7 +4056,8 @@ var IEnumerable = /*#__PURE__*/function (_Array) {
     }
   }, {
     key: "randomProbabilityOrDefault",
-    value: function randomProbabilityOrDefault(defaultValue, probabilitySelector) {
+    value: function randomProbabilityOrDefault(defaultValue) {
+      var probabilitySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
       var node = randomNodeProbability(this, probabilitySelector);
 
       if (core.isUndefined(node)) {
@@ -4243,7 +4326,7 @@ var InOrderTree = require('./enumerables/InOrderTree');
 
 var PostOrderTree = require('./enumerables/PostOrderTree');
 
-},{"./IEnumerator":32,"./core/core":35,"./core/exceptions/KeysForMultiElementsException":38,"./core/exceptions/NoSuchElementsException":40,"./core/exceptions/OutOfRangeException":42,"./core/exceptions/TooManyElementsException":45,"./enumerables/ChunkEnumerable":51,"./enumerables/CombinationEnumerable":52,"./enumerables/CombinationRepeatableEnumerable":53,"./enumerables/CombineEnumerable":54,"./enumerables/ConcatEnumerable":55,"./enumerables/CopyWithinEnumerable":56,"./enumerables/Dictionary":59,"./enumerables/DistinctEnumerable":60,"./enumerables/EachEnumerable":61,"./enumerables/ExceptEnumerable":64,"./enumerables/FillEnumerable":65,"./enumerables/GroupJoinEnumerable":68,"./enumerables/GroupedEnumerable":69,"./enumerables/InOrderTree":78,"./enumerables/IndicesEnumerable":79,"./enumerables/IntersectEnumerable":80,"./enumerables/JoinEnumerable":83,"./enumerables/LeftJoinEnumerable":84,"./enumerables/LeftPadEnumerable":85,"./enumerables/Lookup":86,"./enumerables/NearGroupedEnumerable":88,"./enumerables/NearSplitEnumerable":89,"./enumerables/OfTypeEnumerable":93,"./enumerables/OrderByDescendingEnumerable":94,"./enumerables/OrderByEnumerable":95,"./enumerables/PermutationEnumerable":98,"./enumerables/PermutationRepeatableEnumerable":99,"./enumerables/PostOrderTree":101,"./enumerables/PreOrderTree":103,"./enumerables/ProbabilityNode":106,"./enumerables/RandEnumerable":108,"./enumerables/ReverseEnumerable":111,"./enumerables/RightJoinEnumerable":112,"./enumerables/RightPadEnumerable":113,"./enumerables/SelectEnumerable":114,"./enumerables/SelectManyEnumerable":115,"./enumerables/SeparateEnumerable":116,"./enumerables/SingleNode":119,"./enumerables/SkipEnumerable":120,"./enumerables/SkipProportionEnumerable":121,"./enumerables/SkipSameEnumerable":122,"./enumerables/SkipWhileEnumerable":123,"./enumerables/SliceEnumerable":124,"./enumerables/SortEnumerable":125,"./enumerables/SpliceEnumerable":126,"./enumerables/SplitEnumerable":127,"./enumerables/SymmetricEnumerable":129,"./enumerables/TakeEnumerable":130,"./enumerables/TakeProportionEnumerable":131,"./enumerables/TakeSameEnumerable":132,"./enumerables/TakeWhileEnumerable":133,"./enumerables/UnionEnumerable":137,"./enumerables/ValueNode":138,"./enumerables/WhereEnumerable":139,"./enumerables/WipeEnumerable":140,"./enumerables/ZipEnumerable":141,"./methods/defaultAction":149,"./methods/defaultChildrenSelector":150,"./methods/defaultComparer":152,"./methods/defaultEqualityComparer":153,"./methods/defaultFalsePredicate":155,"./methods/defaultJoinSelector":157,"./methods/defaultKeySelector":158,"./methods/defaultParentSelector":159,"./methods/defaultPredicate":160,"./methods/defaultResultSelector":161,"./methods/defaultSameComparer":162,"./methods/defaultSelector":163,"./methods/defaultStrictEqualityComparer":164,"./methods/defaultValueSelector":165,"./methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/typeof":24,"@babel/runtime/helpers/wrapNativeSuper":26,"@babel/runtime/regenerator":27}],32:[function(require,module,exports){
+},{"./IEnumerator":33,"./core/core":36,"./core/exceptions/KeysForMultiElementsException":39,"./core/exceptions/NoSuchElementsException":41,"./core/exceptions/OutOfRangeException":43,"./core/exceptions/TooManyElementsException":46,"./enumerables/ChunkEnumerable":52,"./enumerables/CombinationEnumerable":53,"./enumerables/CombinationRepeatableEnumerable":54,"./enumerables/CombineEnumerable":55,"./enumerables/ConcatEnumerable":56,"./enumerables/CopyWithinEnumerable":57,"./enumerables/Dictionary":60,"./enumerables/DistinctEnumerable":61,"./enumerables/EachEnumerable":62,"./enumerables/ExceptEnumerable":65,"./enumerables/FillEnumerable":66,"./enumerables/GroupJoinEnumerable":69,"./enumerables/GroupedEnumerable":70,"./enumerables/InOrderTree":79,"./enumerables/IndicesEnumerable":80,"./enumerables/IntersectEnumerable":81,"./enumerables/JoinEnumerable":84,"./enumerables/LeftJoinEnumerable":85,"./enumerables/LeftPadEnumerable":86,"./enumerables/Lookup":87,"./enumerables/NearGroupedEnumerable":89,"./enumerables/NearSplitEnumerable":90,"./enumerables/OfTypeEnumerable":94,"./enumerables/OrderByDescendingEnumerable":95,"./enumerables/OrderByEnumerable":96,"./enumerables/PermutationEnumerable":99,"./enumerables/PermutationRepeatableEnumerable":100,"./enumerables/PostOrderTree":102,"./enumerables/PreOrderTree":104,"./enumerables/ProbabilityNode":107,"./enumerables/RandEnumerable":109,"./enumerables/ReverseEnumerable":112,"./enumerables/RightJoinEnumerable":113,"./enumerables/RightPadEnumerable":114,"./enumerables/SelectEnumerable":115,"./enumerables/SelectManyEnumerable":116,"./enumerables/SeparateEnumerable":117,"./enumerables/SingleNode":120,"./enumerables/SkipEnumerable":121,"./enumerables/SkipProportionEnumerable":122,"./enumerables/SkipSameEnumerable":123,"./enumerables/SkipWhileEnumerable":124,"./enumerables/SliceEnumerable":125,"./enumerables/SortEnumerable":126,"./enumerables/SpliceEnumerable":127,"./enumerables/SplitEnumerable":128,"./enumerables/SymmetricEnumerable":130,"./enumerables/TakeEnumerable":131,"./enumerables/TakeProportionEnumerable":132,"./enumerables/TakeSameEnumerable":133,"./enumerables/TakeWhileEnumerable":134,"./enumerables/UnionEnumerable":138,"./enumerables/ValueNode":139,"./enumerables/WhereEnumerable":140,"./enumerables/WipeEnumerable":141,"./enumerables/ZipEnumerable":142,"./methods/defaultAction":150,"./methods/defaultChildrenSelector":151,"./methods/defaultComparer":153,"./methods/defaultEqualityComparer":154,"./methods/defaultFalsePredicate":156,"./methods/defaultJoinSelector":158,"./methods/defaultKeySelector":159,"./methods/defaultParentSelector":160,"./methods/defaultPredicate":161,"./methods/defaultResultSelector":162,"./methods/defaultSameComparer":163,"./methods/defaultSelector":164,"./methods/defaultStrictEqualityComparer":165,"./methods/defaultValueSelector":166,"./methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/typeof":24,"@babel/runtime/helpers/wrapNativeSuper":26,"@babel/runtime/regenerator":27}],33:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4282,7 +4365,7 @@ var IEnumerator = function IEnumerator(enumerable) {
 
 module.exports = IEnumerator;
 
-},{"./core/core":35,"./core/exceptions/NeedExecuteBeforeException":39,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/interopRequireDefault":12}],33:[function(require,module,exports){
+},{"./core/core":36,"./core/exceptions/NeedExecuteBeforeException":40,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/interopRequireDefault":12}],34:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4307,7 +4390,7 @@ var IComparable = /*#__PURE__*/function () {
 
 module.exports = IComparable;
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],34:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],35:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4332,7 +4415,7 @@ var IEquatable = /*#__PURE__*/function () {
 
 module.exports = IEquatable;
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],35:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],36:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -4713,7 +4796,7 @@ module.exports = core;
 
 }).call(this)}).call(this,require('_process'))
 
-},{"../enumerables/ArrayEnumerable":46,"../enumerables/IterableEnumerable":81,"../enumerables/IteratorEnumerable":82,"../enumerables/MapEnumerable":87,"../enumerables/ObjectEnumerable":92,"../enumerables/StringEnumerable":128,"../enumerables/TreeEnumerable":136,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/typeof":24,"_process":28}],36:[function(require,module,exports){
+},{"../enumerables/ArrayEnumerable":47,"../enumerables/IterableEnumerable":82,"../enumerables/IteratorEnumerable":83,"../enumerables/MapEnumerable":88,"../enumerables/ObjectEnumerable":93,"../enumerables/StringEnumerable":129,"../enumerables/TreeEnumerable":137,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/typeof":24,"_process":28}],37:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4760,7 +4843,7 @@ var Exception = /*#__PURE__*/function (_Error) {
 
 module.exports = Exception;
 
-},{"../core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/wrapNativeSuper":26}],37:[function(require,module,exports){
+},{"../core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/wrapNativeSuper":26}],38:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4794,7 +4877,7 @@ var InvalidFunctionException = /*#__PURE__*/function (_Exception) {
 
 module.exports = InvalidFunctionException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],38:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],39:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4837,7 +4920,7 @@ var KeysForMultiElementsException = /*#__PURE__*/function (_Exception) {
 
 module.exports = KeysForMultiElementsException;
 
-},{"../core":35,"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],39:[function(require,module,exports){
+},{"../core":36,"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],40:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4871,7 +4954,7 @@ var NeedExecuteBeforeException = /*#__PURE__*/function (_Exception) {
 
 module.exports = NeedExecuteBeforeException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],40:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],41:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4905,7 +4988,7 @@ var NoSuchElementsException = /*#__PURE__*/function (_Exception) {
 
 module.exports = NoSuchElementsException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],41:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],42:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4941,7 +5024,7 @@ var NotAncestorOfException = /*#__PURE__*/function (_Exception) {
 
 module.exports = NotAncestorOfException;
 
-},{"../core":35,"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],42:[function(require,module,exports){
+},{"../core":36,"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],43:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -4975,7 +5058,7 @@ var OutOfRangeException = /*#__PURE__*/function (_Exception) {
 
 module.exports = OutOfRangeException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],43:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],44:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5010,7 +5093,7 @@ var PluginRepeatException = /*#__PURE__*/function (_Exception) {
 
 module.exports = PluginRepeatException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],44:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],45:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5044,7 +5127,7 @@ var PropertyExpressionInvalidException = /*#__PURE__*/function (_Exception) {
 
 module.exports = PropertyExpressionInvalidException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],45:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],46:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5078,7 +5161,7 @@ var TooManyElementsException = /*#__PURE__*/function (_Exception) {
 
 module.exports = TooManyElementsException;
 
-},{"./Exception":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],46:[function(require,module,exports){
+},{"./Exception":37,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],47:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5368,7 +5451,7 @@ var ArrayEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
 
 module.exports = ArrayEnumerable;
 
-},{"../core/core":35,"../methods/defaultAction":149,"../methods/defaultComparer":152,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/defaultStrictEqualityComparer":164,"../methods/methods":172,"./ProtoEnumerable":107,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],47:[function(require,module,exports){
+},{"../core/core":36,"../methods/defaultAction":150,"../methods/defaultComparer":153,"../methods/defaultEqualityComparer":154,"../methods/defaultJoinSelector":158,"../methods/defaultSelector":164,"../methods/defaultStrictEqualityComparer":165,"../methods/methods":173,"./ProtoEnumerable":108,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],48:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5441,7 +5524,7 @@ var BetweenEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BetweenEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],48:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],49:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5621,7 +5704,7 @@ var BinaryTree = /*#__PURE__*/function (_ITree) {
 
 module.exports = BinaryTree;
 
-},{"../core/core":35,"./GeneratorEnumerable":67,"./ITree":76,"./InOrderEnumerable":77,"./PostOrderEnumerable":100,"./PreOrderEnumerable":102,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],49:[function(require,module,exports){
+},{"../core/core":36,"./GeneratorEnumerable":68,"./ITree":77,"./InOrderEnumerable":78,"./PostOrderEnumerable":101,"./PreOrderEnumerable":103,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],50:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5735,7 +5818,7 @@ var BreadthEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BreadthEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],50:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],51:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5858,7 +5941,7 @@ var BreadthSubTreeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],51:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],52:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5992,7 +6075,7 @@ var ChunkEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ChunkEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"./IChunk":70,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],52:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"./IChunk":71,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],53:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6123,7 +6206,7 @@ var CombinationEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = CombinationEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NoSuchElementsException":40,"./IndicesEnumerable":79,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],53:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NoSuchElementsException":41,"./IndicesEnumerable":80,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],54:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6247,7 +6330,7 @@ var CombinationEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = CombinationEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NoSuchElementsException":40,"./IndicesEnumerable":79,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],54:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NoSuchElementsException":41,"./IndicesEnumerable":80,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],55:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6461,7 +6544,7 @@ var CombineEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = CombineEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultKeySelector":158,"../methods/defaultParentSelector":159,"../methods/defaultSelector":163,"../methods/methods":172,"./ICombine":71,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],55:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultKeySelector":159,"../methods/defaultParentSelector":160,"../methods/defaultSelector":164,"../methods/methods":173,"./ICombine":72,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],56:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6608,7 +6691,7 @@ var ConcatEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ConcatEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],56:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],57:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6868,7 +6951,7 @@ var CopyWithinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = CopyWithinEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],57:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],58:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6958,7 +7041,7 @@ var DepthEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = DepthEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],58:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],59:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7051,7 +7134,7 @@ var BreadthSubTreeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = BreadthSubTreeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],59:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],60:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7115,7 +7198,7 @@ var Dictionary = /*#__PURE__*/function (_MapEnumerable) {
 
 module.exports = Dictionary;
 
-},{"./MapEnumerable":87,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],60:[function(require,module,exports){
+},{"./MapEnumerable":88,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],61:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7238,7 +7321,7 @@ var DistinctEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = DistinctEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],61:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],62:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7342,7 +7425,7 @@ var EachEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = EachEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultAction":149,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],62:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultAction":150,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],63:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7399,7 +7482,7 @@ var EmptyEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = EmptyEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],63:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],64:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7434,7 +7517,7 @@ var Entry = /*#__PURE__*/function () {
 
 module.exports = Entry;
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],64:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],65:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7553,7 +7636,7 @@ var ExceptEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ExceptEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],65:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],66:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7685,7 +7768,7 @@ var FillEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = FillEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],66:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],67:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7758,7 +7841,7 @@ var GenerateEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GenerateEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],67:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],68:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7802,7 +7885,7 @@ var GeneratorEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GeneratorEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],68:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],69:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -7981,7 +8064,7 @@ var GroupJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GroupJoinEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/methods":172,"./Entry":63,"./IGrouping":72,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],69:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultJoinSelector":158,"../methods/defaultSelector":164,"../methods/methods":173,"./Entry":64,"./IGrouping":73,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],70:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8147,7 +8230,7 @@ var GroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = GroupedEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultResultSelector":161,"../methods/defaultSelector":163,"../methods/equalityPredicate":168,"../methods/methods":172,"./IGrouping":72,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],70:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultResultSelector":162,"../methods/defaultSelector":164,"../methods/equalityPredicate":169,"../methods/methods":173,"./IGrouping":73,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],71:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8195,7 +8278,7 @@ var IChunk = /*#__PURE__*/function (_GeneratorEnumerable) {
 
 module.exports = IChunk;
 
-},{"../core/core":35,"./GeneratorEnumerable":67,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],71:[function(require,module,exports){
+},{"../core/core":36,"./GeneratorEnumerable":68,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],72:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8273,7 +8356,7 @@ var ICombine = /*#__PURE__*/function (_ITree) {
 
 module.exports = ICombine;
 
-},{"../core/core":35,"../methods/defaultChildrenSetter":151,"../methods/defaultValueSetter":166,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],72:[function(require,module,exports){
+},{"../core/core":36,"../methods/defaultChildrenSetter":152,"../methods/defaultValueSetter":167,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],73:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8321,7 +8404,7 @@ var IGrouping = /*#__PURE__*/function (_GeneratorEnumerable) {
 
 module.exports = IGrouping;
 
-},{"../core/core":35,"./GeneratorEnumerable":67,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],73:[function(require,module,exports){
+},{"../core/core":36,"./GeneratorEnumerable":68,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],74:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8435,7 +8518,7 @@ var IMapEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IMapEnumerable;
 
-},{"../IEnumerable":31,"../methods/defaultAction":149,"../methods/defaultKeySelector":158,"../methods/defaultSameComparer":162,"../methods/defaultValueSelector":165,"../methods/methods":172,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],74:[function(require,module,exports){
+},{"../IEnumerable":32,"../methods/defaultAction":150,"../methods/defaultKeySelector":159,"../methods/defaultSameComparer":163,"../methods/defaultValueSelector":166,"../methods/methods":173,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],75:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8464,7 +8547,7 @@ var INode = /*#__PURE__*/function () {
 
 module.exports = INode;
 
-},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],75:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":12}],76:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8634,7 +8717,7 @@ var ThenByEnumerable = require('./ThenByEnumerable');
 
 var ThenByDescendingEnumerable = require('./ThenByDescendingEnumerable');
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultComparer":152,"../methods/defaultSelector":163,"../methods/methods":172,"./ThenByDescendingEnumerable":134,"./ThenByEnumerable":135,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],76:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultComparer":153,"../methods/defaultSelector":164,"../methods/methods":173,"./ThenByDescendingEnumerable":135,"./ThenByEnumerable":136,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],77:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9264,7 +9347,7 @@ var NextNodesEnumerable = require('./NextNodesEnumerable');
 
 var SiblingNodesEnumerable = require('./SiblingNodesEnumerable');
 
-},{"../core/core":35,"../core/exceptions/NotAncestorOfException":41,"../methods/defaultChildrenSetter":151,"../methods/defaultEqualityComparer":153,"../methods/defaultPredicate":160,"../methods/defaultValueSetter":166,"../methods/methods":172,"./BinaryTree":48,"./BreadthEnumerable":49,"./BreadthSubTreeEnumerable":50,"./DepthEnumerable":57,"./DepthSubTreeEnumerable":58,"./GeneratorEnumerable":67,"./NextEnumerable":90,"./NextNodesEnumerable":91,"./PathNodesToEnumerable":96,"./PathToEnumerable":97,"./PrevEnumerable":104,"./PrevNodesEnumerable":105,"./SiblingNodesEnumerable":117,"./SiblingsEnumerable":118,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23}],77:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/NotAncestorOfException":42,"../methods/defaultChildrenSetter":152,"../methods/defaultEqualityComparer":154,"../methods/defaultPredicate":161,"../methods/defaultValueSetter":167,"../methods/methods":173,"./BinaryTree":49,"./BreadthEnumerable":50,"./BreadthSubTreeEnumerable":51,"./DepthEnumerable":58,"./DepthSubTreeEnumerable":59,"./GeneratorEnumerable":68,"./NextEnumerable":91,"./NextNodesEnumerable":92,"./PathNodesToEnumerable":97,"./PathToEnumerable":98,"./PrevEnumerable":105,"./PrevNodesEnumerable":106,"./SiblingNodesEnumerable":118,"./SiblingsEnumerable":119,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23}],78:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9338,7 +9421,7 @@ var InOrderEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = InOrderEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],78:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],79:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9414,7 +9497,7 @@ var InOrderTree = /*#__PURE__*/function (_BinaryTree) {
 
 module.exports = InOrderTree;
 
-},{"../core/exceptions/NoSuchElementsException":40,"./BinaryTree":48,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],79:[function(require,module,exports){
+},{"../core/exceptions/NoSuchElementsException":41,"./BinaryTree":49,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],80:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9554,7 +9637,7 @@ var IndicesEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IndicesEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],80:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],81:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9673,7 +9756,7 @@ var IntersectEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IntersectEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],81:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],82:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9730,7 +9813,7 @@ var IterableEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = IterableEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],82:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],83:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9815,7 +9898,7 @@ var IteratorEnumerable = /*#__PURE__*/function (_IterableEnumerable) {
 
 module.exports = IteratorEnumerable;
 
-},{"../core/core":35,"./IterableEnumerable":81,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],83:[function(require,module,exports){
+},{"../core/core":36,"./IterableEnumerable":82,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],84:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10032,7 +10115,7 @@ var JoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = JoinEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],84:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultJoinSelector":158,"../methods/defaultSelector":164,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],85:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10271,7 +10354,7 @@ var LeftJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],85:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultJoinSelector":158,"../methods/defaultSelector":164,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],86:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10347,7 +10430,7 @@ var LeftPadEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = LeftPadEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],86:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],87:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10381,7 +10464,7 @@ var Lookup = /*#__PURE__*/function (_Dictionary) {
 
 module.exports = Lookup;
 
-},{"./Dictionary":59,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],87:[function(require,module,exports){
+},{"./Dictionary":60,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],88:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10557,7 +10640,7 @@ var MapEnumerable = /*#__PURE__*/function (_IMapEnumerable) {
 
 module.exports = MapEnumerable;
 
-},{"../core/core":35,"../methods/defaultSameComparer":162,"../methods/equalityPredicate":168,"../methods/methods":172,"./Entry":63,"./IMapEnumerable":73,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],88:[function(require,module,exports){
+},{"../core/core":36,"../methods/defaultSameComparer":163,"../methods/equalityPredicate":169,"../methods/methods":173,"./Entry":64,"./IMapEnumerable":74,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],89:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10711,7 +10794,7 @@ var NearGroupedEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NearGroupedEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultResultSelector":161,"../methods/defaultSelector":163,"../methods/methods":172,"./IGrouping":72,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],89:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultResultSelector":162,"../methods/defaultSelector":164,"../methods/methods":173,"./IGrouping":73,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],90:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10856,7 +10939,7 @@ var NearSplitEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NearSplitEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultFalsePredicate":155,"../methods/methods":172,"./IChunk":70,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],90:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultFalsePredicate":156,"../methods/methods":173,"./IChunk":71,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],91:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10976,7 +11059,7 @@ var NextEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],91:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],92:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11096,7 +11179,7 @@ var NextEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = NextEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],92:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],93:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11172,7 +11255,7 @@ var ObjectEnumerable = /*#__PURE__*/function (_IMapEnumerable) {
 
 module.exports = ObjectEnumerable;
 
-},{"../core/core":35,"./Entry":63,"./IMapEnumerable":73,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],93:[function(require,module,exports){
+},{"../core/core":36,"./Entry":64,"./IMapEnumerable":74,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],94:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11314,7 +11397,7 @@ var OfTypeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = OfTypeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],94:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],95:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11362,7 +11445,7 @@ var OrderByDescendingEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = OrderByDescendingEnumerable;
 
-},{"../methods/defaultComparer":152,"../methods/defaultSelector":163,"../methods/descendingComparer":167,"../methods/methods":172,"../methods/selectorComparer":179,"./IOrderedEnumerable":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],95:[function(require,module,exports){
+},{"../methods/defaultComparer":153,"../methods/defaultSelector":164,"../methods/descendingComparer":168,"../methods/methods":173,"../methods/selectorComparer":180,"./IOrderedEnumerable":76,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],96:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11408,7 +11491,7 @@ var OrderByEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = OrderByEnumerable;
 
-},{"../methods/defaultComparer":152,"../methods/defaultSelector":163,"../methods/methods":172,"../methods/selectorComparer":179,"./IOrderedEnumerable":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],96:[function(require,module,exports){
+},{"../methods/defaultComparer":153,"../methods/defaultSelector":164,"../methods/methods":173,"../methods/selectorComparer":180,"./IOrderedEnumerable":76,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],97:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11553,7 +11636,7 @@ var PathNodesToEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PathNodesToEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NotAncestorOfException":41,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],97:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NotAncestorOfException":42,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],98:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11698,7 +11781,7 @@ var PathToEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PathToEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NotAncestorOfException":41,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],98:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NotAncestorOfException":42,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],99:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11849,7 +11932,7 @@ var PermutationEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PermutationEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NoSuchElementsException":40,"./IndicesEnumerable":79,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],99:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NoSuchElementsException":41,"./IndicesEnumerable":80,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],100:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11970,7 +12053,7 @@ var PermutationRepeatableEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PermutationRepeatableEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../core/exceptions/NoSuchElementsException":40,"./IndicesEnumerable":79,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],100:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../core/exceptions/NoSuchElementsException":41,"./IndicesEnumerable":80,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],101:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12044,7 +12127,7 @@ var PostOrderEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PostOrderEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],101:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],102:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12120,7 +12203,7 @@ var PostOrderTree = /*#__PURE__*/function (_BinaryTree) {
 
 module.exports = PostOrderTree;
 
-},{"../core/exceptions/NoSuchElementsException":40,"./BinaryTree":48,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],102:[function(require,module,exports){
+},{"../core/exceptions/NoSuchElementsException":41,"./BinaryTree":49,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],103:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12194,7 +12277,7 @@ var PreOrderEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PreOrderEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],103:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],104:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12270,7 +12353,7 @@ var PreOrderTree = /*#__PURE__*/function (_BinaryTree) {
 
 module.exports = PreOrderTree;
 
-},{"../core/exceptions/NoSuchElementsException":40,"./BinaryTree":48,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],104:[function(require,module,exports){
+},{"../core/exceptions/NoSuchElementsException":41,"./BinaryTree":49,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],105:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12392,7 +12475,7 @@ var PrevEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],105:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],106:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12514,7 +12597,7 @@ var PrevEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = PrevEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],106:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],107:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12563,7 +12646,7 @@ var ProbabilityNode = /*#__PURE__*/function (_INode) {
 
 module.exports = ProbabilityNode;
 
-},{"./INode":74,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],107:[function(require,module,exports){
+},{"./INode":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],108:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12760,7 +12843,7 @@ var ProtoEnumerable = /*#__PURE__*/function (_IterableEnumerable) {
 
 module.exports = ProtoEnumerable;
 
-},{"../core/core":35,"../core/exceptions/NoSuchElementsException":40,"../core/exceptions/OutOfRangeException":42,"../core/exceptions/TooManyElementsException":45,"../methods/defaultPredicate":160,"./IterableEnumerable":81,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],108:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/NoSuchElementsException":41,"../core/exceptions/OutOfRangeException":43,"../core/exceptions/TooManyElementsException":46,"../methods/defaultPredicate":161,"./IterableEnumerable":82,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],109:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12866,7 +12949,7 @@ var RandEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = RandEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],109:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],110:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12939,7 +13022,7 @@ var RangeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = RangeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],110:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],111:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13012,7 +13095,7 @@ var RepeatEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = RepeatEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],111:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],112:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13085,7 +13168,7 @@ var ReverseEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ReverseEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],112:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],113:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13324,7 +13407,7 @@ var LeftJoinEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = LeftJoinEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/defaultJoinSelector":157,"../methods/defaultSelector":163,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],113:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/defaultJoinSelector":158,"../methods/defaultSelector":164,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],114:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13441,7 +13524,7 @@ var RightPadEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = RightPadEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],114:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],115:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13547,7 +13630,7 @@ var SelectEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SelectEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultSelector":163,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],115:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultSelector":164,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],116:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13690,7 +13773,7 @@ var SelectManyEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SelectManyEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultResultSelector":161,"../methods/defaultSelector":163,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],116:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultResultSelector":162,"../methods/defaultSelector":164,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],117:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13836,7 +13919,7 @@ var SeparateEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SeparateEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultChildrenSelector":150,"../methods/defaultValueSelector":165,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],117:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultChildrenSelector":151,"../methods/defaultValueSelector":166,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],118:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -13961,7 +14044,7 @@ var SiblingsEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],118:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],119:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14086,7 +14169,7 @@ var SiblingsEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SiblingsEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],119:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],120:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14120,7 +14203,7 @@ var SingleNode = /*#__PURE__*/function (_INode) {
 
 module.exports = SingleNode;
 
-},{"./INode":74,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],120:[function(require,module,exports){
+},{"./INode":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],121:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14229,7 +14312,7 @@ var SkipEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],121:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],122:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14362,7 +14445,7 @@ var SkipProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipProportionEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],122:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],123:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14499,7 +14582,7 @@ var SkipSameEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipSameEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultSameComparer":162,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],123:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultSameComparer":163,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],124:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14612,7 +14695,7 @@ var SkipWhileEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SkipWhileEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],124:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],125:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14749,7 +14832,7 @@ var SliceEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SliceEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],125:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],126:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14813,7 +14896,7 @@ var SortEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SortEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultComparer":152,"../methods/methods":172,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],126:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultComparer":153,"../methods/methods":173,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/regenerator":27}],127:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15068,7 +15151,7 @@ var SpliceEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SpliceEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],127:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],128:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15209,7 +15292,7 @@ var SplitEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SplitEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultFalsePredicate":155,"../methods/methods":172,"./IChunk":70,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],128:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultFalsePredicate":156,"../methods/methods":173,"./IChunk":71,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],129:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15337,7 +15420,7 @@ var StringEnumerable = /*#__PURE__*/function (_ProtoEnumerable) {
 
 module.exports = StringEnumerable;
 
-},{"../core/core":35,"../core/exceptions/OutOfRangeException":42,"../methods/defaultFalsePredicate":155,"../methods/defaultStrictEqualityComparer":164,"./ProtoEnumerable":107,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],129:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/OutOfRangeException":43,"../methods/defaultFalsePredicate":156,"../methods/defaultStrictEqualityComparer":165,"./ProtoEnumerable":108,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],130:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15504,7 +15587,7 @@ var SymmetricEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = SymmetricEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],130:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],131:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15620,7 +15703,7 @@ var TakeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],131:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],132:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15801,7 +15884,7 @@ var TakeProportionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeProportionEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],132:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],133:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -15935,7 +16018,7 @@ var TakeSameEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeSameEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultSameComparer":162,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],133:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultSameComparer":163,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],134:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16055,7 +16138,7 @@ var TakeWhileEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = TakeWhileEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],134:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],135:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16105,7 +16188,7 @@ var ThenByDescendingEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = ThenByDescendingEnumerable;
 
-},{"../methods/defaultComparer":152,"../methods/defaultSelector":163,"../methods/descendingComparer":167,"../methods/methods":172,"../methods/selectorComparer":179,"../methods/thenByComparer":181,"./IOrderedEnumerable":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],135:[function(require,module,exports){
+},{"../methods/defaultComparer":153,"../methods/defaultSelector":164,"../methods/descendingComparer":168,"../methods/methods":173,"../methods/selectorComparer":180,"../methods/thenByComparer":182,"./IOrderedEnumerable":76,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],136:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16153,7 +16236,7 @@ var ThenByEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
 
 module.exports = ThenByEnumerable;
 
-},{"../methods/defaultComparer":152,"../methods/defaultSelector":163,"../methods/methods":172,"../methods/selectorComparer":179,"../methods/thenByComparer":181,"./IOrderedEnumerable":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],136:[function(require,module,exports){
+},{"../methods/defaultComparer":153,"../methods/defaultSelector":164,"../methods/methods":173,"../methods/selectorComparer":180,"../methods/thenByComparer":182,"./IOrderedEnumerable":76,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],137:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16263,7 +16346,7 @@ var TreeEnumerable = /*#__PURE__*/function (_ITree) {
 
 module.exports = TreeEnumerable;
 
-},{"../core/core":35,"../methods/defaultChildrenSelector":150,"../methods/defaultValueSelector":165,"../methods/methods":172,"./ITree":76,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],137:[function(require,module,exports){
+},{"../core/core":36,"../methods/defaultChildrenSelector":151,"../methods/defaultValueSelector":166,"../methods/methods":173,"./ITree":77,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],138:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16420,7 +16503,7 @@ var UnionEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = UnionEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultEqualityComparer":153,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],138:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultEqualityComparer":154,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],139:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16469,7 +16552,7 @@ var ValueNode = /*#__PURE__*/function (_INode) {
 
 module.exports = ValueNode;
 
-},{"./INode":74,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],139:[function(require,module,exports){
+},{"./INode":75,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/get":9,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19}],140:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16581,7 +16664,7 @@ var WhereEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = WhereEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],140:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],141:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16698,7 +16781,7 @@ var WipeEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = WipeEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultPredicate":160,"../methods/methods":172,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],141:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultPredicate":161,"../methods/methods":173,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],142:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -16779,7 +16862,7 @@ var ZipEnumerable = /*#__PURE__*/function (_IEnumerable) {
 
 module.exports = ZipEnumerable;
 
-},{"../IEnumerable":31,"../core/core":35,"../methods/defaultResultSelector":161,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],142:[function(require,module,exports){
+},{"../IEnumerable":32,"../core/core":36,"../methods/defaultResultSelector":162,"@babel/runtime/helpers/assertThisInitialized":4,"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/getPrototypeOf":10,"@babel/runtime/helpers/inherits":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/possibleConstructorReturn":19,"@babel/runtime/regenerator":27}],143:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17112,6 +17195,11 @@ var extendObject = {
     var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
     return Enumerable.max(this, selector, comparer);
   },
+  maxIndex: function maxIndex() {
+    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+    return Enumerable.maxIndex(this, selector, comparer);
+  },
   maxOrDefault: function maxOrDefault(defaultValue) {
     var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
     var comparer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultComparer;
@@ -17121,6 +17209,11 @@ var extendObject = {
     var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
     var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
     return Enumerable.min(this, selector, comparer);
+  },
+  minIndex: function minIndex() {
+    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+    var comparer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultComparer;
+    return Enumerable.minIndex(this, selector, comparer);
   },
   minOrDefault: function minOrDefault(defaultValue) {
     var selector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
@@ -17339,6 +17432,18 @@ var extendObject = {
   },
   randomOrDefault: function randomOrDefault(defaultValue) {
     return Enumerable.randomOrDefault(this, defaultValue);
+  },
+  randomProbability: function randomProbability() {
+    var probabilitySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+    return Enumerable.randomProbability(this, probabilitySelector);
+  },
+  randomIndexProbability: function randomIndexProbability() {
+    var probabilitySelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultSelector;
+    return Enumerable.randomIndexProbability(this, probabilitySelector);
+  },
+  randomProbabilityOrDefault: function randomProbabilityOrDefault(defaultValue) {
+    var probabilitySelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultSelector;
+    return Enumerable.randomProbabilityOrDefault(this, defaultValue, probabilitySelector);
   },
   wipe: function wipe() {
     var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPredicate;
@@ -17603,7 +17708,7 @@ Enumerable.extend = function (prototype, type) {
   return prototype;
 };
 
-},{"./Enumerable":30,"./core/core":35,"./methods/defaultAction":149,"./methods/defaultChildrenSelector":150,"./methods/defaultComparer":152,"./methods/defaultEqualityComparer":153,"./methods/defaultFalsePredicate":155,"./methods/defaultJoinSelector":157,"./methods/defaultKeySelector":158,"./methods/defaultParentSelector":159,"./methods/defaultPredicate":160,"./methods/defaultResultSelector":161,"./methods/defaultSameComparer":162,"./methods/defaultSelector":163,"./methods/defaultStrictEqualityComparer":164,"./methods/defaultValueSelector":165,"./methods/methods":172,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/slicedToArray":21,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/helpers/typeof":24}],143:[function(require,module,exports){
+},{"./Enumerable":31,"./core/core":36,"./methods/defaultAction":150,"./methods/defaultChildrenSelector":151,"./methods/defaultComparer":153,"./methods/defaultEqualityComparer":154,"./methods/defaultFalsePredicate":156,"./methods/defaultJoinSelector":158,"./methods/defaultKeySelector":159,"./methods/defaultParentSelector":160,"./methods/defaultPredicate":161,"./methods/defaultResultSelector":162,"./methods/defaultSameComparer":163,"./methods/defaultSelector":164,"./methods/defaultStrictEqualityComparer":165,"./methods/defaultValueSelector":166,"./methods/methods":173,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/slicedToArray":21,"@babel/runtime/helpers/toConsumableArray":23,"@babel/runtime/helpers/typeof":24}],144:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -17686,7 +17791,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":30,"./core/core":35}],144:[function(require,module,exports){
+},{"./Enumerable":31,"./core/core":36}],145:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -17705,7 +17810,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":30,"./core/core":35}],145:[function(require,module,exports){
+},{"./Enumerable":31,"./core/core":36}],146:[function(require,module,exports){
 'use strict';
 /**
  * Created by wm123 on 2017/2/14.
@@ -17724,7 +17829,7 @@ module.exports = {
   }
 };
 
-},{"./Enumerable":30,"./core/core":35}],146:[function(require,module,exports){
+},{"./Enumerable":31,"./core/core":36}],147:[function(require,module,exports){
 'use strict';
 
 var core = require('./core/core');
@@ -17854,7 +17959,7 @@ Enumerable.config.extends = {
 };
 module.exports = Enumerable;
 
-},{"./core/core":35,"./extend":142,"./linq":147,"./linq-array":143,"./linq-object":144,"./linq-string":145,"./plugin":182}],147:[function(require,module,exports){
+},{"./core/core":36,"./extend":143,"./linq":148,"./linq-array":144,"./linq-object":145,"./linq-string":146,"./plugin":183}],148:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -17885,16 +17990,24 @@ var _saved = {};
 
 if (g.Enumerable) {
   _Enumerable = g.Enumerable;
-  _Enumerable.save && _Enumerable.save(_saved);
+
+  if (_Enumerable.save) {
+    _Enumerable.save(_saved);
+  }
+
   delete g.Enumerable;
   console.warn(CONFLICT_SUGGEST);
 }
+
+var packageInfo = require('./../package.json');
 
 var core = require('./core/core');
 
 var Enumerable = require('./Enumerable');
 
-Enumerable.version = '2.2.0';
+core.defineProperty(Enumerable, 'version', function () {
+  return packageInfo.version;
+}, true);
 var config = {
   as: defaultAs,
   noConflict: false
@@ -17962,14 +18075,21 @@ Enumerable.noConflict = function () {
       this.save(saved);
       config.noConflict = true;
       g.Enumerable = _Enumerable;
-      g.Enumerable.restore && g.Enumerable.restore(_saved);
+
+      if (g.Enumerable.restore) {
+        g.Enumerable.restore(_saved);
+      }
+
       var noConflict = g.Enumerable.noConflict;
 
       g.Enumerable.noConflict = function () {
         var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
         if (callback === true) {
-          g.Enumerable.save && g.Enumerable.save(_saved);
+          if (g.Enumerable.save) {
+            g.Enumerable.save(_saved);
+          }
+
           config.noConflict = false;
           Enumerable.restore(saved);
           g.Enumerable.noConflict = noConflict;
@@ -17998,7 +18118,7 @@ var StringEnumerable = require('./enumerables/StringEnumerable');
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {})
 
-},{"./Enumerable":30,"./core/core":35,"./enumerables/ArrayEnumerable":46,"./enumerables/MapEnumerable":87,"./enumerables/StringEnumerable":128,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/typeof":24}],148:[function(require,module,exports){
+},{"./../package.json":30,"./Enumerable":31,"./core/core":36,"./enumerables/ArrayEnumerable":47,"./enumerables/MapEnumerable":88,"./enumerables/StringEnumerable":129,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/typeof":24}],149:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -18025,19 +18145,19 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":153,"./methods":172}],149:[function(require,module,exports){
+},{"./defaultEqualityComparer":154,"./methods":173}],150:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, key) {};
 
-},{}],150:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.children === 'undefined' ? element : element.children;
 };
 
-},{}],151:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -18046,7 +18166,7 @@ module.exports = function (element, value) {
   }
 };
 
-},{}],152:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 'use strict';
 
 var IComparable = require('../core/IComparable');
@@ -18055,7 +18175,7 @@ module.exports = function (element, other) {
   return element instanceof IComparable ? element.compare(other) : other instanceof IComparable ? -other.compare(element) : element > other ? 1 : element == other ? 0 : -1;
 };
 
-},{"../core/IComparable":33}],153:[function(require,module,exports){
+},{"../core/IComparable":34}],154:[function(require,module,exports){
 'use strict';
 
 var IEquatable = require('../core/IEquatable');
@@ -18064,28 +18184,28 @@ module.exports = function (element, other) {
   return element instanceof IEquatable ? element.equals(other) : other instanceof IEquatable ? other.equals(element) : element == other;
 };
 
-},{"../core/IEquatable":34}],154:[function(require,module,exports){
+},{"../core/IEquatable":35}],155:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element !== 'undefined' && element !== null;
 };
 
-},{}],155:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return false;
 };
 
-},{}],156:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return index;
 };
 
-},{}],157:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 'use strict';
 
 module.exports = function (outer, inner) {
@@ -18095,63 +18215,63 @@ module.exports = function (outer, inner) {
   };
 };
 
-},{}],158:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.key === 'undefined' ? element : element.key;
 };
 
-},{}],159:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element.parent;
 };
 
-},{}],160:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return true;
 };
 
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 'use strict';
 
 module.exports = function (key, result) {
   return result;
 };
 
-},{}],162:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other || typeof element === 'number' && typeof other === 'number' && isNaN(element) && isNaN(other);
 };
 
-},{}],163:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return element;
 };
 
-},{}],164:[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, other) {
   return element === other;
 };
 
-},{}],165:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, index) {
   return typeof element.value === 'undefined' ? element : element.value;
 };
 
-},{}],166:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 'use strict';
 
 module.exports = function (element, value) {
@@ -18160,7 +18280,7 @@ module.exports = function (element, value) {
   }
 };
 
-},{}],167:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderBy) {
@@ -18169,7 +18289,7 @@ module.exports = function (orderBy) {
   };
 };
 
-},{}],168:[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -18184,7 +18304,7 @@ module.exports = function (value) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":153,"./methods":172}],169:[function(require,module,exports){
+},{"./defaultEqualityComparer":154,"./methods":173}],170:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -18204,7 +18324,7 @@ module.exports = function (greaterThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":153,"./methods":172}],170:[function(require,module,exports){
+},{"./defaultEqualityComparer":154,"./methods":173}],171:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -18221,7 +18341,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":163,"./methods":172}],171:[function(require,module,exports){
+},{"./defaultSelector":164,"./methods":173}],172:[function(require,module,exports){
 'use strict';
 
 var defaultEqualityComparer = require('./defaultEqualityComparer');
@@ -18241,7 +18361,7 @@ module.exports = function (lessThen) {
 
 var methods = require('./methods');
 
-},{"./defaultEqualityComparer":153,"./methods":172}],172:[function(require,module,exports){
+},{"./defaultEqualityComparer":154,"./methods":173}],173:[function(require,module,exports){
 'use strict';
 
 var _require = require('../core/core'),
@@ -18359,7 +18479,7 @@ var propertiesPredicate = require('./propertiesPredicate');
 
 var regexpPredicate = require('./regexpPredicate');
 
-},{"../core/core":35,"../core/exceptions/InvalidFunctionException":37,"./arrayComparer":148,"./defaultComparer":152,"./defaultEqualityComparer":153,"./defaultSameComparer":162,"./defaultStrictEqualityComparer":164,"./propertiesPredicate":175,"./propertySelector":176,"./propertySetter":177,"./regexpPredicate":178,"./selectorComparer":179,"./selectorPredicate":180}],173:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/InvalidFunctionException":38,"./arrayComparer":149,"./defaultComparer":153,"./defaultEqualityComparer":154,"./defaultSameComparer":163,"./defaultStrictEqualityComparer":165,"./propertiesPredicate":176,"./propertySelector":177,"./propertySetter":178,"./regexpPredicate":179,"./selectorComparer":180,"./selectorPredicate":181}],174:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -18374,7 +18494,7 @@ module.exports = function () {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":154,"./methods":172}],174:[function(require,module,exports){
+},{"./defaultExistsPredicate":155,"./methods":173}],175:[function(require,module,exports){
 'use strict';
 
 module.exports = function (array) {
@@ -18401,7 +18521,7 @@ module.exports = function (array) {
 
 var methods = require('./methods');
 
-},{"./methods":172}],175:[function(require,module,exports){
+},{"./methods":173}],176:[function(require,module,exports){
 'use strict';
 
 var defaultSameComparer = require('./defaultSameComparer');
@@ -18442,7 +18562,7 @@ var methods = require('./methods');
 
 var core = require('../core/core');
 
-},{"../core/core":35,"./defaultSameComparer":162,"./methods":172,"./propertySelector":176}],176:[function(require,module,exports){
+},{"../core/core":36,"./defaultSameComparer":163,"./methods":173,"./propertySelector":177}],177:[function(require,module,exports){
 'use strict';
 
 var core = require('../core/core');
@@ -18483,7 +18603,7 @@ module.exports = function (property) {
   }
 };
 
-},{"../core/core":35,"../core/exceptions/PropertyExpressionInvalidException":44}],177:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/PropertyExpressionInvalidException":45}],178:[function(require,module,exports){
 'use strict';
 
 var core = require('../core/core');
@@ -18533,7 +18653,7 @@ module.exports = function (property) {
   }
 };
 
-},{"../core/core":35,"../core/exceptions/PropertyExpressionInvalidException":44}],178:[function(require,module,exports){
+},{"../core/core":36,"../core/exceptions/PropertyExpressionInvalidException":45}],179:[function(require,module,exports){
 'use strict';
 
 var defaultSelector = require('./defaultSelector');
@@ -18548,7 +18668,7 @@ module.exports = function (regexp) {
 
 var methods = require('./methods');
 
-},{"./defaultSelector":163,"./methods":172}],179:[function(require,module,exports){
+},{"./defaultSelector":164,"./methods":173}],180:[function(require,module,exports){
 'use strict';
 
 module.exports = function (selector, comparer) {
@@ -18560,7 +18680,7 @@ module.exports = function (selector, comparer) {
 
 var methods = require('./methods');
 
-},{"./methods":172}],180:[function(require,module,exports){
+},{"./methods":173}],181:[function(require,module,exports){
 'use strict';
 
 var defaultExistsPredicate = require('./defaultExistsPredicate');
@@ -18576,7 +18696,7 @@ module.exports = function (selector) {
 
 var methods = require('./methods');
 
-},{"./defaultExistsPredicate":154,"./methods":172}],181:[function(require,module,exports){
+},{"./defaultExistsPredicate":155,"./methods":173}],182:[function(require,module,exports){
 'use strict';
 
 module.exports = function (orderByComparer, thenByComparer) {
@@ -18586,7 +18706,7 @@ module.exports = function (orderByComparer, thenByComparer) {
   };
 };
 
-},{}],182:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -18774,6 +18894,6 @@ Enumerable.removePlugins = function () {
   return this;
 };
 
-},{"./Enumerable":30,"./IEnumerable":31,"./core/core":35,"./core/exceptions/PluginRepeatException":43,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/slicedToArray":21}]},{},[146])(146)
+},{"./Enumerable":31,"./IEnumerable":32,"./core/core":36,"./core/exceptions/PluginRepeatException":44,"@babel/runtime/helpers/defineProperty":8,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/helpers/slicedToArray":21}]},{},[147])(147)
 });
 //# sourceMappingURL=linq.full.js.map
