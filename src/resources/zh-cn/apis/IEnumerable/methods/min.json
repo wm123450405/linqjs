@@ -258,6 +258,14 @@
                             "method": "max"
                         },
                         {
+                            "apis": "IEnumerable",
+                            "method": "minOrDefault"
+                        },
+                        {
+                            "apis": "IEnumerable",
+                            "method": "minIndex"
+                        },
+                        {
                             "apis": "Enumerable.selectors",
                             "property": "default"
                         },

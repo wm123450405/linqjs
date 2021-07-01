@@ -1,0 +1,62 @@
+{
+    "historys": [
+        {
+            "since": "2.2.0",
+            "overloads": [
+                {
+                    "parameters": [
+                        {
+                            "name": "selector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "应用于每个元素的转换函数，用于转换出元素出现的概率或权重"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "number"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "any",
+                        "descriptions": [
+                            "序列中随机的一个元素所在序列中的索引位置"
+                        ]
+                    },
+                    "description": "根据概率(权重)返回序列中随机的一个元素所在序列中的索引位置",
+                    "remarks": [
+                        "如果在源序列不包含任何元素, 则返回 -1",
+                        "所有元素的概率(权重)可以是浮点数，概率(权重)之和也可以是浮点数，实际抽取的概率按照每个元素转换出的概率(权重)占总概率(权重)的比例进行计算"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "randomProbability"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

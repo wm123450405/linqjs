@@ -1,0 +1,120 @@
+{
+    "historys": [
+        {
+            "since": "2.2.0",
+            "overloads": [
+                {
+                    "generics": [
+                        {
+                            "name": "TResult",
+                            "wheres": [
+                                {
+                                    "type": "number"
+                                },
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "IComparable"
+                                }
+                            ],
+                            "descriptions": [
+                                "用于计算的最大值的可比较的结果类型"
+                            ]
+                        }
+                    ],
+                    "parameters": [
+                        {
+                            "name": "selector",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "应用于每个元素的转换函数，用于转换出可用于比较的数值"
+                            ],
+                            "defaultValue": "defaultSelector",
+                            "declare": {
+                                "returns": {
+                                    "type": "TResult"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "index",
+                                        "types": [
+                                            "number"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "descriptions": [
+                                "用于比较每个元素大小的大小比较器"
+                            ],
+                            "defaultValue": "defaultComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "number"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "TResult"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "TResult"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "number",
+                        "descriptions": [
+                            "值序列的最大值对应的原序列中所在的索引位置"
+                        ]
+                    },
+                    "description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值对应的原序列中所在的索引位置",
+                    "remarks": [
+                        "如果原序列是一个空序列则返回 -1"
+                    ],
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "max"
+                        },
+                        {
+                            "apis": "Enumerable.selectors",
+                            "property": "default"
+                        },
+                        {
+                            "apis": "Enumerable.comparers",
+                            "property": "default"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -30,6 +30,17 @@
                     ]
                 }
             ]
+        },
+        {
+            "since": "2.2.0",
+            "refs": true,
+            "sees": [
+                { },
+                {
+                    "apis": "IEnumerable",
+                    "method": "randomProbability"
+                }
+            ]
         }
     ]
 }

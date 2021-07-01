@@ -1815,14 +1815,56 @@
 			]
 		},
 		{
+			"name": "maxIndex",
+			"historys": [
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值对应的原序列中所在的索引位置",
+							"parameters": [
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "maxOrDefault",
 			"historys": [
 				{
 					"since": "2.1.22",
-					"deprecated": 0,
+					"deprecated": "2.1.24",
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值，如果序列中不包含任何元素则返回一个默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最大值对应的原序列中的元素，如果序列中不包含任何元素则返回一个默认值",
 							"parameters": [
 								{
 									"name": "defaultValue"
@@ -1896,14 +1938,56 @@
 			]
 		},
 		{
+			"name": "minIndex",
+			"historys": [
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值对应的原序列中所在的索引位置",
+							"parameters": [
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "minOrDefault",
 			"historys": [
 				{
 					"since": "2.1.22",
-					"deprecated": 0,
+					"deprecated": "2.1.24",
 					"overloads": [
 						{
 							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值，如果序列中不包含任何元素则返回一个默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								},
+								{
+									"name": "selector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "计算通过对序列中的每个元素调用转换函数获得的新的值序列的最小值对应的原序列中的元素，如果序列中不包含任何元素则返回一个默认值",
 							"parameters": [
 								{
 									"name": "defaultValue"
@@ -2208,32 +2292,58 @@
 			]
 		},
 		{
-			"name": "random",
+			"name": "randomIndexProbability",
 			"historys": [
 				{
-					"since": "2.1.25",
+					"since": "2.2.0",
 					"deprecated": 0,
 					"overloads": [
 						{
-							"description": "返回序列中随机的一个元素",
-							"parameters": []
+							"description": "根据概率(权重)返回序列中随机的一个元素所在序列中的索引位置",
+							"parameters": [
+								{
+									"name": "selector"
+								}
+							]
 						}
 					]
 				}
 			]
 		},
 		{
-			"name": "randomOrDefault",
+			"name": "randomProbability",
 			"historys": [
 				{
-					"since": "2.1.25",
+					"since": "2.2.0",
 					"deprecated": 0,
 					"overloads": [
 						{
-							"description": "返回序列中随机的一个元素. 如果未找到元素, 则返回默认值",
+							"description": "根据概率(权重)返回序列中随机的一个元素",
+							"parameters": [
+								{
+									"name": "selector"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "randomProbabilityOrDefault",
+			"historys": [
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "根据概率(权重)返回序列中随机的一个元素。 如果未找到元素，则返回默认值",
 							"parameters": [
 								{
 									"name": "defaultValue"
+								},
+								{
+									"name": "selector"
 								}
 							]
 						}

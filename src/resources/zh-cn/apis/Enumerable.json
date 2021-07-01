@@ -94,6 +94,18 @@
 					"readonly": true
 				}
 			]
+		},
+		{
+			"name": "version",
+			"historys": [
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"static": true,
+					"description": "获取当前库的版本号",
+					"readonly": true
+				}
+			]
 		}
 	],
 	"methods": [

@@ -1,0 +1,11 @@
+{
+    "historys": [
+        {
+            "type": "string",
+            "static": true,
+            "readonly": true,
+            "since": "2.2.0",
+            "description": "获取当前库的版本号"
+        }
+    ]
+}
