@@ -26,16 +26,19 @@ let _saved = {
 
 if (g.Enumerable) {
     _Enumerable = g.Enumerable;
-    _Enumerable.save && _Enumerable.save(_saved);
+    if (_Enumerable.save) {
+        _Enumerable.save(_saved);
+    }
     delete g.Enumerable;
     console.warn(CONFLICT_SUGGEST);
 }
 
+const packageInfo = require('./../package.json');
 const core = require('./core/core');
 
 const Enumerable = require('./Enumerable');
 
-Enumerable.version = '2.2.0';
+core.defineProperty(Enumerable, 'version', () => packageInfo.version, true);
 
 const config = {
     as: defaultAs,
@@ -110,12 +113,16 @@ Enumerable.noConflict = function(callback = false) {
             this.save(saved);
             config.noConflict = true;
             g.Enumerable = _Enumerable;
-            g.Enumerable.restore && g.Enumerable.restore(_saved);
+            if (g.Enumerable.restore) {
+                g.Enumerable.restore(_saved);
+            }
 
             let noConflict = g.Enumerable.noConflict;
             g.Enumerable.noConflict = function(callback = false) {
                 if (callback === true) {
-                    g.Enumerable.save && g.Enumerable.save(_saved);
+                    if (g.Enumerable.save) {
+                        g.Enumerable.save(_saved);
+                    }
                     config.noConflict = false;
                     Enumerable.restore(saved);
                     g.Enumerable.noConflict = noConflict;

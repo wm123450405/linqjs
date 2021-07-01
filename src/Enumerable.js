@@ -376,13 +376,13 @@ Enumerable.random = function(source) {
 Enumerable.randomOrDefault = function(source, defaultValue) {
     return asEnumerable(source).randomOrDefault(defaultValue);
 };
-Enumerable.randomProbability = function(source, probabilitySelector) {
+Enumerable.randomProbability = function(source, probabilitySelector = defaultSelector) {
     return asEnumerable(source).randomProbability(probabilitySelector);
 };
-Enumerable.randomIndexProbability = function(source, probabilitySelector) {
+Enumerable.randomIndexProbability = function(source, probabilitySelector = defaultSelector) {
     return asEnumerable(source).randomIndexProbability(probabilitySelector);
 };
-Enumerable.randomProbabilityOrDefault = function(source, defaultValue, probabilitySelector) {
+Enumerable.randomProbabilityOrDefault = function(source, defaultValue, probabilitySelector = defaultSelector) {
     return asEnumerable(source).randomProbabilityOrDefault(defaultValue, probabilitySelector);
 };
 Enumerable.wipe = function(source, predicate = defaultPredicate, count = 0) {

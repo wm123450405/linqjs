@@ -207,11 +207,17 @@ const extendObject = {
     max(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.max(this, selector, comparer);
     },
+    maxIndex(selector = defaultSelector, comparer = defaultComparer) {
+        return Enumerable.maxIndex(this, selector, comparer);
+    },
     maxOrDefault(defaultValue, selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.maxOrDefault(this, defaultValue, selector, comparer);
     },
     min(selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.min(this, selector, comparer);
+    },
+    minIndex(selector = defaultSelector, comparer = defaultComparer) {
+        return Enumerable.minIndex(this, selector, comparer);
     },
     minOrDefault(defaultValue, selector = defaultSelector, comparer = defaultComparer) {
         return Enumerable.minOrDefault(this, defaultValue, selector, comparer);
@@ -382,6 +388,15 @@ const extendObject = {
     },
     randomOrDefault(defaultValue) {
         return Enumerable.randomOrDefault(this, defaultValue);
+    },
+    randomProbability(probabilitySelector = defaultSelector) {
+        return Enumerable.randomProbability(this, probabilitySelector);
+    },
+    randomIndexProbability(probabilitySelector = defaultSelector) {
+        return Enumerable.randomIndexProbability(this, probabilitySelector);
+    },
+    randomProbabilityOrDefault(defaultValue, probabilitySelector = defaultSelector) {
+        return Enumerable.randomProbabilityOrDefault(this, defaultValue, probabilitySelector);
     },
     wipe(predicate = defaultPredicate, count = 0) {
         return Enumerable.wipe(this, predicate, count);

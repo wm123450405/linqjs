@@ -1070,6 +1070,12 @@ module.exports = function(Enumerable) {
 		let array_unshift = [1, 2, 3].asEnumerable();
 		assert.strictEqual(array_unshift.unshift(4), 4);
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
+
+		//random
+		let random_base = [1,2,3,4,5,6].asEnumerable();
+		assert.isStrictTrue(random_base.contains(random_base.random()));
+		assert.isStrictTrue(random_base.contains(random_base.randomProbability()));
+		assert.isStrictTrue(random_base.contains(random_base.randomProbability(t => 10 - t)));
 	})();
 
 	assert.deepStrictEqual(Enumerable.toDictionary(['a', 'b', 'c']).toObject(), {
@@ -1131,5 +1137,5 @@ module.exports = function(Enumerable) {
 
     assert.deepStrictEqual(({ key: 1, value: 'a' }).asEnumerable().select(v => v.toObject()).toArray(), [ { key: 'key', value: 1 }, { key: 'value', value: 'a' }]);
 
-	console.log('test successful!');
+	console.log(Enumerable.version + ' test successful!');
 };

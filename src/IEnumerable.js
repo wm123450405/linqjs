@@ -112,11 +112,11 @@ const minNode = function(enumerable, selector = defaultSelector, comparer = defa
         return min;
     }
 };
-const randomNodeProbability = function(enumerable, probabilitySelector) {
+const randomNodeProbability = function(enumerable, probabilitySelector = defaultSelector) {
     let array = [], index = 0, sum = 0, probability = 0;
     probabilitySelector = methods.asSelector(probabilitySelector);
     for (let element of enumerable) {
-        probability = probabilitySelector(array, index);
+        probability = probabilitySelector(element, index);
         if (probability > 0) {
             sum += probability;
             array.push(new ProbabilityNode(element, index, probability));
@@ -783,7 +783,7 @@ class IEnumerable extends Array {
             return defaultValue;
         }
     }
-    randomProbability(probabilitySelector) {
+    randomProbability(probabilitySelector = defaultSelector) {
         let node = randomNodeProbability(this, probabilitySelector);
         if (core.isUndefined(node)) {
             throw new NoSuchElementsException();
@@ -791,7 +791,7 @@ class IEnumerable extends Array {
             return node.element;
         }
     }
-    randomIndexProbability(probabilitySelector) {
+    randomIndexProbability(probabilitySelector = defaultSelector) {
         let node = randomNodeProbability(this, probabilitySelector);
         if (core.isUndefined(node)) {
             return -1;
@@ -799,7 +799,7 @@ class IEnumerable extends Array {
             return node.index;
         }
     }
-    randomProbabilityOrDefault(defaultValue, probabilitySelector) {
+    randomProbabilityOrDefault(defaultValue, probabilitySelector = defaultSelector) {
         let node = randomNodeProbability(this, probabilitySelector);
         if (core.isUndefined(node)) {
             return defaultValue;
