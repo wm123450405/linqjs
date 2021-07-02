@@ -77,6 +77,9 @@ declare namespace Enumerable {
     export function count<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): number;
     export function count<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): number;
 
+    export function proportion<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean = defaultPredicate): number;
+    export function proportion<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): number;
+
     export function defaultIfEmpty<T>(source: T[] | IEnumerable<T>, defaultValue?: T): IEnumerable<T>;
 
     export function distinct<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultEqualityComparer): IEnumerable<T>;
@@ -310,18 +313,24 @@ declare namespace Enumerable {
     export function skipSame<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
     export function skipSame<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
+    export function skipProportion<T>(source: T[] | IEnumerable<T>, proportion: number): IEnumerable<T>;
+
     export function take<T>(source: T[] | IEnumerable<T>, count: number): IEnumerable<T>;
 
     export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
     export function takeWhile<T>(source: T[] | IEnumerable<T>, predicate: string | number | symbol | T | any): IEnumerable<T>;
 
+    // @ts-ignore
     export function takeSame<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
     export function takeSame<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
+
+    export function takeProportion<T>(source: T[] | IEnumerable<T>, proportion: number): IEnumerable<T>;
 
     export function slice<T>(source: T[] | IEnumerable<T>, start: number, end: number): IEnumerable<T>;
 
     export function some<T>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => boolean, thisArg?: any): boolean;
 
+    // @ts-ignore
     export function sort<T>(source: T[] | IEnumerable<T>, comparer: (element: T, other: T) => number = defaultComparer): IEnumerable<T>;
     export function sort<T>(source: T[] | IEnumerable<T>, comparer: string | number | symbol): IEnumerable<T>;
 
@@ -572,6 +581,9 @@ declare namespace Enumerable {
         count(predicate: (element: T, index?: number) => boolean = defaultPredicate): number;
         count(predicate: string | number | symbol | T | any): number;
 
+        proportion(predicate: (element: T, index?: number) => boolean = defaultPredicate): number;
+        proportion(predicate: string | number | symbol | T | any): number;
+
         defaultIfEmpty(defaultValue?: T): IEnumerable<T>;
 
         distinct(comparer: (element: T, other: T) => boolean = defaultEqualityComparer): IEnumerable<T>;
@@ -804,6 +816,8 @@ declare namespace Enumerable {
         skipSame(comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
         skipSame(comparer: string | number | symbol): IEnumerable<T>;
 
+        skipProportion(proportion: number): IEnumerable<T>;
+
         take(count: number): IEnumerable<T>;
 
         takeWhile(predicate: (element: T, index?: number) => boolean): IEnumerable<T>;
@@ -811,6 +825,8 @@ declare namespace Enumerable {
 
         takeSame(comparer: (element: T, other: T) => boolean = defaultSameComparer): IEnumerable<T>;
         takeSame(comparer: string | number | symbol): IEnumerable<T>;
+
+        takeProportion(proportion: number): IEnumerable<T>;
 
         slice(start: number, end: number): IEnumerable<T>;
 
