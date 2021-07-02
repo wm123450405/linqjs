@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/v/linq-js)](https://www.npmjs.com/package/linq-js)
 [![npm](https://img.shields.io/npm/dm/linq-js)](https://www.npmjs.com/package/linq-js)
 [![Travis (.com)](https://img.shields.io/travis/com/wm123450405/linqjs)](https://travis-ci.com/wm123450405/linqjs)
+[![Codecov](https://img.shields.io/codecov/c/github/wm123450405/linqjs)](https://app.codecov.io/gh/wm123450405/linqjs)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/linq-js)
 ![NPM](https://img.shields.io/npm/l/linq-js)
 ![GitHub search hit counter](https://img.shields.io/github/search/wm123450405/linqjs/array)
