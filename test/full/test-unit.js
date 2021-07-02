@@ -1522,6 +1522,18 @@ module.exports = function(Enumerable) {
 		assert.strictEqual(array_unshift.unshift(4), 4);
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
 
+		//getEnumerator
+		let array_getEnumerator = [1,2,3,4,5,6];
+		let enumerator = [...array_getEnumerator].getEnumerator();
+		for(let gei = 0; enumerator.moveNext(); gei++) {
+			assert.strictEqual(enumerator.current, array_getEnumerator[gei]);
+		}
+		enumerator.reset();
+		while(enumerator.moveNext()) {
+			assert.strictEqual(enumerator.current, array_getEnumerator.shift());
+		}
+		assert.strictEqual(array_getEnumerator.length, 0);
+
 
 		Enumerable.addPlugins({
 			name: 'toHtml',

@@ -1076,6 +1076,18 @@ module.exports = function(Enumerable) {
 		assert.isStrictTrue(random_base.contains(random_base.random()));
 		assert.isStrictTrue(random_base.contains(random_base.randomProbability()));
 		assert.isStrictTrue(random_base.contains(random_base.randomProbability(t => 10 - t)));
+
+		//getEnumerator
+		let array_getEnumerator = [1,2,3,4,5,6];
+		let enumerator = [...array_getEnumerator].asEnumerable().getEnumerator();
+		for(let gei = 0; enumerator.moveNext(); gei++) {
+			assert.strictEqual(enumerator.current, array_getEnumerator[gei]);
+		}
+		enumerator.reset();
+		while(enumerator.moveNext()) {
+			assert.strictEqual(enumerator.current, array_getEnumerator.shift());
+		}
+		assert.strictEqual(array_getEnumerator.length, 0);
 	})();
 
 	assert.deepStrictEqual(Enumerable.toDictionary(['a', 'b', 'c']).toObject(), {

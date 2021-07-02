@@ -854,6 +854,16 @@ declare namespace Enumerable {
         toPreOrder(): BinaryTree<T>;
         toInOrder(): BinaryTree<T>;
         toPostOrder(): BinaryTree<T>;
+        
+        getEnumerator(): IEnumerator<T>;
+    }
+
+    export interface IEnumerator<T> {
+        current: T;
+
+        moveNext(): boolean;
+
+        reset(): void;
     }
 
     export class Entry<TKey, TValue> {
