@@ -5,4 +5,7 @@ node_js:
   - "12"
 before_script:
   - npm install -g gulp
-script: gulp
+  - npm install -g codecov
+script:
+  - gulp
+  - npm run codecov
