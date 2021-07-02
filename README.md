@@ -3,9 +3,9 @@
 [![GitHub release](https://img.shields.io/github/release/wm123450405/linqjs.svg)](https://github.com/wm123450405/linqjs)
 [![npm](https://img.shields.io/npm/v/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![npm](https://img.shields.io/npm/dm/linq-js.svg)](https://www.npmjs.com/package/linq-js)
-[![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.org/wm123450405/linqjs)
+[![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.com/wm123450405/linqjs)
 
-Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory is used less and using deferred execution.
+Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory used less and using deferred execution.
 
 对 JavaScript 中原生数组、对象进行扩展, 提供了一些对数据的操作方法.
 包括对数组结构、树形结构、对象结构等数据进行 查询,排序,连接,合并,分组,分段,转换,遍历 等一系列功能.
