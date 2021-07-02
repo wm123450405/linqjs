@@ -1370,35 +1370,40 @@ module.exports={
     "test:full:compile": "npm run compile:full && node test/full/test-compile.js",
     "test:full:babel": "npx babel-node test/full/test-babel.js",
     "test:full:unit": "gulp unitFull",
+    "codecov": "nyc --reporter=lcov mocha ./test/mocha.js && codecov",
     "compile:slim": "gulp slim",
     "compile:full": "gulp full",
     "compile": "gulp",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run compile && npm run codecov"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wm123450405/linqjs.git"
   },
   "devDependencies": {
-    "assertrue": "^1.0.4",
+    "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.0",
     "@babel/node": "^7.13.0",
-    "@babel/cli": "^7.13.0",
-    "@babel/preset-env": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.0",
-    "core-js": "^3.15.0",
+    "@babel/preset-env": "^7.13.0",
+    "assertrue": "^1.0.4",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
+    "codecov": "^3.8.2",
+    "core-js": "^3.15.0",
     "exorcist": "^2.0.0",
+    "extend": "^3.0.1",
     "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.0",
     "gulp-terser": "^2.0.1",
-    "uglify-js": "^3.13.0",
-    "terser": "^5.7.0",
+    "gulp-uglify": "^3.0.0",
     "jshint": "^2.13.0",
+    "mocha": "^9.0.1",
+    "nyc": "^15.1.0",
+    "terser": "^5.7.0",
+    "uglify-js": "^3.13.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
@@ -1420,10 +1425,7 @@ module.exports={
     "url": "https://github.com/wm123450405/linqjs/issues"
   },
   "homepage": "https://github.com/wm123450405/linqjs#readme",
-  "types": "src/linq.d.ts",
-  "dependencies": {
-    "extend": "^3.0.1"
-  }
+  "types": "src/linq.d.ts"
 }
 
 },{}],31:[function(require,module,exports){

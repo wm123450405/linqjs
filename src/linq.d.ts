@@ -199,37 +199,53 @@ declare namespace Enumerable {
 
     export function map<T, TOther>(source: T[] | IEnumerable<T>, callback: (element: T, index?: number, source?: IEnumerable<T>) => TOther, thisArg?: any): IEnumerable<TOther>;
 
-    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
-    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): string;
-    export function max<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number | string;
-    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): T;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): T;
+    export function max<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): T;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): T;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): T;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
+    export function max<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): T;
 
-    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: (element: T, index?: number) => number = defaultSelector): number;
-    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: (element: T, index?: number) => string): string;
-    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: string | number | symbol): number | string;
-    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function maxIndex<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function maxIndex<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): number;
+    export function maxIndex<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
+    export function maxIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): number;
+    export function maxIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): number;
+    export function maxIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): number;
+    export function maxIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): number;
 
-    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
-    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): string;
-    export function min<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number | string;
-    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => number = defaultSelector): T;
+    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => string): T;
+    export function maxOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol): T;
+    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): T;
+    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): T;
+    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
+    export function maxOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol, comparer: string | number | symbol): T;
 
-    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: (element: T, index?: number) => number = defaultSelector): number;
-    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: (element: T, index?: number) => string): string;
-    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: number, selector: string | number | symbol): number | string;
-    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): TResult;
-    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): TResult;
-    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: TResult, selector: string | number | symbol, comparer: string | number | symbol): TResult;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): T;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): T;
+    export function min<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): T;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): T;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): T;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
+    export function min<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): T;
+
+    export function minIndex<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => number = defaultSelector): number;
+    export function minIndex<T>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => string): number;
+    export function minIndex<T>(source: T[] | IEnumerable<T>, selector: string | number | symbol): number;
+    export function minIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): number;
+    export function minIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): number;
+    export function minIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): number;
+    export function minIndex<T, TResult>(source: T[] | IEnumerable<T>, selector: string | number | symbol, comparer: string | number | symbol): number;
+
+    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => number = defaultSelector): T;
+    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => string): T;
+    export function minOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol): T;
+    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): T;
+    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): T;
+    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
+    export function minOrDefault<T, TResult>(source: T[] | IEnumerable<T>, defaultValue: T, selector: string | number | symbol, comparer: string | number | symbol): T;
 
     export function ofType<T, TResult>(source: T[] | IEnumerable<T>, type: string): IEnumerable<TResult>;
     export function ofType<T, TResult>(source: T[] | IEnumerable<T>, type: any): IEnumerable<TResult>;
@@ -256,6 +272,15 @@ declare namespace Enumerable {
     export function random<T>(source: T[] | IEnumerable<T>): T;
 
     export function randomOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T): T;
+
+    export function randomProbability<T>(source: T[] | IEnumerable<T>, probabilitySelector: (element: T, index?: number) => number = defaultSelector): T;
+    export function randomProbability<T>(source: T[] | IEnumerable<T>, probabilitySelector: string | number | symbol): T;
+
+    export function randomIndexProbability<T>(source: T[] | IEnumerable<T>, probabilitySelector: (element: T, index?: number) => number = defaultSelector): number;
+    export function randomIndexProbability<T>(source: T[] | IEnumerable<T>, probabilitySelector: string | number | symbol): number;
+
+    export function randomProbabilityOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, probabilitySelector: (element: T, index?: number) => number = defaultSelector): T;
+    export function randomProbabilityOrDefault<T>(source: T[] | IEnumerable<T>, defaultValue: T, probabilitySelector: string | number | symbol): T;
 
     export function reduce<T, TSeed>(source: T[] | IEnumerable<T>, callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 
@@ -676,6 +701,14 @@ declare namespace Enumerable {
         max<TResult>(selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
         max<TResult>(selector: string | number | symbol, comparer: string | number | symbol): T;
 
+        maxIndex(selector: (element: T, index?: number) => number = defaultSelector): number;
+        maxIndex(selector: (element: T, index?: number) => string): number;
+        maxIndex(selector: string | number | symbol): number;
+        maxIndex<TResult>(selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): number;
+        maxIndex<TResult>(selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): number;
+        maxIndex<TResult>(selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): number;
+        maxIndex<TResult>(selector: string | number | symbol, comparer: string | number | symbol): number;
+
         maxOrDefault(defaultValue: T, selector: (element: T, index?: number) => number = defaultSelector): T;
         maxOrDefault(defaultValue: T, selector: (element: T, index?: number) => string): T;
         maxOrDefault(defaultValue: T, selector: string | number | symbol): T;
@@ -691,6 +724,14 @@ declare namespace Enumerable {
         min<TResult>(selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): T;
         min<TResult>(selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): T;
         min<TResult>(selector: string | number | symbol, comparer: string | number | symbol): T;
+
+        minIndex(selector: (element: T, index?: number) => number = defaultSelector): number;
+        minIndex(selector: (element: T, index?: number) => string): number;
+        minIndex(selector: string | number | symbol): number;
+        minIndex<TResult>(selector: (element: T, index?: number) => TResult, comparer: (element: TResult, other: TResult) => number): number;
+        minIndex<TResult>(selector: string | number | symbol, comparer: (element: TResult, other: TResult) => number): number;
+        minIndex<TResult>(selector: (element: T, index?: number) => TResult, comparer: string | number | symbol): number;
+        minIndex<TResult>(selector: string | number | symbol, comparer: string | number | symbol): number;
 
         minOrDefault(defaultValue: T, selector: (element: T, index?: number) => number = defaultSelector): T;
         minOrDefault(defaultValue: T, selector: (element: T, index?: number) => string): T;
@@ -725,6 +766,15 @@ declare namespace Enumerable {
         random(): T;
 
         randomOrDefault(defaultValue: T): T;
+
+        randomProbability(probabilitySelector: (element: T, index?: number) => number = defaultSelector): T;
+        randomProbability(probabilitySelector: string | number | symbol): T;
+
+        randomIndexProbability(probabilitySelector: (element: T, index?: number) => number = defaultSelector): number;
+        randomIndexProbability(probabilitySelector: string | number | symbol): number;
+
+        randomProbabilityOrDefault(defaultValue: T, probabilitySelector: (element: T, index?: number) => number = defaultSelector): T;
+        randomProbabilityOrDefault(defaultValue: T, probabilitySelector: string | number | symbol): T;
 
         reduce<TSeed>(callback: (seed: TSeed, element: T, index?: number) => TSeed, initialValue: TSeed): TSeed;
 

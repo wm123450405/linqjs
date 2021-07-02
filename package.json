@@ -39,6 +39,7 @@
     "codecov": "^3.8.2",
     "core-js": "^3.15.0",
     "exorcist": "^2.0.0",
+    "extend": "^3.0.1",
     "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
     "gulp-rename": "^2.0.0",
@@ -71,8 +72,5 @@
     "url": "https://github.com/wm123450405/linqjs/issues"
   },
   "homepage": "https://github.com/wm123450405/linqjs#readme",
-  "types": "src/linq.d.ts",
-  "dependencies": {
-    "extend": "^3.0.1"
-  }
+  "types": "src/linq.d.ts"
 }
