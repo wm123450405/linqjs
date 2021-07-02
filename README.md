@@ -4,6 +4,11 @@
 [![npm](https://img.shields.io/npm/v/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![npm](https://img.shields.io/npm/dm/linq-js.svg)](https://www.npmjs.com/package/linq-js)
 [![Travis branch](https://img.shields.io/travis/wm123450405/linqjs.svg)](https://travis-ci.com/wm123450405/linqjs)
+![npm bundle size](https://img.shields.io/bundlephobia/min/linq-js)
+![NPM](https://img.shields.io/npm/l/linq-js)
+![GitHub search hit counter](https://img.shields.io/github/search/wm123450405/linqjs/array)
+![GitHub search hit counter](https://img.shields.io/github/search/wm123450405/linqjs/tree)
+![GitHub search hit counter](https://img.shields.io/github/search/wm123450405/linqjs/enumerable)
 
 Since 2.1.0, I rewrite all to use new features of ES6. The performance be better, memory used less and using deferred execution.
 
