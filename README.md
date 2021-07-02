@@ -71,13 +71,13 @@ function asEnumerable():IEnumerable;
 
 > e.g. 案例 两个数组进行内连接查询
 > ```javascript
-> let magnus = { name: "Hedlund, Magnus" }, terry = { name: "Adams, Terry" }, charlotte = { name: "Weiss, Charlotte" };
-> let barley = { name: "Barley", owner: terry }, boots = { name: "Boots", owner: terry }, whiskers = { name: "Whiskers", owner: charlotte }, daisy = { name: "Daisy", owner: magnus };
+> let magnus = { id: 1, name: "Hedlund, Magnus" }, terry = { id: 2, name: "Adams, Terry" }, charlotte = { id: 3, name: "Weiss, Charlotte" };
+> let barley = { name: "Barley", owner: 2 }, boots = { name: "Boots", owner: 2 }, whiskers = { name: "Whiskers", owner: 3 }, daisy = { name: "Daisy", owner: 1 };
 > let people = [ magnus, terry, charlotte ];
 > let pets = [ barley, boots, whiskers, daisy ];
 > let query = people.asEnumerable().join(pets,
 >     (person, pet) => ({ ownerName: person.name, pet: pet.name }),
->     person => person,
+>     person => person.id,
 >     pet => pet.owner);
 > for (let obj of query) {
 >     console.log(`${ obj.ownerName } - ${ obj.pet }`);
