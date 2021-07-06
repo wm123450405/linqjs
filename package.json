@@ -17,7 +17,7 @@
     "test:full:compile": "npm run compile:full && node test/full/test-compile.js",
     "test:full:babel": "npx babel-node test/full/test-babel.js",
     "test:full:unit": "gulp unitFull",
-    "codecov": "nyc --reporter=lcov mocha ./test/mocha.js && codecov",
+    "codecov": "nyc --reporter=lcov mocha ./test/mocha.js --timeout 10000 && codecov",
     "compile:slim": "gulp slim",
     "compile:full": "gulp full",
     "compile": "gulp",
