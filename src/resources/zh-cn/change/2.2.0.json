@@ -1,5 +1,5 @@
 {
-    "prepublish": true,
+    "publish": "2021-07-06",
     "contents": [
         "调整(Change)",
         "1. 调整了 min、minOrDefault、max、maxOrDefault 方法的逻辑；",

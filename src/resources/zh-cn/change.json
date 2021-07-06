@@ -176,7 +176,7 @@
 		"version": "2.1.24"
 	},
 	{
-		"prepublish": true,
+		"publish": "2021-07-06",
 		"contents": [
 			"调整(Change)",
 			"1. 调整了 min、minOrDefault、max、maxOrDefault 方法的逻辑；",
@@ -196,6 +196,19 @@
 			"修复(Fixed):",
 			"1. 修复了 IEnumerable 中未注册 random、 randomOrDefault 方法的问题；"
 		],
-		"version": "2.2.0.pre"
+		"version": "2.2.0"
+	},
+	{
+		"prepublish": true,
+		"contents": [
+			"调整(Change):",
+			"",
+			"新增(New):",
+			"",
+			"优化(Optimization):",
+			"",
+			"修复(Fixed):"
+		],
+		"version": "2.2.1.pre"
 	}
 ]

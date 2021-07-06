@@ -2292,6 +2292,31 @@
 			]
 		},
 		{
+			"name": "random",
+			"historys": [
+				{
+					"since": "2.1.25",
+					"deprecated": "2.1.24",
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素",
+							"parameters": []
+						}
+					]
+				},
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "randomIndexProbability",
 			"historys": [
 				{
@@ -2303,6 +2328,39 @@
 							"parameters": [
 								{
 									"name": "selector"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "randomOrDefault",
+			"historys": [
+				{
+					"since": "2.1.25",
+					"deprecated": "2.1.24",
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素. 如果未找到元素, 则返回默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
+								}
+							]
+						}
+					]
+				},
+				{
+					"since": "2.2.0",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "返回序列中随机的一个元素. 如果未找到元素, 则返回默认值",
+							"parameters": [
+								{
+									"name": "defaultValue"
 								}
 							]
 						}
