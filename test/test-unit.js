@@ -1071,6 +1071,19 @@ module.exports = function(Enumerable) {
 		assert.strictEqual(array_unshift.unshift(4), 4);
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
 
+		//top
+		let array_top = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
+		assert.deepStrictEqual(array_top.top(4).toArray(), [0,1,2,3]);
+		//bottom
+		let array_bottom = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
+		assert.deepStrictEqual(array_bottom.bottom(4).toArray(), [9,8,7,6]);
+		//orderBy+take
+		let array_orderBy_take = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
+		assert.deepStrictEqual(array_orderBy_take.orderBy().take(4).toArray(), [0,1,2,3]);
+		//orderBy+thenBy+take
+		let array_orderBy_thenBy_take = [13,1,15,7,4,12,9,10,16,8].asEnumerable();
+		assert.deepStrictEqual(array_orderBy_thenBy_take.orderBy(v => v % 5).thenBy().take(5).toArray(), [10,15,1,16,7]);
+
 		//random
 		let random_base = [1,2,3,4,5,6].asEnumerable();
 		assert.isStrictTrue(random_base.contains(random_base.random()));

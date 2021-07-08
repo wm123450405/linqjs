@@ -863,6 +863,12 @@ class IEnumerable extends Array {
         }
         return count === 0 ? 1 : selected / count;
     }
+    top(count, orderByComparer = defaultComparer) {
+        return new TopEnumerable(this, count, orderByComparer);
+    }
+    bottom(count, orderByComparer = defaultComparer) {
+        return new BottomEnumerable(this, count, orderByComparer);
+    }
 }
 
 module.exports = IEnumerable;
@@ -919,6 +925,8 @@ const PermutationEnumerable = require('./enumerables/PermutationEnumerable');
 const PermutationRepeatableEnumerable = require('./enumerables/PermutationRepeatableEnumerable');
 const CombinationEnumerable = require('./enumerables/CombinationEnumerable');
 const CombinationRepeatableEnumerable = require('./enumerables/CombinationRepeatableEnumerable');
+const TopEnumerable = require('./enumerables/TopEnumerable');
+const BottomEnumerable = require('./enumerables/BottomEnumerable');
 
 const PreOrderTree = require('./enumerables/PreOrderTree');
 const InOrderTree = require('./enumerables/InOrderTree');

@@ -48,6 +48,9 @@ class IOrderedEnumerable extends IEnumerable {
         comparer = methods.asComparer(comparer);
         return new ThenByDescendingEnumerable(this, keySelector, comparer);
     }
+    take(count) {
+        return new TopEnumerable(this[IOrderedEnumerable.source], count, this[IOrderedEnumerable.orderByComparer]);
+    }
 }
 
 IOrderedEnumerable.source = Symbol('IOrderedEnumerable.source');
@@ -57,3 +60,4 @@ module.exports = IOrderedEnumerable;
 
 const ThenByEnumerable = require('./ThenByEnumerable');
 const ThenByDescendingEnumerable = require('./ThenByDescendingEnumerable');
+const TopEnumerable = require('./TopEnumerable');

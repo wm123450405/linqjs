@@ -406,6 +406,12 @@ Enumerable.isSuper = function(source, other, comparer = defaultEqualityComparer)
 Enumerable.symmetric = function(source, other, comparer = defaultEqualityComparer) {
     return asEnumerable(source).symmetric(other, comparer);
 };
+Enumerable.top = function(source, count, orderByComparer = defaultComparer) {
+    return asEnumerable(source).top(count, orderByComparer);
+};
+Enumerable.bottom = function(source, count, orderByComparer = defaultComparer) {
+    return asEnumerable(source).bottom(count, orderByComparer);
+};
 Enumerable.conflict = function(source, selector = defaultSelector, comparer = defaultEqualityComparer) {
     return asEnumerable(source).conflict(selector, comparer);
 };
