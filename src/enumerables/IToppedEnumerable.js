@@ -11,7 +11,7 @@ const defaultComparer = require('../methods/defaultComparer');
 const FIRST = Symbol.for('FIRST');
 
 class IToppedEnumerable extends IEnumerable {
-    constructor(source, count, orderByComparer = defaultComparer) {
+    constructor(source, count, reverse, orderByComparer = defaultComparer) {
         super(source);
         orderByComparer = methods.asComparer(orderByComparer);
         core.defineProperty(this, Symbol.iterator, function* ToppedIterator() {
@@ -51,8 +51,15 @@ class IToppedEnumerable extends IEnumerable {
                 }
             }
             if (first !== FIRST) {
-                yield first;
-                yield* temp;
+                if (reverse) {
+                    for (let i = temp.length - 1; i >= 0; i--) {
+                        yield temp[i];
+                    }
+                    yield first;
+                } else {
+                    yield first;
+                    yield* temp;
+                }
             }
         });
     }

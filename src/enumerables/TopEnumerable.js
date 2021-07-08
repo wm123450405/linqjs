@@ -9,7 +9,7 @@ const defaultComparer = require('../methods/defaultComparer');
 class TopEnumerable extends IToppedEnumerable {
     constructor(source, count, orderByComparer = defaultComparer) {
         orderByComparer = methods.asComparer(orderByComparer);
-        super(source, count, orderByComparer);
+        super(source, count, false, orderByComparer);
     }
 }
 
