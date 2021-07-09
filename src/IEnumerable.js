@@ -722,6 +722,12 @@ class IEnumerable extends Array {
     toPostOrder() {
         return new PostOrderTree(this);
     }
+    toMaxHeap(comparer = defaultComparer) {
+        return new MaxHeap(this, comparer);
+    }
+    toMinHeap(comparer = defaultComparer) {
+        return new MinHeap(this, comparer);
+    }
     forEach(action = defaultAction, thisArg = undefined) {
         let index = 0;
         let callback = (element, index) => action.call(thisArg, element, index, this);
@@ -931,3 +937,6 @@ const BottomEnumerable = require('./enumerables/BottomEnumerable');
 const PreOrderTree = require('./enumerables/PreOrderTree');
 const InOrderTree = require('./enumerables/InOrderTree');
 const PostOrderTree = require('./enumerables/PostOrderTree');
+
+const MaxHeap = require('./enumerables/MaxHeap');
+const MinHeap = require('./enumerables/MinHeap');

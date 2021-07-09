@@ -1095,6 +1095,25 @@ module.exports = function(Enumerable) {
 		assert.strictEqual(array_unshift.unshift(4), 4);
 		assert.deepStrictEqual(array_unshift.toArray(), [4, 1, 2, 3]);
 
+		//heap
+		let array_heap = [2, 3, 7, 8, 1, 5, 6].asEnumerable();
+		let array_max_heap = array_heap.toMaxHeap();
+		assert.deepStrictEqual(array_max_heap.toArray(), [ 8, 7, 6, 2, 1, 3, 5]);
+		assert.strictEqual(array_max_heap.push(5), 8);
+		assert.strictEqual(array_max_heap.pop(), 8);
+		assert.strictEqual(array_max_heap.push(9), 8);
+		assert.strictEqual(array_max_heap.pop(), 9);
+		assert.strictEqual(array_max_heap.push(0), 8);
+		assert.strictEqual(array_max_heap.pop(), 7);
+		let array_min_heap = array_heap.toMinHeap();
+		assert.deepStrictEqual(array_min_heap.toArray(), [ 1, 2, 5, 8, 3, 7, 6]);
+		assert.strictEqual(array_min_heap.push(5), 8);
+		assert.strictEqual(array_min_heap.pop(), 1);
+		assert.strictEqual(array_min_heap.push(9), 8);
+		assert.strictEqual(array_min_heap.pop(), 2);
+		assert.strictEqual(array_min_heap.push(0), 8);
+		assert.strictEqual(array_min_heap.pop(), 0);
+
 		//top
 		let array_top = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
 		assert.deepStrictEqual(array_top.top(4).toArray(), [0,1,2,3]);

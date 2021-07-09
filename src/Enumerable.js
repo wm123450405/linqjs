@@ -94,6 +94,12 @@ Enumerable.toInOrder = function(source) {
 Enumerable.toPostOrder = function(source) {
     return asEnumerable(source).toPostOrder();
 };
+Enumerable.toMaxHeap = function(source, comparer = defaultComparer) {
+    return asEnumerable(source).toMaxHeap(comparer);
+};
+Enumerable.toMinHeap = function(source, comparer = defaultComparer) {
+    return asEnumerable(source).toMinHeap(comparer);
+};
 Enumerable.where = function(source, predicate = defaultPredicate) {
     return asEnumerable(source).where(predicate);
 };

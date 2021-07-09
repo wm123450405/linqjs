@@ -289,13 +289,45 @@ const core = {
 		let length = array.length;
 		if (length > 1) {
 			if (direction < 0) {
-				for (let i = length - (length >> 1); i < length; i++) {
-					core.heaping(array, length, i, direction, comparer);
+				// for (let i = length - (length >> 1); i < length; i++) {
+				// 	core.heaping(array, length, i, direction, comparer);
+				// }
+				for (let i = length - 2; i >= 0; i--) {
+					// console.log('heap', i, length);
+					core.upping(array, i, direction, comparer);
 				}
 			} else {
-				let end = length >> 1;
-				for (let i = 0; i < end; i++) {
-					core.heaping(array, length, i, direction, comparer);
+				for (let i = 1; i < length; i++) {
+					core.upping(array, i, direction, comparer);
+				}
+				// let end = length >> 1;
+				// for (let i = 0; i < end; i++) {
+				// 	core.heaping(array, length, i, direction, comparer);
+				// }
+			}
+		}
+	},
+	upping(array, index, direction, comparer) {
+		let length = array.length;
+		if (length >= 1) {
+			if (direction < 0) {
+				// console.log('upping', index, array);
+				for (let i = index, t = length - ((length - i) >> 1); i < length - 1; i = t, t = length - ((length - t) >> 1)) {
+					// console.log(i, t);
+					if (comparer(array[t], array[i]) < 0) {
+						// console.log('swap', array);
+						core.swap(array, t, i);
+					} else {
+						break;
+					}
+				}
+			} else {
+				for (let i = index, t = (i - 1) >> 1; i > 0; i = t, t = (t - 1) >> 1) {
+					if (comparer(array[t], array[i]) < 0) {
+						core.swap(array, t, i);
+					} else {
+						break;
+					}
 				}
 			}
 		}
