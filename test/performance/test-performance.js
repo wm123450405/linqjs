@@ -13,8 +13,10 @@ const logTable = (title, init, enumerable, native, ...counts) => {
                 if (Array.isArray(er) && Array.isArray(nr)) {
                     if (er.length !== nr.length) {
                         console.error(title, 'result not same', er.length, nr.length);
+                        console.error(array.join(','))
                     } else if (!Enumerable.sequenceEqual(er, nr)) {
                         console.error(title, 'result not same', er, nr);
+                        console.error(array.join(','))
                     }
                 } else {
                     console.error(title, 'result not same', er, nr);
@@ -95,7 +97,7 @@ logTable(
 
 );
 logTable(
-    'order+take',
+    'order+takeProportion',
     defaultGenerator,
     array => {
         return Enumerable.orderBy(array).takeProportion(0.1).toArray();
@@ -106,6 +108,20 @@ logTable(
     },
     100000,
     500000
+);
+logTable(
+    'order+take',
+    defaultGenerator,
+    array => {
+        return Enumerable.orderBy(array).take(Math.ceil(array.length / 10)).toArray();
+    },
+    array => {
+        array = [...array].sort((a, b) => a - b);
+        return array.slice(0, Math.ceil(array.length / 10));
+    },
+    100000,
+    500000,
+    // ...(new Array(1000).fill(200).map(v => v + Math.floor(Math.random() * 1000)))
 );
 logTable(
     'order+skip',
@@ -143,7 +159,7 @@ logTable(
     'group+order',
     rangeGenerator(0, 100000),
     array => {
-        return Enumerable.groupBy(array, v => Math.floor(v / 100)).orderByDescending(group => group.count()).take(50).map(group => group.key).toArray();
+        return Enumerable.groupBy(array, v => Math.floor(v / 100)).orderByDescending(group => group.count()).thenBy(group => group.key).take(50).map(group => group.key).toArray();
     },
     array => {
         let result = [];
@@ -158,7 +174,7 @@ logTable(
                 })
             }
         }
-        result = result.sort((a, b) => b.count - a.count);
+        result = result.sort((a, b) => b.count === a.count ? a.key - b.key : b.count - a.count);
         return result.slice(0, 50).map(e => e.key);
     },
     10000,

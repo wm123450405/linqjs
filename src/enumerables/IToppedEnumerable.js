@@ -8,58 +8,70 @@ const methods = require('../methods/methods');
 
 const defaultComparer = require('../methods/defaultComparer');
 
-const FIRST = Symbol.for('FIRST');
-
 class IToppedEnumerable extends IEnumerable {
     constructor(source, count, reverse, orderByComparer = defaultComparer) {
         super(source);
         orderByComparer = methods.asComparer(orderByComparer);
         core.defineProperty(this, Symbol.iterator, function* ToppedIterator() {
-            let temp = [], ts = count - 1;
-            let first = FIRST;
-            const insert = (temp, element, comparer) => {
-                let len = temp.length, c;
-                let i = Math.floor(len / 2);
-                if (len > 0) {
-                    for (let l = 0, r = len; ; i = Math.floor((l + r) / 2)) {
-                        c = comparer(element, temp[i]);
-                        if (c < 0) {
-                            if (l === i) break;
-                            r = i;
-                        } else if (c > 0) {
-                            i++;
-                            if (i === r) break;
-                            l = i;
-                        } else {
-                            break;
+            let header = [];
+            const swap = (array, index, other) => {
+                let temp = array[index];
+                array[index] = array[other];
+                array[other] = temp;
+            };
+            const heaping = (array, index, orderByComparer) => {
+                //let l = count - 1 - ((count - 1 - index) * 2 + 1);
+                //let r = l - 1;
+                let l = 2 * index - count;
+                let r = l - 1;
+                if (r >= 0) {
+                    if (orderByComparer(array[l], array[r]) < 0) {
+                        if (orderByComparer(array[index], array[r]) < 0) {
+                            swap(array, index, r);
+                            heaping(array, r, orderByComparer);
+                        }
+                    } else {
+                        if (orderByComparer(array[index], array[l]) < 0) {
+                            swap(array, index, l);
+                            heaping(array, l, orderByComparer);
                         }
                     }
-                }
-                temp.splice(i, 0, element);
-                if (temp.length > ts) {
-                    temp.pop();
+                } else if (l >= 0) {
+                    if (orderByComparer(array[index], array[l]) < 0) {
+                        swap(array, index, l);
+                    }
                 }
             };
             for (let element of source) {
-                if (first === FIRST) {
-                    first = element;
-                } else if (orderByComparer(first, element) <= 0) {
-                    insert(temp, element, orderByComparer);
+                if (header.length < count) {
+                    if (header.length === 0 || orderByComparer(element, header[0]) > 0) {
+                        header.push(element);
+                    } else {
+                        header.unshift(element);
+                    }
+                    if (header.length === count) {
+                        //todo: 优化倒序大顶堆
+                        header.sort(orderByComparer);
+                        // console.log('start:', header.join('|'));
+                    }
                 } else {
-                    insert(temp, first, orderByComparer);
-                    first = element;
+                    let c;
+                    c = orderByComparer(element, header[count - 1]);
+                    if (c < 0) {
+                        header[count - 1] = element;
+                        heaping(header, count - 1, orderByComparer);
+                        // console.log('header:', header.map(v => v.toFixed(3)).join('|'), element);
+                    }
                 }
             }
-            if (first !== FIRST) {
-                if (reverse) {
-                    for (let i = temp.length - 1; i >= 0; i--) {
-                        yield temp[i];
-                    }
-                    yield first;
-                } else {
-                    yield first;
-                    yield* temp;
+            header.sort(orderByComparer);
+            // console.log('end:', header.map(v => v.toFixed(3)).join('|'));
+            if (reverse) {
+                for (let i = header.length - 1; i >= 0; i--) {
+                    yield header[i];
                 }
+            } else {
+                yield* header;
             }
         });
     }
