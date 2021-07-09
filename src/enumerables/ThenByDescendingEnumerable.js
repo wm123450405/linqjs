@@ -14,7 +14,7 @@ class ThenByDescendingEnumerable extends IOrderedEnumerable {
     constructor(orderedSource, keySelector = defaultSelector, comparer = defaultComparer) {
     	keySelector = methods.asSelector(keySelector);
     	comparer = methods.asComparer(comparer);
-        super(orderedSource[IOrderedEnumerable.source], thenByComparer(orderedSource[IOrderedEnumerable.orderByComparer], descendingComparer(selectorComparer(keySelector, comparer))));
+        super(orderedSource[IOrderedEnumerable.SOURCE], thenByComparer(orderedSource[IOrderedEnumerable.ORDER_BY_COMPARER], descendingComparer(selectorComparer(keySelector, comparer))));
     }
 }
 

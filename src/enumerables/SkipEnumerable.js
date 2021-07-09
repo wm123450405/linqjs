@@ -16,7 +16,15 @@ class SkipEnumerable extends IEnumerable {
                 index++;
             }
         });
+        core.defineProperty(this, SkipEnumerable.SOURCE, () => source, true);
+        core.defineProperty(this, SkipEnumerable.COUNT, () => count, true);
+    }
+    skip(count) {
+        return new SkipEnumerable(this[SkipEnumerable.SOURCE], this[SkipEnumerable.COUNT] + count);
     }
 }
+
+SkipEnumerable.SOURCE = Symbol.for("SkipEnumerable.SOURCE");
+SkipEnumerable.COUNT = Symbol.for("SkipEnumerable.COUNT");
 
 module.exports = SkipEnumerable;

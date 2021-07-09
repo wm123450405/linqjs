@@ -1100,7 +1100,7 @@ module.exports = function(Enumerable) {
 		assert.deepStrictEqual(array_top.top(4).toArray(), [0,1,2,3]);
 		//bottom
 		let array_bottom = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
-		assert.deepStrictEqual(array_bottom.bottom(4).toArray(), [6,7,8,9]);
+		assert.deepStrictEqual(array_bottom.bottom(4).toArray(), [4,5,6,7,8,9]);
 		//orderBy+take
 		let array_orderBy_take = [3,1,5,7,4,2,9,0,6,8].asEnumerable();
 		assert.deepStrictEqual(array_orderBy_take.orderBy().take(4).toArray(), [0,1,2,3]);

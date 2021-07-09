@@ -273,6 +273,11 @@ const core = {
 		}
 		return result;
 	},
+	swap(array, index, other) {
+		let temp = array[index];
+		array[index] = array[other];
+		array[other] = temp;
+	},
 	repeat(element, count) {
 		let result = [];
 		for (let i = 0; i < count; i++) {

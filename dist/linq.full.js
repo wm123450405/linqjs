@@ -8684,8 +8684,8 @@ var IOrderedEnumerable = /*#__PURE__*/function (_IEnumerable) {
         }
       }, OrderedIterator, null, [[8, 18, 21, 24]]);
     }));
-    core.defineProperty((0, _assertThisInitialized2.default)(_this), IOrderedEnumerable.source, source);
-    core.defineProperty((0, _assertThisInitialized2.default)(_this), IOrderedEnumerable.orderByComparer, orderByComparer);
+    core.defineProperty((0, _assertThisInitialized2.default)(_this), IOrderedEnumerable.SOURCE, source);
+    core.defineProperty((0, _assertThisInitialized2.default)(_this), IOrderedEnumerable.ORDER_BY_COMPARER, orderByComparer);
     return _this;
   }
 
@@ -8711,8 +8711,8 @@ var IOrderedEnumerable = /*#__PURE__*/function (_IEnumerable) {
   return IOrderedEnumerable;
 }(IEnumerable);
 
-IOrderedEnumerable.source = Symbol('IOrderedEnumerable.source');
-IOrderedEnumerable.orderByComparer = Symbol('IOrderedEnumerable.orderByComparer');
+IOrderedEnumerable.SOURCE = Symbol('IOrderedEnumerable.SOURCE');
+IOrderedEnumerable.ORDER_BY_COMPARER = Symbol('IOrderedEnumerable.ORDER_BY_COMPARER');
 module.exports = IOrderedEnumerable;
 
 var ThenByEnumerable = require('./ThenByEnumerable');
@@ -16182,7 +16182,7 @@ var ThenByDescendingEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
     (0, _classCallCheck2.default)(this, ThenByDescendingEnumerable);
     keySelector = methods.asSelector(keySelector);
     comparer = methods.asComparer(comparer);
-    return _super.call(this, orderedSource[IOrderedEnumerable.source], thenByComparer(orderedSource[IOrderedEnumerable.orderByComparer], descendingComparer(selectorComparer(keySelector, comparer))));
+    return _super.call(this, orderedSource[IOrderedEnumerable.SOURCE], thenByComparer(orderedSource[IOrderedEnumerable.ORDER_BY_COMPARER], descendingComparer(selectorComparer(keySelector, comparer))));
   }
 
   return ThenByDescendingEnumerable;
@@ -16230,7 +16230,7 @@ var ThenByEnumerable = /*#__PURE__*/function (_IOrderedEnumerable) {
     (0, _classCallCheck2.default)(this, ThenByEnumerable);
     keySelector = methods.asSelector(keySelector);
     comparer = methods.asComparer(comparer);
-    return _super.call(this, orderedSource[IOrderedEnumerable.source], thenByComparer(orderedSource[IOrderedEnumerable.orderByComparer], selectorComparer(keySelector, comparer)));
+    return _super.call(this, orderedSource[IOrderedEnumerable.SOURCE], thenByComparer(orderedSource[IOrderedEnumerable.ORDER_BY_COMPARER], selectorComparer(keySelector, comparer)));
   }
 
   return ThenByEnumerable;

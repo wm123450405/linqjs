@@ -35,8 +35,8 @@ class IOrderedEnumerable extends IEnumerable {
                 }
             }
         });
-        core.defineProperty(this, IOrderedEnumerable.source, source);
-        core.defineProperty(this, IOrderedEnumerable.orderByComparer, orderByComparer);
+        core.defineProperty(this, IOrderedEnumerable.SOURCE, () => source, true);
+        core.defineProperty(this, IOrderedEnumerable.ORDER_BY_COMPARER, () => orderByComparer, true);
     }
     thenBy(keySelector = defaultSelector, comparer = defaultComparer) {
         keySelector = methods.asSelector(keySelector);
@@ -49,15 +49,19 @@ class IOrderedEnumerable extends IEnumerable {
         return new ThenByDescendingEnumerable(this, keySelector, comparer);
     }
     take(count) {
-        return new TopEnumerable(this[IOrderedEnumerable.source], count, this[IOrderedEnumerable.orderByComparer]);
+        return new TopEnumerable(this[IOrderedEnumerable.SOURCE], count, this[IOrderedEnumerable.ORDER_BY_COMPARER]);
+    }
+    skip(count) {
+        return new BottomEnumerable(this[IOrderedEnumerable.SOURCE], count, this[IOrderedEnumerable.ORDER_BY_COMPARER]);
     }
 }
 
-IOrderedEnumerable.source = Symbol('IOrderedEnumerable.source');
-IOrderedEnumerable.orderByComparer = Symbol('IOrderedEnumerable.orderByComparer');
+IOrderedEnumerable.SOURCE = Symbol('IOrderedEnumerable.SOURCE');
+IOrderedEnumerable.ORDER_BY_COMPARER = Symbol('IOrderedEnumerable.ORDER_BY_COMPARER');
 
 module.exports = IOrderedEnumerable;
 
 const ThenByEnumerable = require('./ThenByEnumerable');
 const ThenByDescendingEnumerable = require('./ThenByDescendingEnumerable');
 const TopEnumerable = require('./TopEnumerable');
+const BottomEnumerable = require('./BottomEnumerable');

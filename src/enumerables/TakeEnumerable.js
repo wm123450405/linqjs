@@ -18,7 +18,15 @@ class TakeEnumerable extends IEnumerable {
                 index++;
             }
         });
+        core.defineProperty(this, TakeEnumerable.SOURCE, () => source, true);
+        core.defineProperty(this, TakeEnumerable.COUNT, () => count, true);
+    }
+    take(count) {
+        return new TakeEnumerable(this[TakeEnumerable.SOURCE], Math.min(this[TakeEnumerable.COUNT], count));
     }
 }
+
+TakeEnumerable.SOURCE = Symbol.for("TakeEnumerable.SOURCE");
+TakeEnumerable.COUNT = Symbol.for("TakeEnumerable.COUNT");
 
 module.exports = TakeEnumerable;
