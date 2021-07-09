@@ -1,4 +1,8 @@
+const execution = typeof process !== 'undefined' ? process.argv[process.argv.length - 1] : '';
+
+
 const logTable = (title, init, enumerable, native, ...counts) => {
+    if (execution && execution !== title) return;
     let table = [];
     let now, er, nr, line;
     for (let count of counts) {
@@ -13,10 +17,10 @@ const logTable = (title, init, enumerable, native, ...counts) => {
                 if (Array.isArray(er) && Array.isArray(nr)) {
                     if (er.length !== nr.length) {
                         console.error(title, 'result not same', er.length, nr.length);
-                        console.error(array.join(','))
+                        console.error(array.map(v => JSON.stringify(v)).join(','))
                     } else if (!Enumerable.sequenceEqual(er, nr)) {
                         console.error(title, 'result not same', er, nr);
-                        console.error(array.join(','))
+                        console.error(array.map(v => JSON.stringify(v)).join(','))
                     }
                 } else {
                     console.error(title, 'result not same', er, nr);
@@ -43,7 +47,10 @@ const rangeGenerator = (min, max) => count => {
         array.push(Math.floor(Math.random() * size) + min);
     }
     return array;
-}
+};
+const jsonGenerator = file => count => {
+    return (typeof window === 'undefined' ? require('./' + file)[file] : window[file]).slice(0, count);
+};
 
 logTable(
     'random',
@@ -206,4 +213,45 @@ logTable(
     },
     10000,
     100000
+);
+
+const weightMerge = (original, weight, summary = false) => original + (summary ? weight * 0.2 : weight);
+const ignoreWords = [ 'pro', 'mini', 'max' ]
+const ignoreTags = [ 't', 'm', 'q', 'r', 'p', 'c', 'u', 'w', 'a', 'ad', 'd', 'TIME' ]; //时间副词
+const ignoreTag = ({ tag, word }) => ignoreTags.includes(tag) || ignoreWords.includes(word.toLowerCase()) || word.length < 2 || /^[\x00-\xFF]*\d+[\x00-\xFF]*$/ig.test(word);
+const ignores = [];
+
+logTable(
+    'complex',
+    jsonGenerator('informations.json.js'),
+    array => {
+        return Enumerable.from(array)
+            .selectMany(info => info.tags)
+            .where(({ word, tag }) => !ignoreTag({ word, tag }) && !ignores.includes(word.toLowerCase()))
+            .groupBy(({ word, tag }) => `${tag}-${word}`, ({ weight }) => weight, (key, grouping) => ({ key, weight: grouping.reduce((seed, value) => weightMerge(seed, value), 0) }))
+            .orderByDescending(tag => tag.weight)
+            .take(15)
+            .select(({ key, weight }) => `${key}:${weight}`)
+            .toArray();
+    },
+    array => {
+        let tags = array.map(info => info.tags).flat();
+        tags = tags.filter(({ word, tag }) => !ignoreTag({ word, tag }) && !ignores.includes(word.toLowerCase()));
+        let counting = { };
+        for (let t of tags) {
+            let { tag, word, weight } = t;
+            let key = `${tag}-${word}`;
+            counting[key] = weightMerge(counting[key] || 0, weight);
+        }
+        let countingArray = [];
+        for (let [key, weight] of Object.entries(counting)) {
+            countingArray.push({ key, weight });
+        }
+        countingArray.sort((a, b) => b.weight - a.weight);
+        countingArray = countingArray.slice(0, 15);
+        return countingArray.map(({ key, weight}) => `${key}:${weight}`)
+    },
+    20,
+    200,
+    1000,
 );
