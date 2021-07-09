@@ -16,29 +16,6 @@ class TopEnumerable extends IEnumerable {
 
         core.defineProperty(this, Symbol.iterator, function* TopIterator() {
             let header = [];
-            const heaping = (array, index, orderByComparer) => {
-                //let l = count - 1 - ((count - 1 - index) * 2 + 1);
-                //let r = l - 1;
-                let l = 2 * index - count;
-                let r = l - 1;
-                if (r >= 0) {
-                    if (orderByComparer(array[l], array[r]) < 0) {
-                        if (orderByComparer(array[index], array[r]) < 0) {
-                            core.swap(array, index, r);
-                            heaping(array, r, orderByComparer);
-                        }
-                    } else {
-                        if (orderByComparer(array[index], array[l]) < 0) {
-                            core.swap(array, index, l);
-                            heaping(array, l, orderByComparer);
-                        }
-                    }
-                } else if (l >= 0) {
-                    if (orderByComparer(array[index], array[l]) < 0) {
-                        core.swap(array, index, l);
-                    }
-                }
-            };
             for (let element of source) {
                 if (header.length < count) {
                     if (header.length === 0 || orderByComparer(element, header[0]) > 0) {
@@ -47,8 +24,7 @@ class TopEnumerable extends IEnumerable {
                         header.unshift(element);
                     }
                     if (header.length === count) {
-                        //todo: 优化倒序大顶堆
-                        header.sort(orderByComparer);
+                        core.heap(header, -1, orderByComparer);
                         // console.log('start:', header.join('|'));
                     }
                 } else {
@@ -56,7 +32,7 @@ class TopEnumerable extends IEnumerable {
                     c = orderByComparer(element, header[count - 1]);
                     if (c < 0) {
                         header[count - 1] = element;
-                        heaping(header, count - 1, orderByComparer);
+                        core.heaping(header, header.length,count - 1, -1, orderByComparer);
                         // console.log('header:', header.map(v => v.toFixed(3)).join('|'), element);
                     }
                 }

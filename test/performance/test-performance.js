@@ -124,7 +124,7 @@ logTable(
     // ...(new Array(1000).fill(200).map(v => v + Math.floor(Math.random() * 1000)))
 );
 logTable(
-    'order+skip',
+    'order+skipProportion',
     defaultGenerator,
     array => {
         return Enumerable.orderBy(array).skipProportion(0.9).toArray();
@@ -132,6 +132,19 @@ logTable(
     array => {
         array = [...array].sort((a, b) => a - b);
         return array.slice(array.length / 10 * 9);
+    },
+    100000,
+    500000
+);
+logTable(
+    'order+skip',
+    defaultGenerator,
+    array => {
+        return Enumerable.orderBy(array).skip(Math.ceil(9 * array.length / 10)).toArray();
+    },
+    array => {
+        array = [...array].sort((a, b) => a - b);
+        return array.slice(Math.ceil(9 * array.length / 10));
     },
     100000,
     500000

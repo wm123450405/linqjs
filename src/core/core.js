@@ -273,17 +273,53 @@ const core = {
 		}
 		return result;
 	},
-	swap(array, index, other) {
-		let temp = array[index];
-		array[index] = array[other];
-		array[other] = temp;
-	},
 	repeat(element, count) {
 		let result = [];
 		for (let i = 0; i < count; i++) {
 			result.push(element);
 		}
 		return result;
+	},
+	swap(array, index, other) {
+		let temp = array[index];
+		array[index] = array[other];
+		array[other] = temp;
+	},
+	heap(array, direction, comparer) {
+		let length = array.length;
+		if (length > 1) {
+			if (direction < 0) {
+				for (let i = length - (length >> 1); i < length; i++) {
+					core.heaping(array, length, i, direction, comparer);
+				}
+			} else {
+				let end = length >> 1;
+				for (let i = 0; i < end; i++) {
+					core.heaping(array, length, i, direction, comparer);
+				}
+			}
+		}
+	},
+	heaping(array, length, index, direction, comparer) {
+		let l = 2 * index + (direction < 0 ? -length : 1);
+		let r = l + direction;
+		if (direction < 0 ? (r >= 0) : (r < length)) {
+			if (comparer(array[l], array[r]) < 0) {
+				if (comparer(array[index], array[r]) < 0) {
+					core.swap(array, index, r);
+					core.heaping(array, length, r, direction, comparer);
+				}
+			} else {
+				if (comparer(array[index], array[l]) < 0) {
+					core.swap(array, index, l);
+					core.heaping(array, length, l, direction, comparer);
+				}
+			}
+		} else if (direction < 0 ? (l >= 0) : (l < length)) {
+			if (comparer(array[index], array[l]) < 0) {
+				core.swap(array, index, l);
+			}
+		}
 	},
 	typeAs: Symbol('typeAs'),
 	delegate: Symbol.for('delegate'),
