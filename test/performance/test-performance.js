@@ -2,16 +2,20 @@ const execution = typeof process !== 'undefined' ? process.argv[process.argv.len
 
 
 const logTable = (title, init, enumerable, native, ...counts) => {
-    if (execution && execution !== title) return;
+    if (execution && !/performance/ig.test(execution) && execution !== title) return;
     let table = [];
     let now, er, nr, line;
     for (let count of counts) {
         let array = init(count);
+        while (array.length < count) {
+            array.push(...array.slice(0, count - array.length));
+        }
         now = +Date.now();
         er = enumerable(array);
         line = { [title]: count, 'Enumerable': +Date.now() - now };
         now = +Date.now();
         nr = native(array);
+        line['Native'] = +Date.now() - now;
         if (!(/rand/.test(title))) {
             if (er !== nr) {
                 if (Array.isArray(er) && Array.isArray(nr)) {
@@ -27,7 +31,6 @@ const logTable = (title, init, enumerable, native, ...counts) => {
                 }
             }
         }
-        line['Native'] = +Date.now() - now;
         table.push(line);
     }
     console.table(table, [title, 'Enumerable', 'Native']);
@@ -254,4 +257,5 @@ logTable(
     20,
     200,
     1000,
+    10000
 );

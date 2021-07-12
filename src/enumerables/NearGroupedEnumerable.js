@@ -26,6 +26,7 @@ class NearGroupedEnumerable extends IEnumerable {
 
             let noneKey = Symbol('noneKey');
             let prevKey = noneKey;
+            let grouped = false;
 
             let it = source[Symbol.iterator]();
             let hasNext = () => {
@@ -36,16 +37,11 @@ class NearGroupedEnumerable extends IEnumerable {
                     if (prevKey === noneKey || !comparer(key, prevKey)) {
                         array = [];
                         prevKey = key;
-                        groupings.push(new IGrouping(key, (array => function* () {
-                            let index = 0;
-                            while (array.length > index || hasNext()) {
-                                if (array.length > index) {
-                                    yield array[index++];
-                                }
-                            }
-                        })(array)));
+                        groupings.push(new IGrouping(key, array, hasNext, () => grouped));
                     }
                     array.push(element);
+                } else {
+                    grouped = true;
                 }
                 return !next.done;
             };

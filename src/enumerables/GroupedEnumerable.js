@@ -25,6 +25,7 @@ class GroupedEnumerable extends IEnumerable {
             let iterators = new Map();
 
             let noneKey = Symbol('noneKey');
+            let grouped = false;
 
             let it = source.getIterator();
             let hasNext = () => {
@@ -35,26 +36,23 @@ class GroupedEnumerable extends IEnumerable {
                     let trueKey;
                     if (iterators.has(key)) {
                         trueKey = key;
-                    } else {
+                    } else if (!(core.isPrimitive(key) && comparer === defaultEqualityComparer)) {
                         trueKey = core.asEnumerable(iterators.keys()).where(equalityPredicate(key, comparer)).firstOrDefault(noneKey);
+                    } else {
+                        trueKey = noneKey;
                     }
                     if (trueKey === noneKey) {
-                        iterators.set(key, []);
-                        groupings.push(new IGrouping(key, (key => function* () {
-                            let array = iterators.get(key);
-                            let index = 0;
-                            while (array.length > index || hasNext()) {
-                                if (array.length > index) {
-                                    yield array[index++];
-                                }
-                            }
-                        })(key)));
+                        let array = [];
+                        iterators.set(key, array);
+                        groupings.push(new IGrouping(key, array, hasNext, () => grouped));
                     } else {
                         if (key !== trueKey) {
                             iterators.set(key, iterators.get(trueKey));
                         }
                     }
                     iterators.get(key).push(element);
+                } else {
+                    grouped = true;
                 }
                 return !next.done;
             };

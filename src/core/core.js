@@ -146,6 +146,10 @@ const core = {
 		let type = core.getType(value);
     	return type === ARRAY || type === STRING;
 	},
+	isPrimitive(value) {
+		let type = core.getType(value);
+		return type === NUMBER || type === STRING || type === BOOLEAN || type === REGEXP || type === FUNCTION || type === SYMBOL;
+	},
 	isList(value) {
         let type = core.getType(value);
         return type === ARRAY || type === ENUMERABLE || type === SET;
