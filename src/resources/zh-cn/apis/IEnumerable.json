@@ -220,6 +220,28 @@
 			]
 		},
 		{
+			"name": "bottom",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从有序序列的尾部返回指定的数量的连续元素",
+							"parameters": [
+								{
+									"name": "count"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "chunk",
 			"historys": [
 				{
@@ -3344,6 +3366,46 @@
 			]
 		},
 		{
+			"name": "toMaxHeap",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"override": true,
+							"description": "对数组数据进行排序使其符合大顶堆的结构要求, 并返回一个大顶堆对象",
+							"parameters": [
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "toMinHeap",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"override": true,
+							"description": "对数组数据进行排序使其符合小顶堆的结构要求, 并返回一个小顶堆对象",
+							"parameters": [
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "toObject",
 			"historys": [
 				{
@@ -3378,6 +3440,28 @@
 								},
 								{
 									"name": "valueSelector"
+								},
+								{
+									"name": "comparer"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "top",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"description": "从序列的开头返回指定的数量的连续元素",
+							"parameters": [
+								{
+									"name": "count"
 								},
 								{
 									"name": "comparer"

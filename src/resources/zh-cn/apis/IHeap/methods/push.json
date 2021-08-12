@@ -1,0 +1,25 @@
+{
+    "historys": [
+        {
+            "since": "2.2.1",
+            "overloads": [
+                {
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "values",
+                            "types": [
+                                "any"
+                            ],
+                            "params": true
+                        }
+                    ],
+                    "returns": {
+                        "type": "number"
+                    },
+                    "description": "将一个或多个元素依次添加到顶堆中, 每添加一个元素后对该顶堆进行重排序使该顶堆依然符合大顶堆或小顶堆的结构要求, 并返回最终顶堆的新长度"
+                }
+            ]
+        }
+    ]
+}

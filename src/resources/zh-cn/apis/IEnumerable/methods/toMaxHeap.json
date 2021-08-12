@@ -1,0 +1,56 @@
+{
+    "historys": [
+        {
+            "since": "2.2.1",
+            "overloads": [
+                {
+                    "override": true,
+                    "parameters": [
+                        {
+                            "name": "comparer",
+                            "types": [
+                                "function",
+                                "string",
+                                "symbol",
+                                "number"
+                            ],
+                            "defaultValue": "defaultComparer",
+                            "declare": {
+                                "returns": {
+                                    "type": "number"
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "element",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    },
+                                    {
+                                        "name": "other",
+                                        "types": [
+                                            "any"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "returns": {
+                        "type": "IHeap"
+                    },
+                    "description": "对数组数据进行排序使其符合大顶堆的结构要求, 并返回一个大顶堆对象",
+                    "sees": [
+                        {
+                            "apis": "IEnumerable",
+                            "method": "toMinHeap"
+                        },
+                        {
+                            "apis": "IHeap"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

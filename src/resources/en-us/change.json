@@ -201,11 +201,14 @@
 	{
 		"prepublish": true,
 		"contents": [
-			"调整(Change):",
-			"",
 			"新增(New):",
+			"1. 新增了 top、bottom 方法",
+			"2. 新增了 toMaxHeap、toMinHeap 方法",
+			"3. 新增了 IHeap 数据类型, 使用序列的方式存储数据, 但区别于序列的方式添加或移除数据",
 			"",
 			"优化(Optimization):",
+			"1. 大幅优化了 orderBy、orderByDescending、thenBy、thenByDescending 后使用 take、skip 方法的性能",
+			"2. 优化 groupBy 在 key 为 string、number 等类型数据及使用默认匹配方法时的性能表现",
 			"",
 			"修复(Fixed):"
 		],

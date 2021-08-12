@@ -1,0 +1,23 @@
+{
+    "historys": [
+        {
+            "since": "2.2.1",
+            "overloads": [
+                {
+                    "override": true,
+                    "parameters": [],
+                    "returns": {
+                        "type": "any"
+                    },
+                    "description": "从顶堆中删除堆顶的元素, 删除元素后对该顶堆进行重排序使该顶堆依然符合大顶堆或小顶堆的结构要求, 并返回被删除的元素",
+                    "sees": [
+                        {
+                            "href": "https://developer.mozilla.org/{language}/docs/Web/JavaScript/Reference/Global_Objects/Array/pop",
+                            "title": "Mozilla MDN"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

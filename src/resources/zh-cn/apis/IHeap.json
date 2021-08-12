@@ -1,0 +1,50 @@
+{
+	"type": "interface",
+	"since": "2.2.1",
+	"extends": [
+		"IEnumerable"
+	],
+	"descriptions": [
+		"'顶堆'是一种特殊的序列, 它是以序列的方式表示的一个有序的满二叉树结构, 对顶堆的存取操作都会造成序列的重排序, 且优先操作堆顶的数据."
+	],
+	"name": "IHeap",
+	"properties": [],
+	"methods": [
+		{
+			"name": "pop",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"override": true,
+							"description": "从顶堆中删除堆顶的元素, 删除元素后对该顶堆进行重排序使该顶堆依然符合大顶堆或小顶堆的结构要求, 并返回被删除的元素",
+							"parameters": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "push",
+			"historys": [
+				{
+					"since": "2.2.1",
+					"deprecated": 0,
+					"overloads": [
+						{
+							"override": true,
+							"description": "将一个或多个元素依次添加到顶堆中, 每添加一个元素后对该顶堆进行重排序使该顶堆依然符合大顶堆或小顶堆的结构要求, 并返回最终顶堆的新长度",
+							"parameters": [
+								{
+									"name": "values"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
