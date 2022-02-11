@@ -1,4 +1,4 @@
-let xi = { name: "习大大" };
+let xi = { name: "大龙哥" };
 let wang = { name: "王思聪" };
 let li = { name: "李小龙" };
 
@@ -25,7 +25,7 @@ for (let obj of query) {
 /*
  这段代码的输出结果如下：
 
- 习大大 - 旺财
+ 大龙哥 - 旺财
  王思聪 - 小白
  王思聪 - 机器人
  李小龙 - 黑蛋
