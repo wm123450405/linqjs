@@ -180,6 +180,12 @@
 				"deprecated": "2.2.1.pre"
 			},
 			{
+				"code": "IHeap",
+				"title": "IHeap Interface",
+				"since": "2.2.1",
+				"deprecated": "2.2.1.pre"
+			},
+			{
 				"code": "IMapEnumerable",
 				"title": "IMapEnumerable Interface",
 				"since": "2.1.15",

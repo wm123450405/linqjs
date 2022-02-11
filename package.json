@@ -7,7 +7,7 @@
     "test:reload": "cross-env NODE_ENV=development RUNTIME_RELOAD=reload node webpack.js",
     "test": "cross-env NODE_ENV=development node webpack.js",
     "pack": "cross-env NODE_ENV=production node webpack.js",
-    "pack:all": "cross-env NODE_ENV=production IGNORE_SKIP=false node webpack.js"
+    "pack:all": "cross-env NODE_ENV=production IGNORE_SKIP=false node --trace-warnings webpack.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,8 @@
     "vue-router": "^3.5.0",
     "vue-template-compiler": "^2.6.0",
     "webpack": "^5.39.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "graceful-fs": "4.1.15"
   },
   "engines": {
     "node": ">=6.0.0"

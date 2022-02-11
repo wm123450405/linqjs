@@ -180,6 +180,12 @@
 				"deprecated": "2.2.1.pre"
 			},
 			{
+				"code": "IHeap",
+				"title": "IHeap 接口",
+				"since": "2.2.1",
+				"deprecated": "2.2.1.pre"
+			},
+			{
 				"code": "IMapEnumerable",
 				"title": "IMapEnumerable 接口",
 				"since": "2.1.15",

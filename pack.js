@@ -316,12 +316,12 @@ const createDirectory = refreshLangName => {
 						}
 						let since = apiContent.since || common.lastest, deprecated = apiContent.deprecated || common.newest;
 						for (let method of (apiContent.methods || [])) {
-							since = common.minVersion(Enumerable.min(common.historys(method.historys), history => history.since, common.versionComparer), since);
-							deprecated = common.maxVersion(Enumerable.max(common.historys(method.historys), history => history.deprecated || common.lastest, common.versionComparer), deprecated);
+							since = common.minVersion(...Enumerable.select(common.historys(method.historys), history => history.since), since);
+							deprecated = common.maxVersion(...Enumerable.select(common.historys(method.historys),  history => history.deprecated || common.lastest), deprecated);
 						}
 						for (let property of (apiContent.properties || [])) {
-							since = common.minVersion(Enumerable.min(common.historys(property.historys), history => history.since, common.versionComparer), since);
-							deprecated = common.maxVersion(Enumerable.max(common.historys(property.historys), history => history.deprecated || common.lastest, common.versionComparer), deprecated);
+							since = common.minVersion(...Enumerable.select(common.historys(property.historys), history => history.since), since);
+							deprecated = common.maxVersion(...Enumerable.select(common.historys(property.historys),  history => history.deprecated || common.lastest), deprecated);
 						}
 						apis.children.push({
 							code: path.basename(api, jsonExt),
