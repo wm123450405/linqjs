@@ -5,5 +5,3 @@ node_modules/
 npm-debug.log*
 *.iml
 *.sln
-
-package-lock.json
